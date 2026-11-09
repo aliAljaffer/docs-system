@@ -214,6 +214,37 @@ def projects_index(root: Path, lang: str) -> None:
     (dest / "index.md").write_text("\n".join(lines))
 
 
+def courses_index(root: Path, lang: str) -> None:
+    if lang != "en":
+        return
+    courses = CATALOG.get("courses", [])
+    if not courses:
+        return
+    lines = [
+        "# Courses",
+        "",
+        "Long-form courses built around one project or one skill path.",
+        "",
+    ]
+    for course in courses:
+        lines += [
+            f"## {course['title']}",
+            "",
+            f"**Status:** {course.get('status', 'Planned')}",
+            "",
+            course.get("summary", ""),
+            "",
+            " ".join(f"`{tag}`" for tag in course.get("tags", [])),
+            "",
+        ]
+        page = course.get("page", "")
+        if page:
+            lines += [f"[Start the course](../{page})", ""]
+    dest = root / "courses"
+    dest.mkdir(parents=True, exist_ok=True)
+    (dest / "index.md").write_text("\n".join(lines))
+
+
 def nav_for(root: Path, lang: str) -> list:
     labels = LABELS[lang]
     nav: list = [{"Home": "index.md"}]
@@ -227,9 +258,13 @@ def nav_for(root: Path, lang: str) -> list:
 
     four = root / "four-hats"
     if (four / "index.md").exists():
-        children = [{"Overview": "four-hats/index.md"}]
+        children = []
+        if (root / "courses" / "index.md").exists():
+            children.append({"Overview": "courses/index.md"})
+        children.append({"Four Hats": []})
+        four_children = [{"Overview": "four-hats/index.md"}]
         if (four / "episodes.md").exists():
-            children.append({labels["episodes"]: "four-hats/episodes.md"})
+            four_children.append({labels["episodes"]: "four-hats/episodes.md"})
         by_number = {
             int(p.name[2:4]): p
             for p in (four / "episodes").glob("ep*.md")
@@ -241,14 +276,19 @@ def nav_for(root: Path, lang: str) -> list:
             act: list = []
             for path in group:
                 act.append({title_of(path): path.relative_to(root).as_posix()})
-            children.append({label_en if lang == "en" else label_ar: act})
+            four_children.append({label_en if lang == "en" else label_ar: act})
         for key, name in [
             ("setup", "setup.md"),
             ("cleanup", "cleanup-guide.md"),
             ("costs", "costs-and-free-options.md"),
         ]:
             if (root / name).exists():
-                children.append({labels[key]: name})
+                four_children.append({labels[key]: name})
+        children[-1] = {"Four Hats": four_children}
+        for course in CATALOG.get("courses", []):
+            page = course.get("page", "")
+            if page and course["slug"] != "four-hats" and (root / page).exists():
+                children.append({course["title"]: page})
         nav.append({labels["courses"]: children})
 
     if (root / "notes" / "index.md").exists():
@@ -387,6 +427,7 @@ def assemble(lang: str) -> Path:
         page.write_text(text)
     episode_index(root, lang)
     projects_index(root, lang)
+    courses_index(root, lang)
     process_wiki(root, lang)
     return root
 

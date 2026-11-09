@@ -45,6 +45,13 @@ Open `http://localhost:8000/` and `http://localhost:8000/ar/`.
 
 The curated page is the hub entry. Import deep documents from the project repository only when they are stable, and keep the curated page as the index.
 
+## Add a course
+
+1. Add an entry to the `courses` list in `catalog.yaml`: slug, title, status, summary, tags, page.
+2. Copy `templates/course.md` to the course page and fill it.
+3. Keep the course URL stable. Four Hats stays at `/four-hats/`; `/courses/` is the landing page.
+4. Run `build.py`. The course appears on `/courses/` and in the Courses nav.
+
 ## Layout
 
 ```text

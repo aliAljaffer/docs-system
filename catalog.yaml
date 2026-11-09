@@ -2,6 +2,20 @@ site:
   name: Docs
   tagline: Documentation for the systems I build, the courses I teach, and the notes I keep.
 
+courses:
+  - slug: four-hats
+    title: Four Hats
+    status: Published
+    summary: Four tech careers on one project, from a tested feature to Kubernetes and security.
+    tags: [software, cloud, devops, security]
+    page: four-hats/index.md
+  - slug: cloud-course
+    title: Cloud course
+    status: Planned
+    summary: A separate cloud course, planned from the existing source material.
+    tags: [cloud]
+    page: ""
+
 projects:
   - slug: homelab
     title: Homelab

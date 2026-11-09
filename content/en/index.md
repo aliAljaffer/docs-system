@@ -16,6 +16,8 @@ Documentation for the systems I build, the courses I teach, and the notes I keep
 
 - [Four Hats](four-hats/index.md): four tech careers on one project.
 
+[All courses](courses/index.md).
+
 ## Notes and tools
 
 - [Notes](notes/index.md): public notes.
