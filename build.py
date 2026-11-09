@@ -7,6 +7,7 @@ same English verified apply steps as the English page.
 """
 from __future__ import annotations
 
+import os
 import re
 import shutil
 import subprocess
@@ -23,7 +24,7 @@ SOURCES = ROOT / "sources"
 ACT_ROOT = SOURCES if any(SOURCES.glob("act*.md")) else FOUR_HATS / "docs"
 SITE = ROOT / "site"
 TASKS = yaml.safe_load((ROOT / "episode-tasks.yaml").read_text())["episodes"]
-ZENSICAL = "/Users/h/branding/.venv/bin/zensical"
+ZENSICAL = os.environ.get("ZENSICAL") or shutil.which("zensical") or "/Users/h/branding/.venv/bin/zensical"
 
 SITE_URL = "https://docs.alialjaffer.com"
 
