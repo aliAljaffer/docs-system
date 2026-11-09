@@ -13,7 +13,10 @@ import os
 import re
 import shutil
 import subprocess
+from html import unescape
+from html.parser import HTMLParser
 from pathlib import Path
+from urllib.parse import urlparse
 
 import yaml
 
@@ -51,7 +54,9 @@ LABELS = {
         "costs": "Costs and free options",
         "projects": "Projects",
         "courses": "Courses",
+        "blogs": "Blogs",
         "notes": "Notes",
+        "graph": "Graph",
         "tools": "Tools",
         "wiki": "Wiki",
         "site": "Docs",
@@ -68,7 +73,9 @@ LABELS = {
         "costs": "التكلفة والخيارات المجانية",
         "projects": "المشاريع",
         "courses": "الدورات",
+        "blogs": "المدونات",
         "notes": "الملاحظات",
+        "graph": "الخريطة",
         "tools": "الأدوات",
         "wiki": "الويكي",
         "site": "الوثائق",
@@ -106,6 +113,7 @@ markdown_extensions:
 extra_css:
   - assets/extra.css?v={asset_version}
   - assets/hover.css?v={asset_version}
+  - assets/graph.css?v={asset_version}
 extra_javascript:
   - assets/hover.js?v={asset_version}
   - assets/analytics.js?v={asset_version}
@@ -114,7 +122,7 @@ extra_javascript:
 
 def asset_version() -> str:
     digest = hashlib.sha256()
-    for name in ("extra.css", "hover.css", "hover.js", "analytics.js"):
+    for name in ("extra.css", "hover.css", "graph.css", "hover.js", "graph.js", "analytics.js"):
         digest.update((ASSETS / name).read_bytes())
     return digest.hexdigest()[:10]
 
@@ -123,6 +131,101 @@ def title_of(path: Path) -> str:
     text = path.read_text()
     match = re.search(r"^# (.+)$", text, flags=re.M)
     return match.group(1).strip() if match else path.stem
+
+
+def meta_of(path: Path) -> dict:
+    text = path.read_text()
+    if not text.startswith("---\n"):
+        return {}
+    end = text.find("\n---\n", 4)
+    if end == -1:
+        return {}
+    return yaml.safe_load(text[4:end]) or {}
+
+
+WIKI_ORDER = ["Cloud", "Networking", "Security", "AI", "React", "Web", "Other"]
+NOTES_ORDER = ["GCP", "Cloud", "Security", "Networking", "React", "Web", "Site", "Other"]
+
+
+def group_pages(folder: Path) -> dict[str, list[Path]]:
+    groups: dict[str, list[Path]] = {}
+    for path in folder.rglob("*.md"):
+        if path.name == "index.md":
+            continue
+        category = meta_of(path).get("category") or "Other"
+        groups.setdefault(category, []).append(path)
+    for pages in groups.values():
+        pages.sort(key=title_of)
+    return groups
+
+
+def ordered_groups(
+    groups: dict[str, list[Path]], preferred: list[str]
+) -> list[tuple[str, list[Path]]]:
+    names = [name for name in preferred if name in groups]
+    names += sorted(name for name in groups if name not in preferred)
+    return [(name, groups[name]) for name in names]
+
+
+def section_index(
+    root: Path, folder: str, title: str, intro: str, order: list[str]
+) -> None:
+    base = root / folder
+    if not base.exists():
+        return
+    groups = group_pages(base)
+    if not groups:
+        return
+    lines = [f"# {title}", "", intro, ""]
+    for category, pages in ordered_groups(groups, order):
+        lines += [f"## {category}", ""]
+        for page in pages:
+            link = page.relative_to(base).as_posix()
+            description = meta_of(page).get("description", "")
+            entry = f"- [{title_of(page)}]({link})"
+            lines += [entry + (f": {description}" if description else "")]
+        lines.append("")
+    if folder == "wiki":
+        lines += [
+            "## How mentions work",
+            "",
+            "Write `[[rest]]` or `[[rest|REST]]` in any page. The build resolves it to the definition and records the backlink.",
+            "",
+            "> [!tip] Hover a term",
+            "> Move the pointer over a link to preview the definition without leaving the page.",
+            "",
+        ]
+    (base / "index.md").write_text("\n".join(lines))
+
+
+def blogs_index(root: Path, lang: str) -> None:
+    if lang != "en":
+        return
+    folder = root / "blogs"
+    if not folder.exists():
+        return
+    pages = [p for p in folder.glob("*.md") if p.name != "index.md"]
+    if not pages:
+        return
+    pages.sort(key=lambda p: str(meta_of(p).get("date", "")), reverse=True)
+    lines = [
+        "# Blogs",
+        "",
+        "Writing from the portfolio: field notes, project stories, and lessons learned.",
+        "",
+        "| Date | Post |",
+        "|---|---|",
+    ]
+    for page in pages:
+        date = str(meta_of(page).get("date", ""))
+        lines.append(f"| {date} | [{title_of(page)}]({page.name}) |")
+    lines += [
+        "",
+        "The wiki holds the definitions these posts use. The notes hold the study material.",
+        "",
+    ]
+    (folder / "index.md").write_text("\n".join(lines))
+
 
 
 def apply_content(ep: str) -> tuple[str, str]:
@@ -285,6 +388,28 @@ def project_nav(root: Path, item: dict) -> dict | None:
     return {item["title"]: children}
 
 
+def section_nav(root: Path, folder: str, order: list[str]) -> list:
+    base = root / folder
+    pages = [p for p in base.rglob("*.md") if p.name != "index.md"]
+    if not pages:
+        return []
+    if not any(meta_of(page).get("category") for page in pages):
+        return [
+            {title_of(page): page.relative_to(root).as_posix()}
+            for page in sorted(pages, key=title_of)
+        ]
+    groups = group_pages(base)
+    return [
+        {
+            category: [
+                {title_of(page): page.relative_to(root).as_posix()}
+                for page in group
+            ]
+        }
+        for category, group in ordered_groups(groups, order)
+    ]
+
+
 def nav_for(root: Path, lang: str) -> list:
     labels = LABELS[lang]
     nav: list = [{"Home": "index.md"}]
@@ -332,23 +457,28 @@ def nav_for(root: Path, lang: str) -> list:
                 children.append({course["title"]: page})
         nav.append({labels["courses"]: children})
 
+    if (root / "blogs" / "index.md").exists():
+        posts = [p for p in (root / "blogs").glob("*.md") if p.name != "index.md"]
+        posts.sort(key=lambda p: str(meta_of(p).get("date", "")), reverse=True)
+        children = [{"Overview": "blogs/index.md"}]
+        for page in posts:
+            children.append({title_of(page): page.relative_to(root).as_posix()})
+        nav.append({labels["blogs"]: children})
+
     if (root / "notes" / "index.md").exists():
         children = [{"Overview": "notes/index.md"}]
-        for page in sorted((root / "notes").glob("*.md")):
-            if page.name == "index.md":
-                continue
-            children.append({title_of(page): page.relative_to(root).as_posix()})
+        children += section_nav(root, "notes", NOTES_ORDER)
         nav.append({labels["notes"]: children})
+
+    if (root / "graph.md").exists():
+        nav.append({labels["graph"]: "graph.md"})
 
     if (root / "tools" / "index.md").exists():
         nav.append({labels["tools"]: "tools/index.md"})
 
     if (root / "wiki" / "index.md").exists():
         children = [{"Overview": "wiki/index.md"}]
-        for page in sorted((root / "wiki").glob("*.md")):
-            if page.name == "index.md":
-                continue
-            children.append({title_of(page): page.relative_to(root).as_posix()})
+        children += section_nav(root, "wiki", WIKI_ORDER)
         nav.append({labels["wiki"]: children})
 
     return nav
@@ -469,6 +599,21 @@ def assemble(lang: str) -> Path:
     episode_index(root, lang)
     projects_index(root, lang)
     courses_index(root, lang)
+    blogs_index(root, lang)
+    section_index(
+        root,
+        "notes",
+        "Notes",
+        "Study notes, course summaries, and working reference material.",
+        NOTES_ORDER,
+    )
+    section_index(
+        root,
+        "wiki",
+        "Wiki",
+        "Definitions and informational terms. Link to a definition once, and every page that mentions it appears under **Linked from**.",
+        WIKI_ORDER,
+    )
     process_wiki(root, lang)
     return root
 
@@ -586,6 +731,120 @@ def publish_slides() -> None:
     )
 
 
+class ContentLinks(HTMLParser):
+    def __init__(self) -> None:
+        super().__init__()
+        self.inside = 0
+        self.hrefs: list[str] = []
+
+    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        values = dict(attrs)
+        if tag == "article" and "md-content__inner" in (values.get("class") or ""):
+            self.inside += 1
+        if self.inside and tag == "a" and values.get("href"):
+            self.hrefs.append(values["href"])
+
+    def handle_endtag(self, tag: str) -> None:
+        if tag == "article" and self.inside:
+            self.inside -= 1
+
+
+def graph_url(path: Path, base: Path, lang: str) -> str:
+    rel = path.relative_to(base)
+    if rel.name == "index.html":
+        rel = rel.parent
+    else:
+        rel = rel.with_suffix("")
+    prefix = "/ar" if lang == "ar" else ""
+    part = rel.as_posix().strip("/")
+    return f"{prefix}/{part}/" if part else f"{prefix}/"
+
+
+def page_title(text: str) -> str:
+    match = re.search(r"<h1[^>]*>(.*?)</h1>", text, flags=re.S)
+    raw = match.group(1) if match else ""
+    return unescape(re.sub(r"<[^>]+>", "", raw)).replace("¶", "").strip()
+
+
+def page_type(rel: str) -> str:
+    parts = Path(rel).parts
+    if not parts:
+        return "page"
+    if parts[0] == "projects":
+        return "project"
+    if parts[0] == "four-hats":
+        return "episode" if "episodes" in parts else "course"
+    if parts[0] == "courses":
+        return "collection"
+    if parts[0] == "wiki":
+        return "wiki"
+    if parts[0] == "notes":
+        return "note"
+    if parts[0] == "tools":
+        return "tool"
+    return "page"
+
+
+def build_graph(base: Path, lang: str) -> None:
+    pages: dict[str, Path] = {}
+    for html in base.rglob("*.html"):
+        parts = html.relative_to(base).parts
+        if "404" in html.name or "assets" in parts or "slides" in parts:
+            continue
+        pages[graph_url(html, base, lang)] = html
+
+    nodes = []
+    for url, path in sorted(pages.items()):
+        text = path.read_text()
+        rel = path.relative_to(base).as_posix()
+        nodes.append(
+            {
+                "id": url,
+                "title": page_title(text) or Path(rel).stem,
+                "type": page_type(rel),
+            }
+        )
+
+    links: list[dict[str, str]] = []
+    seen: set[tuple[str, str]] = set()
+    for url, path in pages.items():
+        parser = ContentLinks()
+        parser.feed(path.read_text())
+        for href in parser.hrefs:
+            parsed = urlparse(href)
+            if parsed.scheme or parsed.netloc or not parsed.path:
+                continue
+            if parsed.path.startswith("/"):
+                if lang == "ar" and parsed.path.startswith("/ar/"):
+                    target = SITE / parsed.path.lstrip("/")
+                else:
+                    target = base / parsed.path.lstrip("/")
+            else:
+                target = (path.parent / parsed.path).resolve()
+            if target.is_dir() or parsed.path.endswith("/"):
+                target = target / "index.html"
+            elif target.suffix == "":
+                target = target / "index.html"
+            try:
+                target.relative_to(base)
+            except ValueError:
+                continue
+            if not target.exists() or target.suffix != ".html":
+                continue
+            dest = graph_url(target, base, lang)
+            if dest == url or dest not in pages:
+                continue
+            edge = (url, dest)
+            if edge not in seen:
+                seen.add(edge)
+                links.append({"source": url, "target": dest})
+
+    payload = {"nodes": nodes, "links": links}
+    (base / "assets" / "graph.json").write_text(
+        json.dumps(payload, ensure_ascii=False) + "\n"
+    )
+
+
 def main() -> None:
     if SITE.exists():
         shutil.rmtree(SITE)
@@ -594,6 +853,8 @@ def main() -> None:
         build(lang, root)
     postprocess(SITE, "en")
     postprocess(SITE / "ar", "ar")
+    build_graph(SITE, "en")
+    build_graph(SITE / "ar", "ar")
     publish_slides()
     print("built site/ and site/ar/")
 

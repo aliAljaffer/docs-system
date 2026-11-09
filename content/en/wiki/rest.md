@@ -1,3 +1,10 @@
+---
+title: REST
+category: Web
+description: A style of API design where a client names a resource and an HTTP method states the action.
+tags: [web, http, api]
+---
+
 # REST
 
 REST is a style of API design. A client names a resource, and an HTTP method states the action.

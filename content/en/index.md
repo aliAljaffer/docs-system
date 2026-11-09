@@ -29,11 +29,15 @@ Documentation for the systems I build, the courses I teach, and the notes I keep
 
 [All courses](courses/index.md).
 
+## Writing
+
+- [Blogs](blogs/index.md): project stories and field notes from the portfolio.
+
 ## Notes and tools
 
-- [Notes](notes/index.md): public notes.
+- [Notes](notes/index.md): study notes and course summaries.
 - [Tools](tools/index.md): tool references.
-- [Wiki](wiki/index.md): shared definitions and writing.
+- [Wiki](wiki/index.md): definitions and informational terms.
 
 ## About this site
 

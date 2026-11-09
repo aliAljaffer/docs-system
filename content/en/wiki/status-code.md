@@ -1,3 +1,10 @@
+---
+title: Status code
+category: Web
+description: The first fact a client reads from a response, stating what happened before the body is parsed.
+tags: [web, http, api]
+---
+
 # Status code
 
 A status code is the first fact a client reads from a response. It states what happened, before the client parses the body.

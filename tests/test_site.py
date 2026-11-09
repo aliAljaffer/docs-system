@@ -2,6 +2,7 @@
 """End-to-end checks for the built bilingual site."""
 from __future__ import annotations
 
+import json
 import re
 import unittest
 from html.parser import HTMLParser
@@ -132,6 +133,15 @@ class SiteTests(unittest.TestCase):
         ar = (SITE / "ar" / "assets" / "backlinks.json").read_text()
         self.assertIn("/wiki/rest/", en)
         self.assertIn("/ar/wiki/rest/", ar)
+
+    def test_graph(self) -> None:
+        page = (SITE / "graph" / "index.html").read_text()
+        self.assertEqual(page.count('id="graph"'), 1)
+        self.assertEqual(page.count('id="docs-graph"'), 1)
+        data = json.loads((SITE / "assets" / "graph.json").read_text())
+        self.assertGreater(len(data["nodes"]), 20)
+        self.assertGreater(len(data["links"]), 10)
+        self.assertTrue((SITE / "assets" / "vendor" / "force-graph.min.js").exists())
 
     def test_nav_sections_collapse(self) -> None:
         config = (ROOT / "mkdocs.en.yml").read_text()

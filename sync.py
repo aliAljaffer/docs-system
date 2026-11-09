@@ -2,16 +2,19 @@
 """Pull external sources into the site content tree.
 
 The four-hats repository owns the course text and the verified apply steps.
-The portfolio repository owns the project write-ups and notes. The
-openziti-operator repository owns its reference documentation. This script
-converts and copies those sources. It does not write navigation or build the
-site.
+The portfolio repository owns the project write-ups and blog posts. The
+openziti-operator repository owns its reference documentation. The Obsidian
+vault owns the study notes and the definition pages.
+
+This script converts and copies those sources. It does not write navigation
+or build the site.
 """
 from __future__ import annotations
 
 import re
 import shutil
 import subprocess
+from collections import Counter
 from pathlib import Path
 
 import yaml
@@ -22,9 +25,21 @@ HQ = Path("/Users/h/mk-project/hq-main")
 PORTFOLIO = Path("/Users/h/portfolio/src/data")
 PORTFOLIO_PUBLIC = Path("/Users/h/portfolio/public")
 OPENZITI = Path("/Users/h/openziti-operator/docs")
+VAULT = next(
+    (
+        path
+        for path in (Path.home() / "ObsidianVault", Path.home() / "Desktop" / "ObsidianVault")
+        if path.exists()
+    ),
+    Path.home() / "Desktop" / "ObsidianVault",
+)
 EN = ROOT / "content" / "en"
+WIKI = EN / "wiki"
+NOTES = EN / "notes"
+BLOGS = EN / "blogs"
 ASSETS = ROOT / "assets" / "diagrams"
 PORTFOLIO_ASSETS = ROOT / "assets" / "portfolio"
+VAULT_ASSETS = ROOT / "assets" / "vault"
 OPENZITI_PAGES = EN / "projects" / "openziti-operator"
 
 PAGES = {
@@ -33,8 +48,84 @@ PAGES = {
     "costs-and-free-options.md": "costs-and-free-options.md",
 }
 
-MARKER = "<!-- imported from portfolio/src/data/{name}. Edit the source, then run sync.py. -->"
+MARKER = "<!-- imported from {source}. Edit the source, then run sync.py. -->"
 IMAGE = re.compile(r"\]\(/([^)/]+\.(?:png|jpg|jpeg|gif|svg|webp))\)")
+EMBED = re.compile(r"!\[\[([^\]|]+?)(?:\\?\|([^\]]+))?\]\]")
+WIKI_LINK = re.compile(r"\[\[([^\]|\\]+?)(?:\\?\|([^\]]+))?\]\]")
+TAG_LINE = re.compile(r"(?m)^(#[A-Za-z0-9/_-]+(?:\s+#[A-Za-z0-9/_-]+)*)\s*$")
+COMMENT = re.compile(r"%%.*?%%", re.S)
+FENCE = re.compile(r"^\s*(```|~~~)")
+
+WIKI_DIRS = [
+    ("studies/definitions", "Cloud", ["cloud", "fundamentals"]),
+    ("webdev/general-concepts", "Web", ["web", "fundamentals"]),
+]
+WIKI_FILES = [
+    ("studies/networking/OSI Model.md", "Networking", ["networking", "osi"]),
+    ("studies/cybersecurity/cryptography.md", "Security", ["security", "cryptography"]),
+    ("webdev/react/useState.md", "React", ["react", "hooks"]),
+    ("webdev/react/useEffect.md", "React", ["react", "hooks"]),
+    ("webdev/react/useRef.md", "React", ["react", "hooks"]),
+    ("webdev/react/useReducer.md", "React", ["react", "hooks"]),
+    ("webdev/react/suspense.md", "React", ["react", "components"]),
+    ("webdev/react/react-lazy.md", "React", ["react", "performance"]),
+    ("webdev/react/context-api/main-context-concepts.md", "React", ["react", "context"]),
+    ("webdev/react/context-api/provider.md", "React", ["react", "context"]),
+    ("webdev/react/design-patterns/controlled-elements.md", "React", ["react", "forms"]),
+    ("webdev/react/design-patterns/prop-drilling.md", "React", ["react", "patterns"]),
+]
+NOTE_FILES = [
+    ("studies/networking/main.md", "Networking", ["networking", "devices"], ""),
+    ("studies/cybersecurity/Attack detection.md", "Security", ["security", "incident-response"], ""),
+    ("studies/cybersecurity/Attack prevention strategies.md", "Security", ["security"], ""),
+    ("studies/cybersecurity/Respond to attacks.md", "Security", ["security", "incident-response"], ""),
+    ("studies/cybersecurity/threat intelligence.md", "Security", ["security", "threat-intelligence"], ""),
+    ("studies/PCSE/PCSE Home.md", "GCP", ["gcp", "security", "pcse"], "pcse-home"),
+    ("studies/PCSE/1 - Configuring Access.md", "GCP", ["gcp", "security", "pcse"], "pcse-1-configuring-access"),
+    ("studies/PCSE/2 - Network Security.md", "GCP", ["gcp", "security", "pcse"], "pcse-2-network-security"),
+    ("studies/PCSE/3 - Data Protection.md", "GCP", ["gcp", "security", "pcse"], "pcse-3-data-protection"),
+    ("studies/PCSE/4 - Managing Operations.md", "GCP", ["gcp", "security", "pcse"], "pcse-4-managing-operations"),
+    ("studies/PCSE/5 - Compliance.md", "GCP", ["gcp", "security", "pcse"], "pcse-5-compliance"),
+    ("studies/PCSE/Cheat Sheets.md", "GCP", ["gcp", "security", "pcse"], "pcse-cheat-sheets"),
+    ("studies/PCSE/gcloud Commands.md", "GCP", ["gcp", "security", "pcse"], "pcse-gcloud-commands"),
+    ("webdev/TypeScript.md", "Web", ["web", "typescript"], ""),
+    ("webdev/TailwindCSS.md", "Web", ["web", "css", "tailwind"], ""),
+    ("webdev/SASS.md", "Web", ["web", "css", "sass"], ""),
+    ("webdev/react/main-concepts.md", "React", ["react", "web"], ""),
+    ("webdev/react/performance-optimizations.md", "React", ["react", "performance"], ""),
+    ("webdev/react/react-router/setting-routes.md", "React", ["react", "react-router"], ""),
+    ("webdev/react/react-router/loaders.md", "React", ["react", "react-router"], ""),
+    ("webdev/react/react-router/forms.md", "React", ["react", "react-router"], ""),
+]
+
+EXTRA_TAGS = {
+    "cidr": ["networking"],
+    "containers": ["containers", "kubernetes"],
+    "multi factor authentication": ["security"],
+    "principle of least privilege": ["security"],
+    "totp": ["security"],
+    "traffic analysis": ["security"],
+    "generative ai": ["ai"],
+    "traditional ai": ["ai"],
+    "infrastructure as code": ["iac"],
+    "serverless": ["serverless"],
+    "availability zones": ["geography"],
+    "edge location": ["geography"],
+    "region": ["geography"],
+    "business continuity": ["reliability"],
+    "disaster recovery": ["reliability"],
+    "fault tolerance": ["reliability"],
+    "high availability": ["reliability"],
+    "high durability": ["reliability"],
+    "rto": ["reliability"],
+    "sla": ["reliability"],
+}
+
+
+def slugify(name: str) -> str:
+    name = name.lower().replace("&", " and ")
+    name = re.sub(r"[^a-z0-9]+", "-", name)
+    return name.strip("-")
 
 
 def split_frontmatter(text: str) -> tuple[dict, str]:
@@ -46,7 +137,7 @@ def split_frontmatter(text: str) -> tuple[dict, str]:
     return yaml.safe_load(text[4:end]) or {}, text[end + 5:].lstrip("\n")
 
 
-def clean_body(body: str) -> str:
+def clean_portfolio(body: str) -> str:
     body = body.replace("](/case-study/", "](https://alialjaffer.com/case-study/")
     body = re.sub(
         r"<excalidraw src=\"(/[^\"]+)\"></excalidraw>",
@@ -64,6 +155,173 @@ def clean_body(body: str) -> str:
     return re.sub(r"\n{3,}", "\n\n", body).strip()
 
 
+def vault_images() -> dict[str, Path]:
+    found: dict[str, Path] = {}
+    for path in VAULT.rglob("*"):
+        if path.suffix.lower() in {".png", ".jpg", ".jpeg", ".gif", ".svg", ".webp"}:
+            found.setdefault(path.name, path)
+    return found
+
+
+def resolve_link(raw: str, mapping: dict[str, str]) -> tuple[str | None, str, str]:
+    target = raw.strip()
+    anchor = ""
+    if "#" in target:
+        target, anchor = target.split("#", 1)
+    label = target.strip()
+    if not target:
+        return None, label, anchor
+    for key in (target, target.lower(), slugify(target)):
+        if key in mapping:
+            return mapping[key], label, anchor
+    return None, label, anchor
+
+
+def transform_links(text: str, mapping: dict[str, str]) -> str:
+    out: list[str] = []
+    fenced = False
+    for line in text.splitlines():
+        if FENCE.match(line):
+            fenced = not fenced
+            out.append(line)
+            continue
+        if fenced:
+            line = WIKI_LINK.sub(lambda m: m.group(2) or m.group(1), line)
+            out.append(line)
+            continue
+
+        def replace(match: re.Match[str]) -> str:
+            dest, label, _anchor = resolve_link(match.group(1), mapping)
+            name = match.group(2) or label
+            if not dest:
+                return name
+            if match.group(2):
+                return f"[[{dest}|{name}]]"
+            if dest == label:
+                return f"[[{dest}]]"
+            return f"[[{dest}|{label}]]"
+
+        out.append(WIKI_LINK.sub(replace, line))
+    return "\n".join(out)
+
+
+def clean_vault(body: str, mapping: dict[str, str], images: dict[str, Path]) -> str:
+    body = COMMENT.sub("", body)
+    body = body.replace("\u2014", " - ")
+    body = TAG_LINE.sub("", body)
+    VAULT_ASSETS.mkdir(parents=True, exist_ok=True)
+
+    def embed(match: re.Match[str]) -> str:
+        name = match.group(1).strip()
+        alt = (match.group(2) or "").strip()
+        if name.lower().endswith(".md"):
+            return ""
+        source = images.get(name)
+        if not source:
+            return ""
+        dest = VAULT_ASSETS / re.sub(r"\s+", "-", name.lower())
+        if not dest.exists() or dest.stat().st_mtime < source.stat().st_mtime:
+            shutil.copy2(source, dest)
+        return f"![{alt}](/assets/vault/{dest.name})"
+
+    body = EMBED.sub(embed, body)
+    body = transform_links(body, mapping)
+    body = re.sub(r"(?m)^====\s*$", "", body)
+    body = re.sub(r"==([^=\n]+)==", r"**\1**", body)
+    body = body.lstrip("\n")
+    body = re.sub(r"\A# .+\n", "", body)
+    return re.sub(r"\n{3,}", "\n\n", body).strip()
+
+
+def describe(body: str) -> str:
+    text = re.sub(r"```.*?```", "", body, flags=re.S)
+    for block in re.split(r"\n\s*\n", text):
+        block = block.strip()
+        if not block or block.startswith(("#", "|", "-", "*", "!", ">", "`")):
+            continue
+        line = re.sub(r"\[([^\]]+)\]\([^)]+\)", r"\1", block)
+        line = re.sub(r"[*_`>#]", "", line)
+        line = " ".join(line.split())
+        if len(line) > 20:
+            return line[:200].rstrip()
+    return ""
+
+
+def frontmatter(meta: dict) -> str:
+    data = yaml.safe_dump(meta, sort_keys=False, allow_unicode=True).strip()
+    return f"---\n{data}\n---\n"
+
+
+def tag_line(tags: list[str]) -> list[str]:
+    if not tags:
+        return []
+    return [" ".join(f"`{tag}`" for tag in tags), ""]
+
+
+def project_page(stem: str, meta: dict, body: str) -> str:
+    title = meta.get("name") or stem
+    lines = [
+        MARKER.format(source=f"portfolio/src/data/{stem}.md"),
+        "",
+        f"# {title}",
+        "",
+        "**Status:** Active",
+        "",
+    ]
+    if meta.get("description"):
+        lines += [str(meta["description"]).strip(), ""]
+    lines += tag_line(meta.get("tags") or [])
+    lines += link_block(meta)
+    lines += [body, ""]
+    return "\n".join(lines)
+
+
+def blog_page(stem: str, meta: dict, body: str) -> str:
+    title = meta.get("name") or stem
+    tags = meta.get("tags") or []
+    page_meta = {
+        "title": title,
+        "date": meta.get("date", ""),
+        "description": str(meta.get("description") or "").strip(),
+        "tags": tags,
+    }
+    lines = [
+        frontmatter(page_meta),
+        MARKER.format(source=f"portfolio/src/data/{stem}.md"),
+        "",
+        f"# {title}",
+        "",
+        f"**Published:** {meta.get('date', '')}",
+        "",
+    ]
+    if meta.get("description"):
+        lines += [str(meta["description"]).strip(), ""]
+    lines += tag_line(tags)
+    lines += link_block(meta)
+    lines += [body, ""]
+    return "\n".join(lines)
+
+
+def vault_page(source: Path, title: str, category: str, tags: list[str], body: str) -> str:
+    rel = source.relative_to(VAULT).as_posix()
+    page_meta = {
+        "title": title,
+        "category": category,
+        "description": describe(body),
+        "tags": tags,
+    }
+    lines = [
+        frontmatter(page_meta),
+        MARKER.format(source=f"ObsidianVault/{rel}"),
+        "",
+        f"# {title}",
+        "",
+    ]
+    lines += tag_line(tags)
+    lines += [body, ""]
+    return "\n".join(lines)
+
+
 def link_block(meta: dict) -> list[str]:
     repo = str(meta.get("repo") or "")
     url = str(meta.get("url") or "")
@@ -77,56 +335,22 @@ def link_block(meta: dict) -> list[str]:
     return ["## Links", "", *lines, ""]
 
 
-def tag_line(meta: dict) -> list[str]:
-    tags = meta.get("tags") or []
-    if not tags:
-        return []
-    return [" ".join(f"`{tag}`" for tag in tags), ""]
+def generated(path: Path, source: str) -> bool:
+    head = "\n".join(path.read_text().splitlines()[:8])
+    return "<!-- imported from " in head and source in head
 
 
-def project_page(stem: str, meta: dict, body: str) -> str:
-    title = meta.get("name") or stem
-    lines = [
-        MARKER.format(name=f"{stem}.md"),
-        "",
-        f"# {title}",
-        "",
-        "**Status:** Active",
-        "",
-    ]
-    if meta.get("description"):
-        lines += [str(meta["description"]).strip(), ""]
-    lines += tag_line(meta)
-    lines += link_block(meta)
-    lines += [body, ""]
-    return "\n".join(lines)
-
-
-def note_page(stem: str, meta: dict, body: str) -> str:
-    title = meta.get("name") or stem
-    lines = [
-        MARKER.format(name=f"{stem}.md"),
-        "",
-        f"# {title}",
-        "",
-        f"**Published:** {meta.get('date', '')}",
-        "",
-    ]
-    if meta.get("description"):
-        lines += [str(meta["description"]).strip(), ""]
-    lines += tag_line(meta)
-    lines += link_block(meta)
-    lines += [body, ""]
-    return "\n".join(lines)
-
-
-def generated(path: Path) -> bool:
-    return path.read_text().startswith("<!-- imported from portfolio/")
+def title_from(source: Path, body: str) -> str:
+    match = re.search(r"^# (.+)$", body, re.M)
+    if match and match.start() == 0:
+        return match.group(1).strip()
+    stem = source.stem
+    return stem[:1].upper() + stem[1:]
 
 
 def sync_portfolio() -> tuple[int, int]:
     written: set[Path] = set()
-    projects = notes = 0
+    projects = blogs = 0
     for src in sorted(PORTFOLIO.glob("*.md")):
         stem = src.stem
         if stem == "template":
@@ -135,27 +359,85 @@ def sync_portfolio() -> tuple[int, int]:
         meta = data.get(stem) or next(iter(data.values()), {})
         if not meta or not meta.get("show", True):
             continue
-        body = clean_body(body)
+        body = clean_portfolio(body)
         if meta.get("type") == "blog":
-            dest = EN / "wiki" / f"{stem}.md"
-            text = note_page(stem, meta, body)
+            dest = BLOGS / f"{stem}.md"
+            text = blog_page(stem, meta, body)
         else:
             dest = EN / "projects" / f"{stem}.md"
             text = project_page(stem, meta, body)
-        if dest.exists() and not generated(dest):
+        if dest.exists() and not generated(dest, "portfolio/"):
             continue
         dest.parent.mkdir(parents=True, exist_ok=True)
         dest.write_text(text)
         written.add(dest)
         if meta.get("type") == "blog":
-            notes += 1
+            blogs += 1
         else:
             projects += 1
-    for folder in (EN / "projects", EN / "wiki"):
-        for path in folder.glob("*.md"):
-            if generated(path) and path not in written:
+    for folder in (EN / "projects", WIKI, BLOGS):
+        for path in folder.rglob("*.md"):
+            if generated(path, "portfolio/") and path not in written:
                 path.unlink()
-    return projects, notes
+    return projects, blogs
+
+
+def sync_vault() -> tuple[int, int]:
+    jobs: list[tuple[Path, Path, str, list[str]]] = []
+    for folder, category, tags in WIKI_DIRS:
+        for src in sorted((VAULT / folder).glob("*.md")):
+            tags_all = list(dict.fromkeys(tags + EXTRA_TAGS.get(src.stem.lower(), [])))
+            dest = WIKI / slugify(category) / f"{slugify(src.stem)}.md"
+            jobs.append((src, dest, category, tags_all))
+    for name, category, tags in WIKI_FILES:
+        src = VAULT / name
+        if src.exists():
+            dest = WIKI / slugify(category) / f"{slugify(src.stem)}.md"
+            jobs.append((src, dest, category, tags))
+    for name, category, tags, override in NOTE_FILES:
+        src = VAULT / name
+        if not src.exists() or src.stat().st_size < 80:
+            continue
+        dest = NOTES / slugify(category) / f"{override or slugify(src.stem)}.md"
+        jobs.append((src, dest, category, tags))
+
+    dest_stems = [dest.stem for _src, dest, _cat, _tags in jobs]
+    duplicate = [stem for stem, count in Counter(dest_stems).items() if count > 1]
+    if duplicate:
+        raise SystemExit(f"duplicate vault page names: {duplicate}")
+
+    existing = [path for path in EN.rglob("*.md")]
+    counts = Counter(path.stem for path in existing)
+    mapping = {stem: stem for stem, count in counts.items() if count == 1}
+    for src, dest, _cat, _tags in jobs:
+        mapping[src.stem] = dest.stem
+        mapping[src.stem.lower()] = dest.stem
+        mapping[dest.stem] = dest.stem
+
+    images = vault_images()
+    written: set[Path] = set()
+    wiki = notes = 0
+    for src, dest, category, tags in jobs:
+        _meta, raw = split_frontmatter(src.read_text())
+        title = title_from(src, raw)
+        body = clean_vault(raw, mapping, images)
+        if len(body) < 10:
+            continue
+        text = vault_page(src, title, category, tags, body)
+        if dest.exists() and not generated(dest, "ObsidianVault/"):
+            continue
+        dest.parent.mkdir(parents=True, exist_ok=True)
+        dest.write_text(text)
+        written.add(dest)
+        if dest.is_relative_to(WIKI):
+            wiki += 1
+        else:
+            notes += 1
+    for folder in (WIKI, NOTES):
+        for path in folder.rglob("*.md"):
+            if path.name != "index.md" and generated(path, "ObsidianVault/") and path not in written:
+                path.unlink()
+    return wiki, notes
 
 
 def sync_openziti() -> int:
@@ -229,11 +511,12 @@ def sync_four_hats() -> int:
 
 def main() -> None:
     episodes = sync_four_hats()
-    projects, notes = sync_portfolio()
+    projects, blogs = sync_portfolio()
+    wiki, notes = sync_vault()
     docs = sync_openziti()
     print(
-        f"synced {episodes} episodes, {projects} projects, "
-        f"{notes} notes, {docs} operator docs"
+        f"synced {episodes} episodes, {projects} projects, {blogs} blogs, "
+        f"{wiki} wiki pages, {notes} notes, {docs} operator docs"
     )
 
 

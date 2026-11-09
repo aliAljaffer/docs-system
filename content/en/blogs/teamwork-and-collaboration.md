@@ -1,0 +1,54 @@
+---
+title: Collaboration on GitHub
+date: '2025-10-13'
+description: A session I presented in DevOps bootcamp to help colleagues on how to
+  efficiently collaboarate on GitHub.
+tags:
+- Career
+---
+
+<!-- imported from portfolio/src/data/teamwork-and-collaboration.md. Edit the source, then run sync.py. -->
+
+# Collaboration on GitHub
+
+**Published:** 2025-10-13
+
+A session I presented in DevOps bootcamp to help colleagues on how to efficiently collaboarate on GitHub.
+
+`Career`
+
+## Links
+
+- [Live](https://youtu.be/vS0gLCvDSVc)
+
+## Overview
+
+Following my team's successful launch of our Project 2 -[End-to-end Fully Automated Three-tier Application hosted on Azure](https://github.com/aliAljaffer/e2e-automated-deployment-azure-app), the instructor was impressed with our collaboration as a team. As the **team's leader** for the project, I was asked by Mr. Saurabh Dhingra, our lead instructor, to prepare a session on the practices we used to achieve such level of collaboration.
+
+![The header of the drawing board used](https://alialjaffer-website.s3.me-south-1.amazonaws.com/images/teamwork-and-collaboration/header.png)
+
+A session where I present GitHub concepts that aide and enhance teamwork between team members, like Github Issues, Pull Requests, Branching, Merging Branches, and more.
+
+Drawing board: [https://excalidraw.com/#json=87RhUUHNGDEtb5iRn8GeI,4T_86pgpUCxRsayJBC762g](https://excalidraw.com/#json=87RhUUHNGDEtb5iRn8GeI,4T_86pgpUCxRsayJBC762g)
+
+YouTube video (55:23)
+
+<iframe src="https://www.youtube.com/embed/vS0gLCvDSVc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+## Few Insights
+
+### Why Github?
+
+![Why do we need Github?](https://alialjaffer-website.s3.me-south-1.amazonaws.com/images/teamwork-and-collaboration/why-github.png)
+
+This section explores the challenges of legacy collaboration systems and why Github is needed, and the issues it solves!
+
+### A typical collaborative workflow
+
+![Typical workflow](https://alialjaffer-website.s3.me-south-1.amazonaws.com/images/teamwork-and-collaboration/workflow.png)
+
+Here I shared my team's workflow followed in Project 2, and why we still plan to follow it in Project 3!
+
+### And more!
+
+There's more in the session's video! If you liked these few tidbits, I highly advise going through the session :-)

@@ -1,3 +1,10 @@
+---
+title: Documentation system notes
+category: Site
+description: A public note about how this site is built, why it uses one origin, and what is custom.
+tags: [documentation, site]
+---
+
 # Documentation system notes
 
 A public note about how this site is built. The full plan lives in the HQ repository.
