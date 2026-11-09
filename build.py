@@ -25,6 +25,7 @@ SOURCES = ROOT / "sources"
 ACT_ROOT = SOURCES if any(SOURCES.glob("act*.md")) else FOUR_HATS / "docs"
 SITE = ROOT / "site"
 TASKS = yaml.safe_load((ROOT / "episode-tasks.yaml").read_text())["episodes"]
+CATALOG = yaml.safe_load((ROOT / "catalog.yaml").read_text())
 ZENSICAL = os.environ.get("ZENSICAL") or shutil.which("zensical") or "/Users/h/branding/.venv/bin/zensical"
 
 SITE_URL = "https://docs.alialjaffer.com"
@@ -47,6 +48,9 @@ LABELS = {
         "setup": "Setup",
         "cleanup": "Cleanup",
         "costs": "Costs and free options",
+        "projects": "Projects",
+        "courses": "Courses",
+        "notes": "Notes",
         "tools": "Tools",
         "wiki": "Wiki",
         "site": "Docs",
@@ -61,6 +65,9 @@ LABELS = {
         "setup": "الإعداد",
         "cleanup": "التنظيف",
         "costs": "التكلفة والخيارات المجانية",
+        "projects": "المشاريع",
+        "courses": "الدورات",
+        "notes": "الملاحظات",
         "tools": "الأدوات",
         "wiki": "الويكي",
         "site": "الوثائق",
@@ -177,13 +184,50 @@ def episode_index(root: Path, lang: str) -> Path | None:
     return dest
 
 
+def projects_index(root: Path, lang: str) -> None:
+    if lang != "en":
+        return
+    projects = CATALOG.get("projects", [])
+    if not projects:
+        return
+    lines = [
+        "# Projects",
+        "",
+        CATALOG.get("site", {}).get("tagline", ""),
+        "",
+    ]
+    for item in projects:
+        lines += [
+            f"## {item['title']}",
+            "",
+            f"**Status:** {item.get('status', 'Active')}",
+            "",
+            item.get("summary", ""),
+            "",
+            " ".join(f"`{tag}`" for tag in item.get("tags", [])),
+            "",
+            f"[Read the docs]({Path(item['page']).name})",
+            "",
+        ]
+    dest = root / "projects"
+    dest.mkdir(parents=True, exist_ok=True)
+    (dest / "index.md").write_text("\n".join(lines))
+
+
 def nav_for(root: Path, lang: str) -> list:
     labels = LABELS[lang]
     nav: list = [{"Home": "index.md"}]
 
+    if (root / "projects" / "index.md").exists():
+        children = [{"Overview": "projects/index.md"}]
+        for item in CATALOG.get("projects", []):
+            if (root / item["page"]).exists():
+                children.append({item["title"]: item["page"]})
+        nav.append({labels["projects"]: children})
+
     four = root / "four-hats"
     if (four / "index.md").exists():
-        children: list = [{"Overview": "four-hats/index.md"}]
+        children = [{"Overview": "four-hats/index.md"}]
         if (four / "episodes.md").exists():
             children.append({labels["episodes"]: "four-hats/episodes.md"})
         by_number = {
@@ -196,18 +240,27 @@ def nav_for(root: Path, lang: str) -> list:
                 continue
             act: list = []
             for path in group:
-                rel = path.relative_to(root).as_posix()
-                act.append({title_of(path): rel})
+                act.append({title_of(path): path.relative_to(root).as_posix()})
             children.append({label_en if lang == "en" else label_ar: act})
-        nav.append({labels["four"]: children})
+        for key, name in [
+            ("setup", "setup.md"),
+            ("cleanup", "cleanup-guide.md"),
+            ("costs", "costs-and-free-options.md"),
+        ]:
+            if (root / name).exists():
+                children.append({labels[key]: name})
+        nav.append({labels["courses"]: children})
 
-    for key, name in [
-        ("setup", "setup.md"),
-        ("cleanup", "cleanup-guide.md"),
-        ("costs", "costs-and-free-options.md"),
-    ]:
-        if (root / name).exists():
-            nav.append({labels[key]: name})
+    if (root / "notes" / "index.md").exists():
+        children = [{"Overview": "notes/index.md"}]
+        for page in sorted((root / "notes").glob("*.md")):
+            if page.name == "index.md":
+                continue
+            children.append({title_of(page): page.relative_to(root).as_posix()})
+        nav.append({labels["notes"]: children})
+
+    if (root / "tools" / "index.md").exists():
+        nav.append({labels["tools"]: "tools/index.md"})
 
     if (root / "wiki" / "index.md").exists():
         children = [{"Overview": "wiki/index.md"}]
@@ -216,9 +269,6 @@ def nav_for(root: Path, lang: str) -> list:
                 continue
             children.append({title_of(page): page.relative_to(root).as_posix()})
         nav.append({labels["wiki"]: children})
-
-    if (root / "tools" / "index.md").exists():
-        nav.append({labels["tools"]: "tools/index.md"})
 
     return nav
 
@@ -336,6 +386,7 @@ def assemble(lang: str) -> Path:
         )
         page.write_text(text)
     episode_index(root, lang)
+    projects_index(root, lang)
     process_wiki(root, lang)
     return root
 
