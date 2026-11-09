@@ -36,9 +36,20 @@ python3 -m http.server -d site 8000
 
 Open `http://localhost:8000/` and `http://localhost:8000/ar/`.
 
+## Add a project
+
+1. Add an entry to `catalog.yaml`: slug, title, status, summary, tags, page.
+2. Copy `templates/project.md` to `content/en/projects/<slug>.md` and fill it.
+3. Run `sync.py` if the project has source docs, then `build.py`.
+4. The project appears on the home page, the Projects catalog, and the nav.
+
+The curated page is the hub entry. Import deep documents from the project repository only when they are stable, and keep the curated page as the index.
+
 ## Layout
 
 ```text
+catalog.yaml            project registry: title, status, summary, tags, page
+templates/project.md    project page template
 content/en/             authored English pages plus synced course pages
 content/ar/             authored Arabic pages
 assets/                 shared CSS and generated WebP diagrams
