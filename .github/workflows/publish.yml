@@ -11,10 +11,6 @@ permissions:
   contents: read
   packages: write
 
-env:
-  PORTFOLIO_DIR: ${{ runner.temp }}/portfolio/src/data
-  PORTFOLIO_PUBLIC_DIR: ${{ runner.temp }}/portfolio/public
-
 jobs:
   publish:
     runs-on: ubuntu-latest
@@ -31,10 +27,16 @@ jobs:
         run: git clone --depth 1 https://github.com/aliAljaffer/aliAljaffer.github.io.git "$RUNNER_TEMP/portfolio"
 
       - run: python sync.py --portfolio
+        env:
+          PORTFOLIO_DIR: ${{ runner.temp }}/portfolio/src/data
+          PORTFOLIO_PUBLIC_DIR: ${{ runner.temp }}/portfolio/public
 
       - run: python check_entries.py
 
       - run: python build.py
+        env:
+          PORTFOLIO_DIR: ${{ runner.temp }}/portfolio/src/data
+          PORTFOLIO_PUBLIC_DIR: ${{ runner.temp }}/portfolio/public
 
       - run: python check_parity.py
 
