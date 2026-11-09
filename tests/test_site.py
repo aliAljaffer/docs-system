@@ -141,6 +141,10 @@ class SiteTests(unittest.TestCase):
         self.assertIn("diagram-zoom.js", page)
         self.assertIn("diagram-zoom.css", page)
         self.assertTrue((SITE / "assets" / "vendor" / "panzoom.min.js").exists())
+        js = (SITE / "assets" / "diagram-zoom.js").read_text()
+        self.assertIn("contain: false", js)
+        css = (SITE / "assets" / "diagram-zoom.css").read_text()
+        self.assertIn("--diagram-bg: #ffffff", css)
 
     def test_graph(self) -> None:
         page = (SITE / "graph" / "index.html").read_text()

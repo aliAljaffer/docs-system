@@ -43,7 +43,7 @@
     const pz = PZ(canvas, {
       maxZoom: 10,
       minZoom: 0.5,
-      contain: "inside",
+      contain: false,
       cursor: "grab",
       smooth: true,
     });
