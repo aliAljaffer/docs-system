@@ -46,6 +46,10 @@ def main() -> int:
                 continue
             if not (EN / page).exists():
                 errors.append(f"catalog {kind}: {item['slug']} page missing: {page}")
+            if kind == "projects":
+                date = item.get("date") or frontmatter(EN / page).get("date")
+                if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", str(date or "")):
+                    errors.append(f"catalog projects: {item.get('slug', '?')} needs a date")
             if kind == "projects" and not Path(page).name == "index.md":
                 hub = EN / Path(page).with_suffix("")
                 if hub.is_dir() and (hub / "index.md").exists():

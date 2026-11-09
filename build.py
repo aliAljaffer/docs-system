@@ -313,7 +313,14 @@ def episode_index(root: Path, lang: str) -> Path | None:
 
 
 def project_entries(root: Path) -> list[dict]:
-    entries = list(CATALOG.get("projects", []))
+    entries = []
+    for item in CATALOG.get("projects", []):
+        entry = dict(item)
+        if not entry.get("date"):
+            page = root / item["page"]
+            if page.exists():
+                entry["date"] = str(meta_of(page).get("date", ""))
+        entries.append(entry)
     seen = {item["page"] for item in entries}
     extra: list[dict] = []
     paths = list((root / "projects").glob("*.md")) + list((root / "projects").glob("*/index.md"))
@@ -336,7 +343,9 @@ def project_entries(root: Path) -> list[dict]:
             }
         )
     extra.sort(key=lambda item: item["date"], reverse=True)
-    return entries + extra
+    entries.extend(extra)
+    entries.sort(key=lambda item: str(item.get("date", "")), reverse=True)
+    return entries
 
 
 def inject_projects(root: Path) -> None:
