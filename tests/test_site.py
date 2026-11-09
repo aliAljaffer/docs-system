@@ -135,6 +135,13 @@ class SiteTests(unittest.TestCase):
         self.assertIn("/wiki/", en)
         self.assertIn("/ar/wiki/", ar)
 
+    def test_diagram_zoom(self) -> None:
+        page = (SITE / "four-hats" / "episodes" / "ep04-add-a-feature-with-a-test" / "index.html").read_text()
+        self.assertIn("panzoom.min.js", page)
+        self.assertIn("diagram-zoom.js", page)
+        self.assertIn("diagram-zoom.css", page)
+        self.assertTrue((SITE / "assets" / "vendor" / "panzoom.min.js").exists())
+
     def test_graph(self) -> None:
         page = (SITE / "graph" / "index.html").read_text()
         self.assertEqual(page.count('id="graph"'), 1)

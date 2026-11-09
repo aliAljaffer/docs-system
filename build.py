@@ -114,7 +114,10 @@ extra_css:
   - assets/extra.css?v={asset_version}
   - assets/hover.css?v={asset_version}
   - assets/graph.css?v={asset_version}
+  - assets/diagram-zoom.css?v={asset_version}
 extra_javascript:
+  - assets/vendor/panzoom.min.js
+  - assets/diagram-zoom.js?v={asset_version}
   - assets/hover.js?v={asset_version}
   - assets/analytics.js?v={asset_version}
 """
@@ -122,7 +125,7 @@ extra_javascript:
 
 def asset_version() -> str:
     digest = hashlib.sha256()
-    for name in ("extra.css", "hover.css", "graph.css", "hover.js", "graph.js", "analytics.js"):
+    for name in ("extra.css", "hover.css", "graph.css", "diagram-zoom.css", "hover.js", "graph.js", "diagram-zoom.js", "analytics.js"):
         digest.update((ASSETS / name).read_bytes())
     return digest.hexdigest()[:10]
 
