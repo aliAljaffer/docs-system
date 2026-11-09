@@ -1,0 +1,45 @@
+site_name: Atlas
+site_url: https://docs.alialjaffer.com/
+docs_dir: content
+site_dir: out
+theme:
+  name: material
+  palette:
+    - scheme: default
+      toggle: {icon: material/weather-night, name: Night}
+    - scheme: slate
+      toggle: {icon: material/weather-sunny, name: Day}
+  features:
+    - navigation.tabs
+    - navigation.top
+    - content.code.copy
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - attr_list
+  - tables
+plugins:
+  - search
+  - i18n:
+      docs_structure: suffix
+      fallback_to_default: true
+      reconfigure_material: true
+      languages:
+        - locale: en
+          default: true
+          name: English
+          build: true
+        - locale: ar
+          name: العربية
+          build: true
+          site_name: أطلس
+          nav_translations:
+            Home: الرئيسية
+            Four Hats: أربع قبعات
+nav:
+  - Home: index.md
+  - Four Hats:
+      - "SWE-04: Add a feature with a test": four-hats/ep04.md

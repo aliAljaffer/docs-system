@@ -1,0 +1,30 @@
+/* Arabic typography and the language switch. */
+body[dir="rtl"] {
+  font-family: "Geeza Pro", "Noto Naskh Arabic", "Segoe UI", Tahoma, sans-serif;
+}
+
+body[dir="rtl"] pre,
+body[dir="rtl"] code {
+  direction: ltr;
+  text-align: left;
+}
+
+.lang-switch {
+  display: inline-flex;
+  align-items: center;
+  height: 1.6rem;
+  margin: 0 0.4rem;
+  padding: 0 0.6rem;
+  border: 1px solid currentColor;
+  border-radius: 0.2rem;
+  color: var(--md-primary-bg-color);
+  font-size: 0.65rem;
+  font-weight: 600;
+  opacity: 0.9;
+  white-space: nowrap;
+}
+
+.lang-switch:hover {
+  opacity: 1;
+  text-decoration: none;
+}

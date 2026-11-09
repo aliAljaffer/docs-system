@@ -1,0 +1,80 @@
+episodes:
+  ep00:
+    apply: none
+  ep01:
+    apply: none
+    link: ../setup.md
+  ep02:
+    file: act1-software-engineer.md
+    section: "Episode 2: Git and GitHub"
+  ep03:
+    file: act1-software-engineer.md
+    section: "Episode 3: Run the app"
+  ep04:
+    file: act1-software-engineer.md
+    section: "Episode 4: Add a feature with a test"
+  ep05:
+    file: act1-software-engineer.md
+    section: "Episode 5: Containers"
+  ep06:
+    file: act1-software-engineer.md
+    section: "Episode 6: Continuous Integration"
+  ep07:
+    file: act2-cloud-engineer.md
+    section: "Episode 7: Plan the infrastructure"
+  ep08:
+    file: act2-cloud-engineer.md
+    section: "Episode 8: Your first VM"
+  ep09:
+    file: act2-cloud-engineer.md
+    section: "Episode 9: Configuration as code"
+  ep10:
+    file: act2-cloud-engineer.md
+    section: "Episode 10: Now in the cloud"
+  ep11:
+    file: act3-devops-engineer.md
+    tasks: [1, 2, 6, 8]
+  ep12:
+    file: act3-devops-engineer.md
+    tasks: [4, 10, 11, 12]
+  ep13:
+    file: act3-devops-engineer.md
+    tasks: [3, 9]
+  ep14:
+    file: act3-devops-engineer.md
+    tasks: [5]
+  ep15:
+    file: act3-devops-engineer.md
+    tasks: [7]
+  ep16:
+    file: act3-devops-engineer.md
+    tasks: [13]
+  ep17:
+    file: act3-devops-engineer.md
+    tasks: [14, 15, 16, 17]
+  ep18:
+    file: act3-devops-engineer.md
+    tasks: [18, 19, 20, 21]
+  ep19:
+    file: act3-devops-engineer.md
+    tasks: [22, 23, 24, 25, 26]
+  ep20:
+    file: act4-cybersecurity-engineer.md
+    tasks: [1, 2, 3, 4, 5, 6, 7]
+  ep21:
+    file: act4-cybersecurity-engineer.md
+    tasks: [8, 9, 10, 11, 12, 13]
+  ep22:
+    file: act4-cybersecurity-engineer.md
+    tasks: [14, 15, 16, 17]
+  ep23:
+    file: act4-cybersecurity-engineer.md
+    tasks: [18, 19, 20, 21, 22, 23]
+  ep24:
+    file: act4-cybersecurity-engineer.md
+    tasks: [24, 25, 26, 27, 28, 29, 30, 31]
+  ep25:
+    file: act4-cybersecurity-engineer.md
+    tasks: [32, 33, 34, 35, 36, 37, 38]
+  ep26:
+    apply: none

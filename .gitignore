@@ -1,0 +1,11 @@
+site/
+build/
+.cache/
+demo/out-*/
+demo/shots/
+demo/site-src/
+__pycache__/
+*.pyc
+.DS_Store
+mkdocs.en.yml
+mkdocs.ar.yml
