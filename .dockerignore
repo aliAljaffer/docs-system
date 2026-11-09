@@ -1,0 +1,14 @@
+.git
+.github
+.gitignore
+build
+demo
+.cache
+content
+assets
+sources
+tests
+*.md
+*.py
+.env
+site/**/*.map

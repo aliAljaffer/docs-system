@@ -19,6 +19,8 @@ FOUR_HATS = Path("/Users/h/mk-project/four-hats")
 CONTENT = ROOT / "content"
 ASSETS = ROOT / "assets"
 BUILD = ROOT / "build"
+SOURCES = ROOT / "sources"
+ACT_ROOT = SOURCES if any(SOURCES.glob("act*.md")) else FOUR_HATS / "docs"
 SITE = ROOT / "site"
 TASKS = yaml.safe_load((ROOT / "episode-tasks.yaml").read_text())["episodes"]
 ZENSICAL = "/Users/h/branding/.venv/bin/zensical"
@@ -104,7 +106,7 @@ def apply_content(ep: str) -> tuple[str, str]:
     spec = TASKS.get(ep, {})
     if spec.get("apply") == "none" or not spec.get("file"):
         return "", ""
-    path = FOUR_HATS / "docs" / spec["file"]
+    path = ACT_ROOT / spec["file"]
     text = path.read_text()
     if "section" in spec:
         heading = spec["section"]
@@ -215,8 +217,25 @@ def assemble(lang: str) -> Path:
         text = page.read_text()
         text = text.replace("](../assets/", "](../../assets/")
         text = text.replace("](../../assets/diagrams/", "](../../assets/diagrams/")
+        text = re.sub(
+            r"\]\(\.\./(?:act[1-4]-[a-z-]+\.md|00-setup\.md|cleanup-guide\.md|costs-and-free-options\.md)(#[^)]*)?\)",
+            lambda m: "](https://github.com/aliAljaffer/four-hats/blob/main/docs/"
+            + m.group(0).split("../", 1)[1],
+            text,
+        )
         page.write_text(text)
         inject_apply(page, lang)
+        text = page.read_text()
+        for name in ("00-setup.md", "cleanup-guide.md", "costs-and-free-options.md"):
+            text = text.replace(
+                f"]({name})",
+                f"](https://github.com/aliAljaffer/four-hats/blob/main/docs/{name})",
+            )
+        text = text.replace(
+            "](../cv/skills-ledger.md)",
+            "](https://github.com/aliAljaffer/four-hats/blob/main/cv/skills-ledger.md)",
+        )
+        page.write_text(text)
     episode_index(root, lang)
     return root
 

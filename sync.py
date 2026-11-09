@@ -40,6 +40,17 @@ def main() -> None:
         if src.exists():
             shutil.copy2(src, EN / dst_name)
 
+    sources = ROOT / "sources"
+    sources.mkdir(parents=True, exist_ok=True)
+    for act in FOUR_HATS.joinpath("docs").glob("act*.md"):
+        shutil.copy2(act, sources / act.name)
+    scripts = sources / "scripts"
+    scripts.mkdir(exist_ok=True)
+    for old in scripts.glob("ep*.md"):
+        old.unlink()
+    for script in (HQ / "scripts").glob("ep*.md"):
+        shutil.copy2(script, scripts / script.name)
+
     ASSETS.mkdir(parents=True, exist_ok=True)
     for png in sorted((HQ / "scripts" / "diagrams").glob("ep*.png")):
         webp = ASSETS / f"{png.stem}.webp"
