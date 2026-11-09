@@ -153,7 +153,13 @@ class SiteTests(unittest.TestCase):
         data = json.loads((SITE / "assets" / "graph.json").read_text())
         self.assertGreater(len(data["nodes"]), 20)
         self.assertGreater(len(data["links"]), 10)
+        ids = {node["id"] for node in data["nodes"]}
+        self.assertIn("/", ids)
+        self.assertNotIn("/./", ids)
         self.assertTrue((SITE / "assets" / "vendor" / "force-graph.min.js").exists())
+        js = (SITE / "assets" / "graph.js").read_text()
+        self.assertIn("applyFocus", js)
+        self.assertIn("linkDirectionalParticles", js)
         types = {node["type"] for node in data["nodes"]}
         self.assertIn("definition", types)
         self.assertNotIn("tool", types)

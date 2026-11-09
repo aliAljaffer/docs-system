@@ -494,6 +494,8 @@ def nav_for(root: Path, lang: str) -> list:
             children.append({"Overview": "courses/index.md"})
         children.append({"Four Hats": []})
         four_children = [{"Overview": "four-hats/index.md"}]
+        if (four / "setup.md").exists():
+            four_children.append({labels["setup"]: "four-hats/setup.md"})
         if (four / "episodes.md").exists():
             four_children.append({labels["episodes"]: "four-hats/episodes.md"})
         by_number = {
@@ -509,9 +511,8 @@ def nav_for(root: Path, lang: str) -> list:
                 act.append({title_of(path): path.relative_to(root).as_posix()})
             four_children.append({label_en if lang == "en" else label_ar: act})
         for key, name in [
-            ("setup", "setup.md"),
-            ("cleanup", "cleanup-guide.md"),
-            ("costs", "costs-and-free-options.md"),
+            ("cleanup", "four-hats/cleanup-guide.md"),
+            ("costs", "four-hats/costs-and-free-options.md"),
         ]:
             if (root / name).exists():
                 four_children.append({labels[key]: name})
@@ -640,19 +641,15 @@ def assemble(lang: str) -> Path:
         text = text.replace("](../assets/", "](../../assets/")
         text = text.replace("](../../assets/diagrams/", "](../../assets/diagrams/")
         text = re.sub(
-            r"\]\(\.\./(?:act[1-4]-[a-z-]+\.md|00-setup\.md|cleanup-guide\.md|costs-and-free-options\.md)(#[^)]*)?\)",
+            r"\]\(\.\./(?:act[1-4]-[a-z-]+\.md)(#[^)]*)?\)",
             lambda m: "](https://github.com/aliAljaffer/four-hats/blob/main/docs/"
             + m.group(0).split("../", 1)[1],
             text,
         )
+        text = text.replace("](../00-setup.md", "](../setup.md")
         page.write_text(text)
         inject_apply(page, lang)
         text = page.read_text()
-        for name in ("00-setup.md", "cleanup-guide.md", "costs-and-free-options.md"):
-            text = text.replace(
-                f"]({name})",
-                f"](https://github.com/aliAljaffer/four-hats/blob/main/docs/{name})",
-            )
         text = text.replace(
             "](../cv/skills-ledger.md)",
             "](https://github.com/aliAljaffer/four-hats/blob/main/cv/skills-ledger.md)",
@@ -820,6 +817,8 @@ def graph_url(path: Path, base: Path, lang: str) -> str:
         rel = rel.with_suffix("")
     prefix = "/ar" if lang == "ar" else ""
     part = rel.as_posix().strip("/")
+    if part == ".":
+        part = ""
     return f"{prefix}/{part}/" if part else f"{prefix}/"
 
 

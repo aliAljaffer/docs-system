@@ -1,4 +1,16 @@
 /* Obsidian-style graph view. */
+.graph-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 300px;
+  gap: 1rem;
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .graph-layout {
+    grid-template-columns: 1fr;
+  }
+}
 .docs-graph {
   position: relative;
   width: 100%;
@@ -82,3 +94,82 @@
 .graph-status.error {
   color: var(--md-typeset-color);
 }
+
+.graph-info {
+  padding: 0.8rem 0.9rem;
+  max-height: 76vh;
+  overflow: auto;
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: 0.45rem;
+  font-size: 0.72rem;
+}
+
+.graph-info p {
+  margin: 0;
+}
+
+.graph-info__head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.4rem 1rem;
+  align-items: baseline;
+  margin-bottom: 0.5rem;
+}
+
+.graph-info__head strong {
+  font-size: 0.85rem;
+}
+
+.graph-info__head span {
+  color: var(--md-default-fg-color--light);
+}
+
+.graph-info__cols {
+  display: block;
+}
+
+.graph-info__cols section + section {
+  margin-top: 0.8rem;
+}
+
+.graph-info h3 {
+  margin: 0 0 0.3rem;
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--md-default-fg-color--light);
+}
+
+.graph-info ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  max-height: 8rem;
+  overflow: auto;
+}
+
+.graph-info li {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.12rem 0;
+}
+
+.graph-info li a {
+  min-width: 0;
+  overflow-wrap: break-word;
+}
+
+.graph-info li small {
+  flex: 0 0 auto;
+  color: var(--md-default-fg-color--light);
+  white-space: nowrap;
+}
+
+.graph-info__empty {
+  color: var(--md-default-fg-color--light);
+}
+
+

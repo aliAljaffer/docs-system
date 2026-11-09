@@ -1,6 +1,6 @@
 # Graph
 
-Every page and the links between them. Hover a node to light up its neighbours, drag to move, scroll to zoom, and click a node to open the page. Use the legend to hide a page type.
+Every page and the links between them. Hover a node to light up its neighbours and list the linked pages below. Drag to move, scroll to zoom, and click a node to open the page. Use the legend to hide a page type.
 
 The graph is built from the same internal links that power the definition backlinks.
 
