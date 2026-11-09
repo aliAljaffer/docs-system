@@ -1,6 +1,5 @@
 ---
 title: Image Captioning with AWS and HuggingFace
-status: Active
 date: '2025-06-25'
 description: A serverless image captioning app using AWS services and a HuggingFace
   model on SageMaker.

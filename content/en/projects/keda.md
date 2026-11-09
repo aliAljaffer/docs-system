@@ -1,6 +1,5 @@
 ---
 title: Kubernetes Event-Driven Architecture (KEDA)
-status: Active
 date: '2026-03-01'
 description: A simple, yet powerful way to scale your app's workers on Kubernetes!
 tags:

@@ -1,6 +1,5 @@
 ---
 title: End-to-End Automated App Deployment on Azure
-status: Active
 date: '2025-10-08'
 description: A fully automated approach with CI/CD pipelines and monitoring to deploy
   a three-tier application

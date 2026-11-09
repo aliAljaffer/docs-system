@@ -305,7 +305,6 @@ def project_page(stem: str, meta: dict, body: str) -> str:
     tags = meta.get("tags") or []
     page_meta = {
         "title": title,
-        "status": "Active",
         "date": meta.get("date", ""),
         "description": str(meta.get("description") or "").strip(),
         "tags": tags,

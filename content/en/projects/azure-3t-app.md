@@ -1,6 +1,5 @@
 ---
 title: Azure Three-Tier web app
-status: Active
 date: '2025-09-20'
 description: Azure Three-Tier web app deployed using Terraform and containers
 tags:

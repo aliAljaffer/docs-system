@@ -63,7 +63,7 @@ def main() -> int:
         if not meta:
             errors.append(f"{rel}: add a catalog entry or frontmatter title, description, tags")
             continue
-        for key in ("title", "status", "description", "tags"):
+        for key in ("title", "description", "tags"):
             if not meta.get(key):
                 errors.append(f"{rel}: missing {key}")
 

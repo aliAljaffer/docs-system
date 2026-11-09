@@ -1,6 +1,5 @@
 ---
 title: Body & Power Gym
-status: Active
 date: '2025-07-01'
 description: Volunteer-built website for a local gym using Next.js, Docker, and Strapi
   CMS for fully managed and responsive content delivery.

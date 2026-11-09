@@ -1,6 +1,5 @@
 ---
 title: Catus Locatus
-status: Active
 date: '2025-10-30'
 description: Location-based pet recovery web app using React and Leaflet maps to report
   and view lost pets.

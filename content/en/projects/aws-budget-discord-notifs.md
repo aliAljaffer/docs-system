@@ -1,6 +1,5 @@
 ---
 title: AWS Budget Notifications for Discord Channels
-status: Active
 date: '2025-07-31'
 description: Receive Budget Alerts straight to your personal Discord server channel!
 tags:
