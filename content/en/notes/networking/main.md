@@ -1,9 +1,7 @@
 ---
 title: Main
 category: Networking
-description: '[[osi-model|OSI Model]] Layer 1 devices: 1. Analog modem 2. Hub: Does
-  not care where the signal comes from or where it''s going, just repeats the signal
-  to the ports. Layer 2 devices: 1. Switch: few po'
+description: Detection - Alarm or alert
 tags:
 - networking
 - devices

@@ -1,7 +1,7 @@
 ---
 title: Main-concepts
 category: React
-description: '[[controlled-elements]]'
+description: Always parent to child, never vice-versa.
 tags:
 - react
 - web

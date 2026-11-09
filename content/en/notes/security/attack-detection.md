@@ -1,7 +1,7 @@
 ---
 title: Attack detection
 category: Security
-description: ''
+description: 'Security note: Attack detection.'
 tags:
 - security
 - incident-response

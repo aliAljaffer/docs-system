@@ -1,8 +1,8 @@
 ---
 title: 2 - Network Security
 category: GCP
-description: 'Part of [[pcse-home|PCSE Home]]. Official exam guide sections 2.1 to
-  2.3: securing communications and establishing boundary protection.'
+description: 'Part of PCSE Home. Official exam guide sections 2.1 to 2.3: securing
+  communications and establishing boundary protection.'
 tags:
 - gcp
 - security

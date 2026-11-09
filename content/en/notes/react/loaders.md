@@ -1,7 +1,7 @@
 ---
 title: Loaders
 category: React
-description: React Router - Loaders load data before component renders
+description: 1. Create a loader() function inside the component that needs the data
 tags:
 - react
 - react-router

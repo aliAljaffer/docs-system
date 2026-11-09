@@ -1,3 +1,16 @@
+---
+title: End-to-End Automated App Deployment on Azure
+status: Active
+date: '2025-10-08'
+description: A fully automated approach with CI/CD pipelines and monitoring to deploy
+  a three-tier application
+tags:
+- Azure
+- CI/CD
+- Terraform
+- Ansible
+---
+
 <!-- imported from portfolio/src/data/e2e-automated-deployment-azure.md. Edit the source, then run sync.py. -->
 
 # End-to-End Automated App Deployment on Azure

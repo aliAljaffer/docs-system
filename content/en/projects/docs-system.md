@@ -2,7 +2,7 @@
 
 **Status:** Active
 
-This site is a project too. It is a static documentation hub for projects, courses, tools, and notes.
+This site is a project too. It is a static documentation hub for projects, courses, blogs, notes, and definitions.
 
 ## How it works
 
@@ -13,7 +13,7 @@ This site is a project too. It is a static documentation hub for projects, cours
 | Source | GitHub repository `docs-system` |
 | Pipeline | GitHub Actions builds the image, ArgoCD deploys it |
 | Analytics | Umami, dedicated Docs property |
-| Wiki | Term pages with backlinks and hover previews |
+| Definitions | Term pages with backlinks and hover previews |
 
 ## Design and operations
 
@@ -29,7 +29,6 @@ The full plan, decisions, caveats, and gaps live in the HQ repository.
 - Projects live under `projects/`.
 - Courses keep their own URL. Four Hats is at `/four-hats/`.
 - Notes live under `notes/`.
-- Tool references live under `tools/`.
-- Shared definitions live under `wiki/`.
+- Shared definitions live under `definitions/`.
 
 Adding a project means one entry in `catalog.yaml`, one page, and a build.

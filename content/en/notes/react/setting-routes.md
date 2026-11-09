@@ -1,7 +1,7 @@
 ---
 title: Setting-routes
 category: React
-description: ''
+description: 'React note: Setting-routes.'
 tags:
 - react
 - react-router

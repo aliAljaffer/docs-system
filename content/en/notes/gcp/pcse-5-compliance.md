@@ -1,8 +1,8 @@
 ---
 title: 5 - Compliance
 category: GCP
-description: Part of [[pcse-home|PCSE Home]]. Official exam guide section 5.1. You
-  know compliance concepts from PCA; PCSE adds Google-specific controls.
+description: Part of PCSE Home. Official exam guide section 5.1. You know compliance
+  concepts from PCA; PCSE adds Google-specific controls.
 tags:
 - gcp
 - security

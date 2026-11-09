@@ -1,8 +1,8 @@
 ---
 title: 3 - Data Protection
 category: GCP
-description: 'Part of [[pcse-home|PCSE Home]]. Official exam guide sections 3.1 to
-  3.3: ensuring data protection.'
+description: 'Part of PCSE Home. Official exam guide sections 3.1 to 3.3: ensuring
+  data protection.'
 tags:
 - gcp
 - security

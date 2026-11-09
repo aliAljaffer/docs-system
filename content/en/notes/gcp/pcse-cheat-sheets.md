@@ -1,8 +1,8 @@
 ---
 title: Cheat Sheets
 category: GCP
-description: 'Part of [[pcse-home|PCSE Home]]. Decision rules for scenario questions.
-  Used with the scenario-question technique: the constraint keywords pick the answer.'
+description: 'Part of PCSE Home. Decision rules for scenario questions. Used with
+  the scenario-question technique: the constraint keywords pick the answer.'
 tags:
 - gcp
 - security

@@ -1,7 +1,7 @@
 ---
 title: Respond to attacks
 category: Security
-description: ''
+description: 'Security note: Respond to attacks.'
 tags:
 - security
 - incident-response

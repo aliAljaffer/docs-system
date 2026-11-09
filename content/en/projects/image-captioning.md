@@ -1,3 +1,16 @@
+---
+title: Image Captioning with AWS and HuggingFace
+status: Active
+date: '2025-06-25'
+description: A serverless image captioning app using AWS services and a HuggingFace
+  model on SageMaker.
+tags:
+- AWS
+- Machine Learning
+- Security
+- Python
+---
+
 <!-- imported from portfolio/src/data/image-captioning.md. Edit the source, then run sync.py. -->
 
 # Image Captioning with AWS and HuggingFace

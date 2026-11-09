@@ -7,6 +7,7 @@ same English verified apply steps as the English page.
 """
 from __future__ import annotations
 
+import fcntl
 import hashlib
 import json
 import os
@@ -19,6 +20,8 @@ from pathlib import Path
 from urllib.parse import urlparse
 
 import yaml
+
+import sync
 
 ROOT = Path(__file__).resolve().parent
 FOUR_HATS = Path("/Users/h/mk-project/four-hats")
@@ -57,8 +60,7 @@ LABELS = {
         "blogs": "Blogs",
         "notes": "Notes",
         "graph": "Graph",
-        "tools": "Tools",
-        "wiki": "Wiki",
+        "definitions": "Definitions",
         "site": "Docs",
         "switch": "العربية",
         "apply_note": "Copied from `{file}`. Edit the act guide, not this page.",
@@ -76,8 +78,7 @@ LABELS = {
         "blogs": "المدونات",
         "notes": "الملاحظات",
         "graph": "الخريطة",
-        "tools": "الأدوات",
-        "wiki": "الويكي",
+        "definitions": "التعريفات",
         "site": "الوثائق",
         "switch": "English",
         "apply_note": "الخطوات التالية منقولة من `{file}`. عدّل دليل المسار، لا هذه الصفحة.",
@@ -147,7 +148,20 @@ def meta_of(path: Path) -> dict:
 
 
 WIKI_ORDER = ["Cloud", "Networking", "Security", "AI", "React", "Web", "Other"]
-NOTES_ORDER = ["GCP", "Cloud", "Security", "Networking", "React", "Web", "Site", "Other"]
+NOTES_ORDER = ["GCP", "Cloud", "Security", "AI", "Networking", "React", "Web", "Site", "Other"]
+
+
+CATEGORY_NAMES = {"gcp": "GCP", "ai": "AI"}
+
+
+def category_of(path: Path, folder: Path) -> str:
+    meta = meta_of(path)
+    if meta.get("category"):
+        return meta["category"]
+    name = path.parent.name
+    if path.parent == folder:
+        return "Other"
+    return CATEGORY_NAMES.get(name, name.replace("-", " ").title())
 
 
 def group_pages(folder: Path) -> dict[str, list[Path]]:
@@ -155,7 +169,7 @@ def group_pages(folder: Path) -> dict[str, list[Path]]:
     for path in folder.rglob("*.md"):
         if path.name == "index.md":
             continue
-        category = meta_of(path).get("category") or "Other"
+        category = category_of(path, folder)
         groups.setdefault(category, []).append(path)
     for pages in groups.values():
         pages.sort(key=title_of)
@@ -188,14 +202,14 @@ def section_index(
             entry = f"- [{title_of(page)}]({link})"
             lines += [entry + (f": {description}" if description else "")]
         lines.append("")
-    if folder == "wiki":
+    if folder == "definitions":
         lines += [
             "## How mentions work",
             "",
-            "Write `[[rest]]` or `[[rest|REST]]` in any page. The build resolves it to the definition and records the backlink.",
+            "Write a double-bracket link such as &#91;&#91;rest&#93;&#93; in any page. The build resolves it to the definition and records the backlink.",
             "",
-            "> [!tip] Hover a term",
-            "> Move the pointer over a link to preview the definition without leaving the page.",
+            '!!! tip "Hover a term"',
+            "    Move the pointer over a link to preview the definition without leaving the page.",
             "",
         ]
     (base / "index.md").write_text("\n".join(lines))
@@ -298,10 +312,49 @@ def episode_index(root: Path, lang: str) -> Path | None:
     return dest
 
 
+def project_entries(root: Path) -> list[dict]:
+    entries = list(CATALOG.get("projects", []))
+    seen = {item["page"] for item in entries}
+    extra: list[dict] = []
+    paths = list((root / "projects").glob("*.md")) + list((root / "projects").glob("*/index.md"))
+    for path in paths:
+        rel = path.relative_to(root).as_posix()
+        if rel in seen:
+            continue
+        meta = meta_of(path)
+        if not meta.get("title"):
+            continue
+        extra.append(
+            {
+                "slug": path.parent.name if path.name == "index.md" else path.stem,
+                "title": meta.get("title"),
+                "status": meta.get("status", "Active"),
+                "summary": meta.get("description", ""),
+                "tags": meta.get("tags", []),
+                "page": rel,
+                "date": str(meta.get("date", "")),
+            }
+        )
+    extra.sort(key=lambda item: item["date"], reverse=True)
+    return entries + extra
+
+
+def inject_projects(root: Path) -> None:
+    page = root / "index.md"
+    marker = "<!-- PROJECTS -->"
+    if not page.exists() or marker not in page.read_text():
+        return
+    lines = []
+    for item in project_entries(root):
+        summary = item.get("summary", "")
+        lines.append(f"- [{item['title']}]({item['page']})" + (f": {summary}" if summary else ""))
+    page.write_text(page.read_text().replace(marker, "\n".join(lines)))
+
+
 def projects_index(root: Path, lang: str) -> None:
     if lang != "en":
         return
-    projects = CATALOG.get("projects", [])
+    projects = project_entries(root)
     if not projects:
         return
     lines = [
@@ -396,7 +449,7 @@ def section_nav(root: Path, folder: str, order: list[str]) -> list:
     pages = [p for p in base.rglob("*.md") if p.name != "index.md"]
     if not pages:
         return []
-    if not any(meta_of(page).get("category") for page in pages):
+    if not any(category_of(page, base) != "Other" for page in pages):
         return [
             {title_of(page): page.relative_to(root).as_posix()}
             for page in sorted(pages, key=title_of)
@@ -419,7 +472,7 @@ def nav_for(root: Path, lang: str) -> list:
 
     if (root / "projects" / "index.md").exists():
         children = [{"Overview": "projects/index.md"}]
-        for item in CATALOG.get("projects", []):
+        for item in project_entries(root):
             entry = project_nav(root, item)
             if entry:
                 children.append(entry)
@@ -476,13 +529,10 @@ def nav_for(root: Path, lang: str) -> list:
     if (root / "graph.md").exists():
         nav.append({labels["graph"]: "graph.md"})
 
-    if (root / "tools" / "index.md").exists():
-        nav.append({labels["tools"]: "tools/index.md"})
-
-    if (root / "wiki" / "index.md").exists():
-        children = [{"Overview": "wiki/index.md"}]
-        children += section_nav(root, "wiki", WIKI_ORDER)
-        nav.append({labels["wiki"]: children})
+    if (root / "definitions" / "index.md").exists():
+        children = [{"Overview": "definitions/index.md"}]
+        children += section_nav(root, "definitions", WIKI_ORDER)
+        nav.append({labels["definitions"]: children})
 
     return nav
 
@@ -525,8 +575,8 @@ def process_wiki(root: Path, lang: str) -> None:
     for path in files:
         rel = path.relative_to(root).with_suffix("").as_posix()
         index[rel] = path
-        if rel.startswith("wiki/"):
-            index[rel.removeprefix("wiki/")] = path
+        if rel.startswith("definitions/"):
+            index[rel.removeprefix("definitions/")] = path
         if path.stem != "index":
             stems.setdefault(path.stem, []).append(path)
     for stem, paths in stems.items():
@@ -600,6 +650,7 @@ def assemble(lang: str) -> Path:
         )
         page.write_text(text)
     episode_index(root, lang)
+    inject_projects(root)
     projects_index(root, lang)
     courses_index(root, lang)
     blogs_index(root, lang)
@@ -612,8 +663,8 @@ def assemble(lang: str) -> Path:
     )
     section_index(
         root,
-        "wiki",
-        "Wiki",
+        "definitions",
+        "Definitions",
         "Definitions and informational terms. Link to a definition once, and every page that mentions it appears under **Linked from**.",
         WIKI_ORDER,
     )
@@ -779,13 +830,22 @@ def page_type(rel: str) -> str:
         return "episode" if "episodes" in parts else "course"
     if parts[0] == "courses":
         return "collection"
-    if parts[0] == "wiki":
-        return "wiki"
+    if parts[0] == "definitions":
+        return "definition"
     if parts[0] == "notes":
         return "note"
-    if parts[0] == "tools":
-        return "tool"
     return "page"
+
+
+def page_group(rel: str) -> str:
+    parts = Path(rel).parts
+    if not parts:
+        return "root"
+    if parts[0] == "four-hats":
+        return "four-hats/episodes" if "episodes" in parts else "four-hats"
+    if parts[0] in {"projects", "definitions", "notes"} and len(parts) > 2:
+        return f"{parts[0]}/{parts[1]}"
+    return parts[0]
 
 
 def build_graph(base: Path, lang: str) -> None:
@@ -805,6 +865,7 @@ def build_graph(base: Path, lang: str) -> None:
                 "id": url,
                 "title": page_title(text) or Path(rel).stem,
                 "type": page_type(rel),
+                "group": page_group(rel),
             }
         )
 
@@ -848,7 +909,9 @@ def build_graph(base: Path, lang: str) -> None:
     )
 
 
-def main() -> None:
+def run() -> None:
+    if sync.PORTFOLIO.exists():
+        sync.sync_portfolio()
     if SITE.exists():
         shutil.rmtree(SITE)
     for lang in ("en", "ar"):
@@ -860,6 +923,12 @@ def main() -> None:
     build_graph(SITE / "ar", "ar")
     publish_slides()
     print("built site/ and site/ar/")
+
+
+def main() -> None:
+    with open(ROOT / ".build.lock", "w") as lock:
+        fcntl.flock(lock, fcntl.LOCK_EX)
+        run()
 
 
 if __name__ == "__main__":

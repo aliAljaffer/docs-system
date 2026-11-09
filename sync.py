@@ -11,6 +11,8 @@ or build the site.
 """
 from __future__ import annotations
 
+import argparse
+import os
 import re
 import shutil
 import subprocess
@@ -19,12 +21,51 @@ from pathlib import Path
 
 import yaml
 
+
+def source(name: str, default: str) -> Path:
+    return Path(os.environ.get(name) or default)
+
+
 ROOT = Path(__file__).resolve().parent
-FOUR_HATS = Path("/Users/h/mk-project/four-hats")
-HQ = Path("/Users/h/mk-project/hq-main")
-PORTFOLIO = Path("/Users/h/portfolio/src/data")
-PORTFOLIO_PUBLIC = Path("/Users/h/portfolio/public")
-OPENZITI = Path("/Users/h/openziti-operator/docs")
+FOUR_HATS = source("FOUR_HATS_DIR", "/Users/h/mk-project/four-hats")
+HQ = source("HQ_DIR", "/Users/h/mk-project/hq-main")
+PORTFOLIO = source("PORTFOLIO_DIR", "/Users/h/portfolio/src/data")
+PORTFOLIO_PUBLIC = source("PORTFOLIO_PUBLIC_DIR", "/Users/h/portfolio/public")
+OPENZITI = source("OPENZITI_DOCS_DIR", "/Users/h/openziti-operator/docs")
+VAULT = source(
+    "OBSIDIAN_VAULT",
+    str(
+        next(
+            (
+                path
+                for path in (Path.home() / "ObsidianVault", Path.home() / "Desktop" / "ObsidianVault")
+                if path.exists()
+            ),
+            Path.home() / "Desktop" / "ObsidianVault",
+        )
+    ),
+)
+PROJECT_DOCS = [
+    {"slug": "openziti-operator", "source": OPENZITI, "files": None},
+    {"slug": "homelab", "source": source("HOMELAB_DOCS_DIR", "/Users/h/src/homelab/docs"), "files": None},
+    {
+        "slug": "grooszy",
+        "source": source("GROOSZY_DOCS_DIR", "/Users/h/grooszy/docs"),
+        "files": None,
+        "renames": {"README.md": "documents.md"},
+    },
+    {
+        "slug": "fai",
+        "source": source("FAI_DIR", "/Users/h/fai"),
+        "files": ["README.md", "SECURITY.md"],
+        "titles": {"README.md": "README"},
+        "renames": {"README.md": "project-readme.md"},
+        "assets": [
+            ("screenshots", "screenshots"),
+            ("brand/renders/readme-header.png", "brand/renders/readme-header.png"),
+        ],
+    },
+]
 VAULT = next(
     (
         path
@@ -34,13 +75,12 @@ VAULT = next(
     Path.home() / "Desktop" / "ObsidianVault",
 )
 EN = ROOT / "content" / "en"
-WIKI = EN / "wiki"
+WIKI = EN / "definitions"
 NOTES = EN / "notes"
 BLOGS = EN / "blogs"
 ASSETS = ROOT / "assets" / "diagrams"
 PORTFOLIO_ASSETS = ROOT / "assets" / "portfolio"
 VAULT_ASSETS = ROOT / "assets" / "vault"
-OPENZITI_PAGES = EN / "projects" / "openziti-operator"
 
 PAGES = {
     "00-setup.md": "setup.md",
@@ -236,10 +276,12 @@ def clean_vault(body: str, mapping: dict[str, str], images: dict[str, Path]) -> 
 def describe(body: str) -> str:
     text = re.sub(r"```.*?```", "", body, flags=re.S)
     for block in re.split(r"\n\s*\n", text):
-        block = block.strip()
+        block = block.strip().splitlines()[0] if block.strip() else ""
         if not block or block.startswith(("#", "|", "-", "*", "!", ">", "`")):
             continue
-        line = re.sub(r"\[([^\]]+)\]\([^)]+\)", r"\1", block)
+        line = WIKI_LINK.sub(lambda m: m.group(2) or m.group(1), block)
+        line = EMBED.sub("", line)
+        line = re.sub(r"\[([^\]]+)\]\([^)]+\)", r"\1", line)
         line = re.sub(r"[*_`>#]", "", line)
         line = " ".join(line.split())
         if len(line) > 20:
@@ -260,7 +302,16 @@ def tag_line(tags: list[str]) -> list[str]:
 
 def project_page(stem: str, meta: dict, body: str) -> str:
     title = meta.get("name") or stem
+    tags = meta.get("tags") or []
+    page_meta = {
+        "title": title,
+        "status": "Active",
+        "date": meta.get("date", ""),
+        "description": str(meta.get("description") or "").strip(),
+        "tags": tags,
+    }
     lines = [
+        frontmatter(page_meta),
         MARKER.format(source=f"portfolio/src/data/{stem}.md"),
         "",
         f"# {title}",
@@ -270,7 +321,7 @@ def project_page(stem: str, meta: dict, body: str) -> str:
     ]
     if meta.get("description"):
         lines += [str(meta["description"]).strip(), ""]
-    lines += tag_line(meta.get("tags") or [])
+    lines += tag_line(tags)
     lines += link_block(meta)
     lines += [body, ""]
     return "\n".join(lines)
@@ -304,10 +355,14 @@ def blog_page(stem: str, meta: dict, body: str) -> str:
 
 def vault_page(source: Path, title: str, category: str, tags: list[str], body: str) -> str:
     rel = source.relative_to(VAULT).as_posix()
+    description = describe(body)
+    if not description:
+        kind = "definition" if source.is_relative_to(VAULT / "studies" / "definitions") else "note"
+        description = f"{category} {kind}: {title}."
     page_meta = {
         "title": title,
         "category": category,
-        "description": describe(body),
+        "description": description,
         "tags": tags,
     }
     lines = [
@@ -336,8 +391,8 @@ def link_block(meta: dict) -> list[str]:
 
 
 def generated(path: Path, source: str) -> bool:
-    head = "\n".join(path.read_text().splitlines()[:8])
-    return "<!-- imported from " in head and source in head
+    text = path.read_text()
+    return "<!-- imported from " in text and source in text
 
 
 def title_from(source: Path, body: str) -> str:
@@ -364,6 +419,8 @@ def sync_portfolio() -> tuple[int, int]:
             dest = BLOGS / f"{stem}.md"
             text = blog_page(stem, meta, body)
         else:
+            if (EN / "projects" / stem / "index.md").exists():
+                continue
             dest = EN / "projects" / f"{stem}.md"
             text = project_page(stem, meta, body)
         if dest.exists() and not generated(dest, "portfolio/"):
@@ -440,21 +497,45 @@ def sync_vault() -> tuple[int, int]:
     return wiki, notes
 
 
-def sync_openziti() -> int:
-    OPENZITI_PAGES.mkdir(parents=True, exist_ok=True)
-    for old in OPENZITI_PAGES.rglob("*.md"):
-        if old == OPENZITI_PAGES / "index.md":
-            continue
-        old.unlink()
+def sync_project_docs() -> int:
     count = 0
-    for src in sorted(OPENZITI.rglob("*.md")):
-        rel = src.relative_to(OPENZITI)
-        if rel.name == "index.md":
-            continue
-        dst = OPENZITI_PAGES / rel
-        dst.parent.mkdir(parents=True, exist_ok=True)
-        shutil.copy2(src, dst)
-        count += 1
+    for spec in PROJECT_DOCS:
+        source: Path = spec["source"]
+        dest = EN / "projects" / spec["slug"]
+        dest.mkdir(parents=True, exist_ok=True)
+        for old in dest.rglob("*.md"):
+            if old.name == "index.md" and old.parent == dest:
+                continue
+            old.unlink()
+
+        if spec["files"]:
+            sources = [source / name for name in spec["files"]]
+        else:
+            sources = sorted(source.rglob("*.md"))
+        for src in sources:
+            if not src.exists():
+                continue
+            if src.name == "index.md" and src.parent == source:
+                continue
+            rel = src.relative_to(source)
+            target = dest / (spec.get("renames") or {}).get(rel.as_posix(), rel.as_posix())
+            target.parent.mkdir(parents=True, exist_ok=True)
+            text = src.read_text()
+            title = (spec.get("titles") or {}).get(rel.as_posix())
+            if title:
+                text = re.sub(r"^# .+$", f"# {title}", text, count=1, flags=re.M)
+            text = re.sub(r"\[\[([^\]]+)\]\]", r"\\[\\[\1\\]\\]", text)
+            target.write_text(text)
+            count += 1
+
+        for src_name, dst_name in spec.get("assets", []):
+            src_path = source / src_name
+            if src_path.is_dir():
+                shutil.copytree(src_path, dest / dst_name, dirs_exist_ok=True)
+            elif src_path.exists():
+                target = dest / dst_name
+                target.parent.mkdir(parents=True, exist_ok=True)
+                shutil.copy2(src_path, target)
     return count
 
 
@@ -498,6 +579,8 @@ def sync_four_hats() -> int:
         shutil.copytree(fonts, slides / "fonts", dirs_exist_ok=True)
 
     ASSETS.mkdir(parents=True, exist_ok=True)
+    for svg in sorted((HQ / "scripts" / "diagrams").glob("ep*.svg")):
+        shutil.copy2(svg, ASSETS / svg.name)
     for png in sorted((HQ / "scripts" / "diagrams").glob("ep*.png")):
         webp = ASSETS / f"{png.stem}.webp"
         if not webp.exists() or webp.stat().st_mtime < png.stat().st_mtime:
@@ -510,13 +593,25 @@ def sync_four_hats() -> int:
 
 
 def main() -> None:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "--portfolio",
+        action="store_true",
+        help="import only the portfolio project pages and blog posts",
+    )
+    args = parser.parse_args()
+    if args.portfolio:
+        projects, blogs = sync_portfolio()
+        print(f"synced {projects} projects and {blogs} blogs from the portfolio")
+        return
+
     episodes = sync_four_hats()
     projects, blogs = sync_portfolio()
     wiki, notes = sync_vault()
-    docs = sync_openziti()
+    docs = sync_project_docs()
     print(
         f"synced {episodes} episodes, {projects} projects, {blogs} blogs, "
-        f"{wiki} wiki pages, {notes} notes, {docs} operator docs"
+        f"{wiki} definitions, {notes} notes, {docs} project docs"
     )
 
 

@@ -28,19 +28,19 @@ projects:
     status: Active
     summary: Kubernetes on Talos Linux, managed by ArgoCD, with Cilium, Longhorn, CloudNativePG, and a public Cloudflare tunnel.
     tags: [kubernetes, talos, gitops, homelab]
-    page: projects/homelab.md
+    page: projects/homelab/index.md
   - slug: grooszy
     title: Grooszy
     status: Active
     summary: Private, self-hosted analysis of Saudi bank statements. Go for parsing, Next.js for the interface, PostgreSQL for storage.
     tags: [go, nextjs, postgresql, privacy]
-    page: projects/grooszy.md
+    page: projects/grooszy/index.md
   - slug: fai
     title: Fai
     status: Active
     summary: Self-hosted task tracker, Kanban, and notes app, behind your own identity provider or as a desktop app.
     tags: [tasks, notes, self-hosted]
-    page: projects/fai.md
+    page: projects/fai/index.md
   - slug: portfolio
     title: Portfolio
     status: Active

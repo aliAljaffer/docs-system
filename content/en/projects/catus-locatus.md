@@ -1,3 +1,16 @@
+---
+title: Catus Locatus
+status: Active
+date: '2025-10-30'
+description: Location-based pet recovery web app using React and Leaflet maps to report
+  and view lost pets.
+tags:
+- Kubernetes
+- Terraform
+- Azure
+- React
+---
+
 <!-- imported from portfolio/src/data/catus-locatus.md. Edit the source, then run sync.py. -->
 
 # Catus Locatus

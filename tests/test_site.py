@@ -75,7 +75,7 @@ class SiteTests(unittest.TestCase):
         self.assertEqual(broken, [], "\n".join(broken[:20]))
 
     def test_pairs_have_switch(self) -> None:
-        pairs = ["", "four-hats", "tools"]
+        pairs = ["", "four-hats"]
         for rel in pairs:
             en = SITE / rel / "index.html" if rel else SITE / "index.html"
             ar = SITE / "ar" / rel / "index.html" if rel else SITE / "ar" / "index.html"
@@ -124,16 +124,16 @@ class SiteTests(unittest.TestCase):
             self.assertTrue(built.exists(), page.stem)
 
     def test_wiki(self) -> None:
-        self.assertTrue((SITE / "wiki" / "index.html").exists())
-        self.assertTrue((SITE / "wiki" / "rest" / "index.html").exists())
-        self.assertTrue((SITE / "ar" / "wiki" / "index.html").exists())
-        page = (SITE / "wiki" / "web" / "props" / "index.html").read_text()
-        self.assertIn('href="/wiki/web/component/"', page)
+        self.assertTrue((SITE / "definitions" / "index.html").exists())
+        self.assertTrue((SITE / "definitions" / "rest" / "index.html").exists())
+        self.assertTrue((SITE / "ar" / "definitions" / "index.html").exists())
+        page = (SITE / "definitions" / "web" / "props" / "index.html").read_text()
+        self.assertIn('href="/definitions/web/component/"', page)
         self.assertNotIn("[[component|", page)
         en = (SITE / "assets" / "backlinks.json").read_text()
         ar = (SITE / "ar" / "assets" / "backlinks.json").read_text()
-        self.assertIn("/wiki/", en)
-        self.assertIn("/ar/wiki/", ar)
+        self.assertIn("/definitions/", en)
+        self.assertIn("/ar/definitions/", ar)
 
     def test_diagram_zoom(self) -> None:
         page = (SITE / "four-hats" / "episodes" / "ep04-add-a-feature-with-a-test" / "index.html").read_text()
@@ -150,6 +150,13 @@ class SiteTests(unittest.TestCase):
         self.assertGreater(len(data["nodes"]), 20)
         self.assertGreater(len(data["links"]), 10)
         self.assertTrue((SITE / "assets" / "vendor" / "force-graph.min.js").exists())
+        types = {node["type"] for node in data["nodes"]}
+        self.assertIn("definition", types)
+        self.assertNotIn("tool", types)
+        self.assertTrue(all(node.get("group") for node in data["nodes"]))
+        js = (SITE / "assets" / "graph.js").read_text()
+        self.assertIn("onNodeHover", js)
+        self.assertIn("graph-legend", js)
 
     def test_nav_sections_collapse(self) -> None:
         config = (ROOT / "mkdocs.en.yml").read_text()
@@ -174,7 +181,7 @@ class SiteTests(unittest.TestCase):
         self.assertTrue((SITE / "assets" / "hover.js").exists())
         self.assertTrue((SITE / "assets" / "hover.css").exists())
         self.assertTrue((SITE / "assets" / "fonts" / "noto-naskh-arabic.woff2").exists())
-        page = (SITE / "wiki" / "rest" / "index.html").read_text()
+        page = (SITE / "definitions" / "rest" / "index.html").read_text()
         self.assertIn("hover.js", page)
         self.assertIn("hover.css", page)
 

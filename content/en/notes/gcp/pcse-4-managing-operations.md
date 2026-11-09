@@ -1,9 +1,8 @@
 ---
 title: 4 - Managing Operations
 category: GCP
-description: 'Part of [[pcse-home|PCSE Home]]. Official exam guide sections 4.1 to
-  4.2: managing operations. Ties into [[attack-detection|Attack detection]] and [[respond-to-attacks|Respond
-  to attacks]].'
+description: 'Part of PCSE Home. Official exam guide sections 4.1 to 4.2: managing
+  operations. Ties into Attack detection and Respond to attacks.'
 tags:
 - gcp
 - security

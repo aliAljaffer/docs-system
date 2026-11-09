@@ -1,3 +1,15 @@
+---
+title: Azure Three-Tier web app
+status: Active
+date: '2025-09-20'
+description: Azure Three-Tier web app deployed using Terraform and containers
+tags:
+- Azure
+- Terraform
+- Networking
+- Docker
+---
+
 <!-- imported from portfolio/src/data/azure-3t-app.md. Edit the source, then run sync.py. -->
 
 # Azure Three-Tier web app

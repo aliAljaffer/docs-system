@@ -1,9 +1,9 @@
 ---
 title: Gcloud Commands
 category: GCP
-description: Part of [[pcse-home|PCSE Home]]. Command families to practice before
-  the exam. Assume PCA-level gcloud fluency. Verify exact syntax against docs as you
-  go; the exam is multiple choice, so recognizing
+description: Part of PCSE Home. Command families to practice before the exam. Assume
+  PCA-level gcloud fluency. Verify exact syntax against docs as you go; the exam is
+  multiple choice, so recognizing the right serv
 tags:
 - gcp
 - security

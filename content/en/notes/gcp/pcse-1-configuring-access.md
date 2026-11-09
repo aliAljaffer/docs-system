@@ -1,8 +1,7 @@
 ---
 title: 1 - Configuring Access
 category: GCP
-description: Part of [[pcse-home|PCSE Home]]. Official exam guide sections 1.1 to
-  1.5.
+description: Part of PCSE Home. Official exam guide sections 1.1 to 1.5.
 tags:
 - gcp
 - security
