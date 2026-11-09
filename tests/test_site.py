@@ -148,6 +148,7 @@ class SiteTests(unittest.TestCase):
 
     def test_graph(self) -> None:
         page = (SITE / "graph" / "index.html").read_text()
+        self.assertRegex(page, r"graph\.js\?v=[0-9a-f]{10}")
         self.assertEqual(page.count('id="graph"'), 1)
         self.assertEqual(page.count('id="docs-graph"'), 1)
         data = json.loads((SITE / "assets" / "graph.json").read_text())

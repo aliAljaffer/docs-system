@@ -8,4 +8,3 @@
 <p id="graph-status" class="graph-status">جارٍ تحميل الخريطة...</p>
 
 <script src="/assets/vendor/force-graph.min.js"></script>
-<script src="/assets/graph.js"></script>

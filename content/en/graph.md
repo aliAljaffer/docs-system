@@ -8,4 +8,3 @@ The graph is built from the same internal links that power the definition backli
 <p id="graph-status" class="graph-status">Loading graph...</p>
 
 <script src="/assets/vendor/force-graph.min.js"></script>
-<script src="/assets/graph.js"></script>

@@ -121,6 +121,7 @@ extra_css:
 extra_javascript:
   - assets/vendor/panzoom.min.js
   - assets/diagram-zoom.js?v={asset_version}
+  - assets/graph.js?v={asset_version}
   - assets/hover.js?v={asset_version}
   - assets/analytics.js?v={asset_version}
 """
