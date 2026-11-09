@@ -1,7 +1,7 @@
 /* Rich analytics for docs.alialjaffer.com, powered by the homelab Umami. */
 (() => {
   const UMAMI_HOST = "https://umami.alialjaffer.com";
-  const WEBSITE_ID = "ea36b581-4b7d-4c81-9691-3182bfd8dfc8";
+  const WEBSITE_ID = "3034df8d-b43a-4664-8a8a-6d89f86c32eb";
   const SITE_HOST = "docs.alialjaffer.com";
   const FORCE = new URLSearchParams(location.search).has("analytics");
 

@@ -148,7 +148,7 @@ class SiteTests(unittest.TestCase):
 
     def test_analytics(self) -> None:
         js = (SITE / "assets" / "analytics.js").read_text()
-        self.assertIn("ea36b581-4b7d-4c81-9691-3182bfd8dfc8", js)
+        self.assertIn("3034df8d-b43a-4664-8a8a-6d89f86c32eb", js)
         self.assertIn("umami.alialjaffer.com", js)
         self.assertIn('data-tag", "docs"', js)
         self.assertIn("docs:preview", js)
