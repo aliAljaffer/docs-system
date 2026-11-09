@@ -92,7 +92,7 @@ theme:
     - scheme: slate
       media: "(prefers-color-scheme: dark)"
       toggle: {{icon: material/weather-sunny, name: Day}}
-  features: [navigation.tabs, navigation.top, content.code.copy, content.code.annotate, navigation.sections]
+  features: [navigation.tabs, navigation.top, content.code.copy, content.code.annotate]
 markdown_extensions:
   - admonition
   - pymdownx.details
@@ -205,6 +205,8 @@ def projects_index(root: Path, lang: str) -> None:
         "",
     ]
     for item in projects:
+        page = Path(item["page"])
+        target = f"{page.parent.name}/" if page.name == "index.md" else page.name
         lines += [
             f"## {item['title']}",
             "",
@@ -214,7 +216,7 @@ def projects_index(root: Path, lang: str) -> None:
             "",
             " ".join(f"`{tag}`" for tag in item.get("tags", [])),
             "",
-            f"[Read the docs]({Path(item['page']).name})",
+            f"[Read the docs]({target})",
             "",
         ]
     dest = root / "projects"
@@ -253,6 +255,36 @@ def courses_index(root: Path, lang: str) -> None:
     (dest / "index.md").write_text("\n".join(lines))
 
 
+SUBDIR_LABELS = {"adr": "Decisions", "reference": "API reference"}
+
+
+def project_nav(root: Path, item: dict) -> dict | None:
+    page = root / item["page"]
+    if not page.exists():
+        return None
+    if page.name != "index.md":
+        return {item["title"]: item["page"]}
+    parent = page.parent
+    children: list = [{"Overview": item["page"]}]
+    for path in sorted(parent.glob("*.md")):
+        if path.name == "index.md":
+            continue
+        children.append({title_of(path): path.relative_to(root).as_posix()})
+    for folder in sorted(p for p in parent.iterdir() if p.is_dir()):
+        pages = sorted(folder.glob("*.md"))
+        if not pages:
+            continue
+        children.append(
+            {
+                SUBDIR_LABELS.get(folder.name, folder.name.title()): [
+                    {title_of(path): path.relative_to(root).as_posix()}
+                    for path in pages
+                ]
+            }
+        )
+    return {item["title"]: children}
+
+
 def nav_for(root: Path, lang: str) -> list:
     labels = LABELS[lang]
     nav: list = [{"Home": "index.md"}]
@@ -260,8 +292,9 @@ def nav_for(root: Path, lang: str) -> list:
     if (root / "projects" / "index.md").exists():
         children = [{"Overview": "projects/index.md"}]
         for item in CATALOG.get("projects", []):
-            if (root / item["page"]).exists():
-                children.append({item["title"]: item["page"]})
+            entry = project_nav(root, item)
+            if entry:
+                children.append(entry)
         nav.append({labels["projects"]: children})
 
     four = root / "four-hats"

@@ -11,6 +11,8 @@ The full plan, decisions, caveats, and gaps live in
 |---|---|
 | English course pages | `~/mk-project/four-hats/docs/episodes/` |
 | Verified apply steps | `~/mk-project/four-hats/docs/act*.md` |
+| Project write-ups and notes | `~/portfolio/src/data/` |
+| Operator docs | `~/openziti-operator/docs/` |
 | English site-wide pages | `content/en/` |
 | Arabic pages | `content/ar/` |
 | Diagram sources | `~/mk-project/hq-main/scripts/diagrams/` |
@@ -44,6 +46,10 @@ Open `http://localhost:8000/` and `http://localhost:8000/ar/`.
 4. The project appears on the home page, the Projects catalog, and the nav.
 
 The curated page is the hub entry. Import deep documents from the project repository only when they are stable, and keep the curated page as the index.
+
+Project pages under `content/en/projects/<slug>.md` and notes under `content/en/wiki/` that start with an import marker are generated from `~/portfolio/src/data/`. Edit the source, then run `sync.py`. A generated page is never overwritten after you remove the marker.
+
+The OpenZiti Operator keeps its curated hub at `content/en/projects/openziti-operator/index.md`. The rest of that directory is copied from `~/openziti-operator/docs/` by `sync.py`. The project nav reads the directory, so an imported page appears without a catalog change.
 
 ## Add a course
 

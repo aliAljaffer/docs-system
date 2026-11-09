@@ -133,6 +133,13 @@ class SiteTests(unittest.TestCase):
         self.assertIn("/wiki/rest/", en)
         self.assertIn("/ar/wiki/rest/", ar)
 
+    def test_nav_sections_collapse(self) -> None:
+        config = (ROOT / "mkdocs.en.yml").read_text()
+        self.assertNotIn("navigation.sections", config)
+        page = (SITE / "courses" / "index.html").read_text()
+        self.assertIn("Four Hats", page)
+        self.assertIn("md-nav__toggle", page)
+
     def test_assets_are_versioned(self) -> None:
         page = (SITE / "index.html").read_text()
         self.assertRegex(page, r"hover\.js\?v=[0-9a-f]{10}")
@@ -143,6 +150,7 @@ class SiteTests(unittest.TestCase):
     def test_hover_does_not_scroll(self) -> None:
         js = (SITE / "assets" / "hover.js").read_text()
         self.assertNotIn("scrollIntoView", js)
+        self.assertIn('querySelectorAll(".headerlink")', js)
 
     def test_hover_and_font(self) -> None:
         self.assertTrue((SITE / "assets" / "hover.js").exists())

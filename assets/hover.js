@@ -21,15 +21,22 @@
     card.classList.remove("visible");
   }
 
+  function cleanText(element) {
+    if (!element) return "";
+    const clone = element.cloneNode(true);
+    clone.querySelectorAll(".headerlink").forEach((node) => node.remove());
+    return clone.textContent.trim();
+  }
+
   async function load(url) {
     if (cache.has(url)) return cache.get(url);
     const response = await fetch(url, { headers: { Accept: "text/html" } });
     const text = await response.text();
     const doc = new DOMParser().parseFromString(text, "text/html");
     const article = doc.querySelector(".md-content__inner") || doc.querySelector("article");
-    const title = article?.querySelector("h1")?.textContent?.trim() || url;
+    const title = cleanText(article?.querySelector("h1")) || url;
     const first = article?.querySelector("p");
-    const body = first?.textContent?.trim() || "";
+    const body = cleanText(first);
     const result = { title, body };
     cache.set(url, result);
     return result;
