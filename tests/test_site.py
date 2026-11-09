@@ -157,7 +157,9 @@ class SiteTests(unittest.TestCase):
 
     def test_slides(self) -> None:
         self.assertTrue((SITE / "slides" / "index.html").exists())
-        self.assertGreaterEqual(len(list((SITE / "slides").glob("ep*.html"))), 27)
+        decks = list((SITE / "slides").glob("ep*.html"))
+        self.assertGreaterEqual(len(decks), 27)
+        self.assertIn("analytics.js", decks[0].read_text())
 
     def test_redirects_configured(self) -> None:
         conf = (ROOT / "deploy" / "nginx.conf").read_text()

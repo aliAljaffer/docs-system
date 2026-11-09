@@ -427,7 +427,12 @@ def publish_slides() -> None:
     dest = SITE / "slides"
     dest.mkdir(parents=True, exist_ok=True)
     for deck in decks:
-        shutil.copy2(deck, dest / deck.name)
+        html = deck.read_text()
+        if "/assets/analytics.js" not in html:
+            html = html.replace(
+                "</body>", '<script src="/assets/analytics.js"></script></body>'
+            )
+        (dest / deck.name).write_text(html)
     for extra in source.glob("*.css"):
         shutil.copy2(extra, dest / extra.name)
     fonts = source / "fonts"
