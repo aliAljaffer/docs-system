@@ -1,6 +1,14 @@
 /* Arabic typography and the language switch. */
+@font-face {
+  font-family: "Noto Naskh Arabic";
+  src: url("fonts/noto-naskh-arabic.woff2") format("woff2");
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 body[dir="rtl"] {
-  font-family: "Geeza Pro", "Noto Naskh Arabic", "Segoe UI", Tahoma, sans-serif;
+  font-family: "Noto Naskh Arabic", "Geeza Pro", "Segoe UI", Tahoma, sans-serif;
 }
 
 body[dir="rtl"] pre,

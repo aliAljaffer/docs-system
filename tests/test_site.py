@@ -86,8 +86,11 @@ class SiteTests(unittest.TestCase):
             self.assertIn('hreflang="en"', ar.read_text(), f"ar {rel}")
 
     def test_arabic_rtl(self) -> None:
-        for page in (SITE / "ar").rglob("*.html"):
-            self.assertIn('dir="rtl"', page.read_text(), page.name)
+        for source in AR.rglob("*.md"):
+            rel = source.relative_to(AR).with_suffix("")
+            page = SITE / "ar" / rel / "index.html" if rel.name != "index" else SITE / "ar" / rel.parent / "index.html"
+            self.assertTrue(page.exists(), str(rel))
+            self.assertIn('dir="rtl"', page.read_text(), str(rel))
 
     def test_apply_injected(self) -> None:
         for page in (SITE / "four-hats" / "episodes").rglob("index.html"):
@@ -118,6 +121,34 @@ class SiteTests(unittest.TestCase):
         for page in EPISODES.glob("ep*.md"):
             built = SITE / "four-hats" / "episodes" / page.stem / "index.html"
             self.assertTrue(built.exists(), page.stem)
+
+    def test_wiki(self) -> None:
+        for base in (SITE / "wiki", SITE / "ar" / "wiki"):
+            self.assertTrue((base / "index.html").exists())
+            self.assertTrue((base / "rest" / "index.html").exists())
+        for page in SITE.rglob("*.html"):
+            self.assertNotIn("[[", page.read_text(), page.name)
+        en = (SITE / "assets" / "backlinks.json").read_text()
+        ar = (SITE / "ar" / "assets" / "backlinks.json").read_text()
+        self.assertIn("/wiki/rest/", en)
+        self.assertIn("/ar/wiki/rest/", ar)
+
+    def test_hover_and_font(self) -> None:
+        self.assertTrue((SITE / "assets" / "hover.js").exists())
+        self.assertTrue((SITE / "assets" / "hover.css").exists())
+        self.assertTrue((SITE / "assets" / "fonts" / "noto-naskh-arabic.woff2").exists())
+        page = (SITE / "wiki" / "rest" / "index.html").read_text()
+        self.assertIn("hover.js", page)
+        self.assertIn("hover.css", page)
+
+    def test_slides(self) -> None:
+        self.assertTrue((SITE / "slides" / "index.html").exists())
+        self.assertGreaterEqual(len(list((SITE / "slides").glob("ep*.html"))), 27)
+
+    def test_redirects_configured(self) -> None:
+        conf = (ROOT / "deploy" / "nginx.conf").read_text()
+        self.assertIn("return 301 /four-hats/", conf)
+        self.assertIn("rewrite ^/courses/four-hats/", conf)
 
     def test_sitemap_and_404(self) -> None:
         self.assertTrue((SITE / "sitemap.xml").exists())

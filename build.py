@@ -7,6 +7,7 @@ same English verified apply steps as the English page.
 """
 from __future__ import annotations
 
+import json
 import os
 import re
 import shutil
@@ -47,6 +48,7 @@ LABELS = {
         "cleanup": "Cleanup",
         "costs": "Costs and free options",
         "tools": "Tools",
+        "wiki": "Wiki",
         "site": "Docs",
         "switch": "العربية",
         "apply_note": "Copied from `{file}`. Edit the act guide, not this page.",
@@ -60,6 +62,7 @@ LABELS = {
         "cleanup": "التنظيف",
         "costs": "التكلفة والخيارات المجانية",
         "tools": "الأدوات",
+        "wiki": "الويكي",
         "site": "الوثائق",
         "switch": "English",
         "apply_note": "الخطوات التالية منقولة من `{file}`. عدّل دليل المسار، لا هذه الصفحة.",
@@ -94,6 +97,9 @@ markdown_extensions:
       permalink: true
 extra_css:
   - assets/extra.css
+  - assets/hover.css
+extra_javascript:
+  - assets/hover.js
 """
 
 
@@ -202,10 +208,72 @@ def nav_for(root: Path, lang: str) -> list:
         if (root / name).exists():
             nav.append({labels[key]: name})
 
+    if (root / "wiki" / "index.md").exists():
+        children = [{"Overview": "wiki/index.md"}]
+        for page in sorted((root / "wiki").glob("*.md")):
+            if page.name == "index.md":
+                continue
+            children.append({title_of(page): page.relative_to(root).as_posix()})
+        nav.append({labels["wiki"]: children})
+
     if (root / "tools" / "index.md").exists():
         nav.append({labels["tools"]: "tools/index.md"})
 
     return nav
+
+
+WIKI = re.compile(r"\[\[([^\]|]+)(?:\|([^\]]+))?\]\]")
+
+
+def page_url(rel: str, lang: str) -> str:
+    prefix = "/ar" if lang == "ar" else ""
+    return f"{prefix}/{rel}/" if rel else f"{prefix}/"
+
+
+def process_wiki(root: Path, lang: str) -> None:
+    files = sorted(root.rglob("*.md"))
+    index: dict[str, Path] = {}
+    stems: dict[str, list[Path]] = {}
+    for path in files:
+        rel = path.relative_to(root).with_suffix("").as_posix()
+        index[rel] = path
+        if rel.startswith("wiki/"):
+            index[rel.removeprefix("wiki/")] = path
+        if path.stem != "index":
+            stems.setdefault(path.stem, []).append(path)
+    for stem, paths in stems.items():
+        if len(paths) == 1:
+            index[stem] = paths[0]
+
+    titles = {}
+    for path in files:
+        match = re.search(r"^# (.+)$", path.read_text(), flags=re.M)
+        titles[path] = match.group(1).strip() if match else path.stem
+
+    backlinks: dict[str, list[dict[str, str]]] = {}
+    for path in files:
+        text = path.read_text()
+
+        def replace(match: re.Match[str]) -> str:
+            target = match.group(1).strip()
+            label = (match.group(2) or target).strip()
+            if target not in index:
+                raise SystemExit(f"{path.name}: missing wikilink target: {target}")
+            dest = index[target]
+            url = page_url(dest.relative_to(root).with_suffix("").as_posix(), lang)
+            source = page_url(path.relative_to(root).with_suffix("").as_posix(), lang)
+            entry = {"title": titles[path], "url": source}
+            bucket = backlinks.setdefault(url, [])
+            if entry not in bucket:
+                bucket.append(entry)
+            return f"[{label}]({url})"
+
+        path.write_text(WIKI.sub(replace, text))
+
+    for bucket in backlinks.values():
+        bucket.sort(key=lambda item: item["title"])
+    out = root / "assets" / "backlinks.json"
+    out.write_text(json.dumps(backlinks, indent=2, ensure_ascii=False) + "\n")
 
 
 def assemble(lang: str) -> Path:
@@ -213,7 +281,12 @@ def assemble(lang: str) -> Path:
     if root.exists():
         shutil.rmtree(root)
     shutil.copytree(CONTENT / lang, root)
-    shutil.copytree(ASSETS, root / "assets", dirs_exist_ok=True)
+    shutil.copytree(
+        ASSETS,
+        root / "assets",
+        dirs_exist_ok=True,
+        ignore=shutil.ignore_patterns("slides"),
+    )
     for page in root.rglob("*.md"):
         text = page.read_text()
         text = text.replace("](../assets/", "](../../assets/")
@@ -238,6 +311,7 @@ def assemble(lang: str) -> Path:
         )
         page.write_text(text)
     episode_index(root, lang)
+    process_wiki(root, lang)
     return root
 
 
@@ -320,6 +394,33 @@ def postprocess(base: Path, lang: str) -> None:
         html.write_text(text)
 
 
+def publish_slides() -> None:
+    source = ASSETS / "slides"
+    decks = sorted(source.glob("ep*.html"))
+    if not decks:
+        return
+    dest = SITE / "slides"
+    dest.mkdir(parents=True, exist_ok=True)
+    for deck in decks:
+        shutil.copy2(deck, dest / deck.name)
+    for extra in source.glob("*.css"):
+        shutil.copy2(extra, dest / extra.name)
+    fonts = source / "fonts"
+    if fonts.exists():
+        shutil.copytree(fonts, dest / "fonts", dirs_exist_ok=True)
+    rows = "\n".join(
+        f'<li><a href="{deck.name}">{deck.stem.replace("-", " ")}</a></li>'
+        for deck in decks
+    )
+    (dest / "index.html").write_text(
+        "<!doctype html><html lang=\"en\"><head><meta charset=\"utf-8\">"
+        "<meta name=\"robots\" content=\"noindex\"><title>Slides</title>"
+        "<style>body{font-family:system-ui;max-width:60rem;margin:3rem auto;"
+        "padding:0 1rem;line-height:1.6}li{margin:.4rem 0}</style></head>"
+        f"<body><h1>Slides</h1><p>Raw 16:9 decks. These are visual aids, not lessons.</p><ul>{rows}</ul></body></html>"
+    )
+
+
 def main() -> None:
     if SITE.exists():
         shutil.rmtree(SITE)
@@ -328,6 +429,7 @@ def main() -> None:
         build(lang, root)
     postprocess(SITE, "en")
     postprocess(SITE / "ar", "ar")
+    publish_slides()
     print("built site/ and site/ar/")
 
 

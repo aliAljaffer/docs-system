@@ -13,4 +13,4 @@ Course notes, tool documentation, and project records in one place.
 
 ## Notes
 
-Public notes will live here. Each note can link to a definition in the wiki.
+Public notes will live here. Each note can link to a definition in the [wiki](wiki/index.md). For example, [[rest]] is a shared term.

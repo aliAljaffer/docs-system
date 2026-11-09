@@ -51,6 +51,18 @@ def main() -> None:
     for script in (HQ / "scripts").glob("ep*.md"):
         shutil.copy2(script, scripts / script.name)
 
+    slides = ROOT / "assets" / "slides"
+    slides.mkdir(parents=True, exist_ok=True)
+    for old in slides.glob("ep*.html"):
+        old.unlink()
+    for deck in (HQ / "slides").glob("ep*.html"):
+        shutil.copy2(deck, slides / deck.name)
+    for extra in (HQ / "slides").glob("*.css"):
+        shutil.copy2(extra, slides / extra.name)
+    fonts = HQ / "slides" / "fonts"
+    if fonts.exists():
+        shutil.copytree(fonts, slides / "fonts", dirs_exist_ok=True)
+
     ASSETS.mkdir(parents=True, exist_ok=True)
     for png in sorted((HQ / "scripts" / "diagrams").glob("ep*.png")):
         webp = ASSETS / f"{png.stem}.webp"
