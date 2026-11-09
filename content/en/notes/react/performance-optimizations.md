@@ -5,14 +5,13 @@ description: Do NOT prematurely optimize. Run and test for bottlenecks first. So
   bottlenecks are not worth optimizing for (Not a lot of gains)
 tags:
 - react
-- performance
 ---
 
 <!-- imported from ObsidianVault/webdev/react/performance-optimizations.md. Edit the source, then run sync.py. -->
 
 # Performance-optimizations
 
-`react` `performance`
+`react`
 
 Do NOT prematurely optimize. Run and test for bottlenecks first. Some bottlenecks are not worth optimizing for (Not a lot of gains)
 

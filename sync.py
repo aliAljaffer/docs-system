@@ -83,9 +83,9 @@ PORTFOLIO_ASSETS = ROOT / "assets" / "portfolio"
 VAULT_ASSETS = ROOT / "assets" / "vault"
 
 PAGES = {
-    "00-setup.md": "setup.md",
-    "cleanup-guide.md": "cleanup-guide.md",
-    "costs-and-free-options.md": "costs-and-free-options.md",
+    "00-setup.md": "four-hats/setup.md",
+    "cleanup-guide.md": "four-hats/cleanup-guide.md",
+    "costs-and-free-options.md": "four-hats/costs-and-free-options.md",
 }
 
 MARKER = "<!-- imported from {source}. Edit the source, then run sync.py. -->"
@@ -102,6 +102,7 @@ WIKI_DIRS = [
 ]
 WIKI_FILES = [
     ("studies/networking/OSI Model.md", "Networking", ["networking", "osi"]),
+    ("studies/networking/main.md", "Networking", ["networking", "devices"]),
     ("studies/cybersecurity/cryptography.md", "Security", ["security", "cryptography"]),
     ("webdev/react/useState.md", "React", ["react", "hooks"]),
     ("webdev/react/useEffect.md", "React", ["react", "hooks"]),
@@ -114,29 +115,60 @@ WIKI_FILES = [
     ("webdev/react/design-patterns/controlled-elements.md", "React", ["react", "forms"]),
     ("webdev/react/design-patterns/prop-drilling.md", "React", ["react", "patterns"]),
 ]
-NOTE_FILES = [
-    ("studies/networking/main.md", "Networking", ["networking", "devices"], ""),
-    ("studies/cybersecurity/Attack detection.md", "Security", ["security", "incident-response"], ""),
-    ("studies/cybersecurity/Attack prevention strategies.md", "Security", ["security"], ""),
-    ("studies/cybersecurity/Respond to attacks.md", "Security", ["security", "incident-response"], ""),
-    ("studies/cybersecurity/threat intelligence.md", "Security", ["security", "threat-intelligence"], ""),
-    ("studies/PCSE/PCSE Home.md", "GCP", ["gcp", "security", "pcse"], "pcse-home"),
-    ("studies/PCSE/1 - Configuring Access.md", "GCP", ["gcp", "security", "pcse"], "pcse-1-configuring-access"),
-    ("studies/PCSE/2 - Network Security.md", "GCP", ["gcp", "security", "pcse"], "pcse-2-network-security"),
-    ("studies/PCSE/3 - Data Protection.md", "GCP", ["gcp", "security", "pcse"], "pcse-3-data-protection"),
-    ("studies/PCSE/4 - Managing Operations.md", "GCP", ["gcp", "security", "pcse"], "pcse-4-managing-operations"),
-    ("studies/PCSE/5 - Compliance.md", "GCP", ["gcp", "security", "pcse"], "pcse-5-compliance"),
-    ("studies/PCSE/Cheat Sheets.md", "GCP", ["gcp", "security", "pcse"], "pcse-cheat-sheets"),
-    ("studies/PCSE/gcloud Commands.md", "GCP", ["gcp", "security", "pcse"], "pcse-gcloud-commands"),
-    ("webdev/TypeScript.md", "Web", ["web", "typescript"], ""),
-    ("webdev/TailwindCSS.md", "Web", ["web", "css", "tailwind"], ""),
-    ("webdev/SASS.md", "Web", ["web", "css", "sass"], ""),
-    ("webdev/react/main-concepts.md", "React", ["react", "web"], ""),
-    ("webdev/react/performance-optimizations.md", "React", ["react", "performance"], ""),
-    ("webdev/react/react-router/setting-routes.md", "React", ["react", "react-router"], ""),
-    ("webdev/react/react-router/loaders.md", "React", ["react", "react-router"], ""),
-    ("webdev/react/react-router/forms.md", "React", ["react", "react-router"], ""),
+GCP_DEFINITION_DIRS = [
+    ("studies/cloud-architecht/gcp/networking", "GCP Networking", ["gcp", "networking"]),
+    ("studies/cloud-architecht/gcp/security", "GCP Security", ["gcp", "security"]),
+    ("studies/cloud-architecht/gcp/compute", "GCP Compute", ["gcp", "compute"]),
+    ("studies/cloud-architecht/gcp/databases", "GCP Databases", ["gcp", "databases"]),
+    ("studies/cloud-architecht/gcp/storage", "GCP Storage", ["gcp", "storage"]),
+    ("studies/cloud-architecht/gcp/devops", "GCP DevOps", ["gcp", "devops"]),
+    ("studies/cloud-architecht/gcp/data-analytics", "GCP Data analytics", ["gcp", "data"]),
+    ("studies/cloud-architecht/gcp/operations", "GCP Operations", ["gcp", "operations"]),
+    ("studies/cloud-architecht/gcp/management", "GCP Management", ["gcp", "management"]),
+    ("studies/cloud-architecht/gcp/ai-ml", "GCP AI", ["gcp", "ai"]),
+    ("studies/cloud-architecht/gcp/services", "GCP Services", ["gcp", "services"]),
 ]
+CLOUD_DEFINITION_SLUGS = {
+    "aws-compute", "aws-networking", "aws-security", "aws-services", "aws-storage",
+    "ec2-user-data", "restful-apis", "cloud-concepts", "vms-and-containers",
+    "free-services", "tagging", "allocation-tags", "partner-network",
+    "application-integration", "operational-excellence-pillars",
+    "cost-optimization-pillar", "performance-efficiency-pillar",
+    "reliability-pillars", "security-pillars", "total-cost-of-ownership",
+    "migration-strategies", "cloud-adoption-framework", "logging",
+    "governance-and-compliance", "autoscaling-groups-and-load-balancers",
+    "allocation-tags",
+}
+AWS_DEFINITION_SLUGS = {
+    "aws-compute", "aws-networking", "aws-security", "aws-services", "aws-storage",
+    "ec2-user-data", "free-services", "autoscaling-groups-and-load-balancers",
+    "allocation-tags",
+}
+TITLE_OVERRIDES = {
+    VAULT / "studies/networking/main.md": "Network devices",
+    VAULT / "studies/cloud-architecht/gcp/readme.md": "GCP notes index",
+}
+NOTE_RULES = [
+    ("studies/cloud-architecht/gcp", "GCP", "glob", ["gcp"]),
+    ("studies/cloud-architecht/unsorted", "GCP", "rglob", ["gcp"]),
+    ("studies/cloud-architecht/quizzes", "GCP", "rglob", ["gcp", "quiz"]),
+    ("studies/cloud-architecht", "Certifications", "glob", ["certification"]),
+    ("studies/DevOps Bootcamp", "DevOps", "rglob", ["devops"]),
+    ("studies/PCSE", "GCP", "rglob", ["gcp", "security", "pcse"]),
+    ("studies/cybersecurity", "Security", "rglob", ["security"]),
+    ("studies/terraform", "Terraform", "rglob", ["terraform"]),
+    ("webdev/react", "React", "rglob", ["react"]),
+    ("webdev/interviews", "Interviews", "rglob", ["interview"]),
+    ("webdev", "Web", "glob", ["web"]),
+]
+SKIP_NAME = re.compile(
+    r"(?i)^(untitled|drawing|agenda|topic|resume|practice exam results|main thoughts|"
+    r"certification journey|script-sbom|! main|progress|.*study tracker|.*review topics)"
+)
+SKIP_SOURCES = {
+    VAULT / "studies/networking/OSI Model.md",
+    *[VAULT / name for name, _category, _tags in WIKI_FILES],
+}
 
 EXTRA_TAGS = {
     "cidr": ["networking"],
@@ -245,11 +277,52 @@ def transform_links(text: str, mapping: dict[str, str]) -> str:
     return "\n".join(out)
 
 
-def clean_vault(body: str, mapping: dict[str, str], images: dict[str, Path]) -> str:
+MD_IMAGE = re.compile(r"!\[([^\]]*)\]\(([^)]+)\)")
+MD_LINK = re.compile(r"\[([^\]]+)\]\(([^)#\s]+\.md)(#[^)]*)?\)")
+
+
+def scrub_secrets(text: str) -> str:
+    text = re.sub(r"AKIA[0-9A-Z]{16}", "<redacted-access-key>", text)
+    text = re.sub(
+        r"(?i)((?:secret|access)_key\s*=\s*\")[^\"]+(\")",
+        r"\1<redacted>\2",
+        text,
+    )
+    text = re.sub(
+        r"(?i)(aws_secret_access_key\s*=\s*\")[^\"]+(\")",
+        r"\1<redacted>\2",
+        text,
+    )
+    return text
+
+
+def clean_vault(
+    body: str,
+    mapping: dict[str, str],
+    images: dict[str, Path],
+    src: Path,
+    source_map: dict[Path, Path],
+) -> str:
     body = COMMENT.sub("", body)
     body = body.replace("\u2014", " - ")
     body = TAG_LINE.sub("", body)
     VAULT_ASSETS.mkdir(parents=True, exist_ok=True)
+
+    def asset(source: Path, raw_name: str) -> str:
+        raw = re.sub(r"\s+", "-", raw_name.lower())
+        if source.suffix.lower() in {".png", ".jpg", ".jpeg"}:
+            dest = VAULT_ASSETS / f"{Path(raw).stem}.webp"
+            if not dest.exists() or dest.stat().st_mtime < source.stat().st_mtime:
+                subprocess.run(
+                    ["magick", str(source), "-resize", "1400x", "-strip",
+                     "-quality", "82", str(dest)],
+                    check=True,
+                )
+        else:
+            dest = VAULT_ASSETS / raw
+            if not dest.exists() or dest.stat().st_mtime < source.stat().st_mtime:
+                shutil.copy2(source, dest)
+        return dest.name
 
     def embed(match: re.Match[str]) -> str:
         name = match.group(1).strip()
@@ -259,17 +332,40 @@ def clean_vault(body: str, mapping: dict[str, str], images: dict[str, Path]) -> 
         source = images.get(name)
         if not source:
             return ""
-        dest = VAULT_ASSETS / re.sub(r"\s+", "-", name.lower())
-        if not dest.exists() or dest.stat().st_mtime < source.stat().st_mtime:
-            shutil.copy2(source, dest)
-        return f"![{alt}](/assets/vault/{dest.name})"
+        return f"![{alt}](/assets/vault/{asset(source, name)})"
+
+    def md_image(match: re.Match[str]) -> str:
+        alt, href = match.group(1), match.group(2).strip()
+        if href.startswith(("/", "http://", "https://", "data:")):
+            return match.group(0)
+        name = href.split()[0]
+        source = (src.parent / name).resolve()
+        if not source.exists():
+            source = (src.parent / "images" / Path(name).name).resolve()
+        if not source.exists():
+            source = images.get(Path(name).name, Path())
+        if not source.exists():
+            return ""
+        return f"![{alt}](/assets/vault/{asset(source, source.name)})"
+
+    def md_link(match: re.Match[str]) -> str:
+        label, href, anchor = match.group(1), match.group(2), match.group(3) or ""
+        target = (src.parent / href).resolve()
+        dest = source_map.get(target)
+        if not dest:
+            return label
+        rel = dest.relative_to(EN).with_suffix("").as_posix()
+        return f"[{label}](/{rel}/{anchor})"
 
     body = EMBED.sub(embed, body)
+    body = MD_IMAGE.sub(md_image, body)
+    body = MD_LINK.sub(md_link, body)
     body = transform_links(body, mapping)
     body = re.sub(r"(?m)^====\s*$", "", body)
     body = re.sub(r"==([^=\n]+)==", r"**\1**", body)
     body = body.lstrip("\n")
     body = re.sub(r"\A# .+\n", "", body)
+    body = scrub_secrets(body)
     return re.sub(r"\n{3,}", "\n\n", body).strip()
 
 
@@ -438,26 +534,81 @@ def sync_portfolio() -> tuple[int, int]:
     return projects, blogs
 
 
+GENERIC_TITLES = {"overview", "readme", "main", "index", "notes"}
+
+
+def note_title(src: Path, rel: Path, meta: dict, body: str) -> str:
+    if src in TITLE_OVERRIDES:
+        return TITLE_OVERRIDES[src]
+    if meta.get("title"):
+        return str(meta["title"])
+    match = re.search(r"^# (.+)$", body, re.M)
+    if match and match.start() == 0:
+        return match.group(1).strip()
+    stem = rel.stem
+    if stem.lower() in GENERIC_TITLES or re.fullmatch(r"day\s*\d+", stem, re.I):
+        parts = rel.with_suffix("").parts[-2:]
+        return " ".join(part.replace("-", " ").replace("_", " ").title() for part in parts)
+    return src.stem[:1].upper() + src.stem[1:]
+
+
 def sync_vault() -> tuple[int, int]:
-    jobs: list[tuple[Path, Path, str, list[str]]] = []
+    jobs: list[tuple[Path, Path, str, list[str], Path]] = []
+    seen: set[Path] = set()
     for folder, category, tags in WIKI_DIRS:
         for src in sorted((VAULT / folder).glob("*.md")):
             tags_all = list(dict.fromkeys(tags + EXTRA_TAGS.get(src.stem.lower(), [])))
             dest = WIKI / slugify(category) / f"{slugify(src.stem)}.md"
-            jobs.append((src, dest, category, tags_all))
+            jobs.append((src, dest, category, tags_all, src.relative_to(VAULT / folder)))
+            seen.add(src)
     for name, category, tags in WIKI_FILES:
         src = VAULT / name
         if src.exists():
             dest = WIKI / slugify(category) / f"{slugify(src.stem)}.md"
-            jobs.append((src, dest, category, tags))
-    for name, category, tags, override in NOTE_FILES:
-        src = VAULT / name
-        if not src.exists() or src.stat().st_size < 80:
-            continue
-        dest = NOTES / slugify(category) / f"{override or slugify(src.stem)}.md"
-        jobs.append((src, dest, category, tags))
+            jobs.append((src, dest, category, tags, Path(src.name)))
+            seen.add(src)
 
-    dest_stems = [dest.stem for _src, dest, _cat, _tags in jobs]
+    for folder, category, tags in GCP_DEFINITION_DIRS:
+        base = VAULT / folder
+        if not base.exists():
+            continue
+        for src in sorted(base.rglob("*.md")):
+            if src in seen:
+                continue
+            rel = src.relative_to(base)
+            stem = "-".join(slugify(part) for part in rel.with_suffix("").parts)
+            if not stem:
+                continue
+            dest = WIKI / slugify(category) / f"{stem}.md"
+            jobs.append((src, dest, category, tags, rel))
+            seen.add(src)
+
+    for folder, category, mode, tags in NOTE_RULES:
+        base = VAULT / folder
+        if not base.exists():
+            continue
+        sources = base.rglob("*.md") if mode == "rglob" else base.glob("*.md")
+        for src in sorted(sources):
+            if src in seen or src in SKIP_SOURCES:
+                continue
+            if SKIP_NAME.search(src.stem) or "excalidraw" in src.stem.lower():
+                continue
+            if src.stat().st_size < 40:
+                continue
+            rel = src.relative_to(base)
+            stem = "-".join(slugify(part) for part in rel.with_suffix("").parts)
+            if not stem:
+                continue
+            if slugify(src.stem) in CLOUD_DEFINITION_SLUGS:
+                kind = "AWS" if slugify(src.stem) in AWS_DEFINITION_SLUGS else "Cloud"
+                dest = WIKI / slugify(kind) / f"{stem}.md"
+                jobs.append((src, dest, kind, tags, rel))
+            else:
+                dest = NOTES / slugify(category) / f"{stem}.md"
+                jobs.append((src, dest, category, tags, rel))
+            seen.add(src)
+
+    dest_stems = [dest.stem for _src, dest, _cat, _tags, _rel in jobs]
     duplicate = [stem for stem, count in Counter(dest_stems).items() if count > 1]
     if duplicate:
         raise SystemExit(f"duplicate vault page names: {duplicate}")
@@ -465,18 +616,21 @@ def sync_vault() -> tuple[int, int]:
     existing = [path for path in EN.rglob("*.md")]
     counts = Counter(path.stem for path in existing)
     mapping = {stem: stem for stem, count in counts.items() if count == 1}
-    for src, dest, _cat, _tags in jobs:
-        mapping[src.stem] = dest.stem
-        mapping[src.stem.lower()] = dest.stem
+    source_counts = Counter(src.stem for src, *_rest in jobs)
+    for src, dest, _cat, _tags, _rel in jobs:
+        if source_counts[src.stem] == 1:
+            mapping[src.stem] = dest.stem
+            mapping[src.stem.lower()] = dest.stem
         mapping[dest.stem] = dest.stem
 
     images = vault_images()
+    source_map = {src.resolve(): dest for src, dest, *_rest in jobs}
     written: set[Path] = set()
     wiki = notes = 0
-    for src, dest, category, tags in jobs:
-        _meta, raw = split_frontmatter(src.read_text())
-        title = title_from(src, raw)
-        body = clean_vault(raw, mapping, images)
+    for src, dest, category, tags, rel in jobs:
+        meta, raw = split_frontmatter(src.read_text())
+        title = note_title(src, rel, meta, raw)
+        body = clean_vault(raw, mapping, images, src, source_map)
         if len(body) < 10:
             continue
         text = vault_page(src, title, category, tags, body)

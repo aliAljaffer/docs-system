@@ -4,14 +4,13 @@ category: React
 description: Always parent to child, never vice-versa.
 tags:
 - react
-- web
 ---
 
 <!-- imported from ObsidianVault/webdev/react/main-concepts.md. Edit the source, then run sync.py. -->
 
 # Main-concepts
 
-`react` `web`
+`react`
 
 [[component]]
 

@@ -6,14 +6,13 @@ description: TypeScript is a statically typed superset of JavaScript that compil
   catch errors early and make development more e
 tags:
 - web
-- typescript
 ---
 
 <!-- imported from ObsidianVault/webdev/TypeScript.md. Edit the source, then run sync.py. -->
 
 # TypeScript Basics and Must-Knows
 
-`web` `typescript`
+`web`
 
 ## Introduction to TypeScript
 

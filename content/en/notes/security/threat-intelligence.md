@@ -6,14 +6,13 @@ description: Cyberthreat Intelligence is data that an organization has collected
   Techniques, and Procedures (TTPs) or othe
 tags:
 - security
-- threat-intelligence
 ---
 
 <!-- imported from ObsidianVault/studies/cybersecurity/threat intelligence.md. Edit the source, then run sync.py. -->
 
 # Threat intelligence
 
-`security` `threat-intelligence`
+`security`
 
 Cyberthreat Intelligence is data that an organization has collected and analyzed to understand the motives and behavior of threat actors. Focusing on **Tactics, Techniques, and Procedures** (TTPs) or other **Indicators of Compromise** (IoC)
 

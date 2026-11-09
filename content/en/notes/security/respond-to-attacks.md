@@ -4,14 +4,13 @@ category: Security
 description: 'Security note: Respond to attacks.'
 tags:
 - security
-- incident-response
 ---
 
 <!-- imported from ObsidianVault/studies/cybersecurity/Respond to attacks.md. Edit the source, then run sync.py. -->
 
 # Respond to attacks
 
-`security` `incident-response`
+`security`
 
 ## Incident Response (IR)
 1. Phase 1: Preparation. An organization plans and prepares a protocol on what it will do when an incident occurs.

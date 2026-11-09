@@ -6,15 +6,13 @@ description: SASS (Syntactically Awesome Style Sheets) is a CSS preprocessor tha
   CSS more maintainable and easier to write. SCSS (S
 tags:
 - web
-- css
-- sass
 ---
 
 <!-- imported from ObsidianVault/webdev/SASS.md. Edit the source, then run sync.py. -->
 
 # SASS and SCSS Basics and Must-Knows
 
-`web` `css` `sass`
+`web`
 
 ## Introduction to SASS and SCSS
 

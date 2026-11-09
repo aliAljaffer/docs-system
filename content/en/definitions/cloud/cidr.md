@@ -14,6 +14,6 @@ tags:
 
 `cloud` `fundamentals` `networking`
 
-![](/assets/vault/pasted-image-20241124110700.png)
+![](/assets/vault/pasted-image-20241124110700.webp)
 ## 0.0.0.0/X
 For every 8X, an entire slot from the left is static.

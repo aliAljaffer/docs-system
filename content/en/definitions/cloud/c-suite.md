@@ -13,4 +13,4 @@ tags:
 
 `cloud` `fundamentals`
 
-![](/assets/vault/pasted-image-20250531135809.png)
+![](/assets/vault/pasted-image-20250531135809.webp)

@@ -26,3 +26,5 @@ Documentation for the systems I build, the courses I teach, and the notes I keep
 ## About this site
 
 This site is the central documentation source for my projects. It is built with Zensical, deployed on the homelab, and tracked with Umami. The plan and the known gaps live in the [docs system project page](projects/docs-system.md).
+
+Questions about the content? [Contact me](contact.md).

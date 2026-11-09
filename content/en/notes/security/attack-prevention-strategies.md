@@ -29,7 +29,7 @@ A demilitarized zone (DMZ) is a network segment between an organization's intern
 vulnerability scanner
 ### Use defense in depth
 
-![](/assets/vault/pasted-image-20250515151648.png)
+![](/assets/vault/pasted-image-20250515151648.webp)
 
 - Firewalls (Network defense)
 - Malware scanners (Device defense)

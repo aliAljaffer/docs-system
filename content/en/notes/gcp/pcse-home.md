@@ -24,15 +24,15 @@ Study project for the **Professional Cloud Security Engineer** exam. Tailored fo
 
 | # | Section | Weight | Note |
 |---|---|---|---|
-| 1 | Configuring access | ~25% | [[pcse-1-configuring-access|1 - Configuring Access]] |
-| 2 | Securing communications and boundary protection | ~22% | [[pcse-2-network-security|2 - Network Security]] |
-| 3 | Ensuring data protection | ~23% | [[pcse-3-data-protection|3 - Data Protection]] |
-| 4 | Managing operations | ~19% | [[pcse-4-managing-operations|4 - Managing Operations]] |
-| 5 | Supporting compliance requirements | ~11% | [[pcse-5-compliance|5 - Compliance]] |
+| 1 | Configuring access | ~25% | [[1-configuring-access|1 - Configuring Access]] |
+| 2 | Securing communications and boundary protection | ~22% | [[2-network-security|2 - Network Security]] |
+| 3 | Ensuring data protection | ~23% | [[3-data-protection|3 - Data Protection]] |
+| 4 | Managing operations | ~19% | [[4-managing-operations|4 - Managing Operations]] |
+| 5 | Supporting compliance requirements | ~11% | [[5-compliance|5 - Compliance]] |
 
 Sections 1 through 3 are about 70% of the exam. Do not skip operations or compliance: together they still account for about 30%.
 
-Support notes: [[pcse-cheat-sheets|Cheat Sheets]], [[pcse-gcloud-commands|gcloud Commands]], Final Week Checklist.
+Support notes: [[cheat-sheets|Cheat Sheets]], [[gcloud-commands|gcloud Commands]], [[final-week-checklist|Final Week Checklist]].
 
 ## Exam facts
 
@@ -64,7 +64,7 @@ Official page: https://cloud.google.com/learn/certification/cloud-security-engin
 
 ### Securing AI workloads is in scope
 
-Objective 3.3 has three official bullets: security and privacy controls for AI/ML systems, security requirements for IaaS-hosted and PaaS-hosted training models, and security controls for Gemini Enterprise Agent Platform. The course does not cover them. Study them in [[pcse-3-data-protection|3 - Data Protection]] and the official documentation (vertex-ai, gemini, Model Armor). **2025 test-taker reports put AI and Vertex AI content at up to a quarter of some exam forms**, so treat objective 3.3 as a priority domain, not filler.
+Objective 3.3 has three official bullets: security and privacy controls for AI/ML systems, security requirements for IaaS-hosted and PaaS-hosted training models, and security controls for Gemini Enterprise Agent Platform. The course does not cover them. Study them in [[3-data-protection|3 - Data Protection]] and the official documentation ([[vertex-ai]], [[gemini]], Model Armor). **2025 test-taker reports put AI and Vertex AI content at up to a quarter of some exam forms**, so treat objective 3.3 as a priority domain, not filler.
 
 ## Study Plan
 
@@ -72,15 +72,15 @@ Keep the course sequence as the spine of your schedule. Since you hold PCA, spen
 
 ### Pass 1: Course core
 
-1. Complete the access modules. Practice hierarchy and policy inheritance, role selection, service account attachment, impersonation, and key-risk decisions. See [[pcse-1-configuring-access|1 - Configuring Access]].
-2. Complete the networking modules. Practice firewall reasoning, Shared VPC subnet access, peering limits, IAP access, DNSSEC, Private Google Access, and the Cloud Armor scenario. See [[pcse-2-network-security|2 - Network Security]].
-3. Complete the data-protection modules. Practice DLP inspection and de-identification, Secret Manager versioning, CMEK versus CSEK, and Cloud Storage lifecycle rules. See [[pcse-3-data-protection|3 - Data Protection]].
-4. Complete the operations modules. Be able to explain RPO versus RTO, backup and restore choices, vulnerability scanning, Binary Authorization, audit logs, sinks, and SCC findings. See [[pcse-4-managing-operations|4 - Managing Operations]].
+1. Complete the access modules. Practice hierarchy and policy inheritance, role selection, service account attachment, impersonation, and key-risk decisions. See [[1-configuring-access|1 - Configuring Access]].
+2. Complete the networking modules. Practice firewall reasoning, Shared VPC subnet access, peering limits, IAP access, DNSSEC, Private Google Access, and the Cloud Armor scenario. See [[2-network-security|2 - Network Security]].
+3. Complete the data-protection modules. Practice DLP inspection and de-identification, Secret Manager versioning, CMEK versus CSEK, and Cloud Storage lifecycle rules. See [[3-data-protection|3 - Data Protection]].
+4. Complete the operations modules. Be able to explain RPO versus RTO, backup and restore choices, vulnerability scanning, Binary Authorization, audit logs, sinks, and SCC findings. See [[4-managing-operations|4 - Managing Operations]].
 5. Review the role-play scenarios. For each one, state the threat, the control, where to apply it, and how to verify it.
 
 ### Pass 2: Official exam-guide gaps
 
-Use the "Course gaps" column above. Read only the matching current exam objective and the relevant summary in these notes. Use the official documentation when you need more detail. Prioritize VPC Service Controls, current IAM controls, modern private connectivity, logging and detection, AI workload security, and compliance services.
+Use the "Course gaps" column above. Read only the matching current exam objective and the relevant summary in these notes. Use the official documentation when you need more detail. Prioritize [[vpc-service-controls|VPC Service Controls]], current IAM controls, modern private connectivity, logging and detection, AI workload security, and compliance services.
 
 ### Final review
 
@@ -89,20 +89,20 @@ Use the "Course gaps" column above. Read only the matching current exam objectiv
 - Repeat weak course topics in a sandbox or by drawing the configuration from memory.
 - Take another timed exam only after closing the specific gaps from the first attempt.
 - Use the official exam guide's current domain weights to allocate any remaining study time.
-- Finish with Final Week Checklist.
+- Finish with [[final-week-checklist|Final Week Checklist]].
 
 ### Scenario-question technique (from 2025 passers)
 
 - Every option is usually a workable solution; **the constraint keywords pick the answer**"most secure", "minimizes cost", "least operational overhead".
 - Extract the ask from the scenario first, then match Google's exact product, feature, role, or constraint name; the exam tests Google's names and config options, not general security theory.
 - Eliminate the obviously wrong options first; when two viable options remain, the more specific, more managed, or more native control is usually correct.
-- Draw the GMEK/CMEK/CSEK/EKM table from memory before exam day; 2025 passers report the key options blur under time pressure. See [[pcse-cheat-sheets|Cheat Sheets]].
+- Draw the GMEK/CMEK/CSEK/EKM table from memory before exam day; 2025 passers report the key options blur under time pressure. See [[cheat-sheets|Cheat Sheets]].
 
 ## Related vault notes
 
-- GCP security: IAM, Cloud KMS, Secret Manager, Binary Authorization, Identity-Aware Proxy, Security Command Center, VPC Service Controls, Security Labs
-- GCP networking: VPC, Cloud NGFW, Cloud Armor, Cloud DNS, Cloud Load Balancing, Cloud VPN, Cloud Interconnect, Cloud NAT, PGA vs PSC, Networking Labs
-- GCP services: GKE, Compute Engine, Cloud Run, BigQuery, Cloud SQL, Cloud Storage, Pub/Sub, Artifact Registry, Cloud Build, Cloud Logging, Cloud Monitoring, Vertex AI, Gemini
+- GCP security: IAM, [[cloud-kms|Cloud KMS]], [[secret-manager|Secret Manager]], [[binary-authorization|Binary Authorization]], [[identity-aware-proxy|Identity-Aware Proxy]], [[security-command-center|Security Command Center]], [[vpc-service-controls|VPC Service Controls]], [[security-labs|Security Labs]]
+- GCP networking: VPC, [[cloud-ngfw|Cloud NGFW]], [[cloud-armor|Cloud Armor]], [[cloud-dns|Cloud DNS]], [[cloud-load-balancing|Cloud Load Balancing]], [[cloud-vpn|Cloud VPN]], [[cloud-interconnect|Cloud Interconnect]], [[cloud-nat|Cloud NAT]], [[private-google-access-vs-psc|PGA vs PSC]], [[networking-labs|Networking Labs]]
+- GCP services: [[gke|GKE]], [[compute-engine|Compute Engine]], [[cloud-run|Cloud Run]], [[bigquery|BigQuery]], [[cloud-sql|Cloud SQL]], [[cloud-storage|Cloud Storage]], [[pub-sub|Pub/Sub]], [[artifact-registry|Artifact Registry]], [[cloud-build|Cloud Build]], [[cloud-logging|Cloud Logging]], [[cloud-monitoring|Cloud Monitoring]], [[vertex-ai|Vertex AI]], [[gemini|Gemini]]
 - Principles: [[principle-of-least-privilege|Least privilege]], [[multi-factor-authentication|MFA/2SV]], [[cryptography|Cryptography]], [[cidr|CIDR]], [[rto|RTO]], [[attack-detection|Attack detection]], [[attack-prevention-strategies|Attack prevention strategies]], [[respond-to-attacks|Respond to attacks]], [[threat-intelligence|Threat intelligence]]
 
 Track progress on the Certification Journey board.

@@ -61,6 +61,7 @@ LABELS = {
         "notes": "Notes",
         "graph": "Graph",
         "definitions": "Definitions",
+        "contact": "Contact",
         "site": "Docs",
         "switch": "العربية",
         "apply_note": "Copied from `{file}`. Edit the act guide, not this page.",
@@ -79,6 +80,7 @@ LABELS = {
         "notes": "الملاحظات",
         "graph": "الخريطة",
         "definitions": "التعريفات",
+        "contact": "اتصل",
         "site": "الوثائق",
         "switch": "English",
         "apply_note": "الخطوات التالية منقولة من `{file}`. عدّل دليل المسار، لا هذه الصفحة.",
@@ -147,8 +149,19 @@ def meta_of(path: Path) -> dict:
     return yaml.safe_load(text[4:end]) or {}
 
 
-WIKI_ORDER = ["Cloud", "Networking", "Security", "AI", "React", "Web", "Other"]
-NOTES_ORDER = ["GCP", "Cloud", "Security", "AI", "Networking", "React", "Web", "Site", "Other"]
+WIKI_ORDER = [
+    "GCP", "GCP Networking", "GCP Security", "GCP Compute", "GCP Databases",
+    "GCP Storage", "GCP DevOps", "GCP Data analytics", "GCP Operations",
+    "GCP Management", "GCP AI", "GCP Services", "AWS", "Cloud", "Networking",
+    "Security", "AI", "React", "Web", "Other",
+]
+NOTES_ORDER = [
+    "GCP", "GCP Networking", "GCP Security", "GCP Compute", "GCP Databases",
+    "GCP Storage", "GCP DevOps", "GCP Data analytics", "GCP Operations",
+    "GCP Management", "GCP AI", "GCP Services", "Cloud", "Security", "AI",
+    "Networking", "DevOps", "Terraform", "Certifications", "Projects",
+    "React", "Web", "Interviews", "Site", "Other",
+]
 
 
 CATEGORY_NAMES = {"gcp": "GCP", "ai": "AI"}
@@ -544,6 +557,9 @@ def nav_for(root: Path, lang: str) -> list:
         children += section_nav(root, "definitions", WIKI_ORDER)
         nav.append({labels["definitions"]: children})
 
+    if (root / "contact.md").exists():
+        nav.append({labels["contact"]: "contact.md"})
+
     return nav
 
 
@@ -650,6 +666,11 @@ def assemble(lang: str) -> Path:
         page.write_text(text)
         inject_apply(page, lang)
         text = page.read_text()
+        text = re.sub(
+            r"\]\((?:\.\./)*(?:four-hats/)?(costs-and-free-options|cleanup-guide)\.md\)",
+            r"](/four-hats/\1/)",
+            text,
+        )
         text = text.replace(
             "](../cv/skills-ledger.md)",
             "](https://github.com/aliAljaffer/four-hats/blob/main/cv/skills-ledger.md)",

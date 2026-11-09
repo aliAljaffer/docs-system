@@ -4,17 +4,16 @@ category: Security
 description: 'Security note: Attack detection.'
 tags:
 - security
-- incident-response
 ---
 
 <!-- imported from ObsidianVault/studies/cybersecurity/Attack detection.md. Edit the source, then run sync.py. -->
 
 # Attack detection
 
-`security` `incident-response`
+`security`
 
 - Antimalware software
-- Logging
+- [[logging|Logging]]
 - Network monitoring
 - [[traffic-analysis|traffic analysis]]
 - Security information and event management tools

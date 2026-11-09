@@ -6,15 +6,13 @@ description: TailwindCSS is a utility-first CSS framework that allows you to bui
   let you create complex designs without ever leavi
 tags:
 - web
-- css
-- tailwind
 ---
 
 <!-- imported from ObsidianVault/webdev/TailwindCSS.md. Edit the source, then run sync.py. -->
 
 # TailwindCSS Basics and Must-Knows
 
-`web` `css` `tailwind`
+`web`
 
 ## Introduction to TailwindCSS
 

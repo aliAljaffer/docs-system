@@ -22,6 +22,8 @@ The full plan, decisions, caveats, and gaps live in
 | Diagram sources | `~/mk-project/hq-main/scripts/diagrams/` |
 | Slides and scripts | `~/mk-project/hq-main/` |
 
+The vault import covers cloud and security definitions, GCP service references, certification notes, DevOps bootcamp notes, React notes, web notes, and interview notes. Excalidraw drawings, trackers, and personal drafts are skipped.
+
 ## Build
 
 ```bash
@@ -82,7 +84,7 @@ The directory decides the type. A file under `definitions/` is a definition. A f
 
 Guidelines:
 
-1. Put one idea on one page. A definition goes in `definitions/`. The long explanation goes in a note or a blog.
+1. Put one idea on one page. A definition is a concept or service reference. A note is course material, a lab, a checklist, or a how-to. Do not put a course chapter in Definitions, and do not put a service reference in Notes.
 2. Portfolio entries are drop-in. Add a `.md` file to `~/portfolio/src/data/`, then run `build.py`. It imports the page, adds frontmatter, and updates the home list, the Projects or Blogs index, and the nav. Do not edit `catalog.yaml` for a portfolio entry.
 3. Copy `templates/definition.md`, `templates/note.md`, or `templates/blog.md` for authored pages.
 4. A definition can be a bare file with an H1. Frontmatter is optional and adds a category, description, and tags.

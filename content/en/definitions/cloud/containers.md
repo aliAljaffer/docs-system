@@ -20,4 +20,4 @@ Containers allow you to run multiple applications on the same ec2-ccp instance t
 
 A container comes with everything an application needs to run, regardless of the O.S.
 
-![](/assets/vault/pasted-image-20241222171850.png)
+![](/assets/vault/pasted-image-20241222171850.webp)

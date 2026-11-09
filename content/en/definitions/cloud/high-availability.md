@@ -16,4 +16,4 @@ tags:
 
 - Your services should be able to remain highly available by having no single point of failure
 - This is primarily done by having cloud workloads running in multiple  [[region|regions]] and/or [[availability-zones|availability zones]]
-- You can use Elastic Load Balancer to distribute traffic and automatically re-route in case of failures
+- You can use [[autoscaling-groups-and-load-balancers|Elastic Load Balancer]] to distribute traffic and automatically re-route in case of failures
