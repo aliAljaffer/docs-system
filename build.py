@@ -222,6 +222,29 @@ def nav_for(root: Path, lang: str) -> list:
     return nav
 
 
+CALLOUT = re.compile(r"^> \[!(\w+)\][+-]?\s*(.*)$")
+
+
+def convert_callouts(text: str) -> str:
+    lines = text.splitlines()
+    out: list[str] = []
+    i = 0
+    while i < len(lines):
+        match = CALLOUT.match(lines[i])
+        if not match:
+            out.append(lines[i])
+            i += 1
+            continue
+        kind, title = match.group(1).lower(), match.group(2).strip()
+        out.append(f'!!! {kind} "{title}"' if title else f"!!! {kind}")
+        i += 1
+        while i < len(lines) and lines[i].startswith(">"):
+            body = lines[i][1:].lstrip()
+            out.append(f"    {body}" if body else "")
+            i += 1
+    return "\n".join(out)
+
+
 WIKI = re.compile(r"\[\[([^\]|]+)(?:\|([^\]]+))?\]\]")
 
 
@@ -289,6 +312,7 @@ def assemble(lang: str) -> Path:
     )
     for page in root.rglob("*.md"):
         text = page.read_text()
+        text = convert_callouts(text)
         text = text.replace("](../assets/", "](../../assets/")
         text = text.replace("](../../assets/diagrams/", "](../../assets/diagrams/")
         text = re.sub(

@@ -141,6 +141,11 @@ class SiteTests(unittest.TestCase):
         self.assertIn("hover.js", page)
         self.assertIn("hover.css", page)
 
+    def test_callouts(self) -> None:
+        page = (SITE / "wiki" / "index.html").read_text()
+        self.assertIn('class="admonition tip"', page)
+        self.assertNotIn("[!tip]", page)
+
     def test_slides(self) -> None:
         self.assertTrue((SITE / "slides" / "index.html").exists())
         self.assertGreaterEqual(len(list((SITE / "slides").glob("ep*.html"))), 27)
