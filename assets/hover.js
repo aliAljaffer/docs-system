@@ -52,7 +52,6 @@
     const url = new URL(link.href, location.href);
     if (url.origin !== location.origin) return;
     ensureCard();
-    link.scrollIntoView({ block: "center" });
     try {
       const { title, body } = await load(url.pathname);
       card.innerHTML = `<h3>${title}</h3><p>${body}</p><span class="preview-more">Click to open</span>`;
@@ -125,7 +124,6 @@
     setTimeout(() => {
       const link = [...document.querySelectorAll("a[href]")].find((a) => a.pathname.includes(demo));
       if (link) {
-        link.scrollIntoView({ block: "center" });
         preview(link);
       }
     }, 600);

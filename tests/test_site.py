@@ -133,6 +133,10 @@ class SiteTests(unittest.TestCase):
         self.assertIn("/wiki/rest/", en)
         self.assertIn("/ar/wiki/rest/", ar)
 
+    def test_hover_does_not_scroll(self) -> None:
+        js = (SITE / "assets" / "hover.js").read_text()
+        self.assertNotIn("scrollIntoView", js)
+
     def test_hover_and_font(self) -> None:
         self.assertTrue((SITE / "assets" / "hover.js").exists())
         self.assertTrue((SITE / "assets" / "hover.css").exists())
