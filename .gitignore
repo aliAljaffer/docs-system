@@ -9,3 +9,4 @@ __pycache__/
 .DS_Store
 mkdocs.en.yml
 mkdocs.ar.yml
+.build.lock

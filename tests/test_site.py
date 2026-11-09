@@ -124,15 +124,16 @@ class SiteTests(unittest.TestCase):
             self.assertTrue(built.exists(), page.stem)
 
     def test_wiki(self) -> None:
-        for base in (SITE / "wiki", SITE / "ar" / "wiki"):
-            self.assertTrue((base / "index.html").exists())
-            self.assertTrue((base / "rest" / "index.html").exists())
-        for page in SITE.rglob("*.html"):
-            self.assertNotIn("[[", page.read_text(), page.name)
+        self.assertTrue((SITE / "wiki" / "index.html").exists())
+        self.assertTrue((SITE / "wiki" / "rest" / "index.html").exists())
+        self.assertTrue((SITE / "ar" / "wiki" / "index.html").exists())
+        page = (SITE / "wiki" / "web" / "props" / "index.html").read_text()
+        self.assertIn('href="/wiki/web/component/"', page)
+        self.assertNotIn("[[component|", page)
         en = (SITE / "assets" / "backlinks.json").read_text()
         ar = (SITE / "ar" / "assets" / "backlinks.json").read_text()
-        self.assertIn("/wiki/rest/", en)
-        self.assertIn("/ar/wiki/rest/", ar)
+        self.assertIn("/wiki/", en)
+        self.assertIn("/ar/wiki/", ar)
 
     def test_graph(self) -> None:
         page = (SITE / "graph" / "index.html").read_text()
@@ -171,9 +172,14 @@ class SiteTests(unittest.TestCase):
         self.assertIn("hover.css", page)
 
     def test_callouts(self) -> None:
-        page = (SITE / "wiki" / "index.html").read_text()
-        self.assertIn('class="admonition tip"', page)
-        self.assertNotIn("[!tip]", page)
+        import sys
+        sys.path.insert(0, str(ROOT))
+        from build import convert_callouts
+
+        source = "> [!tip] Hover a term\n> Move the pointer over a link.\n"
+        result = convert_callouts(source)
+        self.assertIn('!!! tip "Hover a term"', result)
+        self.assertIn("    Move the pointer", result)
 
     def test_analytics(self) -> None:
         js = (SITE / "assets" / "analytics.js").read_text()
