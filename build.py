@@ -7,6 +7,7 @@ same English verified apply steps as the English page.
 """
 from __future__ import annotations
 
+import hashlib
 import json
 import os
 import re
@@ -103,12 +104,19 @@ markdown_extensions:
   - toc:
       permalink: true
 extra_css:
-  - assets/extra.css
-  - assets/hover.css
+  - assets/extra.css?v={asset_version}
+  - assets/hover.css?v={asset_version}
 extra_javascript:
-  - assets/hover.js
-  - assets/analytics.js
+  - assets/hover.js?v={asset_version}
+  - assets/analytics.js?v={asset_version}
 """
+
+
+def asset_version() -> str:
+    digest = hashlib.sha256()
+    for name in ("extra.css", "hover.css", "hover.js", "analytics.js"):
+        digest.update((ASSETS / name).read_bytes())
+    return digest.hexdigest()[:10]
 
 
 def title_of(path: Path) -> str:
@@ -444,6 +452,7 @@ def write_config(lang: str, docs_dir: Path) -> Path:
         docs_dir=docs_dir.relative_to(ROOT).as_posix(),
         site_dir=site_dir.relative_to(ROOT).as_posix(),
         language=language,
+        asset_version=asset_version(),
     )
     config += "\nnav:\n" + yaml.safe_dump(
         nav_for(docs_dir, lang), sort_keys=False, allow_unicode=True
@@ -522,7 +531,8 @@ def publish_slides() -> None:
         html = deck.read_text()
         if "/assets/analytics.js" not in html:
             html = html.replace(
-                "</body>", '<script src="/assets/analytics.js"></script></body>'
+                "</body>",
+                f'<script src="/assets/analytics.js?v={asset_version()}"></script></body>',
             )
         (dest / deck.name).write_text(html)
     for extra in source.glob("*.css"):

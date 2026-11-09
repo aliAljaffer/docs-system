@@ -133,6 +133,13 @@ class SiteTests(unittest.TestCase):
         self.assertIn("/wiki/rest/", en)
         self.assertIn("/ar/wiki/rest/", ar)
 
+    def test_assets_are_versioned(self) -> None:
+        page = (SITE / "index.html").read_text()
+        self.assertRegex(page, r"hover\.js\?v=[0-9a-f]{10}")
+        self.assertRegex(page, r"analytics\.js\?v=[0-9a-f]{10}")
+        js = (SITE / "assets" / "hover.js").read_text()
+        self.assertIn("backlinks.json?v=", js)
+
     def test_hover_does_not_scroll(self) -> None:
         js = (SITE / "assets" / "hover.js").read_text()
         self.assertNotIn("scrollIntoView", js)
