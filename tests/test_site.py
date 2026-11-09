@@ -146,6 +146,15 @@ class SiteTests(unittest.TestCase):
         self.assertIn('class="admonition tip"', page)
         self.assertNotIn("[!tip]", page)
 
+    def test_analytics(self) -> None:
+        js = (SITE / "assets" / "analytics.js").read_text()
+        self.assertIn("ea36b581-4b7d-4c81-9691-3182bfd8dfc8", js)
+        self.assertIn("umami.alialjaffer.com", js)
+        self.assertIn('data-tag", "docs"', js)
+        self.assertIn("docs:preview", js)
+        for page in (SITE / "index.html", SITE / "four-hats" / "episodes" / "ep04-add-a-feature-with-a-test" / "index.html"):
+            self.assertIn("analytics.js", page.read_text())
+
     def test_slides(self) -> None:
         self.assertTrue((SITE / "slides" / "index.html").exists())
         self.assertGreaterEqual(len(list((SITE / "slides").glob("ep*.html"))), 27)

@@ -58,6 +58,9 @@
       card.innerHTML = `<h3>${title}</h3><p>${body}</p><span class="preview-more">Click to open</span>`;
       position(link);
       card.classList.add("visible");
+      document.dispatchEvent(
+        new CustomEvent("docs:preview", { detail: { title, url: url.pathname } }),
+      );
     } catch {
       hide();
     }

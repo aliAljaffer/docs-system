@@ -100,6 +100,7 @@ extra_css:
   - assets/hover.css
 extra_javascript:
   - assets/hover.js
+  - assets/analytics.js
 """
 
 
