@@ -1,4 +1,4 @@
-{% if (page.url[:6] == 'blogs/' or page.url[:9] == 'projects/') and page.meta.comments is not sameas false %}
+{% if page.url[:9] == 'projects/' and page.meta.comments is not sameas false %}
 <h2 id="__comments">Comments</h2>
 <script src="https://giscus.app/client.js"
   data-repo="aliAljaffer/aliAljaffer.github.io" data-repo-id="R_kgDOIZBWHA"

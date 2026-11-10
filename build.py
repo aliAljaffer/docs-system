@@ -1,9 +1,8 @@
 #!/usr/bin/env python3
-"""Build the bilingual site with Zensical.
+"""Build the docs site with Zensical.
 
-English is built to /, Arabic to /ar/. Each language gets its own nav, search
-index, UI strings, and direction. The Arabic pages carry Arabic theory and the
-same English verified apply steps as the English page.
+Project and course docs are fetched from the repos in sources.yaml. Home,
+Contact, and Definitions live in content/en.
 """
 from __future__ import annotations
 
@@ -11,90 +10,45 @@ import fcntl
 import hashlib
 import json
 import os
+import posixpath
 import re
 import shutil
 import subprocess
-from datetime import datetime, timezone
-from email.utils import format_datetime
-from html import escape, unescape
-from html.parser import HTMLParser
 from pathlib import Path
-from urllib.parse import urlparse
 
 import yaml
 
+import fetch
+
 ROOT = Path(__file__).resolve().parent
-CONTENT = ROOT / "content"
+CONTENT = ROOT / "content" / "en"
 ASSETS = ROOT / "assets"
-BUILD = ROOT / "build"
-SOURCES = ROOT / "sources"
-ACT_ROOT = SOURCES
+BUILD = ROOT / "build" / "en"
 SITE = ROOT / "site"
 TASKS = yaml.safe_load((ROOT / "episode-tasks.yaml").read_text())["episodes"]
-CATALOG = yaml.safe_load((ROOT / "catalog.yaml").read_text())
 ZENSICAL = os.environ.get("ZENSICAL") or shutil.which("zensical") or "zensical"
 
 SITE_URL = "https://docs.alialjaffer.com"
+TAGLINE = "Documentation for the projects I build and the courses I teach."
 
 ACTS = [
-    (0, 1, "Introduction", "المقدمة"),
-    (2, 6, "Act 1: Software Engineer", "المسار 1: مهندس البرمجيات"),
-    (7, 10, "Act 2: Cloud Engineer", "المسار 2: مهندس السحابة"),
-    (11, 19, "Act 3: DevOps Engineer", "المسار 3: مهندس DevOps"),
-    (20, 25, "Act 4: Cybersecurity Engineer", "المسار 4: مهندس الأمن السيبراني"),
-    (26, 26, "Wrap up", "الختام"),
+    (0, 1, "Introduction"),
+    (2, 6, "Act 1: Software Engineer"),
+    (7, 10, "Act 2: Cloud Engineer"),
+    (11, 19, "Act 3: DevOps Engineer"),
+    (20, 25, "Act 4: Cybersecurity Engineer"),
+    (26, 26, "Wrap up"),
 ]
 
-LABELS = {
-    "en": {
-        "home": "Home",
-        "four": "Four Hats",
-        "overview": "Overview",
-        "episodes": "Episodes",
-        "setup": "Setup",
-        "cleanup": "Cleanup",
-        "costs": "Costs and free options",
-        "projects": "Projects",
-        "courses": "Courses",
-        "blogs": "Blogs",
-        "notes": "Notes",
-        "graph": "Graph",
-        "definitions": "Definitions",
-        "contact": "Contact",
-        "site": "Docs",
-        "switch": "العربية",
-        "apply_note": "Copied from `{file}`. Edit the act guide, not this page.",
-    },
-    "ar": {
-        "home": "الرئيسية",
-        "four": "أربع قبعات",
-        "overview": "نظرة عامة",
-        "episodes": "الحلقات",
-        "setup": "الإعداد",
-        "cleanup": "التنظيف",
-        "costs": "التكلفة والخيارات المجانية",
-        "projects": "المشاريع",
-        "courses": "الدورات",
-        "blogs": "المدونات",
-        "notes": "الملاحظات",
-        "graph": "الخريطة",
-        "definitions": "التعريفات",
-        "contact": "اتصل",
-        "site": "الوثائق",
-        "switch": "English",
-        "apply_note": "الخطوات التالية منقولة من `{file}`. عدّل دليل المسار، لا هذه الصفحة.",
-    },
-}
-
 BASE_THEME = """\
-site_name: {site_name}
-site_url: {site_url}
+site_name: Docs
+site_url: {site_url}/
 docs_dir: {docs_dir}
-site_dir: {site_dir}
+site_dir: site
 theme:
   name: material
   custom_dir: overrides
-  language: {language}
+  language: en
   palette:
     - scheme: default
       media: "(prefers-color-scheme: light)"
@@ -116,31 +70,27 @@ markdown_extensions:
   - toc:
       permalink: true
 extra_css:
-  - assets/extra.css?v={asset_version}
-  - assets/hover.css?v={asset_version}
-  - assets/graph.css?v={asset_version}
-  - assets/diagram-zoom.css?v={asset_version}
+  - assets/hover.css?v={v}
+  - assets/diagram-zoom.css?v={v}
 extra_javascript:
   - assets/vendor/panzoom.min.js
-  - assets/mathjax.js?v={asset_version}
+  - assets/mathjax.js?v={v}
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
-  - assets/diagram-zoom.js?v={asset_version}
-  - assets/graph.js?v={asset_version}
-  - assets/hover.js?v={asset_version}
-  - assets/analytics.js?v={asset_version}
+  - assets/diagram-zoom.js?v={v}
+  - assets/hover.js?v={v}
+  - assets/analytics.js?v={v}
 """
 
 
 def asset_version() -> str:
     digest = hashlib.sha256()
-    for name in ("extra.css", "hover.css", "graph.css", "diagram-zoom.css", "hover.js", "graph.js", "diagram-zoom.js", "analytics.js", "mathjax.js"):
+    for name in ("hover.css", "diagram-zoom.css", "hover.js", "diagram-zoom.js", "analytics.js", "mathjax.js"):
         digest.update((ASSETS / name).read_bytes())
     return digest.hexdigest()[:10]
 
 
 def title_of(path: Path) -> str:
-    text = path.read_text()
-    match = re.search(r"^# (.+)$", text, flags=re.M)
+    match = re.search(r"^# (.+)$", path.read_text(), flags=re.M)
     return match.group(1).strip() if match else path.stem
 
 
@@ -149,24 +99,24 @@ def meta_of(path: Path) -> dict:
     if not text.startswith("---\n"):
         return {}
     end = text.find("\n---\n", 4)
-    if end == -1:
-        return {}
-    return yaml.safe_load(text[4:end]) or {}
+    return yaml.safe_load(text[4:end]) or {} if end != -1 else {}
 
 
-WIKI_ORDER = [
-    "GCP", "AWS", "Cloud", "Networking", "Security", "AI", "React", "Web",
-    "Other",
-]
-NOTES_ORDER = [
-    "GCP", "GCP Networking", "GCP Security", "GCP Compute", "GCP Databases",
-    "GCP Storage", "GCP DevOps", "GCP Data analytics", "GCP Operations",
-    "GCP Management", "GCP AI", "GCP Services", "Cloud", "Security", "AI",
-    "Networking", "DevOps", "Terraform", "Certifications", "Projects",
-    "React", "Web", "Career", "Site", "Other",
-]
+def summary_of(path: Path) -> str:
+    text = path.read_text()
+    if text.startswith("---\n") and "\n---\n" in text[4:]:
+        text = text[text.find("\n---\n", 4) + 5:]
+    for block in re.split(r"\n\s*\n", text):
+        block = block.strip()
+        if not block or block[0] in "#|-*>!<`[:" or block.startswith(("```", "**")):
+            continue
+        plain = re.sub(r"\[([^\]]*)\]\([^)]*\)", r"\1", block)
+        plain = re.sub(r"[*_`]", "", " ".join(plain.split()))
+        return plain if len(plain) <= 200 else plain[:197].rsplit(" ", 1)[0] + "..."
+    return ""
 
 
+WIKI_ORDER = ["GCP", "AWS", "Cloud", "Networking", "Security", "AI", "React", "Web", "Other"]
 CATEGORY_NAMES = {"gcp": "GCP", "ai": "AI"}
 
 
@@ -174,429 +124,98 @@ def category_of(path: Path, folder: Path) -> str:
     meta = meta_of(path)
     if meta.get("category"):
         return meta["category"]
-    name = path.parent.name
     if path.parent == folder:
         return "Other"
-    return CATEGORY_NAMES.get(name, name.replace("-", " ").title())
+    return CATEGORY_NAMES.get(path.parent.name, path.parent.name.replace("-", " ").title())
 
 
 def group_pages(folder: Path) -> dict[str, list[Path]]:
     groups: dict[str, list[Path]] = {}
     for path in folder.rglob("*.md"):
-        if path.name == "index.md":
-            continue
-        category = category_of(path, folder)
-        groups.setdefault(category, []).append(path)
+        if path.name != "index.md":
+            groups.setdefault(category_of(path, folder), []).append(path)
     for pages in groups.values():
         pages.sort(key=title_of)
     return groups
 
 
-def ordered_groups(
-    groups: dict[str, list[Path]], preferred: list[str]
-) -> list[tuple[str, list[Path]]]:
-    names = [name for name in preferred if name in groups]
-    names += sorted(name for name in groups if name not in preferred)
+def ordered_groups(groups: dict[str, list[Path]]) -> list[tuple[str, list[Path]]]:
+    names = [n for n in WIKI_ORDER if n in groups] + sorted(n for n in groups if n not in WIKI_ORDER)
     return [(name, groups[name]) for name in names]
 
 
-def section_index(
-    root: Path, folder: str, title: str, intro: str, order: list[str]
-) -> None:
-    base = root / folder
-    if not base.exists():
-        return
+def definitions_index(root: Path) -> None:
+    base = root / "definitions"
     groups = group_pages(base)
-    if not groups:
-        return
-    lines = [f"# {title}", "", intro, ""]
-    for category, pages in ordered_groups(groups, order):
+    lines = [
+        "# Definitions",
+        "",
+        "Definitions and informational terms. Link to a definition once, and every page that mentions it appears under **Linked from**.",
+        "",
+    ]
+    for category, pages in ordered_groups(groups):
         lines += [f"## {category}", ""]
         for page in pages:
-            link = page.relative_to(base).as_posix()
             description = meta_of(page).get("description", "")
-            entry = f"- [{title_of(page)}]({link})"
-            lines += [entry + (f": {description}" if description else "")]
+            lines.append(
+                f"- [{title_of(page)}]({page.relative_to(base).as_posix()})"
+                + (f": {description}" if description else "")
+            )
         lines.append("")
-    if folder == "definitions":
-        lines += [
-            "## How mentions work",
-            "",
-            "Write a double-bracket link such as &#91;&#91;rest&#93;&#93; in any page. The build resolves it to the definition and records the backlink.",
-            "",
-            '!!! tip "Hover a term"',
-            "    Move the pointer over a link to preview the definition without leaving the page.",
-            "",
-        ]
+    lines += [
+        "## How mentions work",
+        "",
+        "Write a double-bracket link such as &#91;&#91;rest&#93;&#93; in any page. The build resolves it to the definition and records the backlink.",
+        "",
+        '!!! tip "Hover a term"',
+        "    Move the pointer over a link to preview the definition without leaving the page.",
+        "",
+    ]
     (base / "index.md").write_text("\n".join(lines))
 
 
-def blogs_index(root: Path, lang: str) -> None:
-    if lang != "en":
-        return
-    folder = root / "blogs"
-    if not folder.exists():
-        return
-    pages = [p for p in folder.glob("*.md") if p.name != "index.md"]
-    if not pages:
-        return
-    pages.sort(key=lambda p: str(meta_of(p).get("date", "")), reverse=True)
-    lines = [
-        "# Blogs",
-        "",
-        "Writing from the portfolio: field notes, project stories, and lessons learned.",
-        "",
-        "| Date | Post |",
-        "|---|---|",
-    ]
-    for page in pages:
-        date = str(meta_of(page).get("date", ""))
-        lines.append(f"| {date} | [{title_of(page)}]({page.name}) |")
-    lines += [
-        "",
-        "Browse by topic on the [tags page](../tags/). The wiki holds the definitions these posts use. The notes hold the study material.",
-        "",
-    ]
-    (folder / "index.md").write_text("\n".join(lines))
+WIKI = re.compile(r"\[\[([^\]|]+)(?:\|([^\]]+))?\]\]")
 
 
+def process_wiki(root: Path) -> None:
+    files = sorted(root.rglob("*.md"))
+    index: dict[str, Path] = {}
+    stems: dict[str, list[Path]] = {}
+    for path in files:
+        rel = path.relative_to(root).with_suffix("").as_posix()
+        index[rel] = path
+        if rel.startswith("definitions/"):
+            index[rel.removeprefix("definitions/")] = path
+        if path.stem != "index":
+            stems.setdefault(path.stem, []).append(path)
+    for stem, paths in stems.items():
+        if len(paths) == 1:
+            index[stem] = paths[0]
 
-def apply_content(ep: str) -> tuple[str, str]:
-    spec = TASKS.get(ep, {})
-    if spec.get("apply") == "none" or not spec.get("file"):
-        return "", ""
-    path = ACT_ROOT / spec["file"]
-    text = path.read_text()
-    if "section" in spec:
-        heading = spec["section"]
-        match = re.search(
-            rf"^## {re.escape(heading)}\s*$(.*?)(?=^## |\Z)", text, flags=re.M | re.S
-        )
-        if not match:
-            raise SystemExit(f"{path.name}: section not found: {heading}")
-        return match.group(1).strip(), spec["file"]
-    blocks = []
-    for number in spec.get("tasks", []):
-        match = re.search(
-            rf"^#### Task {number}: .+?(?=^#### Task |^### |^## |\Z)",
-            text,
-            flags=re.M | re.S,
-        )
-        if not match:
-            raise SystemExit(f"{path.name}: Task {number} not found")
-        blocks.append(match.group(0).strip())
-    return "\n\n".join(blocks), spec["file"]
+    titles = {path: title_of(path) for path in files}
+    backlinks: dict[str, list[dict[str, str]]] = {}
+    for path in files:
 
+        def replace(match: re.Match[str]) -> str:
+            target = match.group(1).strip()
+            label = (match.group(2) or target).strip()
+            if target not in index:
+                raise SystemExit(f"{path.name}: missing wikilink target: {target}")
+            url = f"/{index[target].relative_to(root).with_suffix('').as_posix()}/"
+            source = f"/{path.relative_to(root).with_suffix('').as_posix()}/"
+            entry = {"title": titles[path], "url": source}
+            bucket = backlinks.setdefault(url, [])
+            if entry not in bucket:
+                bucket.append(entry)
+            return f"[{label}]({url})"
 
-def inject_apply(page: Path, lang: str) -> None:
-    marker = "<!-- APPLY -->"
-    text = page.read_text()
-    if marker not in text:
-        return
-    ep = page.name[:4]
-    body, source = apply_content(ep)
-    if not body:
-        page.write_text(text.replace(marker, "").rstrip() + "\n")
-        return
-    note = LABELS[lang]["apply_note"].format(file=source)
-    block = f"### {LABELS[lang]['apply_note'].split('`')[0].strip() or 'Apply'}\n\n{note}\n\n{body}\n"
-    if lang == "en":
-        block = f"### Verified steps\n\n{note}\n\n{body}\n"
-    else:
-        heading = "الخطوات الموثقة"
-        block = f"### {heading}\n\n{note}\n\n{body}\n"
-    page.write_text(text.replace(marker, block))
+        path.write_text(WIKI.sub(replace, path.read_text()))
 
-
-def episode_index(root: Path, lang: str) -> Path | None:
-    eps = sorted((root / "four-hats" / "episodes").glob("ep*.md"))
-    if not eps:
-        return None
-    lines = [f"# {LABELS[lang]['episodes']}", ""]
-    by_number = {int(p.name[2:4]): p for p in eps}
-    for start, end, label_en, label_ar in ACTS:
-        group = [by_number[n] for n in range(start, end + 1) if n in by_number]
-        if not group:
-            continue
-        lines += [f"## {label_en if lang == 'en' else label_ar}", "", "| Episode |", "|---|"]
-        for path in group:
-            title = title_of(path)
-            lines.append(f"| [{title}](episodes/{path.name}) |")
-        lines.append("")
-    dest = root / "four-hats" / "episodes.md"
-    dest.write_text("\n".join(lines))
-    return dest
-
-
-def split_meta(text: str) -> tuple[dict, str]:
-    if not text.startswith("---\n"):
-        return {}, text
-    end = text.find("\n---\n", 4)
-    if end == -1:
-        return {}, text
-    return yaml.safe_load(text[4:end]) or {}, text[end + 5:]
-
-
-def add_header(page: Path, root: Path) -> None:
-    rel = page.relative_to(root).as_posix()
-    section = rel.split("/")[0]
-    if section not in ("blogs", "projects") or page.name == "index.md" and rel.count("/") == 1:
-        return
-    meta, body = split_meta(page.read_text())
-    if not meta.get("title"):
-        return
-    match = re.match(r"\s*# .+\n", body)
-    h1 = match.group(0) if match else f"# {meta['title']}\n"
-    rest = body[match.end():] if match else body
-    if re.match(r"\s*\*\*(Status|Published):\*\*", rest):
-        return
-    if section == "blogs":
-        lines = [f"**Published:** {meta.get('date', '')}", ""]
-    else:
-        lines = [f"**Status:** {meta.get('status', 'Active')}", ""]
-    if meta.get("description"):
-        lines += [str(meta["description"]).strip(), ""]
-    if meta.get("tags"):
-        lines += [" ".join(f"`{tag}`" for tag in meta["tags"]), ""]
-    links = []
-    if meta.get("repo"):
-        links.append(f"- [Repository]({meta['repo']})")
-    if meta.get("url"):
-        links.append(f"- [Live]({meta['url']})")
-    if links:
-        lines += ["## Links", "", *links, ""]
-    fm = page.read_text()[: len(page.read_text()) - len(body)]
-    page.write_text(fm + h1 + "\n" + "\n".join(lines) + "\n" + rest.lstrip("\n"))
-
-
-def drop_drafts(root: Path) -> None:
-    for page in list(root.rglob("*.md")):
-        if meta_of(page).get("draft") is True:
-            page.unlink()
-
-
-def project_entries(root: Path) -> list[dict]:
-    entries = []
-    paths = list((root / "projects").glob("*.md")) + list((root / "projects").glob("*/index.md"))
-    for path in paths:
-        meta = meta_of(path)
-        if not meta.get("title") or path.name == "index.md" and path.parent.name == "projects":
-            continue
-        entries.append(
-            {
-                "slug": path.parent.name if path.name == "index.md" else path.stem,
-                "title": meta["title"],
-                "status": meta.get("status", "Active"),
-                "summary": meta.get("description", ""),
-                "tags": meta.get("tags", []),
-                "page": path.relative_to(root).as_posix(),
-                "date": str(meta.get("date", "")),
-            }
-        )
-    entries.sort(key=lambda item: item["date"], reverse=True)
-    return entries
-
-
-def inject_projects(root: Path) -> None:
-    page = root / "index.md"
-    marker = "<!-- PROJECTS -->"
-    if not page.exists() or marker not in page.read_text():
-        return
-    lines = []
-    for item in project_entries(root):
-        summary = item.get("summary", "")
-        lines.append(f"- [{item['title']}]({item['page']})" + (f": {summary}" if summary else ""))
-    page.write_text(page.read_text().replace(marker, "\n".join(lines)))
-
-
-def projects_index(root: Path, lang: str) -> None:
-    if lang != "en":
-        return
-    projects = project_entries(root)
-    if not projects:
-        return
-    lines = [
-        "# Projects",
-        "",
-        CATALOG.get("site", {}).get("tagline", ""),
-        "",
-    ]
-    for item in projects:
-        page = Path(item["page"])
-        target = f"{page.parent.name}/" if page.name == "index.md" else page.name
-        lines += [
-            f"## {item['title']}",
-            "",
-            f"**Status:** {item.get('status', 'Active')}",
-            "",
-            item.get("summary", ""),
-            "",
-            " ".join(f"`{tag}`" for tag in item.get("tags", [])),
-            "",
-            f"[Read the docs]({target})",
-            "",
-        ]
-    dest = root / "projects"
-    dest.mkdir(parents=True, exist_ok=True)
-    (dest / "index.md").write_text("\n".join(lines))
-
-
-def courses_index(root: Path, lang: str) -> None:
-    if lang != "en":
-        return
-    courses = CATALOG.get("courses", [])
-    if not courses:
-        return
-    lines = [
-        "# Courses",
-        "",
-        "Long-form courses built around one project or one skill path.",
-        "",
-    ]
-    for course in courses:
-        lines += [
-            f"## {course['title']}",
-            "",
-            f"**Status:** {course.get('status', 'Planned')}",
-            "",
-            course.get("summary", ""),
-            "",
-            " ".join(f"`{tag}`" for tag in course.get("tags", [])),
-            "",
-        ]
-        page = course.get("page", "")
-        if page:
-            lines += [f"[Start the course](../{page})", ""]
-    dest = root / "courses"
-    dest.mkdir(parents=True, exist_ok=True)
-    (dest / "index.md").write_text("\n".join(lines))
-
-
-SUBDIR_LABELS = {"adr": "Decisions", "reference": "API reference"}
-
-
-def project_nav(root: Path, item: dict) -> dict | None:
-    page = root / item["page"]
-    if not page.exists():
-        return None
-    if page.name != "index.md":
-        return {item["title"]: item["page"]}
-    parent = page.parent
-    children: list = [{"Overview": item["page"]}]
-    for path in sorted(parent.glob("*.md")):
-        if path.name == "index.md":
-            continue
-        children.append({title_of(path): path.relative_to(root).as_posix()})
-    for folder in sorted(p for p in parent.iterdir() if p.is_dir()):
-        pages = sorted(folder.glob("*.md"))
-        if not pages:
-            continue
-        children.append(
-            {
-                SUBDIR_LABELS.get(folder.name, folder.name.title()): [
-                    {title_of(path): path.relative_to(root).as_posix()}
-                    for path in pages
-                ]
-            }
-        )
-    return {item["title"]: children}
-
-
-def section_nav(root: Path, folder: str, order: list[str]) -> list:
-    base = root / folder
-    pages = [p for p in base.rglob("*.md") if p.name != "index.md"]
-    if not pages:
-        return []
-    if not any(category_of(page, base) != "Other" for page in pages):
-        return [
-            {title_of(page): page.relative_to(root).as_posix()}
-            for page in sorted(pages, key=title_of)
-        ]
-    groups = group_pages(base)
-    return [
-        {
-            category: [
-                {title_of(page): page.relative_to(root).as_posix()}
-                for page in group
-            ]
-        }
-        for category, group in ordered_groups(groups, order)
-    ]
-
-
-def nav_for(root: Path, lang: str) -> list:
-    labels = LABELS[lang]
-    nav: list = [{"Home": "index.md"}]
-
-    if (root / "projects" / "index.md").exists():
-        children = [{"Overview": "projects/index.md"}]
-        for item in project_entries(root):
-            entry = project_nav(root, item)
-            if entry:
-                children.append(entry)
-        nav.append({labels["projects"]: children})
-
-    four = root / "four-hats"
-    if (four / "index.md").exists():
-        children = []
-        if (root / "courses" / "index.md").exists():
-            children.append({"Overview": "courses/index.md"})
-        children.append({"Four Hats": []})
-        four_children = [{"Overview": "four-hats/index.md"}]
-        if (four / "setup.md").exists():
-            four_children.append({labels["setup"]: "four-hats/setup.md"})
-        if (four / "episodes.md").exists():
-            four_children.append({labels["episodes"]: "four-hats/episodes.md"})
-        by_number = {
-            int(p.name[2:4]): p
-            for p in (four / "episodes").glob("ep*.md")
-        }
-        for start, end, label_en, label_ar in ACTS:
-            group = [by_number[n] for n in range(start, end + 1) if n in by_number]
-            if not group:
-                continue
-            act: list = []
-            for path in group:
-                act.append({title_of(path): path.relative_to(root).as_posix()})
-            four_children.append({label_en if lang == "en" else label_ar: act})
-        for key, name in [
-            ("cleanup", "four-hats/cleanup-guide.md"),
-            ("costs", "four-hats/costs-and-free-options.md"),
-        ]:
-            if (root / name).exists():
-                four_children.append({labels[key]: name})
-        children[-1] = {"Four Hats": four_children}
-        for course in CATALOG.get("courses", []):
-            page = course.get("page", "")
-            if page and course["slug"] != "four-hats" and (root / page).exists():
-                children.append({course["title"]: page})
-        nav.append({labels["courses"]: children})
-
-    if (root / "blogs" / "index.md").exists():
-        posts = [p for p in (root / "blogs").glob("*.md") if p.name != "index.md"]
-        posts.sort(key=lambda p: str(meta_of(p).get("date", "")), reverse=True)
-        children = [{"Overview": "blogs/index.md"}]
-        for page in posts:
-            children.append({title_of(page): page.relative_to(root).as_posix()})
-        nav.append({labels["blogs"]: children})
-
-    if (root / "notes" / "index.md").exists():
-        children = [{"Overview": "notes/index.md"}]
-        children += section_nav(root, "notes", NOTES_ORDER)
-        nav.append({labels["notes"]: children})
-
-    if (root / "graph.md").exists():
-        nav.append({labels["graph"]: "graph.md"})
-
-    if (root / "definitions" / "index.md").exists():
-        children = [{"Overview": "definitions/index.md"}]
-        children += section_nav(root, "definitions", WIKI_ORDER)
-        nav.append({labels["definitions"]: children})
-
-    if (root / "contact.md").exists():
-        nav.append({labels["contact"]: "contact.md"})
-
-    return nav
+    for bucket in backlinks.values():
+        bucket.sort(key=lambda item: item["title"])
+    (root / "assets" / "backlinks.json").write_text(
+        json.dumps(backlinks, indent=2, ensure_ascii=False) + "\n"
+    )
 
 
 CALLOUT = re.compile(r"^> \[!(\w+)\][+-]?\s*(.*)$")
@@ -622,447 +241,269 @@ def convert_callouts(text: str) -> str:
     return "\n".join(out)
 
 
-WIKI = re.compile(r"\[\[([^\]|]+)(?:\|([^\]]+))?\]\]")
+LINK = re.compile(r"(!?)\[([^\]]*)\]\(([^)\s]+)((?:\s+\"[^\"]*\")?)\)")
 
 
-def page_url(rel: str, lang: str) -> str:
-    prefix = "/ar" if lang == "ar" else ""
-    return f"{prefix}/{rel}/" if rel else f"{prefix}/"
+def rewrite_links(page: Path, base: Path, entry: dict) -> None:
+    """Keep links that resolve inside the fetched docs. Point the rest at GitHub."""
+    page_dir = page.parent.relative_to(base).as_posix()
+    repo, branch = entry["repo"], entry["branch"]
+
+    def fix(match: re.Match[str]) -> str:
+        bang, label, target, title = match.groups()
+        if re.match(r"([a-z][a-z0-9+.-]*:|#|/)", target, flags=re.I):
+            return match.group(0)
+        path, _, anchor = target.partition("#")
+        rel = posixpath.normpath(posixpath.join(page_dir, path))
+        if not rel.startswith("..") and (base / rel).exists():
+            if posixpath.basename(path) == "README.md" and (base / rel).with_name("index.md").exists():
+                target = path[: -len("README.md")] + "index.md" + (f"#{anchor}" if anchor else "")
+            return f"{bang}[{label}]({target}{title})"
+        repo_rel = posixpath.normpath(posixpath.join(entry["path"], rel))
+        if bang:
+            url = f"https://raw.githubusercontent.com/{repo}/{branch}/{repo_rel}"
+        else:
+            kind = "tree" if path.endswith("/") or not posixpath.splitext(path)[1] else "blob"
+            url = f"https://github.com/{repo}/{kind}/{branch}/{repo_rel}" + (f"#{anchor}" if anchor else "")
+        return f"{bang}[{label}]({url}{title})"
+
+    out: list[str] = []
+    fenced = False
+    for line in page.read_text().splitlines():
+        if line.lstrip().startswith("```"):
+            fenced = not fenced
+        out.append(line if fenced else LINK.sub(fix, line))
+    page.write_text("\n".join(out) + "\n")
 
 
-def process_wiki(root: Path, lang: str) -> None:
-    files = sorted(root.rglob("*.md"))
-    index: dict[str, Path] = {}
-    stems: dict[str, list[Path]] = {}
-    for path in files:
-        rel = path.relative_to(root).with_suffix("").as_posix()
-        index[rel] = path
-        if rel.startswith("definitions/"):
-            index[rel.removeprefix("definitions/")] = path
-        if path.stem != "index":
-            stems.setdefault(path.stem, []).append(path)
-    for stem, paths in stems.items():
-        if len(paths) == 1:
-            index[stem] = paths[0]
-
-    titles = {}
-    for path in files:
-        match = re.search(r"^# (.+)$", path.read_text(), flags=re.M)
-        titles[path] = match.group(1).strip() if match else path.stem
-
-    backlinks: dict[str, list[dict[str, str]]] = {}
-    for path in files:
-        text = path.read_text()
-
-        def replace(match: re.Match[str]) -> str:
-            target = match.group(1).strip()
-            label = (match.group(2) or target).strip()
-            if target not in index:
-                raise SystemExit(f"{path.name}: missing wikilink target: {target}")
-            dest = index[target]
-            url = page_url(dest.relative_to(root).with_suffix("").as_posix(), lang)
-            source = page_url(path.relative_to(root).with_suffix("").as_posix(), lang)
-            entry = {"title": titles[path], "url": source}
-            bucket = backlinks.setdefault(url, [])
-            if entry not in bucket:
-                bucket.append(entry)
-            return f"[{label}]({url})"
-
-        path.write_text(WIKI.sub(replace, text))
-
-    for bucket in backlinks.values():
-        bucket.sort(key=lambda item: item["title"])
-    out = root / "assets" / "backlinks.json"
-    out.write_text(json.dumps(backlinks, indent=2, ensure_ascii=False) + "\n")
+def normalize(base: Path, entry: dict, kind: str) -> None:
+    if kind == "projects":
+        readme = next((p for p in base.glob("*") if p.name.lower() == "readme.md"), None)
+        if readme and not (base / "index.md").exists():
+            readme.rename(base / "index.md")
+        if not (base / "index.md").exists():
+            title = entry.get("title", entry["slug"].replace("-", " ").title())
+            (base / "index.md").write_text(f"# {title}\n\n{entry.get('description', '')}\n")
+        index = base / "index.md"
+        text = index.read_text()
+        match = re.match(r"(\s*# .+\n)", text)
+        link = f"\n[Repository](https://github.com/{entry['repo']}) on `{entry['branch']}`\n"
+        index.write_text(match.group(1) + link + text[match.end():] if match else link + text)
 
 
-def assemble(lang: str) -> Path:
-    root = BUILD / lang
-    if root.exists():
-        shutil.rmtree(root)
-    shutil.copytree(CONTENT / lang, root)
-    shutil.copytree(
-        ASSETS,
-        root / "assets",
-        dirs_exist_ok=True,
-        ignore=shutil.ignore_patterns("slides"),
-    )
-    drop_drafts(root)
-    for page in root.rglob("*.md"):
-        add_header(page, root)
-        text = page.read_text()
-        text = convert_callouts(text)
-        text = text.replace("](../assets/", "](../../assets/")
-        text = text.replace("](../../assets/diagrams/", "](../../assets/diagrams/")
-        text = re.sub(
-            r"\]\(\.\./(?:act[1-4]-[a-z-]+\.md)(#[^)]*)?\)",
-            lambda m: "](https://github.com/aliAljaffer/four-hats/blob/main/docs/"
-            + m.group(0).split("../", 1)[1],
+def apply_content(acts: Path, ep: str) -> tuple[str, str]:
+    spec = TASKS.get(ep, {})
+    if spec.get("apply") == "none" or not spec.get("file"):
+        return "", ""
+    path = acts / spec["file"]
+    text = path.read_text()
+    if "section" in spec:
+        heading = spec["section"]
+        match = re.search(
+            rf"^## {re.escape(heading)}\s*$(.*?)(?=^## |\Z)", text, flags=re.M | re.S
+        )
+        if not match:
+            raise SystemExit(f"{path.name}: section not found: {heading}")
+        return match.group(1).strip(), spec["file"]
+    blocks = []
+    for number in spec.get("tasks", []):
+        match = re.search(
+            rf"^#### Task {number}: .+?(?=^#### Task |^### |^## |\Z)",
             text,
+            flags=re.M | re.S,
         )
-        text = text.replace("](../00-setup.md", "](../setup.md")
-        page.write_text(text)
-        inject_apply(page, lang)
-        text = page.read_text()
-        text = re.sub(
-            r"\]\((?:\.\./)*(?:four-hats/)?(costs-and-free-options|cleanup-guide)\.md\)",
-            r"](/four-hats/\1/)",
-            text,
-        )
-        text = text.replace(
-            "](../cv/skills-ledger.md)",
-            "](https://github.com/aliAljaffer/four-hats/blob/main/cv/skills-ledger.md)",
-        )
-        page.write_text(text)
-    episode_index(root, lang)
-    inject_projects(root)
-    projects_index(root, lang)
-    courses_index(root, lang)
-    blogs_index(root, lang)
-    tags_index(root, lang)
-    section_index(
-        root,
-        "notes",
-        "Notes",
-        "Study notes, course summaries, and working reference material.",
-        NOTES_ORDER,
-    )
-    section_index(
-        root,
-        "definitions",
-        "Definitions",
-        "Definitions and informational terms. Link to a definition once, and every page that mentions it appears under **Linked from**.",
-        WIKI_ORDER,
-    )
-    process_wiki(root, lang)
-    return root
+        if not match:
+            raise SystemExit(f"{path.name}: Task {number} not found")
+        blocks.append(match.group(0).strip())
+    return "\n\n".join(blocks), spec["file"]
 
 
-def write_config(lang: str, docs_dir: Path) -> Path:
-    labels = LABELS[lang]
-    if lang == "en":
-        site_dir, site_url, language = SITE, f"{SITE_URL}/", "en"
-    else:
-        site_dir, site_url, language = SITE / "ar", f"{SITE_URL}/ar/", "ar"
-    config = BASE_THEME.format(
-        site_name=labels["site"],
-        site_url=site_url,
-        docs_dir=docs_dir.relative_to(ROOT).as_posix(),
-        site_dir=site_dir.relative_to(ROOT).as_posix(),
-        language=language,
-        asset_version=asset_version(),
-    )
-    config += "\nnav:\n" + yaml.safe_dump(
-        nav_for(docs_dir, lang), sort_keys=False, allow_unicode=True
-    )
-    path = ROOT / f"mkdocs.{lang}.yml"
-    path.write_text(config)
-    return path
-
-
-def build(lang: str, docs_dir: Path) -> None:
-    config = write_config(lang, docs_dir)
-    result = subprocess.run(
-        [ZENSICAL, "build", "-f", str(config)],
-        capture_output=True,
-        text=True,
-    )
-    if result.returncode != 0:
-        raise SystemExit(result.stdout + result.stderr)
-    print(result.stdout.strip().splitlines()[-1])
-
-
-def rel_path(html: Path, base: Path) -> str:
-    rel = html.relative_to(base)
-    if rel.name == "index.html":
-        return rel.parent.as_posix().removeprefix(".")
-    return rel.with_suffix("").as_posix()
-
-
-def pair_exists(lang: str, rel: str) -> bool:
-    other = "ar" if lang == "en" else "en"
-    return (CONTENT / other / (rel or ".") / "index.md").exists() or (
-        CONTENT / other / f"{rel}.md"
-    ).exists()
-
-
-def localised_url(rel: str, lang: str) -> str:
-    prefix = "" if lang == "en" else "/ar"
-    suffix = f"/{rel}/" if rel else "/"
-    return f"{SITE_URL}{prefix}{suffix}"
-
-
-def postprocess(base: Path, lang: str) -> None:
-    labels = LABELS[lang]
-    for html in base.rglob("*.html"):
-        if lang == "en" and (SITE / "ar") in html.parents:
-            continue
-        rel = rel_path(html, base)
-        text = html.read_text()
-        if pair_exists(lang, rel):
-            other = "ar" if lang == "en" else "en"
-            links = (
-                f'<link rel="alternate" hreflang="en" href="{localised_url(rel, "en")}">'
-                f'<link rel="alternate" hreflang="ar" href="{localised_url(rel, "ar")}">'
-                f'<link rel="alternate" hreflang="x-default" href="{localised_url(rel, "en")}">'
-            )
-            text = text.replace("</head>", links + "</head>", 1)
-            target = f"/ar/{rel}/" if lang == "en" and rel else (
-                "/ar/" if lang == "en" else (f"/{rel}/" if rel else "/")
-            )
-            switch = (
-                f'<a class="lang-switch" href="{target}" '
-                f'hreflang="{other}" lang="{other}">{labels["switch"]}</a>'
-            )
-            text = text.replace('<div class="md-search"', switch + '<div class="md-search"', 1)
-        html.write_text(text)
-
-
-def publish_slides() -> None:
-    source = ASSETS / "slides"
-    decks = sorted(source.glob("ep*.html"))
-    if not decks:
-        return
-    dest = SITE / "slides"
-    dest.mkdir(parents=True, exist_ok=True)
-    for deck in decks:
+def embed_slides(base: Path) -> None:
+    script = f'<script src="/assets/analytics.js?v={asset_version()}"></script></body>'
+    for deck in (base / "slides").glob("ep*.html"):
         html = deck.read_text()
         if "/assets/analytics.js" not in html:
-            html = html.replace(
-                "</body>",
-                f'<script src="/assets/analytics.js?v={asset_version()}"></script></body>',
-            )
-        (dest / deck.name).write_text(html)
-    for extra in source.glob("*.css"):
-        shutil.copy2(extra, dest / extra.name)
-    fonts = source / "fonts"
-    if fonts.exists():
-        shutil.copytree(fonts, dest / "fonts", dirs_exist_ok=True)
-    rows = "\n".join(
-        f'<li><a href="{deck.name}">{deck.stem.replace("-", " ")}</a></li>'
-        for deck in decks
-    )
-    (dest / "index.html").write_text(
-        "<!doctype html><html lang=\"en\"><head><meta charset=\"utf-8\">"
-        "<meta name=\"robots\" content=\"noindex\"><title>Slides</title>"
-        "<style>body{font-family:system-ui;max-width:60rem;margin:3rem auto;"
-        "padding:0 1rem;line-height:1.6}li{margin:.4rem 0}</style></head>"
-        f"<body><h1>Slides</h1><p>Raw 16:9 decks. These are visual aids, not lessons.</p><ul>{rows}</ul></body></html>"
-    )
-
-
-class ContentLinks(HTMLParser):
-    def __init__(self) -> None:
-        super().__init__()
-        self.inside = 0
-        self.hrefs: list[str] = []
-
-    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
-        values = dict(attrs)
-        if tag == "article" and "md-content__inner" in (values.get("class") or ""):
-            self.inside += 1
-        if self.inside and tag == "a" and values.get("href"):
-            self.hrefs.append(values["href"])
-
-    def handle_endtag(self, tag: str) -> None:
-        if tag == "article" and self.inside:
-            self.inside -= 1
-
-
-def graph_url(path: Path, base: Path, lang: str) -> str:
-    rel = path.relative_to(base)
-    if rel.name == "index.html":
-        rel = rel.parent
-    else:
-        rel = rel.with_suffix("")
-    prefix = "/ar" if lang == "ar" else ""
-    part = rel.as_posix().strip("/")
-    if part == ".":
-        part = ""
-    return f"{prefix}/{part}/" if part else f"{prefix}/"
-
-
-def page_title(text: str) -> str:
-    match = re.search(r"<h1[^>]*>(.*?)</h1>", text, flags=re.S)
-    raw = match.group(1) if match else ""
-    return unescape(re.sub(r"<[^>]+>", "", raw)).replace("¶", "").strip()
-
-
-def page_type(rel: str) -> str:
-    parts = Path(rel).parts
-    if not parts:
-        return "page"
-    if parts[0] == "projects":
-        return "project"
-    if parts[0] == "four-hats":
-        return "episode" if "episodes" in parts else "course"
-    if parts[0] == "courses":
-        return "collection"
-    if parts[0] == "definitions":
-        return "definition"
-    if parts[0] == "notes":
-        return "note"
-    return "page"
-
-
-def page_group(rel: str) -> str:
-    parts = Path(rel).parts
-    if not parts:
-        return "root"
-    if parts[0] == "four-hats":
-        return "four-hats/episodes" if "episodes" in parts else "four-hats"
-    if parts[0] in {"projects", "definitions", "notes"} and len(parts) > 2:
-        return f"{parts[0]}/{parts[1]}"
-    return parts[0]
-
-
-def build_graph(base: Path, lang: str) -> None:
-    pages: dict[str, Path] = {}
-    for html in base.rglob("*.html"):
-        parts = html.relative_to(base).parts
-        if "404" in html.name or "assets" in parts or "slides" in parts:
+            deck.write_text(html.replace("</body>", script))
+        page = base / "episodes" / f"{deck.stem}.md"
+        if not page.exists():
             continue
-        pages[graph_url(html, base, lang)] = html
-
-    nodes = []
-    for url, path in sorted(pages.items()):
-        text = path.read_text()
-        rel = path.relative_to(base).as_posix()
-        nodes.append(
-            {
-                "id": url,
-                "title": page_title(text) or Path(rel).stem,
-                "type": page_type(rel),
-                "group": page_group(rel),
-            }
+        url = f"/four-hats/slides/{deck.name}"
+        block = (
+            '<div markdown="0">\n'
+            f'<iframe src="{url}" title="Slides" loading="lazy" allowfullscreen '
+            'style="width:100%;aspect-ratio:16/9;border:0"></iframe>\n'
+            '<p><button type="button" onclick="this.closest(\'div\').querySelector(\'iframe\').requestFullscreen()">Fullscreen</button> '
+            f'<a href="{url}" target="_blank" rel="noopener">Open in new tab</a></p>\n</div>\n'
         )
-
-    links: list[dict[str, str]] = []
-    seen: set[tuple[str, str]] = set()
-    for url, path in pages.items():
-        parser = ContentLinks()
-        parser.feed(path.read_text())
-        for href in parser.hrefs:
-            parsed = urlparse(href)
-            if parsed.scheme or parsed.netloc or not parsed.path:
-                continue
-            if parsed.path.startswith("/"):
-                if lang == "ar" and parsed.path.startswith("/ar/"):
-                    target = SITE / parsed.path.lstrip("/")
-                else:
-                    target = base / parsed.path.lstrip("/")
-            else:
-                target = (path.parent / parsed.path).resolve()
-            if target.is_dir() or parsed.path.endswith("/"):
-                target = target / "index.html"
-            elif target.suffix == "":
-                target = target / "index.html"
-            try:
-                target.relative_to(base)
-            except ValueError:
-                continue
-            if not target.exists() or target.suffix != ".html":
-                continue
-            dest = graph_url(target, base, lang)
-            if dest == url or dest not in pages:
-                continue
-            edge = (url, dest)
-            if edge not in seen:
-                seen.add(edge)
-                links.append({"source": url, "target": dest})
-
-    payload = {"nodes": nodes, "links": links}
-    (base / "assets" / "graph.json").write_text(
-        json.dumps(payload, ensure_ascii=False) + "\n"
-    )
+        text = page.read_text()
+        match = re.match(r"(\s*# .+\n)", text)
+        page.write_text(match.group(1) + "\n" + block + text[match.end():] if match else block + text)
 
 
-def tags_index(root: Path, lang: str) -> None:
-    if lang != "en":
-        return
-    groups: dict[str, list[tuple[str, str, str]]] = {}
-    for kind in ("blogs", "projects"):
-        for path in sorted((root / kind).glob("*.md")) + sorted((root / kind).glob("*/index.md")):
-            meta = meta_of(path)
-            if not meta.get("title") or not meta.get("date") or path == root / kind / "index.md":
-                continue
-            slug = path.parent.name if path.name == "index.md" else path.stem
-            for tag in meta.get("tags", []):
-                groups.setdefault(tag, []).append((str(meta["date"]), meta["title"], f"../{kind}/{slug}/"))
-    if not groups:
-        return
-    lines = ["# Tags", ""]
-    for tag in sorted(groups):
-        lines += [f"## {tag}", ""]
-        for date, title, url in sorted(groups[tag], reverse=True):
-            lines.append(f"- [{title}]({url}) ({date})")
-        lines.append("")
-    dest = root / "tags"
-    dest.mkdir(exist_ok=True)
+def four_hats(base: Path) -> None:
+    """Course-specific steps: inject act-guide steps, then drop unlisted pages."""
+    marker = "<!-- APPLY -->"
+    for page in sorted((base / "episodes").glob("ep*.md")):
+        text = page.read_text()
+        if marker not in text:
+            continue
+        body, source = apply_content(base, page.name[:4])
+        if body:
+            note = f"Copied from `{source}`. Edit the act guide, not this page."
+            text = text.replace(marker, f"### Verified steps\n\n{note}\n\n{body}\n")
+        else:
+            text = text.replace(marker, "").rstrip() + "\n"
+        page.write_text(text)
+    embed_slides(base)
+    setup = base / "00-setup.md"
+    if setup.exists():
+        setup.rename(base / "setup.md")
+    for page in base.glob("act*.md"):
+        page.unlink()
+    plan = base / "infrastructure-plan.md"
+    if plan.exists():
+        plan.unlink()
+    lines = ["# Episodes", ""]
+    by_number = {int(p.name[2:4]): p for p in (base / "episodes").glob("ep*.md")}
+    for start, end, label in ACTS:
+        group = [by_number[n] for n in range(start, end + 1) if n in by_number]
+        if group:
+            lines += [f"## {label}", "", "| Episode |", "|---|"]
+            lines += [f"| [{title_of(p)}](episodes/{p.name}) |" for p in group]
+            lines.append("")
+    (base / "episodes.md").write_text("\n".join(lines))
+
+
+def prepare(root: Path, config: dict) -> None:
+    for kind in ("projects", "courses"):
+        for entry in config.get(kind, []):
+            base = root / fetch.dest_of(kind, entry)
+            if entry["slug"] == "four-hats":
+                four_hats(base)
+            normalize(base, entry, kind)
+            for page in base.rglob("*.md"):
+                page.write_text(convert_callouts(page.read_text()))
+                rewrite_links(page, base, entry)
+            if kind == "courses" and not (base / "index.md").exists():
+                title = entry.get("title", entry["slug"].replace("-", " ").title())
+                (base / "index.md").write_text(f"# {title}\n\n{entry.get('description', '')}\n")
+            if entry.get("description") is None:
+                entry["description"] = summary_of(base / "index.md")
+            entry.setdefault("title", entry["slug"].replace("-", " ").title())
+
+
+def listing(config: dict, kind: str) -> list[str]:
+    prefix = "projects/" if kind == "projects" else ""
+    return [
+        f"- [{e['title']}]({prefix}{e['slug']}/index.md)" + (f": {e['description']}" if e["description"] else "")
+        for e in config.get(kind, [])
+    ]
+
+
+def write_index(root: Path, config: dict, kind: str, title: str, intro: str) -> None:
+    lines = [f"# {title}", "", intro, ""]
+    for entry in config.get(kind, []):
+        lines += [f"## {entry['title']}", "", entry["description"], ""]
+        target = f"{entry['slug']}/" if kind == "projects" else f"../{entry['slug']}/"
+        lines += [f"[Read the docs]({target}) · [Repository](https://github.com/{entry['repo']})", ""]
+    dest = root / kind if kind == "projects" else root / "courses"
+    dest.mkdir(parents=True, exist_ok=True)
     (dest / "index.md").write_text("\n".join(lines))
 
 
-def build_feed(posts: list[dict]) -> None:
-    items = "".join(
-        f"<item><title>{escape(p['title'])}</title><link>{p['url']}</link>"
-        f"<guid>{p['url']}</guid><pubDate>{format_datetime(datetime.fromisoformat(p['date']).replace(tzinfo=timezone.utc))}</pubDate>"
-        f"<description>{escape(p['description'])}</description></item>"
-        for p in posts
-        if p["type"] == "blog"
-    )
-    (SITE / "feed.xml").write_text(
-        '<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"><channel>'
-        f"<title>Docs</title><link>{SITE_URL}/</link><description>Blog posts</description>{items}</channel></rss>\n"
-    )
+def inject_home(root: Path, config: dict) -> None:
+    page = root / "index.md"
+    text = page.read_text()
+    for marker, kind in (("<!-- PROJECTS -->", "projects"), ("<!-- COURSES -->", "courses")):
+        text = text.replace(marker, "\n".join(listing(config, kind)))
+    page.write_text(text)
 
 
-def build_manifest() -> None:
-    posts = []
-    root = BUILD / "en"
-    for kind in ("blogs", "projects"):
-        for path in sorted((root / kind).rglob("*.md")):
-            meta = meta_of(path)
-            if not meta.get("title") or not meta.get("date") or path.name == "index.md" and path.parent.name == kind:
-                continue
-            slug = path.parent.name if path.name == "index.md" else path.stem
-            if path.parent != root / kind and path.name != "index.md":
-                continue
-            posts.append(
-                {
-                    "id": slug,
-                    "type": kind[:-1],
-                    "title": meta["title"],
-                    "date": str(meta["date"]),
-                    "description": str(meta.get("description", "")).strip(),
-                    "tags": meta.get("tags", []),
-                    "url": f"{SITE_URL}/{kind}/{slug}/",
-                }
+SUBDIR_LABELS = {"adr": "Decisions", "reference": "API reference"}
+
+
+def tree_nav(root: Path, base: Path, title: str) -> dict:
+    rel = lambda p: p.relative_to(root).as_posix()
+    children: list = [{"Overview": rel(base / "index.md")}]
+    for path in sorted(base.glob("*.md")):
+        if path.name != "index.md":
+            children.append({title_of(path): rel(path)})
+    for folder in sorted(p for p in base.iterdir() if p.is_dir()):
+        pages = sorted(folder.rglob("*.md"))
+        if pages:
+            children.append(
+                {SUBDIR_LABELS.get(folder.name, folder.name.title()): [{title_of(p): rel(p)} for p in pages]}
             )
-    posts.sort(key=lambda item: item["date"], reverse=True)
-    (SITE / "posts.json").write_text(json.dumps(posts, ensure_ascii=False, indent=2) + "\n")
-    build_feed(posts)
+    return {title: children}
+
+
+def four_hats_nav(root: Path, base: Path, title: str) -> dict:
+    rel = lambda p: p.relative_to(root).as_posix()
+    children: list = [{"Overview": rel(base / "index.md")}]
+    for name, label in (("setup.md", "Setup"), ("episodes.md", "Episodes")):
+        if (base / name).exists():
+            children.append({label: rel(base / name)})
+    by_number = {int(p.name[2:4]): p for p in (base / "episodes").glob("ep*.md")}
+    for start, end, label in ACTS:
+        group = [by_number[n] for n in range(start, end + 1) if n in by_number]
+        if group:
+            children.append({label: [{title_of(p): rel(p)} for p in group]})
+    for name, label in (("cleanup-guide.md", "Cleanup"), ("costs-and-free-options.md", "Costs and free options")):
+        if (base / name).exists():
+            children.append({label: rel(base / name)})
+    return {title: children}
+
+
+def nav_for(root: Path, config: dict) -> list:
+    nav: list = [{"Home": "index.md"}]
+    projects = [{"Overview": "projects/index.md"}]
+    projects += [tree_nav(root, root / "projects" / e["slug"], e["title"]) for e in config.get("projects", [])]
+    nav.append({"Projects": projects})
+    courses = [{"Overview": "courses/index.md"}]
+    for e in config.get("courses", []):
+        build = four_hats_nav if e["slug"] == "four-hats" else tree_nav
+        courses.append(build(root, root / e["slug"], e["title"]))
+    nav.append({"Courses": courses})
+    children = [{"Overview": "definitions/index.md"}]
+    for category, pages in ordered_groups(group_pages(root / "definitions")):
+        children.append({category: [{title_of(p): p.relative_to(root).as_posix()} for p in pages]})
+    nav.append({"Definitions": children})
+    nav.append({"Contact": "contact.md"})
+    return nav
+
+
+def assemble() -> Path:
+    config = fetch.load()
+    if BUILD.parent.exists():
+        shutil.rmtree(BUILD.parent)
+    shutil.copytree(CONTENT, BUILD)
+    shutil.copytree(ASSETS, BUILD / "assets")
+    definitions_index(BUILD)
+    process_wiki(BUILD)
+    fetch.fetch_all(BUILD, config)
+    prepare(BUILD, config)
+    inject_home(BUILD, config)
+    write_index(BUILD, config, "projects", "Projects", TAGLINE)
+    write_index(BUILD, config, "courses", "Courses", "Long-form courses built around one project or one skill path.")
+    (ROOT / "mkdocs.en.yml").write_text(
+        BASE_THEME.format(site_url=SITE_URL, docs_dir=BUILD.relative_to(ROOT).as_posix(), v=asset_version())
+        + "\nnav:\n"
+        + yaml.safe_dump(nav_for(BUILD, config), sort_keys=False, allow_unicode=True)
+    )
+    return ROOT / "mkdocs.en.yml"
 
 
 def run() -> None:
     if SITE.exists():
         shutil.rmtree(SITE)
-    for lang in ("en", "ar"):
-        root = assemble(lang)
-        build(lang, root)
-    postprocess(SITE, "en")
-    postprocess(SITE / "ar", "ar")
-    build_graph(SITE, "en")
-    build_graph(SITE / "ar", "ar")
-    publish_slides()
-    build_manifest()
-    print("built site/ and site/ar/")
-
-
-def main() -> None:
-    with open(ROOT / ".build.lock", "w") as lock:
-        fcntl.flock(lock, fcntl.LOCK_EX)
-        run()
+    config = assemble()
+    result = subprocess.run([ZENSICAL, "build", "-f", str(config)], capture_output=True, text=True)
+    if result.returncode != 0:
+        raise SystemExit(result.stdout + result.stderr)
+    print(result.stdout.strip().splitlines()[-1])
 
 
 if __name__ == "__main__":
-    main()
+    with open(ROOT / ".build.lock", "w") as lock:
+        fcntl.flock(lock, fcntl.LOCK_EX)
+        run()

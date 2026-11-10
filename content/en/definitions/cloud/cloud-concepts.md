@@ -11,7 +11,7 @@ tags:
 
 `gcp`
 
-start @ [[certificate-topics|certificate topics]]
+start @ certificate topics
 
 What is cloud computing? [[cloud-computing|cloud computing]]
 

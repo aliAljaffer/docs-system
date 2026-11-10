@@ -1,83 +1,62 @@
 # Docs System
 
-Site builder for `docs.alialjaffer.com`. Zensical is the locked builder. Every page lives in this repo.
+Site builder for `docs.alialjaffer.com`. Zensical builds the site. Each project and course page is fetched from its own repository at build time.
 
 ## Commands
 
 ```bash
 make setup   # create .venv, install requirements.txt
-make check   # validate frontmatter
-make build   # build site/, run the parity gate and the tests
-make serve   # preview at http://localhost:8000/ and /ar/
+make check   # validate sources.yaml
+make build   # fetch the repos, build site/, run the tests
+make serve   # preview at http://localhost:8000/
 ```
 
-`python sync.py four-hats` imports the Four Hats course from its own repo. Set `FOUR_HATS_DIR` and `HQ_DIR` first. CI never runs it.
+## Add a project
 
-## Adding a New Entry
+Add three fields to `sources.yaml`, then push to `main`.
 
-Create one Markdown file, then push to `main`. The directory sets the type. The frontmatter sets everything else.
+```yaml
+projects:
+  - slug: my-project
+    repo: owner/name
+    branch: main
+    path: docs
+```
 
-| Field | Blogs | Projects | Notes | Definitions | Meaning |
-|---|---|---|---|---|---|
-| `title` | required | required | required | optional (H1 fallback) | Page and nav title |
-| `description` | required | required | required | optional | Index and home summary |
-| `date` | required | required | | | Sort order, `YYYY-MM-DD` |
-| `tags` | required | required | required | optional | Lowercase kebab-case |
-| `status` | | optional, default `Active` | | | Project status |
-| `repo`, `url` | | optional | | | Links block |
-| `category` | | | optional, folder fallback | optional, folder fallback | Index group |
-| `draft` | optional | optional | optional | optional | `true` excludes the page from the build |
-| `comments` | optional | optional | | | `false` turns comments off |
+| Field | Required | Meaning |
+|---|---|---|
+| `slug` | yes | URL segment, `/projects/<slug>/` |
+| `repo` | yes | Public GitHub repo, `owner/name` |
+| `branch` | yes | Branch to read |
+| `path` | yes | Docs folder in the repo. Use `.` for the repo root |
+| `title` | no | Default: the slug in title case |
+| `description` | no | Default: the GitHub repo description |
+| `exclude` | no | Top-level folders to skip |
 
-Locations:
-
-| Type | Path |
-|---|---|
-| Blog | `content/en/blogs/<slug>.md` |
-| Project | `content/en/projects/<slug>.md`, or `content/en/projects/<slug>/index.md` with child pages beside it |
-| Note | `content/en/notes/<category>/<slug>.md` |
-| Definition | `content/en/definitions/<category>/<slug>.md` |
-
-The build adds the status or date line, the tag chips, and the links block under the H1 of every blog and project. Do not write them by hand.
-
-Guidelines:
-
-1. Put one idea on one page.
-2. Copy a file from `templates/` to start.
-3. Link a definition with `[[slug]]`. The build fails on an unresolved link.
-4. Reuse existing tags before you add a new one.
-5. Run `make check build` before you commit.
-
-Blogs and projects get Giscus comments from `overrides/partials/comments.html`.
+The build copies every Markdown file and image under `path`. `README.md` becomes the overview page. Without a README, the build creates the overview from the repo description. Links that leave the docs folder point to GitHub.
 
 ## Add a course
 
-1. Add an entry to the `courses` list in `catalog.yaml`: slug, title, status, summary, tags, page.
-2. Copy `templates/course.md` to the course page and fill it.
-3. Keep the course URL stable. Four Hats stays at `/four-hats/`.
+Same fields, under `courses:`. The URL is `/<slug>/`. `four-hats` also gets its episode navigation and the verified steps from the act guides (`episode-tasks.yaml`).
+
+## Definitions, Home, Contact
+
+These live in `content/en/`. Link a definition with `[[slug]]`. The build fails on an unresolved link.
+
+## Updates
+
+The site rebuilds on every push to `main` and daily at 03:00 UTC, so repo changes appear within a day. Run the `Publish` workflow to rebuild now.
 
 ## Layout
 
 ```text
-catalog.yaml            site tagline and course registry
-templates/              page templates
-content/en/             English pages
-content/ar/             Arabic pages
-overrides/              theme partials (comments)
-assets/                 shared CSS, JS, images, diagrams
-sources/                Four Hats act docs and video scripts
-build/en, build/ar      assembled trees, generated
-site/                   final output and posts.json, generated
-sync.py                 manual Four Hats import
-build.py                injects headers and apply steps, writes nav, indexes, and posts.json
-check_entries.py        validates frontmatter
-check_parity.py         gate for English episode pages
-deck.py                 text digest from a slide deck: python deck.py [name ...]
-episode-tasks.yaml      episode to act-doc task mapping
+sources.yaml     projects and courses: repo, branch, path
+fetch.py         clones the repos and copies the docs
+build.py         assembles the tree, rewrites links, writes nav and indexes
+check_sources.py validates sources.yaml
+content/en/      Home, Contact, Definitions, Four Hats overview
+assets/          shared JS and CSS
+episode-tasks.yaml  Four Hats episode to act-guide mapping
 ```
 
-Do not edit `build/`, `site/`, `mkdocs.en.yml`, or `mkdocs.ar.yml`. They are generated.
-
-## Arabic rule
-
-Pair by path: `content/en/foo.md` with `content/ar/foo.md`. Arabic pages carry Arabic theory and the English verified apply steps, injected unchanged at build time.
+Do not edit `build/`, `site/`, or `mkdocs.en.yml`. They are generated.

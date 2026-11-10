@@ -1,6 +1,6 @@
 # Documentation
 
-Documentation for the systems I build, the courses I teach, and the notes I keep.
+Documentation for the projects I build and the courses I teach.
 
 ## Projects
 
@@ -10,21 +10,16 @@ Documentation for the systems I build, the courses I teach, and the notes I keep
 
 ## Courses
 
-- [Four Hats](four-hats/index.md): four tech careers on one project.
+<!-- COURSES -->
 
 [All courses](courses/index.md).
 
-## Writing
+## Definitions
 
-- [Blogs](blogs/index.md): project stories and field notes from the portfolio.
-
-## Notes and definitions
-
-- [Notes](notes/index.md): study notes and course summaries.
-- [Definitions](definitions/index.md): definitions and informational terms.
+[Definitions](definitions/index.md): definitions and informational terms.
 
 ## About this site
 
-This site is the central documentation source for my projects. It is built with Zensical, deployed on the homelab, and tracked with Umami. The plan and the known gaps live in the [docs system project page](projects/docs-system.md).
+Each project and course page is fetched from its repository at build time. Edit the repository, not this site.
 
-Questions about the content? [Contact me](contact.md).
+Questions? [Contact me](contact.md).

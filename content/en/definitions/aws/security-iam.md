@@ -12,7 +12,6 @@ tags:
 
 `aws` `services`
 
-[[4-solutions-architect-associate-saa-c03|Return to SSA]]
 
 ### IAM Policies Inheritance
 - Inline Policy: Sole policy dedicated to a group-less user
@@ -89,4 +88,3 @@ Roles = "virtual" users (NOT human-controlled) that need to use AWS services
 	- AWS SDK - access keys and secret keys
 - Reports can be acquired account-level using Credentials Report, showing status of each user in the account and activity. And user-level with Access Advisor, to see which services the accounts are using.
 - 
-[[4-solutions-architect-associate-saa-c03|Return to SSA]]

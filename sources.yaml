@@ -1,0 +1,25 @@
+projects:
+  - slug: homelab
+    repo: aliAljaffer/homelab
+    branch: main
+    path: docs
+  - slug: grooszy
+    repo: aliAljaffer/grooszy
+    branch: main
+    path: docs
+  - slug: openziti-operator
+    title: OpenZiti Operator
+    repo: aliAljaffer/openziti-operator
+    branch: main
+    path: docs
+  - slug: s2t
+    title: s2t
+    repo: aliAljaffer/s2t
+    branch: main
+    path: .
+courses:
+  - slug: four-hats
+    title: Four Hats
+    repo: aliAljaffer/four-hats
+    branch: main
+    path: docs

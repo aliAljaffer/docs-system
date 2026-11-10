@@ -18,3 +18,5 @@ jobs:
           python-version: "3.12"
 
       - run: make setup check build
+        env:
+          GITHUB_TOKEN: ${{ github.token }}

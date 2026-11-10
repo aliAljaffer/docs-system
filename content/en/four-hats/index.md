@@ -33,4 +33,3 @@ The video is a visual aid. The page is complete without it.
 2. Read Episode 0 to see the four roles.
 3. Do Episode 1 to install the tools.
 4. Take the acts in order, or start at the act that matches the job you want.
-\n[Slides](/slides/): raw 16:9 decks, visual aids only.\n

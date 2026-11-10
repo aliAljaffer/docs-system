@@ -6,11 +6,10 @@ setup:
 	$(PY) -m pip install -r requirements.txt
 
 check:
-	$(PY) check_entries.py
+	$(PY) check_sources.py
 
 build:
 	ZENSICAL=$(CURDIR)/.venv/bin/zensical $(PY) build.py
-	$(PY) check_parity.py
 	$(PY) -m unittest discover -s tests
 
 serve:
