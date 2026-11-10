@@ -41,7 +41,7 @@ ACTS = [
 ]
 
 BASE_THEME = """\
-site_name: Docs
+site_name: Ali's Docs
 site_url: {site_url}/
 docs_dir: {docs_dir}
 site_dir: site
