@@ -14,7 +14,7 @@ tags:
 `gcp` `data`
 
 ## Cloud Pub/Sub
-**AWS Equivalent:** SNS + SQS combined
+**AWS Equivalent:** [[application-integration-sns|SNS]] + [[application-integration-sqs|SQS]] combined
 **Fully managed** messaging and event streaming
 
 ### Overview
@@ -216,7 +216,7 @@ Single Publisher → Topic → Sub A (priority) → Fast processing
 - 99.95% availability SLA
 
 ### Security Best Practices
-- **IAM roles**:
+- **[[security-iam|IAM]] roles**:
   - `pubsub.publisher`: Publish messages
   - `pubsub.subscriber`: Receive messages
   - `pubsub.viewer`: List topics/subscriptions

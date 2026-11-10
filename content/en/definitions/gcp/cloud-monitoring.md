@@ -14,7 +14,7 @@ tags:
 `gcp` `operations`
 
 ## Cloud Monitoring
-**AWS Equivalent:** CloudWatch
+**AWS Equivalent:** [[management-and-governance-cloudwatch|CloudWatch]]
 **Observability and monitoring** for Google Cloud and AWS
 
 ### Overview
@@ -239,7 +239,7 @@ Alert → PagerDuty/Splunk On-Call → On-call engineer
 
 ### Compliance & Audit
 - **Audit logs**: Who created/modified alerts and dashboards
-- **Access control**: IAM roles for monitoring
+- **Access control**: [[security-iam|IAM]] roles for monitoring
   - `monitoring.viewer`: Read-only
   - `monitoring.editor`: Create/edit dashboards and alerts
   - `monitoring.admin`: Full access

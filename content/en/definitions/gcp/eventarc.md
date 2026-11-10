@@ -55,8 +55,8 @@ tags:
 - **Cloud Audit Logs** as event source
 - Track API calls across Google Cloud
 - Examples:
-  - IAM policy changes
-  - VPC firewall rule modifications
+  - [[security-iam|IAM]] policy changes
+  - [[networking-vpc|VPC]] firewall rule modifications
   - Cloud SQL instance deletions
 - Filter by service, method, resource type
 - Use case: Automated remediation, compliance monitoring
@@ -325,7 +325,7 @@ gcloud eventarc triggers delete TRIGGER_NAME --location=REGION
 - Creating Eventarc triggers for Cloud Storage and [[pub-sub|Pub/Sub]] events
 - Routing events to Cloud Run services
 - Using event filters to process specific events
-- Granting appropriate IAM permissions for event routing
+- Granting appropriate [[security-iam|IAM]] permissions for event routing
 - Viewing trigger status and event logs
 - Troubleshooting failed event deliveries
 
@@ -412,7 +412,7 @@ Eventarc Trigger (europe-west1) → Cloud Run (europe-west1)
 ```
 
 ### Security Best Practices
-- **Service Accounts**:
+- **[[security-iam|Service Accounts]]**:
   - Unique service account per trigger
   - Minimal permissions (least privilege)
   - `roles/run.invoker` for Cloud Run targets
@@ -421,7 +421,7 @@ Eventarc Trigger (europe-west1) → Cloud Run (europe-west1)
   - Eventarc automatically includes auth tokens
   - Targets verify caller identity
   - No public endpoints required
-- **VPC integration**:
+- **[[networking-vpc|VPC]] integration**:
   - Use Cloud Run internal ingress
   - Private event targets (no internet exposure)
 - **VPC Service Controls**:
@@ -605,7 +605,7 @@ Benefits:
 - **Event audit trail**: All events logged via Cloud Logging
 - **Data residency**: Events processed in trigger region
 - **Encryption**: Events encrypted in transit (HTTPS)
-- **Access control**: IAM-based event routing
+- **Access control**: [[security-iam|IAM]]-based event routing
 - **Retention**: Configure [[pub-sub|Pub/Sub]] message retention for compliance
 
 ### Troubleshooting
@@ -614,7 +614,7 @@ Benefits:
 **Check:**
 1. Trigger active? `gcloud eventarc triggers describe TRIGGER_NAME`
 2. Event filters correct? (bucket name, event type)
-3. IAM permissions: Service account has `run.invoker` or `cloudfunctions.invoker`
+3. [[security-iam|IAM]] permissions: Service account has `run.invoker` or `cloudfunctions.invoker`
 4. Target service deployed and healthy?
 5. Event actually published? Check source service logs
 
@@ -645,7 +645,7 @@ gcloud logging read "resource.type=eventarc.googleapis.com/Trigger AND \
 ### Well-Architected Considerations
 - **Operational Excellence**: Managed service, no infrastructure, centralized trigger management, Cloud Logging integration
 - **Reliability**: At-least-once delivery, automatic retries, DLQ for failures, built on [[pub-sub|Pub/Sub]] (99.95% SLA)
-- **Security**: IAM-based access, service account identity, VPC Service Controls, audit logging
+- **Security**: [[security-iam|IAM]]-based access, service account identity, VPC Service Controls, audit logging
 - **Performance**: Low latency event routing, concurrent processing, filter at source, CloudEvents standard
 - **Cost**: Pay-per-event ([[pub-sub|Pub/Sub]] costs), no idle charges, event filtering reduces costs, serverless targets
 - **Sustainability**: Serverless architecture, auto-scaling (no idle resources), efficient event routing
@@ -675,7 +675,7 @@ gcloud logging read "resource.type=eventarc.googleapis.com/Trigger AND \
 ---
 
 ### Scenario 3: Audit Log Automation
-**Question:** "Alert when IAM policy changed. Real-time automation needed."
+**Question:** "Alert when [[security-iam|IAM]] policy changed. Real-time automation needed."
 
 **Answer:** **Eventarc trigger on Cloud Audit Logs → Cloud Run**
 - **Why**: Real-time (no polling), audit logs as event source

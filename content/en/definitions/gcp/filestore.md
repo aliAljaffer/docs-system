@@ -14,7 +14,7 @@ tags:
 `gcp` `storage`
 
 ## Filestore
-**AWS Equivalent:** EFS (Elastic File System)
+**AWS Equivalent:** [[storage-efs|EFS (Elastic File System)]]
 **Fully managed NFS file storage** for Compute Engine and GKE
 
 ### Overview
@@ -87,10 +87,10 @@ tags:
 ### Filestore Features
 #### Network Connectivity
 - Accessible via **VPC network**
-- Requires VPC with Private Services Access
+- Requires [[networking-vpc|VPC]] with Private Services Access
 - Can access from:
-  - Compute Engine VMs in same VPC
-  - GKE clusters in same VPC
+  - Compute Engine VMs in same [[networking-vpc|VPC]]
+  - GKE clusters in same [[networking-vpc|VPC]]
   - On-premises via Cloud VPN or Cloud Interconnect
 - **Cannot access from internet directly**
 
@@ -102,7 +102,7 @@ tags:
 - UID/GID-based access control
 
 #### Snapshots
-**AWS Equivalent:** EFS Backups
+**AWS Equivalent:** [[storage-efs|EFS Backups]]
 - Point-in-time copy of file share
 - **On-demand or scheduled** snapshots
 - **Incremental** (only changed data)
@@ -162,7 +162,7 @@ tags:
 #### At Rest
 - **Automatic encryption with Google-managed keys**
 - **CMEK (Customer-Managed Encryption Keys)** available
-  - Encryption keys in Cloud KMS
+  - Encryption keys in [[security-kms|Cloud KMS]]
   - Audit key usage
   - Regional key required
 - **No CSEK support**
@@ -171,7 +171,7 @@ tags:
 - **NFSv3 does not natively encrypt in transit**
 - Secure via private VPC network
 - For extra security:
-  - Use Cloud VPN for on-prem connections
+  - Use [[networking-vpn|Cloud VPN]] for on-prem connections
   - Application-level encryption
   - VPC Service Controls
 
@@ -430,7 +430,7 @@ spec:
 - **Warm standby**: Pre-provisioned instance, sync via scripts/rsync
 
 #### Hybrid Cloud Architecture
-- On-premises to GCP via Cloud VPN or Cloud Interconnect
+- On-premises to GCP via [[networking-vpn|Cloud VPN]] or Cloud Interconnect
 - Filestore as cloud-side NFS
 - Burst to cloud for additional capacity
 - Gradual migration to cloud storage
@@ -518,7 +518,7 @@ nfsvers=3          # NFSv3 protocol
 - **Network-level**: VPC firewall rules, Private Services Access
 - **File-level**: POSIX permissions (UID/GID)
   - Implement consistent UID/GID across clients
-  - Use [[iam|service accounts]] for VM identity
+  - Use [[security-iam|service accounts]] for VM identity
 - **Audit**: Cloud Audit Logs for admin operations
   - Track instance creation/deletion
   - Snapshot/backup operations

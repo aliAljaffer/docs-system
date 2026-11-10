@@ -274,7 +274,7 @@ Dataproc (Spark processing) → BigQuery (SQL analytics)
 - **Private Google Access**: Access GCS without external IPs
 - **Encryption**: Default encryption at rest and in transit
 - **CMEK**: Customer-managed encryption keys
-- **IAM**: Service accounts per cluster
+- **[[security-iam|IAM]]**: Service accounts per cluster
 - **Component Gateway**: Secure web UI access
 
 ### Monitoring & Observability

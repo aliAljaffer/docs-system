@@ -15,13 +15,13 @@ tags:
 Free tier for first 12 months of signup.
 
 **But these services are free forever:**
-- IAM
+- [[security-user-and-identity-management|IAM]]
 - [[vpc|VPC]]
 - [[autoscaling-groups-and-load-balancers|autoscaling groups and load balancers]]
-- cloudformation
-- beanstalk
+- [[management-and-governance-cloudformation|cloudformation]]
+- [[compute-beanstalk|beanstalk]]
 - Opsworks
-- amplify
-- Appsync
-- organizations and [[consolidated-billing|consolidated billing]]
-- cost explorer
+- [[front-end-amplify|amplify]]
+- [[front-end-appsync|Appsync]]
+- [[management-and-governance-organizations|organizations]] and [[consolidated-billing|consolidated billing]]
+- [[financial-management-cost-explorer|cost explorer]]

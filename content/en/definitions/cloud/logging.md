@@ -23,6 +23,6 @@ AWS has a few types of logging services, but there are two primary areas you mon
 - Any changes and access to your infrastructure (**Who did what**)
 ## Services
 - [[tagging]]
-- athena
-- cloudwatch
-- cloudtrail
+- [[analytics-athena|athena]]
+- [[management-and-governance-cloudwatch|cloudwatch]]
+- [[management-and-governance-cloudtrail|cloudtrail]]

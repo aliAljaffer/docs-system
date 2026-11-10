@@ -14,7 +14,7 @@ tags:
 `gcp` `networking`
 
 ## Cloud DNS
-**AWS Equivalent:** Route 53
+**AWS Equivalent:** [[networking-route53|Route 53]]
 **Managed authoritative DNS** service running on Google's global infrastructure
 
 ### Key Differences from AWS Route 53
@@ -324,7 +324,7 @@ VPC Resources
   - Never expose internal IPs publicly
   - Restrict to specific [[vpc|VPCs]]
 - **VPC Service Controls**: Protect DNS zones
-- **IAM**: Least privilege for DNS management
+- **[[security-iam|IAM]]**: Least privilege for DNS management
   - `roles/dns.admin`: Full DNS management
   - `roles/dns.reader`: Read-only access
 - **Audit logging**: Track DNS zone changes

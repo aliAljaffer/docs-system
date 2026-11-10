@@ -14,7 +14,7 @@ tags:
 `gcp` `storage`
 
 ## Cloud Storage
-**AWS Equivalent:** S3
+**AWS Equivalent:** [[storage-s3|S3]]
 **Object storage** for unstructured data - fully managed, scalable, and durable
 
 ### Overview
@@ -68,7 +68,7 @@ tags:
 - Cannot contain dots if using SSL/TLS
 
 ### Object Versioning
-**AWS Equivalent:** S3 Versioning
+**AWS Equivalent:** [[storage-s3|S3 Versioning]]
 - **Disabled by default**
 - When enabled, creates new version for each modification
 - Deletes create delete marker (not permanent)
@@ -78,7 +78,7 @@ tags:
 - List versions: `gsutil ls -a gs://BUCKET_NAME`
 
 ### Object Lifecycle Management
-**AWS Equivalent:** S3 Lifecycle Policies
+**AWS Equivalent:** [[storage-s3|S3 Lifecycle Policies]]
 - Automate storage class transitions and deletions
 - Conditions:
   - **Age**: Days since upload
@@ -95,7 +95,7 @@ tags:
 
 ### Access Control
 #### Uniform (Bucket-level) - Recommended
-- **Uses only Cloud IAM**
+- **Uses only [[security-iam|Cloud IAM]]**
 - Applies to all objects in bucket
 - **Cannot be reverted to fine-grained for 90 days**
 - Simpler, recommended for new buckets
@@ -114,7 +114,7 @@ tags:
 - `roles/storage.admin`: Full control of buckets and objects
 
 ### Access Control Lists (ACLs)
-**AWS Equivalent:** S3 ACLs
+**AWS Equivalent:** [[storage-s3|S3 ACLs]]
 - Only with fine-grained access control
 - Predefined ACLs:
   - `private`: Owner only
@@ -125,7 +125,7 @@ tags:
 - `gsutil acl set public-read gs://bucket/object`
 
 ### Signed URLs (Presigned URLs)
-**AWS Equivalent:** S3 Presigned URLs
+**AWS Equivalent:** [[storage-s3|S3 Presigned URLs]]
 - Time-limited access to specific objects
 - No GCP account needed for the user
 - **Valid from 1 second to 7 days**
@@ -139,14 +139,14 @@ gsutil signurl -d 10m /path/to/key.json gs://bucket/object
 ```
 
 ### Signed Policy Documents
-**AWS Equivalent:** S3 POST Policy
+**AWS Equivalent:** [[storage-s3|S3 POST Policy]]
 - Control uploads with specific conditions
 - File size limits, content type restrictions
 - Expiration time
 - Use case: Allow users to upload directly to Cloud Storage from browser
 
 ### Requester Pays
-**AWS Equivalent:** S3 Requester Pays
+**AWS Equivalent:** [[storage-s3|S3 Requester Pays]]
 - Requester pays networking and operation costs
 - Bucket owner pays storage costs
 - Requester must include project ID in request
@@ -176,7 +176,7 @@ gsutil signurl -d 10m /path/to/key.json gs://bucket/object
 ### Encryption
 #### Encryption at Rest (Automatic)
 - **Google-managed keys**: Default, automatic, **no configuration needed**
-- **Customer-managed keys (CMEK)**: Keys in Cloud KMS
+- **Customer-managed keys (CMEK)**: Keys in [[security-kms|Cloud KMS]]
   - Rotate keys, audit usage
   - Regional KMS key must match bucket location
 - **Customer-supplied keys (CSEK)**: You manage keys
@@ -201,7 +201,7 @@ gsutil compose gs://bucket/part1 gs://bucket/part2 gs://bucket/final
 
 ### Object Change Notification
 #### Pub/Sub Notifications (Recommended)
-**AWS Equivalent:** S3 Event Notifications
+**AWS Equivalent:** [[storage-s3|S3 Event Notifications]]
 - Send notifications to Pub/Sub topic
 - Events: Object finalize, delete, archive, metadata update
 - More reliable and scalable than legacy notifications
@@ -213,7 +213,7 @@ gsutil compose gs://bucket/part1 gs://bucket/part2 gs://bucket/final
 - Less reliable, **deprecated - use Pub/Sub**
 
 ### CORS (Cross-Origin Resource Sharing)
-**AWS Equivalent:** S3 CORS
+**AWS Equivalent:** [[storage-s3|S3 CORS]]
 - Allow browser-based apps to access bucket from different origin
 - Configure allowed origins, methods, headers
 - Set via JSON configuration file
@@ -244,7 +244,7 @@ gsutil compose gs://bucket/part1 gs://bucket/part2 gs://bucket/final
 - **Fastest for large transfers from on-prem**
 
 #### Storage Transfer Service
-**AWS Equivalent:** AWS DataSync
+**AWS Equivalent:** [[storage-s3|AWS DataSync]]
 - **Transfer from AWS S3, Azure, HTTP/HTTPS sources**
 - Scheduled or one-time transfers
 - **Managed service, no infrastructure needed**
@@ -252,7 +252,7 @@ gsutil compose gs://bucket/part1 gs://bucket/part2 gs://bucket/final
 - Use case: Cloud-to-cloud migrations
 
 #### Transfer Appliance
-**AWS Equivalent:** AWS Snowball
+**AWS Equivalent:** [[storage-s3|AWS Snowball]]
 - Physical device shipped to your datacenter
 - Up to **1 PB capacity**
 - Encrypted transfer
@@ -394,7 +394,7 @@ gcloud storage buckets update gs://BUCKET_NAME --lock-retention-period
 
 ### Architectural Patterns
 #### Static Website Hosting
-**AWS Equivalent:** S3 Static Website Hosting
+**AWS Equivalent:** [[storage-s3|S3 Static Website Hosting]]
 - Cloud Storage + Cloud CDN + Load Balancing
 - **No native website hosting mode** (unlike S3)
 - Requires Load Balancer backend bucket

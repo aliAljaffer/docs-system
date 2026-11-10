@@ -110,7 +110,7 @@ A network appliance that is used to load balance between multiple hosts that con
 ### Content Delivery Network (CDN)
 - Speeds up the process of data delivery
 - Geographically distributed caching servers
-### Virtual Private Network
+### [[networking-vpn|Virtual Private Network]]
 - use Concentrator or head-end to manage VPN connections
 	- Encryption/decryption access device
 	- Often integrated into a firewall

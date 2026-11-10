@@ -234,7 +234,7 @@ spec:
 
 ### Compliance & Security
 - **PII in traces**: Avoid logging sensitive data in span attributes
-- **Access control**: IAM roles
+- **Access control**: [[security-iam|IAM]] roles
   - `cloudtrace.user`: Read traces
   - `cloudtrace.admin`: Full access
 - **Trace data retention**: 30 days, cannot extend

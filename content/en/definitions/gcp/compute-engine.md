@@ -14,7 +14,7 @@ tags:
 `gcp` `compute`
 
 ## Compute Engine
-**AWS Equivalent:** EC2
+**AWS Equivalent:** [[compute-ec2|EC2]]
 **IaaS** - Virtual machines running in Google's data centers
 
 ### Machine Types
@@ -64,7 +64,7 @@ tags:
 - **Preemptible/Spot**: Can be terminated any time
 
 ### Preemptible & Spot VMs
-**AWS Equivalent:** EC2 Spot Instances
+**AWS Equivalent:** [[compute-ec2|EC2 Spot Instances]]
 - **Up to 91% discount** compared to on-demand
 - **Preemptible**: Max 24 hours, legacy option
 - **Spot**: No max runtime, better than preemptible
@@ -75,7 +75,7 @@ tags:
 ### Persistent Disks
 See Persistent Disk for full details
 
-**AWS Equivalent:** EBS
+**AWS Equivalent:** [[storage-ebs|EBS]]
 - Network-attached storage, **survives VM termination**
 - Standard (HDD), Balanced (SSD), Performance (SSD), Extreme (SSD)
 - **Can attach to multiple VMs in read-only mode**
@@ -84,7 +84,7 @@ See Persistent Disk for full details
 - **Snapshots**: Incremental, global resource, can create across regions
 
 ### Local SSDs
-**AWS Equivalent:** EC2 Instance Store
+**AWS Equivalent:** [[compute-ec2|EC2 Instance Store]]
 - Physically attached to the server
 - **375 GB per device, up to 24 devices (9 TB total)**
 - **Ephemeral - data lost on VM stop/terminate**
@@ -93,7 +93,7 @@ See Persistent Disk for full details
 
 ### Instance Groups
 #### Managed Instance Groups (MIG)
-**AWS Equivalent:** Auto Scaling Groups
+**AWS Equivalent:** [[management-and-governance-auto-scaling|Auto Scaling Groups]]
 - Identical VMs created from instance template
 - **Autoscaling**: CPU, load balancing, custom metrics from Cloud Monitoring, schedules
 - **Auto-healing**: Health checks, automatic recreation
@@ -119,7 +119,7 @@ See Persistent Disk for full details
 - Use cases: Sensitive data processing, regulatory compliance
 
 ### Sole-Tenant Nodes
-**AWS Equivalent:** Dedicated Hosts
+**AWS Equivalent:** [[compute-ec2|Dedicated Hosts]]
 - Physical Compute Engine server dedicated to your project
 - Use cases: BYOL, compliance, performance isolation
 - Can specify node affinity (which node a VM runs on)
@@ -131,7 +131,7 @@ See Persistent Disk for full details
 - **AWS doesn't have this** - AWS stops/starts instances during maintenance
 
 ### OS Login
-- Manage SSH access using IAM
+- Manage SSH access using [[security-iam|IAM]]
 - No need to manage SSH keys manually
 - OS Login 2FA available
 - **Best practice for SSH access control**
@@ -139,11 +139,11 @@ See Persistent Disk for full details
 ### Metadata Server
 - `http://metadata.google.internal/computeMetadata/v1/`
 - Query instance metadata, project metadata
-- Get access tokens for service accounts
+- Get access tokens for [[security-iam|service accounts]]
 - Similar to AWS Instance Metadata Service
 
 ### Startup Scripts & Metadata
-**AWS Equivalent:** EC2 User Data
+**AWS Equivalent:** [[compute-ec2|EC2 User Data]]
 - Run scripts on VM boot
 - Can be in metadata or Cloud Storage
 - Keys: `startup-script`, `shutdown-script`
@@ -231,7 +231,7 @@ gcloud compute disks create DISK_NAME \
 - Configuring autoscaling and auto-healing
 - Managing disks (attach, detach, snapshot)
 - Using startup scripts
-- Basic networking (VPC, firewall rules)
+- Basic networking ([[networking-vpc|VPC]], firewall rules)
 - OS Login for SSH access
 - Viewing instance inventory and logs
 
@@ -254,7 +254,7 @@ gcloud compute disks create DISK_NAME \
 - **Security**:
   - Shielded VMs for secure boot
   - Confidential VMs for data encryption in-use
-  - Service accounts with minimal permissions
+  - [[security-iam|Service accounts]] with minimal permissions
   - VPC Service Controls for data exfiltration prevention
 
 ### Migration Strategies
@@ -289,13 +289,13 @@ gcloud compute disks create DISK_NAME \
 - **Load Balancing**: Cloud Load Balancing with MIGs
 - **Storage**: Persistent Disk, Filestore, Cloud Storage
 - **Databases**: Cloud SQL, Cloud Spanner for persistent data
-- **Networking**: VPC, Cloud VPN, Cloud Interconnect
+- **Networking**: [[networking-vpc|VPC]], Cloud VPN, Cloud Interconnect
 - **Monitoring**: Cloud Monitoring, Cloud Logging
 
 ### Well-Architected Considerations
 - **Operational Excellence**: Automated patching, OS image management, monitoring
 - **Reliability**: Multi-zone/region deployment, health checks, backups, live migration
-- **Security**: Least privilege IAM, Shielded VMs, encryption at-rest and in-transit
+- **Security**: Least privilege [[security-iam|IAM]], Shielded VMs, encryption at-rest and in-transit
 - **Performance**: Right machine type, local SSD, network throughput optimization
 - **Cost**: Sustained use, committed use, preemptible VMs, rightsizing
 - **Sustainability**: Choose efficient machine types, rightsize to reduce carbon footprint

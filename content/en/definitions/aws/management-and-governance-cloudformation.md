@@ -1,0 +1,21 @@
+---
+title: Cloudformation
+category: AWS
+description: A service that allows you to make templates to specify how you want architecture
+  deployed.
+tags:
+- aws
+- services
+---
+
+<!-- imported from ObsidianVault/studies/cloud-architecht/services/management-and-governance/cloudformation.md. Edit the source, then run sync.py. -->
+
+# Cloudformation
+
+`aws` `services`
+
+A service that allows you to make templates to specify how you want architecture deployed.
+
+You can reuse templates to quickly deploy or edit your architecture configuration automatically.
+
+Helps eliminate user error.

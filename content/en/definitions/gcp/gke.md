@@ -14,7 +14,7 @@ tags:
 `gcp` `compute`
 
 ## Google Kubernetes Engine (GKE)
-**AWS Equivalent:** EKS
+**AWS Equivalent:** [[containers-eks|EKS]]
 **Managed Kubernetes** service for containerized applications
 
 ### GKE Cluster Modes
@@ -92,9 +92,9 @@ tags:
 ### Workload Identity
 **AWS Equivalent:** IRSA (IAM Roles for Service Accounts)
 - **Recommended way to access Google Cloud services from GKE**
-- Maps Kubernetes Service Accounts to Google Service Accounts
+- Maps Kubernetes Service Accounts to [[security-iam|Google Service Accounts]]
 - No need to store credentials in pods
-- Fine-grained IAM access control
+- Fine-grained [[security-iam|IAM]] access control
 
 ```bash
 # Enable Workload Identity on cluster
@@ -108,10 +108,10 @@ gcloud iam service-accounts add-iam-policy-binding GSA@PROJECT.iam.gserviceaccou
 
 ### GKE Networking Modes
 #### VPC-Native (IP Aliasing) - **Recommended**
-- Pods get IPs from VPC subnet ranges
+- Pods get IPs from [[networking-vpc|VPC]] subnet ranges
 - **Better integration with Google Cloud services**
 - Required for Private Google Access, VPC Service Controls
-- Required for Shared VPC
+- Required for [[networking-vpc|Shared VPC]]
 - Pods are routable within VPC
 
 #### Routes-Based (Legacy)

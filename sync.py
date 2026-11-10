@@ -115,7 +115,7 @@ WIKI_FILES = [
     ("webdev/react/design-patterns/controlled-elements.md", "React", ["react", "forms"]),
     ("webdev/react/design-patterns/prop-drilling.md", "React", ["react", "patterns"]),
 ]
-GCP_DEFINITION_DIRS = [
+SERVICE_DEFINITION_DIRS = [
     ("studies/cloud-architecht/gcp/networking", "GCP", ["gcp", "networking"]),
     ("studies/cloud-architecht/gcp/security", "GCP", ["gcp", "security"]),
     ("studies/cloud-architecht/gcp/compute", "GCP", ["gcp", "compute"]),
@@ -127,6 +127,7 @@ GCP_DEFINITION_DIRS = [
     ("studies/cloud-architecht/gcp/management", "GCP", ["gcp", "management"]),
     ("studies/cloud-architecht/gcp/ai-ml", "GCP", ["gcp", "ai"]),
     ("studies/cloud-architecht/gcp/services", "GCP", ["gcp", "services"]),
+    ("studies/cloud-architecht/services", "AWS", ["aws", "services"]),
 ]
 CLOUD_DEFINITION_SLUGS = {
     "aws-compute", "aws-networking", "aws-security", "aws-services", "aws-storage",
@@ -568,7 +569,7 @@ def sync_vault() -> tuple[int, int]:
             jobs.append((src, dest, category, tags, Path(src.name)))
             seen.add(src)
 
-    for folder, category, tags in GCP_DEFINITION_DIRS:
+    for folder, category, tags in SERVICE_DEFINITION_DIRS:
         base = VAULT / folder
         if not base.exists():
             continue

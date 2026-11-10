@@ -23,16 +23,16 @@ An effictively secured application has security at multiple layers. For appilica
 7. Physical - Limiting access to a data center (not applicable in aws/cloud)
 ## Encryption
 - In transit - SSL/TLS
-- At rest - S3 SSE, RDS DB instances
+- At rest - [[storage-s3|S3]] SSE, RDS DB instances
 One of the most popular and secure types of encryption is AES-256
 
 ## AWS services related to security
-- AWS Inspector
-- AWS Shield
-- AWS GuardDuty
-- Virtual Private Networks
-- AWS WAF
-- AWS Key Management Service
-- artifact
-- cognito
-- user and identity management
+- [[security-inspector|AWS Inspector]]
+- [[security-shield|AWS Shield]]
+- [[security-guardduty|AWS GuardDuty]]
+- [[networking-vpn|Virtual Private Networks]]
+- [[security-waf|AWS WAF]]
+- [[security-kms|AWS Key Management Service]]
+- [[security-artifact|artifact]]
+- [[security-cognito|cognito]]
+- [[security-user-and-identity-management|user and identity management]]

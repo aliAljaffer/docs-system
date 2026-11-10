@@ -39,10 +39,10 @@ Shows which CSP is leading the way in cloud services.
 
 ## IaaS core services
 
-1. **Compute** - A virtual PC (or multiple)  (**ec2-ccp**)
+1. **Compute** - A virtual PC (or multiple)  (**[[compute-ec2-ccp|ec2-ccp]]**)
 2. **Networking** - Virtual network defining connections or services **(VPC)**
-3. **Storage** - Virtual hard drive (**EBS**)
-4. **Database** - Virtual database for storing report data **(RDS)**
+3. **Storage** - Virtual hard drive (**[[storage-ebs|EBS]]**)
+4. **Database** - Virtual database for storing report data **([[database-aws-database|RDS]])**
 
 [stopped @ 35:05](https://youtu.be/SOTamWNgDKc&t=2105) 
 

@@ -15,4 +15,4 @@ tags:
 1. [[aws-compute|aws compute]]
 2. [[aws-storage|aws storage]]
 3. [[aws-networking|aws networking]]
-4. aws database
+4. [[database-aws-database|aws database]]

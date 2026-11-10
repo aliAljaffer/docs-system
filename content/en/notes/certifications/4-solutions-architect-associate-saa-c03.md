@@ -23,7 +23,7 @@ tags:
 - Region Table: Allows you to see services available for each region
 ----
  
-## [[iam|IAM]]
+## [[security-iam|IAM]]
 ### Summary
 - As best practice, employ [[principle-of-least-privilege|principle of least privilege]].
 -  are JSON documents detailing what can and can't be done, by who and on what service. A policy contains: Version Number, Policy ID, Statement(s). Statement(s) are composed of:
@@ -39,7 +39,7 @@ tags:
 	- Universal 2nd Factory (Physical, U2F): YubiKey
 	- SurePassID's Key Fob for AWS GovCloud.
 -  provide a way for AWS resources to have access to other AWS resources. 
-	- Examples include Lambda needing a S3 Role to be able to upload a file programmatically.
+	- Examples include [[compute-lambda|Lambda]] needing a [[storage-s3|S3]] Role to be able to upload a file programmatically.
 - Access to AWS can be done in three ways:
 	- AWS CLI - access keys and secret keys
 	- AWS Management Console - password + MFA
@@ -48,7 +48,7 @@ tags:
 - 
 
 ---
-## EC2
+## [[compute-ec2|EC2]]
 ### Summary
 - s
 - 
@@ -78,7 +78,7 @@ tags:
 	- Routing based on  path in URL
 	- Routing based on hostname (one.example.com and two.example.com)
 	- Routing based on query string, Headers
-- **Great fit for MICRO services and container-based applications (Docker, ecs)**
+- **Great fit for MICRO services and container-based applications (Docker, [[containers-ecs|ecs]])**
 - Has port mapping feature to redirect to a dynamic port in ECS
 - In comparison, we'd need multiple Classic Load Balancer per application.
 ##### Target Groups
@@ -157,7 +157,7 @@ Target Group -> Actions -> Edit Attributes ->  \[Target Selection Configuration\
 	- No charges for inter-AZ data
 ### Server Name Indication - SNI
 - SNI solves the problem of **loading multiple SSL certs onto one web server**, to serve multiple websites
-- Only works for ALB, NLB, CloudFront
+- Only works for ALB, NLB, [[networking-cloudfront|CloudFront]]
 #### Support for SSL Certs
 - CLB
 	- Support only one SSL cert
@@ -347,7 +347,7 @@ Generally, if a custom endpoint is set, the Reader Endpoint is not used.
 	- **Typical cross-region replication takes less than 1 second.**
 ### Aurora Machine Learning
 - Enables you to add ML-based predictions to your app via SQL
-- Supports sagemaker and comprehend
+- Supports [[machine-learning-sagemaker|sagemaker]] and [[machine-learning-comprehend|comprehend]]
 - No need to have ML experiences
 - Use case: Fraud detection, ads targeting, sentiment analysis, product recommendations.
 ### Aurora Backups
@@ -485,10 +485,10 @@ example: route users from a particular ISP to a specific endpoint.
 - CDN
 - Caches content at edge
 - 216 edge locations globally
-- DDOS protection, integration with shield and waf
+- DDOS protection, integration with [[security-shield|shield]] and [[security-waf|waf]]
 ### Origins
 - S3 buckets, use Origin Access Control to guarantee only CF has access to bucket
-- Custom Origin (HTTP) - ALB, ec2, s3 website with static S3 hosting, any http backend 
+- Custom Origin (HTTP) - ALB, [[compute-ec2|ec2]], [[storage-s3|s3]] website with static S3 hosting, any http backend 
 ### Price Classes
 1. Price Class All: All regions, best performance
 2. Price class 200: Most regions, minus expensive ones
@@ -1018,7 +1018,7 @@ Data Streams, NOT Firehose
 #### Consumers
 - 
 - 
-- lambda
+- [[compute-lambda|lambda]]
 - Apps running on EC2, ECS, EKS
 ## Machine Learning
 ### Rekognition
@@ -1304,7 +1304,7 @@ See **26. Security, Video 18.**
 #### Private vs. Public IP (IPv4)
 - IPv4 = 3.7 billion addresses
 #### Elastic IP
-A static public IPv4. Avoid using Elastic IP. Instead, use a random public IP and register a DNS name to it (route53) or a [[autoscaling-groups-and-load-balancers|load balancer]]
+A static public IPv4. Avoid using Elastic IP. Instead, use a random public IP and register a DNS name to it ([[networking-route53|route53]]) or a [[autoscaling-groups-and-load-balancers|load balancer]]
 #### SSL/TLS
 - SSL Cert. allows traffic between clients and load balancer to be encrypted in transit
 - SSL = Secure Sockets Layer

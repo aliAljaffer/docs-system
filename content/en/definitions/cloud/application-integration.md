@@ -25,17 +25,17 @@ Most common systems utilized for application integration are:
 ## Queuing
 A queueing system. is a non real-time messaging system, used to process messaging and events that will delete messages once consumed.
 
-SQS
+[[application-integration-sqs|SQS]]
 ## Publish/Subscribe (Pub/Sub)
 Used for messaging and notifications.
-SNS Flow:
+[[application-integration-sns|SNS]] Flow:
 - User subscribes to a topic to be notified by email when AWS account charges reach X dollars.
 - When an account reaches X dollars, SNS sends a notification to that topic.
 - The message is then filtered and sorted automatically emailed to the user notifying them of their charge.
 ## Streaming
-Utilizes SNS and SQS, users or services can react to events/messages in real time as they are processed.
-**Amazon Kinesis** is the primary streaming service to handle analyzing real-time incoming events.
+Utilizes [[application-integration-sns|SNS]] and [[application-integration-sqs|SQS]], users or services can react to events/messages in real time as they are processed.
+**[[analytics-kinesis|Amazon Kinesis]]** is the primary streaming service to handle analyzing real-time incoming events.
 ## API Gateways
 APIs are the middlemen between an application and the backend systems. They contain information about a request, and once verified it sends back the appropriate information to load your profile.
 
-Amazon API Gateway handles APIs in your cloud environment context, and allows you to format requests and responses.
+[[networking-api-gateway|Amazon API Gateway]] handles APIs in your cloud environment context, and allows you to format requests and responses.

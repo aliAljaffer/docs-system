@@ -14,7 +14,7 @@ tags:
 `gcp` `operations`
 
 ## Cloud Logging
-**AWS Equivalent:** CloudTrail + CloudWatch Logs
+**AWS Equivalent:** [[management-and-governance-cloudtrail|CloudTrail]] + [[management-and-governance-cloudwatch|CloudWatch Logs]]
 **Centralized logging** for Google Cloud
 
 ### Overview

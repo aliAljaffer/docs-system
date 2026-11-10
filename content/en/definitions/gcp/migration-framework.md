@@ -135,7 +135,7 @@ Organization (root)
   - Sync with on-prem Active Directory
   - Or use Google Workspace
 - **IAM Strategy**:
-  - IAM best practices
+  - [[security-iam|IAM]] best practices
   - Use groups, not individual users
   - Principle of least privilege
   - Separation of duties

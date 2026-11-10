@@ -14,10 +14,10 @@ tags:
 
 ## Virtual Machines 
 ...utilize software to replicate using an actual server
-- Amazon Lightsail
+- [[compute-lightsail|Amazon Lightsail]]
 ## Containers
 ..have everything an app needs to run on a server.
-- Amazon ECS
-- Amazon Fargate
-- Amazon Elastic Kubernetes Service
+- [[containers-ecs|Amazon ECS]]
+- [[compute-fargate|Amazon Fargate]]
+- [[containers-eks|Amazon Elastic Kubernetes Service]]
 [[containers]]

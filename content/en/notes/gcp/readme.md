@@ -52,7 +52,7 @@ Each service note contains:
 
 **Security & IAM:**
 
-- IAM - Roles, policies, service accounts, conditions
+- [[security-iam|IAM]] - Roles, policies, service accounts, conditions
 - Cloud KMS - Key management
 
 **Management:**
@@ -87,7 +87,7 @@ Each service note contains:
 
 **Networking:**
 
-- VPC - Subnets, firewall rules, Private Google Access
+- [[networking-vpc|VPC]] - Subnets, firewall rules, Private Google Access
 - Cloud Load Balancing - HTTP(S), Network, Internal
 
 **AI/ML:**
@@ -147,7 +147,7 @@ Each service note contains:
 
 **Security:**
 
-- IAM - Roles (basic, predefined, custom), service accounts
+- [[security-iam|IAM]] - Roles (basic, predefined, custom), service accounts
 - Cloud KMS - Encryption keys
 - Secret Manager - Secrets management
 
@@ -171,7 +171,7 @@ Each service note contains:
 - All Compute options: Compute Engine, GKE, Cloud Run, App Engine
 - Storage architecture: Cloud Storage, Persistent Disk, Filestore
 - Database selection: Cloud SQL, Spanner, Bigtable, Firestore, BigQuery, AlloyDB
-- Network topology: VPC, Load Balancing, hybrid connectivity
+- Network topology: [[networking-vpc|VPC]], Load Balancing, hybrid connectivity
 - **AI/ML architecture**: Vertex AI, Gemini, RAG patterns, MLOps
 
 ### Section 2: Managing and provisioning solution infrastructure (~15%)
@@ -198,7 +198,7 @@ Each service note contains:
 
 **Security:**
 
-- IAM - Resource hierarchy, conditions, least privilege
+- [[security-iam|IAM]] - Resource hierarchy, conditions, least privilege
 - Cloud KMS - CMEK, encryption strategies
 - Secret Manager - Secret rotation
 - VPC Service Controls - Perimeter security
@@ -688,7 +688,7 @@ Study sections in this order based on service dependencies and complexity:
 
 | Use Case                              | Service                                                              |
 | ------------------------------------- | -------------------------------------------------------------------- |
-| Virtual network                       | VPC                                              |
+| Virtual network                       | [[networking-vpc|VPC]]                                              |
 | Load balancing                        | Cloud Load Balancing            |
 | VPN                                   | Cloud VPN                                  |
 | Dedicated connection                  | Cloud Interconnect                |

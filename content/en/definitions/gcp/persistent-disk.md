@@ -14,7 +14,7 @@ tags:
 `gcp` `storage`
 
 ## Persistent Disk
-**AWS Equivalent:** EBS (Elastic Block Storage)
+**AWS Equivalent:** [[storage-ebs|EBS (Elastic Block Storage)]]
 **Block storage** for Compute Engine and GKE - network-attached, durable
 
 ### Overview
@@ -87,7 +87,7 @@ tags:
 - **Cannot shrink disks**
 
 ### Disk Resizing
-**AWS Equivalent:** EBS Volume Modification
+**AWS Equivalent:** [[storage-ebs|EBS Volume Modification]]
 - Increase size without detaching
 - **Automatically replicates additional capacity**
 - Resize file system after disk resize:
@@ -97,7 +97,7 @@ tags:
 - **Cannot decrease size**
 
 ### Multi-Attach (Read-Only)
-**AWS Equivalent:** EBS Multi-Attach (but different)
+**AWS Equivalent:** [[storage-ebs|EBS Multi-Attach]] (but different)
 - Attach single disk to **multiple VMs in read-only mode**
 - Up to **10 VMs** can read simultaneously
 - All VMs must be in same zone (zonal) or replication zones (regional)
@@ -105,7 +105,7 @@ tags:
 - **Cannot write from multiple VMs** (unlike EBS Multi-Attach io2)
 
 ### Snapshots
-**AWS Equivalent:** EBS Snapshots
+**AWS Equivalent:** [[storage-ebs|EBS Snapshots]]
 - Point-in-time backup of persistent disk
 - **Incremental and automatic** (only changed blocks)
 - **Global resource** - can restore to any zone/region
@@ -131,7 +131,7 @@ tags:
 ### Encryption
 #### Encryption at Rest (Automatic)
 - **Google-managed keys**: **Default, automatic, no configuration**
-- **Customer-managed keys (CMEK)**: Keys in Cloud KMS
+- **Customer-managed keys (CMEK)**: Keys in [[security-kms|Cloud KMS]]
   - Regional key must match disk region
   - Can't convert existing disks to CMEK
 - **Customer-supplied keys (CSEK)**: You manage and provide keys
@@ -194,7 +194,7 @@ tags:
 - Use Cloud Monitoring to monitor disk utilization
 
 ### Disk Images
-**AWS Equivalent:** AMI
+**AWS Equivalent:** [[storage-ebs|AMI]]
 - Template for creating boot disks
 - Public images: Google, OS vendors, community
 - Custom images: Created from your disks/snapshots
@@ -203,7 +203,7 @@ tags:
 - Image families: Always get latest image in family
 
 ### Machine Images
-**AWS Equivalent:** AMI + Launch Template combined
+**AWS Equivalent:** [[compute-ec2|AMI + Launch Template combined]]
 - **Complete VM configuration** (disks, metadata, permissions)
 - Includes boot disk + data disks
 - Preserves machine type, labels, metadata

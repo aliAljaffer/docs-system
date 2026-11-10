@@ -79,12 +79,12 @@ tags:
 
 ### Ingress Control
 - **All**: Accept traffic from anywhere (default)
-- **Internal**: Only from VPC or Cloud Load Balancing
+- **Internal**: Only from [[networking-vpc|VPC]] or Cloud Load Balancing
 - **Internal and Cloud Load Balancing**: More restrictive internal
 
 ### Networking
 #### VPC Connector
-- Connect Cloud Run to VPC resources
+- Connect Cloud Run to [[networking-vpc|VPC]] resources
 - Access Cloud SQL, [[compute-engine|Compute Engine]], etc. via private IPs
 - **Serverless VPC Access** connector required
 - Traffic can be:
@@ -94,7 +94,7 @@ tags:
 #### Direct VPC Egress
 - **New feature, simpler than VPC Connector**
 - No connector resource needed
-- Provides private connectivity to VPC
+- Provides private connectivity to [[networking-vpc|VPC]]
 
 ### Authentication
 #### Allow Unauthenticated (Public)
@@ -104,10 +104,10 @@ tags:
 
 #### Require Authentication
 - Callers must provide valid credentials
-- IAM role: `roles/run.invoker`
+- [[security-iam|IAM]] role: `roles/run.invoker`
 - Methods:
-  - Service-to-service: Service account identity tokens
-  - User: Google Sign-In or Cloud IAM
+  - Service-to-service: [[security-iam|Service account]] identity tokens
+  - User: Google Sign-In or [[security-iam|Cloud IAM]]
 
 ### Traffic Management
 - **Revisions**: Each deployment creates a new immutable revision
@@ -219,7 +219,7 @@ gcloud run jobs execute JOB_NAME --region=REGION
 
 #### Microservices
 - Each microservice as separate Cloud Run service
-- Service-to-service authentication with service accounts
+- Service-to-service authentication with [[security-iam|service accounts]]
 - Cloud Trace for distributed tracing
 - Internal ingress for inter-service communication
 
@@ -231,8 +231,8 @@ gcloud run jobs execute JOB_NAME --region=REGION
 
 ### Security Best Practices
 - **Authentication**: Always enable unless truly public
-- **Service Identity**: Unique service account per service
-- **IAM**: Principle of least privilege
+- **Service Identity**: Unique [[security-iam|service account]] per service
+- **[[security-iam|IAM]]**: Principle of least privilege
 - **VPC Service Controls**: Prevent data exfiltration
 - **Binary Authorization**: Only deploy verified images
 - **Secrets**: Use Secret Manager, never hardcode
@@ -276,7 +276,7 @@ gcloud run jobs execute JOB_NAME --region=REGION
 - **Cloud SQL Proxy**: Automatic with Cloud Run
   - Add Cloud SQL connection in service config
   - No VPC Connector needed
-  - Automatic IAM authentication option
+  - Automatic [[security-iam|IAM]] authentication option
 - **Firestore/Bigtable**: Direct connection via APIs
 - **Connection limits**: Consider serverless nature
 

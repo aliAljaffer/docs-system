@@ -84,7 +84,7 @@ tags:
 - [[app-engine|App Engine]] (Standard & Flexible)
 - GKE
 - Cloud Functions
-- Must be in same VPC region
+- Must be in same [[networking-vpc|VPC]] region
 
 ### Networking
 - **Private IP only** (within VPC)
@@ -230,7 +230,7 @@ Application → Memorystore (check cache)
 ### Security Best Practices
 - **Private IP only** (no internet exposure)
 - VPC firewall rules
-- VPC Service Controls for data protection
+- [[networking-vpc|VPC Service Controls]] for data protection
 - Redis AUTH for authentication
 - TLS/SSL for transit encryption
 - IAM roles:

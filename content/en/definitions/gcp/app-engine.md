@@ -14,7 +14,7 @@ tags:
 `gcp` `compute`
 
 ## App Engine
-**AWS Equivalent:** Elastic Beanstalk
+**AWS Equivalent:** [[compute-beanstalk|Elastic Beanstalk]]
 **Fully managed PaaS** for web applications and APIs
 
 ### Environments
@@ -167,10 +167,10 @@ cron:
 - **Deprecated, use Memorystore instead**
 
 ### Security
-- **Cloud IAM** for access control
+- **[[security-iam|Cloud IAM]]** for access control
 - **App Engine firewall**: IP allowlist/denylist
 - **SSL/TLS**: Automatic for `.appspot.com` domains
-- **Service accounts**: Each app runs with service account
+- **[[security-iam|Service accounts]]**: Each app runs with service account
 - **Identity-Aware Proxy**: User authentication
 
 ### Regional Deployment
@@ -312,7 +312,7 @@ gcloud app services set-traffic default --splits=v2=1
 ### Database Integration
 - **Cloud SQL**: Relational database
   - Standard: Use Cloud SQL Proxy
-  - Flexible: Direct VPC connection
+  - Flexible: Direct [[networking-vpc|VPC]] connection
 - **Firestore**: NoSQL, native integration
 - **Datastore**: Legacy NoSQL (Firestore-compatible)
 - **Bigtable**: Wide-column NoSQL
@@ -321,7 +321,7 @@ gcloud app services set-traffic default --splits=v2=1
 ### Security Best Practices
 - **App Engine Firewall**: Restrict source IPs
 - **Identity-Aware Proxy**: User authentication and authorization
-- **Service account**: Minimal permissions
+- **[[security-iam|Service account]]**: Minimal permissions
 - **Secrets**: Secret Manager, not environment vars
 - **HTTPS only**: Enforce secure connections
 - **Security scanning**: Web Security Scanner
@@ -372,7 +372,7 @@ dispatch:
 ```
 
 #### VPC Connector (Flexible)
-- Connect to VPC resources
+- Connect to [[networking-vpc|VPC]] resources
 - Private IP communication
 - Access [[compute-engine|Compute Engine]], Cloud SQL via private IP
 
@@ -390,7 +390,7 @@ beta_settings:
 ### Well-Architected Considerations
 - **Operational Excellence**: Fully managed, automatic updates, traffic splitting
 - **Reliability**: Multi-zone deployment, health checks, automatic instance replacement
-- **Security**: IAM, App Engine firewall, IAP, HTTPS, secrets management
+- **Security**: [[security-iam|IAM]], App Engine firewall, IAP, HTTPS, secrets management
 - **Performance**: Auto-scaling, caching, CDN integration, warmup requests
 - **Cost**: Scale to zero (Standard), sustained use discounts, static file serving
 - **Sustainability**: Efficient resource usage, scale to zero when idle

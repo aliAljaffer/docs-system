@@ -22,4 +22,4 @@ Compare the cost of:
 
 ![](/assets/vault/pasted-image-20241222175902.webp)
 
-pricing calculator
+[[financial-management-pricing-calculator|pricing calculator]]
