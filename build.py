@@ -68,6 +68,7 @@ markdown_extensions:
   - pymdownx.tasklist:
       custom_checkbox: true
   - attr_list
+  - md_in_html
   - tables
   - toc:
       permalink: true
@@ -242,7 +243,7 @@ def convert_callouts(text: str) -> str:
             body = lines[i][1:].lstrip()
             out.append(f"    {body}" if body else "")
             i += 1
-    return "\n".join(out)
+    return "\n".join(out).replace("\n<details>\n", '\n<details markdown="1">\n')
 
 
 LINK = re.compile(r"(!?)\[([^\]]*)\]\(([^)\s]+)((?:\s+\"[^\"]*\")?)\)")
@@ -295,30 +296,44 @@ def normalize(base: Path, entry: dict, kind: str) -> None:
         index.write_text(match.group(1) + link + text[match.end():] if match else link + text)
 
 
+def mask_fences(text: str) -> str:
+    """Blank fenced lines, same length, so headings inside code blocks do not end a section."""
+    out: list[str] = []
+    fenced = False
+    for line in text.splitlines(keepends=True):
+        if line.lstrip().startswith("```"):
+            fenced = not fenced
+            out.append(line)
+        else:
+            out.append(re.sub(r"[^\n]", " ", line) if fenced else line)
+    return "".join(out)
+
+
 def apply_content(acts: Path, ep: str) -> tuple[str, str]:
     spec = TASKS.get(ep, {})
     if spec.get("apply") == "none" or not spec.get("file"):
         return "", ""
     path = acts / spec["file"]
     text = path.read_text()
+    masked = mask_fences(text)
     if "section" in spec:
         heading = spec["section"]
         match = re.search(
-            rf"^## {re.escape(heading)}\s*$(.*?)(?=^## |\Z)", text, flags=re.M | re.S
+            rf"^## {re.escape(heading)}\s*$(.*?)(?=^## |\Z)", masked, flags=re.M | re.S
         )
         if not match:
             raise SystemExit(f"{path.name}: section not found: {heading}")
-        return match.group(1).strip(), spec["file"]
+        return text[match.start(1):match.end(1)].strip(), spec["file"]
     blocks = []
     for number in spec.get("tasks", []):
         match = re.search(
             rf"^#### Task {number}: .+?(?=^#### Task |^### |^## |\Z)",
-            text,
+            masked,
             flags=re.M | re.S,
         )
         if not match:
             raise SystemExit(f"{path.name}: Task {number} not found")
-        blocks.append(match.group(0).strip())
+        blocks.append(text[match.start():match.end()].strip())
     return "\n\n".join(blocks), spec["file"]
 
 
