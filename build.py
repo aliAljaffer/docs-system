@@ -29,6 +29,7 @@ TASKS = yaml.safe_load((ROOT / "episode-tasks.yaml").read_text())["episodes"]
 ZENSICAL = os.environ.get("ZENSICAL") or shutil.which("zensical") or "zensical"
 
 SITE_URL = "https://docs.alialjaffer.com"
+SITE_NAME = "Ali's Docs"
 TAGLINE = "Documentation for the projects I build and the courses I teach."
 
 ACTS = [
@@ -41,7 +42,8 @@ ACTS = [
 ]
 
 BASE_THEME = """\
-site_name: Ali's Docs
+site_name: {site_name}
+site_description: {tagline}
 site_url: {site_url}/
 docs_dir: {docs_dir}
 site_dir: site
@@ -108,10 +110,12 @@ def summary_of(path: Path) -> str:
         text = text[text.find("\n---\n", 4) + 5:]
     for block in re.split(r"\n\s*\n", text):
         block = block.strip()
-        if not block or block[0] in "#|-*>!<`[:" or block.startswith(("```", "**")):
+        if not block or block[0] in "#|-*>!<`[:" or block.startswith(("```", "**")) or re.match(r"\d+\.", block):
             continue
         plain = re.sub(r"\[([^\]]*)\]\([^)]*\)", r"\1", block)
         plain = re.sub(r"[*_`]", "", " ".join(plain.split()))
+        if len(plain) < 30:
+            continue
         return plain if len(plain) <= 200 else plain[:197].rsplit(" ", 1)[0] + "..."
     return ""
 
@@ -374,6 +378,40 @@ def four_hats(base: Path) -> None:
     (base / "episodes.md").write_text("\n".join(lines))
 
 
+def split_meta(text: str) -> tuple[dict, str]:
+    if text.startswith("---\n") and "\n---\n" in text[4:]:
+        end = text.find("\n---\n", 4)
+        return yaml.safe_load(text[4:end]) or {}, text[end + 5:]
+    return {}, text
+
+
+def label_pages(root: Path, config: dict) -> None:
+    """Give every page a tab title and description that name that page."""
+    owners = {}
+    for kind in ("projects", "courses"):
+        for entry in config.get(kind, []):
+            owners[fetch.dest_of(kind, entry)] = entry
+    for page in sorted(root.rglob("*.md")):
+        rel = page.relative_to(root)
+        if rel.parts[0] == "assets":
+            continue
+        meta, body = split_meta(page.read_text())
+        heading = title_of(page) if re.search(r"^# ", body, flags=re.M) else page.stem
+        owner = next((e for d, e in owners.items() if rel.as_posix().startswith(d + "/")), None)
+        if rel.as_posix() == "index.md":
+            heading = SITE_NAME
+        elif owner and rel.name == "index.md" and len(rel.parts) == len(Path(fetch.dest_of("projects" if rel.parts[0] == "projects" else "courses", owner)).parts) + 1:
+            heading = owner["title"]
+        elif owner:
+            heading = f"{heading} - {owner['title']}"
+        meta.setdefault("title", "Home" if heading == SITE_NAME else heading)
+        if "description" not in meta:
+            summary = owner["description"] if owner and rel.name == "index.md" else summary_of(page)
+            if summary:
+                meta["description"] = summary
+        page.write_text("---\n" + yaml.safe_dump(meta, sort_keys=False, allow_unicode=True) + "---\n" + body)
+
+
 def prepare(root: Path, config: dict) -> None:
     for kind in ("projects", "courses"):
         for entry in config.get(kind, []):
@@ -489,8 +527,9 @@ def assemble() -> Path:
     inject_home(BUILD, config)
     write_index(BUILD, config, "projects", "Projects", TAGLINE)
     write_index(BUILD, config, "courses", "Courses", "Long-form courses built around one project or one skill path.")
+    label_pages(BUILD, config)
     (ROOT / "mkdocs.en.yml").write_text(
-        BASE_THEME.format(site_url=SITE_URL, docs_dir=BUILD.relative_to(ROOT).as_posix(), v=asset_version())
+        BASE_THEME.format(site_name=SITE_NAME, tagline=TAGLINE, site_url=SITE_URL, docs_dir=BUILD.relative_to(ROOT).as_posix(), v=asset_version())
         + "\nnav:\n"
         + yaml.safe_dump(nav_for(BUILD, config), sort_keys=False, allow_unicode=True)
     )

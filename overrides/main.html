@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block extrahead %}
+  {% set heading = config.site_name if page.canonical_url == config.site_url else (page.meta.title if page.meta and page.meta.title else page.title) %}
+  {% set summary = page.meta.description if page.meta and page.meta.description else config.site_description %}
+  <meta property="og:site_name" content="{{ config.site_name }}">
+  <meta property="og:type" content="{{ 'website' if page.is_homepage else 'article' }}">
+  <meta property="og:title" content="{{ heading | e }}">
+  <meta property="og:url" content="{{ page.canonical_url }}">
+  <meta property="og:image" content="{{ config.site_url }}assets/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ heading | e }}">
+  {% if summary %}
+  <meta name="description" content="{{ summary | e }}">
+  <meta property="og:description" content="{{ summary | e }}">
+  <meta name="twitter:description" content="{{ summary | e }}">
+  {% endif %}
+  {{ super() }}
+{% endblock %}

@@ -81,6 +81,19 @@ class SiteTests(unittest.TestCase):
         self.assertIn("aws/security-iam", slugs)
         self.assertNotIn("index", slugs)
 
+    def test_page_titles_and_previews(self) -> None:
+        cases = {
+            "projects/s2t/index.html": "<title>s2t - Ali's Docs</title>",
+            "definitions/aws/security-iam/index.html": "<title>IAM - Ali's Docs</title>",
+        }
+        for rel, title in cases.items():
+            page = (SITE / rel).read_text().replace("&#x27;", "'")
+            self.assertIn(title, page, rel)
+            self.assertIn('property="og:title"', page, rel)
+            self.assertIn('property="og:url"', page, rel)
+            self.assertIn("assets/og.png", page, rel)
+        self.assertTrue((SITE / "assets" / "og.png").exists())
+
     def test_wiki(self) -> None:
         self.assertTrue((SITE / "definitions" / "rest" / "index.html").exists())
         self.assertIn("/definitions/", (SITE / "assets" / "backlinks.json").read_text())
