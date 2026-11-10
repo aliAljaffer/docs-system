@@ -216,7 +216,7 @@ Single Publisher → Topic → Sub A (priority) → Fast processing
 - 99.95% availability SLA
 
 ### Security Best Practices
-- **[[security-iam|IAM]] roles**:
+- **[[iam|IAM]] roles**:
   - `pubsub.publisher`: Publish messages
   - `pubsub.subscriber`: Receive messages
   - `pubsub.viewer`: List topics/subscriptions

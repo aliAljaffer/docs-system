@@ -274,7 +274,7 @@ Performance Issue Workflow:
 
 ### Security Considerations
 - **No sensitive data in profiles**: Function names, not data
-- **Access control**: [[security-iam|IAM]] roles
+- **Access control**: [[iam|IAM]] roles
   - `cloudprofiler.user`: View profiles
   - `cloudprofiler.admin`: Full access
 - **VPC Service Controls**: Prevent profile data exfiltration

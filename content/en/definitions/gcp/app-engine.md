@@ -167,10 +167,10 @@ cron:
 - **Deprecated, use Memorystore instead**
 
 ### Security
-- **[[security-iam|Cloud IAM]]** for access control
+- **[[iam|Cloud IAM]]** for access control
 - **App Engine firewall**: IP allowlist/denylist
 - **SSL/TLS**: Automatic for `.appspot.com` domains
-- **[[security-iam|Service accounts]]**: Each app runs with service account
+- **[[iam|Service accounts]]**: Each app runs with service account
 - **Identity-Aware Proxy**: User authentication
 
 ### Regional Deployment
@@ -312,7 +312,7 @@ gcloud app services set-traffic default --splits=v2=1
 ### Database Integration
 - **Cloud SQL**: Relational database
   - Standard: Use Cloud SQL Proxy
-  - Flexible: Direct [[networking-vpc|VPC]] connection
+  - Flexible: Direct [[vpc|VPC]] connection
 - **Firestore**: NoSQL, native integration
 - **Datastore**: Legacy NoSQL (Firestore-compatible)
 - **Bigtable**: Wide-column NoSQL
@@ -321,7 +321,7 @@ gcloud app services set-traffic default --splits=v2=1
 ### Security Best Practices
 - **App Engine Firewall**: Restrict source IPs
 - **Identity-Aware Proxy**: User authentication and authorization
-- **[[security-iam|Service account]]**: Minimal permissions
+- **[[iam|Service account]]**: Minimal permissions
 - **Secrets**: Secret Manager, not environment vars
 - **HTTPS only**: Enforce secure connections
 - **Security scanning**: Web Security Scanner
@@ -372,7 +372,7 @@ dispatch:
 ```
 
 #### VPC Connector (Flexible)
-- Connect to [[networking-vpc|VPC]] resources
+- Connect to [[vpc|VPC]] resources
 - Private IP communication
 - Access [[compute-engine|Compute Engine]], Cloud SQL via private IP
 
@@ -390,7 +390,7 @@ beta_settings:
 ### Well-Architected Considerations
 - **Operational Excellence**: Fully managed, automatic updates, traffic splitting
 - **Reliability**: Multi-zone deployment, health checks, automatic instance replacement
-- **Security**: [[security-iam|IAM]], App Engine firewall, IAP, HTTPS, secrets management
+- **Security**: [[iam|IAM]], App Engine firewall, IAP, HTTPS, secrets management
 - **Performance**: Auto-scaling, caching, CDN integration, warmup requests
 - **Cost**: Scale to zero (Standard), sustained use discounts, static file serving
 - **Sustainability**: Efficient resource usage, scale to zero when idle

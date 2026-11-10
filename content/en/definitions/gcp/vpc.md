@@ -71,7 +71,7 @@ tags:
 - Stateful (return traffic automatically allowed)
 - Applied via:
   - **Target tags**: Flexible, most common
-  - **Target service accounts**: [[security-iam|IAM]]-based, more secure
+  - **Target service accounts**: [[iam|IAM]]-based, more secure
   - **All instances**: Apply to entire VPC
   - **Specified instances**: By name
 
@@ -82,7 +82,7 @@ tags:
 - **Source/Destination**:
   - IP ranges (CIDR)
   - Tags (for ingress)
-  - [[security-iam|Service accounts]]
+  - [[iam|Service accounts]]
 - **Protocols and ports**: TCP, UDP, ICMP, etc.
 
 #### Implied Firewall Rules
@@ -123,7 +123,7 @@ tags:
 
 #### VPC Peering Limitations
 - Maximum 25 peered VPCs per VPC (can be increased)
-- [[security-iam|IAM]] permissions required on both VPCs
+- [[iam|IAM]] permissions required on both VPCs
 - Firewall rules apply independently in each VPC
 
 ### Shared VPC
@@ -152,7 +152,7 @@ tags:
 - Control access to resources based on:
   - IP address
   - VPC network
-  - Identity context (user, [[security-iam|service account]], device)
+  - Identity context (user, [[iam|service account]], device)
 - Supported services: Cloud Storage, Cloud SQL, BigQuery, etc.
 - See VPC Service Controls for full details
 
@@ -293,7 +293,7 @@ gcloud compute routes create ROUTE_NAME \
 ### Key Concepts for ACE
 - Creating custom VPC networks and subnets
 - Understanding regional subnets vs AWS AZ-specific subnets
-- Configuring firewall rules with tags and [[security-iam|service accounts]]
+- Configuring firewall rules with tags and [[iam|service accounts]]
 - Enabling Private Google Access for private VMs
 - Managing static and ephemeral IP addresses
 - Expanding subnet ranges without downtime
@@ -351,7 +351,7 @@ gcloud compute routes create ROUTE_NAME \
 
 ### Security Best Practices
 - **Least Privilege Firewall Rules**: Deny by default, allow explicitly
-- **Use [[security-iam|Service Accounts]] for Rules**: More secure than tags
+- **Use [[iam|Service Accounts]] for Rules**: More secure than tags
 - **Hierarchical Firewall Policies**: Enforce org-wide rules
 - **Private Google Access**: Avoid external IPs when possible
 - **VPC Service Controls**: Prevent data exfiltration
@@ -373,7 +373,7 @@ gcloud compute routes create ROUTE_NAME \
   - Design: Single global VPC vs multiple regional VPCs
 - **Subnets**: GCP subnets are regional, AWS subnets are AZ-specific
   - Simplifies multi-AZ deployments in GCP
-- **Security Groups**: Map to firewall rules with tags/[[security-iam|service accounts]]
+- **Security Groups**: Map to firewall rules with tags/[[iam|service accounts]]
 - **Network ACLs**: Map to firewall rules (stateful in GCP)
 - **VPC Endpoints**: Use Private Google Access and Private Service Connection
 - **Transit Gateway**: Use VPC peering or Network Connectivity Center

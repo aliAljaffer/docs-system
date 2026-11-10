@@ -15,7 +15,7 @@ tags:
 [[cloud-concepts|AWS]]
 CI/CD
 [[course-link-and-progress|IaaS]]
-Containerization
+[[cloud/containers|Containerization]]
 ## Progress keeping
 ### 11/21/2024
 [stopped @ 1:29:49](https://youtu.be/JsmhEgIV1mQ?t=5389) on [[storage-efs|efs]]

@@ -35,7 +35,7 @@ Three configuration layers, in order of where they attach:
 
 **[[cloud-load-balancing|Load balancers]] as perimeter controls:** external LBs accept internet traffic, internal LBs accept RFC 1918 only (scope and exposure are independent); secure the entry with SSL policies (minimum TLS version and ciphers) and Google-managed certificates; [[cloud-armor|Cloud Armor]] attaches to external global LB backends.
 
-**[[identity-aware-proxy|Identity-Aware Proxy]]:** PCSE wants config: enable IAP on a backend service or for TCP forwarding; control with IAM roles (`roles/iap.httpsResourceAccessor`); combine with ACM access levels for context-aware access. IAP TCP forwarding gives secure RDP/SSH without public IPs or bastions.
+**[[identity-aware-proxy|Identity-Aware Proxy]]:** PCSE wants config: enable IAP on a backend service or for TCP forwarding; control with [[gcp/iam|IAM]] roles (`roles/iap.httpsResourceAccessor`); combine with ACM access levels for context-aware access. IAP TCP forwarding gives secure RDP/SSH without public IPs or bastions.
 
 **[[cloud-armor|Cloud Armor]]: the WAF and edge security product.**
 - Security policies attach to external HTTPS/TCP proxy load balancer backends (and Cloud CDN).

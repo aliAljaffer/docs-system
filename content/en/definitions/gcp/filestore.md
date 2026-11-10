@@ -87,10 +87,10 @@ tags:
 ### Filestore Features
 #### Network Connectivity
 - Accessible via **VPC network**
-- Requires [[networking-vpc|VPC]] with Private Services Access
+- Requires [[vpc|VPC]] with Private Services Access
 - Can access from:
-  - Compute Engine VMs in same [[networking-vpc|VPC]]
-  - GKE clusters in same [[networking-vpc|VPC]]
+  - Compute Engine VMs in same [[vpc|VPC]]
+  - GKE clusters in same [[vpc|VPC]]
   - On-premises via Cloud VPN or Cloud Interconnect
 - **Cannot access from internet directly**
 
@@ -518,7 +518,7 @@ nfsvers=3          # NFSv3 protocol
 - **Network-level**: VPC firewall rules, Private Services Access
 - **File-level**: POSIX permissions (UID/GID)
   - Implement consistent UID/GID across clients
-  - Use [[security-iam|service accounts]] for VM identity
+  - Use [[iam|service accounts]] for VM identity
 - **Audit**: Cloud Audit Logs for admin operations
   - Track instance creation/deletion
   - Snapshot/backup operations

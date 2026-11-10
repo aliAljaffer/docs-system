@@ -324,7 +324,7 @@ VPC Resources
   - Never expose internal IPs publicly
   - Restrict to specific [[vpc|VPCs]]
 - **VPC Service Controls**: Protect DNS zones
-- **[[security-iam|IAM]]**: Least privilege for DNS management
+- **[[iam|IAM]]**: Least privilege for DNS management
   - `roles/dns.admin`: Full DNS management
   - `roles/dns.reader`: Read-only access
 - **Audit logging**: Track DNS zone changes

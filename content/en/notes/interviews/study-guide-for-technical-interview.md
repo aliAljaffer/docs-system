@@ -63,13 +63,13 @@ tags:
 - Trees (Binary Trees, BST, Heaps, Trie)
 - Graphs (BFS, DFS, Dijkstra's Algorithm)
 - Sorting algorithms (Merge Sort, Quick Sort, Bubble Sort)
-- Dynamic programming (Memoization, Tabulation)
+- Dynamic programming ([[web/memoization|Memoization]], Tabulation)
 
 ## **Design of IT Systems (CI/CD, etc)**
 
 - Continuous Integration/Continuous Deployment (CI/CD)
 - DevOps principles and tools (Jenkins, Docker, Kubernetes)
-- Infrastructure as Code (Terraform, Ansible)
+- [[cloud/infrastructure-as-code|Infrastructure as Code]] (Terraform, Ansible)
 - Monitoring and Logging (Prometheus, Grafana, ELK stack)
 
 ## **Intro to Software Engineering (Agile, Waterfall methods)**
@@ -96,7 +96,7 @@ tags:
 - Scripting languages vs compiled languages
 - Concurrency and Parallelism in different languages
 
-## **Cryptography & Data Security**
+## **[[security/cryptography|Cryptography]] & Data Security**
 
 - Symmetric vs Asymmetric encryption (AES, RSA, ECC)
 - Hashing algorithms (SHA, MD5, bcrypt)
@@ -114,7 +114,7 @@ tags:
 
 ## **Network Security Attacks and Defenses**
 
-- OSI Model and TCP/IP Stack
+- [[networking/osi-model|OSI Model]] and TCP/IP Stack
 - Common attacks (MITM, DDoS, Phishing, SQL Injection)
 - Firewall and IDS/IPS
 - VPN and encryption protocols (IPSec, TLS)
@@ -122,7 +122,7 @@ tags:
 
 ## **Cyber Network Security**
 
-- Authentication mechanisms (MFA, OAuth, SAML)
+- Authentication mechanisms ([[cloud/multi-factor-authentication|MFA]], OAuth, SAML)
 - Secure coding practices (OWASP Top 10)
 - Endpoint security
 - Secure network architecture

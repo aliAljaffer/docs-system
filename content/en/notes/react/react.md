@@ -297,7 +297,7 @@ import { configureStore } from "@reduxjs/toolkit";
   }
   ```
 
-## Redux vs Context API
+## Redux vs [[react/main-context-concepts|Context API]]
 
 ### Pros and Cons
 
@@ -340,7 +340,7 @@ decreaseItemQuantity(state, action) {
 | :------------------------------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------- |
 | Global state management in **small** apps                                                          | Global state management in **large** apps                                                                    |
 | When you need to share a value that doesn't change often [Color theme, preferred language, etc...] | When you have lots of global UI state that needs to be updated frequently [Shopping cart, current tabs, ...] |
-| When you need to solve a simple prop drilling problem                                              | When you have complex state with nested objects and arrays                                                   |
+| When you need to solve a simple [[react/prop-drilling|prop drilling]] problem                                              | When you have complex state with nested objects and arrays                                                   |
 | When you need to manage state in local sub-tree of the app                                         |                                                                                                              |
 
 ## TypeScript
@@ -734,7 +734,7 @@ When you want to use `<Image>` but don't want to set height/width, statically im
 
 **Next Image Unconfigured Host:** Provide hostname and path to make life easier.
 
-## Suspense
+## [[react/suspense|Suspense]]
 
 Built-in React component that are not yet ready to be rendered.
 
@@ -793,7 +793,7 @@ If all routes in an app are static, the entire app can be exported as a static s
 
 HTML is generated at request time, and useful for personalized user data (carts).
 
-When deployed to vercel: each dynamic route becomes a serverless function.
+When deployed to vercel: each dynamic route becomes a [[cloud/serverless|serverless]] function.
 
 A route switches to dynamic rendering in these scenarios:
 

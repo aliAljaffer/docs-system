@@ -95,7 +95,7 @@ tags:
 
 ### Access Control
 #### Uniform (Bucket-level) - Recommended
-- **Uses only [[security-iam|Cloud IAM]]**
+- **Uses only [[iam|Cloud IAM]]**
 - Applies to all objects in bucket
 - **Cannot be reverted to fine-grained for 90 days**
 - Simpler, recommended for new buckets

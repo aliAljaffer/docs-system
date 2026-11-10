@@ -134,7 +134,7 @@ Algorithm
 
 talk about yourself in 5 minutes
 
-OSI layers:
+[[networking/osi-model|OSI layers]]:
 - **Physical Layer**: This is the hardware part of communication, like cables, switches, and electrical signals. It sends raw bits over the physical medium.
 - **Data Link Layer**: Ensures that data is transferred error-free over the physical link. It also handles addressing on a local network (MAC addresses).
 - **Network Layer**: Responsible for routing data between devices on different networks. It uses IP addresses to decide the best path for data to travel.

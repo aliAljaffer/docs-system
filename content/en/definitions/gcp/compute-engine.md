@@ -131,7 +131,7 @@ See Persistent Disk for full details
 - **AWS doesn't have this** - AWS stops/starts instances during maintenance
 
 ### OS Login
-- Manage SSH access using [[security-iam|IAM]]
+- Manage SSH access using [[iam|IAM]]
 - No need to manage SSH keys manually
 - OS Login 2FA available
 - **Best practice for SSH access control**
@@ -139,7 +139,7 @@ See Persistent Disk for full details
 ### Metadata Server
 - `http://metadata.google.internal/computeMetadata/v1/`
 - Query instance metadata, project metadata
-- Get access tokens for [[security-iam|service accounts]]
+- Get access tokens for [[iam|service accounts]]
 - Similar to AWS Instance Metadata Service
 
 ### Startup Scripts & Metadata
@@ -231,7 +231,7 @@ gcloud compute disks create DISK_NAME \
 - Configuring autoscaling and auto-healing
 - Managing disks (attach, detach, snapshot)
 - Using startup scripts
-- Basic networking ([[networking-vpc|VPC]], firewall rules)
+- Basic networking ([[vpc|VPC]], firewall rules)
 - OS Login for SSH access
 - Viewing instance inventory and logs
 
@@ -254,7 +254,7 @@ gcloud compute disks create DISK_NAME \
 - **Security**:
   - Shielded VMs for secure boot
   - Confidential VMs for data encryption in-use
-  - [[security-iam|Service accounts]] with minimal permissions
+  - [[iam|Service accounts]] with minimal permissions
   - VPC Service Controls for data exfiltration prevention
 
 ### Migration Strategies
@@ -289,13 +289,13 @@ gcloud compute disks create DISK_NAME \
 - **Load Balancing**: Cloud Load Balancing with MIGs
 - **Storage**: Persistent Disk, Filestore, Cloud Storage
 - **Databases**: Cloud SQL, Cloud Spanner for persistent data
-- **Networking**: [[networking-vpc|VPC]], Cloud VPN, Cloud Interconnect
+- **Networking**: [[vpc|VPC]], Cloud VPN, Cloud Interconnect
 - **Monitoring**: Cloud Monitoring, Cloud Logging
 
 ### Well-Architected Considerations
 - **Operational Excellence**: Automated patching, OS image management, monitoring
 - **Reliability**: Multi-zone/region deployment, health checks, backups, live migration
-- **Security**: Least privilege [[security-iam|IAM]], Shielded VMs, encryption at-rest and in-transit
+- **Security**: Least privilege [[iam|IAM]], Shielded VMs, encryption at-rest and in-transit
 - **Performance**: Right machine type, local SSD, network throughput optimization
 - **Cost**: Sustained use, committed use, preemptible VMs, rightsizing
 - **Sustainability**: Choose efficient machine types, rightsize to reduce carbon footprint

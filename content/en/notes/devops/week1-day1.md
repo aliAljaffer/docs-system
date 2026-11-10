@@ -21,7 +21,7 @@ Frequently merging code changes from multiple developers into a central reposito
 - Github Actions
 ### CD - Continuous Delivery
 Automatic the release and delivery process of the software so that it can be delivered in short, frequent iterations.
-### IaC - Infrastructure as Code
+### IaC - [[cloud/infrastructure-as-code|Infrastructure as Code]]
 Create infrastructure from code, rather than manually clicking or dealing with a portal/software to provision infrastructure. The benefits of this is that code is repeatable, version-controlled, and because it's automated, it's less prone to human error.
 ### CI/CD Pipeline
 The automated workflow that code changes go through on their way to prod

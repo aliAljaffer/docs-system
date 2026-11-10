@@ -62,7 +62,7 @@ tags:
 - it costs less to setup your own LB but it will be more effort on your end
 - It is integrated with many AWS services
 	- EC2, EC2 Auto Scaling Groups, ECS
-	- AWS Cert. Manager, CloudWatch
+	- AWS Cert. Manager, [[aws/management-and-governance-cloudwatch|CloudWatch]]
 	- Route 53, WAF, Global Accelerator
 ### Health Checks
 - ELB checks if an instance is properly working, in order to send traffic to it.
@@ -431,7 +431,7 @@ NS = Name servers for the hosted zone
 ### Hosted Zones
 A hosted zone is a container of records that define how to route traffic to a domain and its subdomains
 - **Public Hosted Zone**: Records that specify how to route traffic on the internet
-- **Private Hosted Zone**: Records that specify how to route traffic internally (on a VPC, for example)
+- **Private Hosted Zone**: Records that specify how to route traffic internally (on a [[aws/networking-vpc|VPC]], for example)
 Each hosted zone costs $0.50 per month.
 ![](/assets/vault/pasted-image-20250608172727.webp)
 ### CNAME vs Alias

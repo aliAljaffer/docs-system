@@ -1,6 +1,6 @@
 # Operations
 
-## High availability
+## [[cloud/high-availability|High availability]]
 
 The Deployment runs two replicas with leader election. One replica works. The other waits. After the leader stops, the other takes over in about 20 seconds (measured with a killed process).
 
@@ -10,7 +10,7 @@ The manager serves Prometheus metrics. Enable them with `--metrics-bind-address`
 
 | Metric | Meaning |
 |---|---|
-| `ziti_operator_api_requests_total{method,kind,code}` | Calls to the Ziti API. `code` is the HTTP status, or `error`. |
+| `ziti_operator_api_requests_total{method,kind,code}` | Calls to the Ziti API. `code` is the [[status-code|HTTP status]], or `error`. |
 | `ziti_operator_resource_conditions{kind,type,status}` | Resources by condition, for every kind. |
 | `ziti_operator_identity_certificate_expires_seconds{namespace,name}` | Seconds until the earliest client certificate of a `ZitiIdentity` expires. Negative when already expired. |
 | `ziti_operator_app_service_terminators{namespace,name,service}` | Terminators hosting each Ziti service of a `ZitiApp`. |

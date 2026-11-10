@@ -32,7 +32,7 @@ Right now, infra provisioning and code deploys are manual. Your job is to **desi
 10. **Automate Infrastructure Provisioning** with **Github Actions** (terraform init → plan → apply)
 ## Reference Application (What you’ll deploy)
 - **Frontend:** React, TypeScript, and Vite.
-- **Backend:** Maven-Java REST API.
+- **Backend:** Maven-Java [[rest|REST API]].
 - **Database:** Azure SQL Database (single DB is fine) or Postgres Database.
 > Keep frontend and backend as **independent deployables** (separate repos or folders, separate pipelines).
 

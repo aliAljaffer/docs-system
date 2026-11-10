@@ -205,7 +205,7 @@ Error Reporting → Pub/Sub → Cloud Function → PagerDuty
 
 ### Compliance & Security
 - **No PII in error messages**: Sanitize before logging
-- **Access control**: [[security-iam|IAM]] roles
+- **Access control**: [[iam|IAM]] roles
   - `errorreporting.user`: View errors
   - `errorreporting.admin`: Full access
 - **VPC Service Controls**: Prevent data exfiltration

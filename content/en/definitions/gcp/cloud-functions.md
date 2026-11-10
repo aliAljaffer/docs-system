@@ -91,17 +91,17 @@ def my_function(request):
 - More memory = faster execution but higher cost
 
 ### Networking
-- **VPC Connector** (1st gen): Connect to [[networking-vpc|VPC]] resources
-- **Direct VPC egress** (2nd gen): Simpler [[networking-vpc|VPC]] connectivity
-- Access Cloud SQL via Unix sockets or [[networking-vpc|VPC]]
+- **VPC Connector** (1st gen): Connect to [[vpc|VPC]] resources
+- **Direct VPC egress** (2nd gen): Simpler [[vpc|VPC]] connectivity
+- Access Cloud SQL via Unix sockets or [[vpc|VPC]]
 - Static IP via Cloud NAT
 
 ### Security
 - **Authentication**:
   - HTTP: `roles/cloudfunctions.invoker` for authenticated
-  - Service-to-service: [[security-iam|Service account]] tokens
+  - Service-to-service: [[iam|Service account]] tokens
 - **Secrets**: Secret Manager integration
-- **[[security-iam|Service Account]]**: Function runs with associated service account identity
+- **[[iam|Service Account]]**: Function runs with associated service account identity
 - **VPC Service Controls**: Prevent data exfiltration
 
 ### Cloud Functions vs Cloud Run vs App Engine
@@ -185,7 +185,7 @@ gcloud functions deploy FUNCTION_NAME \
 - Viewing function logs and execution history
 - Setting appropriate memory and timeout values
 - Understanding cold starts and warming strategies
-- Managing function access with [[security-iam|IAM]]
+- Managing function access with [[iam|IAM]]
 
 ---
 
@@ -248,7 +248,7 @@ gcloud functions deploy FUNCTION_NAME \
 
 ### Security Best Practices
 - **Authentication**: Require for sensitive functions
-- **[[security-iam|Service Account]]**: Minimal permissions, unique per function
+- **[[iam|Service Account]]**: Minimal permissions, unique per function
 - **Secrets**: Use Secret Manager, not environment variables
 - **VPC Service Controls**: Prevent data exfiltration
 - **Input validation**: Always validate and sanitize
@@ -299,7 +299,7 @@ Cloud Storage upload → Function → Transform data → Load to BigQuery
 - Similar event model
 - Runtime differences (check compatibility)
 - VPC connectivity differs
-- [[security-iam|IAM]] model differences
+- [[iam|IAM]] model differences
 - Consider 2nd gen for Lambda parity
 
 #### When to Migrate to Cloud Run
@@ -311,7 +311,7 @@ Cloud Storage upload → Function → Transform data → Load to BigQuery
 ### Well-Architected Considerations
 - **Operational Excellence**: Managed infrastructure, automatic scaling
 - **Reliability**: Automatic retries, multi-region deployment option
-- **Security**: [[security-iam|IAM]], secrets management, VPC connectivity, least privilege
+- **Security**: [[iam|IAM]], secrets management, VPC connectivity, least privilege
 - **Performance**: Right-size memory, connection pooling, global variables
 - **Cost**: Pay-per-invocation, concurrency optimization, right-sizing
 - **Sustainability**: Efficient resource use, scale to zero when idle

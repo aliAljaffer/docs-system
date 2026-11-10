@@ -52,7 +52,7 @@ Each service note contains:
 
 **Security & IAM:**
 
-- [[security-iam|IAM]] - Roles, policies, service accounts, conditions
+- [[iam|IAM]] - Roles, policies, service accounts, conditions
 - Cloud KMS - Key management
 
 **Management:**
@@ -66,33 +66,33 @@ Each service note contains:
 **Compute:**
 
 - Compute Engine - Machine types, preemptible VMs
-- GKE - Autopilot vs Standard, node pools
+- [[gcp/gke|GKE]] - Autopilot vs Standard, node pools
 - Cloud Run - Services vs Jobs
 - Cloud Functions - Event-driven functions
 - App Engine - Standard vs Flexible
 
 **Storage:**
 
-- Cloud Storage - Storage classes
+- [[gcp/cloud-storage|Cloud Storage]] - Storage classes
 - Persistent Disk - Zonal vs Regional
 - Filestore - NFS file system
 
 **Databases:**
 
 - Cloud SQL - MySQL, PostgreSQL, SQL Server
-- BigQuery - Data warehouse
+- [[gcp/bigquery|BigQuery]] - Data warehouse
 - Firestore - NoSQL document database
 - Cloud Spanner - Globally distributed SQL
 - Cloud Bigtable - NoSQL wide-column
 
 **Networking:**
 
-- [[networking-vpc|VPC]] - Subnets, firewall rules, Private Google Access
+- [[vpc|VPC]] - Subnets, firewall rules, Private Google Access
 - Cloud Load Balancing - HTTP(S), Network, Internal
 
 **AI/ML:**
 
-- Vertex AI - Unified ML platform, AutoML
+- [[gcp/vertex-ai|Vertex AI]] - Unified ML platform, AutoML
 - Gemini - Foundation models (basic usage)
 
 ### Section 3: Deploying and implementing a cloud solution (~25%)
@@ -111,7 +111,7 @@ Each service note contains:
 
 **Networking:**
 
-- Creating VPCs, subnets, firewall rules
+- Creating [[gcp/vpc|VPCs]], subnets, firewall rules
 - VPC Peering, Shared VPC
 - Cloud VPN, Cloud Interconnect
 
@@ -147,7 +147,7 @@ Each service note contains:
 
 **Security:**
 
-- [[security-iam|IAM]] - Roles (basic, predefined, custom), service accounts
+- [[iam|IAM]] - Roles (basic, predefined, custom), service accounts
 - Cloud KMS - Encryption keys
 - Secret Manager - Secrets management
 
@@ -171,7 +171,7 @@ Each service note contains:
 - All Compute options: Compute Engine, GKE, Cloud Run, App Engine
 - Storage architecture: Cloud Storage, Persistent Disk, Filestore
 - Database selection: Cloud SQL, Spanner, Bigtable, Firestore, BigQuery, AlloyDB
-- Network topology: [[networking-vpc|VPC]], Load Balancing, hybrid connectivity
+- Network topology: [[vpc|VPC]], Load Balancing, hybrid connectivity
 - **AI/ML architecture**: Vertex AI, Gemini, RAG patterns, MLOps
 
 ### Section 2: Managing and provisioning solution infrastructure (~15%)
@@ -198,7 +198,7 @@ Each service note contains:
 
 **Security:**
 
-- [[security-iam|IAM]] - Resource hierarchy, conditions, least privilege
+- [[iam|IAM]] - Resource hierarchy, conditions, least privilege
 - Cloud KMS - CMEK, encryption strategies
 - Secret Manager - Secret rotation
 - VPC Service Controls - Perimeter security
@@ -688,7 +688,7 @@ Study sections in this order based on service dependencies and complexity:
 
 | Use Case                              | Service                                                              |
 | ------------------------------------- | -------------------------------------------------------------------- |
-| Virtual network                       | [[networking-vpc|VPC]]                                              |
+| Virtual network                       | [[vpc|VPC]]                                              |
 | Load balancing                        | Cloud Load Balancing            |
 | VPN                                   | Cloud VPN                                  |
 | Dedicated connection                  | Cloud Interconnect                |

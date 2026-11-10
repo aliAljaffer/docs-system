@@ -23,7 +23,7 @@ tags:
 		- No public exposure, only AGW
 		- Public access disabled
 		- SQL: Public network disabled
-		- Hardened containers: multi-stage builds, non root user, POLP
+		- Hardened containers: multi-stage builds, non root user, [[cloud/principle-of-least-privilege|POLP]]
 	- Monitoring
 		- App Insights + Log Analytics
 		- Health probes

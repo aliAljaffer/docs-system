@@ -92,9 +92,9 @@ tags:
 ### Workload Identity
 **AWS Equivalent:** IRSA (IAM Roles for Service Accounts)
 - **Recommended way to access Google Cloud services from GKE**
-- Maps Kubernetes Service Accounts to [[security-iam|Google Service Accounts]]
+- Maps Kubernetes Service Accounts to [[iam|Google Service Accounts]]
 - No need to store credentials in pods
-- Fine-grained [[security-iam|IAM]] access control
+- Fine-grained [[iam|IAM]] access control
 
 ```bash
 # Enable Workload Identity on cluster
@@ -108,10 +108,10 @@ gcloud iam service-accounts add-iam-policy-binding GSA@PROJECT.iam.gserviceaccou
 
 ### GKE Networking Modes
 #### VPC-Native (IP Aliasing) - **Recommended**
-- Pods get IPs from [[networking-vpc|VPC]] subnet ranges
+- Pods get IPs from [[vpc|VPC]] subnet ranges
 - **Better integration with Google Cloud services**
 - Required for Private Google Access, VPC Service Controls
-- Required for [[networking-vpc|Shared VPC]]
+- Required for [[vpc|Shared VPC]]
 - Pods are routable within VPC
 
 #### Routes-Based (Legacy)
