@@ -72,6 +72,7 @@ class SiteTests(unittest.TestCase):
         page = next((SITE / "four-hats" / "episodes").glob("ep04-*/index.html")).read_text()
         self.assertIn("<iframe", page)
         self.assertIn("requestFullscreen", page)
+        self.assertIn("md-button", page)
         self.assertTrue(len(list((SITE / "four-hats" / "slides").glob("ep*.html"))) >= 27)
 
     def test_wiki(self) -> None:

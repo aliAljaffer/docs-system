@@ -332,7 +332,7 @@ def embed_slides(base: Path) -> None:
             '<div markdown="0">\n'
             f'<iframe src="{url}" title="Slides" loading="lazy" allowfullscreen '
             'style="width:100%;aspect-ratio:16/9;border:0"></iframe>\n'
-            '<p><button type="button" onclick="this.closest(\'div\').querySelector(\'iframe\').requestFullscreen()">Fullscreen</button> '
+            '<p><button type="button" class="md-button" onclick="this.closest(\'div\').querySelector(\'iframe\').requestFullscreen()">Fullscreen</button> '
             f'<a href="{url}" target="_blank" rel="noopener">Open in new tab</a></p>\n</div>\n'
         )
         text = page.read_text()
