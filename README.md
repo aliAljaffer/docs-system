@@ -32,12 +32,13 @@ projects:
 | `title` | no | Default: the slug in title case |
 | `description` | no | Default: the GitHub repo description |
 | `exclude` | no | Top-level folders to skip |
+| `src` | no | Local folder to copy instead of cloning the repo. `repo`, `branch`, and `path` still build the GitHub links. `four-hats` uses `docs-src/four-hats` |
 
 The build copies every Markdown file and image under `path`. `README.md` becomes the overview page. Without a README, the build creates the overview from the repo description. Links that leave the docs folder point to GitHub.
 
 ## Add a course
 
-Same fields, under `courses:`. The URL is `/<slug>/`. `four-hats` also gets its episode navigation and the verified steps from the act guides (`episode-tasks.yaml`).
+Same fields, under `courses:`. The URL is `/<slug>/`. `four-hats` keeps its docs in `docs-src/four-hats` (this repo is the source). It also gets its episode navigation and the verified steps from the act guides (`episode-tasks.yaml`).
 
 ## Definitions, Home, Contact
 

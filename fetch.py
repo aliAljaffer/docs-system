@@ -18,6 +18,8 @@ SKIP_NAMES = {"AGENTS.md", "CLAUDE.md"}
 
 
 def clone(entry: dict) -> Path:
+    if "src" in entry:
+        return ROOT / entry["src"]
     dest = CACHE / entry["slug"]
     shutil.rmtree(dest, ignore_errors=True)
     cmd = ["git", "clone", "--quiet", "--depth", "1", "--branch", entry["branch"]]
