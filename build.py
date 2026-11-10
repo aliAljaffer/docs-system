@@ -14,7 +14,9 @@ import os
 import re
 import shutil
 import subprocess
-from html import unescape
+from datetime import datetime, timezone
+from email.utils import format_datetime
+from html import escape, unescape
 from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import urlparse
@@ -252,7 +254,7 @@ def blogs_index(root: Path, lang: str) -> None:
         lines.append(f"| {date} | [{title_of(page)}]({page.name}) |")
     lines += [
         "",
-        "The wiki holds the definitions these posts use. The notes hold the study material.",
+        "Browse by topic on the [tags page](../tags/). The wiki holds the definitions these posts use. The notes hold the study material.",
         "",
     ]
     (folder / "index.md").write_text("\n".join(lines))
@@ -717,6 +719,7 @@ def assemble(lang: str) -> Path:
     projects_index(root, lang)
     courses_index(root, lang)
     blogs_index(root, lang)
+    tags_index(root, lang)
     section_index(
         root,
         "notes",
@@ -974,6 +977,45 @@ def build_graph(base: Path, lang: str) -> None:
     )
 
 
+def tags_index(root: Path, lang: str) -> None:
+    if lang != "en":
+        return
+    groups: dict[str, list[tuple[str, str, str]]] = {}
+    for kind in ("blogs", "projects"):
+        for path in sorted((root / kind).glob("*.md")) + sorted((root / kind).glob("*/index.md")):
+            meta = meta_of(path)
+            if not meta.get("title") or not meta.get("date") or path == root / kind / "index.md":
+                continue
+            slug = path.parent.name if path.name == "index.md" else path.stem
+            for tag in meta.get("tags", []):
+                groups.setdefault(tag, []).append((str(meta["date"]), meta["title"], f"../{kind}/{slug}/"))
+    if not groups:
+        return
+    lines = ["# Tags", ""]
+    for tag in sorted(groups):
+        lines += [f"## {tag}", ""]
+        for date, title, url in sorted(groups[tag], reverse=True):
+            lines.append(f"- [{title}]({url}) ({date})")
+        lines.append("")
+    dest = root / "tags"
+    dest.mkdir(exist_ok=True)
+    (dest / "index.md").write_text("\n".join(lines))
+
+
+def build_feed(posts: list[dict]) -> None:
+    items = "".join(
+        f"<item><title>{escape(p['title'])}</title><link>{p['url']}</link>"
+        f"<guid>{p['url']}</guid><pubDate>{format_datetime(datetime.fromisoformat(p['date']).replace(tzinfo=timezone.utc))}</pubDate>"
+        f"<description>{escape(p['description'])}</description></item>"
+        for p in posts
+        if p["type"] == "blog"
+    )
+    (SITE / "feed.xml").write_text(
+        '<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"><channel>'
+        f"<title>Docs</title><link>{SITE_URL}/</link><description>Blog posts</description>{items}</channel></rss>\n"
+    )
+
+
 def build_manifest() -> None:
     posts = []
     root = BUILD / "en"
@@ -998,6 +1040,7 @@ def build_manifest() -> None:
             )
     posts.sort(key=lambda item: item["date"], reverse=True)
     (SITE / "posts.json").write_text(json.dumps(posts, ensure_ascii=False, indent=2) + "\n")
+    build_feed(posts)
 
 
 def run() -> None:
