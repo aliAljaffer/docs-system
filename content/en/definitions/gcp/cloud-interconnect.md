@@ -451,12 +451,12 @@ gcloud compute routers add-bgp-peer ROUTER_NAME \
 - Direct traffic to closest region
 
 ### Observability
-- **Cloud Monitoring**:
+- **[[gcp/cloud-monitoring|Cloud Monitoring]]**:
   - VLAN attachment throughput
   - BGP session status
   - Packet loss, errors
   - Link utilization
-- **Cloud Logging**:
+- **[[gcp/cloud-logging|Cloud Logging]]**:
   - BGP session events
   - Configuration changes
   - Interconnect provisioning events

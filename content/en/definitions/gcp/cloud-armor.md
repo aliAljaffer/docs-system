@@ -254,7 +254,7 @@ Apply security policies **at edge locations**
 
 ### Request Logging
 - Enabled per security policy
-- Logs to Cloud Logging
+- Logs to [[gcp/cloud-logging|Cloud Logging]]
 - Contains:
   - Matched rule
   - Action taken
@@ -268,7 +268,7 @@ Apply security policies **at edge locations**
 - **All blocked requests always logged**
 
 ### Metrics
-Cloud Monitoring metrics:
+[[gcp/cloud-monitoring|Cloud Monitoring]] metrics:
 - **Request count**: Total requests
 - **Allowed/denied requests**: Per action
 - **Rate limit exceeded**: Throttle events
@@ -595,11 +595,11 @@ gcloud logging read "jsonPayload.enforcedSecurityPolicy.preconfiguredExprIds:*" 
 ### Integration with GCP Services
 - **[[cloud-load-balancing|Cloud Load Balancing]]**: Required (backend service attachment)
 - **Cloud CDN**: Cache to reduce backend load
-- **Cloud Monitoring**: Metrics and dashboards
-- **Cloud Logging**: Security logs
+- **[[gcp/cloud-monitoring|Cloud Monitoring]]**: Metrics and dashboards
+- **[[gcp/cloud-logging|Cloud Logging]]**: Security logs
 - **reCAPTCHA Enterprise**: Bot detection
-- **Binary Authorization**: Container image verification
-- **VPC Service Controls**: Perimeter security
+- **[[gcp/binary-authorization|Binary Authorization]]**: Container image verification
+- **[[gcp/vpc-service-controls|VPC Service Controls]]**: Perimeter security
 
 ### Advanced DDoS Protection
 #### Volumetric Attacks (Layer 3/4)

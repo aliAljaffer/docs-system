@@ -323,8 +323,8 @@ VPC Resources
 - **Private zones**: Use for internal resources
   - Never expose internal IPs publicly
   - Restrict to specific [[vpc|VPCs]]
-- **VPC Service Controls**: Protect DNS zones
-- **[[iam|IAM]]**: Least privilege for DNS management
+- **[[gcp/vpc-service-controls|VPC Service Controls]]**: Protect DNS zones
+- **[[gcp/iam|IAM]]**: Least privilege for DNS management
   - `roles/dns.admin`: Full DNS management
   - `roles/dns.reader`: Read-only access
 - **Audit logging**: Track DNS zone changes
@@ -427,18 +427,18 @@ gcloud dns policies create outbound-policy \
 ```
 
 ### Observability
-- **Cloud Monitoring**:
+- **[[gcp/cloud-monitoring|Cloud Monitoring]]**:
   - Query count per zone
   - Query response time
   - DNSSEC validation failures
-- **Cloud Logging**:
+- **[[gcp/cloud-logging|Cloud Logging]]**:
   - DNS query logs (must enable)
   - Zone configuration changes
   - DNSSEC key rotation events
 - **DNS Query Logging**:
   - **Not enabled by default** (performance impact)
   - Enable for troubleshooting or compliance
-  - Sent to Cloud Logging
+  - Sent to [[gcp/cloud-logging|Cloud Logging]]
 
 ### Troubleshooting
 #### DNS Resolution Issues
@@ -465,10 +465,10 @@ dig example.com +trace
 
 ### Integration with Other GCP Services
 - **[[cloud-load-balancing|Cloud Load Balancing]]**: DNS → LB IP for global routing
-- **Compute Engine**: Automatic internal DNS names
-- **GKE**: CoreDNS with Cloud DNS integration
-- **Cloud Run**: Custom domains with Cloud DNS
-- **App Engine**: Custom domains mapped via DNS
+- **[[gcp/compute-engine|Compute Engine]]**: Automatic internal DNS names
+- **[[gcp/gke|GKE]]**: CoreDNS with Cloud DNS integration
+- **[[gcp/cloud-run|Cloud Run]]**: Custom domains with Cloud DNS
+- **[[gcp/app-engine|App Engine]]**: Custom domains mapped via DNS
 
 ### Compliance Considerations
 - **DNSSEC**: Required for many compliance frameworks

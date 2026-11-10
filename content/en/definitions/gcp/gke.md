@@ -54,7 +54,7 @@ tags:
 - Nodes have only private IP addresses
 - Control plane can have private or public endpoint
 - Improved security, no direct internet access
-- Requires Cloud NAT for outbound traffic
+- Requires [[gcp/cloud-nat|Cloud NAT]] for outbound traffic
 
 ### Node Pools
 - Group of nodes within a cluster with same configuration
@@ -86,15 +86,15 @@ tags:
 
 **Horizontal Pod Autoscaling (HPA)**
 - Scales number of pod replicas based on metrics
-- CPU, memory, custom metrics from Cloud Monitoring
+- CPU, memory, custom metrics from [[gcp/cloud-monitoring|Cloud Monitoring]]
 - Native Kubernetes feature
 
 ### Workload Identity
 **AWS Equivalent:** IRSA (IAM Roles for Service Accounts)
 - **Recommended way to access Google Cloud services from GKE**
-- Maps Kubernetes Service Accounts to [[iam|Google Service Accounts]]
+- Maps Kubernetes Service Accounts to [[gcp/iam|Google Service Accounts]]
 - No need to store credentials in pods
-- Fine-grained [[iam|IAM]] access control
+- Fine-grained [[gcp/iam|IAM]] access control
 
 ```bash
 # Enable Workload Identity on cluster
@@ -108,10 +108,10 @@ gcloud iam service-accounts add-iam-policy-binding GSA@PROJECT.iam.gserviceaccou
 
 ### GKE Networking Modes
 #### VPC-Native (IP Aliasing) - **Recommended**
-- Pods get IPs from [[vpc|VPC]] subnet ranges
+- Pods get IPs from [[gcp/vpc|VPC]] subnet ranges
 - **Better integration with Google Cloud services**
-- Required for Private Google Access, VPC Service Controls
-- Required for [[vpc|Shared VPC]]
+- Required for [[gcp/private-google-access-vs-psc|Private Google Access]], [[gcp/vpc-service-controls|VPC Service Controls]]
+- Required for [[gcp/vpc|Shared VPC]]
 - Pods are routable within VPC
 
 #### Routes-Based (Legacy)
@@ -135,15 +135,15 @@ gcloud iam service-accounts add-iam-policy-binding GSA@PROJECT.iam.gserviceaccou
 ### Binary Authorization
 - Deploy-time security control
 - Enforces that only trusted container images are deployed
-- Integrates with Artifact Registry, Container Analysis
+- Integrates with [[gcp/artifact-registry|Artifact Registry]], Container Analysis
 - Attestation-based policy enforcement
-- See Binary Authorization for details
+- See [[gcp/binary-authorization|Binary Authorization]] for details
 
 ### Config Connector
 - Manage Google Cloud resources using Kubernetes manifests
 - Declarative resource management
 - GitOps workflows for infrastructure
-- Example: Create Cloud SQL instance via K8s manifest
+- Example: Create [[gcp/cloud-sql|Cloud SQL]] instance via K8s manifest
 
 ### Multi-Cluster Management
 #### GKE Enterprise (formerly Anthos)
@@ -242,7 +242,7 @@ gcloud container clusters update CLUSTER_NAME \
 - Understanding Kubernetes objects: Pods, Deployments, Services
 - Configuring autoscaling (HPA and cluster autoscaling)
 - Viewing cluster and workload inventory
-- Working with Artifact Registry for container images
+- Working with [[gcp/artifact-registry|Artifact Registry]] for container images
 - Basic kubectl operations
 - Connecting to clusters with `gcloud container clusters get-credentials`
 
@@ -253,13 +253,13 @@ gcloud container clusters update CLUSTER_NAME \
 ### Architectural Patterns
 #### Stateless Applications
 - Deploy with Deployments
-- Use Cloud Load Balancing for ingress
+- Use [[gcp/cloud-load-balancing|Cloud Load Balancing]] for ingress
 - Horizontal scaling with HPA
-- Store state in external services (Cloud SQL, Firestore, Cloud Storage)
+- Store state in external services ([[gcp/cloud-sql|Cloud SQL]], [[gcp/firestore|Firestore]], [[gcp/cloud-storage|Cloud Storage]])
 #### Stateful Applications
 - Use StatefulSets
-- Persistent Disks for storage
-- Consider Filestore for shared storage
+- [[gcp/persistent-disk|Persistent Disks]] for storage
+- Consider [[gcp/filestore|Filestore]] for shared storage
 - Backup strategies for stateful data
 #### Batch Processing
 - Use Jobs or CronJobs
@@ -281,10 +281,10 @@ gcloud container clusters update CLUSTER_NAME \
 - Anti-affinity rules to spread pods across nodes/zones
 ### Security Best Practices
 - **Workload Identity** for cloud service access
-- **Binary Authorization** for image verification
+- **[[gcp/binary-authorization|Binary Authorization]]** for image verification
 - **GKE Sandbox** for untrusted workloads
 - **Private clusters** with authorized networks
-- **VPC Service Controls** for data exfiltration prevention
+- **[[gcp/vpc-service-controls|VPC Service Controls]]** for data exfiltration prevention
 - **[[compute-engine|Shielded]] GKE nodes** (default)
 - **Pod Security Standards** (Restricted, Baseline, Privileged)
 
@@ -298,23 +298,23 @@ gcloud container clusters update CLUSTER_NAME \
 - **[[compute-engine|Preemptible nodes]]** in Standard mode
 
 ### Observability
-- Cloud Monitoring for metrics
-- Cloud Logging for logs
+- [[gcp/cloud-monitoring|Cloud Monitoring]] for metrics
+- [[gcp/cloud-logging|Cloud Logging]] for logs
 - GKE Dashboard in Cloud Console
-- Cloud Trace for distributed tracing
+- [[gcp/cloud-trace|Cloud Trace]] for distributed tracing
 - Prometheus integration via Managed Service for Prometheus
 
 ### CI/CD Integration
-- Cloud Build for container image building
-- Artifact Registry for image storage
+- [[gcp/cloud-build|Cloud Build]] for container image building
+- [[gcp/artifact-registry|Artifact Registry]] for image storage
 - [Cloud Deploy](https://cloud.google.com/deploy) for deployment pipelines
-- Binary Authorization for security gates
+- [[gcp/binary-authorization|Binary Authorization]] for security gates
 - GitOps with Config Sync
 
 ### Networking Considerations
 - **VPC-native clusters** for better integration
 - **Network policies** for pod-to-pod security
-- **Ingress controllers**: GKE Ingress (HTTP(S) Load Balancer), NGINX, Istio
+- **Ingress controllers**: GKE Ingress ([[gcp/cloud-load-balancing|HTTP(S) Load Balancer]]), NGINX, Istio
 - **Service mesh**: Anthos Service Mesh for mTLS, traffic management
 - **Pod IP address ranges**: Plan carefully to avoid IP exhaustion
 
@@ -327,7 +327,7 @@ gcloud container clusters update CLUSTER_NAME \
 ### Well-Architected Considerations
 - **Operational Excellence**: Automated upgrades via release channels, Config Sync
 - **Reliability**: Regional clusters, PDBs, health checks, multi-zone node pools
-- **Security**: Workload Identity, Binary Authorization, private clusters, least privilege
+- **Security**: Workload Identity, [[gcp/binary-authorization|Binary Authorization]], private clusters, least privilege
 - **Performance**: Appropriate machine types, GPUs for ML, local SSDs for high I/O
 - **Cost**: Autopilot, [[compute-engine|Spot nodes]], autoscaling, rightsizing
 - **Sustainability**: Efficient resource utilization, carbon-aware scheduling

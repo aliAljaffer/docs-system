@@ -16,7 +16,7 @@ tags:
 2. security-and-compliance
 3. technology
 4. billing-and-prices
-## Pillars of [[cloud/cloud-computing|Cloud Computing]]
+## Pillars of [[cloud-computing|Cloud Computing]]
 
 1. [[operational-excellence-pillars|Operational excellence]]
 2. [[security-pillars|Security]]

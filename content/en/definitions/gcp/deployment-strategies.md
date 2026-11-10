@@ -44,7 +44,7 @@ Trade-offs: Downtime vs complexity vs cost vs risk
 ✗ Production systems (downtime unacceptable)
 
 ### GCP Services
-- Managed Instance Groups: Delete group, create new
+- [[gcp/compute-engine|Managed Instance Groups]]: Delete group, create new
 - Not recommended for production
 
 ---
@@ -73,8 +73,8 @@ Trade-offs: Downtime vs complexity vs cost vs risk
 ✗ Database schema changes without compatibility
 
 ### GCP Services
-- **Managed Instance Groups**: Rolling update with `instance-group-manager update`
-- **GKE**: RollingUpdate strategy (default)
+- **[[gcp/compute-engine|Managed Instance Groups]]**: Rolling update with `instance-group-manager update`
+- **[[gcp/gke|GKE]]**: RollingUpdate strategy (default)
   ```yaml
   spec:
     strategy:
@@ -118,7 +118,7 @@ gcloud compute instance-groups managed rolling-action start-update my-mig \
 ✓ Testing new version with real traffic before full commitment
 
 ### GCP Services
-- **MIG**: Use `max-surge` parameter
+- **[[gcp/compute-engine|MIG]]**: Use `max-surge` parameter
   ```bash
   gcloud compute instance-groups managed rolling-action start-update my-mig \
     --version=template=new-template \

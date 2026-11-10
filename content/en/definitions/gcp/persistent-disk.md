@@ -15,7 +15,7 @@ tags:
 
 ## Persistent Disk
 **AWS Equivalent:** [[storage-ebs|EBS (Elastic Block Storage)]]
-**Block storage** for Compute Engine and GKE - network-attached, durable
+**Block storage** for [[gcp/compute-engine|Compute Engine]] and [[gcp/gke|GKE]] - network-attached, durable
 
 ### Overview
 - Network-attached block storage for VMs
@@ -191,7 +191,7 @@ tags:
 - ==More vCPUs = higher throughput limits==
 - Machine type affects maximum disk performance
 - Balance disk type and VM size
-- Use Cloud Monitoring to monitor disk utilization
+- Use [[gcp/cloud-monitoring|Cloud Monitoring]] to monitor disk utilization
 
 ### Disk Images
 **AWS Equivalent:** [[storage-ebs|AMI]]
@@ -367,7 +367,7 @@ sudo resize2fs /dev/sdb
 - Formatting and mounting disks in Linux
 - Understanding zonal vs regional disks
 - Encryption options (Google-managed, CMEK, CSEK)
-- Monitoring disk performance with Cloud Monitoring
+- Monitoring disk performance with [[gcp/cloud-monitoring|Cloud Monitoring]]
 
 ---
 
@@ -417,7 +417,7 @@ sudo resize2fs /dev/sdb
 - Use RAID 0 for striping (performance), RAID 1 for mirroring (redundancy)
 
 #### Performance Monitoring
-- Cloud Monitoring metrics:
+- [[gcp/cloud-monitoring|Cloud Monitoring]] metrics:
   - `disk.read_bytes_count`: Read throughput
   - `disk.write_bytes_count`: Write throughput
   - `disk.read_ops_count`: Read IOPS
@@ -462,7 +462,7 @@ sudo resize2fs /dev/sdb
 - **Default**: Google-managed encryption (no effort)
 - **CMEK**: When audit requirements or key rotation needed
   - Centralized key management
-  - Audit key usage via Cloud Logging
+  - Audit key usage via [[gcp/cloud-logging|Cloud Logging]]
   - Can disable/revoke keys
 - **CSEK**: Only for regulatory requirement to control keys
   - High operational overhead

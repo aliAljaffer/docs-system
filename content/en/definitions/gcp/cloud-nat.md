@@ -142,7 +142,7 @@ Private VM (no external IP) → Cloud Router → Cloud NAT → Internet
   - NAT IP used
   - Bytes transferred
   - Timestamp
-- Sent to Cloud Logging
+- Sent to [[gcp/cloud-logging|Cloud Logging]]
 - **Filter options**:
   - **All**: Log all connections (high volume)
   - **Errors only**: Failed translations
@@ -156,7 +156,7 @@ Private VM (no external IP) → Cloud Router → Cloud NAT → Internet
 ---
 ## Private Google Access
 **Important:** Cloud NAT is **NOT required** for [[vpc|Private Google Access]]
-- [[vpc|Private Google Access]]: VM → Google APIs (e.g., Cloud Storage)
+- [[vpc|Private Google Access]]: VM → Google APIs (e.g., [[gcp/cloud-storage|Cloud Storage]])
 - Cloud NAT: VM → Internet (e.g., software updates, external APIs)
 - Can use both simultaneously
 
@@ -264,7 +264,7 @@ gcloud logging read "resource.type=nat_gateway" --limit=50
 
 ### Architectural Patterns
 #### Private GKE with Cloud NAT
-- GKE private cluster (no external IPs on nodes)
+- [[gcp/gke|GKE private cluster]] (no external IPs on nodes)
 - Cloud NAT for:
   - Pulling images from Docker Hub, gcr.io
   - External API calls
@@ -303,7 +303,7 @@ gcloud logging read "resource.type=nat_gateway" --limit=50
 - **[[vpc|Private Google Access]]**: Use instead of NAT for Google APIs
 - **Logging**: Enable for security monitoring and forensics
 - **IP allowlisting**: Use manual NAT IPs for external allowlisting
-- **VPC Service Controls**: Prevent data exfiltration
+- **[[gcp/vpc-service-controls|VPC Service Controls]]**: Prevent data exfiltration
 - **Monitoring**: Alert on unusual connection patterns
 
 ### Performance Optimization
@@ -465,11 +465,11 @@ curl ifconfig.me  # Returns NAT IP
 - **Egress controls**: Monitor and restrict outbound destinations
 
 ### Integration with GCP Services
-- **GKE**: Private clusters with Cloud NAT for outbound
-- **Compute Engine**: Private VMs with internet access
-- **Cloud Run**: Use VPC Connector + Cloud NAT for outbound
-- **Cloud Functions**: VPC Connector + Cloud NAT
-- **App Engine**: Serverless VPC Access + Cloud NAT
+- **[[gcp/gke|GKE]]**: Private clusters with Cloud NAT for outbound
+- **[[gcp/compute-engine|Compute Engine]]**: Private VMs with internet access
+- **[[gcp/cloud-run|Cloud Run]]**: Use [[gcp/cloud-run|VPC Connector]] + Cloud NAT for outbound
+- **[[gcp/cloud-functions|Cloud Functions]]**: [[gcp/cloud-functions|VPC Connector]] + Cloud NAT
+- **[[gcp/app-engine|App Engine]]**: Serverless VPC Access + Cloud NAT
 
 ### Cloud NAT vs Private Google Access vs VPN
 | Feature | Cloud NAT | Private Google Access | VPN/Interconnect |

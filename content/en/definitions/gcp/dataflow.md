@@ -241,7 +241,7 @@ Cloud Storage (daily files) → Dataflow → Transform → BigQuery (data wareho
 - Exactly-once processing
 
 ✗ **Not ideal for:**
-- Simple data movement (use Storage Transfer Service)
+- Simple data movement (use [[gcp/cloud-storage|Storage Transfer Service]])
 - SQL-only transformations (use BigQuery directly)
 - Very low latency (<1 second) - consider Pub/Sub + Cloud Functions
 

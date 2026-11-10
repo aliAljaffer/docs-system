@@ -68,9 +68,9 @@ bigquery.googleapis.com → 199.36.153.8/30
 ```
 
 ### Use Cases
-✓ **GKE private clusters** accessing Google services
-✓ **Compute Engine VMs without external IPs** reading from Cloud Storage
-✓ **Data processing** (Dataflow, Dataproc) accessing BigQuery
+✓ **[[gcp/gke|GKE private clusters]]** accessing Google services
+✓ **[[gcp/compute-engine|Compute Engine]] VMs without external IPs** reading from [[gcp/cloud-storage|Cloud Storage]]
+✓ **Data processing** ([[gcp/dataflow|Dataflow]], Dataproc) accessing [[bigquery|BigQuery]]
 ✓ **Cost savings** (no [[cloud-nat|NAT Gateway]] needed for Google API access)
 ✓ **Security** (no internet exposure)
 
@@ -327,5 +327,5 @@ bigquery.googleapis.com → 10.0.1.5
 - **[[vpc|VPC]]**: Both features operate within VPC
 - **[[cloud-vpn|Cloud VPN]]** / **[[cloud-interconnect|Cloud Interconnect]]**: PSC often used with hybrid connectivity
 - **[[vpc|VPC Service Controls]]**: Works with both PGA and PSC
-- **GKE Private Clusters**: Commonly use PGA
+- **[[gcp/gke|GKE Private Clusters]]**: Commonly use PGA
 - **[[cloud-nat|Cloud NAT]]**: Alternative to PGA (but costs more, provides full internet access)

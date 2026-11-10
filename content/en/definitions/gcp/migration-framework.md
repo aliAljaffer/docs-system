@@ -63,7 +63,7 @@ Google Cloud migration follows **4 sequential phases**:
   - Licensing (BYOL vs Google-provided)
   - Support plans
 
-**Pricing Calculator**: Use GCP Pricing Calculator
+**Pricing Calculator**: Use [[cloud-scheduler|GCP Pricing Calculator]]
 
 #### 3. Workload Prioritization
 
@@ -152,12 +152,12 @@ Organization (root)
 - **Firewall Rules**: Default deny, explicit allows
 
 **Hybrid Connectivity:**
-- **Cloud VPN**:
+- **[[cloud-vpn|Cloud VPN]]**:
   - HA VPN for 99.99% SLA
   - 1.5-3 Gbps per tunnel
   - Encrypted
   - Good for: Low-moderate bandwidth, encrypted requirement
-- **Cloud Interconnect**:
+- **[[cloud-interconnect|Cloud Interconnect]]**:
   - Dedicated: 10-100 Gbps
   - Partner: 50 Mbps - 10 Gbps
   - Good for: High bandwidth, low latency, predictable performance
@@ -172,16 +172,16 @@ Organization (root)
 
 #### 4. Security & Compliance
 - **Logging & Monitoring**:
-  - Enable all audit logs
-  - Set up Cloud Monitoring alerts
+  - Enable all [[cloud-logging|audit logs]]
+  - Set up [[cloud-monitoring|Cloud Monitoring]] alerts
   - Export logs to [[cloud-storage|Cloud Storage]] for compliance
 - **Encryption**:
-  - Cloud KMS for encryption keys
+  - [[cloud-kms|Cloud KMS]] for encryption keys
   - CMEK for compliance requirements
 - **Security Controls**:
-  - VPC Service Controls perimeter
+  - [[vpc-service-controls|VPC Service Controls]] perimeter
   - Organization policies (constraints)
-  - Security Command Center for threat detection
+  - [[security-command-center|Security Command Center]] for threat detection
 
 #### 5. Migration Team
 **Roles needed:**
@@ -224,7 +224,7 @@ Organization (root)
 #### 2. Improve and Move (Replatform)
 **Approach**: Minor optimization during migration
 - Move to managed services where possible
-- Example: Database → Cloud SQL
+- Example: Database → [[cloud-sql|Cloud SQL]]
 
 **Best for:**
 ✓ Want some cloud benefits
@@ -277,7 +277,7 @@ Organization (root)
   - Offline transfer (no bandwidth cost)
 
 #### Database Migration
-- **Database Migration Service**:
+- **[[cloud-sql|Database Migration Service]]**:
   - Migrate to Cloud SQL
   - Minimal downtime
   - Continuous replication until cutover
@@ -296,8 +296,8 @@ Organization (root)
 - Ensure consistent configuration
 
 **CI/CD Pipelines:**
-- Cloud Build for builds
-- Artifact Registry for images
+- [[cloud-build|Cloud Build]] for builds
+- [[artifact-registry|Artifact Registry]] for images
 - Automated testing
 
 **Infrastructure as Code:**
@@ -323,11 +323,11 @@ Organization (root)
 
 #### 1. Logging, Monitoring, Alerting
 - **Comprehensive observability**:
-  - Cloud Monitoring: Metrics, uptime checks
-  - Cloud Logging: Centralized logs
-  - Cloud Trace: Distributed tracing
-  - Cloud Profiler: Performance optimization
-  - Error Reporting: Proactive error detection
+  - [[cloud-monitoring|Cloud Monitoring]]: Metrics, uptime checks
+  - [[cloud-logging|Cloud Logging]]: Centralized logs
+  - [[cloud-trace|Cloud Trace]]: Distributed tracing
+  - [[cloud-profiler|Cloud Profiler]]: Performance optimization
+  - [[error-reporting|Error Reporting]]: Proactive error detection
 - **SLOs & Error Budgets**:
   - Define SLIs (latency, availability, error rate)
   - Set SLOs (99.9% availability)
@@ -335,10 +335,10 @@ Organization (root)
 
 #### 2. Managed Services
 **Replace self-managed with managed:**
-- VMs with databases → Cloud SQL, Cloud Spanner
+- VMs with databases → [[cloud-sql|Cloud SQL]], [[cloud-spanner|Cloud Spanner]]
 - Self-managed Kubernetes → [[gke|GKE Autopilot]]
-- Message queues → Cloud Pub/Sub
-- File servers → Filestore
+- Message queues → [[pub-sub|Cloud Pub/Sub]]
+- File servers → [[filestore|Filestore]]
 - Monitoring stack → Cloud Operations Suite
 
 **Benefits:**
@@ -366,7 +366,7 @@ Organization (root)
 
 #### 4. Cost Optimization
 - **Right-sizing**:
-  - Use Monitoring recommendations
+  - Use [[cloud-monitoring|Monitoring]] recommendations
   - Downsize over-provisioned VMs
   - Delete unused resources
 - **Committed Use Discounts**:
@@ -393,12 +393,12 @@ Organization (root)
   - [[gke|GKE]] for orchestration
   - [[cloud-run|Cloud Run]] for simplicity
 - **Data Analytics**:
-  - BigQuery for analytics
-  - Cloud Dataflow for ETL
-  - Pub/Sub for event streaming
+  - [[bigquery|BigQuery]] for analytics
+  - [[dataflow|Cloud Dataflow]] for ETL
+  - [[pub-sub|Pub/Sub]] for event streaming
 - **AI/ML**:
-  - Vertex AI for ML workloads
-  - Gemini for generative AI
+  - [[vertex-ai|Vertex AI]] for ML workloads
+  - [[gemini|Gemini]] for generative AI
 
 ---
 
@@ -416,19 +416,19 @@ Organization (root)
 ### Databases
 1. **Assess**: Database type, size, IOPS, replication
 2. **Plan**: Choose managed service (Cloud SQL, Spanner, etc.)
-3. **Deploy**: Database Migration Service for minimal downtime
+3. **Deploy**: [[cloud-sql|Database Migration Service]] for minimal downtime
 4. **Optimize**: Read replicas, automatic backups, point-in-time recovery
 
 ### Batch Processing
 1. **Assess**: Spark/Hadoop workloads, data volume, schedule
-2. **Plan**: Cloud Dataproc or Cloud Dataflow
+2. **Plan**: [[dataproc|Cloud Dataproc]] or [[dataflow|Cloud Dataflow]]
 3. **Deploy**: Migrate jobs to Dataproc, data to Cloud Storage
 4. **Optimize**: Preemptible VMs, autoscaling, lifecycle policies
 
 ### File Servers
 1. **Assess**: File size, access patterns, performance requirements
-2. **Plan**: Filestore or Cloud Storage
-3. **Deploy**: Storage Transfer Service or Transfer Appliance
+2. **Plan**: [[filestore|Filestore]] or [[cloud-storage|Cloud Storage]]
+3. **Deploy**: [[migration-framework|Storage Transfer Service]] or Transfer Appliance
 4. **Optimize**: Lifecycle policies, nearline/coldline storage
 
 ---

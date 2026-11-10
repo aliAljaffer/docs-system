@@ -64,17 +64,17 @@ tags:
 
 ### Supported Services
 **Fully Protected Services (60+):**
-- Cloud Storage
-- BigQuery
-- Cloud SQL
-- Cloud Bigtable
-- Cloud KMS
-- Secret Manager
-- Compute Engine
-- GKE
-- Pub/Sub
-- Cloud Run
-- Artifact Registry
+- [[gcp/cloud-storage|Cloud Storage]]
+- [[bigquery|BigQuery]]
+- [[gcp/cloud-sql|Cloud SQL]]
+- [[gcp/bigtable|Cloud Bigtable]]
+- [[gcp/cloud-kms|Cloud KMS]]
+- [[gcp/secret-manager|Secret Manager]]
+- [[gcp/compute-engine|Compute Engine]]
+- [[gcp/gke|GKE]]
+- [[gcp/pub-sub|Pub/Sub]]
+- [[gcp/cloud-run|Cloud Run]]
+- [[gcp/artifact-registry|Artifact Registry]]
 
 **Not all GCP services support VPC SC**
 - Check documentation for latest list

@@ -52,7 +52,7 @@ Publishers → Topic → Subscription A (pull) → Service A
 - Pub/Sub sends HTTP POST to endpoint
 - Endpoint must return 200 OK
 - Automatic retries on failure
-- Good for: Webhooks, [[cloud-functions|Cloud Functions]], Cloud Run
+- Good for: Webhooks, [[cloud-functions|Cloud Functions]], [[gcp/cloud-run|Cloud Run]]
 
 ### Message Delivery Guarantees
 - **At-least-once delivery** (may receive duplicates)
@@ -216,7 +216,7 @@ Single Publisher → Topic → Sub A (priority) → Fast processing
 - 99.95% availability SLA
 
 ### Security Best Practices
-- **[[iam|IAM]] roles**:
+- **[[gcp/iam|IAM]] roles**:
   - `pubsub.publisher`: Publish messages
   - `pubsub.subscriber`: Receive messages
   - `pubsub.viewer`: List topics/subscriptions

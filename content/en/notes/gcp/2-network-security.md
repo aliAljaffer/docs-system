@@ -25,7 +25,7 @@ Part of [[pcse-home|PCSE Home]]. Official exam guide sections 2.1 to 2.3: securi
 
 Three configuration layers, in order of where they attach:
 
-1. **Hierarchical firewall policies:** attach at org or folder level; inherited by child projects' [[gcp/vpc|VPCs]]; support rules with priorities; cannot be bypassed by projects.
+1. **Hierarchical firewall policies:** attach at org or folder level; inherited by child projects' VPCs; support rules with priorities; cannot be bypassed by projects.
 2. **Global network firewall policies:** attach at VPC level; the modern replacement for classic per-VPC firewall rules; support threat inspection.
 3. **Classic VPC firewall rules:** per network, still exist; implied deny egress / allow ingress defaults.
 
@@ -35,7 +35,7 @@ Three configuration layers, in order of where they attach:
 
 **[[cloud-load-balancing|Load balancers]] as perimeter controls:** external LBs accept internet traffic, internal LBs accept RFC 1918 only (scope and exposure are independent); secure the entry with SSL policies (minimum TLS version and ciphers) and Google-managed certificates; [[cloud-armor|Cloud Armor]] attaches to external global LB backends.
 
-**[[identity-aware-proxy|Identity-Aware Proxy]]:** PCSE wants config: enable IAP on a backend service or for TCP forwarding; control with [[gcp/iam|IAM]] roles (`roles/iap.httpsResourceAccessor`); combine with ACM access levels for context-aware access. IAP TCP forwarding gives secure RDP/SSH without public IPs or bastions.
+**[[identity-aware-proxy|Identity-Aware Proxy]]:** PCSE wants config: enable IAP on a backend service or for TCP forwarding; control with [[iam|IAM]] roles (`roles/iap.httpsResourceAccessor`); combine with ACM access levels for context-aware access. IAP TCP forwarding gives secure RDP/SSH without public IPs or bastions.
 
 **[[cloud-armor|Cloud Armor]]: the WAF and edge security product.**
 - Security policies attach to external HTTPS/TCP proxy load balancer backends (and Cloud CDN).
@@ -72,7 +72,7 @@ Three configuration layers, in order of where they attach:
 
 ### 2.2 Configuring boundary segmentation
 
-- **VPC security properties:** global vs regional resources, subnets regional, firewall implied rules, effective firewall evaluation: priority 0-65535, lower number wins (default 1000); deny overrides allow only at equal priority.
+- **[[vpc|VPC]] security properties:** global vs regional resources, subnets regional, firewall implied rules, effective firewall evaluation: priority 0-65535, lower number wins (default 1000); deny overrides allow only at equal priority.
 - **VPC peering vs Shared VPC (config-level now):** peering = network-to-network, no IAM separation, transitivity absent; Shared VPC = project-level attachment to host project, service project admins, IAM control at host, org policy `compute.restrictSharedVpcSubnetworks` to limit which subnets service projects can use.
 - **Peering restrictions (2025 exam reports):** no overlapping [[cidr|CIDR]] ranges between peers; firewall rules cannot use tags or SAs from the peer network (use IP ranges); internal Compute Engine DNS does not resolve across peering (use IPs); no transitive peering.
 - **N-tier isolation:** tiered subnets + NGFW policies per tier + secure tags; private GKE clusters for the data tier; PSC for southbound private access to services.

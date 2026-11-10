@@ -150,11 +150,11 @@ tags:
 
 ### Integration with GCP Services
 **Automatic Encryption at Rest:**
-- Cloud Storage: CMEK (Customer-Managed Encryption Keys)
-- Compute Engine: Encrypted persistent disks
-- Cloud SQL: Encrypted database instances
-- BigQuery: Encrypted datasets and tables
-- GKE: Encrypted secrets and persistent volumes
+- [[gcp/cloud-storage|Cloud Storage]]: CMEK (Customer-Managed Encryption Keys)
+- [[gcp/compute-engine|Compute Engine]]: Encrypted persistent disks
+- [[gcp/cloud-sql|Cloud SQL]]: Encrypted database instances
+- [[bigquery|BigQuery]]: Encrypted datasets and tables
+- [[gcp/gke|GKE]]: Encrypted secrets and persistent volumes
 
 **No additional code required - managed by GCP**
 
@@ -505,7 +505,7 @@ gcloud alpha monitoring policies create \
 ```
 
 **Prevent Data Exfiltration:**
-- Use VPC Service Controls around KMS
+- Use [[vpc-service-controls|VPC Service Controls]] around KMS
 - Prevent keys from being used outside perimeter
 - **Block copy operations across perimeter boundaries**
 
@@ -651,7 +651,7 @@ encrypted_dek = kms_client.encrypt(
 - AWS KMS Alias -> Key names (no aliases in GCP)
 - AWS KMS Grant -> IAM roles on keys
 - AWS CloudHSM -> Cloud HSM protection level
-- AWS Secrets Manager -> Secret Manager (not KMS)
+- AWS Secrets Manager -> [[gcp/secret-manager|Secret Manager]] (not KMS)
 
 **Migration Steps:**
 1. Inventory AWS KMS keys and usage

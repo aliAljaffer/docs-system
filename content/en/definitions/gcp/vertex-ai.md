@@ -76,7 +76,7 @@ tags:
 - **RLHF**: Reinforcement learning from human feedback
 ### RAG (Retrieval-Augmented Generation)
 - Vertex AI Search integration
-- Connect to your own data (Cloud Storage, BigQuery, [[alloydb|AlloyDB]])
+- Connect to your own data ([[gcp/cloud-storage|Cloud Storage]], [[gcp/bigquery|BigQuery]], [[alloydb|AlloyDB]])
 - Embeddings API for vector search
 - Matching Engine for similarity search
 ### Model Deployment
@@ -286,8 +286,8 @@ Cloud Storage (data) → Vertex AI Batch Prediction → Cloud Storage (results)
 - Similar API patterns (REST, streaming)
 
 ### Monitoring & Observability
-- **Cloud Monitoring**: Prediction latency, error rate
-- **Cloud Logging**: Prediction logs, training logs
+- **[[cloud-monitoring|Cloud Monitoring]]**: Prediction latency, error rate
+- **[[cloud-logging|Cloud Logging]]**: Prediction logs, training logs
 - **Model monitoring**: Feature drift, prediction drift
 - **Vertex AI Experiments**: Training metrics tracking
 - **Cost tracking**: Per-model cost attribution

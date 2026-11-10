@@ -66,7 +66,7 @@ During deployment updates, a new ReplicaSet is created that uses the updated pro
 - ![](/assets/vault/pasted-image-20250829123220.webp)
 ### DaemonSet
 - Deployment that starts one Pod instance in every node in the cluster.
-- Useful when an agent is needed, like AWS [[aws/management-and-governance-cloudwatch|CloudWatch]] Agent.
+- Useful when an agent is needed, like AWS [[management-and-governance-cloudwatch|CloudWatch]] Agent.
 - When nodes are added or removed, the DaemonSet automatically changes the number of pods accordingly.
 ### AutoScaling
 - HorizontalPodAutoscaler observes usage statistics and after passing a threshold, will add additional replicas. 

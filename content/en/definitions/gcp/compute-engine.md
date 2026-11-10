@@ -52,7 +52,7 @@ tags:
 - Machine Image = AMI + complete instance config
 
 - **Image**: Boot disk only, OS and software
-- **Snapshot**: Point-in-time copy of Persistent Disk, incremental
+- **Snapshot**: Point-in-time copy of [[gcp/persistent-disk|Persistent Disk]], incremental
 - **Machine Image**: Complete VM config (disks, metadata, permissions, instance properties)
   - Best for instance cloning and backups
   - Can include multiple disks
@@ -73,7 +73,7 @@ tags:
 - Use cases: Batch jobs, fault-tolerant workloads, rendering
 
 ### Persistent Disks
-See Persistent Disk for full details
+See [[gcp/persistent-disk|Persistent Disk]] for full details
 
 **AWS Equivalent:** [[storage-ebs|EBS]]
 - Network-attached storage, **survives VM termination**
@@ -95,7 +95,7 @@ See Persistent Disk for full details
 #### Managed Instance Groups (MIG)
 **AWS Equivalent:** [[management-and-governance-auto-scaling|Auto Scaling Groups]]
 - Identical VMs created from instance template
-- **Autoscaling**: CPU, load balancing, custom metrics from Cloud Monitoring, schedules
+- **Autoscaling**: CPU, load balancing, custom metrics from [[gcp/cloud-monitoring|Cloud Monitoring]], schedules
 - **Auto-healing**: Health checks, automatic recreation
 - **Regional MIGs**: Multi-zone for high availability (**recommended**)
 - **Zonal MIGs**: Single zone
@@ -131,7 +131,7 @@ See Persistent Disk for full details
 - **AWS doesn't have this** - AWS stops/starts instances during maintenance
 
 ### OS Login
-- Manage SSH access using [[iam|IAM]]
+- Manage SSH access using [[gcp/iam|IAM]]
 - No need to manage SSH keys manually
 - OS Login 2FA available
 - **Best practice for SSH access control**
@@ -139,17 +139,17 @@ See Persistent Disk for full details
 ### Metadata Server
 - `http://metadata.google.internal/computeMetadata/v1/`
 - Query instance metadata, project metadata
-- Get access tokens for [[iam|service accounts]]
+- Get access tokens for [[gcp/iam|service accounts]]
 - Similar to AWS Instance Metadata Service
 
 ### Startup Scripts & Metadata
 **AWS Equivalent:** [[compute-ec2|EC2 User Data]]
 - Run scripts on VM boot
-- Can be in metadata or Cloud Storage
+- Can be in metadata or [[gcp/cloud-storage|Cloud Storage]]
 - Keys: `startup-script`, `shutdown-script`
 
 ### Snapshots
-- Point-in-time copies of Persistent Disks
+- Point-in-time copies of [[gcp/persistent-disk|Persistent Disks]]
 - Incremental (only changed data after first snapshot)
 - Global resource (can be used across regions)
 - Use for backups and disaster recovery
@@ -231,7 +231,7 @@ gcloud compute disks create DISK_NAME \
 - Configuring autoscaling and auto-healing
 - Managing disks (attach, detach, snapshot)
 - Using startup scripts
-- Basic networking ([[vpc|VPC]], firewall rules)
+- Basic networking ([[gcp/vpc|VPC]], firewall rules)
 - OS Login for SSH access
 - Viewing instance inventory and logs
 
@@ -243,7 +243,7 @@ gcloud compute disks create DISK_NAME \
 - **High Availability**: Regional MIGs across multiple zones
 - **Disaster Recovery**: Cross-region snapshots and images
 - **Cost Optimization**:
-  - Rightsizing using Cloud Monitoring recommendations
+  - Rightsizing using [[gcp/cloud-monitoring|Cloud Monitoring]] recommendations
   - Committed Use Discounts for predictable workloads
   - Preemptible/Spot for fault-tolerant batch processing
   - Custom machine types to avoid over-provisioning
@@ -254,8 +254,8 @@ gcloud compute disks create DISK_NAME \
 - **Security**:
   - Shielded VMs for secure boot
   - Confidential VMs for data encryption in-use
-  - [[iam|Service accounts]] with minimal permissions
-  - VPC Service Controls for data exfiltration prevention
+  - [[gcp/iam|Service accounts]] with minimal permissions
+  - [[gcp/vpc-service-controls|VPC Service Controls]] for data exfiltration prevention
 
 ### Migration Strategies
 - **Lift and Shift**: Machine Images, import from AWS/Azure
@@ -286,16 +286,16 @@ gcloud compute disks create DISK_NAME \
 - Workload isolation for compliance
 
 ### Integration Patterns
-- **Load Balancing**: Cloud Load Balancing with MIGs
-- **Storage**: Persistent Disk, Filestore, Cloud Storage
-- **Databases**: Cloud SQL, Cloud Spanner for persistent data
-- **Networking**: [[vpc|VPC]], Cloud VPN, Cloud Interconnect
-- **Monitoring**: Cloud Monitoring, Cloud Logging
+- **Load Balancing**: [[gcp/cloud-load-balancing|Cloud Load Balancing]] with MIGs
+- **Storage**: [[gcp/persistent-disk|Persistent Disk]], [[gcp/filestore|Filestore]], [[gcp/cloud-storage|Cloud Storage]]
+- **Databases**: [[gcp/cloud-sql|Cloud SQL]], [[gcp/cloud-spanner|Cloud Spanner]] for persistent data
+- **Networking**: [[gcp/vpc|VPC]], [[gcp/cloud-vpn|Cloud VPN]], [[gcp/cloud-interconnect|Cloud Interconnect]]
+- **Monitoring**: [[gcp/cloud-monitoring|Cloud Monitoring]], [[gcp/cloud-logging|Cloud Logging]]
 
 ### Well-Architected Considerations
-- **Operational Excellence**: Automated patching, OS image management, monitoring
+- **Operational Excellence**: Automated patching, OS image management, [[gcp/cloud-monitoring|monitoring]]
 - **Reliability**: Multi-zone/region deployment, health checks, backups, live migration
-- **Security**: Least privilege [[iam|IAM]], Shielded VMs, encryption at-rest and in-transit
+- **Security**: Least privilege [[gcp/iam|IAM]], Shielded VMs, encryption at-rest and in-transit
 - **Performance**: Right machine type, local SSD, network throughput optimization
 - **Cost**: Sustained use, committed use, preemptible VMs, rightsizing
 - **Sustainability**: Choose efficient machine types, rightsize to reduce carbon footprint

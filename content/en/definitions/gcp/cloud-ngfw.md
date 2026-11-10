@@ -427,7 +427,7 @@ Application Tier
 7. **Regular Updates**: Security profiles auto-update (verify policy coverage)
 8. **Geo-blocking**: Block high-risk countries for internet traffic
 9. **Application Control**: Use application-aware rules (not just port-based)
-10. **Incident Response**: Integrate logs with Cloud Logging and SIEM
+10. **Incident Response**: Integrate logs with [[gcp/cloud-logging|Cloud Logging]] and SIEM
 
 ### Migration Strategies
 
@@ -479,9 +479,9 @@ Application Tier
 ### Integration with GCP Services
 - **[[vpc|VPC]]**: Deployed as VPC firewall endpoints
 - **[[cloud-interconnect|Cloud Interconnect]] / [[cloud-vpn|Cloud VPN]]**: Inspect hybrid traffic
-- **Cloud Logging**: Centralized logging
-- **Cloud Monitoring**: Metrics and alerting
-- **VPC Service Controls**: Perimeter security (complementary)
+- **[[gcp/cloud-logging|Cloud Logging]]**: Centralized logging
+- **[[gcp/cloud-monitoring|Cloud Monitoring]]**: Metrics and alerting
+- **[[gcp/vpc-service-controls|VPC Service Controls]]**: Perimeter security (complementary)
 - **Security Command Center**: Threat findings aggregation
 - **Chronicle (Google Cloud SIEM)**: Security analytics and investigation
 
@@ -638,9 +638,9 @@ firewallPolicy:
 
 - **[[vpc|VPC]]**: Cloud NGFW deployed as VPC firewall endpoints
 - **[[cloud-armor|Cloud Armor]]**: Layer 7 WAF (complementary to Cloud NGFW)
-- **VPC Service Controls**: Perimeter-based data exfiltration prevention
-- **Security Command Center**: Centralized security findings
-- **Cloud Logging**: NGFW logs and threat detections
+- **[[gcp/vpc-service-controls|VPC Service Controls]]**: Perimeter-based data exfiltration prevention
+- **[[gcp/security-command-center|Security Command Center]]**: Centralized security findings
+- **[[gcp/cloud-logging|Cloud Logging]]**: NGFW logs and threat detections
 - **[[cloud-interconnect|Cloud Interconnect]] / [[cloud-vpn|Cloud VPN]]**: Hybrid connectivity (NGFW inspects traffic)
-- **Binary Authorization**: Container image verification
-- **Identity-Aware Proxy**: Application-level access control
+- **[[gcp/binary-authorization|Binary Authorization]]**: Container image verification
+- **[[gcp/identity-aware-proxy|Identity-Aware Proxy]]**: Application-level access control

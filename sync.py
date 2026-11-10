@@ -46,7 +46,7 @@ VAULT = source(
     ),
 )
 PROJECT_DOCS = [
-    {"slug": "openziti-operator", "source": OPENZITI, "files": None},
+    {"slug": "openziti-operator", "source": OPENZITI, "files": None, "wikilinks": True},
     {"slug": "homelab", "source": source("HOMELAB_DOCS_DIR", "/Users/h/src/homelab/docs"), "files": None},
     {
         "slug": "grooszy",
@@ -252,7 +252,12 @@ def vault_images() -> dict[str, Path]:
     return found
 
 
-def resolve_link(raw: str, mapping: dict[str, str]) -> tuple[str | None, str, str]:
+def resolve_link(
+    raw: str,
+    mapping: dict[str, str],
+    base: Path | None = None,
+    source_map: dict[Path, Path] | None = None,
+) -> tuple[str | None, str, str]:
     target = raw.strip()
     anchor = ""
     if "#" in target:
@@ -260,13 +265,28 @@ def resolve_link(raw: str, mapping: dict[str, str]) -> tuple[str | None, str, st
     label = target.strip()
     if not target:
         return None, label, anchor
-    for key in (target, target.lower(), slugify(target)):
+    if base is not None and source_map and "/" in target:
+        for suffix in ("", ".md"):
+            key = Path(str(base / target) + suffix).resolve()
+            dest = source_map.get(key)
+            if dest:
+                rel = dest.relative_to(EN).with_suffix("").as_posix()
+                if rel.startswith("definitions/"):
+                    rel = rel.removeprefix("definitions/")
+                return rel, label, anchor
+    stem = Path(target).stem if "/" in target else target
+    for key in (target, target.lower(), slugify(target), stem, stem.lower(), slugify(stem)):
         if key in mapping:
             return mapping[key], label, anchor
     return None, label, anchor
 
 
-def transform_links(text: str, mapping: dict[str, str]) -> str:
+def transform_links(
+    text: str,
+    mapping: dict[str, str],
+    base: Path | None = None,
+    source_map: dict[Path, Path] | None = None,
+) -> str:
     out: list[str] = []
     fenced = False
     for line in text.splitlines():
@@ -280,7 +300,7 @@ def transform_links(text: str, mapping: dict[str, str]) -> str:
             continue
 
         def replace(match: re.Match[str]) -> str:
-            dest, label, _anchor = resolve_link(match.group(1), mapping)
+            dest, label, _anchor = resolve_link(match.group(1), mapping, base, source_map)
             name = match.group(2) or label
             if not dest:
                 return name
@@ -377,7 +397,7 @@ def clean_vault(
     body = EMBED.sub(embed, body)
     body = MD_IMAGE.sub(md_image, body)
     body = MD_LINK.sub(md_link, body)
-    body = transform_links(body, mapping)
+    body = transform_links(body, mapping, src.parent, source_map)
     body = re.sub(r"(?m)^====\s*$", "", body)
     body = re.sub(r"==([^=\n]+)==", r"**\1**", body)
     body = body.lstrip("\n")
@@ -644,10 +664,19 @@ def sync_vault() -> tuple[int, int]:
     counts = Counter(path.stem for path in existing)
     mapping = {stem: stem for stem, count in counts.items() if count == 1}
     source_counts = Counter(src.stem for src, *_rest in jobs)
+
+    def claim(key: str, value: str) -> None:
+        # Nested imports (AWS services) share stems with flat notes (GCP iam, vpc).
+        # A key that already resolves to its own stem must not be captured.
+        current = mapping.get(key)
+        if current is not None and current.split("/")[-1] == key:
+            return
+        mapping[key] = value
+
     for src, dest, _cat, _tags, _rel in jobs:
         if source_counts[src.stem] == 1:
-            mapping[src.stem] = dest.stem
-            mapping[src.stem.lower()] = dest.stem
+            claim(src.stem, dest.stem)
+            claim(src.stem.lower(), dest.stem)
         mapping[dest.stem] = dest.stem
 
     images = vault_images()
@@ -704,7 +733,8 @@ def sync_project_docs() -> int:
             title = (spec.get("titles") or {}).get(rel.as_posix())
             if title:
                 text = re.sub(r"^# .+$", f"# {title}", text, count=1, flags=re.M)
-            text = re.sub(r"\[\[([^\]]+)\]\]", r"\\[\\[\1\\]\\]", text)
+            if not spec.get("wikilinks"):
+                text = re.sub(r"\[\[([^\]]+)\]\]", r"\\[\\[\1\\]\\]", text)
             text = text.replace("\u2014", " - ")
             for old, new in (spec.get("links") or {}).items():
                 text = text.replace(f"]({old})", f"]({new})")

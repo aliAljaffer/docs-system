@@ -21,7 +21,7 @@ tags:
 - **Analyze latency** in distributed systems
 - Trace requests across services
 - Identify performance bottlenecks
-- Automatic integration with [[app-engine|App Engine]], Cloud Run, GKE
+- Automatic integration with [[app-engine|App Engine]], [[gcp/cloud-run|Cloud Run]], [[gcp/gke|GKE]]
 - OpenTelemetry support
 
 ### Traces and Spans
@@ -234,7 +234,7 @@ spec:
 
 ### Compliance & Security
 - **PII in traces**: Avoid logging sensitive data in span attributes
-- **Access control**: [[iam|IAM]] roles
+- **Access control**: [[gcp/iam|IAM]] roles
   - `cloudtrace.user`: Read traces
   - `cloudtrace.admin`: Full access
 - **Trace data retention**: 30 days, cannot extend

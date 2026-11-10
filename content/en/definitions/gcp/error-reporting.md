@@ -26,10 +26,10 @@ tags:
 
 ### Automatic Error Detection
 - [[app-engine|App Engine]]: Automatic
-- Cloud Functions: Automatic
-- Cloud Run: Automatic
-- GKE: Via logs
-- Compute Engine: Via client libraries or logs
+- [[gcp/cloud-functions|Cloud Functions]]: Automatic
+- [[gcp/cloud-run|Cloud Run]]: Automatic
+- [[gcp/gke|GKE]]: Via logs
+- [[gcp/compute-engine|Compute Engine]]: Via client libraries or logs
 
 ### Error Grouping
 - **Groups similar errors automatically**
@@ -205,7 +205,7 @@ Error Reporting → Pub/Sub → Cloud Function → PagerDuty
 
 ### Compliance & Security
 - **No PII in error messages**: Sanitize before logging
-- **Access control**: [[iam|IAM]] roles
+- **Access control**: [[gcp/iam|IAM]] roles
   - `errorreporting.user`: View errors
   - `errorreporting.admin`: Full access
 - **VPC Service Controls**: Prevent data exfiltration

@@ -80,11 +80,11 @@ tags:
 | Cost | Higher | Lower |
 
 ### Integration
-- Compute Engine
+- [[gcp/compute-engine|Compute Engine]]
 - [[app-engine|App Engine]] (Standard & Flexible)
-- GKE
-- Cloud Functions
-- Must be in same [[vpc|VPC]] region
+- [[gcp/gke|GKE]]
+- [[gcp/cloud-functions|Cloud Functions]]
+- Must be in same [[gcp/vpc|VPC]] region
 
 ### Networking
 - **Private IP only** (within VPC)
@@ -230,7 +230,7 @@ Application → Memorystore (check cache)
 ### Security Best Practices
 - **Private IP only** (no internet exposure)
 - VPC firewall rules
-- [[vpc|VPC Service Controls]] for data protection
+- [[gcp/vpc|VPC Service Controls]] for data protection
 - Redis AUTH for authentication
 - TLS/SSL for transit encryption
 - IAM roles:
@@ -290,7 +290,7 @@ data:
 ```
 
 ### Monitoring & Alerts
-- **Cloud Monitoring metrics**:
+- **[[cloud-monitoring|Cloud Monitoring]] metrics**:
   - CPU utilization
   - Memory usage
   - Evicted keys (cache full indicator)

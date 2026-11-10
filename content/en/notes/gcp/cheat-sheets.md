@@ -39,12 +39,12 @@ Part of [[pcse-home|PCSE Home]]. Decision rules for scenario questions. Used wit
 2. On-prem to Google APIs -> PGA for on-prem hosts + VIP routes + DNS.
 3. Only-Google-APIs network -> restricted.googleapis.com VIP.
 4. Private connection to a specific managed service -> PSC endpoint. See [[private-google-access-vs-psc|PGA vs PSC]].
-5. VPC-to-VPC within org with central control -> Shared [[gcp/vpc|VPC]].
+5. VPC-to-VPC within org with central control -> Shared [[vpc|VPC]].
 6. VPC-to-VPC without shared host -> VPC peering.
 7. Outbound internet only -> [[cloud-nat|Cloud NAT]]. See [[2-network-security|2 - Network Security]].
 
 ### Data exfiltration / sharing control
-1. [[gcp/iam|IAM]] wrong principal -> org policy domain-restricted sharing.
+1. [[iam|IAM]] wrong principal -> org policy domain-restricted sharing.
 2. Public data -> storage.publicAccessPrevention.
 3. Service-level exfiltration -> [[vpc-service-controls|VPC-SC]] + gcp.resourceRestrictions.
 4. Fine-grained column/row -> [[bigquery|BigQuery]] policy tags / RLS.

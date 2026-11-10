@@ -266,13 +266,13 @@ LIMIT 10;
 - Can justify higher cost for performance
 
 ### When NOT to Use AlloyDB
-- **Budget constraints** → Use Cloud SQL (2-3x cheaper)
-- **Simple workloads** → Use Cloud SQL
+- **Budget constraints** → Use [[gcp/cloud-sql|Cloud SQL]] (2-3x cheaper)
+- **Simple workloads** → Use [[gcp/cloud-sql|Cloud SQL]]
 - **Global distribution** required → Use [[cloud-spanner|Cloud Spanner]]
-- **NoSQL better fit** → Use Firestore or Bigtable
-- **Pure analytics** → Use BigQuery
-- **MySQL or SQL Server** required → Use Cloud SQL
-- Small datasets (<100 GB) with low traffic → Use Cloud SQL
+- **NoSQL better fit** → Use [[gcp/firestore|Firestore]] or [[gcp/bigtable|Bigtable]]
+- **Pure analytics** → Use [[bigquery|BigQuery]]
+- **MySQL or SQL Server** required → Use [[gcp/cloud-sql|Cloud SQL]]
+- Small datasets (<100 GB) with low traffic → Use [[gcp/cloud-sql|Cloud SQL]]
 
 ### Migration Strategies
 #### Database Migration Service (DMS)
@@ -671,7 +671,7 @@ gcloud projects add-iam-policy-binding PROJECT_ID \
 ```
 
 #### Encryption
-- **At-rest**: Default encryption or CMEK via Cloud KMS
+- **At-rest**: Default encryption or CMEK via [[gcp/cloud-kms|Cloud KMS]]
 - **In-transit**: SSL/TLS required (enforced)
 - **Column-level**: Use pgcrypto extension
 

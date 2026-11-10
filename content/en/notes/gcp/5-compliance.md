@@ -19,7 +19,7 @@ tags:
 
 Part of [[pcse-home|PCSE Home]]. Official exam guide section 5.1. You know compliance concepts from PCA; PCSE adds Google-specific controls.
 
-- **Shared responsibility model (in depth):** map a control question ("who patches the OS on [[compute-engine|GCE]] vs [[cloud-run|Cloud Run]]?") to responsibility; be able to say what is Google's responsibility (physical, hypervisor, managed service internals) vs yours ([[gcp/iam|IAM]], data, config).
+- **Shared responsibility model (in depth):** map a control question ("who patches the OS on [[compute-engine|GCE]] vs [[cloud-run|Cloud Run]]?") to responsibility; be able to say what is Google's responsibility (physical, hypervisor, managed service internals) vs yours ([[iam|IAM]], data, config).
 - **Assured Workloads:** creates a folder with enforced compliance regime (FedRAMP Moderate/High, IL2/4/5, CJIS, HIPAA-like controls, US/EU regions and support, Data Boundary): restricts Google personnel access, data location, and allowed services; blocks non-compliant regions/products automatically. It operates at the **folder** level and is created via a wizard; other projects must be created inside it.
 - **Access Transparency:** logs (with justification) whenever Google support accesses your content; near real-time logs; available with eligible support tiers.
 - **Access Approval:** you must approve access requests before Google can act; pairs with Access Transparency; control who receives approval requests.
@@ -29,7 +29,7 @@ Part of [[pcse-home|PCSE Home]]. Official exam guide section 5.1. You know compl
 	- Data residency -> Assured Workloads + resource locations org policy.
 	- Google personnel access oversight -> Access Transparency + Access Approval.
 	- Evidence/audit -> Cloud Audit Logs (incl. Data Access) + log sinks with long retention + bucket lock. See [[cloud-logging|Cloud Logging]].
-	- Segmentation -> [[vpc-service-controls|VPC-SC]], Shared [[gcp/vpc|VPC]], NGFW policies, ACM.
+	- Segmentation -> [[vpc-service-controls|VPC-SC]], Shared [[vpc|VPC]], NGFW policies, ACM.
 	- Regime-specific guarantees -> Assured Workloads regime.
 
 **Additional facts:**
@@ -38,5 +38,5 @@ Part of [[pcse-home|PCSE Home]]. Official exam guide section 5.1. You know compl
 - HIPAA example: choosing HIPAA-eligible services is the customer's job.
 - Assured Workloads setup: select the regime, set data location with org policies, choose key management; enforces that data and resources stay in the selected region; blueprints are Policy-as-Code templates per regime.
 - Access Transparency: configured on a project page but applies org-wide; needs an org, an eligible support tier, billing linked, `roles/axt.admin`; **disabling requires Google support**; log fields include resource, action, time, reason, accessor location and job category.
-- Access Approval: requests arrive by email or [[gcp/pub-sub|Pub/Sub]]; approve via console or API; requests are signed, Google-managed key by default or customer-managed via [[cloud-kms|Cloud KMS]]/EKM; enable per service or all, at project/folder/org; requires AT enabled + `roles/accessapproval.configEditor`; approve time-sensitive requests promptly.
+- Access Approval: requests arrive by email or [[pub-sub|Pub/Sub]]; approve via console or API; requests are signed, Google-managed key by default or customer-managed via [[cloud-kms|Cloud KMS]]/EKM; enable per service or all, at project/folder/org; requires AT enabled + `roles/accessapproval.configEditor`; approve time-sensitive requests promptly.
 - Evidence: Compliance Reports Manager (now the Compliance Manager experience) provides audit reports, statements of applicability, certificates; filter offerings by country and industry to find in-scope services.

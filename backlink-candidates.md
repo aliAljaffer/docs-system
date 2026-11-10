@@ -3,13 +3,14 @@
 Snapshot of `content/en` on 2026-11-10. Re-run the scan after a new sync because the definition
 set grows with each vault import.
 
-Applied in the first pass: 123 links across 45 pages, plus 11 retargeted links that pointed at the
-AWS IAM and VPC pages from GCP pages. Net post-to-definition links rose from 231 to 283 in
-`content/en`, and orphans fell from 142 to 121.
+222 definitions, 47 post pages with at least one candidate,
+396 plain-text mentions that name a definition the page does not link.
+106 definitions still have zero inbound wikilinks.
 
-What is left: 222 definitions, 47 post pages with at least one candidate,
-535 plain-text mentions that name a definition the page does not link.
-121 definitions still have zero inbound wikilinks.
+Applied so far: 123 links across 45 pages, 74 wrong-target links retargeted in GCP pages, and an
+import fix that restores wiki links written as relative paths in the vault. Post-to-definition links
+in `content/en` rose from 231 to 384. Orphan definitions fell from 142 to 106. Links now live in
+the vault and the portfolio/four-hats sources, so `sync.py` keeps them.
 
 Matching rules: frontmatter, fenced code, inline code, existing links and link targets are ignored.
 One link per definition per page, first plain mention only. `IAM`, `VPC` and `KMS` are routed to the
@@ -29,9 +30,9 @@ One page from each section, two links each. These give the most coverage for the
 
 | Page | Link 1 | Link 2 |
 |---|---|---|
-| `notes/gcp/readme.md` | `[[gcp/cloud-run\|Cloud Run]]` L70 | `[[gcp/cloud-sql\|Cloud SQL]]` L82 |
 | `notes/certifications/4-solutions-architect-associate-saa-c03.md` | `[[cloud/disaster-recovery\|Disaster Recovery]]` L240 | `[[aws/application-integration-sqs\|SQS]]` L597 |
 | `notes/react/react.md` | `[[web/component\|component]]` L62 | `[[web/hook\|Hooks]]` L20 |
+| `notes/gcp/readme.md` | `[[cloud/cost-optimization-pillar\|Cost optimization]]` L163 | `[[cloud/generative-ai\|Generative AI]]` L167 |
 | `projects/body-power-gym.md` | `[[aws/compute-fargate\|Fargate]]` L45 | `[[cloud/infrastructure-as-code\|Infrastructure as Code]]` L51 |
 | `four-hats/episodes/ep03-run-the-app.md` | `[[cloud/containers\|containers]]` L10 |  |
 
@@ -41,12 +42,11 @@ One page from each section, two links each. These give the most coverage for the
 |---|---|---|---|
 | `cloud/containers` | 23 | 70 | 4 |
 | `web/component` | 6 | 48 | 1 |
-| `cloud/logging` | 8 | 21 | 1 |
+| `cloud/logging` | 8 | 20 | 1 |
 | `cloud/region` | 10 | 19 | 1 |
 | `aws/compute-lambda` | 3 | 16 | 2 |
 | `web/hook` | 3 | 11 | 1 |
 | `cloud/disaster-recovery` | 2 | 10 | 2 |
-| `gcp/cloud-run` | 2 | 10 | 4 |
 | `aws/application-integration-sns` | 1 | 9 | 1 |
 | `aws/application-integration-sqs` | 1 | 9 | 1 |
 | `aws/machine-learning-glue` | 1 | 9 | 0 |
@@ -57,8 +57,9 @@ One page from each section, two links each. These give the most coverage for the
 | `aws/management-and-governance-auto-scaling` | 2 | 7 | 0 |
 | `aws/networking-direct-connect` | 1 | 7 | 0 |
 | `aws/storage-ebs` | 1 | 7 | 0 |
-| `gcp/compute-engine` | 2 | 7 | 6 |
-| `gcp/cloud-functions` | 2 | 7 | 0 |
+| `cloud/cidr` | 1 | 6 | 5 |
+| `aws/security-kms` | 1 | 6 | 1 |
+| `cloud/cost-optimization-pillar` | 1 | 6 | 1 |
 
 ## Certification notes (mostly AWS)
 
@@ -87,13 +88,13 @@ One page from each section, two links each. These give the most coverage for the
 
 | Line | Link | Fit | Anchor in text |
 |---|---|---|---|
-| 70 | `[[gcp/cloud-run\|Cloud Run]]` | strong | - Cloud Run - Services vs Jobs |
-| 82 | `[[gcp/cloud-sql\|Cloud SQL]]` | strong | - Cloud SQL - MySQL, PostgreSQL, SQL Server |
-| 62 | `[[gcp/cloud-monitoring\|Cloud Monitoring]]` | strong | - Cloud Monitoring - Ops Agent |
-| 68 | `[[gcp/compute-engine\|Compute Engine]]` | strong | - Compute Engine - Machine types, preemptible VMs |
-| 77 | `[[gcp/persistent-disk\|Persistent Disk]]` | strong | - Persistent Disk - Zonal vs Regional |
+| 163 | `[[cloud/cost-optimization-pillar\|Cost optimization]]` | strong | - Cost optimization strategies |
+| 167 | `[[cloud/generative-ai\|Generative AI]]` | strong | - **Generative AI integration** (NEW in 2026) |
+| 189 | `[[cloud/serverless\|Serverless]]` | strong | - Serverless patterns (Cloud Run, Cloud Functions) |
+| 201 | `[[cloud/principle-of-least-privilege\|least privilege]]` | strong | - [[iam/IAM]] - Resource hierarchy, conditions, least privilege |
+| 258 | `[[cloud/infrastructure-as-code\|Infrastructure as Code]]` | strong | - Infrastructure as Code (Deployment Manager, Terraform) |
 
-46 more definitions appear on this page: `gcp/firestore`, `gcp/gemini`, `cloud/cost-optimization-pillar`, `gcp/cloud-functions`, `gcp/cloud-spanner`, `gcp/bigtable`, `gcp/deployment-strategies`, `gcp/filestore`, `gcp/private-google-access-vs-psc`, `gcp/cloud-load-balancing`, `gcp/alloydb`, `gcp/cloud-kms` and 34 more.
+6 more definitions appear on this page: `cloud/disaster-recovery`, `cloud/total-cost-of-ownership`, `cloud/operational-excellence-pillars`, `cloud/migration-strategies`, `cloud/logging`, `cloud/containers`.
 
 ### `notes/gcp/4-managing-operations.md`
 
@@ -185,7 +186,7 @@ One page from each section, two links each. These give the most coverage for the
 | Line | Link | Fit | Anchor in text |
 |---|---|---|---|
 | 17 | `[[cloud/scalability\|scalability]]` | loose | - Stress test to show scalability |
-| 26 | `[[cloud/containers\|containers]]` | loose | - Hardened containers: multi-stage builds, non root user, [[cloud/principle-of-least-privilege/POLP]] |
+| 26 | `[[cloud/containers\|containers]]` | loose | - Hardened containers: multi-stage builds, non root user, [[principle-of-least-privilege/POLP]] |
 
 ### `notes/react/react-router-loaders.md`  (imported from `ObsidianVault/webdev/react/react-router/loaders.md`)
 
@@ -408,7 +409,7 @@ One page from each section, two links each. These give the most coverage for the
 
 ## Orphan definitions
 
-Zero inbound wikilinks: 121 of 222.
+Zero inbound wikilinks: 106 of 222.
 
 ### Orphans that already appear in a post
 
@@ -416,9 +417,7 @@ Zero inbound wikilinks: 121 of 222.
 - `aws/containers-eks` `aws/ec2-user-data` `aws/financial-management-budgets` `aws/free-services` `aws/machine-learning-glue` `aws/management-and-governance-auto-scaling`
 - `aws/management-and-governance-cloudformation` `aws/management-and-governance-config` `aws/management-and-governance-systems-manager` `aws/networking-direct-connect` `aws/networking-vpn` `aws/security-guardduty`
 - `aws/storage-ebs` `cloud/generative-ai` `cloud/governance-and-compliance` `cloud/migration-strategies` `cloud/scalability` `cloud/tagging`
-- `gcp/alloydb` `gcp/bigtable` `gcp/cloud-composer` `gcp/cloud-functions` `gcp/cloud-profiler` `gcp/cloud-spanner`
-- `gcp/cloud-trace` `gcp/dataflow` `gcp/dataproc` `gcp/error-reporting` `gcp/filestore` `gcp/firestore`
-- `gcp/memorystore` `react/provider` `web/props`
+- `react/provider` `web/props`
 
 ### Orphans with no mention anywhere
 
@@ -434,19 +433,23 @@ Zero inbound wikilinks: 121 of 222.
 - `cloud/consolidated-billing` `cloud/csp` `cloud/dedicated-server` `cloud/elasticity` `cloud/fault-tolerance` `cloud/high-durability`
 - `cloud/partner-network` `cloud/restful-apis` `cloud/shared-hosting` `cloud/tenets-of-aws` `cloud/totp` `cloud/traditional-ai`
 - `cloud/vms-and-containers` `cloud/vps` `gcp/ai-ml-labs` `gcp/compute-labs` `gcp/data-analytics-labs` `gcp/databases-labs`
-- `gcp/devops-labs` `gcp/eventarc` `gcp/management-labs` `gcp/migration-framework` `gcp/ops-labs` `gcp/storage-labs`
-- `gcp/workflows` `networking/main` `react/react-lazy` `web/pure-functions`
+- `gcp/devops-labs` `gcp/eventarc` `gcp/management-labs` `gcp/ops-labs` `gcp/storage-labs` `networking/main`
+- `react/react-lazy` `web/pure-functions`
 
 The AWS service pages are all orphans today. The fastest win is one link per service from
 `notes/certifications/4-solutions-architect-associate-saa-c03.md` and `projects/image-captioning.md`.
 
 ## Wrong targets fixed
 
-| Where | Problem |
-|---|---|
-| `notes/gcp/readme.md` (6 links) | `[[security-iam\|IAM]]` and `[[networking-vpc\|VPC]]` pointed at the AWS pages from a GCP note. Retargeted to `iam` and `vpc`. |
-| `definitions/gcp/*.md` (4 links in `gke.md`) | Same retarget inside the GKE definition page. |
-| `notes/certifications/10-professional-cloud-architect-pca.md` line 17 | The line compares AWS IAM with GCP Service Accounts. It now links to `aws/security-iam`. |
+The vault links GCP notes with relative paths like `[[../security/iam]]`. The importer flattened
+those to `security-iam`, which is the AWS IAM page, and `networking-vpc`, the AWS VPC page. That put
+74 GCP links on AWS definitions. Fixed in three places:
+
+1. `sync.py` now resolves a relative wiki link against the source file first, then falls back to the
+   stem. A stem that already resolves to itself is no longer captured by a nested AWS import.
+2. The vault links `[[security/iam]]` and `[[networking/vpc]]` now use bare `iam` and `vpc`.
+3. `notes/certifications/10-professional-cloud-architect-pca.md` line 17 compares AWS IAM with GCP
+   Service Accounts, so it links to `security-iam`.
 
 ## Do not link these
 

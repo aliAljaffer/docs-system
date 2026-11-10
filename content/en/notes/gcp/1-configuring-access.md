@@ -43,7 +43,7 @@ Part of [[pcse-home|PCSE Home]]. Official exam guide sections 1.1 to 1.5.
 - On organization creation, all domain users automatically get `projectCreator` and `billing.creator` at org level.
 - User lifecycle: provisioning connectors (full lifecycle) vs JIT provisioning (sign-in only, no deprovisioning).
 - Super admin setup order: enforce 2SV, add a non-personal recovery email, delegate Organization Admins plus a group, keep the super admin out of that group.
-- Super Admin (Cloud Identity/Workspace) and Organization Administrator ([[gcp/iam|IAM]]) are deliberately separate roles: separation of duties.
+- Super Admin (Cloud Identity/Workspace) and Organization Administrator ([[iam|IAM]]) are deliberately separate roles: separation of duties.
 
 ### 1.2 Managing service accounts
 
@@ -58,7 +58,7 @@ This is a favorite exam topic. Know the decision tree cold:
 | Legacy system cannot use any of the above | User-managed key, but: restrict with org policy `iam.disableServiceAccountKeyCreation`, rotate, monitor with [[security-command-center|SCC]] and Cloud Audit Logs |
 
 **Must-know details:**
-- **Default service accounts** (Compute Engine default SA, [[gcp/app-engine|App Engine]] default SA): have Editor on the project. Mitigation: org policy `iam.automaticIamGrantsForDefaultServiceAccounts` **prevents the automatic Editor grant for new default SAs, but is not retroactive**, existing grants remain; replace default SAs with purpose-built SAs; disable key creation for default SAs.
+- **Default service accounts** (Compute Engine default SA, [[app-engine|App Engine]] default SA): have Editor on the project. Mitigation: org policy `iam.automaticIamGrantsForDefaultServiceAccounts` **prevents the automatic Editor grant for new default SAs, but is not retroactive**, existing grants remain; replace default SAs with purpose-built SAs; disable key creation for default SAs.
 - **Key lifecycle:** keys never expire (rotation is manual or scripted). Audit key usage via Data Access logs and SCC findings (weak/unused keys). Prefer disabling key upload via `iam.disableServiceAccountKeyUpload`.
 - **Impersonation chains:** you can chain (SA A impersonates B impersonates C). Keep the two roles straight: **Service Account User** = act as the SA (attach to resources, run as), **Token Creator** = mint tokens for the SA (impersonation). The caller needs Token Creator on the target SA, and anyone treating an SA as a resource (attaching it to a VM, running jobs as it) needs Service Account User on it.
 - **Short-lived credentials:** token lifetimes from ~1 min up to 12 hours (delegated chains reduce the max per hop). Never a standing credential.

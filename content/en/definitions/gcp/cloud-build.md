@@ -57,7 +57,7 @@ steps:
 - Custom variables: `$_VAR_NAME`
 
 ### Artifact Storage
-- Build artifacts to Cloud Storage
+- Build artifacts to [[gcp/cloud-storage|Cloud Storage]]
 - Container images to [[artifact-registry|Artifact Registry]]/Container Registry
 - Build logs to Cloud Logging
 

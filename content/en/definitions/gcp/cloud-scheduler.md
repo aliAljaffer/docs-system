@@ -19,7 +19,7 @@ tags:
 
 ### Overview
 - Schedule tasks on cron schedule
-- Target: HTTP endpoint, Pub/Sub, [[app-engine|App Engine]]
+- Target: HTTP endpoint, [[gcp/pub-sub|Pub/Sub]], [[app-engine|App Engine]]
 - **Serverless**, no infrastructure
 - Retry logic built-in
 
@@ -97,7 +97,7 @@ gcloud scheduler jobs delete my-job
 ## PCA Level
 
 ### Use Cases
-- Trigger Cloud Functions or Cloud Run on schedule
+- Trigger [[gcp/cloud-functions|Cloud Functions]] or [[gcp/cloud-run|Cloud Run]] on schedule
 - Daily backups
 - Periodic data exports
 - Batch job orchestration

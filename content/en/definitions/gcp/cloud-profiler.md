@@ -25,11 +25,11 @@ tags:
 - Supports multiple languages
 
 ### Supported Platforms
-- Compute Engine
-- GKE
+- [[gcp/compute-engine|Compute Engine]]
+- [[gcp/gke|GKE]]
 - [[app-engine|App Engine]]
-- Cloud Run
-- Cloud Functions (2nd gen)
+- [[gcp/cloud-run|Cloud Run]]
+- [[gcp/cloud-functions|Cloud Functions]] (2nd gen)
 - On-premises via agent
 
 ### Supported Languages
@@ -274,7 +274,7 @@ Performance Issue Workflow:
 
 ### Security Considerations
 - **No sensitive data in profiles**: Function names, not data
-- **Access control**: [[iam|IAM]] roles
+- **Access control**: [[gcp/iam|IAM]] roles
   - `cloudprofiler.user`: View profiles
   - `cloudprofiler.admin`: Full access
 - **VPC Service Controls**: Prevent profile data exfiltration

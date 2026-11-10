@@ -27,7 +27,7 @@ tags:
 - Automatic storage increase (up to configured limit)
 - High availability with automatic failover
 - Read replicas for read scaling
-- Integrated with Cloud Monitoring and Cloud Logging
+- Integrated with [[gcp/cloud-monitoring|Cloud Monitoring]] and [[gcp/cloud-logging|Cloud Logging]]
 - **Serverless export to BigQuery and Cloud Storage**
 - Private IP (VPC) and public IP support
 - Managed security patches and updates
@@ -83,9 +83,9 @@ tags:
 - **Recommended for production**
 - Instance gets private IP from VPC
 - No internet exposure
-- Requires [[vpc|VPC peering]] setup
+- Requires [[gcp/vpc|VPC peering]] setup
 - Better security and performance
-- Lower latency from Compute Engine and GKE
+- Lower latency from [[gcp/compute-engine|Compute Engine]] and [[gcp/gke|GKE]]
 
 #### Cloud SQL Proxy
 **AWS Equivalent:** IAM Database Authentication (similar concept)
@@ -106,7 +106,7 @@ tags:
 - Daily backups during backup window
 - Transaction logs for point-in-time recovery
 - **Retained for 1-365 days** (default 7)
-- Stored in multi-regional Cloud Storage
+- Stored in multi-regional [[gcp/cloud-storage|Cloud Storage]]
 - **Incremental** (only changes after first full backup)
 
 #### On-Demand Backups
@@ -145,7 +145,7 @@ tags:
 ### Data Protection
 - **Encryption at rest**: All data encrypted by default (AES-256)
 - **Encryption in transit**: SSL/TLS connections
-- **Customer-Managed Encryption Keys (CMEK)**: Use Cloud KMS keys
+- **Customer-Managed Encryption Keys (CMEK)**: Use [[gcp/cloud-kms|Cloud KMS]] keys
 - **Deletion protection**: Prevent accidental deletion
 - **IAM integration**: Fine-grained access control
 
@@ -187,10 +187,10 @@ tags:
 
 ### When NOT to Use Cloud SQL
 - Need global distribution → Use [[cloud-spanner|Cloud Spanner]]
-- Need >64 TB storage → Use [[cloud-spanner|Cloud Spanner]] or Bigtable
+- Need >64 TB storage → Use [[cloud-spanner|Cloud Spanner]] or [[gcp/bigtable|Bigtable]]
 - Need >96 vCPUs → Use [[cloud-spanner|Cloud Spanner]]
-- NoSQL requirements → Use Firestore or Bigtable
-- Analytical workloads → Use BigQuery
+- NoSQL requirements → Use [[gcp/firestore|Firestore]] or [[gcp/bigtable|Bigtable]]
+- Analytical workloads → Use [[bigquery|BigQuery]]
 - Extremely high performance PostgreSQL → Use [[alloydb|AlloyDB]]
 
 ---
@@ -359,7 +359,7 @@ Primary (Zone A) → Standby (Zone B)
   - `roles/cloudsql.client` for applications
   - `roles/cloudsql.admin` for administrators
 - **Audit logging** with Cloud Audit Logs
-- **[[vpc|VPC Service Controls]]** for data exfiltration prevention
+- **[[gcp/vpc|VPC Service Controls]]** for data exfiltration prevention
 
 ### Cost Optimization Strategies
 - **Committed Use Discounts**: 1 or 3 year, **up to 60% savings**
@@ -431,7 +431,7 @@ spec:
 #### With Cloud Run
 - Use Cloud SQL connections (built-in Cloud SQL Proxy)
 - Set connection name in environment
-- Use Secret Manager for credentials
+- Use [[gcp/secret-manager|Secret Manager]] for credentials
 
 #### With App Engine
 - Built-in Cloud SQL connector

@@ -191,7 +191,7 @@ Configured at [[vpc|VPC]] level, affects Cloud Router behavior:
 - **Dropped packets**: Indicates issues
 
 ### Logs
-- Cloud Logging for VPN events
+- [[gcp/cloud-logging|Cloud Logging]] for VPN events
 - BGP session events
 - Tunnel state changes
 
@@ -408,11 +408,11 @@ gcloud compute vpn-tunnels delete TUNNEL_NAME --region=REGION
 - **Private connectivity**: No internet exposure for VPN traffic
 
 ### Observability
-- **Cloud Monitoring**:
+- **[[gcp/cloud-monitoring|Cloud Monitoring]]**:
   - Tunnel status (up/down)
   - Throughput (bytes sent/received)
   - Packet drops
-- **Cloud Logging**:
+- **[[gcp/cloud-logging|Cloud Logging]]**:
   - Tunnel establishment events
   - BGP session changes
   - Configuration changes

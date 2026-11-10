@@ -119,7 +119,7 @@ handlers:
 - Default: `https://PROJECT_ID.REGION_ID.r.appspot.com`
 - Service: `https://SERVICE-dot-PROJECT_ID.REGION_ID.r.appspot.com`
 - Version: `https://VERSION-dot-SERVICE-dot-PROJECT_ID.REGION_ID.r.appspot.com`
-- Custom domains via Cloud Load Balancing
+- Custom domains via [[gcp/cloud-load-balancing|Cloud Load Balancing]]
 
 ### Runtimes
 **Standard Environment:**
@@ -164,13 +164,13 @@ cron:
 - Shared in-memory cache
 - **Shared memcache**: Free, no guarantee
 - **Dedicated memcache**: Guaranteed space, paid
-- **Deprecated, use Memorystore instead**
+- **Deprecated, use [[gcp/memorystore|Memorystore]] instead**
 
 ### Security
-- **[[iam|Cloud IAM]]** for access control
+- **[[gcp/iam|Cloud IAM]]** for access control
 - **App Engine firewall**: IP allowlist/denylist
 - **SSL/TLS**: Automatic for `.appspot.com` domains
-- **[[iam|Service accounts]]**: Each app runs with service account
+- **[[gcp/iam|Service accounts]]**: Each app runs with service account
 - **Identity-Aware Proxy**: User authentication
 
 ### Regional Deployment
@@ -293,7 +293,7 @@ gcloud app services set-traffic default --splits=v2=1
 - **Standard environment** for cost efficiency (scales to zero)
 - **Automatic scaling**: Set appropriate min/max instances
 - **Static files**: Serve from App Engine, not instances
-- **Caching**: Use Cloud CDN or Memorystore
+- **Caching**: Use Cloud CDN or [[gcp/memorystore|Memorystore]]
 - **Right-size instances**: Balance cost vs performance
 - **Traffic splitting**: Test with minimal traffic first
 
@@ -310,28 +310,28 @@ gcloud app services set-traffic default --splits=v2=1
 - **CPU/memory**: Allocate based on profiling
 
 ### Database Integration
-- **Cloud SQL**: Relational database
+- **[[gcp/cloud-sql|Cloud SQL]]**: Relational database
   - Standard: Use Cloud SQL Proxy
-  - Flexible: Direct [[vpc|VPC]] connection
-- **Firestore**: NoSQL, native integration
+  - Flexible: Direct [[gcp/vpc|VPC]] connection
+- **[[gcp/firestore|Firestore]]**: NoSQL, native integration
 - **Datastore**: Legacy NoSQL (Firestore-compatible)
-- **Bigtable**: Wide-column NoSQL
-- **Cloud Storage**: Object storage
+- **[[gcp/bigtable|Bigtable]]**: Wide-column NoSQL
+- **[[gcp/cloud-storage|Cloud Storage]]**: Object storage
 
 ### Security Best Practices
 - **App Engine Firewall**: Restrict source IPs
 - **Identity-Aware Proxy**: User authentication and authorization
-- **[[iam|Service account]]**: Minimal permissions
-- **Secrets**: Secret Manager, not environment vars
+- **[[gcp/iam|Service account]]**: Minimal permissions
+- **Secrets**: [[gcp/secret-manager|Secret Manager]], not environment vars
 - **HTTPS only**: Enforce secure connections
 - **Security scanning**: Web Security Scanner
 
 ### Monitoring & Observability
-- Cloud Monitoring: Requests, latency, errors
-- Cloud Logging: Application and request logs
-- Cloud Trace: Distributed tracing
-- Cloud Profiler: CPU and memory profiling
-- Error Reporting: Error aggregation
+- [[gcp/cloud-monitoring|Cloud Monitoring]]: Requests, latency, errors
+- [[gcp/cloud-logging|Cloud Logging]]: Application and request logs
+- [[gcp/cloud-trace|Cloud Trace]]: Distributed tracing
+- [[gcp/cloud-profiler|Cloud Profiler]]: CPU and memory profiling
+- [[gcp/error-reporting|Error Reporting]]: Error aggregation
 - Cloud Debugger: Live debugging (Standard only)
 
 ### Migration Strategies
@@ -372,9 +372,9 @@ dispatch:
 ```
 
 #### VPC Connector (Flexible)
-- Connect to [[vpc|VPC]] resources
+- Connect to [[gcp/vpc|VPC]] resources
 - Private IP communication
-- Access [[compute-engine|Compute Engine]], Cloud SQL via private IP
+- Access [[compute-engine|Compute Engine]], [[gcp/cloud-sql|Cloud SQL]] via private IP
 
 #### Environment Variables & Secrets
 ```yaml
@@ -390,7 +390,7 @@ beta_settings:
 ### Well-Architected Considerations
 - **Operational Excellence**: Fully managed, automatic updates, traffic splitting
 - **Reliability**: Multi-zone deployment, health checks, automatic instance replacement
-- **Security**: [[iam|IAM]], App Engine firewall, IAP, HTTPS, secrets management
+- **Security**: [[gcp/iam|IAM]], App Engine firewall, IAP, HTTPS, [[gcp/secret-manager|secrets management]]
 - **Performance**: Auto-scaling, caching, CDN integration, warmup requests
 - **Cost**: Scale to zero (Standard), sustained use discounts, static file serving
 - **Sustainability**: Efficient resource usage, scale to zero when idle

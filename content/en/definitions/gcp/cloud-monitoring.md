@@ -28,9 +28,9 @@ tags:
 ### Metrics
 #### Built-in Metrics
 - Automatically collected from GCP resources
-- CPU, memory, disk, network for Compute Engine
-- Request count, latency for Cloud Run, [[app-engine|App Engine]]
-- Query metrics for [[bigquery|BigQuery]], Cloud SQL
+- CPU, memory, disk, network for [[gcp/compute-engine|Compute Engine]]
+- Request count, latency for [[gcp/cloud-run|Cloud Run]], [[app-engine|App Engine]]
+- Query metrics for [[bigquery|BigQuery]], [[gcp/cloud-sql|Cloud SQL]]
 - No configuration needed
 
 #### Custom Metrics
@@ -65,7 +65,7 @@ tags:
 - **Metric threshold**: CPU > 80%
 - **Metric absence**: No data for X minutes
 - **Forecast**: Predict breach in future
-- **Process health**: Compute Engine process monitoring
+- **Process health**: [[gcp/compute-engine|Compute Engine]] process monitoring
 - **Uptime check**: Endpoint availability
 
 ### Uptime Checks
@@ -86,7 +86,7 @@ tags:
 
 ### Managed Service for Prometheus
 - **Fully managed Prometheus-compatible monitoring**
-- Collect metrics from GKE clusters
+- Collect metrics from [[gcp/gke|GKE]] clusters
 - PromQL query language
 - Global query across regions/projects
 - No operational overhead
@@ -94,7 +94,7 @@ tags:
 ### Ops Agent
 **Successor to Monitoring Agent and Logging Agent**
 - **Single agent** for metrics and logs
-- Install on Compute Engine or on-prem VMs
+- Install on [[gcp/compute-engine|Compute Engine]] or on-prem VMs
 - Collects system metrics (CPU, memory, disk, network)
 - Collects application logs (Apache, NGINX, MySQL, etc.)
 - OpenTelemetry-based
@@ -239,7 +239,7 @@ Alert → PagerDuty/Splunk On-Call → On-call engineer
 
 ### Compliance & Audit
 - **Audit logs**: Who created/modified alerts and dashboards
-- **Access control**: [[iam|IAM]] roles for monitoring
+- **Access control**: [[gcp/iam|IAM]] roles for monitoring
   - `monitoring.viewer`: Read-only
   - `monitoring.editor`: Create/edit dashboards and alerts
   - `monitoring.admin`: Full access

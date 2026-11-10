@@ -95,7 +95,7 @@ tags:
 
 ### Access Control
 #### Uniform (Bucket-level) - Recommended
-- **Uses only [[iam|Cloud IAM]]**
+- **Uses only [[gcp/iam|Cloud IAM]]**
 - Applies to all objects in bucket
 - **Cannot be reverted to fine-grained for 90 days**
 - Simpler, recommended for new buckets
@@ -202,7 +202,7 @@ gsutil compose gs://bucket/part1 gs://bucket/part2 gs://bucket/final
 ### Object Change Notification
 #### Pub/Sub Notifications (Recommended)
 **AWS Equivalent:** [[storage-s3|S3 Event Notifications]]
-- Send notifications to Pub/Sub topic
+- Send notifications to [[gcp/pub-sub|Pub/Sub]] topic
 - Events: Object finalize, delete, archive, metadata update
 - More reliable and scalable than legacy notifications
 - Requires uniform bucket-level access
@@ -395,7 +395,7 @@ gcloud storage buckets update gs://BUCKET_NAME --lock-retention-period
 ### Architectural Patterns
 #### Static Website Hosting
 **AWS Equivalent:** [[storage-s3|S3 Static Website Hosting]]
-- Cloud Storage + Cloud CDN + Load Balancing
+- Cloud Storage + Cloud CDN + [[gcp/cloud-load-balancing|Load Balancing]]
 - **No native website hosting mode** (unlike S3)
 - Requires Load Balancer backend bucket
 - Custom domain via CNAME or Load Balancer
@@ -404,8 +404,8 @@ gcloud storage buckets update gs://BUCKET_NAME --lock-retention-period
 #### Data Lake Architecture
 - Cloud Storage as central repository
 - Standard for hot data, Nearline/Coldline for warm/cold
-- BigQuery for analytics (query in-place)
-- Dataflow for ETL
+- [[bigquery|BigQuery]] for analytics (query in-place)
+- [[gcp/dataflow|Dataflow]] for ETL
 - Organize by zone: raw, curated, analytics-ready
 
 #### Backup & Disaster Recovery
@@ -447,7 +447,7 @@ gcloud storage buckets update gs://BUCKET_NAME --lock-retention-period
   - Control data movement between projects
 - **Bucket Lock**: For compliance (WORM)
 - **Public access prevention**: Org policy to block public access
-- **Audit logging**: Cloud Logging for all access
+- **Audit logging**: [[gcp/cloud-logging|Cloud Logging]] for all access
 
 ### Cost Optimization
 - **Storage class selection**:
@@ -536,12 +536,12 @@ gcloud storage buckets update gs://BUCKET_NAME --lock-retention-period
 - **Cloud DLP**: Scan for sensitive data (PII, PCI)
 
 ### Monitoring & Observability
-- **Cloud Monitoring metrics**:
+- **[[gcp/cloud-monitoring|Cloud Monitoring]] metrics**:
   - Request count (by method, response code)
   - Bucket total bytes
   - Object count
   - Network bytes sent/received
-- **Cloud Logging**:
+- **[[gcp/cloud-logging|Cloud Logging]]**:
   - Admin activity logs (bucket operations)
   - Data access logs (object operations - must enable)
 - **Storage Insights**: Inventory and metadata insights

@@ -14,7 +14,7 @@ tags:
 `gcp` `networking`
 
 ## Virtual Private Cloud (VPC)
-**AWS Equivalent:** VPC
+**AWS Equivalent:** [[vpc|VPC]]
 **Global resource** that spans all regions, providing **isolated network** for Google Cloud resources
 
 ### Key Differences from AWS VPC
@@ -36,7 +36,7 @@ tags:
 - **Regional resource** that spans all zones in a region
 - Each subnet has:
   - **Primary IP range**: Main CIDR block for resources
-  - **Secondary IP ranges**: Additional ranges for GKE pods/services, alias IPs
+  - **Secondary IP ranges**: Additional ranges for [[gcp/gke|GKE]] pods/services, alias IPs
 - Can expand primary and secondary ranges **without downtime**
 - **Cannot overlap with other subnets** in same VPC
 - Cannot shrink subnet ranges
@@ -71,7 +71,7 @@ tags:
 - Stateful (return traffic automatically allowed)
 - Applied via:
   - **Target tags**: Flexible, most common
-  - **Target service accounts**: [[iam|IAM]]-based, more secure
+  - **Target service accounts**: [[gcp/iam|IAM]]-based, more secure
   - **All instances**: Apply to entire VPC
   - **Specified instances**: By name
 
@@ -82,7 +82,7 @@ tags:
 - **Source/Destination**:
   - IP ranges (CIDR)
   - Tags (for ingress)
-  - [[iam|Service accounts]]
+  - [[gcp/iam|Service accounts]]
 - **Protocols and ports**: TCP, UDP, ICMP, etc.
 
 #### Implied Firewall Rules
@@ -101,15 +101,15 @@ tags:
 - Enabled **per subnet**
 - Traffic stays within Google's network, doesn't traverse internet
 - Required for:
-  - Compute Engine instances without external IPs accessing Cloud Storage, Cloud SQL
-  - GKE private clusters accessing Google APIs
+  - [[gcp/compute-engine|Compute Engine]] instances without external IPs accessing [[gcp/cloud-storage|Cloud Storage]], [[gcp/cloud-sql|Cloud SQL]]
+  - [[gcp/gke|GKE private clusters]] accessing Google APIs
 - **Private Google Access for on-premises hosts**: Access Google APIs from on-prem via [[cloud-vpn|VPN]]/[[cloud-interconnect|Interconnect]]
 - See [[private-google-access-vs-psc|Private Google Access vs Private Service Connect]] for detailed comparison
 
 ### Private Service Connection
 - Connect to Google-managed services via private IP
 - Uses VPC peering under the hood
-- Examples: Cloud SQL, Memorystore
+- Examples: [[gcp/cloud-sql|Cloud SQL]], [[gcp/memorystore|Memorystore]]
 - Requires allocated IP range for service
 
 ### VPC Peering
@@ -123,7 +123,7 @@ tags:
 
 #### VPC Peering Limitations
 - Maximum 25 peered VPCs per VPC (can be increased)
-- [[iam|IAM]] permissions required on both VPCs
+- [[gcp/iam|IAM]] permissions required on both VPCs
 - Firewall rules apply independently in each VPC
 
 ### Shared VPC
@@ -131,7 +131,7 @@ tags:
 - Share VPC network from **host project** to **service projects**
 - Centralized network administration
 - Service project resources use host project's VPC
-- **Requires VPC-native clusters** for GKE
+- **Requires VPC-native clusters** for [[gcp/gke|GKE]]
 
 #### Use Cases
 - Central IT manages networking
@@ -152,16 +152,16 @@ tags:
 - Control access to resources based on:
   - IP address
   - VPC network
-  - Identity context (user, [[iam|service account]], device)
-- Supported services: Cloud Storage, Cloud SQL, BigQuery, etc.
-- See VPC Service Controls for full details
+  - Identity context (user, [[gcp/iam|service account]], device)
+- Supported services: [[gcp/cloud-storage|Cloud Storage]], [[gcp/cloud-sql|Cloud SQL]], [[gcp/bigquery|BigQuery]], etc.
+- See [[gcp/vpc-service-controls|VPC Service Controls]] for full details
 
 ### Flow Logs
 **AWS Equivalent:** VPC Flow Logs
 - Capture network traffic metadata
 - **Per subnet** configuration
 - Sampling rate: 0.0 to 1.0 (1.0 = 100%)
-- Sent to Cloud Logging
+- Sent to [[gcp/cloud-logging|Cloud Logging]]
 - Use cases: Network monitoring, forensics, cost optimization
 
 ### Packet Mirroring
@@ -202,7 +202,7 @@ tags:
 #### External IP Addresses
 - **Ephemeral**: Temporary, released when resource stopped
 - **Static**: Reserved, persist beyond resource lifecycle
-- **Regional**: Used by regional resources (VMs, [[cloud-load-balancing|internal LBs]])
+- **Regional**: Used by regional resources ([[gcp/compute-engine|VMs]], [[cloud-load-balancing|internal LBs]])
 - **Global**: Used by global resources ([[cloud-load-balancing|Global Load Balancers]])
 
 ### MTU (Maximum Transmission Unit)
@@ -293,7 +293,7 @@ gcloud compute routes create ROUTE_NAME \
 ### Key Concepts for ACE
 - Creating custom VPC networks and subnets
 - Understanding regional subnets vs AWS AZ-specific subnets
-- Configuring firewall rules with tags and [[iam|service accounts]]
+- Configuring firewall rules with tags and [[gcp/iam|service accounts]]
 - Enabling Private Google Access for private VMs
 - Managing static and ephemeral IP addresses
 - Expanding subnet ranges without downtime
@@ -308,7 +308,7 @@ gcloud compute routes create ROUTE_NAME \
 #### Hub-and-Spoke Topology
 - Central hub VPC connected to multiple spoke VPCs
 - Use [[cloud-vpn|Cloud VPN]] or [[cloud-interconnect|Cloud Interconnect]] for on-prem
-- Shared services ([[cloud-dns|DNS]], monitoring) in hub
+- Shared services ([[cloud-dns|DNS]], [[gcp/cloud-monitoring|monitoring]]) in hub
 - Requires VPC peering or [[cloud-vpn|VPN tunnels]] between hub and spokes
 - **Non-transitive nature** of peering requires careful design
 
@@ -347,11 +347,11 @@ gcloud compute routes create ROUTE_NAME \
 - [[cloud-load-balancing|Cloud Load Balancing]] for traffic distribution
 - [[cloud-vpn|HA VPN]] for 99.99% SLA connectivity
 - Multiple Cloud Routers in each region for BGP redundancy
-- Regional Persistent Disks for data replication
+- [[gcp/persistent-disk|Regional Persistent Disks]] for data replication
 
 ### Security Best Practices
 - **Least Privilege Firewall Rules**: Deny by default, allow explicitly
-- **Use [[iam|Service Accounts]] for Rules**: More secure than tags
+- **Use [[gcp/iam|Service Accounts]] for Rules**: More secure than tags
 - **Hierarchical Firewall Policies**: Enforce org-wide rules
 - **Private Google Access**: Avoid external IPs when possible
 - **VPC Service Controls**: Prevent data exfiltration
@@ -364,7 +364,7 @@ gcloud compute routes create ROUTE_NAME \
 - **Regional Egress**: Keep traffic within region when possible
 - **VPC Peering**: Use instead of external IPs for inter-VPC communication
 - **Private Google Access**: Avoid egress charges for Google API access
-- **Committed Use Discounts**: Apply to VM network egress
+- **[[gcp/compute-engine|Committed Use Discounts]]**: Apply to VM network egress
 - **Release Static IPs**: When not in use to avoid charges
 
 ### Migration Considerations
@@ -373,7 +373,7 @@ gcloud compute routes create ROUTE_NAME \
   - Design: Single global VPC vs multiple regional VPCs
 - **Subnets**: GCP subnets are regional, AWS subnets are AZ-specific
   - Simplifies multi-AZ deployments in GCP
-- **Security Groups**: Map to firewall rules with tags/[[iam|service accounts]]
+- **Security Groups**: Map to firewall rules with tags/[[gcp/iam|service accounts]]
 - **Network ACLs**: Map to firewall rules (stateful in GCP)
 - **VPC Endpoints**: Use Private Google Access and Private Service Connection
 - **Transit Gateway**: Use VPC peering or Network Connectivity Center
@@ -386,7 +386,7 @@ gcloud compute routes create ROUTE_NAME \
 
 ### IP Address Planning
 - **Subnet sizing**: Plan for growth, can expand later
-- **Secondary ranges**: Reserve for GKE pods/services
+- **Secondary ranges**: Reserve for [[gcp/gke|GKE pods/services]]
 - **Avoid overlaps**: Critical for VPC peering and hybrid connectivity
 - **RFC 1918 ranges**: 10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16
 - **Organization-wide IPAM**: Centralized IP address management
@@ -404,7 +404,7 @@ gcloud compute routes create ROUTE_NAME \
 
 #### Firewall Rules Logging
 - Log allowed or denied connections
-- Integrates with Cloud Logging
+- Integrates with [[gcp/cloud-logging|Cloud Logging]]
 - Performance impact: ~0.1% throughput reduction
 
 ### Network Connectivity Center

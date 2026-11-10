@@ -60,7 +60,7 @@ Internal Load Balancers (private)
 - **Target proxy**: Routes requests to URL map
 - **URL map**: Routes based on host and path
 - **Backend services**: Manages backend instance groups
-- **Backend groups**: Actual compute resources (Compute Engine, GKE, Cloud Run, Cloud Functions)
+- **Backend groups**: Actual compute resources ([[gcp/compute-engine|Compute Engine]], [[gcp/gke|GKE]], [[gcp/cloud-run|Cloud Run]], [[gcp/cloud-functions|Cloud Functions]])
 - **Health checks**: Monitor backend health
 
 #### URL Maps and Content-Based Routing
@@ -214,7 +214,7 @@ Internal Load Balancers (private)
 - Autoscaling based on CPU, load, custom metrics
 - Auto-healing with health checks
 - **Most common backend type**
-- See Compute Engine MIGs
+- See [[gcp/compute-engine|Compute Engine MIGs]]
 
 **Unmanaged Instance Groups**
 - Heterogeneous instances
@@ -231,7 +231,7 @@ Internal Load Balancers (private)
 - Use case: Multi-cloud, hybrid architectures
 
 #### Serverless NEG
-- Cloud Run, Cloud Functions, App Engine
+- [[gcp/cloud-run|Cloud Run]], [[gcp/cloud-functions|Cloud Functions]], [[gcp/app-engine|App Engine]]
 - **Fully managed** backends
 
 #### Hybrid Connectivity NEG
@@ -408,7 +408,7 @@ gcloud compute backend-services update BACKEND_SERVICE_NAME \
 - Managing SSL certificates (Google-managed vs self-managed)
 - Difference between global and regional load balancers
 - Creating internal load balancers for private traffic
-- Viewing load balancer metrics in Cloud Monitoring
+- Viewing load balancer metrics in [[gcp/cloud-monitoring|Cloud Monitoring]]
 
 ---
 
@@ -426,7 +426,7 @@ gcloud compute backend-services update BACKEND_SERVICE_NAME \
 - Internal HTTP(S) Load Balancer for service-to-service communication
 - Multiple backend services for different microservices
 - URL-based routing to different services
-- GKE with container-native load balancing
+- [[gcp/gke|GKE]] with container-native load balancing
 
 #### Hybrid Cloud Architecture
 - TCP/UDP Load Balancer with Hybrid Connectivity NEG
@@ -455,7 +455,7 @@ gcloud compute backend-services update BACKEND_SERVICE_NAME \
 - **IAP**: Application-level access control
 - **Private load balancers**: For internal services
 - **Firewall rules**: Restrict to LB health check ranges
-- **VPC Service Controls**: Perimeter security
+- **[[gcp/vpc-service-controls|VPC Service Controls]]**: Perimeter security
 
 ### Performance Optimization
 - **Cloud CDN**: Cache static content
@@ -468,11 +468,11 @@ gcloud compute backend-services update BACKEND_SERVICE_NAME \
 
 ### Cost Optimization
 - **Regional LB**: Use when traffic is regional
-- **Serverless NEG**: No idle backend costs for Cloud Run, Cloud Functions
+- **Serverless NEG**: No idle backend costs for [[gcp/cloud-run|Cloud Run]], [[gcp/cloud-functions|Cloud Functions]]
 - **Autoscaling backends**: Scale down during low traffic
 - **Cloud CDN**: Reduce backend load and egress costs
 - **Internal LB**: No egress charges for [[vpc|VPC]] traffic
-- **Committed Use Discounts**: For predictable backend resources
+- **[[gcp/compute-engine|Committed Use Discounts]]**: For predictable backend resources
 
 ### Traffic Management Strategies
 #### Canary Deployments
@@ -506,21 +506,21 @@ gcloud compute backend-services update BACKEND_SERVICE_NAME \
 - Monitor latency and errors during migration
 
 ### Observability
-- **Cloud Monitoring**:
+- **[[gcp/cloud-monitoring|Cloud Monitoring]]**:
   - Request count, latency, error rate
   - Backend utilization, health
   - Per-backend metrics
-- **Cloud Logging**:
+- **[[gcp/cloud-logging|Cloud Logging]]**:
   - HTTP request logs
   - SSL certificate expiration
   - Backend health changes
-- **Cloud Trace**: Request latency breakdown
+- **[[gcp/cloud-trace|Cloud Trace]]**: Request latency breakdown
 
 ### Container-Native Load Balancing
-- GKE pods as direct backends (not node proxying)
+- [[gcp/gke|GKE]] pods as direct backends (not node proxying)
 - **Lower latency** (no extra hop)
 - Better load distribution
-- Requires VPC-native cluster
+- Requires [[gcp/gke|VPC-native cluster]]
 - Uses NEG automatically
 
 ### Advanced URL Map Configurations

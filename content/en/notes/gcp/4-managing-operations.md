@@ -40,7 +40,7 @@ Part of [[pcse-home|PCSE Home]]. Official exam guide sections 4.1 to 4.2: managi
 - Attestor signing: Cloud KMS asymmetric key `ec-sign-p256-sha256`; sign with `binauthz attestations sign-and-create --artifact-url=IMAGE@DIGEST`.
 - **With attestations required, deploy by digest; mutable tags like `latest` are rejected**.
 - Images: a bootable image needs a partition table plus bootable partition; imported disks must be `disk.raw`, tarred, gzip; RHEL/Windows are premium (billed hourly); `compute.trustedImageProjects` restricts sources; share via `roles/compute.imageUser`.
-- Artifact Registry: regional repositories per project, repo-level [[gcp/iam|IAM]], put repositories inside a VPC-SC perimeter.
+- Artifact Registry: regional repositories per project, repo-level [[iam|IAM]], put repositories inside a VPC-SC perimeter.
 - Custom SHA modules (Enterprise tier only): YAML + CEL declaring scanned resources, detection logic, response (recommendation or automatic remediation); real-time mode triggers on config change, batch runs daily; uploading a module does not itself trigger a scan; the display name becomes the finding category.
 
 ### 4.2 Configuring logging, monitoring, and detection
@@ -53,9 +53,9 @@ Part of [[pcse-home|PCSE Home]]. Official exam guide sections 4.1 to 4.2: managi
 | [[cloud-ngfw|Cloud NGFW]] logs | Firewall allow/deny events with rule name | Enable per rule or policy; log to [[cloud-logging|Cloud Logging]] |
 | Packet Mirroring | Full packet copy of VM traffic | Mirror source (subnet, tags, or instance) + collector behind internal LB (`--is-mirroring-collector`) |
 | Cloud IDS | Managed IDS verdicts on mirrored traffic | Create endpoint in VPC; requires Packet Mirroring; Palo Alto threat signatures |
-| Log Analytics | SQL queries over log buckets | Enable on a log bucket; query in Cloud Logging UI ([[gcp/bigquery|BigQuery]] engine) |
+| Log Analytics | SQL queries over log buckets | Enable on a log bucket; query in Cloud Logging UI ([[bigquery|BigQuery]] engine) |
 
-**Incident response flow:** detect (Event Threat Detection, audit logs, SCC findings), notify (SCC notification configs to [[gcp/pub-sub|Pub/Sub]] or email), respond and remediate (Cloud Functions triggered on findings, e.g., disable a leaked SA key), investigate and correlate (Google SecOps). See [[respond-to-attacks|Respond to attacks]].
+**Incident response flow:** detect (Event Threat Detection, audit logs, SCC findings), notify (SCC notification configs to [[pub-sub|Pub/Sub]] or email), respond and remediate (Cloud Functions triggered on findings, e.g., disable a leaked SA key), investigate and correlate (Google SecOps). See [[respond-to-attacks|Respond to attacks]].
 
 **Logging strategy design:**
 - Log buckets per domain/env with retention settings (default 30 days in Cloud Logging; buckets can retain up to 3650 days); **log views** to scope what each team can read; exclusions to cut cost.

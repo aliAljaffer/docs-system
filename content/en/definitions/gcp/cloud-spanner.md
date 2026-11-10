@@ -203,12 +203,12 @@ tags:
 - Any workload requiring >2 TB and strong consistency
 
 ### When NOT to Use Cloud Spanner
-- Small databases (<100 GB) → Use Cloud SQL
-- Don't need strong consistency → Use Cloud SQL with replicas
-- NoSQL better fit → Use Firestore or Bigtable
-- Analytical workloads → Use BigQuery
-- Cost-sensitive with regional requirements → Use Cloud SQL or [[alloydb|AlloyDB]]
-- Simple key-value access → Use Firestore
+- Small databases (<100 GB) → Use [[gcp/cloud-sql|Cloud SQL]]
+- Don't need strong consistency → Use [[gcp/cloud-sql|Cloud SQL]] with replicas
+- NoSQL better fit → Use [[gcp/firestore|Firestore]] or [[gcp/bigtable|Bigtable]]
+- Analytical workloads → Use [[bigquery|BigQuery]]
+- Cost-sensitive with regional requirements → Use [[gcp/cloud-sql|Cloud SQL]] or [[alloydb|AlloyDB]]
+- Simple key-value access → Use [[gcp/firestore|Firestore]]
 
 ### Migration to Spanner
 #### HarbourBridge
@@ -526,7 +526,7 @@ SELECT * FROM Orders WHERE OrderDate > '2024-01-01';
   - `roles/spanner.databaseAdmin`: Schema changes
   - `roles/spanner.admin`: Full instance management
 - **VPC Service Controls**: Prevent data exfiltration
-- **CMEK**: Customer-managed encryption keys via Cloud KMS
+- **CMEK**: Customer-managed encryption keys via [[gcp/cloud-kms|Cloud KMS]]
 - **Audit logging**: Track all database operations
 - **Private Google Access**: Access from VPC without internet
 - **Fine-grained access control**: Row-level security via application layer
@@ -561,7 +561,7 @@ SELECT * FROM Orders WHERE OrderDate > '2024-01-01';
 
 #### Storage Optimization
 - Monitor storage growth
-- Archive old data to Cloud Storage or BigQuery
+- Archive old data to [[gcp/cloud-storage|Cloud Storage]] or [[bigquery|BigQuery]]
 - Use `BYTES(MAX)` only when necessary
 - Consider data retention policies
 

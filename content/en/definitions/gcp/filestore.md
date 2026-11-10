@@ -15,7 +15,7 @@ tags:
 
 ## Filestore
 **AWS Equivalent:** [[storage-efs|EFS (Elastic File System)]]
-**Fully managed NFS file storage** for Compute Engine and GKE
+**Fully managed NFS file storage** for [[gcp/compute-engine|Compute Engine]] and [[gcp/gke|GKE]]
 
 ### Overview
 - Managed Network File System (NFS)
@@ -87,11 +87,11 @@ tags:
 ### Filestore Features
 #### Network Connectivity
 - Accessible via **VPC network**
-- Requires [[vpc|VPC]] with Private Services Access
+- Requires [[gcp/vpc|VPC]] with Private Services Access
 - Can access from:
-  - Compute Engine VMs in same [[vpc|VPC]]
-  - GKE clusters in same [[vpc|VPC]]
-  - On-premises via Cloud VPN or Cloud Interconnect
+  - [[gcp/compute-engine|Compute Engine]] VMs in same [[gcp/vpc|VPC]]
+  - [[gcp/gke|GKE]] clusters in same [[gcp/vpc|VPC]]
+  - On-premises via [[gcp/cloud-vpn|Cloud VPN]] or [[gcp/cloud-interconnect|Cloud Interconnect]]
 - **Cannot access from internet directly**
 
 #### Shared Access
@@ -458,7 +458,7 @@ nfsvers=3          # NFSv3 protocol
 ```
 
 #### Performance Monitoring
-- Cloud Monitoring metrics:
+- [[gcp/cloud-monitoring|Cloud Monitoring]] metrics:
   - `nfs/server/read_bytes`: Read throughput
   - `nfs/server/write_bytes`: Write throughput
   - `nfs/server/read_ops`: Read IOPS
@@ -519,7 +519,7 @@ nfsvers=3          # NFSv3 protocol
 - **File-level**: POSIX permissions (UID/GID)
   - Implement consistent UID/GID across clients
   - Use [[iam|service accounts]] for VM identity
-- **Audit**: Cloud Audit Logs for admin operations
+- **Audit**: [[gcp/cloud-logging|Cloud Audit Logs]] for admin operations
   - Track instance creation/deletion
   - Snapshot/backup operations
 

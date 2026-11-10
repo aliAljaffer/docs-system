@@ -32,15 +32,15 @@ tags:
 - **Policy Denied logs**: Security policy violations (30-day default)
 
 #### Component Logs
-- Application logs from [[app-engine|App Engine]], Cloud Run, GKE
-- Compute Engine logs via Ops Agent
+- Application logs from [[app-engine|App Engine]], [[gcp/cloud-run|Cloud Run]], [[gcp/gke|GKE]]
+- [[gcp/compute-engine|Compute Engine]] logs via Ops Agent
 - Container logs from GKE
 - Load balancer logs
 
 ### Log Router
 - **Default sink**: Stores logs in Cloud Logging
 - **Custom sinks**: Route logs to:
-  - Cloud Storage (archival)
+  - [[gcp/cloud-storage|Cloud Storage]] (archival)
   - [[bigquery|BigQuery]] (analysis)
   - [[pub-sub|Pub/Sub]] (streaming)
   - Another project (centralized logging)

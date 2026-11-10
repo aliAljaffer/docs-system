@@ -48,7 +48,7 @@ tags:
 - Listen on `$PORT` environment variable (default 8080)
 - Stateless (request-scoped only)
 - **Container must start within 4 minutes** (configurable up to 60 min)
-- Image in Artifact Registry or Container Registry
+- Image in [[gcp/artifact-registry|Artifact Registry]] or Container Registry
 
 ### Scaling Configuration
 - **Min instances**: Keep instances warm, **costs even at 0 requests**
@@ -79,13 +79,13 @@ tags:
 
 ### Ingress Control
 - **All**: Accept traffic from anywhere (default)
-- **Internal**: Only from [[vpc|VPC]] or Cloud Load Balancing
+- **Internal**: Only from [[gcp/vpc|VPC]] or [[gcp/cloud-load-balancing|Cloud Load Balancing]]
 - **Internal and Cloud Load Balancing**: More restrictive internal
 
 ### Networking
 #### VPC Connector
-- Connect Cloud Run to [[vpc|VPC]] resources
-- Access Cloud SQL, [[compute-engine|Compute Engine]], etc. via private IPs
+- Connect Cloud Run to [[gcp/vpc|VPC]] resources
+- Access [[gcp/cloud-sql|Cloud SQL]], [[compute-engine|Compute Engine]], etc. via private IPs
 - **Serverless VPC Access** connector required
 - Traffic can be:
   - **All traffic** through VPC (higher security, higher cost)
@@ -94,7 +94,7 @@ tags:
 #### Direct VPC Egress
 - **New feature, simpler than VPC Connector**
 - No connector resource needed
-- Provides private connectivity to [[vpc|VPC]]
+- Provides private connectivity to [[gcp/vpc|VPC]]
 
 ### Authentication
 #### Allow Unauthenticated (Public)
@@ -104,23 +104,23 @@ tags:
 
 #### Require Authentication
 - Callers must provide valid credentials
-- [[iam|IAM]] role: `roles/run.invoker`
+- [[gcp/iam|IAM]] role: `roles/run.invoker`
 - Methods:
-  - Service-to-service: [[iam|Service account]] identity tokens
-  - User: Google Sign-In or [[iam|Cloud IAM]]
+  - Service-to-service: [[gcp/iam|Service account]] identity tokens
+  - User: Google Sign-In or [[gcp/iam|Cloud IAM]]
 
 ### Traffic Management
 - **Revisions**: Each deployment creates a new immutable revision
 - **Traffic splitting**: Route % of traffic to different revisions
-  - Blue/green deployments
-  - Canary testing
-  - Gradual rollouts
+  - [[gcp/deployment-strategies|Blue/green deployments]]
+  - [[gcp/deployment-strategies|Canary testing]]
+  - [[gcp/deployment-strategies|Gradual rollouts]]
 - **Tags**: Assign names to revisions for testing
   - Each tag gets a unique URL
 
 ### Environment Variables & Secrets
 - Set environment variables via console, gcloud, YAML
-- Integrate with Secret Manager:
+- Integrate with [[gcp/secret-manager|Secret Manager]]:
   - Mount secrets as environment variables
   - Mount secrets as files (volume mounts)
   - **Automatically rotated when secret updates**
@@ -207,35 +207,35 @@ gcloud run jobs execute JOB_NAME --region=REGION
 ### Architectural Patterns
 #### API Gateway Pattern
 - Cloud Run for backend services
-- [API Gateway](https://cloud.google.com/api-gateway) or Cloud Load Balancing for routing
+- [API Gateway](https://cloud.google.com/api-gateway) or [[gcp/cloud-load-balancing|Cloud Load Balancing]] for routing
 - **Automatic scaling based on request volume**
-- Cloud Armor for DDoS protection
+- [[gcp/cloud-armor|Cloud Armor]] for DDoS protection
 
 #### Event-Driven Architecture
-- Trigger Cloud Run from Pub/Sub messages
-- Eventarc for event routing from 100+ sources
-- Cloud Storage events, Cloud Scheduler
+- Trigger Cloud Run from [[gcp/pub-sub|Pub/Sub]] messages
+- [[gcp/eventarc|Eventarc]] for event routing from 100+ sources
+- [[gcp/cloud-storage|Cloud Storage]] events, [[gcp/cloud-scheduler|Cloud Scheduler]]
 - Async processing, decoupled services
 
 #### Microservices
 - Each microservice as separate Cloud Run service
-- Service-to-service authentication with [[iam|service accounts]]
-- Cloud Trace for distributed tracing
+- Service-to-service authentication with [[gcp/iam|service accounts]]
+- [[gcp/cloud-trace|Cloud Trace]] for distributed tracing
 - Internal ingress for inter-service communication
 
 ### High Availability Design
 - **Multi-region deployment** for global availability
-- Global HTTP(S) Load Balancing for multi-region routing
+- [[gcp/cloud-load-balancing|Global HTTP(S) Load Balancing]] for multi-region routing
 - Health checks and automatic traffic failover
 - Regional redundancy
 
 ### Security Best Practices
 - **Authentication**: Always enable unless truly public
-- **Service Identity**: Unique [[iam|service account]] per service
-- **[[iam|IAM]]**: Principle of least privilege
-- **VPC Service Controls**: Prevent data exfiltration
-- **Binary Authorization**: Only deploy verified images
-- **Secrets**: Use Secret Manager, never hardcode
+- **Service Identity**: Unique [[gcp/iam|service account]] per service
+- **[[gcp/iam|IAM]]**: Principle of least privilege
+- **[[gcp/vpc-service-controls|VPC Service Controls]]**: Prevent data exfiltration
+- **[[gcp/binary-authorization|Binary Authorization]]**: Only deploy verified images
+- **Secrets**: Use [[gcp/secret-manager|Secret Manager]], never hardcode
 - **Ingress**: Restrict to internal/load balancer when possible
 
 ### Cost Optimization
@@ -256,7 +256,7 @@ gcloud run jobs execute JOB_NAME --region=REGION
 - **Request latency**:
   - Increase concurrency if I/O-bound
   - Optimize app code
-  - Use caching (Memorystore)
+  - Use caching ([[gcp/memorystore|Memorystore]])
   - Connection pooling for databases
 
 ### Cloud Run vs. Other Compute Options
@@ -272,27 +272,27 @@ gcloud run jobs execute JOB_NAME --region=REGION
 | Auto-scaling to 0 | ✓ | No | No | ✓ |
 
 ### Database Connections
-- **Connection pooling**: Required for Cloud SQL
+- **Connection pooling**: Required for [[gcp/cloud-sql|Cloud SQL]]
 - **Cloud SQL Proxy**: Automatic with Cloud Run
   - Add Cloud SQL connection in service config
   - No VPC Connector needed
-  - Automatic [[iam|IAM]] authentication option
-- **Firestore/Bigtable**: Direct connection via APIs
+  - Automatic [[gcp/iam|IAM]] authentication option
+- **[[gcp/firestore|Firestore]]/[[gcp/bigtable|Bigtable]]**: Direct connection via APIs
 - **Connection limits**: Consider serverless nature
 
 ### Observability & Monitoring
-- Cloud Monitoring: Request count, latency, instance count
-- Cloud Logging: Application and system logs
-- Cloud Trace: Request latency breakdown
-- Cloud Profiler: CPU and memory profiling
+- [[gcp/cloud-monitoring|Cloud Monitoring]]: Request count, latency, instance count
+- [[gcp/cloud-logging|Cloud Logging]]: Application and system logs
+- [[gcp/cloud-trace|Cloud Trace]]: Request latency breakdown
+- [[gcp/cloud-profiler|Cloud Profiler]]: CPU and memory profiling
 - Custom metrics for business KPIs
 
 ### CI/CD Strategies
-- Cloud Build for container builds
-- Artifact Registry for image storage
+- [[gcp/cloud-build|Cloud Build]] for container builds
+- [[gcp/artifact-registry|Artifact Registry]] for image storage
 - [Cloud Deploy](https://cloud.google.com/deploy) for deployment pipelines
-- Canary deployments with traffic splitting
-- Blue/green with revision management
+- [[gcp/deployment-strategies|Canary deployments]] with traffic splitting
+- [[gcp/deployment-strategies|Blue/green]] with revision management
 - Automated rollbacks on errors
 
 ### Migration to Cloud Run
@@ -314,7 +314,7 @@ gcloud run jobs execute JOB_NAME --region=REGION
 ### Well-Architected Considerations
 - **Operational Excellence**: Fully managed, automated updates, simplified operations
 - **Reliability**: Multi-region deployment, automatic scaling, health checks
-- **Security**: IAM authentication, VPC SC, secret management, least privilege
+- **Security**: IAM authentication, [[gcp/vpc-service-controls|VPC SC]], secret management, least privilege
 - **Performance**: Automatic scaling, startup CPU boost, connection pooling
 - **Cost**: Pay-per-request, auto-scale to zero, committed use for high-traffic
 - **Sustainability**: Efficient resource utilization, scale to zero when idle

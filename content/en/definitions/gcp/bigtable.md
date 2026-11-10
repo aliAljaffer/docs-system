@@ -268,11 +268,11 @@ row_filter = RowFilterChain([
 - Analytical workloads with Hadoop/Spark
 
 ### When NOT to Use Bigtable
-- Small datasets (<1 TB) → Use Firestore or Cloud SQL
-- Transactional workloads → Use [[cloud-spanner|Cloud Spanner]] or Cloud SQL
-- Complex SQL queries → Use Cloud SQL or BigQuery
-- Serverless/variable workload → Use Firestore (pay per request)
-- Document database → Use Firestore
+- Small datasets (<1 TB) → Use [[gcp/firestore|Firestore]] or [[gcp/cloud-sql|Cloud SQL]]
+- Transactional workloads → Use [[cloud-spanner|Cloud Spanner]] or [[gcp/cloud-sql|Cloud SQL]]
+- Complex SQL queries → Use [[gcp/cloud-sql|Cloud SQL]] or [[bigquery|BigQuery]]
+- Serverless/variable workload → Use [[gcp/firestore|Firestore]] (pay per request)
+- Document database → Use [[gcp/firestore|Firestore]]
 - Low throughput → DynamoDB on-demand more cost-effective
 
 ### Migration Strategies
@@ -574,7 +574,7 @@ gcloud bigtable clusters update CLUSTER_ID \
 #### Storage Optimization
 - Use HDD for cold data (75% storage savings)
 - Set aggressive garbage collection policies
-- Archive old data to Cloud Storage
+- Archive old data to [[gcp/cloud-storage|Cloud Storage]]
 - Monitor storage growth trends
 
 #### Development Instances

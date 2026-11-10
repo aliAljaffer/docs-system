@@ -53,47 +53,47 @@ Each service note contains:
 **Security & IAM:**
 
 - [[iam|IAM]] - Roles, policies, service accounts, conditions
-- Cloud KMS - Key management
+- [[gcp/cloud-kms|Cloud KMS]] - Key management
 
 **Management:**
 
 - Resource hierarchy (Organizations, Folders, Projects)
 - Billing configuration
-- Cloud Monitoring - Ops Agent
+- [[gcp/cloud-monitoring|Cloud Monitoring]] - Ops Agent
 
 ### Section 2: Planning and configuring a cloud solution (~17.5%)
 
 **Compute:**
 
-- Compute Engine - Machine types, preemptible VMs
+- [[gcp/compute-engine|Compute Engine]] - Machine types, preemptible VMs
 - [[gcp/gke|GKE]] - Autopilot vs Standard, node pools
-- Cloud Run - Services vs Jobs
-- Cloud Functions - Event-driven functions
-- App Engine - Standard vs Flexible
+- [[gcp/cloud-run|Cloud Run]] - Services vs Jobs
+- [[gcp/cloud-functions|Cloud Functions]] - Event-driven functions
+- [[gcp/app-engine|App Engine]] - Standard vs Flexible
 
 **Storage:**
 
 - [[gcp/cloud-storage|Cloud Storage]] - Storage classes
-- Persistent Disk - Zonal vs Regional
-- Filestore - NFS file system
+- [[gcp/persistent-disk|Persistent Disk]] - Zonal vs Regional
+- [[gcp/filestore|Filestore]] - NFS file system
 
 **Databases:**
 
-- Cloud SQL - MySQL, PostgreSQL, SQL Server
+- [[gcp/cloud-sql|Cloud SQL]] - MySQL, PostgreSQL, SQL Server
 - [[gcp/bigquery|BigQuery]] - Data warehouse
-- Firestore - NoSQL document database
-- Cloud Spanner - Globally distributed SQL
-- Cloud Bigtable - NoSQL wide-column
+- [[gcp/firestore|Firestore]] - NoSQL document database
+- [[gcp/cloud-spanner|Cloud Spanner]] - Globally distributed SQL
+- [[gcp/bigtable|Cloud Bigtable]] - NoSQL wide-column
 
 **Networking:**
 
 - [[vpc|VPC]] - Subnets, firewall rules, Private Google Access
-- Cloud Load Balancing - HTTP(S), Network, Internal
+- [[gcp/cloud-load-balancing|Cloud Load Balancing]] - HTTP(S), Network, Internal
 
 **AI/ML:**
 
 - [[gcp/vertex-ai|Vertex AI]] - Unified ML platform, AutoML
-- Gemini - Foundation models (basic usage)
+- [[gcp/gemini|Gemini]] - Foundation models (basic usage)
 
 ### Section 3: Deploying and implementing a cloud solution (~25%)
 
@@ -107,18 +107,18 @@ Each service note contains:
 **Databases:**
 
 - Deploying Cloud SQL, Firestore, BigQuery, Spanner
-- Loading data via Cloud Storage, Cloud Build
+- Loading data via Cloud Storage, [[gcp/cloud-build|Cloud Build]]
 
 **Networking:**
 
-- Creating [[gcp/vpc|VPCs]], subnets, firewall rules
+- Creating VPCs, subnets, firewall rules
 - VPC Peering, Shared VPC
-- Cloud VPN, Cloud Interconnect
+- [[gcp/cloud-vpn|Cloud VPN]], [[gcp/cloud-interconnect|Cloud Interconnect]]
 
 **DevOps:**
 
-- Cloud Build - CI/CD
-- Artifact Registry - Container images
+- [[gcp/cloud-build|Cloud Build]] - CI/CD
+- [[gcp/artifact-registry|Artifact Registry]] - Container images
 
 ### Section 4: Ensuring successful operation (~20%)
 
@@ -130,26 +130,26 @@ Each service note contains:
 
 **Storage & Database:**
 
-- Cloud Storage - Lifecycle policies, versioning
+- [[gcp/cloud-storage|Cloud Storage]] - Lifecycle policies, versioning
 - Database management (backups, queries)
 
 **Networking:**
 
-- Cloud DNS
-- Cloud NAT
+- [[gcp/cloud-dns|Cloud DNS]]
+- [[gcp/cloud-nat|Cloud NAT]]
 
 **Operations:**
 
-- Cloud Monitoring - Alerts, uptime checks, dashboards
-- Cloud Logging - Log buckets, sinks, filters
+- [[gcp/cloud-monitoring|Cloud Monitoring]] - Alerts, uptime checks, dashboards
+- [[gcp/cloud-logging|Cloud Logging]] - Log buckets, sinks, filters
 
 ### Section 5: Configuring access and security (~17.5%)
 
 **Security:**
 
 - [[iam|IAM]] - Roles (basic, predefined, custom), service accounts
-- Cloud KMS - Encryption keys
-- Secret Manager - Secrets management
+- [[gcp/cloud-kms|Cloud KMS]] - Encryption keys
+- [[gcp/secret-manager|Secret Manager]] - Secrets management
 
 ---
 
@@ -168,19 +168,19 @@ Each service note contains:
 
 **Key Services:**
 
-- All Compute options: Compute Engine, GKE, Cloud Run, App Engine
-- Storage architecture: Cloud Storage, Persistent Disk, Filestore
-- Database selection: Cloud SQL, Spanner, Bigtable, Firestore, BigQuery, AlloyDB
-- Network topology: [[vpc|VPC]], Load Balancing, hybrid connectivity
-- **AI/ML architecture**: Vertex AI, Gemini, RAG patterns, MLOps
+- All Compute options: [[gcp/compute-engine|Compute Engine]], [[gcp/gke|GKE]], [[gcp/cloud-run|Cloud Run]], [[gcp/app-engine|App Engine]]
+- Storage architecture: [[gcp/cloud-storage|Cloud Storage]], [[gcp/persistent-disk|Persistent Disk]], [[gcp/filestore|Filestore]]
+- Database selection: [[gcp/cloud-sql|Cloud SQL]], [[gcp/cloud-spanner|Spanner]], [[gcp/bigtable|Bigtable]], [[gcp/firestore|Firestore]], [[gcp/bigquery|BigQuery]], [[gcp/alloydb|AlloyDB]]
+- Network topology: [[vpc|VPC]], [[gcp/cloud-load-balancing|Load Balancing]], hybrid connectivity
+- **AI/ML architecture**: [[gcp/vertex-ai|Vertex AI]], [[gcp/gemini|Gemini]], RAG patterns, MLOps
 
 ### Section 2: Managing and provisioning solution infrastructure (~15%)
 
 **Networking:**
 
 - VPC design, Shared VPC, VPC Peering
-- Hybrid connectivity (VPN, Interconnect)
-- Load Balancing architecture
+- Hybrid connectivity ([[gcp/cloud-vpn|VPN]], [[gcp/cloud-interconnect|Interconnect]])
+- [[gcp/cloud-load-balancing|Load Balancing]] architecture
 
 **Compute:**
 
@@ -199,43 +199,43 @@ Each service note contains:
 **Security:**
 
 - [[iam|IAM]] - Resource hierarchy, conditions, least privilege
-- Cloud KMS - CMEK, encryption strategies
-- Secret Manager - Secret rotation
-- VPC Service Controls - Perimeter security
-- Security Command Center - Threat detection
-- Binary Authorization - Image verification
-- Identity-Aware Proxy - Zero-trust access
+- [[gcp/cloud-kms|Cloud KMS]] - CMEK, encryption strategies
+- [[gcp/secret-manager|Secret Manager]] - Secret rotation
+- [[gcp/vpc-service-controls|VPC Service Controls]] - Perimeter security
+- [[gcp/security-command-center|Security Command Center]] - Threat detection
+- [[gcp/binary-authorization|Binary Authorization]] - Image verification
+- [[gcp/identity-aware-proxy|Identity-Aware Proxy]] - Zero-trust access
 
 **Networking:**
 
-- Cloud Armor - DDoS protection, WAF
+- [[gcp/cloud-armor|Cloud Armor]] - DDoS protection, WAF
 - Private Google Access, Private Service Connect
 
 ### Section 4: Analyzing and optimizing technical and business processes (~18%)
 
 **Operations:**
 
-- Cloud Monitoring - SLO/SLI, error budgets
-- Cloud Logging - Log analytics, centralized logging
-- Cloud Trace - Distributed tracing, bottleneck analysis
-- Cloud Profiler - CPU/memory optimization
-- Error Reporting - Proactive error detection
+- [[gcp/cloud-monitoring|Cloud Monitoring]] - SLO/SLI, error budgets
+- [[gcp/cloud-logging|Cloud Logging]] - Log analytics, centralized logging
+- [[gcp/cloud-trace|Cloud Trace]] - Distributed tracing, bottleneck analysis
+- [[gcp/cloud-profiler|Cloud Profiler]] - CPU/memory optimization
+- [[gcp/error-reporting|Error Reporting]] - Proactive error detection
 
 **Data Analytics:**
 
-- Cloud Pub/Sub - Event-driven architecture
-- Cloud Dataflow - Stream/batch processing
-- Cloud Dataproc - Spark/Hadoop workloads
-- Cloud Composer - Apache Airflow orchestration
+- [[gcp/pub-sub|Cloud Pub/Sub]] - Event-driven architecture
+- [[gcp/dataflow|Cloud Dataflow]] - Stream/batch processing
+- [[gcp/dataproc|Cloud Dataproc]] - Spark/Hadoop workloads
+- [[gcp/cloud-composer|Cloud Composer]] - Apache Airflow orchestration
 
 **Caching:**
 
-- Memorystore - Redis vs Memcached selection, caching patterns
+- [[gcp/memorystore|Memorystore]] - Redis vs Memcached selection, caching patterns
 
 **AI/ML & Generative AI:** **NEW FOCUS AREA in 2026**
 
-- Vertex AI - ML platform architecture
-- Gemini - Foundation model selection (Pro vs Flash)
+- [[gcp/vertex-ai|Vertex AI]] - ML platform architecture
+- [[gcp/gemini|Gemini]] - Foundation model selection (Pro vs Flash)
 - RAG (Retrieval-Augmented Generation) patterns
 - Context caching for cost optimization
 - Model deployment and monitoring
@@ -252,17 +252,17 @@ Each service note contains:
 
 **DevOps:**
 
-- Cloud Build - CI/CD pipelines
-- Artifact Registry - Image management
-- Deployment Strategies - **6 strategies (Recreate, Rolling, Canary, Blue/Green, Shadow, A/B)**
+- [[gcp/cloud-build|Cloud Build]] - CI/CD pipelines
+- [[gcp/artifact-registry|Artifact Registry]] - Image management
+- [[gcp/deployment-strategies|Deployment Strategies]] - **6 strategies (Recreate, Rolling, Canary, Blue/Green, Shadow, A/B)**
 - Infrastructure as Code (Deployment Manager, Terraform)
 
 **Management:**
 
-- Cloud Scheduler - Scheduled tasks
-- Workflows - Service orchestration
-- Cloud Composer - Apache Airflow for complex data pipelines
-- Migration Framework - **4-phase methodology (Assess, Plan, Deploy, Optimize)**
+- [[gcp/cloud-scheduler|Cloud Scheduler]] - Scheduled tasks
+- [[gcp/workflows|Workflows]] - Service orchestration
+- [[gcp/cloud-composer|Cloud Composer]] - Apache Airflow for complex data pipelines
+- [[gcp/migration-framework|Migration Framework]] - **4-phase methodology (Assess, Plan, Deploy, Optimize)**
 
 ### Section 6: Ensuring solution and operations reliability (~14%)
 
@@ -287,7 +287,7 @@ Each service note contains:
 
 ### 1. Deployment Strategies (MUST KNOW)
 
-**Full Guide**
+**[[gcp/deployment-strategies|Full Guide]]**
 
 Exam tests you on **selecting the right strategy** for scenarios:
 
@@ -302,7 +302,7 @@ Exam tests you on **selecting the right strategy** for scenarios:
 
 ### 2. Migration Framework (CASE STUDY CRITICAL)
 
-**Full Guide**
+**[[gcp/migration-framework|Full Guide]]**
 
 **4 Phases** (know them cold):
 
@@ -352,7 +352,7 @@ IoT Core → Pub/Sub → Dataflow → BigQuery (ad-hoc)
 
 ### 5. Caching Architecture
 
-**Memorystore**: Redis vs Memcached
+**[[gcp/memorystore|Memorystore]]**: Redis vs Memcached
 
 - **Memcached**: Pure cache, no persistence, session store, reference data
 - **Redis Standard**: Persistence + HA + failover, gaming leaderboards, critical sessions
@@ -648,56 +648,56 @@ Study sections in this order based on service dependencies and complexity:
 
 | Use Case                 | Service                                      |
 | ------------------------ | -------------------------------------------- |
-| VMs                      | Compute Engine   |
-| Containers (managed K8s) | GKE                         |
-| Containers (serverless)  | Cloud Run             |
-| Functions (event-driven) | Cloud Functions |
-| Full web apps (PaaS)     | App Engine           |
+| VMs                      | [[gcp/compute-engine|Compute Engine]]   |
+| Containers (managed K8s) | [[gcp/gke|GKE]]                         |
+| Containers (serverless)  | [[gcp/cloud-run|Cloud Run]]             |
+| Functions (event-driven) | [[gcp/cloud-functions|Cloud Functions]] |
+| Full web apps (PaaS)     | [[gcp/app-engine|App Engine]]           |
 
 ### Storage
 
 | Use Case           | Service                                      |
 | ------------------ | -------------------------------------------- |
-| Object storage     | Cloud Storage     |
-| Block storage (VM) | Persistent Disk |
-| File storage (NFS) | Filestore             |
+| Object storage     | [[gcp/cloud-storage|Cloud Storage]]     |
+| Block storage (VM) | [[gcp/persistent-disk|Persistent Disk]] |
+| File storage (NFS) | [[gcp/filestore|Filestore]]             |
 
 ### Database
 
 | Use Case               | Service                                                     |
 | ---------------------- | ----------------------------------------------------------- |
-| Relational (regional)  | Cloud SQL                          |
-| Relational (global)    | Cloud Spanner                  |
-| PostgreSQL (high perf) | AlloyDB                              |
-| NoSQL (document)       | Firestore                          |
-| NoSQL (wide-column)    | Cloud Bigtable                      |
-| Data warehouse         | BigQuery                            |
-| In-memory cache        | Memorystore (Redis or Memcached) |
+| Relational (regional)  | [[gcp/cloud-sql|Cloud SQL]]                          |
+| Relational (global)    | [[gcp/cloud-spanner|Cloud Spanner]]                  |
+| PostgreSQL (high perf) | [[gcp/alloydb|AlloyDB]]                              |
+| NoSQL (document)       | [[gcp/firestore|Firestore]]                          |
+| NoSQL (wide-column)    | [[gcp/bigtable|Cloud Bigtable]]                      |
+| Data warehouse         | [[gcp/bigquery|BigQuery]]                            |
+| In-memory cache        | [[gcp/memorystore|Memorystore]] (Redis or Memcached) |
 
 ### AI/ML
 
 | Use Case                        | Service                                                     |
 | ------------------------------- | ----------------------------------------------------------- |
-| Generative AI (text/multimodal) | Gemini via Vertex AI |
-| No-code ML                      | Vertex AI AutoML                       |
-| Custom ML training              | Vertex AI Custom Training              |
-| ML pipelines (MLOps)            | Vertex AI Pipelines                    |
-| RAG / Vector search             | Vertex AI Matching Engine              |
+| Generative AI (text/multimodal) | [[gcp/gemini|Gemini]] via [[gcp/vertex-ai|Vertex AI]] |
+| No-code ML                      | [[gcp/vertex-ai|Vertex AI AutoML]]                       |
+| Custom ML training              | [[gcp/vertex-ai|Vertex AI Custom Training]]              |
+| ML pipelines (MLOps)            | [[gcp/vertex-ai|Vertex AI Pipelines]]                    |
+| RAG / Vector search             | [[gcp/vertex-ai|Vertex AI Matching Engine]]              |
 
 ### Networking
 
 | Use Case                              | Service                                                              |
 | ------------------------------------- | -------------------------------------------------------------------- |
 | Virtual network                       | [[vpc|VPC]]                                              |
-| Load balancing                        | Cloud Load Balancing            |
-| VPN                                   | Cloud VPN                                  |
-| Dedicated connection                  | Cloud Interconnect                |
-| DNS                                   | Cloud DNS                                  |
-| NAT                                   | Cloud NAT                                  |
-| DDoS/WAF (Layer 7)                    | Cloud Armor                              |
-| Advanced firewall (Layer 3-7 IDS/IPS) | Cloud NGFW Enterprise                     |
+| Load balancing                        | [[gcp/cloud-load-balancing|Cloud Load Balancing]]            |
+| VPN                                   | [[gcp/cloud-vpn|Cloud VPN]]                                  |
+| Dedicated connection                  | [[gcp/cloud-interconnect|Cloud Interconnect]]                |
+| DNS                                   | [[gcp/cloud-dns|Cloud DNS]]                                  |
+| NAT                                   | [[gcp/cloud-nat|Cloud NAT]]                                  |
+| DDoS/WAF (Layer 7)                    | [[gcp/cloud-armor|Cloud Armor]]                              |
+| Advanced firewall (Layer 3-7 IDS/IPS) | [[gcp/cloud-ngfw|Cloud NGFW Enterprise]]                     |
 | Private API access (simple)           | Private Google Access (free)                                         |
-| Private API access (advanced)         | Private Service Connect |
+| Private API access (advanced)         | [[gcp/private-google-access-vs-psc|Private Service Connect]] |
 
 ---
 

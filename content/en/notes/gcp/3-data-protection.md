@@ -31,7 +31,7 @@ Part of [[pcse-home|PCSE Home]]. Official exam guide sections 3.1 to 3.3: ensuri
 
 **Restricting access to data services:**
 
-- **[[bigquery|BigQuery]]:** [[gcp/iam|IAM]] at dataset/table level, **policy tags** + column-level security (Data Catalog / Dataplex policy tags), **row-level security** filter expressions, authorized views/datasets/routines to share without table access, CMEK, [[vpc-service-controls|VPC-SC]] for exfiltration. Know the difference: column ACLs (policy tags) vs row filters vs authorized views.
+- **[[bigquery|BigQuery]]:** [[iam|IAM]] at dataset/table level, **policy tags** + column-level security (Data Catalog / Dataplex policy tags), **row-level security** filter expressions, authorized views/datasets/routines to share without table access, CMEK, [[vpc-service-controls|VPC-SC]] for exfiltration. Know the difference: column ACLs (policy tags) vs row filters vs authorized views.
 - **[[cloud-storage|Cloud Storage]]:** UBLA, public access prevention (org policy + bucket level), retention policies + bucket lock (WORM, irreversible), object versioning, CMEK, signed URLs for temporary access, ACLs only when UBLA off.
 - **[[cloud-sql|Cloud SQL]]:** private IP (with PSA or PSC), IAM database authentication, CMEK, encrypted connections, no public IP flag.
 - **[[secret-manager|Secret Manager]]:** versions (enable/disable/destroy), replication policy (auto or user-managed regions), CMEK, rotation (manual + [[cloud-scheduler|Cloud Scheduler]]/Function pattern or terraform), per-secret IAM, audit logging. "Database credentials for an app, must rotate quarterly and never appear in code" -> Secret Manager + rotation + WIF/impersonation for app identity.
@@ -60,7 +60,7 @@ Decision table (memorize):
 | CSEK (customer-supplied, passed per request) | You (per request, not stored, or stored wrapped) | Legacy/specific compliance patterns, rare |
 | CMEK via [[cloud-kms|Cloud KMS]] (software) | You (in Cloud KMS) | Need key control, rotation, revocation (access revoked by disabling key) |
 | CMEK with Cloud KMS HSM (hardware) | You (FIPS 140-2 L3) | Compliance requires hardware keys |
-| Cloud EKM | You (external key manager: Fortanix, Thales, etc.) | Keys must live outside Google; via [[gcp/vpc|VPC]] endpoints to EKM |
+| Cloud EKM | You (external key manager: Fortanix, Thales, etc.) | Keys must live outside Google; via [[vpc|VPC]] endpoints to EKM |
 | Confidential Computing | Google + TEE hardware | Protect data *in use* (memory encryption) |
 
 See [[cryptography|Cryptography]] for the underlying concepts.
@@ -115,7 +115,7 @@ Objective 3.3 has three official bullets. Track them directly. See also [[vertex
 - PaaS-hosted ([[vertex-ai|Vertex AI]]): Google secures the infrastructure. You configure IAM per ML role (data scientist, trainer, deployer), data access controls, CMEK, VPC-SC perimeters, PSC private endpoints, and Model Armor.
 - One-sentence exam answer: IaaS means you secure infrastructure and platform; PaaS means Google secures infrastructure and you configure access, data, and perimeter controls.
 
-**3. Security controls for [[gcp/gemini|Gemini]] Enterprise Agent Platform:**
+**3. Security controls for Gemini Enterprise Agent Platform:**
 
 - Model Armor provides unified runtime guardrails for first-party Gemini models and third-party or open models on the platform: prompt injection and jailbreak filters, PII and unsafe content filters, malicious URL detection.
 - Data controls for Gemini Enterprise: your prompts and responses are not used to train Google models, and you control logging and retention.

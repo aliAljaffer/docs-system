@@ -66,7 +66,7 @@ tags:
 - Storage cost: $0.02 per GB/month (active), $0.01 per GB/month (long-term)
 
 #### External Tables
-- Query data in [[cloud-storage|Cloud Storage]], Bigtable, Cloud SQL
+- Query data in [[cloud-storage|Cloud Storage]], [[gcp/bigtable|Bigtable]], [[gcp/cloud-sql|Cloud SQL]]
 - No data movement required
 - **Lower performance** than native tables
 - No storage cost in BigQuery (pay for source storage)
@@ -415,7 +415,7 @@ LIMIT 10;
   - `roles/bigquery.user`: Run queries
   - `roles/bigquery.admin`: Full control
 - **VPC Service Controls**: Prevent data exfiltration
-- **CMEK**: Customer-managed encryption keys via Cloud KMS
+- **CMEK**: Customer-managed encryption keys via [[gcp/cloud-kms|Cloud KMS]]
 - **Authorized views**: Share subset of data without full table access
 - **Column-level security**: Restrict sensitive columns
 - **Row-level security**: Filter rows based on user

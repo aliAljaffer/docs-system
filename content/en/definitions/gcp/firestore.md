@@ -116,7 +116,7 @@ const snapshot = await query.get();
 - **OR queries** supported (in() operator with up to 30 values)
 - **NOT-EQUAL queries** supported
 - Inequality filters on single field only
-- No full-text search (use Algolia or BigQuery)
+- No full-text search (use Algolia or [[bigquery|BigQuery]])
 
 ### Indexing
 #### Automatic Indexing
@@ -297,11 +297,11 @@ service cloud.firestore {
 - Rapid development with managed security
 
 ### When NOT to Use Firestore
-- **Massive scale** (>100 TB) → Use Bigtable
-- **Complex SQL queries** → Use Cloud SQL or BigQuery
-- **Analytics workloads** → Use BigQuery
+- **Massive scale** (>100 TB) → Use [[gcp/bigtable|Bigtable]]
+- **Complex SQL queries** → Use [[gcp/cloud-sql|Cloud SQL]] or [[bigquery|BigQuery]]
+- **Analytics workloads** → Use [[bigquery|BigQuery]]
 - **Graph queries** → Use specialized graph database
-- **High write throughput per document** (>1/sec sustained) → Use Bigtable
+- **High write throughput per document** (>1/sec sustained) → Use [[gcp/bigtable|Bigtable]]
 - **Full-text search** → Use Algolia or Elasticsearch (or export to BigQuery)
 - **Global strong consistency across regions** → Use [[cloud-spanner|Cloud Spanner]]
 

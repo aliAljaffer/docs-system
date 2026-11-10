@@ -41,13 +41,13 @@ tags:
 
 ### Google Cloud Service Events
 **Direct events** (no [[pub-sub|Pub/Sub]] topic needed):
-- **Cloud Storage**: Object finalize, delete, archive, metadata update
-- **Pub/Sub**: Message published to topic
-- **Firestore**: Document create, update, delete
-- **Artifact Registry**: Image push, delete
-- **Compute Engine**: Instance start, stop, delete
-- **Cloud SQL**: Instance creation, backup complete
-- **Cloud Build**: Build status changes
+- **[[gcp/cloud-storage|Cloud Storage]]**: Object finalize, delete, archive, metadata update
+- **[[gcp/pub-sub|Pub/Sub]]**: Message published to topic
+- **[[gcp/firestore|Firestore]]**: Document create, update, delete
+- **[[gcp/artifact-registry|Artifact Registry]]**: Image push, delete
+- **[[gcp/compute-engine|Compute Engine]]**: Instance start, stop, delete
+- **[[gcp/cloud-sql|Cloud SQL]]**: Instance creation, backup complete
+- **[[gcp/cloud-build|Cloud Build]]**: Build status changes
 - **BigQuery**: Job complete, dataset changes
 - **50+ more Google Cloud services**
 
@@ -55,9 +55,9 @@ tags:
 - **Cloud Audit Logs** as event source
 - Track API calls across Google Cloud
 - Examples:
-  - [[iam|IAM]] policy changes
-  - [[vpc|VPC]] firewall rule modifications
-  - Cloud SQL instance deletions
+  - [[gcp/iam|IAM]] policy changes
+  - [[gcp/vpc|VPC]] firewall rule modifications
+  - [[gcp/cloud-sql|Cloud SQL]] instance deletions
 - Filter by service, method, resource type
 - Use case: Automated remediation, compliance monitoring
 
@@ -80,9 +80,9 @@ tags:
 ### Supported Targets
 | Target | Use Case | Invocation |
 |--------|----------|------------|
-| **Cloud Run** | HTTP services, APIs, web apps | **Recommended** |
-| **Cloud Functions** | Simple event processing | Good for small functions |
-| **GKE** | Complex workloads, stateful apps | Advanced use cases |
+| **[[gcp/cloud-run|Cloud Run]]** | HTTP services, APIs, web apps | **Recommended** |
+| **[[gcp/cloud-functions|Cloud Functions]]** | Simple event processing | Good for small functions |
+| **[[gcp/gke|GKE]]** | Complex workloads, stateful apps | Advanced use cases |
 | **Workflows** | Multi-step orchestration | Coordinate services |
 
 ### Cloud Run as Target (Recommended)
@@ -90,10 +90,10 @@ tags:
 - Automatic scaling (0 to N)
 - Receives events as HTTP POST requests
 - Event delivered in CloudEvents format
-- Example: Image processing on Cloud Storage upload
+- Example: Image processing on [[gcp/cloud-storage|Cloud Storage]] upload
 
 ### Cloud Functions as Target
-- 2nd gen Cloud Functions required
+- 2nd gen [[gcp/cloud-functions|Cloud Functions]] required
 - Event-driven function invocation
 - Simpler than Cloud Run for basic tasks
 - Event automatically parsed
@@ -101,12 +101,12 @@ tags:
 ### GKE as Target
 - Deploy event handler as Kubernetes Service
 - Suitable for complex, stateful processing
-- Requires GKE cluster
+- Requires [[gcp/gke|GKE]] cluster
 - Event delivered to Service endpoint
 
 ### Workflows as Target
 - Orchestrate multi-step processes
-- Example: Storage upload → Workflow → Cloud Run → BigQuery
+- Example: Storage upload → Workflow → Cloud Run → [[bigquery|BigQuery]]
 - YAML-based workflow definition
 - Built-in error handling, retries
 
@@ -155,10 +155,10 @@ tags:
 **Trigger** = Configuration that routes events from source to target
 
 **Components:**
-1. **Event provider**: Source service (e.g., Cloud Storage)
+1. **Event provider**: Source service (e.g., [[gcp/cloud-storage|Cloud Storage]])
 2. **Event type**: Specific event (e.g., object finalized)
 3. **Event filters**: Attribute matching (optional)
-4. **Target**: Destination service (e.g., Cloud Run)
+4. **Target**: Destination service (e.g., [[gcp/cloud-run|Cloud Run]])
 5. **Service account**: Identity for invoking target
 
 ### Event Filtering
@@ -263,7 +263,7 @@ Cloud Run service
 - **No charge for Eventarc service** itself
 - Underlying costs:
   - **[[pub-sub|Pub/Sub]]**: $40 per TiB of data (first 10 GiB/month free)
-  - **Target invocation**: Cloud Run or Cloud Functions pricing
+  - **Target invocation**: [[gcp/cloud-run|Cloud Run]] or [[gcp/cloud-functions|Cloud Functions]] pricing
   - **Event egress**: Standard network egress rates
 - **Audit log events**: Cloud Logging costs apply
 
@@ -322,10 +322,10 @@ gcloud eventarc triggers delete TRIGGER_NAME --location=REGION
 
 ### Key Concepts for ACE
 - Understanding event-driven architectures
-- Creating Eventarc triggers for Cloud Storage and [[pub-sub|Pub/Sub]] events
-- Routing events to Cloud Run services
+- Creating Eventarc triggers for [[gcp/cloud-storage|Cloud Storage]] and [[pub-sub|Pub/Sub]] events
+- Routing events to [[gcp/cloud-run|Cloud Run]] services
 - Using event filters to process specific events
-- Granting appropriate [[iam|IAM]] permissions for event routing
+- Granting appropriate [[gcp/iam|IAM]] permissions for event routing
 - Viewing trigger status and event logs
 - Troubleshooting failed event deliveries
 
@@ -412,7 +412,7 @@ Eventarc Trigger (europe-west1) → Cloud Run (europe-west1)
 ```
 
 ### Security Best Practices
-- **[[iam|Service Accounts]]**:
+- **[[gcp/iam|Service Accounts]]**:
   - Unique service account per trigger
   - Minimal permissions (least privilege)
   - `roles/run.invoker` for Cloud Run targets
@@ -421,22 +421,22 @@ Eventarc Trigger (europe-west1) → Cloud Run (europe-west1)
   - Eventarc automatically includes auth tokens
   - Targets verify caller identity
   - No public endpoints required
-- **[[vpc|VPC]] integration**:
-  - Use Cloud Run internal ingress
+- **[[gcp/vpc|VPC]] integration**:
+  - Use [[gcp/cloud-run|Cloud Run internal ingress]]
   - Private event targets (no internet exposure)
-- **VPC Service Controls**:
+- **[[gcp/vpc-service-controls|VPC Service Controls]]**:
   - Protect event data from exfiltration
   - Control cross-project event routing
 - **Audit logging**:
-  - All trigger operations logged to Cloud Logging
+  - All trigger operations logged to [[gcp/cloud-logging|Cloud Logging]]
   - Track event deliveries and failures
 
 ### Performance Optimization
 - **Concurrency**:
-  - Cloud Run: Up to 1000 concurrent requests
-  - Cloud Functions: Up to 1000 concurrent invocations
+  - [[gcp/cloud-run|Cloud Run]]: Up to 1000 concurrent requests
+  - [[gcp/cloud-functions|Cloud Functions]]: Up to 1000 concurrent invocations
 - **Cold starts**:
-  - Use Cloud Run min instances for latency-sensitive
+  - Use Cloud Run [[gcp/cloud-run|min instances]] for latency-sensitive
   - Optimize container startup time
 - **Event filtering**:
   - Filter at trigger (reduce invocations)
@@ -448,8 +448,8 @@ Eventarc Trigger (europe-west1) → Cloud Run (europe-west1)
 ### Cost Optimization
 - **Event filtering**: Reduce unnecessary target invocations
 - **Right-size targets**:
-  - Cloud Run: Appropriate CPU/memory
-  - Cloud Functions: Minimize execution time
+  - [[gcp/cloud-run|Cloud Run]]: Appropriate CPU/memory
+  - [[gcp/cloud-functions|Cloud Functions]]: Minimize execution time
 - **Avoid event storms**:
   - Use rate limiting on event sources
   - Implement circuit breakers
@@ -545,16 +545,16 @@ Cloud Storage → Eventarc trigger → Cloud Run
 - Centralized trigger management
 
 ### Integration with GCP Services
-- **Cloud Run**: Primary target (recommended)
-- **Cloud Functions**: Event-driven functions (2nd gen)
-- **GKE**: Complex workloads, stateful processing
+- **[[gcp/cloud-run|Cloud Run]]**: Primary target (recommended)
+- **[[gcp/cloud-functions|Cloud Functions]]**: Event-driven functions (2nd gen)
+- **[[gcp/gke|GKE]]**: Complex workloads, stateful processing
 - **Workflows**: Multi-step orchestration
 - **[[pub-sub|Pub/Sub]]**: Underlying messaging, custom events
-- **Cloud Storage**: Object events (finalize, delete, archive)
-- **Firestore**: Document events (create, update, delete)
-- **Cloud Build**: Build status events
-- **Cloud Logging**: Audit log events
-- **BigQuery**: Job completion events
+- **[[gcp/cloud-storage|Cloud Storage]]**: Object events (finalize, delete, archive)
+- **[[gcp/firestore|Firestore]]**: Document events (create, update, delete)
+- **[[gcp/cloud-build|Cloud Build]]**: Build status events
+- **[[gcp/cloud-logging|Cloud Logging]]**: Audit log events
+- **[[bigquery|BigQuery]]**: Job completion events
 
 ### Use Case Examples
 
@@ -602,10 +602,10 @@ Benefits:
 ```
 
 ### Compliance Considerations
-- **Event audit trail**: All events logged via Cloud Logging
+- **Event audit trail**: All events logged via [[gcp/cloud-logging|Cloud Logging]]
 - **Data residency**: Events processed in trigger region
 - **Encryption**: Events encrypted in transit (HTTPS)
-- **Access control**: [[iam|IAM]]-based event routing
+- **Access control**: [[gcp/iam|IAM]]-based event routing
 - **Retention**: Configure [[pub-sub|Pub/Sub]] message retention for compliance
 
 ### Troubleshooting
@@ -614,23 +614,23 @@ Benefits:
 **Check:**
 1. Trigger active? `gcloud eventarc triggers describe TRIGGER_NAME`
 2. Event filters correct? (bucket name, event type)
-3. [[iam|IAM]] permissions: Service account has `run.invoker` or `cloudfunctions.invoker`
+3. [[gcp/iam|IAM]] permissions: Service account has `run.invoker` or `cloudfunctions.invoker`
 4. Target service deployed and healthy?
 5. Event actually published? Check source service logs
 
 #### High Latency
 **Causes:**
-- Cold starts on target (Cloud Run/Cloud Functions)
+- Cold starts on target ([[gcp/cloud-run|Cloud Run]]/[[gcp/cloud-functions|Cloud Functions]])
 - Slow target processing
 - Network issues
 
 **Solutions:**
 - Set min instances on Cloud Run
 - Optimize target code
-- Use Cloud Trace to identify bottlenecks
+- Use [[gcp/cloud-trace|Cloud Trace]] to identify bottlenecks
 
 #### Failed Event Deliveries
-**Check Cloud Logging:**
+**Check [[gcp/cloud-logging|Cloud Logging]]:**
 ```bash
 gcloud logging read "resource.type=eventarc.googleapis.com/Trigger AND \
   jsonPayload.responseCode >= 400"
@@ -643,9 +643,9 @@ gcloud logging read "resource.type=eventarc.googleapis.com/Trigger AND \
 - Network connectivity
 
 ### Well-Architected Considerations
-- **Operational Excellence**: Managed service, no infrastructure, centralized trigger management, Cloud Logging integration
+- **Operational Excellence**: Managed service, no infrastructure, centralized trigger management, [[gcp/cloud-logging|Cloud Logging]] integration
 - **Reliability**: At-least-once delivery, automatic retries, DLQ for failures, built on [[pub-sub|Pub/Sub]] (99.95% SLA)
-- **Security**: [[iam|IAM]]-based access, service account identity, VPC Service Controls, audit logging
+- **Security**: [[gcp/iam|IAM]]-based access, service account identity, [[gcp/vpc-service-controls|VPC Service Controls]], [[gcp/cloud-logging|audit logging]]
 - **Performance**: Low latency event routing, concurrent processing, filter at source, CloudEvents standard
 - **Cost**: Pay-per-event ([[pub-sub|Pub/Sub]] costs), no idle charges, event filtering reduces costs, serverless targets
 - **Sustainability**: Serverless architecture, auto-scaling (no idle resources), efficient event routing
@@ -657,7 +657,7 @@ gcloud logging read "resource.type=eventarc.googleapis.com/Trigger AND \
 ### Scenario 1: Serverless Image Processing
 **Question:** "Automatically resize images when uploaded to Cloud Storage. What's the simplest solution?"
 
-**Answer:** **Eventarc trigger from Cloud Storage → Cloud Run**
+**Answer:** **Eventarc trigger from Cloud Storage → [[gcp/cloud-run|Cloud Run]]**
 - **Why**: No code for event routing, automatic scaling, fully serverless
 - **Why not Pub/Sub directly**: More configuration (manual topic, subscription, notification)
 - **Why not Cloud Functions**: Cloud Run more flexible (custom runtime, longer timeout)
@@ -675,23 +675,23 @@ gcloud logging read "resource.type=eventarc.googleapis.com/Trigger AND \
 ---
 
 ### Scenario 3: Audit Log Automation
-**Question:** "Alert when [[iam|IAM]] policy changed. Real-time automation needed."
+**Question:** "Alert when [[gcp/iam|IAM]] policy changed. Real-time automation needed."
 
-**Answer:** **Eventarc trigger on Cloud Audit Logs → Cloud Run**
+**Answer:** **Eventarc trigger on Cloud Audit Logs → [[gcp/cloud-run|Cloud Run]]**
 - **Why**: Real-time (no polling), audit logs as event source
 - **Why not scheduled function**: Not real-time
-- **Why not Cloud Logging sink**: Eventarc more appropriate for triggering actions
+- **Why not [[gcp/cloud-logging|Cloud Logging]] sink**: Eventarc more appropriate for triggering actions
 
 ---
 
 ## Related Services
 - **[[pub-sub|Cloud Pub/Sub]]**: Underlying messaging infrastructure
-- **Cloud Run**: Primary event target (recommended)
-- **Cloud Functions**: Serverless event handlers
-- **GKE**: Container-based event targets
-- **Cloud Storage**: Common event source (object events)
-- **Firestore**: Document event source
-- **Cloud Build**: Build event source
-- **Cloud Logging**: Audit log events, trigger logging
-- **Cloud Monitoring**: Event metrics and alerting
+- **[[gcp/cloud-run|Cloud Run]]**: Primary event target (recommended)
+- **[[gcp/cloud-functions|Cloud Functions]]**: Serverless event handlers
+- **[[gcp/gke|GKE]]**: Container-based event targets
+- **[[gcp/cloud-storage|Cloud Storage]]**: Common event source (object events)
+- **[[gcp/firestore|Firestore]]**: Document event source
+- **[[gcp/cloud-build|Cloud Build]]**: Build event source
+- **[[gcp/cloud-logging|Cloud Logging]]**: Audit log events, trigger logging
+- **[[gcp/cloud-monitoring|Cloud Monitoring]]**: Event metrics and alerting
 - **Workflows**: Event-driven orchestration

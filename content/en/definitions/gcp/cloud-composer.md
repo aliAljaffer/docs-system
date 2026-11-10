@@ -254,8 +254,8 @@ train_model = CreateCustomTrainingJobOperator(
 
 ### Monitoring & Observability
 - **Airflow UI**: Task status, logs, DAG visualization
-- **Cloud Monitoring**: Environment health, worker CPU/memory
-- **Cloud Logging**: Airflow logs, task logs
+- **[[cloud-monitoring|Cloud Monitoring]]**: Environment health, worker CPU/memory
+- **[[cloud-logging|Cloud Logging]]**: Airflow logs, task logs
 - **Email alerts**: On task failure, SLA miss
 - **Slack integration**: Workflow notifications
 

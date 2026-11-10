@@ -29,7 +29,7 @@ tags:
 - Longer timeouts: **up to 60 minutes**
 - Larger instances: up to 16 GiB memory, 4 vCPUs
 - **Concurrency** up to 1000 concurrent requests per instance
-- Traffic splitting, Eventarc triggers
+- Traffic splitting, [[gcp/eventarc|Eventarc]] triggers
 - Better performance, more features
 
 ### Trigger Types
@@ -40,15 +40,15 @@ tags:
 - Returns HTTP response
 
 #### Event Triggers
-- **Cloud Storage**: Object finalize, delete, archive, metadata update
-- **Pub/Sub**: Message published to topic
-- **Firestore**: Document create, update, delete
+- **[[gcp/cloud-storage|Cloud Storage]]**: Object finalize, delete, archive, metadata update
+- **[[gcp/pub-sub|Pub/Sub]]**: Message published to topic
+- **[[gcp/firestore|Firestore]]**: Document create, update, delete
 - **Firebase**: Real-time Database, Authentication, Analytics
-- **Eventarc**: 100+ event sources (2nd gen only)
+- **[[gcp/eventarc|Eventarc]]**: 100+ event sources (2nd gen only)
 
 ### Runtime Environment
 - Temporary file system at `/tmp` (**ephemeral, not persisted across invocations**)
-- Environment variables and secrets from Secret Manager
+- Environment variables and secrets from [[gcp/secret-manager|Secret Manager]]
 - No state preserved between invocations
 - **Each invocation is isolated**
 
@@ -91,18 +91,18 @@ def my_function(request):
 - More memory = faster execution but higher cost
 
 ### Networking
-- **VPC Connector** (1st gen): Connect to [[vpc|VPC]] resources
-- **Direct VPC egress** (2nd gen): Simpler [[vpc|VPC]] connectivity
-- Access Cloud SQL via Unix sockets or [[vpc|VPC]]
-- Static IP via Cloud NAT
+- **VPC Connector** (1st gen): Connect to [[gcp/vpc|VPC]] resources
+- **Direct VPC egress** (2nd gen): Simpler [[gcp/vpc|VPC]] connectivity
+- Access [[gcp/cloud-sql|Cloud SQL]] via Unix sockets or [[gcp/vpc|VPC]]
+- Static IP via [[gcp/cloud-nat|Cloud NAT]]
 
 ### Security
 - **Authentication**:
   - HTTP: `roles/cloudfunctions.invoker` for authenticated
-  - Service-to-service: [[iam|Service account]] tokens
-- **Secrets**: Secret Manager integration
-- **[[iam|Service Account]]**: Function runs with associated service account identity
-- **VPC Service Controls**: Prevent data exfiltration
+  - Service-to-service: [[gcp/iam|Service account]] tokens
+- **Secrets**: [[gcp/secret-manager|Secret Manager]] integration
+- **[[gcp/iam|Service Account]]**: Function runs with associated service account identity
+- **[[gcp/vpc-service-controls|VPC Service Controls]]**: Prevent data exfiltration
 
 ### Cloud Functions vs Cloud Run vs App Engine
 | Feature | Cloud Functions | [[cloud-run|Cloud Run]] | [[app-engine|App Engine]] |
@@ -181,11 +181,11 @@ gcloud functions deploy FUNCTION_NAME \
 ### Key Concepts for ACE
 - Deploying functions from local code or Cloud Source Repositories
 - Understanding trigger types (HTTP vs event-driven)
-- Configuring environment variables and secrets
+- Configuring environment variables and [[gcp/secret-manager|secrets]]
 - Viewing function logs and execution history
 - Setting appropriate memory and timeout values
 - Understanding cold starts and warming strategies
-- Managing function access with [[iam|IAM]]
+- Managing function access with [[gcp/iam|IAM]]
 
 ---
 
@@ -199,19 +199,19 @@ gcloud functions deploy FUNCTION_NAME \
 - **Use [[cloud-run|Cloud Run]] for more complex APIs**
 
 #### Event Processing
-- **Cloud Storage**: Image resizing, file processing
-- **Pub/Sub**: Async message processing, event handling
-- **Firestore**: Real-time data processing, triggers
-- ETL pipelines with Dataflow triggers
+- **[[gcp/cloud-storage|Cloud Storage]]**: Image resizing, file processing
+- **[[gcp/pub-sub|Pub/Sub]]**: Async message processing, event handling
+- **[[gcp/firestore|Firestore]]**: Real-time data processing, triggers
+- ETL pipelines with [[gcp/dataflow|Dataflow]] triggers
 
 #### Scheduled Tasks
-- Cloud Scheduler + HTTP trigger
+- [[gcp/cloud-scheduler|Cloud Scheduler]] + HTTP trigger
 - Periodic data cleanup, backups
 - Report generation
 - Health checks
 
 #### IoT & Real-time
-- Process Pub/Sub messages from IoT devices
+- Process [[gcp/pub-sub|Pub/Sub]] messages from IoT devices
 - Real-time analytics
 - Alerting and notifications
 - Stream processing
@@ -248,17 +248,17 @@ gcloud functions deploy FUNCTION_NAME \
 
 ### Security Best Practices
 - **Authentication**: Require for sensitive functions
-- **[[iam|Service Account]]**: Minimal permissions, unique per function
-- **Secrets**: Use Secret Manager, not environment variables
-- **VPC Service Controls**: Prevent data exfiltration
+- **[[gcp/iam|Service Account]]**: Minimal permissions, unique per function
+- **Secrets**: Use [[gcp/secret-manager|Secret Manager]], not environment variables
+- **[[gcp/vpc-service-controls|VPC Service Controls]]**: Prevent data exfiltration
 - **Input validation**: Always validate and sanitize
-- **Rate limiting**: Prevent abuse (use Cloud Armor if exposed)
+- **Rate limiting**: Prevent abuse (use [[gcp/cloud-armor|Cloud Armor]] if exposed)
 
 ### Monitoring & Observability
-- Cloud Monitoring: Invocations, errors, duration
-- Cloud Logging: Function logs, structured logging
-- Cloud Trace: Request latency tracking
-- Error Reporting: Automatic error aggregation
+- [[gcp/cloud-monitoring|Cloud Monitoring]]: Invocations, errors, duration
+- [[gcp/cloud-logging|Cloud Logging]]: Function logs, structured logging
+- [[gcp/cloud-trace|Cloud Trace]]: Request latency tracking
+- [[gcp/error-reporting|Error Reporting]]: Automatic error aggregation
 - Custom metrics for business KPIs
 
 ### When to Use Cloud Functions
@@ -299,7 +299,7 @@ Cloud Storage upload → Function → Transform data → Load to BigQuery
 - Similar event model
 - Runtime differences (check compatibility)
 - VPC connectivity differs
-- [[iam|IAM]] model differences
+- [[gcp/iam|IAM]] model differences
 - Consider 2nd gen for Lambda parity
 
 #### When to Migrate to Cloud Run
@@ -311,7 +311,7 @@ Cloud Storage upload → Function → Transform data → Load to BigQuery
 ### Well-Architected Considerations
 - **Operational Excellence**: Managed infrastructure, automatic scaling
 - **Reliability**: Automatic retries, multi-region deployment option
-- **Security**: [[iam|IAM]], secrets management, VPC connectivity, least privilege
+- **Security**: [[gcp/iam|IAM]], [[gcp/secret-manager|secrets management]], VPC connectivity, least privilege
 - **Performance**: Right-size memory, connection pooling, global variables
 - **Cost**: Pay-per-invocation, concurrency optimization, right-sizing
 - **Sustainability**: Efficient resource use, scale to zero when idle
