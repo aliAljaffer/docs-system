@@ -112,7 +112,7 @@ projects:
     status: Active
     summary: Go CLI that decodes Kubernetes Secrets and ConfigMaps into readable key/value pairs.
     tags: [kubernetes, automation, go]
-    page: projects/s2t.md
+    page: projects/s2t/index.md
   - slug: tuwaiq-tracker
     title: Tuwaiq Tracker
     status: Active

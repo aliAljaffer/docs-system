@@ -55,6 +55,19 @@ PROJECT_DOCS = [
         "renames": {"README.md": "documents.md"},
     },
     {
+        "slug": "s2t",
+        "source": source("S2T_DIR", "/Users/h/s2t"),
+        "files": ["README.md", "CHANGELOG.md", "CONTRIBUTING.md"],
+        "titles": {"README.md": "README"},
+        "renames": {"README.md": "project-readme.md"},
+        "assets": [("images", "images")],
+        "links": {
+            ".github/workflows/release.yml": "https://github.com/aliAljaffer/s2t/blob/main/.github/workflows/release.yml",
+            "Formula/s2t.rb": "https://github.com/aliAljaffer/s2t/blob/main/Formula/s2t.rb",
+            "LICENSE": "https://github.com/aliAljaffer/s2t/blob/main/LICENSE",
+        },
+    },
+    {
         "slug": "fai",
         "source": source("FAI_DIR", "/Users/h/fai"),
         "files": ["README.md", "SECURITY.md"],
@@ -149,6 +162,10 @@ TITLE_OVERRIDES = {
     VAULT / "studies/networking/main.md": "Network devices",
     VAULT / "studies/cloud-architecht/gcp/readme.md": "GCP notes index",
 }
+EXTRA_NOTES = [
+    ("studies/Certification Journey.md", "Career", ["career", "certification"]),
+    ("studies/How to Get Into Tech.md", "Career", ["career"]),
+]
 NOTE_RULES = [
     ("studies/cloud-architecht/gcp", "GCP", "glob", ["gcp"]),
     ("studies/cloud-architecht/unsorted", "GCP", "rglob", ["gcp"]),
@@ -530,6 +547,8 @@ def sync_portfolio() -> tuple[int, int]:
             projects += 1
     for folder in (EN / "projects", WIKI, BLOGS):
         for path in folder.rglob("*.md"):
+            if path.name == "index.md":
+                continue
             if generated(path, "portfolio/") and path not in written:
                 path.unlink()
     return projects, blogs
@@ -609,6 +628,14 @@ def sync_vault() -> tuple[int, int]:
                 jobs.append((src, dest, category, tags, rel))
             seen.add(src)
 
+    for name, category, tags in EXTRA_NOTES:
+        src = VAULT / name
+        if not src.exists() or src in seen:
+            continue
+        dest = NOTES / slugify(category) / f"{slugify(src.stem)}.md"
+        jobs.append((src, dest, category, tags, Path(src.name)))
+        seen.add(src)
+
     dest_stems = [dest.stem for _src, dest, _cat, _tags, _rel in jobs]
     duplicate = [stem for stem, count in Counter(dest_stems).items() if count > 1]
     if duplicate:
@@ -679,6 +706,9 @@ def sync_project_docs() -> int:
             if title:
                 text = re.sub(r"^# .+$", f"# {title}", text, count=1, flags=re.M)
             text = re.sub(r"\[\[([^\]]+)\]\]", r"\\[\\[\1\\]\\]", text)
+            text = text.replace("\u2014", " - ")
+            for old, new in (spec.get("links") or {}).items():
+                text = text.replace(f"]({old})", f"]({new})")
             target.write_text(text)
             count += 1
 

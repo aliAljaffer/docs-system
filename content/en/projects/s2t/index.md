@@ -23,6 +23,12 @@ A small CLI that decodes Kubernetes Secrets and ConfigMaps into readable key/val
 
 - [Repository](https://github.com/aliAljaffer/s2t)
 
+## Documentation
+
+- [README](project-readme.md)
+- [Changelog](CHANGELOG.md)
+- [Contributing](CONTRIBUTING.md)
+
 ## Overview
 
 A CLI that decodes Kubernetes Secrets into readable key/value pairs. It reads a raw manifest (YAML or JSON), a custom `key: value` blob, or fetches a live secret via `kubectl`, base64-decodes every value, and prints the result in a few different shapes. `kubectl` is only required for live-fetching a resource by name - decoding a file or piped stdin doesn't need it installed at all.

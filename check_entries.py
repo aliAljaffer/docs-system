@@ -17,7 +17,7 @@ CATEGORIES = {
     },
     "notes": {
         "GCP", "Cloud", "Security", "AI", "Networking", "React", "Web", "Site",
-        "DevOps", "Terraform", "Certifications", "Projects", "Interviews",
+        "DevOps", "Terraform", "Certifications", "Projects", "Interviews", "Career",
     },
 }
 REQUIRED = {

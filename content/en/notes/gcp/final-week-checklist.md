@@ -40,4 +40,4 @@ Part of [[pcse-home|PCSE Home]]. Work through this the week before the exam. Che
 - [ ] Practiced the command families in [[gcloud-commands|gcloud Commands]].
 - [ ] Completed 2 timed practice exams at 80%+.
 
-Then book the exam. Good luck.
+Then [[certification-journey|book the exam]]. Good luck.
