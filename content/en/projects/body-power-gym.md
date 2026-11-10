@@ -42,8 +42,8 @@ The other requirements included: Pages for offers, subscription plans, and an im
 
 ## Technical Skills Demonstrated
 
-- **AWS Services**: VPC, ECS Fargate, ALB, ECR, CodeBuild, EventBridge, CloudWatch, Lambda, Certificate Manager, RDS, NAT Gateway, Security Groups, IAM, CloudFormation
-- **Containerization**: Docker, multi-stage builds, container orchestration, image optimization
+- **AWS Services**: VPC, [[aws/containers-ecs|ECS]] Fargate, ALB, [[aws/containers-ecr|ECR]], CodeBuild, [[aws/application-integration-eventbridge|EventBridge]], [[aws/management-and-governance-cloudwatch|CloudWatch]], Lambda, Certificate Manager, RDS, NAT Gateway, Security Groups, IAM, CloudFormation
+- **[[cloud/containers|Containerization]]**: Docker, multi-stage builds, container orchestration, image optimization
 - **CI/CD**: GitHub Actions, CodeBuild, automated testing, webhook integrations
 - **Infrastructure**: Network design, load balancing, SSL/TLS configuration, auto-scaling policies
 - **Monitoring**: CloudWatch metrics, EventBridge rules, alerting systems, log aggregation

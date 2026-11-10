@@ -107,6 +107,8 @@ markdown_extensions:
   - admonition
   - pymdownx.details
   - pymdownx.superfences
+  - pymdownx.arithmatex:
+      generic: true
   - pymdownx.tasklist:
       custom_checkbox: true
   - attr_list
@@ -120,6 +122,8 @@ extra_css:
   - assets/diagram-zoom.css?v={asset_version}
 extra_javascript:
   - assets/vendor/panzoom.min.js
+  - assets/mathjax.js?v={asset_version}
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
   - assets/diagram-zoom.js?v={asset_version}
   - assets/graph.js?v={asset_version}
   - assets/hover.js?v={asset_version}
@@ -129,7 +133,7 @@ extra_javascript:
 
 def asset_version() -> str:
     digest = hashlib.sha256()
-    for name in ("extra.css", "hover.css", "graph.css", "diagram-zoom.css", "hover.js", "graph.js", "diagram-zoom.js", "analytics.js"):
+    for name in ("extra.css", "hover.css", "graph.css", "diagram-zoom.css", "hover.js", "graph.js", "diagram-zoom.js", "analytics.js", "mathjax.js"):
         digest.update((ASSETS / name).read_bytes())
     return digest.hexdigest()[:10]
 

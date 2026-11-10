@@ -105,4 +105,4 @@ Use the "Course gaps" column above. Read only the matching current exam objectiv
 - GCP services: [[gke|GKE]], [[compute-engine|Compute Engine]], [[cloud-run|Cloud Run]], [[bigquery|BigQuery]], [[cloud-sql|Cloud SQL]], [[cloud-storage|Cloud Storage]], [[pub-sub|Pub/Sub]], [[artifact-registry|Artifact Registry]], [[cloud-build|Cloud Build]], [[cloud-logging|Cloud Logging]], [[cloud-monitoring|Cloud Monitoring]], [[vertex-ai|Vertex AI]], [[gemini|Gemini]]
 - Principles: [[principle-of-least-privilege|Least privilege]], [[multi-factor-authentication|MFA/2SV]], [[cryptography|Cryptography]], [[cidr|CIDR]], [[rto|RTO]], [[attack-detection|Attack detection]], [[attack-prevention-strategies|Attack prevention strategies]], [[respond-to-attacks|Respond to attacks]], [[threat-intelligence|Threat intelligence]]
 
-Track progress on the [[certification-journey|Certification Journey]] board.
+Track progress on the Certification Journey board.

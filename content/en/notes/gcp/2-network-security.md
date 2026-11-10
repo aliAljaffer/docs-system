@@ -25,7 +25,7 @@ Part of [[pcse-home|PCSE Home]]. Official exam guide sections 2.1 to 2.3: securi
 
 Three configuration layers, in order of where they attach:
 
-1. **Hierarchical firewall policies:** attach at org or folder level; inherited by child projects' VPCs; support rules with priorities; cannot be bypassed by projects.
+1. **Hierarchical firewall policies:** attach at org or folder level; inherited by child projects' [[gcp/vpc|VPCs]]; support rules with priorities; cannot be bypassed by projects.
 2. **Global network firewall policies:** attach at VPC level; the modern replacement for classic per-VPC firewall rules; support threat inspection.
 3. **Classic VPC firewall rules:** per network, still exist; implied deny egress / allow ingress defaults.
 

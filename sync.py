@@ -163,7 +163,6 @@ TITLE_OVERRIDES = {
     VAULT / "studies/cloud-architecht/gcp/readme.md": "GCP notes index",
 }
 EXTRA_NOTES = [
-    ("studies/Certification Journey.md", "Career", ["career", "certification"]),
     ("studies/How to Get Into Tech.md", "Career", ["career"]),
 ]
 NOTE_RULES = [
