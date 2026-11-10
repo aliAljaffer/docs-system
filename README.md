@@ -22,7 +22,7 @@ The full plan, decisions, caveats, and gaps live in
 | Diagram sources | `~/mk-project/hq-main/scripts/diagrams/` |
 | Slides and scripts | `~/mk-project/hq-main/` |
 
-The vault import covers cloud and security definitions, GCP service references, certification notes, DevOps bootcamp notes, React notes, web notes, and interview notes. Excalidraw drawings, trackers, and personal drafts are skipped.
+The vault import covers cloud and security definitions, GCP service references, certification notes, DevOps bootcamp notes, React notes, and web notes. Excalidraw drawings, trackers, and personal drafts are skipped.
 
 ## Build
 

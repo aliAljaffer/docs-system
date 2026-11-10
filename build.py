@@ -163,7 +163,7 @@ NOTES_ORDER = [
     "GCP Storage", "GCP DevOps", "GCP Data analytics", "GCP Operations",
     "GCP Management", "GCP AI", "GCP Services", "Cloud", "Security", "AI",
     "Networking", "DevOps", "Terraform", "Certifications", "Projects",
-    "React", "Web", "Interviews", "Career", "Site", "Other",
+    "React", "Web", "Career", "Site", "Other",
 ]
 
 

@@ -175,7 +175,6 @@ NOTE_RULES = [
     ("studies/cybersecurity", "Security", "rglob", ["security"]),
     ("studies/terraform", "Terraform", "rglob", ["terraform"]),
     ("webdev/react", "React", "rglob", ["react"]),
-    ("webdev/interviews", "Interviews", "rglob", ["interview"]),
     ("webdev", "Web", "glob", ["web"]),
 ]
 SKIP_NAME = re.compile(
