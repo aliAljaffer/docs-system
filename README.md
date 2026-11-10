@@ -45,7 +45,27 @@ These live in `content/en/`. Link a definition with `[[slug]]`. The build fails 
 
 ## Updates
 
-The site rebuilds on every push to `main` and daily at 03:00 UTC, so repo changes appear within a day. Run the `Publish` workflow to rebuild now.
+The site rebuilds on every push to `main`, on `repository_dispatch` (`docs-updated`), and daily at 03:00 UTC as a safety net. Overlapping runs queue; the newest pending run replaces older ones. Run the `Publish` workflow to rebuild now.
+
+### Rebuild on source repo push
+
+1. Install the `update-manifests-homelab` GitHub App on the source repo.
+2. Add the App private key as the secret `HOMELAB_APP_KEY` in the source repo.
+3. Add `.github/workflows/notify-docs.yml` to the source repo:
+
+```yaml
+name: Notify docs
+on:
+  push:
+    branches: [main]
+    paths: ["docs/**", "README.md"]
+jobs:
+  notify:
+    uses: aliAljaffer/docs-system/.github/workflows/notify.yml@main
+    secrets: inherit
+```
+
+Match `branches` and `paths` to the `branch` and `path` in `sources.yaml`.
 
 ## Layout
 

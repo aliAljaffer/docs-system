@@ -1,0 +1,23 @@
+name: Notify docs-system
+
+on:
+  workflow_call:
+    secrets:
+      HOMELAB_APP_KEY:
+        required: true
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/create-github-app-token@v1
+        id: app
+        with:
+          app-id: 5511128
+          private-key: ${{ secrets.HOMELAB_APP_KEY }}
+          owner: aliAljaffer
+          repositories: docs-system
+
+      - run: gh api repos/aliAljaffer/docs-system/dispatches -f event_type=docs-updated
+        env:
+          GH_TOKEN: ${{ steps.app.outputs.token }}
