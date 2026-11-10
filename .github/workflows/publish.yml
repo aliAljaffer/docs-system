@@ -67,8 +67,8 @@ jobs:
           tag="run-${GITHUB_RUN_ID}"
           sed -i "s|newTag: .*|newTag: ${tag}|" kubernetes/apps/docs/kustomization.yaml
           git diff --quiet && exit 0
-          git config user.name "docs-system CI"
-          git config user.email "ci@users.noreply.github.com"
+          git config user.name "update-manifests-homelab[bot]"
+          git config user.email "349350479+update-manifests-homelab[bot]@users.noreply.github.com"
           git commit -am "Deploy docs ${tag}"
           git pull --rebase origin main
           git push origin HEAD:main
