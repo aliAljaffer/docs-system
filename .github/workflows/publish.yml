@@ -38,6 +38,7 @@ jobs:
           tags: |
             type=raw,value=latest
             type=sha
+            type=raw,value=run-${{ github.run_id }}
 
       - uses: docker/build-push-action@v6
         with:
@@ -63,7 +64,7 @@ jobs:
       - name: Bump image tag in homelab
         working-directory: homelab
         run: |
-          tag="sha-${GITHUB_SHA::7}"
+          tag="run-${GITHUB_RUN_ID}"
           sed -i "s|newTag: .*|newTag: ${tag}|" kubernetes/apps/docs/kustomization.yaml
           git diff --quiet && exit 0
           git config user.name "docs-system CI"
