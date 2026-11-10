@@ -322,6 +322,26 @@ def apply_content(acts: Path, ep: str) -> tuple[str, str]:
     return "\n\n".join(blocks), spec["file"]
 
 
+def rebase_links(body: str) -> str:
+    """Act-guide links are relative to docs/; the body lands in docs/episodes/."""
+
+    def fix(match: re.Match[str]) -> str:
+        bang, label, target, title = match.groups()
+        if re.match(r"([a-z][a-z0-9+.-]*:|#|/)", target, flags=re.I):
+            return match.group(0)
+        if target.startswith("00-setup.md"):
+            target = "setup.md" + target[len("00-setup.md"):]
+        return f"{bang}[{label}](../{target}{title})"
+
+    out: list[str] = []
+    fenced = False
+    for line in body.splitlines():
+        if line.lstrip().startswith("```"):
+            fenced = not fenced
+        out.append(line if fenced else LINK.sub(fix, line))
+    return "\n".join(out)
+
+
 def embed_slides(base: Path) -> None:
     script = f'<script src="/assets/analytics.js?v={asset_version()}"></script></body>'
     for deck in (base / "slides").glob("ep*.html"):
@@ -352,6 +372,7 @@ def four_hats(base: Path) -> None:
         if marker not in text:
             continue
         body, source = apply_content(base, page.name[:4])
+        body = rebase_links(body)
         if body:
             note = f"Copied from `{source}`. Edit the act guide, not this page."
             text = text.replace(marker, f"### Verified steps\n\n{note}\n\n{body}\n")
