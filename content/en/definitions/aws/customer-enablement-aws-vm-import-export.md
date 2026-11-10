@@ -7,7 +7,6 @@ tags:
 - services
 ---
 
-<!-- imported from ObsidianVault/studies/cloud-architecht/services/customer-enablement/AWS VM Import Export.md. Edit the source, then run sync.py. -->
 
 # AWS VM Import Export
 

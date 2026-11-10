@@ -6,7 +6,6 @@ tags:
 - gcp
 ---
 
-<!-- imported from ObsidianVault/studies/cloud-architecht/unsorted/operational excellence pillars.md. Edit the source, then run sync.py. -->
 
 # Operational excellence pillars
 

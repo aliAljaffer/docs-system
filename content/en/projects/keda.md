@@ -1,26 +1,16 @@
 ---
-title: Kubernetes Event-Driven Architecture (KEDA)
+title: KEDA
 date: '2026-03-01'
-description: A simple, yet powerful way to scale your app's workers on Kubernetes!
+description: Event-driven worker autoscaling on Kubernetes with KEDA and database queue triggers.
 tags:
-- Kubernetes
-- Automation
-- Python
+- kubernetes
+- automation
+- python
+status: Active
+repo: https://github.com/keda-project-youtube
 ---
 
-<!-- imported from portfolio/src/data/keda.md. Edit the source, then run sync.py. -->
-
 # Kubernetes Event-Driven Architecture (KEDA)
-
-**Status:** Active
-
-A simple, yet powerful way to scale your app's workers on Kubernetes!
-
-`Kubernetes` `Automation` `Python`
-
-## Links
-
-- [Repository](https://github.com/keda-project-youtube)
 
 ## Overview
 

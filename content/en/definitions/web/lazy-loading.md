@@ -9,7 +9,6 @@ tags:
 - fundamentals
 ---
 
-<!-- imported from ObsidianVault/webdev/general-concepts/lazy-loading.md. Edit the source, then run sync.py. -->
 
 # Lazy-loading
 

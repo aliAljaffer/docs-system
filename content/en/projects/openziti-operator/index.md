@@ -1,3 +1,16 @@
+---
+title: OpenZiti Operator
+date: '2026-10-21'
+description: Kubernetes operator for OpenZiti apps, identities, and routers, with validation, conditions, and adoption of existing resources.
+tags:
+- kubernetes
+- go
+- openziti
+- networking
+- security
+status: Active
+---
+
 # OpenZiti Operator
 
 **Status:** Active

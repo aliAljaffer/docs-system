@@ -7,7 +7,6 @@ tags:
 - devices
 ---
 
-<!-- imported from ObsidianVault/studies/networking/main.md. Edit the source, then run sync.py. -->
 
 # Network devices
 

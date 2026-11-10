@@ -8,7 +8,6 @@ tags:
 - web
 ---
 
-<!-- imported from ObsidianVault/webdev/TailwindCSS.md. Edit the source, then run sync.py. -->
 
 # TailwindCSS Basics and Must-Knows
 

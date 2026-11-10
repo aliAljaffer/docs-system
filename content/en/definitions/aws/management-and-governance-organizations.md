@@ -8,7 +8,6 @@ tags:
 - services
 ---
 
-<!-- imported from ObsidianVault/studies/cloud-architecht/services/management-and-governance/organizations.md. Edit the source, then run sync.py. -->
 
 # Organizations
 

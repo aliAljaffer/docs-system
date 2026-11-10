@@ -1,27 +1,16 @@
 ---
-title: s2t - secret2text
+title: s2t
 date: '2026-07-15'
-description: A small CLI that decodes Kubernetes Secrets and ConfigMaps into readable
-  key/value pairs
+description: Go CLI that decodes Kubernetes Secrets and ConfigMaps into readable key/value pairs.
 tags:
-- Kubernetes
-- Automation
-- Go
+- kubernetes
+- automation
+- go
+status: Active
+repo: https://github.com/aliAljaffer/s2t
 ---
 
-<!-- imported from portfolio/src/data/s2t.md. Edit the source, then run sync.py. -->
-
 # s2t - secret2text
-
-**Status:** Active
-
-A small CLI that decodes Kubernetes Secrets and ConfigMaps into readable key/value pairs
-
-`Kubernetes` `Automation` `Go`
-
-## Links
-
-- [Repository](https://github.com/aliAljaffer/s2t)
 
 ## Documentation
 

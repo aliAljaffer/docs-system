@@ -7,7 +7,6 @@ tags:
 - gcp
 ---
 
-<!-- imported from ObsidianVault/studies/cloud-architecht/unsorted/application integration.md. Edit the source, then run sync.py. -->
 
 # Application integration
 

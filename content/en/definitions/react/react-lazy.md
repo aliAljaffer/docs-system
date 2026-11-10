@@ -9,7 +9,6 @@ tags:
 - performance
 ---
 
-<!-- imported from ObsidianVault/webdev/react/react-lazy.md. Edit the source, then run sync.py. -->
 
 # React-lazy
 

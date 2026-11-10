@@ -7,7 +7,6 @@ tags:
 - compute
 ---
 
-<!-- imported from ObsidianVault/studies/cloud-architecht/gcp/compute/cloud-run.md. Edit the source, then run sync.py. -->
 
 # Cloud-run
 

@@ -8,7 +8,6 @@ tags:
 - services
 ---
 
-<!-- imported from ObsidianVault/studies/cloud-architecht/services/customer-enablement/rePost.md. Edit the source, then run sync.py. -->
 
 # RePost
 

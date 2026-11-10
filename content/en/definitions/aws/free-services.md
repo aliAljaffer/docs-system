@@ -6,7 +6,6 @@ tags:
 - gcp
 ---
 
-<!-- imported from ObsidianVault/studies/cloud-architecht/unsorted/free services.md. Edit the source, then run sync.py. -->
 
 # Free services
 

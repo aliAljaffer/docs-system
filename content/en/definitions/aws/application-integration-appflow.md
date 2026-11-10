@@ -8,7 +8,6 @@ tags:
 - services
 ---
 
-<!-- imported from ObsidianVault/studies/cloud-architecht/services/application-integration/appflow.md. Edit the source, then run sync.py. -->
 
 # Appflow
 

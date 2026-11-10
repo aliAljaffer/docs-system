@@ -7,7 +7,6 @@ tags:
 - operations
 ---
 
-<!-- imported from ObsidianVault/studies/cloud-architecht/gcp/operations/cloud-profiler.md. Edit the source, then run sync.py. -->
 
 # Cloud-profiler
 

@@ -7,7 +7,6 @@ tags:
 - hooks
 ---
 
-<!-- imported from ObsidianVault/webdev/react/useState.md. Edit the source, then run sync.py. -->
 
 # UseState
 

@@ -7,7 +7,6 @@ tags:
 - react
 ---
 
-<!-- imported from ObsidianVault/webdev/react/performance-optimizations.md. Edit the source, then run sync.py. -->
 
 # Performance-optimizations
 

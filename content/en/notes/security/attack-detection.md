@@ -6,7 +6,6 @@ tags:
 - security
 ---
 
-<!-- imported from ObsidianVault/studies/cybersecurity/Attack detection.md. Edit the source, then run sync.py. -->
 
 # Attack detection
 

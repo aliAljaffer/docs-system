@@ -1,28 +1,17 @@
 ---
 title: Tuwaiq Tracker
 date: '2024-09-20'
-description: Responsive full-stack tracker that scrapes, stores, and displays course
-  offerings from Tuwaiq Academy using Next.js and MongoDB.
+description: Full-stack tracker that scrapes, stores, and displays Tuwaiq Academy course offerings.
 tags:
-- Next.js
-- Automation
-- AWS
+- nextjs
+- automation
+- aws
+status: Active
+repo: https://github.com/aliAljaffer/tuwaiq-tracker
+url: https://tuwaiqtracker.com/
 ---
 
-<!-- imported from portfolio/src/data/tuwaiq-tracker.md. Edit the source, then run sync.py. -->
-
 # Tuwaiq Tracker
-
-**Status:** Active
-
-Responsive full-stack tracker that scrapes, stores, and displays course offerings from Tuwaiq Academy using Next.js and MongoDB.
-
-`Next.js` `Automation` `AWS`
-
-## Links
-
-- [Repository](https://github.com/aliAljaffer/tuwaiq-tracker)
-- [Live](https://tuwaiqtracker.com/)
 
 ## Overview
 

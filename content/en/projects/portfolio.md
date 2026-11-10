@@ -1,3 +1,13 @@
+---
+title: Portfolio
+date: '2026-11-01'
+description: Personal site for projects, writing, and contact, built with Next.js and hosted on the homelab.
+tags:
+- nextjs
+- portfolio
+status: Active
+---
+
 # Portfolio
 
 **Status:** Active

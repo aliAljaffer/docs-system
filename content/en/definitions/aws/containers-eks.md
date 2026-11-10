@@ -9,7 +9,6 @@ tags:
 - services
 ---
 
-<!-- imported from ObsidianVault/studies/cloud-architecht/services/containers/eks.md. Edit the source, then run sync.py. -->
 
 # Eks
 

@@ -8,7 +8,6 @@ tags:
 - services
 ---
 
-<!-- imported from ObsidianVault/studies/cloud-architecht/services/storage/efs.md. Edit the source, then run sync.py. -->
 
 # Efs
 

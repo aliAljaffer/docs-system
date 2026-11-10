@@ -8,7 +8,6 @@ tags:
 - devops
 ---
 
-<!-- imported from ObsidianVault/studies/DevOps Bootcamp/Week6/Project.md. Edit the source, then run sync.py. -->
 
 # Project
 

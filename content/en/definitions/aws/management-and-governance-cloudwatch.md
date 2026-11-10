@@ -8,7 +8,6 @@ tags:
 - services
 ---
 
-<!-- imported from ObsidianVault/studies/cloud-architecht/services/management-and-governance/cloudwatch.md. Edit the source, then run sync.py. -->
 
 # Cloudwatch
 

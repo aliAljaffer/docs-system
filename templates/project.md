@@ -1,8 +1,13 @@
+---
+title: Project name
+date: 2026-01-01
+description: One sentence summary for the project index.
+tags: [kubernetes, homelab]
+status: Active
+repo: https://github.com/aliAljaffer/REPO
+---
+
 # Project name
-
-**Status:** Active | Paused | Archived
-
-One paragraph: what it is, who it is for, and why it exists.
 
 ## Stack
 
@@ -12,11 +17,6 @@ One paragraph: what it is, who it is for, and why it exists.
 | Language | |
 | Data | |
 | Hosting | |
-
-## Start here
-
-- [Repository](https://github.com/aliAljaffer/REPO)
-- [Live site](https://example.com)
 
 ## Operations
 
@@ -28,7 +28,3 @@ One paragraph: what it is, who it is for, and why it exists.
 ## Decisions
 
 Record the choices a new maintainer would question, with the reason.
-
-## Known gaps
-
-State what this page does not cover, and where the source documents live.

@@ -8,7 +8,6 @@ tags:
 - services
 ---
 
-<!-- imported from ObsidianVault/studies/cloud-architecht/services/management-and-governance/trusted advisor.md. Edit the source, then run sync.py. -->
 
 # Trusted advisor
 

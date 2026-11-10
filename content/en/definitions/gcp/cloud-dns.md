@@ -7,7 +7,6 @@ tags:
 - networking
 ---
 
-<!-- imported from ObsidianVault/studies/cloud-architecht/gcp/networking/cloud-dns.md. Edit the source, then run sync.py. -->
 
 # Cloud-dns
 

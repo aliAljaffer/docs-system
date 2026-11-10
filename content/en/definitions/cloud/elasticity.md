@@ -8,7 +8,6 @@ tags:
 - fundamentals
 ---
 
-<!-- imported from ObsidianVault/studies/definitions/elasticity.md. Edit the source, then run sync.py. -->
 
 # Elasticity
 

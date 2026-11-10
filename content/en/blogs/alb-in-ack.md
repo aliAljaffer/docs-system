@@ -1,24 +1,15 @@
 ---
 title: Using ALB in Alibaba Container Service for Kubernetes
 date: '2026-04-26'
-description: Customize an Application Load Balancer and use it with Ingress or Gateway
-  API on Alibaba cloud.
+description: Customize an Application Load Balancer and use it with Ingress or Gateway API on Alibaba cloud.
 tags:
-- Kubernetes
-- Alibaba Cloud
-- Networking
-- Security
+- kubernetes
+- alibaba-cloud
+- networking
+- security
 ---
 
-<!-- imported from portfolio/src/data/alb-in-ack.md. Edit the source, then run sync.py. -->
-
 # Using ALB in Alibaba Container Service for Kubernetes
-
-**Published:** 2026-04-26
-
-Customize an Application Load Balancer and use it with Ingress or Gateway API on Alibaba cloud.
-
-`Kubernetes` `Alibaba Cloud` `Networking` `Security`
 
 NGINX Ingress Controller can only provision a Classic Load Balancer. To use an ALB (to make use of security features such as WAF and DDoS protection), you need to install **ALB Ingress Controller** by going to ACK console → Add Ons. You can then customise the controller to use an existing ALB. Later, we explore how to use `Gateway API` instead.
 

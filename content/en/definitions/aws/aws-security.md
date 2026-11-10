@@ -7,7 +7,6 @@ tags:
 - gcp
 ---
 
-<!-- imported from ObsidianVault/studies/cloud-architecht/unsorted/aws security.md. Edit the source, then run sync.py. -->
 
 # Aws security
 

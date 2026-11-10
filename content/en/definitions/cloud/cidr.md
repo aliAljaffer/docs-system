@@ -8,7 +8,6 @@ tags:
 - networking
 ---
 
-<!-- imported from ObsidianVault/studies/definitions/cidr.md. Edit the source, then run sync.py. -->
 
 # Cidr
 

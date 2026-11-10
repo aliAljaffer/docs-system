@@ -7,7 +7,6 @@ tags:
 - fundamentals
 ---
 
-<!-- imported from ObsidianVault/studies/definitions/dedicated server.md. Edit the source, then run sync.py. -->
 
 # Dedicated server
 

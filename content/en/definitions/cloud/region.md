@@ -9,7 +9,6 @@ tags:
 - geography
 ---
 
-<!-- imported from ObsidianVault/studies/definitions/region.md. Edit the source, then run sync.py. -->
 
 # Region
 

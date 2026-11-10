@@ -1,22 +1,13 @@
 ---
 title: Author Clock/Entertainment System
 date: '2025-09-05'
-description: Author Clock replica built on Raspberry Pi with YouTube, Spotify, and
-  Kodi integration
+description: Author Clock replica built on Raspberry Pi with YouTube, Spotify, and Kodi integration
 tags:
-- Homelab
-- React
+- homelab
+- react
 ---
 
-<!-- imported from portfolio/src/data/author-clock.md. Edit the source, then run sync.py. -->
-
 # Author Clock/Entertainment System
-
-**Published:** 2025-09-05
-
-Author Clock replica built on Raspberry Pi with YouTube, Spotify, and Kodi integration
-
-`Homelab` `React`
 
 ## Overview
 

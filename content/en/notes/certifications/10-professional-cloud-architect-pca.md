@@ -6,7 +6,6 @@ tags:
 - certification
 ---
 
-<!-- imported from ObsidianVault/studies/cloud-architecht/10. Professional Cloud Architect PCA.md. Edit the source, then run sync.py. -->
 
 # 10. Professional Cloud Architect PCA
 

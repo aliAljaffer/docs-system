@@ -6,7 +6,6 @@ tags:
 - react
 ---
 
-<!-- imported from ObsidianVault/webdev/react/react-router/link.md. Edit the source, then run sync.py. -->
 
 # Link
 

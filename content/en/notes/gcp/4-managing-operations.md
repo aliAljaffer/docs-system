@@ -9,7 +9,6 @@ tags:
 - pcse
 ---
 
-<!-- imported from ObsidianVault/studies/PCSE/4 - Managing Operations.md. Edit the source, then run sync.py. -->
 
 # 4 - Managing Operations
 

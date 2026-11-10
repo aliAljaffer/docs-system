@@ -7,7 +7,6 @@ tags:
 - devops
 ---
 
-<!-- imported from ObsidianVault/studies/cloud-architecht/gcp/devops/artifact-registry.md. Edit the source, then run sync.py. -->
 
 # Artifact-registry
 

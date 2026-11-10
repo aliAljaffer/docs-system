@@ -7,7 +7,6 @@ tags:
 - services
 ---
 
-<!-- imported from ObsidianVault/studies/cloud-architecht/services/customer-enablement/support plans.md. Edit the source, then run sync.py. -->
 
 # Support plans
 

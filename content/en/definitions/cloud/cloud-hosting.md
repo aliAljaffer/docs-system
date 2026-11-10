@@ -7,7 +7,6 @@ tags:
 - fundamentals
 ---
 
-<!-- imported from ObsidianVault/studies/definitions/cloud hosting.md. Edit the source, then run sync.py. -->
 
 # Cloud hosting
 

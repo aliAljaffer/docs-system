@@ -7,7 +7,6 @@ tags:
 - services
 ---
 
-<!-- imported from ObsidianVault/studies/cloud-architecht/services/front-end/device farm.md. Edit the source, then run sync.py. -->
 
 # Device farm
 

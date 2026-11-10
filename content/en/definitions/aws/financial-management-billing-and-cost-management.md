@@ -8,7 +8,6 @@ tags:
 - services
 ---
 
-<!-- imported from ObsidianVault/studies/cloud-architecht/services/financial-management/billing and cost management.md. Edit the source, then run sync.py. -->
 
 # Billing and cost management
 

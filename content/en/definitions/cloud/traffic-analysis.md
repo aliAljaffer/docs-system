@@ -8,7 +8,6 @@ tags:
 - security
 ---
 
-<!-- imported from ObsidianVault/studies/definitions/traffic analysis.md. Edit the source, then run sync.py. -->
 
 # Traffic analysis
 

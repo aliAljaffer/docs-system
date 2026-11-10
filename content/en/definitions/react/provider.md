@@ -9,7 +9,6 @@ tags:
 - context
 ---
 
-<!-- imported from ObsidianVault/webdev/react/context-api/provider.md. Edit the source, then run sync.py. -->
 
 # Provider
 

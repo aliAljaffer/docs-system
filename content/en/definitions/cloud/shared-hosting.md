@@ -7,7 +7,6 @@ tags:
 - fundamentals
 ---
 
-<!-- imported from ObsidianVault/studies/definitions/shared hosting.md. Edit the source, then run sync.py. -->
 
 # Shared hosting
 

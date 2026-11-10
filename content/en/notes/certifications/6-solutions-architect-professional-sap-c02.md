@@ -6,7 +6,6 @@ tags:
 - certification
 ---
 
-<!-- imported from ObsidianVault/studies/cloud-architecht/6. Solutions Architect - Professional SAP-C02.md. Edit the source, then run sync.py. -->
 
 # 6. Solutions Architect - Professional SAP-C02
 

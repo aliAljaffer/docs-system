@@ -8,7 +8,6 @@ tags:
 - services
 ---
 
-<!-- imported from ObsidianVault/studies/cloud-architecht/services/migration/application migration service.md. Edit the source, then run sync.py. -->
 
 # Application migration service
 

@@ -10,7 +10,6 @@ tags:
 - pcse
 ---
 
-<!-- imported from ObsidianVault/studies/PCSE/PCSE Home.md. Edit the source, then run sync.py. -->
 
 # PCSE Home
 

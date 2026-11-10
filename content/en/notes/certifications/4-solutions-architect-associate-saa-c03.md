@@ -6,7 +6,6 @@ tags:
 - certification
 ---
 
-<!-- imported from ObsidianVault/studies/cloud-architecht/✅ 4. Solutions Architect - Associate SAA-C03.md. Edit the source, then run sync.py. -->
 
 # ✅ 4. Solutions Architect - Associate SAA-C03
 

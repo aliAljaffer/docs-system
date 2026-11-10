@@ -9,7 +9,6 @@ tags:
 - reliability
 ---
 
-<!-- imported from ObsidianVault/studies/definitions/fault tolerance.md. Edit the source, then run sync.py. -->
 
 # Fault tolerance
 

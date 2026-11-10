@@ -7,7 +7,6 @@ tags:
 - gcp
 ---
 
-<!-- imported from ObsidianVault/studies/cloud-architecht/gcp/README.md. Edit the source, then run sync.py. -->
 
 # Readme
 

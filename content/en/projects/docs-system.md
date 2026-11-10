@@ -1,3 +1,14 @@
+---
+title: Docs system
+date: '2026-11-09'
+description: This site. Zensical, bilingual, source-controlled, deployed by ArgoCD, with Umami analytics and a wiki.
+tags:
+- documentation
+- zensical
+- analytics
+status: Active
+---
+
 # Docs system
 
 **Status:** Active

@@ -7,7 +7,6 @@ tags:
 - operations
 ---
 
-<!-- imported from ObsidianVault/studies/cloud-architecht/gcp/operations/cloud-monitoring.md. Edit the source, then run sync.py. -->
 
 # Cloud-monitoring
 

@@ -1,27 +1,17 @@
 ---
-title: Azure Three-Tier web app
+title: Azure Three-Tier App
 date: '2025-09-20'
-description: Azure Three-Tier web app deployed using Terraform and containers
+description: Three-tier web app deployed on Azure with Terraform and containers.
 tags:
-- Azure
-- Terraform
-- Networking
-- Docker
+- azure
+- terraform
+- networking
+- docker
+status: Active
+repo: https://github.com/aliAljaffer/azure-3t-app
 ---
 
-<!-- imported from portfolio/src/data/azure-3t-app.md. Edit the source, then run sync.py. -->
-
 # Azure Three-Tier web app
-
-**Status:** Active
-
-Azure Three-Tier web app deployed using Terraform and containers
-
-`Azure` `Terraform` `Networking` `Docker`
-
-## Links
-
-- [Repository](https://github.com/aliAljaffer/azure-3t-app)
 
 ## Overview
 

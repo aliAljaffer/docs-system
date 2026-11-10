@@ -8,7 +8,6 @@ tags:
 - services
 ---
 
-<!-- imported from ObsidianVault/studies/cloud-architecht/services/networking/cloudfront.md. Edit the source, then run sync.py. -->
 
 # Cloudfront
 

@@ -7,7 +7,6 @@ tags:
 - management
 ---
 
-<!-- imported from ObsidianVault/studies/cloud-architecht/gcp/management/cloud-scheduler.md. Edit the source, then run sync.py. -->
 
 # Cloud-scheduler
 

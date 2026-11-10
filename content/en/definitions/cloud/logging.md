@@ -6,7 +6,6 @@ tags:
 - gcp
 ---
 
-<!-- imported from ObsidianVault/studies/cloud-architecht/unsorted/logging.md. Edit the source, then run sync.py. -->
 
 # Logging
 

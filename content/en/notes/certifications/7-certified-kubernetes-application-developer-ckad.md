@@ -6,7 +6,6 @@ tags:
 - certification
 ---
 
-<!-- imported from ObsidianVault/studies/cloud-architecht/✅ 7. Certified Kubernetes Application Developer CKAD.md. Edit the source, then run sync.py. -->
 
 # ✅ 7. Certified Kubernetes Application Developer CKAD
 

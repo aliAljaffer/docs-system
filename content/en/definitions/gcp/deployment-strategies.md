@@ -7,7 +7,6 @@ tags:
 - devops
 ---
 
-<!-- imported from ObsidianVault/studies/cloud-architecht/gcp/devops/deployment-strategies.md. Edit the source, then run sync.py. -->
 
 # Deployment-strategies
 

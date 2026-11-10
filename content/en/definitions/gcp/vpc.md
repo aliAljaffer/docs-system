@@ -7,7 +7,6 @@ tags:
 - networking
 ---
 
-<!-- imported from ObsidianVault/studies/cloud-architecht/gcp/networking/vpc.md. Edit the source, then run sync.py. -->
 
 # Vpc
 

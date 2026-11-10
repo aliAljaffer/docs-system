@@ -9,7 +9,6 @@ tags:
 - fundamentals
 ---
 
-<!-- imported from ObsidianVault/studies/definitions/cloud computing.md. Edit the source, then run sync.py. -->
 
 # Cloud computing
 

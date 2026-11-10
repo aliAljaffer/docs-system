@@ -8,7 +8,6 @@ tags:
 - forms
 ---
 
-<!-- imported from ObsidianVault/webdev/react/design-patterns/controlled-elements.md. Edit the source, then run sync.py. -->
 
 # Controlled-elements
 

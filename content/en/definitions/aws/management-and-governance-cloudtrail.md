@@ -8,7 +8,6 @@ tags:
 - services
 ---
 
-<!-- imported from ObsidianVault/studies/cloud-architecht/services/management-and-governance/cloudtrail.md. Edit the source, then run sync.py. -->
 
 # Cloudtrail
 

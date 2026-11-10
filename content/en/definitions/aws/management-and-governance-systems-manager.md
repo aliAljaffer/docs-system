@@ -7,7 +7,6 @@ tags:
 - services
 ---
 
-<!-- imported from ObsidianVault/studies/cloud-architecht/services/management-and-governance/systems manager.md. Edit the source, then run sync.py. -->
 
 # Systems manager
 

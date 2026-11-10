@@ -10,7 +10,6 @@ tags:
 - serverless
 ---
 
-<!-- imported from ObsidianVault/studies/definitions/serverless.md. Edit the source, then run sync.py. -->
 
 # Serverless
 

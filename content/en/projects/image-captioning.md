@@ -1,28 +1,17 @@
 ---
-title: Image Captioning with AWS and HuggingFace
+title: Image Captioning
 date: '2025-06-25'
-description: A serverless image captioning app using AWS services and a HuggingFace
-  model on SageMaker.
+description: Serverless alt-text generation on AWS with a Hugging Face model on SageMaker.
 tags:
-- AWS
-- Machine Learning
-- Security
-- Python
+- aws
+- machine-learning
+- security
+- python
+status: Active
+url: https://textify.alialjaffer.com/
 ---
 
-<!-- imported from portfolio/src/data/image-captioning.md. Edit the source, then run sync.py. -->
-
 # Image Captioning with AWS and HuggingFace
-
-**Status:** Active
-
-A serverless image captioning app using AWS services and a HuggingFace model on SageMaker.
-
-`AWS` `Machine Learning` `Security` `Python`
-
-## Links
-
-- [Live](https://textify.alialjaffer.com/)
 
 ## Overview
 

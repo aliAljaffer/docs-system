@@ -6,7 +6,6 @@ tags:
 - gcp
 ---
 
-<!-- imported from ObsidianVault/studies/cloud-architecht/unsorted/aws compute.md. Edit the source, then run sync.py. -->
 
 # Aws compute
 

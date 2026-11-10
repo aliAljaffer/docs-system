@@ -6,7 +6,6 @@ tags:
 - gcp
 ---
 
-<!-- imported from ObsidianVault/studies/cloud-architecht/unsorted/total cost of ownership.md. Edit the source, then run sync.py. -->
 
 # Total cost of ownership
 

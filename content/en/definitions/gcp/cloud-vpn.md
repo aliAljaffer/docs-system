@@ -7,7 +7,6 @@ tags:
 - networking
 ---
 
-<!-- imported from ObsidianVault/studies/cloud-architecht/gcp/networking/cloud-vpn.md. Edit the source, then run sync.py. -->
 
 # Cloud-vpn
 

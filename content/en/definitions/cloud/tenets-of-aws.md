@@ -7,7 +7,6 @@ tags:
 - fundamentals
 ---
 
-<!-- imported from ObsidianVault/studies/definitions/tenets of aws.md. Edit the source, then run sync.py. -->
 
 # Tenets of aws
 

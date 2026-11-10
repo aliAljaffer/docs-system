@@ -9,7 +9,6 @@ tags:
 - services
 ---
 
-<!-- imported from ObsidianVault/studies/cloud-architecht/services/security/Security Token Service.md. Edit the source, then run sync.py. -->
 
 # Security Token Service
 

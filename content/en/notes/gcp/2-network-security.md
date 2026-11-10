@@ -9,7 +9,6 @@ tags:
 - pcse
 ---
 
-<!-- imported from ObsidianVault/studies/PCSE/2 - Network Security.md. Edit the source, then run sync.py. -->
 
 # 2 - Network Security
 

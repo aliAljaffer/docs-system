@@ -6,7 +6,6 @@ tags:
 - gcp
 ---
 
-<!-- imported from ObsidianVault/studies/cloud-architecht/unsorted/VMs and containers.md. Edit the source, then run sync.py. -->
 
 # VMs and containers
 

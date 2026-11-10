@@ -7,7 +7,6 @@ tags:
 - security
 ---
 
-<!-- imported from ObsidianVault/studies/cybersecurity/Attack prevention strategies.md. Edit the source, then run sync.py. -->
 
 # Attack prevention strategies
 

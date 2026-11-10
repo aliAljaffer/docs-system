@@ -7,7 +7,6 @@ tags:
 - networking
 ---
 
-<!-- imported from ObsidianVault/studies/cloud-architecht/gcp/networking/cloud-interconnect.md. Edit the source, then run sync.py. -->
 
 # Cloud-interconnect
 

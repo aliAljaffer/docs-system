@@ -3,25 +3,14 @@ title: K3s Cluster Homelab
 date: '2026-03-11'
 description: Documenting my homelabbing journey! :)
 tags:
-- Kubernetes
-- Homelab
-- Networking
-- Automation
+- kubernetes
+- homelab
+- networking
+- automation
+repo: https://github.com/aliAljaffer/homelab
 ---
 
-<!-- imported from portfolio/src/data/k3s-homelab.md. Edit the source, then run sync.py. -->
-
 # K3s Cluster Homelab
-
-**Published:** 2026-03-11
-
-Documenting my homelabbing journey! :)
-
-`Kubernetes` `Homelab` `Networking` `Automation`
-
-## Links
-
-- [Repository](https://github.com/aliAljaffer/homelab)
 
 **NOTE:** This post is out of date! The cluster's moved way past `k3s` since this was written. Check out [the up-to-date homelab post](https://alialjaffer.com/case-study/homelab/) for where things stand now. Keeping this one up for archival reasons :)
 

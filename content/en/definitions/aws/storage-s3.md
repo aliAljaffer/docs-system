@@ -7,7 +7,6 @@ tags:
 - services
 ---
 
-<!-- imported from ObsidianVault/studies/cloud-architecht/services/storage/s3.md. Edit the source, then run sync.py. -->
 
 # S3
 

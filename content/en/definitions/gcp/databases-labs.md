@@ -7,7 +7,6 @@ tags:
 - databases
 ---
 
-<!-- imported from ObsidianVault/studies/cloud-architecht/gcp/databases/databases-labs.md. Edit the source, then run sync.py. -->
 
 # Databases-labs
 

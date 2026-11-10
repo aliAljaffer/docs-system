@@ -7,7 +7,6 @@ tags:
 - hooks
 ---
 
-<!-- imported from ObsidianVault/webdev/react/useEffect.md. Edit the source, then run sync.py. -->
 
 # UseEffect
 

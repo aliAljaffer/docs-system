@@ -7,7 +7,6 @@ tags:
 - ai
 ---
 
-<!-- imported from ObsidianVault/studies/cloud-architecht/gcp/ai-ml/gemini.md. Edit the source, then run sync.py. -->
 
 # Gemini
 

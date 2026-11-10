@@ -9,7 +9,6 @@ tags:
 - patterns
 ---
 
-<!-- imported from ObsidianVault/webdev/react/design-patterns/prop-drilling.md. Edit the source, then run sync.py. -->
 
 # Prop-drilling
 

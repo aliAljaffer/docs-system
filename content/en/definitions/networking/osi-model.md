@@ -7,7 +7,6 @@ tags:
 - osi
 ---
 
-<!-- imported from ObsidianVault/studies/networking/OSI Model.md. Edit the source, then run sync.py. -->
 
 # OSI Model
 

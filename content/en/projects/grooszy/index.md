@@ -1,3 +1,15 @@
+---
+title: Grooszy
+date: '2026-10-29'
+description: Private, self-hosted analysis of Saudi bank statements. Go for parsing, Next.js for the interface, PostgreSQL for storage.
+tags:
+- go
+- nextjs
+- postgresql
+- privacy
+status: Active
+---
+
 # Grooszy
 
 **Status:** Active

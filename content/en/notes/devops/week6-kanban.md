@@ -6,7 +6,6 @@ tags:
 - devops
 ---
 
-<!-- imported from ObsidianVault/studies/DevOps Bootcamp/Week6/Kanban.md. Edit the source, then run sync.py. -->
 
 # Kanban
 

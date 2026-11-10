@@ -10,7 +10,6 @@ tags:
 - geography
 ---
 
-<!-- imported from ObsidianVault/studies/definitions/availability zones.md. Edit the source, then run sync.py. -->
 
 # Availability zones
 

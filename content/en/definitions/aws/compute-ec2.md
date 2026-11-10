@@ -7,7 +7,6 @@ tags:
 - services
 ---
 
-<!-- imported from ObsidianVault/studies/cloud-architecht/services/compute/ec2.md. Edit the source, then run sync.py. -->
 
 # Ec2
 

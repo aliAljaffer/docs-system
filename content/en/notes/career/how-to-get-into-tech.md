@@ -6,7 +6,6 @@ tags:
 - career
 ---
 
-<!-- imported from ObsidianVault/studies/How to Get Into Tech.md. Edit the source, then run sync.py. -->
 
 # How to Get Into Tech
 

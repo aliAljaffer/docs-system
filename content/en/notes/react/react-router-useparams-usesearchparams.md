@@ -6,7 +6,6 @@ tags:
 - react
 ---
 
-<!-- imported from ObsidianVault/webdev/react/react-router/useParams-useSearchParams.md. Edit the source, then run sync.py. -->
 
 # UseParams-useSearchParams
 

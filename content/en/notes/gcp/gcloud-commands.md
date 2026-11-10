@@ -10,7 +10,6 @@ tags:
 - pcse
 ---
 
-<!-- imported from ObsidianVault/studies/PCSE/gcloud Commands.md. Edit the source, then run sync.py. -->
 
 # Gcloud Commands
 

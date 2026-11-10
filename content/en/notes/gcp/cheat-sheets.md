@@ -9,7 +9,6 @@ tags:
 - pcse
 ---
 
-<!-- imported from ObsidianVault/studies/PCSE/Cheat Sheets.md. Edit the source, then run sync.py. -->
 
 # Cheat Sheets
 

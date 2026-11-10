@@ -6,19 +6,11 @@ import re
 import sys
 from pathlib import Path
 
-FOUR_HATS = Path("/Users/h/mk-project/four-hats")
-HQ = Path("/Users/h/mk-project/hq-main")
 ROOT = Path(__file__).resolve().parent
-PAGES = FOUR_HATS / "docs" / "episodes"
-if not PAGES.exists():
-    PAGES = ROOT / "content" / "en" / "four-hats" / "episodes"
+PAGES = ROOT / "content" / "en" / "four-hats" / "episodes"
 COMPOSED = ROOT / "build" / "en" / "four-hats" / "episodes"
 SCRIPTS = ROOT / "sources" / "scripts"
-if not SCRIPTS.exists():
-    SCRIPTS = HQ / "scripts"
 DIAGRAMS = ROOT / "assets" / "diagrams"
-if not DIAGRAMS.exists():
-    DIAGRAMS = HQ / "scripts" / "diagrams"
 
 REQUIRED = [
     "What you will be able to do",

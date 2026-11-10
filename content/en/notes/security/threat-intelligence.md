@@ -8,7 +8,6 @@ tags:
 - security
 ---
 
-<!-- imported from ObsidianVault/studies/cybersecurity/threat intelligence.md. Edit the source, then run sync.py. -->
 
 # Threat intelligence
 

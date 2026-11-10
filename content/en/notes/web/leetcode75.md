@@ -7,7 +7,6 @@ tags:
 - web
 ---
 
-<!-- imported from ObsidianVault/webdev/LeetCode75.md. Edit the source, then run sync.py. -->
 
 # LeetCode75
 

@@ -7,7 +7,6 @@ tags:
 - services
 ---
 
-<!-- imported from ObsidianVault/studies/cloud-architecht/services/media-services/overview.md. Edit the source, then run sync.py. -->
 
 # Media Services Overview
 

@@ -1,29 +1,18 @@
 ---
 title: Catus Locatus
 date: '2025-10-30'
-description: Location-based pet recovery web app using React and Leaflet maps to report
-  and view lost pets.
+description: Location-based pet recovery web app, built with React and Leaflet, deployed to Azure Kubernetes.
 tags:
-- Kubernetes
-- Terraform
-- Azure
-- React
+- kubernetes
+- terraform
+- azure
+- react
+status: Active
+repo: https://github.com/aliAljaffer/catus-locatus
+url: https://cl.alialjaffer.com/
 ---
 
-<!-- imported from portfolio/src/data/catus-locatus.md. Edit the source, then run sync.py. -->
-
 # Catus Locatus
-
-**Status:** Active
-
-Location-based pet recovery web app using React and Leaflet maps to report and view lost pets.
-
-`Kubernetes` `Terraform` `Azure` `React`
-
-## Links
-
-- [Repository](https://github.com/aliAljaffer/catus-locatus)
-- [Live](https://cl.alialjaffer.com/)
 
 ## (2025-10-30) Major Update: Deploying to Kubernetes
 

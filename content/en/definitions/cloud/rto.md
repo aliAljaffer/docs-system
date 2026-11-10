@@ -9,7 +9,6 @@ tags:
 - reliability
 ---
 
-<!-- imported from ObsidianVault/studies/definitions/RTO.md. Edit the source, then run sync.py. -->
 
 # RTO
 

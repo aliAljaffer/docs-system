@@ -9,7 +9,6 @@ tags:
 - services
 ---
 
-<!-- imported from ObsidianVault/studies/cloud-architecht/services/compute/fargate.md. Edit the source, then run sync.py. -->
 
 # Fargate
 

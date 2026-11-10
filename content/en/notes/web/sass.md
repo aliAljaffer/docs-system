@@ -8,7 +8,6 @@ tags:
 - web
 ---
 
-<!-- imported from ObsidianVault/webdev/SASS.md. Edit the source, then run sync.py. -->
 
 # SASS and SCSS Basics and Must-Knows
 

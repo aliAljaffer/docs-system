@@ -7,7 +7,6 @@ tags:
 - data
 ---
 
-<!-- imported from ObsidianVault/studies/cloud-architecht/gcp/data-analytics/dataflow.md. Edit the source, then run sync.py. -->
 
 # Dataflow
 

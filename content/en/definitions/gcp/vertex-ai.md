@@ -7,7 +7,6 @@ tags:
 - ai
 ---
 
-<!-- imported from ObsidianVault/studies/cloud-architecht/gcp/ai-ml/vertex-ai.md. Edit the source, then run sync.py. -->
 
 # Vertex-ai
 

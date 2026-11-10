@@ -9,7 +9,6 @@ tags:
 - services
 ---
 
-<!-- imported from ObsidianVault/studies/cloud-architecht/services/networking/direct connect.md. Edit the source, then run sync.py. -->
 
 # Direct connect
 

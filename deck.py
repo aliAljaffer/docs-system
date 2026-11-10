@@ -11,7 +11,8 @@ import sys
 from html import unescape
 from pathlib import Path
 
-SLIDES = Path("/Users/h/mk-project/hq-main/slides")
+ROOT = Path(__file__).resolve().parent
+SLIDES = ROOT / "assets" / "slides"
 
 
 def clean(fragment: str) -> str:
@@ -55,7 +56,7 @@ def digest(path: Path) -> str:
 
 def main() -> None:
     names = sys.argv[1:] or [p.stem for p in sorted(SLIDES.glob("ep*.html"))]
-    out_dir = Path("/Users/h/docs-system/.cache/digests")
+    out_dir = ROOT / ".cache" / "digests"
     out_dir.mkdir(parents=True, exist_ok=True)
     for name in names:
         path = SLIDES / (name if name.endswith(".html") else f"{name}.html")

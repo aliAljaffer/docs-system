@@ -10,7 +10,6 @@ tags:
 - security
 ---
 
-<!-- imported from ObsidianVault/studies/definitions/principle of least privilege.md. Edit the source, then run sync.py. -->
 
 # Principle of least privilege
 

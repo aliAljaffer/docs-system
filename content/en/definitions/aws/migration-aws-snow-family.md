@@ -7,7 +7,6 @@ tags:
 - services
 ---
 
-<!-- imported from ObsidianVault/studies/cloud-architecht/services/migration/aws snow family.md. Edit the source, then run sync.py. -->
 
 # Aws snow family
 

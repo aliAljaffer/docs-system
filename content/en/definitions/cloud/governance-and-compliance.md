@@ -7,7 +7,6 @@ tags:
 - gcp
 ---
 
-<!-- imported from ObsidianVault/studies/cloud-architecht/unsorted/governance and compliance.md. Edit the source, then run sync.py. -->
 
 # Governance and compliance
 

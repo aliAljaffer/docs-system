@@ -7,7 +7,6 @@ tags:
 - compute
 ---
 
-<!-- imported from ObsidianVault/studies/cloud-architecht/gcp/compute/compute-engine.md. Edit the source, then run sync.py. -->
 
 # Compute-engine
 

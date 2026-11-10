@@ -7,7 +7,6 @@ tags:
 - services
 ---
 
-<!-- imported from ObsidianVault/studies/cloud-architecht/services/front-end/amplify.md. Edit the source, then run sync.py. -->
 
 # Amplify
 

@@ -1,21 +1,12 @@
 ---
 title: 'Guide to: Cloud Certifications and Building Side Projects'
 date: '2026-06-17'
-description: A simple, 4-cert roadmap to cover many positions. And a how-to on showing
-  off your projects.
+description: A simple, 4-cert roadmap to cover many positions. And a how-to on showing off your projects.
 tags:
-- Career
+- career
 ---
 
-<!-- imported from portfolio/src/data/certification-roadmap.md. Edit the source, then run sync.py. -->
-
 # Guide to: Cloud Certifications and Building Side Projects
-
-**Published:** 2026-06-17
-
-A simple, 4-cert roadmap to cover many positions. And a how-to on showing off your projects.
-
-`Career`
 
 ## Overview
 

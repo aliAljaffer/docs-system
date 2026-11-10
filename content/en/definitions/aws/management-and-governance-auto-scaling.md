@@ -8,7 +8,6 @@ tags:
 - services
 ---
 
-<!-- imported from ObsidianVault/studies/cloud-architecht/services/management-and-governance/auto scaling.md. Edit the source, then run sync.py. -->
 
 # Auto scaling
 

@@ -8,7 +8,6 @@ tags:
 - reliability
 ---
 
-<!-- imported from ObsidianVault/studies/definitions/disaster recovery.md. Edit the source, then run sync.py. -->
 
 # Disaster recovery
 

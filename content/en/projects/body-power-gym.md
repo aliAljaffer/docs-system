@@ -1,24 +1,16 @@
 ---
 title: Body & Power Gym
 date: '2025-07-01'
-description: Volunteer-built website for a local gym using Next.js, Docker, and Strapi
-  CMS for fully managed and responsive content delivery.
+description: Volunteer-built website for a local gym, with Next.js, Docker, and Strapi CMS on AWS.
 tags:
-- Next.js
-- Docker
-- AWS
-- CI/CD
+- nextjs
+- docker
+- aws
+- ci-cd
+status: Active
 ---
 
-<!-- imported from portfolio/src/data/body-power-gym.md. Edit the source, then run sync.py. -->
-
 # Body & Power Gym
-
-**Status:** Active
-
-Volunteer-built website for a local gym using Next.js, Docker, and Strapi CMS for fully managed and responsive content delivery.
-
-`Next.js` `Docker` `AWS` `CI/CD`
 
 ## Overview
 

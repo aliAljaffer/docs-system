@@ -21,19 +21,16 @@ from urllib.parse import urlparse
 
 import yaml
 
-import sync
-
 ROOT = Path(__file__).resolve().parent
-FOUR_HATS = Path("/Users/h/mk-project/four-hats")
 CONTENT = ROOT / "content"
 ASSETS = ROOT / "assets"
 BUILD = ROOT / "build"
 SOURCES = ROOT / "sources"
-ACT_ROOT = SOURCES if any(SOURCES.glob("act*.md")) else FOUR_HATS / "docs"
+ACT_ROOT = SOURCES
 SITE = ROOT / "site"
 TASKS = yaml.safe_load((ROOT / "episode-tasks.yaml").read_text())["episodes"]
 CATALOG = yaml.safe_load((ROOT / "catalog.yaml").read_text())
-ZENSICAL = os.environ.get("ZENSICAL") or shutil.which("zensical") or "/Users/h/branding/.venv/bin/zensical"
+ZENSICAL = os.environ.get("ZENSICAL") or shutil.which("zensical") or "zensical"
 
 SITE_URL = "https://docs.alialjaffer.com"
 
@@ -94,6 +91,7 @@ docs_dir: {docs_dir}
 site_dir: {site_dir}
 theme:
   name: material
+  custom_dir: overrides
   language: {language}
   palette:
     - scheme: default
@@ -328,39 +326,72 @@ def episode_index(root: Path, lang: str) -> Path | None:
     return dest
 
 
+def split_meta(text: str) -> tuple[dict, str]:
+    if not text.startswith("---\n"):
+        return {}, text
+    end = text.find("\n---\n", 4)
+    if end == -1:
+        return {}, text
+    return yaml.safe_load(text[4:end]) or {}, text[end + 5:]
+
+
+def add_header(page: Path, root: Path) -> None:
+    rel = page.relative_to(root).as_posix()
+    section = rel.split("/")[0]
+    if section not in ("blogs", "projects") or page.name == "index.md" and rel.count("/") == 1:
+        return
+    meta, body = split_meta(page.read_text())
+    if not meta.get("title"):
+        return
+    match = re.match(r"\s*# .+\n", body)
+    h1 = match.group(0) if match else f"# {meta['title']}\n"
+    rest = body[match.end():] if match else body
+    if re.match(r"\s*\*\*(Status|Published):\*\*", rest):
+        return
+    if section == "blogs":
+        lines = [f"**Published:** {meta.get('date', '')}", ""]
+    else:
+        lines = [f"**Status:** {meta.get('status', 'Active')}", ""]
+    if meta.get("description"):
+        lines += [str(meta["description"]).strip(), ""]
+    if meta.get("tags"):
+        lines += [" ".join(f"`{tag}`" for tag in meta["tags"]), ""]
+    links = []
+    if meta.get("repo"):
+        links.append(f"- [Repository]({meta['repo']})")
+    if meta.get("url"):
+        links.append(f"- [Live]({meta['url']})")
+    if links:
+        lines += ["## Links", "", *links, ""]
+    fm = page.read_text()[: len(page.read_text()) - len(body)]
+    page.write_text(fm + h1 + "\n" + "\n".join(lines) + "\n" + rest.lstrip("\n"))
+
+
+def drop_drafts(root: Path) -> None:
+    for page in list(root.rglob("*.md")):
+        if meta_of(page).get("draft") is True:
+            page.unlink()
+
+
 def project_entries(root: Path) -> list[dict]:
     entries = []
-    for item in CATALOG.get("projects", []):
-        entry = dict(item)
-        if not entry.get("date"):
-            page = root / item["page"]
-            if page.exists():
-                entry["date"] = str(meta_of(page).get("date", ""))
-        entries.append(entry)
-    seen = {item["page"] for item in entries}
-    extra: list[dict] = []
     paths = list((root / "projects").glob("*.md")) + list((root / "projects").glob("*/index.md"))
     for path in paths:
-        rel = path.relative_to(root).as_posix()
-        if rel in seen:
-            continue
         meta = meta_of(path)
-        if not meta.get("title"):
+        if not meta.get("title") or path.name == "index.md" and path.parent.name == "projects":
             continue
-        extra.append(
+        entries.append(
             {
                 "slug": path.parent.name if path.name == "index.md" else path.stem,
-                "title": meta.get("title"),
+                "title": meta["title"],
                 "status": meta.get("status", "Active"),
                 "summary": meta.get("description", ""),
                 "tags": meta.get("tags", []),
-                "page": rel,
+                "page": path.relative_to(root).as_posix(),
                 "date": str(meta.get("date", "")),
             }
         )
-    extra.sort(key=lambda item: item["date"], reverse=True)
-    entries.extend(extra)
-    entries.sort(key=lambda item: str(item.get("date", "")), reverse=True)
+    entries.sort(key=lambda item: item["date"], reverse=True)
     return entries
 
 
@@ -654,7 +685,9 @@ def assemble(lang: str) -> Path:
         dirs_exist_ok=True,
         ignore=shutil.ignore_patterns("slides"),
     )
+    drop_drafts(root)
     for page in root.rglob("*.md"):
+        add_header(page, root)
         text = page.read_text()
         text = convert_callouts(text)
         text = text.replace("](../assets/", "](../../assets/")
@@ -941,9 +974,33 @@ def build_graph(base: Path, lang: str) -> None:
     )
 
 
+def build_manifest() -> None:
+    posts = []
+    root = BUILD / "en"
+    for kind in ("blogs", "projects"):
+        for path in sorted((root / kind).rglob("*.md")):
+            meta = meta_of(path)
+            if not meta.get("title") or not meta.get("date") or path.name == "index.md" and path.parent.name == kind:
+                continue
+            slug = path.parent.name if path.name == "index.md" else path.stem
+            if path.parent != root / kind and path.name != "index.md":
+                continue
+            posts.append(
+                {
+                    "id": slug,
+                    "type": kind[:-1],
+                    "title": meta["title"],
+                    "date": str(meta["date"]),
+                    "description": str(meta.get("description", "")).strip(),
+                    "tags": meta.get("tags", []),
+                    "url": f"{SITE_URL}/{kind}/{slug}/",
+                }
+            )
+    posts.sort(key=lambda item: item["date"], reverse=True)
+    (SITE / "posts.json").write_text(json.dumps(posts, ensure_ascii=False, indent=2) + "\n")
+
+
 def run() -> None:
-    if sync.PORTFOLIO.exists():
-        sync.sync_portfolio()
     if SITE.exists():
         shutil.rmtree(SITE)
     for lang in ("en", "ar"):
@@ -954,6 +1011,7 @@ def run() -> None:
     build_graph(SITE, "en")
     build_graph(SITE / "ar", "ar")
     publish_slides()
+    build_manifest()
     print("built site/ and site/ar/")
 
 

@@ -10,7 +10,6 @@ tags:
 - security
 ---
 
-<!-- imported from ObsidianVault/studies/definitions/multi factor authentication.md. Edit the source, then run sync.py. -->
 
 # Multi factor authentication
 

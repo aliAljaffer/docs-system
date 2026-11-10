@@ -6,7 +6,6 @@ tags:
 - react
 ---
 
-<!-- imported from ObsidianVault/webdev/react/main-concepts.md. Edit the source, then run sync.py. -->
 
 # Main-concepts
 

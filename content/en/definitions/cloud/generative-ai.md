@@ -8,7 +8,6 @@ tags:
 - ai
 ---
 
-<!-- imported from ObsidianVault/studies/definitions/generative ai.md. Edit the source, then run sync.py. -->
 
 # Generative ai
 

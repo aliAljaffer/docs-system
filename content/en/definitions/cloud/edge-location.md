@@ -9,7 +9,6 @@ tags:
 - geography
 ---
 
-<!-- imported from ObsidianVault/studies/definitions/edge location.md. Edit the source, then run sync.py. -->
 
 # Edge location
 

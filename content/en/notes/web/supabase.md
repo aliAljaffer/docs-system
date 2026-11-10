@@ -6,7 +6,6 @@ tags:
 - web
 ---
 
-<!-- imported from ObsidianVault/webdev/Supabase.md. Edit the source, then run sync.py. -->
 
 # SUPABASE
 

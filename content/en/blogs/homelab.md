@@ -1,29 +1,17 @@
 ---
 title: The Homelab, Ten Months In
 date: '2026-08-15'
-description: The k3s cluster grew up. Talos Linux, full GitOps, real disaster recovery,
-  and three stacked firmware bugs on a 2012 MacBook.
+description: The k3s cluster grew up. Talos Linux, full GitOps, real disaster recovery, and three stacked firmware bugs on a 2012 MacBook.
 tags:
-- Kubernetes
-- Homelab
-- Networking
-- Automation
-- Security
+- kubernetes
+- homelab
+- networking
+- automation
+- security
+repo: https://github.com/aliAljaffer/homelab
 ---
 
-<!-- imported from portfolio/src/data/homelab.md. Edit the source, then run sync.py. -->
-
 # The Homelab, Ten Months In
-
-**Published:** 2026-08-15
-
-The k3s cluster grew up. Talos Linux, full GitOps, real disaster recovery, and three stacked firmware bugs on a 2012 MacBook.
-
-`Kubernetes` `Homelab` `Networking` `Automation` `Security`
-
-## Links
-
-- [Repository](https://github.com/aliAljaffer/homelab)
 
 ## Overview
 

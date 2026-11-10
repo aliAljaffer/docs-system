@@ -7,7 +7,6 @@ tags:
 - gcp
 ---
 
-<!-- imported from ObsidianVault/studies/cloud-architecht/unsorted/autoscaling groups and load balancers.md. Edit the source, then run sync.py. -->
 
 # Autoscaling groups and load balancers
 

@@ -6,7 +6,6 @@ tags:
 - web
 ---
 
-<!-- imported from ObsidianVault/webdev/GitHub CLI.md. Edit the source, then run sync.py. -->
 
 # GitHub CLI commands
 

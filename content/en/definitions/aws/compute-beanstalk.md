@@ -8,7 +8,6 @@ tags:
 - services
 ---
 
-<!-- imported from ObsidianVault/studies/cloud-architecht/services/compute/beanstalk.md. Edit the source, then run sync.py. -->
 
 # Beanstalk
 

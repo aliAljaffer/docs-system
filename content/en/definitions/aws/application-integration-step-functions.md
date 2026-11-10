@@ -9,7 +9,6 @@ tags:
 - services
 ---
 
-<!-- imported from ObsidianVault/studies/cloud-architecht/services/application-integration/step functions.md. Edit the source, then run sync.py. -->
 
 # Step functions
 

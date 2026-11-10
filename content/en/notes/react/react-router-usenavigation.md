@@ -6,7 +6,6 @@ tags:
 - react
 ---
 
-<!-- imported from ObsidianVault/webdev/react/react-router/useNavigation.md. Edit the source, then run sync.py. -->
 
 # UseNavigation
 

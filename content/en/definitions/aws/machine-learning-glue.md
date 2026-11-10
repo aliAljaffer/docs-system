@@ -7,7 +7,6 @@ tags:
 - services
 ---
 
-<!-- imported from ObsidianVault/studies/cloud-architecht/services/machine-learning/glue.md. Edit the source, then run sync.py. -->
 
 # Glue
 

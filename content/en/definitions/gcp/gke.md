@@ -7,7 +7,6 @@ tags:
 - compute
 ---
 
-<!-- imported from ObsidianVault/studies/cloud-architecht/gcp/compute/gke.md. Edit the source, then run sync.py. -->
 
 # Gke
 

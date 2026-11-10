@@ -6,7 +6,6 @@ tags:
 - gcp
 ---
 
-<!-- imported from ObsidianVault/studies/cloud-architecht/unsorted/aws networking.md. Edit the source, then run sync.py. -->
 
 # Aws networking
 

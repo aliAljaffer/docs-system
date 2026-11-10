@@ -1,3 +1,14 @@
+---
+title: Fai
+date: '2026-10-29'
+description: Self-hosted task tracker, Kanban, and notes app, behind your own identity provider or as a desktop app.
+tags:
+- tasks
+- notes
+- self-hosted
+status: Active
+---
+
 # Fai
 
 **Status:** Active

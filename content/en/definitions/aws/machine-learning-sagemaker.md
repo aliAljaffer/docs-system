@@ -9,7 +9,6 @@ tags:
 - services
 ---
 
-<!-- imported from ObsidianVault/studies/cloud-architecht/services/machine-learning/sagemaker.md. Edit the source, then run sync.py. -->
 
 # Sagemaker
 

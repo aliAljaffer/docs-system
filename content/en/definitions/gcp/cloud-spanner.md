@@ -7,7 +7,6 @@ tags:
 - databases
 ---
 
-<!-- imported from ObsidianVault/studies/cloud-architecht/gcp/databases/cloud-spanner.md. Edit the source, then run sync.py. -->
 
 # Cloud-spanner
 

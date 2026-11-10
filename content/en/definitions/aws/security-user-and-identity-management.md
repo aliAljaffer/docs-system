@@ -9,7 +9,6 @@ tags:
 - services
 ---
 
-<!-- imported from ObsidianVault/studies/cloud-architecht/services/security/user and identity management.md. Edit the source, then run sync.py. -->
 
 # User and identity management
 

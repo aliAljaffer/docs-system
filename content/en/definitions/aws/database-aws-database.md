@@ -8,7 +8,6 @@ tags:
 - services
 ---
 
-<!-- imported from ObsidianVault/studies/cloud-architecht/services/database/aws database.md. Edit the source, then run sync.py. -->
 
 # Aws database
 

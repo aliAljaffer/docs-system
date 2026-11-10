@@ -7,7 +7,6 @@ tags:
 - security
 ---
 
-<!-- imported from ObsidianVault/studies/cloud-architecht/gcp/security/security-command-center.md. Edit the source, then run sync.py. -->
 
 # Security-command-center
 

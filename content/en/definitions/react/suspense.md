@@ -8,7 +8,6 @@ tags:
 - components
 ---
 
-<!-- imported from ObsidianVault/webdev/react/suspense.md. Edit the source, then run sync.py. -->
 
 # Suspense
 

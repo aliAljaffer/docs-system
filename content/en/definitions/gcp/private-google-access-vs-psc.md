@@ -7,7 +7,6 @@ tags:
 - networking
 ---
 
-<!-- imported from ObsidianVault/studies/cloud-architecht/gcp/networking/private-google-access-vs-psc.md. Edit the source, then run sync.py. -->
 
 # Private-google-access-vs-psc
 

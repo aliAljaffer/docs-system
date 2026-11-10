@@ -8,7 +8,6 @@ tags:
 - services
 ---
 
-<!-- imported from ObsidianVault/studies/cloud-architecht/services/financial-management/budgets.md. Edit the source, then run sync.py. -->
 
 # Budgets
 

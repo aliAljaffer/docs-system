@@ -7,7 +7,6 @@ tags:
 - services
 ---
 
-<!-- imported from ObsidianVault/studies/cloud-architecht/services/security/guardduty.md. Edit the source, then run sync.py. -->
 
 # Guardduty
 

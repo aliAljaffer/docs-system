@@ -6,7 +6,6 @@ tags:
 - gcp
 ---
 
-<!-- imported from ObsidianVault/studies/cloud-architecht/unsorted/cloud concepts.md. Edit the source, then run sync.py. -->
 
 # Cloud concepts
 

@@ -6,7 +6,6 @@ tags:
 - certification
 ---
 
-<!-- imported from ObsidianVault/studies/cloud-architecht/8. Red Hat Certified System Administrator RHCSA.md. Edit the source, then run sync.py. -->
 
 # 8. Red Hat Certified System Administrator RHCSA
 

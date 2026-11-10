@@ -10,3 +10,4 @@ __pycache__/
 mkdocs.en.yml
 mkdocs.ar.yml
 .build.lock
+.venv/

@@ -6,7 +6,6 @@ tags:
 - web
 ---
 
-<!-- imported from ObsidianVault/webdev/FullstackOpen.md. Edit the source, then run sync.py. -->
 
 # Fullstack Open Course
 

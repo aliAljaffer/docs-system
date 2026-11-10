@@ -6,7 +6,6 @@ tags:
 - gcp
 ---
 
-<!-- imported from ObsidianVault/studies/cloud-architecht/unsorted/cloud adoption framework.md. Edit the source, then run sync.py. -->
 
 # Cloud adoption framework
 

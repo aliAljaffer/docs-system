@@ -7,7 +7,6 @@ tags:
 - data
 ---
 
-<!-- imported from ObsidianVault/studies/cloud-architecht/gcp/data-analytics/eventarc.md. Edit the source, then run sync.py. -->
 
 # Eventarc
 

@@ -1,3 +1,15 @@
+---
+title: Homelab
+date: '2026-11-09'
+description: Kubernetes on Talos Linux, managed by ArgoCD, with Cilium, Longhorn, CloudNativePG, and a public Cloudflare tunnel.
+tags:
+- kubernetes
+- talos
+- gitops
+- homelab
+status: Active
+---
+
 # Homelab
 
 **Status:** Active

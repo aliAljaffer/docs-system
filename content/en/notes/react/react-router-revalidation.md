@@ -7,7 +7,6 @@ tags:
 - react
 ---
 
-<!-- imported from ObsidianVault/webdev/react/react-router/revalidation.md. Edit the source, then run sync.py. -->
 
 # Revalidation
 

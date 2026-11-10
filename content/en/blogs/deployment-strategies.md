@@ -3,19 +3,11 @@ title: Application Zero-Downtime Deployment Strategies
 date: '2026-02-28'
 description: We explore Rolling Updates, Canary Deployments, and Blue/Green Deployments
 tags:
-- Kubernetes
-- CI/CD
+- kubernetes
+- ci-cd
 ---
 
-<!-- imported from portfolio/src/data/deployment-strategies.md. Edit the source, then run sync.py. -->
-
 # Application Zero-Downtime Deployment Strategies
-
-**Published:** 2026-02-28
-
-We explore Rolling Updates, Canary Deployments, and Blue/Green Deployments
-
-`Kubernetes` `CI/CD`
 
 Diving into the most popular [[gcp/deployment-strategies|deployment strategies]] for deploying new versions or features out to the public. First going through examples, then moving onto demonstrating the deployment on a custom Kubernetes dashboard that interacts with a `minikube` cluster I set up. Feel free to contact me with any questions regarding this topic or others!
 

@@ -1,28 +1,18 @@
 ---
-title: AWS Budget Notifications for Discord Channels
+title: AWS Budget Notifications
 date: '2025-07-31'
-description: Receive Budget Alerts straight to your personal Discord server channel!
+description: Terraform module that sends AWS Budget alerts to a Discord channel.
 tags:
-- AWS
-- Terraform
-- Automation
-- Python
+- aws
+- terraform
+- automation
+- python
+status: Active
+repo: https://github.com/aliAljaffer/terraform-aws-budgets-discord-notifs
+url: https://registry.terraform.io/modules/aliAljaffer/budgets-discord-notifs/aws/latest
 ---
 
-<!-- imported from portfolio/src/data/aws-budget-discord-notifs.md. Edit the source, then run sync.py. -->
-
 # AWS Budget Notifications for Discord Channels
-
-**Status:** Active
-
-Receive Budget Alerts straight to your personal Discord server channel!
-
-`AWS` `Terraform` `Automation` `Python`
-
-## Links
-
-- [Repository](https://github.com/aliAljaffer/terraform-aws-budgets-discord-notifs)
-- [Live](https://registry.terraform.io/modules/aliAljaffer/budgets-discord-notifs/aws/latest)
 
 ## Overview
 

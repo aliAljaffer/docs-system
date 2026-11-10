@@ -6,7 +6,6 @@ tags:
 - terraform
 ---
 
-<!-- imported from ObsidianVault/studies/terraform/course-link-and-progress.md. Edit the source, then run sync.py. -->
 
 # Course-link-and-progress
 

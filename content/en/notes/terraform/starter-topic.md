@@ -6,7 +6,6 @@ tags:
 - terraform
 ---
 
-<!-- imported from ObsidianVault/studies/terraform/starter-topic.md. Edit the source, then run sync.py. -->
 
 # Starter-topic
 

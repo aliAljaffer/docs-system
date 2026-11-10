@@ -7,7 +7,6 @@ tags:
 - services
 ---
 
-<!-- imported from ObsidianVault/studies/cloud-architecht/services/security/IAM.md. Edit the source, then run sync.py. -->
 
 # IAM
 

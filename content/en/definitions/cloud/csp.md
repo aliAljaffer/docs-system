@@ -9,7 +9,6 @@ tags:
 - fundamentals
 ---
 
-<!-- imported from ObsidianVault/studies/definitions/csp.md. Edit the source, then run sync.py. -->
 
 # Csp
 

@@ -9,7 +9,6 @@ tags:
 - pcse
 ---
 
-<!-- imported from ObsidianVault/studies/PCSE/Final Week Checklist.md. Edit the source, then run sync.py. -->
 
 # Final Week Checklist
 

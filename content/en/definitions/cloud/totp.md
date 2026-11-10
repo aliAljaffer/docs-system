@@ -10,7 +10,6 @@ tags:
 - security
 ---
 
-<!-- imported from ObsidianVault/studies/definitions/TOTP.md. Edit the source, then run sync.py. -->
 
 # TOTP
 

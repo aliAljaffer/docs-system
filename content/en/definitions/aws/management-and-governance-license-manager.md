@@ -8,7 +8,6 @@ tags:
 - services
 ---
 
-<!-- imported from ObsidianVault/studies/cloud-architecht/services/management-and-governance/license manager.md. Edit the source, then run sync.py. -->
 
 # License manager
 

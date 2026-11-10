@@ -9,7 +9,6 @@ tags:
 - reliability
 ---
 
-<!-- imported from ObsidianVault/studies/definitions/business continuity.md. Edit the source, then run sync.py. -->
 
 # Business continuity
 

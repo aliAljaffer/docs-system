@@ -6,7 +6,6 @@ tags:
 - web
 ---
 
-<!-- imported from ObsidianVault/webdev/Flutter.md. Edit the source, then run sync.py. -->
 
 # Flutter
 

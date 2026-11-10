@@ -9,7 +9,6 @@ tags:
 - ai
 ---
 
-<!-- imported from ObsidianVault/studies/definitions/traditional ai.md. Edit the source, then run sync.py. -->
 
 # Traditional ai
 

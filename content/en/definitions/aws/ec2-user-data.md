@@ -7,7 +7,6 @@ tags:
 - gcp
 ---
 
-<!-- imported from ObsidianVault/studies/cloud-architecht/unsorted/EC2 User Data.md. Edit the source, then run sync.py. -->
 
 # EC2 User Data
 

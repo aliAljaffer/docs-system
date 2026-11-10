@@ -7,7 +7,6 @@ tags:
 - security
 ---
 
-<!-- imported from ObsidianVault/studies/cloud-architecht/gcp/security/secret-manager.md. Edit the source, then run sync.py. -->
 
 # Secret-manager
 

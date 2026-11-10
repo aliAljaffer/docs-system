@@ -8,7 +8,6 @@ tags:
 - reliability
 ---
 
-<!-- imported from ObsidianVault/studies/definitions/high durability.md. Edit the source, then run sync.py. -->
 
 # High durability
 

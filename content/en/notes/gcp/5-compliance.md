@@ -9,7 +9,6 @@ tags:
 - pcse
 ---
 
-<!-- imported from ObsidianVault/studies/PCSE/5 - Compliance.md. Edit the source, then run sync.py. -->
 
 # 5 - Compliance
 

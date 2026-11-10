@@ -8,7 +8,6 @@ tags:
 - fundamentals
 ---
 
-<!-- imported from ObsidianVault/webdev/general-concepts/memoization.md. Edit the source, then run sync.py. -->
 
 # Memoization
 

@@ -7,7 +7,6 @@ tags:
 - security
 ---
 
-<!-- imported from ObsidianVault/studies/cloud-architecht/gcp/security/identity-aware-proxy.md. Edit the source, then run sync.py. -->
 
 # Identity-aware-proxy
 

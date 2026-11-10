@@ -6,7 +6,6 @@ tags:
 - devops
 ---
 
-<!-- imported from ObsidianVault/studies/DevOps Bootcamp/Week0/Day1.md. Edit the source, then run sync.py. -->
 
 # Week0 Day1
 

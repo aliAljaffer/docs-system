@@ -8,7 +8,6 @@ tags:
 - services
 ---
 
-<!-- imported from ObsidianVault/studies/cloud-architecht/services/financial-management/pricing calculator.md. Edit the source, then run sync.py. -->
 
 # Pricing calculator
 

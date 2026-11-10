@@ -8,7 +8,6 @@ tags:
 - fundamentals
 ---
 
-<!-- imported from ObsidianVault/studies/definitions/scalability.md. Edit the source, then run sync.py. -->
 
 # Scalability
 

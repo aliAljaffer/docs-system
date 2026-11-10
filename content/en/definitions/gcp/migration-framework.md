@@ -7,7 +7,6 @@ tags:
 - management
 ---
 
-<!-- imported from ObsidianVault/studies/cloud-architecht/gcp/management/migration-framework.md. Edit the source, then run sync.py. -->
 
 # Migration-framework
 

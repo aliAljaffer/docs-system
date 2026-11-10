@@ -1,26 +1,16 @@
 ---
 title: AirPods Status
 date: '2026-08-22'
-description: A GNOME Shell extension that shows your AirPods battery percentage in
-  the top bar, colored by charge level.
+description: GNOME Shell extension that shows AirPods battery percentage in the top bar, colored by charge level.
 tags:
-- Linux
-- Automation
+- linux
+- gnome
+- automation
+status: Active
+repo: https://github.com/aliAljaffer/airpods-status-gnome
 ---
 
-<!-- imported from portfolio/src/data/airpods-status.md. Edit the source, then run sync.py. -->
-
 # AirPods Status
-
-**Status:** Active
-
-A GNOME Shell extension that shows your AirPods battery percentage in the top bar, colored by charge level.
-
-`Linux` `Automation`
-
-## Links
-
-- [Repository](https://github.com/aliAljaffer/airpods-status-gnome)
 
 ## Overview
 

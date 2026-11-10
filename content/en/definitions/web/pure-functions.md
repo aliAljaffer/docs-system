@@ -8,7 +8,6 @@ tags:
 - fundamentals
 ---
 
-<!-- imported from ObsidianVault/webdev/general-concepts/pure-functions.md. Edit the source, then run sync.py. -->
 
 # Pure-functions
 

@@ -8,7 +8,6 @@ tags:
 - fundamentals
 ---
 
-<!-- imported from ObsidianVault/webdev/general-concepts/component.md. Edit the source, then run sync.py. -->
 
 # Component
 

@@ -10,7 +10,6 @@ tags:
 - kubernetes
 ---
 
-<!-- imported from ObsidianVault/studies/definitions/containers.md. Edit the source, then run sync.py. -->
 
 # Containers
 

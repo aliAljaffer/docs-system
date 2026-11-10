@@ -6,7 +6,6 @@ tags:
 - certification
 ---
 
-<!-- imported from ObsidianVault/studies/cloud-architecht/✅ 5. Terraform Associate 003.md. Edit the source, then run sync.py. -->
 
 # ✅ 5. Terraform Associate 003
 

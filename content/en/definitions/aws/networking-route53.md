@@ -7,7 +7,6 @@ tags:
 - services
 ---
 
-<!-- imported from ObsidianVault/studies/cloud-architecht/services/networking/route53.md. Edit the source, then run sync.py. -->
 
 # Route53
 

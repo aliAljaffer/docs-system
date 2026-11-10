@@ -7,7 +7,6 @@ tags:
 - fundamentals
 ---
 
-<!-- imported from ObsidianVault/studies/definitions/C-suite.md. Edit the source, then run sync.py. -->
 
 # C-suite
 

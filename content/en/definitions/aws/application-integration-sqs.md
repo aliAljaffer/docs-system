@@ -7,7 +7,6 @@ tags:
 - services
 ---
 
-<!-- imported from ObsidianVault/studies/cloud-architecht/services/application-integration/sqs.md. Edit the source, then run sync.py. -->
 
 # Sqs
 

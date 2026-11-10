@@ -10,7 +10,6 @@ tags:
 - reliability
 ---
 
-<!-- imported from ObsidianVault/studies/definitions/SLA.md. Edit the source, then run sync.py. -->
 
 # SLA
 

@@ -8,7 +8,6 @@ tags:
 - pcse
 ---
 
-<!-- imported from ObsidianVault/studies/PCSE/1 - Configuring Access.md. Edit the source, then run sync.py. -->
 
 # 1 - Configuring Access
 

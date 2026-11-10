@@ -7,7 +7,6 @@ tags:
 - security
 ---
 
-<!-- imported from ObsidianVault/studies/cloud-architecht/gcp/security/binary-authorization.md. Edit the source, then run sync.py. -->
 
 # Binary-authorization
 

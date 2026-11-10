@@ -1,25 +1,13 @@
 ---
 title: Collaboration on GitHub
 date: '2025-10-13'
-description: A session I presented in DevOps bootcamp to help colleagues on how to
-  efficiently collaboarate on GitHub.
+description: A session I presented in DevOps bootcamp to help colleagues on how to efficiently collaboarate on GitHub.
 tags:
-- Career
+- career
+url: https://youtu.be/vS0gLCvDSVc
 ---
 
-<!-- imported from portfolio/src/data/teamwork-and-collaboration.md. Edit the source, then run sync.py. -->
-
 # Collaboration on GitHub
-
-**Published:** 2025-10-13
-
-A session I presented in DevOps bootcamp to help colleagues on how to efficiently collaboarate on GitHub.
-
-`Career`
-
-## Links
-
-- [Live](https://youtu.be/vS0gLCvDSVc)
 
 ## Overview
 

@@ -7,7 +7,6 @@ tags:
 - storage
 ---
 
-<!-- imported from ObsidianVault/studies/cloud-architecht/gcp/storage/cloud-storage.md. Edit the source, then run sync.py. -->
 
 # Cloud-storage
 

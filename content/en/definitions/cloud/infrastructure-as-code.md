@@ -9,7 +9,6 @@ tags:
 - iac
 ---
 
-<!-- imported from ObsidianVault/studies/definitions/infrastructure as code.md. Edit the source, then run sync.py. -->
 
 # Infrastructure as code
 

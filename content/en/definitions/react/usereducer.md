@@ -7,7 +7,6 @@ tags:
 - hooks
 ---
 
-<!-- imported from ObsidianVault/webdev/react/useReducer.md. Edit the source, then run sync.py. -->
 
 # UseReducer
 

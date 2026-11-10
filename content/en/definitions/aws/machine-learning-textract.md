@@ -8,7 +8,6 @@ tags:
 - services
 ---
 
-<!-- imported from ObsidianVault/studies/cloud-architecht/services/machine-learning/textract.md. Edit the source, then run sync.py. -->
 
 # Textract
 

@@ -3,20 +3,12 @@ title: The Kubernetes learning journey (so far)
 date: '2025-11-22'
 description: Sharing thoughts after getting into the administration side of K8s
 tags:
-- Kubernetes
-- Career
-- Ansible
+- kubernetes
+- career
+- ansible
 ---
 
-<!-- imported from portfolio/src/data/k8s-adventures.md. Edit the source, then run sync.py. -->
-
 # The Kubernetes learning journey (so far)
-
-**Published:** 2025-11-22
-
-Sharing thoughts after getting into the administration side of K8s
-
-`Kubernetes` `Career` `Ansible`
 
 I've been getting in-depth with Kubernetes lately; from watching YouTube videos on real-life projects with it, to building a multi-node homelab with a K3s cluster. (And now another cluster using `kubeadm`)
 

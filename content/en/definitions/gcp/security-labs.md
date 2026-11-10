@@ -7,7 +7,6 @@ tags:
 - security
 ---
 
-<!-- imported from ObsidianVault/studies/cloud-architecht/gcp/security/security-labs.md. Edit the source, then run sync.py. -->
 
 # Security-labs
 

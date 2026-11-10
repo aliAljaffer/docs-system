@@ -8,7 +8,6 @@ tags:
 - certification
 ---
 
-<!-- imported from ObsidianVault/studies/cloud-architecht/✅ 1. Certified Cloud Practitioner CLF-02.md. Edit the source, then run sync.py. -->
 
 # ✅ 1. Certified Cloud Practitioner CLF-02
 

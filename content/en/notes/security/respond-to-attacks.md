@@ -6,7 +6,6 @@ tags:
 - security
 ---
 
-<!-- imported from ObsidianVault/studies/cybersecurity/Respond to attacks.md. Edit the source, then run sync.py. -->
 
 # Respond to attacks
 

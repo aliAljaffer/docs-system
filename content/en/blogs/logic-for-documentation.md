@@ -1,21 +1,12 @@
 ---
 title: 'Math Makes You a Better Technical Writer: Propositional Logic'
 date: '2026-10-03'
-description: Bad documentation is basically unprovable math. Six ideas from propositional
-  logic that fix vague writing, with before and after rewrites.
+description: Bad documentation is basically unprovable math. Six ideas from propositional logic that fix vague writing, with before and after rewrites.
 tags:
-- Career
+- career
 ---
 
-<!-- imported from portfolio/src/data/logic-for-documentation.md. Edit the source, then run sync.py. -->
-
 # Math Makes You a Better Technical Writer: Propositional Logic
-
-**Published:** 2026-10-03
-
-Bad documentation is basically unprovable math. Six ideas from propositional logic that fix vague writing, with before and after rewrites.
-
-`Career`
 
 I bet you have written (or seen) this sentence before:
 
