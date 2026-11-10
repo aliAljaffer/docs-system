@@ -1,7 +1,8 @@
+PYTHON ?= python3
 PY := .venv/bin/python
 
 setup:
-	python3 -m venv .venv
+	$(PYTHON) -m venv .venv
 	$(PY) -m pip install -r requirements.txt
 
 check:
