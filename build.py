@@ -501,6 +501,12 @@ def run() -> None:
     if result.returncode != 0:
         raise SystemExit(result.stdout + result.stderr)
     print(result.stdout.strip().splitlines()[-1])
+    slugs = sorted(
+        p.relative_to(BUILD / "definitions").with_suffix("").as_posix()
+        for p in (BUILD / "definitions").rglob("*.md")
+        if p.name != "index.md"
+    )
+    (SITE / "definitions.json").write_text(json.dumps(slugs) + "\n")
 
 
 if __name__ == "__main__":

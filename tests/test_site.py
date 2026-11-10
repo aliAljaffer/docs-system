@@ -2,6 +2,7 @@
 """End-to-end checks for the built site."""
 from __future__ import annotations
 
+import json
 import sys
 import unittest
 from html.parser import HTMLParser
@@ -74,6 +75,11 @@ class SiteTests(unittest.TestCase):
         self.assertIn("requestFullscreen", page)
         self.assertIn("md-button", page)
         self.assertTrue(len(list((SITE / "four-hats" / "slides").glob("ep*.html"))) >= 27)
+
+    def test_definitions_manifest(self) -> None:
+        slugs = json.loads((SITE / "definitions.json").read_text())
+        self.assertIn("aws/security-iam", slugs)
+        self.assertNotIn("index", slugs)
 
     def test_wiki(self) -> None:
         self.assertTrue((SITE / "definitions" / "rest" / "index.html").exists())
