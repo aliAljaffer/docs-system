@@ -3,13 +3,13 @@
 Snapshot of `content/en` on 2026-11-10. Re-run the scan after a new sync because the definition
 set grows with each vault import.
 
-222 definitions, 47 post pages with at least one candidate,
-396 plain-text mentions that name a definition the page does not link.
-106 definitions still have zero inbound wikilinks.
+222 definitions, 45 post pages with at least one candidate,
+303 plain-text mentions that name a definition the page does not link.
+102 definitions still have zero inbound wikilinks.
 
-Applied so far: 123 links across 45 pages, 74 wrong-target links retargeted in GCP pages, and an
+Applied so far: 153 links across 50 pages, 74 wrong-target links retargeted in GCP pages, and an
 import fix that restores wiki links written as relative paths in the vault. Post-to-definition links
-in `content/en` rose from 231 to 384. Orphan definitions fell from 142 to 106. Links now live in
+in `content/en` rose from 231 to 408. Orphan definitions fell from 142 to 102. Links now live in
 the vault and the portfolio/four-hats sources, so `sync.py` keeps them.
 
 Matching rules: frontmatter, fenced code, inline code, existing links and link targets are ignored.
@@ -30,11 +30,11 @@ One page from each section, two links each. These give the most coverage for the
 
 | Page | Link 1 | Link 2 |
 |---|---|---|
-| `notes/certifications/4-solutions-architect-associate-saa-c03.md` | `[[cloud/disaster-recovery\|Disaster Recovery]]` L240 | `[[aws/application-integration-sqs\|SQS]]` L597 |
+| `notes/certifications/4-solutions-architect-associate-saa-c03.md` | `[[aws/storage-ebs\|EBS]]` L189 | `[[aws/networking-direct-connect\|Direct Connect]]` L533 |
 | `notes/react/react.md` | `[[web/component\|component]]` L62 | `[[web/hook\|Hooks]]` L20 |
-| `notes/gcp/readme.md` | `[[cloud/cost-optimization-pillar\|Cost optimization]]` L163 | `[[cloud/generative-ai\|Generative AI]]` L167 |
-| `projects/body-power-gym.md` | `[[aws/compute-fargate\|Fargate]]` L45 | `[[cloud/infrastructure-as-code\|Infrastructure as Code]]` L51 |
+| `projects/image-captioning.md` | `[[aws/application-integration-step-functions\|Step Functions]]` L101 | `[[aws/compute-lambda\|Lambda]]` L64 |
 | `four-hats/episodes/ep03-run-the-app.md` | `[[cloud/containers\|containers]]` L10 |  |
+| `notes/gcp/4-managing-operations.md` | `[[cloud/logging\|logging]]` L46 | `[[cloud/region\|region]]` L92 |
 
 ## Top targets
 
@@ -42,24 +42,24 @@ One page from each section, two links each. These give the most coverage for the
 |---|---|---|---|
 | `cloud/containers` | 23 | 70 | 4 |
 | `web/component` | 6 | 48 | 1 |
-| `cloud/logging` | 8 | 20 | 1 |
 | `cloud/region` | 10 | 19 | 1 |
+| `cloud/logging` | 6 | 18 | 2 |
 | `aws/compute-lambda` | 3 | 16 | 2 |
 | `web/hook` | 3 | 11 | 1 |
-| `cloud/disaster-recovery` | 2 | 10 | 2 |
-| `aws/application-integration-sns` | 1 | 9 | 1 |
-| `aws/application-integration-sqs` | 1 | 9 | 1 |
-| `aws/machine-learning-glue` | 1 | 9 | 0 |
-| `aws/compute-fargate` | 2 | 8 | 0 |
-| `aws/management-and-governance-cloudtrail` | 1 | 8 | 1 |
-| `cloud/scalability` | 6 | 8 | 0 |
 | `aws/analytics-kinesis` | 1 | 7 | 0 |
-| `aws/management-and-governance-auto-scaling` | 2 | 7 | 0 |
 | `aws/networking-direct-connect` | 1 | 7 | 0 |
 | `aws/storage-ebs` | 1 | 7 | 0 |
+| `cloud/scalability` | 5 | 7 | 0 |
 | `cloud/cidr` | 1 | 6 | 5 |
+| `aws/compute-fargate` | 1 | 6 | 1 |
 | `aws/security-kms` | 1 | 6 | 1 |
-| `cloud/cost-optimization-pillar` | 1 | 6 | 1 |
+| `web/props` | 2 | 6 | 0 |
+| `aws/analytics-redshift` | 1 | 5 | 0 |
+| `aws/management-and-governance-auto-scaling` | 1 | 5 | 1 |
+| `cloud/governance-and-compliance` | 2 | 4 | 0 |
+| `aws/containers-eks` | 1 | 4 | 0 |
+| `aws/networking-api-gateway` | 2 | 4 | 1 |
+| `aws/security-cognito` | 1 | 4 | 1 |
 
 ## Certification notes (mostly AWS)
 
@@ -67,13 +67,13 @@ One page from each section, two links each. These give the most coverage for the
 
 | Line | Link | Fit | Anchor in text |
 |---|---|---|---|
-| 240 | `[[cloud/disaster-recovery\|Disaster Recovery]]` | strong | - Multi-AZ setup for Disaster Recovery |
-| 597 | `[[aws/application-integration-sqs\|SQS]]` | strong | ## SQS |
-| 627 | `[[aws/application-integration-sns\|SNS]]` | strong | ## SNS |
-| 925 | `[[aws/machine-learning-glue\|Glue]]` | strong | - Use Glue to convery your data to Parquet |
-| 1121 | `[[aws/management-and-governance-cloudtrail\|CloudTrail]]` | strong | ### CloudTrail |
+| 189 | `[[aws/storage-ebs\|EBS]]` | strong | Configurations for your launched instances detailing information like: AMI and Instance Type, EC2 User Data, E |
+| 533 | `[[aws/networking-direct-connect\|Direct Connect]]` | strong | - Accessed on prem using VPN or Direct Connect |
+| 640 | `[[aws/analytics-kinesis\|Kinesis]]` | strong | - Kinesis Data Firehose |
+| 377 | `[[aws/security-kms\|AWS KMS]]` | strong | - Database Master & Replicas encryption using AWS KMS - Must be defined as launch time |
+| 716 | `[[aws/compute-fargate\|Fargate]]` | strong | - Fargate - Serverless, no provisioning. Create **Task Definition** and AWS will run the task based on CPU / R |
 
-29 more definitions appear on this page: `aws/storage-ebs`, `aws/networking-direct-connect`, `aws/analytics-kinesis`, `aws/security-kms`, `aws/compute-fargate`, `cloud/cidr`, `aws/management-and-governance-auto-scaling`, `aws/analytics-redshift`, `aws/security-cognito`, `aws/storage-efs`, `aws/containers-eks`, `aws/networking-api-gateway` and 17 more.
+24 more definitions appear on this page: `cloud/cidr`, `aws/management-and-governance-auto-scaling`, `aws/analytics-redshift`, `aws/security-cognito`, `aws/storage-efs`, `aws/containers-eks`, `aws/networking-api-gateway`, `aws/analytics-athena`, `aws/application-integration-eventbridge`, `aws/management-and-governance-cloudformation`, `aws/containers-ecr`, `aws/ec2-user-data` and 12 more.
 
 ### `notes/certifications/7-certified-kubernetes-application-developer-ckad.md`
 
@@ -84,53 +84,43 @@ One page from each section, two links each. These give the most coverage for the
 
 ## GCP notes
 
-### `notes/gcp/readme.md`  (imported from `ObsidianVault/studies/cloud-architecht/gcp/README.md`)
-
-| Line | Link | Fit | Anchor in text |
-|---|---|---|---|
-| 163 | `[[cloud/cost-optimization-pillar\|Cost optimization]]` | strong | - Cost optimization strategies |
-| 167 | `[[cloud/generative-ai\|Generative AI]]` | strong | - **Generative AI integration** (NEW in 2026) |
-| 189 | `[[cloud/serverless\|Serverless]]` | strong | - Serverless patterns (Cloud Run, Cloud Functions) |
-| 201 | `[[cloud/principle-of-least-privilege\|least privilege]]` | strong | - [[iam/IAM]] - Resource hierarchy, conditions, least privilege |
-| 258 | `[[cloud/infrastructure-as-code\|Infrastructure as Code]]` | strong | - Infrastructure as Code (Deployment Manager, Terraform) |
-
-6 more definitions appear on this page: `cloud/disaster-recovery`, `cloud/total-cost-of-ownership`, `cloud/operational-excellence-pillars`, `cloud/migration-strategies`, `cloud/logging`, `cloud/containers`.
-
 ### `notes/gcp/4-managing-operations.md`
 
 | Line | Link | Fit | Anchor in text |
 |---|---|---|---|
-| 36 | `[[gcp/cloud-storage\|Cloud Storage]]` | strong | - Gotcha: a [[vpc-service-controls/VPC-SC]] perimeter restricting Cloud Storage breaks `gcloud builds submit`  |
-| 52 | `[[gcp/vpc\|VPC]]` | strong | / VPC Flow Logs / L3/L4 flows (5-tuple, bytes/packets) / Enable per subnet (all-or-nothing); aggregation inter |
-| 58 | `[[gcp/cloud-functions\|Cloud Functions]]` | strong | **Incident response flow:** detect (Event Threat Detection, audit logs, SCC findings), notify (SCC notificatio |
-| 97 | `[[gcp/dataflow\|Dataflow]]` | strong | - Splunk: export JSON to Pub/Sub (Dataflow onward); GCS exports: lifecycle to Nearline/Coldline then delete. |
 | 46 | `[[cloud/logging\|logging]]` | loose | ### 4.2 Configuring logging, monitoring, and detection |
+| 92 | `[[cloud/region\|region]]` | loose | - Packet Mirroring: copies headers plus payloads, consumes VM (not network) bandwidth; sources: subnets, tags, |
 
-1 more definitions appear on this page: `cloud/region`.
+### `notes/gcp/readme.md`  (imported from `ObsidianVault/studies/cloud-architecht/gcp/README.md`)
+
+| Line | Link | Fit | Anchor in text |
+|---|---|---|---|
+| 273 | `[[cloud/disaster-recovery\|Disaster recovery]]` | strong | - Disaster recovery strategies |
+| 309 | `[[cloud/total-cost-of-ownership\|TCO]]` | strong | 1. **Assess**: TCO calculation, workload prioritization (low complexity + high value first) |
+| 363 | `[[cloud/operational-excellence-pillars\|Operational Excellence]]` | strong | 1. **Operational Excellence**: 4 golden signals (latency, traffic, errors, saturation), SLI/SLO/error budgets |
+| 550 | `[[cloud/migration-strategies\|migration strategies]]` | strong | - Advanced topics: Multi-region deployments, hybrid architectures, migration strategies |
+| 219 | `[[cloud/logging\|logging]]` | loose | - [[gcp/cloud-logging/Cloud Logging]] - Log analytics, centralized logging |
+
+1 more definitions appear on this page: `cloud/containers`.
 
 ### `notes/gcp/2-network-security.md`
 
 | Line | Link | Fit | Anchor in text |
 |---|---|---|---|
-| 104 | `[[cloud/sla\|SLA]]` | strong | / On-prem to VPC / HA VPN (one gateway, two interfaces, 2+ tunnels, 99.99% SLA) or [[cloud-interconnect/Cloud  |
-| 64 | `[[gcp/cloud-logging\|Cloud Logging]]` | strong | - Firewall Rules Logging is per rule (never on the two implied rules) and exports to Cloud Logging, Pub/Sub, o |
-| 64 | `[[gcp/pub-sub\|Pub/Sub]]` | strong | - Firewall Rules Logging is per rule (never on the two implied rules) and exports to Cloud Logging, Pub/Sub, o |
-| 66 | `[[cloud/serverless\|serverless]]` | strong | - Cloud Armor also supports serverless NEGs (App Engine, Cloud Run, Functions), Internet NEGs (hybrid/multiclo |
-| 66 | `[[gcp/app-engine\|App Engine]]` | strong | - Cloud Armor also supports serverless NEGs (App Engine, Cloud Run, Functions), Internet NEGs (hybrid/multiclo |
-
-5 more definitions appear on this page: `gcp/cloud-run`, `gcp/compute-engine`, `gcp/gke`, `cloud/logging`, `cloud/region`.
+| 66 | `[[gcp/cloud-run\|Cloud Run]]` | strong | - Cloud Armor also supports [[serverless/serverless]] NEGs ([[app-engine/App Engine]], Cloud Run, Functions),  |
+| 77 | `[[gcp/compute-engine\|Compute Engine]]` | strong | - **Peering restrictions (2025 exam reports):** no overlapping [[cidr/CIDR]] ranges between peers; firewall ru |
+| 78 | `[[gcp/gke\|GKE]]` | strong | - **N-tier isolation:** tiered subnets + NGFW policies per tier + secure tags; private GKE clusters for the da |
+| 32 | `[[cloud/logging\|logging]]` | loose | - **Tiers:** Cloud NGFW Essentials (rules, logging), Enterprise (adds Layer 7 filtering and TLS inspection wit |
+| 114 | `[[cloud/region\|region]]` | loose | - HA VPN: one gateway with two interfaces (two reserved public IPs), at least two tunnels originating in the s |
 
 ### `notes/gcp/3-data-protection.md`
 
 | Line | Link | Fit | Anchor in text |
 |---|---|---|---|
-| 97 | `[[gcp/dataflow\|Dataflow]]` | strong | - Confidential family: Confidential VM, GKE Nodes, Dataflow, Dataproc, Space; SEV VMs on N2D support live migr |
-| 97 | `[[gcp/dataproc\|Dataproc]]` | strong | - Confidential family: Confidential VM, GKE Nodes, Dataflow, Dataproc, Space; SEV VMs on N2D support live migr |
-| 106 | `[[cloud/principle-of-least-privilege\|least privilege]]` | strong | - Data: Sensitive Data Protection discovery and redaction on training data, CMEK on data and model artifacts,  |
-| 128 | `[[gcp/private-google-access-vs-psc\|Private Service Connect]]` | strong | - Private Service Connect endpoints for Vertex AI give private access from your VPC, including multicloud acce |
 | 37 | `[[cloud/logging\|logging]]` | loose | - **[[secret-manager/Secret Manager]]:** versions (enable/disable/destroy), replication policy (auto or user-m |
-
-3 more definitions appear on this page: `cloud/region`, `gcp/cloud-vpn`, `cloud/governance-and-compliance`.
+| 37 | `[[cloud/region\|regions]]` | loose | - **[[secret-manager/Secret Manager]]:** versions (enable/disable/destroy), replication policy (auto or user-m |
+| 71 | `[[gcp/cloud-vpn\|HA VPN]]` | loose | - Hybrid: HA VPN encrypts with IPsec by default; Dedicated Interconnect can be encrypted with MACsec (also IPs |
+| 109 | `[[cloud/governance-and-compliance\|Governance]]` | loose | - Governance: SAIF (Secure AI Framework) is Google's blueprint for AI security. SCC gives AI asset discovery ( |
 
 ### `notes/gcp/1-configuring-access.md`
 
@@ -144,13 +134,6 @@ One page from each section, two links each. These give the most coverage for the
 |---|---|---|---|
 | 23 | `[[cloud/region\|regions]]` | loose | - **Assured Workloads:** creates a folder with enforced compliance regime (FedRAMP Moderate/High, IL2/4/5, CJI |
 
-### `notes/gcp/final-week-checklist.md`
-
-| Line | Link | Fit | Anchor in text |
-|---|---|---|---|
-| 38 | `[[gcp/vertex-ai\|Vertex AI]]` | strong | - [ ] Know the Vertex AI specifics: dedicated VPC-SC perimeters, public endpoint gated by an access level, PSC |
-| 36 | `[[gcp/cloud-vpn\|HA VPN]]` | loose | - [ ] Know encryption in transit: SSL policies, IPsec on HA VPN, MACsec on Dedicated Interconnect. |
-
 ### `notes/gcp/pcse-home.md`
 
 | Line | Link | Fit | Anchor in text |
@@ -162,6 +145,12 @@ One page from each section, two links each. These give the most coverage for the
 | Line | Link | Fit | Anchor in text |
 |---|---|---|---|
 | 59 | `[[cloud/containers\|containers]]` | loose | 6. Lateral movement in containers -> Container Threat Detection. |
+
+### `notes/gcp/final-week-checklist.md`
+
+| Line | Link | Fit | Anchor in text |
+|---|---|---|---|
+| 36 | `[[gcp/cloud-vpn\|HA VPN]]` | loose | - [ ] Know encryption in transit: SSL policies, IPsec on HA VPN, MACsec on Dedicated Interconnect. |
 
 ## Other notes
 
@@ -200,18 +189,6 @@ One page from each section, two links each. These give the most coverage for the
 |---|---|---|---|
 | 17 | `[[cloud/scalability\|scalability]]` | loose | You’re the core tech team at a company that migrated a legacy app from a single on-prem VM to Azure because th |
 
-### `notes/interviews/interview-prep.md`
-
-| Line | Link | Fit | Anchor in text |
-|---|---|---|---|
-| 198 | `[[cloud/scalability\|scalability]]` | loose | > Some advantages of using OOPs in Java include code reusability, modularity, flexibility, scalability, and ea |
-
-### `notes/interviews/study-guide-for-technical-interview.md`
-
-| Line | Link | Fit | Anchor in text |
-|---|---|---|---|
-| 73 | `[[cloud/logging\|Logging]]` | loose | - Monitoring and Logging (Prometheus, Grafana, ELK stack) |
-
 ### `notes/react/main-concepts.md`  (imported from `ObsidianVault/webdev/react/main-concepts.md`)
 
 | Line | Link | Fit | Anchor in text |
@@ -238,26 +215,22 @@ One page from each section, two links each. These give the most coverage for the
 
 ## Project pages
 
-### `projects/body-power-gym.md`  (imported from `portfolio/src/data/body-power-gym.md`)
-
-| Line | Link | Fit | Anchor in text |
-|---|---|---|---|
-| 45 | `[[aws/compute-fargate\|Fargate]]` | strong | - **AWS Services**: VPC, [[aws/containers-ecs/ECS]] Fargate, ALB, [[aws/containers-ecr/ECR]], CodeBuild, [[aws |
-| 51 | `[[cloud/infrastructure-as-code\|Infrastructure as Code]]` | strong | - **DevOps**: Infrastructure as Code (soon!), configuration management, deployment automation, rollback strate |
-| 77 | `[[aws/management-and-governance-auto-scaling\|Auto Scaling]]` | strong | Unlike the backend instance, the frontend container would be the one always running, and getting **Auto Scalin |
-| 45 | `[[aws/management-and-governance-cloudformation\|CloudFormation]]` | strong | - **AWS Services**: VPC, [[aws/containers-ecs/ECS]] Fargate, ALB, [[aws/containers-ecr/ECR]], CodeBuild, [[aws |
-| 49 | `[[cloud/logging\|log aggregation]]` | strong | - **Monitoring**: CloudWatch metrics, EventBridge rules, alerting systems, log aggregation |
-
-4 more definitions appear on this page: `aws/storage-s3`, `aws/networking-api-gateway`, `aws/compute-lambda`, `cloud/scalability`.
-
 ### `projects/image-captioning.md`  (imported from `portfolio/src/data/image-captioning.md`)
 
 | Line | Link | Fit | Anchor in text |
 |---|---|---|---|
-| 60 | `[[aws/networking-cloudfront\|CloudFront]]` | strong | 4. `invalidate_cache`: Invalidates the CloudFront CDN cache so that the newly-built version is served to the u |
 | 101 | `[[aws/application-integration-step-functions\|Step Functions]]` | strong | - **Asynchronous Execution**: For Lambdas, I was envisioning a workflow for the image like this: `upload-to-s3 |
 | 64 | `[[aws/compute-lambda\|Lambda]]` | loose | Next, I created two Lambda functions. One function receives an image file `image/*` from the frontend, and upl |
 | 49 | `[[aws/free-services\|free tier]]` | loose | The main concern to me was the cost of building this project. However, knowing that most of the services I dec |
+
+### `projects/body-power-gym.md`  (imported from `portfolio/src/data/body-power-gym.md`)
+
+| Line | Link | Fit | Anchor in text |
+|---|---|---|---|
+| 67 | `[[aws/storage-s3\|S3]]` | strong | I went with Strapi because it seemed easy to work with, just looking at the documentation. (And it was.) It al |
+| 113 | `[[aws/networking-api-gateway\|API Gateway]]` | strong | Webhooks are wonderful. They are basically a way for service A to notify service B that an event occurred. In  |
+| 45 | `[[aws/compute-lambda\|Lambda]]` | loose | - **AWS Services**: VPC, [[aws/containers-ecs/ECS]] [[aws/compute-fargate/Fargate]], ALB, [[aws/containers-ecr |
+| 75 | `[[cloud/scalability\|scalability]]` | loose | I also thought, why not containerize? Containerization would tremendously help with scalability of the website |
 
 ### `projects/aws-budget-discord-notifs.md`  (imported from `portfolio/src/data/aws-budget-discord-notifs.md`)
 
@@ -409,15 +382,14 @@ One page from each section, two links each. These give the most coverage for the
 
 ## Orphan definitions
 
-Zero inbound wikilinks: 106 of 222.
+Zero inbound wikilinks: 102 of 222.
 
 ### Orphans that already appear in a post
 
-- `aws/analytics-athena` `aws/analytics-kinesis` `aws/analytics-redshift` `aws/application-integration-step-functions` `aws/compute-beanstalk` `aws/compute-fargate`
-- `aws/containers-eks` `aws/ec2-user-data` `aws/financial-management-budgets` `aws/free-services` `aws/machine-learning-glue` `aws/management-and-governance-auto-scaling`
-- `aws/management-and-governance-cloudformation` `aws/management-and-governance-config` `aws/management-and-governance-systems-manager` `aws/networking-direct-connect` `aws/networking-vpn` `aws/security-guardduty`
-- `aws/storage-ebs` `cloud/generative-ai` `cloud/governance-and-compliance` `cloud/migration-strategies` `cloud/scalability` `cloud/tagging`
-- `react/provider` `web/props`
+- `aws/analytics-athena` `aws/analytics-kinesis` `aws/analytics-redshift` `aws/application-integration-step-functions` `aws/compute-beanstalk` `aws/containers-eks`
+- `aws/ec2-user-data` `aws/financial-management-budgets` `aws/free-services` `aws/management-and-governance-config` `aws/management-and-governance-systems-manager` `aws/networking-direct-connect`
+- `aws/networking-vpn` `aws/security-guardduty` `aws/storage-ebs` `cloud/governance-and-compliance` `cloud/migration-strategies` `cloud/scalability`
+- `cloud/tagging` `react/provider` `web/props`
 
 ### Orphans with no mention anywhere
 
@@ -434,22 +406,18 @@ Zero inbound wikilinks: 106 of 222.
 - `cloud/partner-network` `cloud/restful-apis` `cloud/shared-hosting` `cloud/tenets-of-aws` `cloud/totp` `cloud/traditional-ai`
 - `cloud/vms-and-containers` `cloud/vps` `gcp/ai-ml-labs` `gcp/compute-labs` `gcp/data-analytics-labs` `gcp/databases-labs`
 - `gcp/devops-labs` `gcp/eventarc` `gcp/management-labs` `gcp/ops-labs` `gcp/storage-labs` `networking/main`
-- `react/react-lazy` `web/pure-functions`
+- `networking/osi-model` `react/react-lazy` `web/pure-functions`
 
 The AWS service pages are all orphans today. The fastest win is one link per service from
 `notes/certifications/4-solutions-architect-associate-saa-c03.md` and `projects/image-captioning.md`.
 
-## Wrong targets fixed
+## Wrong targets found while scanning
 
-The vault links GCP notes with relative paths like `[[../security/iam]]`. The importer flattened
-those to `security-iam`, which is the AWS IAM page, and `networking-vpc`, the AWS VPC page. That put
-74 GCP links on AWS definitions. Fixed in three places:
-
-1. `sync.py` now resolves a relative wiki link against the source file first, then falls back to the
-   stem. A stem that already resolves to itself is no longer captured by a nested AWS import.
-2. The vault links `[[security/iam]]` and `[[networking/vpc]]` now use bare `iam` and `vpc`.
-3. `notes/certifications/10-professional-cloud-architect-pca.md` line 17 compares AWS IAM with GCP
-   Service Accounts, so it links to `security-iam`.
+| Where | Problem |
+|---|---|
+| `notes/gcp/readme.md` line 53 | `[[security-iam\|IAM]]` points at the AWS IAM page in a GCP note. Use `[[iam\|IAM]]`. |
+| `notes/gcp/readme.md` line 90 | `[[networking-vpc\|VPC]]` points at the AWS VPC page. Use `[[vpc\|VPC]]`. |
+| `notes/certifications/10-professional-cloud-architect-pca.md` line 17 | The line compares AWS IAM with GCP Service Accounts. If you link IAM there, use `security-iam`, not `iam`. |
 
 ## Do not link these
 

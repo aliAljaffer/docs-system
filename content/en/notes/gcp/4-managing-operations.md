@@ -33,7 +33,7 @@ Part of [[pcse-home|PCSE Home]]. Official exam guide sections 4.1 to 4.2: managi
 **Additional facts:**
 - Scan results update continuously as new CVEs are discovered, not only at push; on-demand severity values: CRITICAL, HIGH, MEDIUM, LOW, MINIMAL.
 - Cloud Build gate: `_SEVERITY` substitution with a regex like `"CRITICAL|HIGH"`; the build SA needs `roles/ondemandscanning.admin`.
-- Gotcha: a [[vpc-service-controls|VPC-SC]] perimeter restricting Cloud Storage breaks `gcloud builds submit` with PERMISSION_DENIED.
+- Gotcha: a [[vpc-service-controls|VPC-SC]] perimeter restricting [[cloud-storage|Cloud Storage]] breaks `gcloud builds submit` with PERMISSION_DENIED.
 - Binary Authorization cluster flag: `--binauthz-evaluation-mode=PROJECT_SINGLETON_POLICY_ENFORCE`; policy YAML: `defaultAdmissionRule` with `evaluationMode` (ALWAYS_DENY, REQUIRE_ATTESTATION) + `enforcementMode`; dry-run audits violations while pods still run.
 - The global policy allows `gcr.io/google-containers` by default; everything else hits the default admission rule.
 - Each attestor requires an Artifact Analysis note; attestations are stored as note occurrences; the Binary Authorization service SA needs `roles/containeranalysis.notes.occurrences.viewer` on the note.
@@ -49,13 +49,13 @@ Part of [[pcse-home|PCSE Home]]. Official exam guide sections 4.1 to 4.2: managi
 
 | Tool | What it captures | Key config points |
 |---|---|---|
-| VPC Flow Logs | L3/L4 flows (5-tuple, bytes/packets) | Enable per subnet (all-or-nothing); aggregation interval default 5s (5s to 15 min); sampling 0.0 to 1.0, default 0.5, cost lever |
+| [[vpc|VPC]] Flow Logs | L3/L4 flows (5-tuple, bytes/packets) | Enable per subnet (all-or-nothing); aggregation interval default 5s (5s to 15 min); sampling 0.0 to 1.0, default 0.5, cost lever |
 | [[cloud-ngfw|Cloud NGFW]] logs | Firewall allow/deny events with rule name | Enable per rule or policy; log to [[cloud-logging|Cloud Logging]] |
 | Packet Mirroring | Full packet copy of VM traffic | Mirror source (subnet, tags, or instance) + collector behind internal LB (`--is-mirroring-collector`) |
 | Cloud IDS | Managed IDS verdicts on mirrored traffic | Create endpoint in VPC; requires Packet Mirroring; Palo Alto threat signatures |
 | Log Analytics | SQL queries over log buckets | Enable on a log bucket; query in Cloud Logging UI ([[bigquery|BigQuery]] engine) |
 
-**Incident response flow:** detect (Event Threat Detection, audit logs, SCC findings), notify (SCC notification configs to [[pub-sub|Pub/Sub]] or email), respond and remediate (Cloud Functions triggered on findings, e.g., disable a leaked SA key), investigate and correlate (Google SecOps). See [[respond-to-attacks|Respond to attacks]].
+**Incident response flow:** detect (Event Threat Detection, audit logs, SCC findings), notify (SCC notification configs to [[pub-sub|Pub/Sub]] or email), respond and remediate ([[cloud-functions|Cloud Functions]] triggered on findings, e.g., disable a leaked SA key), investigate and correlate (Google SecOps). See [[respond-to-attacks|Respond to attacks]].
 
 **Logging strategy design:**
 - Log buckets per domain/env with retention settings (default 30 days in Cloud Logging; buckets can retain up to 3650 days); **log views** to scope what each team can read; exclusions to cut cost.
@@ -94,7 +94,7 @@ Part of [[pcse-home|PCSE Home]]. Official exam guide sections 4.1 to 4.2: managi
 - Field-level access: restricted fields (textPayload, jsonPayload, protoPayload, httpRequest, labels, sourceLocation) need explicit permission.
 - Sinks: destinations are log buckets, Pub/Sub, BigQuery, Cloud Storage (cross-project OK); aggregated sinks need org/folder + `--include-children`; grant the sink writer identity per destination: objectCreator (GCS), dataEditor (BQ), publisher (Pub/Sub), bucketWriter (log bucket).
 - BigQuery sink default: dated tables; `--use-partitioned-table` switches to partitioned.
-- Splunk: export JSON to Pub/Sub (Dataflow onward); GCS exports: lifecycle to Nearline/Coldline then delete.
+- Splunk: export JSON to Pub/Sub ([[dataflow|Dataflow]] onward); GCS exports: lifecycle to Nearline/Coldline then delete.
 - SCC: activation at project or org level, requires an organization; built-in services enable at org/folder/project; Container Threat Detection also per cluster; settings inherit.
 - Premium/Enterprise SHA adds compliance benchmarks, attack exposure scores, attack paths; detectors off by default include CMEK-disabled family, `SQL_NO_ROOT_PASSWORD`, `SQL_WEAK_ROOT_PASSWORD`, `VPC_FLOW_LOGS_SETTINGS_NOT_RECOMMENDED`.
 

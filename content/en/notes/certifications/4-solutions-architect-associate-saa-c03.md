@@ -237,7 +237,7 @@ Min / Max Sizes, Initial Capacity, and Scaling Policies.
 	- Continuous backups and restores
 	- Monitoring dashboards
 	- Read Replicas for improved performance
-	- Multi-AZ setup for Disaster Recovery
+	- Multi-AZ setup for [[disaster-recovery|Disaster Recovery]]
 	- Maintenance windows for upgrades
 	- Scaling, both vertical and horizontal
 	- Storage back by EBS
@@ -594,7 +594,7 @@ AWS Storage Gateway bridges S3 with on prem data
 - In case of **DataSync** need but network isn't suitable for it, ****AWS Snowcone has datasync agent preinstalled**** 
 ![](/assets/vault/pasted-image-20250705153321.webp)
 
-## SQS
+## [[application-integration-sqs|SQS]]
 
 Producers send messages to Queue, Consumers poll messages from the queue.
 Use case: decouple between application tiers
@@ -624,7 +624,7 @@ Ordered queue, no out-of-order consumption
 ![](/assets/vault/pasted-image-20250705210253.webp)
 ### Using SQS as a buffer to database writes
 ![](/assets/vault/pasted-image-20250705210441.webp)
-## SNS
+## [[application-integration-sns|SNS]]
 Pub/Sub model of notification.
 - SNS "Topic" has multiple subscribers.
 - A publisher sends the message to the topic.
@@ -922,7 +922,7 @@ Decentralized
  Use Columnar data for cost-saving by scanning less
 - Apache Parquet or ORC
 - High Performance
-- Use Glue to convery your data to Parquet
+- Use [[machine-learning-glue|Glue]] to convery your data to Parquet
 - Compress data
 ![](/assets/vault/pasted-image-20250706184249.webp)
 #### Federated Query
@@ -1118,7 +1118,7 @@ Replay events to see if the bug has been truly fixed
 ![](/assets/vault/pasted-image-20250707180319.webp)
 #### Cross-Account Bussing
 ![](/assets/vault/pasted-image-20250707180415.webp)
-### CloudTrail
+### [[management-and-governance-cloudtrail|CloudTrail]]
 - Governance, compliance, and audit
 - ENABLED
 - Get history of events or API calls

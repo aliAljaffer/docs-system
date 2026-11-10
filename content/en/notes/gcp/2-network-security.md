@@ -61,9 +61,9 @@ Three configuration layers, in order of where they attach:
 - Ingress rules cannot use destination ranges; egress rules cannot use source ranges; an omitted source or destination means 0.0.0.0/0.
 - `--source-ranges` plus `--source-tags` is a union: tagged VMs match even outside the ranges.
 - Priority 0-65535, lower wins, default 1000; **deny overrides allow only at equal priority, otherwise the lower number wins regardless of action**; you cannot change an existing rule's direction or action, create the new rule then delete the old.
-- Firewall Rules Logging is per rule (never on the two implied rules) and exports to Cloud Logging, Pub/Sub, or BigQuery.
+- Firewall Rules Logging is per rule (never on the two implied rules) and exports to [[cloud-logging|Cloud Logging]], [[pub-sub|Pub/Sub]], or BigQuery.
 - Network firewall policies group rules under IAM control: hierarchical (org/folder), global (VPC), regional (VPC).
-- Cloud Armor also supports serverless NEGs (App Engine, Cloud Run, Functions), Internet NEGs (hybrid/multicloud), and GCS bucket backends; advanced network DDoS protection covers regional external TCP/UDP LBs, protocol forwarding, and public-IP VMs.
+- Cloud Armor also supports [[serverless|serverless]] NEGs ([[app-engine|App Engine]], Cloud Run, Functions), Internet NEGs (hybrid/multicloud), and GCS bucket backends; advanced network DDoS protection covers regional external TCP/UDP LBs, protocol forwarding, and public-IP VMs.
 - Preconfigured WAF sensitivity 0-4: level N enables signatures up to N; lower level = higher confidence, fewer false positives.
 - Cloud Armor rule priority 0 to 2147483647, the default rule sits at 2147483647; actions include `deny-404` and `deny-502`.
 - Adaptive Protection full alerts require Managed Protection Plus, now named Cloud Armor Enterprise.
@@ -101,7 +101,7 @@ Three configuration layers, in order of where they attach:
 | Only allow Google APIs, block general Google cloud-internal traffic | restricted.googleapis.com VIP (199.36.153.4/30) with DNS forwarding |
 | Reach specific managed services privately from a VPC | Private Service Connect (PSC) endpoints (producer/consumer), or published services |
 | Outbound internet for private VMs | [[cloud-nat|Cloud NAT]] |
-| On-prem to VPC | HA VPN (one gateway, two interfaces, 2+ tunnels, 99.99% SLA) or [[cloud-interconnect|Cloud Interconnect]] (Dedicated/Partner) |
+| On-prem to VPC | HA VPN (one gateway, two interfaces, 2+ tunnels, 99.99% [[sla|SLA]]) or [[cloud-interconnect|Cloud Interconnect]] (Dedicated/Partner) |
 | VPC to VPC (same org or different) | peering or Shared VPC |
 
 See [[private-google-access-vs-psc|PGA vs PSC]] for the full comparison.

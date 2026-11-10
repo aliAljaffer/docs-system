@@ -160,11 +160,11 @@ Each service note contains:
 **All services - Architectural considerations:**
 
 - Business requirements mapping
-- Cost optimization strategies
+- [[cost-optimization-pillar|Cost optimization]] strategies
 - Performance requirements
 - Compliance and data residency
 - Migration planning
-- **Generative AI integration** (NEW in 2026)
+- **[[generative-ai|Generative AI]] integration** (NEW in 2026)
 
 **Key Services:**
 
@@ -186,7 +186,7 @@ Each service note contains:
 
 - Instance groups, autoscaling
 - GKE cluster design (Autopilot vs Standard, multi-zone, regional)
-- Serverless patterns (Cloud Run, Cloud Functions)
+- [[serverless|Serverless]] patterns (Cloud Run, Cloud Functions)
 
 **Storage:**
 
@@ -198,7 +198,7 @@ Each service note contains:
 
 **Security:**
 
-- [[iam|IAM]] - Resource hierarchy, conditions, least privilege
+- [[iam|IAM]] - Resource hierarchy, conditions, [[principle-of-least-privilege|least privilege]]
 - [[gcp/cloud-kms|Cloud KMS]] - CMEK, encryption strategies
 - [[gcp/secret-manager|Secret Manager]] - Secret rotation
 - [[gcp/vpc-service-controls|VPC Service Controls]] - Perimeter security
@@ -255,7 +255,7 @@ Each service note contains:
 - [[gcp/cloud-build|Cloud Build]] - CI/CD pipelines
 - [[gcp/artifact-registry|Artifact Registry]] - Image management
 - [[gcp/deployment-strategies|Deployment Strategies]] - **6 strategies (Recreate, Rolling, Canary, Blue/Green, Shadow, A/B)**
-- Infrastructure as Code (Deployment Manager, Terraform)
+- [[infrastructure-as-code|Infrastructure as Code]] (Deployment Manager, Terraform)
 
 **Management:**
 

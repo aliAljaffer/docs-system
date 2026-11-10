@@ -94,7 +94,7 @@ See [[cryptography|Cryptography]] for the underlying concepts.
 - EKM: keys never stored or cached at Google; each version combines external key material, a key reference, and internal KMS material; Key Access Justifications restricts the partner to allowed justification codes.
 - Storage lifecycle has only three actions: Delete, SetStorageClass, AbortIncompleteMultipartUpload; Delete beats SetStorageClass on conflict; changes take up to 24 hours; `--lifecycle-file` works only on `buckets update`.
 - In transit: TLS terminates at the Google Front End; VM-to-VM traffic is always encrypted unless both VMs use external IPs; extra options: IPsec tunnels, managed SSL certificates, S/MIME, Istio.
-- Confidential family: Confidential VM, GKE Nodes, Dataflow, Dataproc, Space; SEV VMs on N2D support live migration; GKE node keys are generated in hardware and never leave the processor.
+- Confidential family: Confidential VM, GKE Nodes, [[dataflow|Dataflow]], [[dataproc|Dataproc]], Space; SEV VMs on N2D support live migration; GKE node keys are generated in hardware and never leave the processor.
 
 ### 3.3 Securing AI workloads
 
@@ -103,7 +103,7 @@ Objective 3.3 has three official bullets. Track them directly. See also [[vertex
 **1. Security and privacy controls for AI/ML systems (protect data and models from unintentional exploitation):**
 
 - Think in three layers: the data, the model, and the user interaction layer. Exam scenarios name one of the three; pick the control that matches.
-- Data: Sensitive Data Protection discovery and redaction on training data, CMEK on data and model artifacts, [[vpc-service-controls|VPC Service Controls]] perimeters around data projects, IAM least privilege on datasets.
+- Data: Sensitive Data Protection discovery and redaction on training data, CMEK on data and model artifacts, [[vpc-service-controls|VPC Service Controls]] perimeters around data projects, IAM [[principle-of-least-privilege|least privilege]] on datasets.
 - Models: vulnerability scanning and signed images in [[artifact-registry|Artifact Registry]], [[binary-authorization|Binary Authorization]] for model-serving workloads, per-endpoint IAM, Vertex AI Model Monitoring for anomaly detection.
 - Interaction: Model Armor on endpoints to screen prompts and responses.
 - Governance: SAIF (Secure AI Framework) is Google's blueprint for AI security. SCC gives AI asset discovery (shadow AI visibility) and the Recommended AI Controls framework via Audit Manager.
@@ -125,5 +125,5 @@ Objective 3.3 has three official bullets. Track them directly. See also [[vertex
 **Vertex AI specifics (2025 exams lean on these):**
 - Dedicated VPC-SC perimeters for Vertex AI: separate perimeters for training data projects vs serving and model endpoints.
 - Public endpoint, restricted: expose a public Vertex AI endpoint but gate it with a VPC-SC access level, vs fully private endpoints.
-- Private Service Connect endpoints for Vertex AI give private access from your VPC, including multicloud access.
+- [[private-google-access-vs-psc|Private Service Connect]] endpoints for Vertex AI give private access from your VPC, including multicloud access.
 - Custom route exports: advertise your VPC's custom routes to Google's service network so managed Vertex AI components can reach back into your network (Private Services Access).

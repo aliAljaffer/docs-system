@@ -35,7 +35,7 @@ Part of [[pcse-home|PCSE Home]]. Work through this the week before the exam. Che
 - [ ] Know Assured Workloads, Access Transparency vs Access Approval, and the shared responsibility split. See [[5-compliance|5 - Compliance]].
 - [ ] Know encryption in transit: SSL policies, IPsec on HA VPN, MACsec on Dedicated Interconnect.
 - [ ] Can name the three AI layers (data, model, interaction) and the control for each, the IaaS vs PaaS training split, and the Model Armor use cases for [[gemini|Gemini]] Enterprise Agent Platform.
-- [ ] Know the Vertex AI specifics: dedicated VPC-SC perimeters, public endpoint gated by an access level, PSC endpoints, custom route exports.
+- [ ] Know the [[vertex-ai|Vertex AI]] specifics: dedicated VPC-SC perimeters, public endpoint gated by an access level, PSC endpoints, custom route exports.
 - [ ] Can recite the decision rules in [[cheat-sheets|Cheat Sheets]] without looking.
 - [ ] Practiced the command families in [[gcloud-commands|gcloud Commands]].
 - [ ] Completed 2 timed practice exams at 80%+.
