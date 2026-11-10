@@ -23,3 +23,15 @@ courses:
     repo: aliAljaffer/four-hats
     branch: main
     path: docs
+  - slug: aws-saa-c03
+    title: AWS Solutions Architect Associate (SAA-C03)
+    local: true
+  - slug: ckad
+    title: Certified Kubernetes Application Developer (CKAD)
+    local: true
+  - slug: rhcsa
+    title: Red Hat Certified System Administrator (RHCSA) [unfinished]
+    local: true
+  - slug: gcp-pcse
+    title: Google Cloud Professional Cloud Security Engineer (PCSE)
+    local: true

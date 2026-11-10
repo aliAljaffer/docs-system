@@ -3,7 +3,7 @@ title: VMs and containers
 category: Cloud
 description: 'Cloud note: VMs and containers.'
 tags:
-- gcp
+- cloud
 ---
 
 

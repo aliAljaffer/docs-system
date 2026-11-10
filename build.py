@@ -116,7 +116,7 @@ def summary_of(path: Path) -> str:
     return ""
 
 
-WIKI_ORDER = ["GCP", "AWS", "Cloud", "Networking", "Security", "AI", "React", "Web", "Other"]
+WIKI_ORDER = ["GCP", "AWS", "Cloud", "Networking", "Security", "AI", "React", "React Router", "Web", "Other"]
 CATEGORY_NAMES = {"gcp": "GCP", "ai": "AI"}
 
 
@@ -378,6 +378,9 @@ def prepare(root: Path, config: dict) -> None:
     for kind in ("projects", "courses"):
         for entry in config.get(kind, []):
             base = root / fetch.dest_of(kind, entry)
+            if entry.get("local"):
+                entry.setdefault("description", summary_of(base / "index.md"))
+                continue
             if entry["slug"] == "four-hats":
                 four_hats(base)
             normalize(base, entry, kind)
@@ -405,7 +408,8 @@ def write_index(root: Path, config: dict, kind: str, title: str, intro: str) -> 
     for entry in config.get(kind, []):
         lines += [f"## {entry['title']}", "", entry["description"], ""]
         target = f"{entry['slug']}/" if kind == "projects" else f"../{entry['slug']}/"
-        lines += [f"[Read the docs]({target}) · [Repository](https://github.com/{entry['repo']})", ""]
+        repo = f" · [Repository](https://github.com/{entry['repo']})" if "repo" in entry else ""
+        lines += [f"[Read the docs]({target}){repo}", ""]
     dest = root / kind if kind == "projects" else root / "courses"
     dest.mkdir(parents=True, exist_ok=True)
     (dest / "index.md").write_text("\n".join(lines))

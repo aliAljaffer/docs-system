@@ -3,7 +3,7 @@ title: Cloud concepts
 category: Cloud
 description: start @ certificate topics
 tags:
-- gcp
+- cloud
 ---
 
 

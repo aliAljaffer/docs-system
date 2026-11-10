@@ -3,7 +3,7 @@ title: Logging
 category: Cloud
 description: 'Remember: Things WILL go wrong.'
 tags:
-- gcp
+- aws
 ---
 
 

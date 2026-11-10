@@ -5,7 +5,7 @@ description: Build RESTful APIs optimized for serverless workloads and HTTP back
   using HTTP APIs. HTTP APIs are the best choice for building APIs that only require
   API proxy functionality. If your APIs require
 tags:
-- gcp
+- aws
 ---
 
 

@@ -27,3 +27,5 @@ Encryption methods that are resistant to quantum computing attacks.
 2. Hash-based encryption
 3. Multivariate encryption
 4. Code-based encryption: Transforms data into encoded messages that are difficult to decode without the correct algorithm.
+
+Related: [[cybersecurity]], [[attack-prevention-strategies]].
