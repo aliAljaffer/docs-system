@@ -116,17 +116,17 @@ WIKI_FILES = [
     ("webdev/react/design-patterns/prop-drilling.md", "React", ["react", "patterns"]),
 ]
 GCP_DEFINITION_DIRS = [
-    ("studies/cloud-architecht/gcp/networking", "GCP Networking", ["gcp", "networking"]),
-    ("studies/cloud-architecht/gcp/security", "GCP Security", ["gcp", "security"]),
-    ("studies/cloud-architecht/gcp/compute", "GCP Compute", ["gcp", "compute"]),
-    ("studies/cloud-architecht/gcp/databases", "GCP Databases", ["gcp", "databases"]),
-    ("studies/cloud-architecht/gcp/storage", "GCP Storage", ["gcp", "storage"]),
-    ("studies/cloud-architecht/gcp/devops", "GCP DevOps", ["gcp", "devops"]),
-    ("studies/cloud-architecht/gcp/data-analytics", "GCP Data analytics", ["gcp", "data"]),
-    ("studies/cloud-architecht/gcp/operations", "GCP Operations", ["gcp", "operations"]),
-    ("studies/cloud-architecht/gcp/management", "GCP Management", ["gcp", "management"]),
-    ("studies/cloud-architecht/gcp/ai-ml", "GCP AI", ["gcp", "ai"]),
-    ("studies/cloud-architecht/gcp/services", "GCP Services", ["gcp", "services"]),
+    ("studies/cloud-architecht/gcp/networking", "GCP", ["gcp", "networking"]),
+    ("studies/cloud-architecht/gcp/security", "GCP", ["gcp", "security"]),
+    ("studies/cloud-architecht/gcp/compute", "GCP", ["gcp", "compute"]),
+    ("studies/cloud-architecht/gcp/databases", "GCP", ["gcp", "databases"]),
+    ("studies/cloud-architecht/gcp/storage", "GCP", ["gcp", "storage"]),
+    ("studies/cloud-architecht/gcp/devops", "GCP", ["gcp", "devops"]),
+    ("studies/cloud-architecht/gcp/data-analytics", "GCP", ["gcp", "data"]),
+    ("studies/cloud-architecht/gcp/operations", "GCP", ["gcp", "operations"]),
+    ("studies/cloud-architecht/gcp/management", "GCP", ["gcp", "management"]),
+    ("studies/cloud-architecht/gcp/ai-ml", "GCP", ["gcp", "ai"]),
+    ("studies/cloud-architecht/gcp/services", "GCP", ["gcp", "services"]),
 ]
 CLOUD_DEFINITION_SLUGS = {
     "aws-compute", "aws-networking", "aws-security", "aws-services", "aws-storage",

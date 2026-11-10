@@ -13,17 +13,11 @@ EN = ROOT / "content" / "en"
 CATALOG = yaml.safe_load((ROOT / "catalog.yaml").read_text())
 CATEGORIES = {
     "definitions": {
-        "Cloud", "Networking", "Security", "AI", "React", "Web", "AWS",
-        "GCP", "GCP Networking", "GCP Security", "GCP Compute",
-        "GCP Databases", "GCP Storage", "GCP DevOps", "GCP Data analytics",
-        "GCP Operations", "GCP Management", "GCP AI", "GCP Services",
+        "Cloud", "Networking", "Security", "AI", "React", "Web", "AWS", "GCP",
     },
     "notes": {
         "GCP", "Cloud", "Security", "AI", "Networking", "React", "Web", "Site",
-        "GCP Networking", "GCP Security", "GCP Compute", "GCP Databases",
-        "GCP Storage", "GCP DevOps", "GCP Data analytics", "GCP Operations",
-        "GCP Management", "GCP AI", "GCP Services", "DevOps", "Terraform",
-        "Certifications", "Projects", "Interviews",
+        "DevOps", "Terraform", "Certifications", "Projects", "Interviews",
     },
 }
 REQUIRED = {

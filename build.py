@@ -151,10 +151,8 @@ def meta_of(path: Path) -> dict:
 
 
 WIKI_ORDER = [
-    "GCP", "GCP Networking", "GCP Security", "GCP Compute", "GCP Databases",
-    "GCP Storage", "GCP DevOps", "GCP Data analytics", "GCP Operations",
-    "GCP Management", "GCP AI", "GCP Services", "AWS", "Cloud", "Networking",
-    "Security", "AI", "React", "Web", "Other",
+    "GCP", "AWS", "Cloud", "Networking", "Security", "AI", "React", "Web",
+    "Other",
 ]
 NOTES_ORDER = [
     "GCP", "GCP Networking", "GCP Security", "GCP Compute", "GCP Databases",
