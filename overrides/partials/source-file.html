@@ -1,0 +1,7 @@
+{% if page.meta and (page.meta.updated or page.meta.edit_url) %}
+  <p class="md-source-file">
+    {%- if page.meta.updated %}Last updated <time datetime="{{ page.meta.updated }}">{{ page.meta.updated }}</time>{% endif -%}
+    {%- if page.meta.updated and page.meta.edit_url %} · {% endif -%}
+    {%- if page.meta.edit_url %}<a href="{{ page.meta.edit_url }}">Edit this page</a>{% endif -%}
+  </p>
+{% endif %}

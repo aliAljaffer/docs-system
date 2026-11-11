@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import re
 import sys
 import unittest
 from html.parser import HTMLParser
@@ -14,6 +15,7 @@ sys.path.insert(0, str(ROOT))
 SITE = ROOT / "site"
 
 import fetch  # noqa: E402
+import provenance  # noqa: E402
 from build import convert_callouts  # noqa: E402
 
 
@@ -115,6 +117,28 @@ class SiteTests(unittest.TestCase):
     def test_sitemap_and_404(self) -> None:
         self.assertTrue((SITE / "sitemap.xml").exists())
         self.assertTrue((SITE / "404.html").exists())
+
+    def test_last_updated_and_edit_link(self) -> None:
+        dated = re.compile(r'class="md-source-file">\s*Last updated <time datetime="\d{4}-\d{2}-\d{2}">')
+        episode = next((SITE / "four-hats" / "episodes").glob("ep04-*/index.html"))
+        pages = {
+            SITE / "projects/homelab/api-endpoint/index.html": "aliAljaffer/homelab/edit/main/docs/",
+            SITE / "definitions/rest/index.html": "aliAljaffer/docs-system/edit/main/content/en/",
+            episode: "aliAljaffer/docs-system/edit/main/docs-src/four-hats/",
+        }
+        for page, origin in pages.items():
+            html = page.read_text()
+            self.assertRegex(html, dated, str(page))
+            self.assertIn(f'<a href="https://github.com/{origin}', html, str(page))
+        index = (SITE / "projects/index.html").read_text()
+        self.assertNotIn('class="md-source-file"', index)
+        self.assertNotIn("Edit this page", index)
+
+    def test_commit_dates(self) -> None:
+        dates = provenance.commit_dates(ROOT, "content/en")
+        self.assertTrue(dates)
+        for path, date in dates.items():
+            self.assertRegex(date, r"^\d{4}-\d{2}-\d{2}$", path)
 
 
 if __name__ == "__main__":

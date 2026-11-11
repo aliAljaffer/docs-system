@@ -11,6 +11,8 @@ from pathlib import Path
 
 import yaml
 
+import provenance
+
 ROOT = Path(__file__).resolve().parent
 CACHE = ROOT / ".cache"
 KEEP = {".md", ".png", ".jpg", ".jpeg", ".gif", ".svg", ".webp", ".html", ".css", ".ttf"}
@@ -18,18 +20,24 @@ SKIP_NAMES = {"AGENTS.md", "CLAUDE.md"}
 
 
 def clone(entry: dict) -> Path:
-    if "src" in entry:
-        return ROOT / entry["src"]
     dest = CACHE / entry["slug"]
     shutil.rmtree(dest, ignore_errors=True)
-    cmd = ["git", "clone", "--quiet", "--depth", "1", "--branch", entry["branch"]]
+    cmd = ["git", "clone", "--quiet", "--filter=blob:none", "--branch", entry["branch"]]
     if entry["path"] != ".":
-        cmd += ["--filter=blob:none", "--sparse"]
+        cmd.append("--sparse")
     cmd += [f"https://github.com/{entry['repo']}.git", str(dest)]
     subprocess.run(cmd, check=True)
     if entry["path"] != ".":
         subprocess.run(["git", "-C", str(dest), "sparse-checkout", "set", entry["path"]], check=True)
-    return dest / entry["path"]
+    return dest
+
+
+def source_of(entry: dict) -> tuple[Path, dict[str, str], provenance.Origin]:
+    if "src" in entry:
+        return ROOT / entry["src"], provenance.commit_dates(ROOT, entry["src"]), provenance.local_origin(entry["src"])
+    repo = clone(entry)
+    origin = provenance.Origin(entry["repo"], entry["branch"], entry["path"])
+    return repo / entry["path"], provenance.commit_dates(repo, entry["path"]), origin
 
 
 def describe(repo: str) -> str:
@@ -73,11 +81,11 @@ def fetch_all(root: Path, config: dict) -> None:
     entries = [(kind, e) for kind in ("projects", "courses") for e in config.get(kind, []) if not e.get("local")]
     # Bounded to 6 concurrent clones: network-bound, one per repo, GitHub tolerates it.
     with ThreadPoolExecutor(max_workers=6) as pool:
-        clones = [pool.submit(clone, e) for _, e in entries]
+        clones = [pool.submit(source_of, e) for _, e in entries]
         described = [pool.submit(describe, e["repo"]) for _, e in entries]
-        srcs = [f.result() for f in clones]
+        sources = [f.result() for f in clones]
         descriptions = [f.result() for f in described]
-    for (kind, entry), src, description in zip(entries, srcs, descriptions):
+    for (kind, entry), (src, dates, origin), description in zip(entries, sources, descriptions):
         if description:
             entry.setdefault("description", description)
         if not src.is_dir():
@@ -85,6 +93,7 @@ def fetch_all(root: Path, config: dict) -> None:
         dst = root / dest_of(kind, entry)
         if copy_docs(src, dst, entry.get("exclude", [])) == 0:
             raise SystemExit(f"{entry['repo']}: no docs under {entry['path']}")
+        provenance.stamp(dst, dates, origin)
 
 
 if __name__ == "__main__":

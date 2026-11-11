@@ -19,6 +19,8 @@ from pathlib import Path
 import yaml
 
 import fetch
+import provenance
+from frontmatter import join_meta, split_meta
 
 ROOT = Path(__file__).resolve().parent
 CONTENT = ROOT / "content" / "en"
@@ -45,7 +47,7 @@ BASE_THEME = """\
 site_name: {site_name}
 site_description: {tagline}
 site_url: {site_url}/
-repo_url: https://github.com/aliAljaffer/docs-system
+repo_url: https://github.com/{self_repo}
 docs_dir: {docs_dir}
 site_dir: site
 theme:
@@ -77,6 +79,7 @@ markdown_extensions:
 extra_css:
   - assets/hover.css?v={v}
   - assets/diagram-zoom.css?v={v}
+  - assets/source-file.css?v={v}
 extra_javascript:
   - assets/vendor/panzoom.min.js
   - assets/mathjax.js?v={v}
@@ -90,29 +93,22 @@ extra_javascript:
 
 def asset_version() -> str:
     digest = hashlib.sha256()
-    for name in ("hover.css", "diagram-zoom.css", "hover.js", "diagram-zoom.js", "analytics.js", "checklist.js", "mathjax.js"):
+    for name in ("hover.css", "diagram-zoom.css", "source-file.css", "hover.js", "diagram-zoom.js", "analytics.js", "checklist.js", "mathjax.js"):
         digest.update((ASSETS / name).read_bytes())
     return digest.hexdigest()[:10]
 
 
 def title_of(path: Path) -> str:
-    match = re.search(r"^# (.+)$", path.read_text(), flags=re.M)
+    match = re.search(r"^# (.+)$", split_meta(path.read_text())[1], flags=re.M)
     return match.group(1).strip() if match else path.stem
 
 
 def meta_of(path: Path) -> dict:
-    text = path.read_text()
-    if not text.startswith("---\n"):
-        return {}
-    end = text.find("\n---\n", 4)
-    return yaml.safe_load(text[4:end]) or {} if end != -1 else {}
+    return split_meta(path.read_text())[0]
 
 
 def summary_of(path: Path) -> str:
-    text = path.read_text()
-    if text.startswith("---\n") and "\n---\n" in text[4:]:
-        text = text[text.find("\n---\n", 4) + 5:]
-    for block in re.split(r"\n\s*\n", text):
+    for block in re.split(r"\n\s*\n", split_meta(path.read_text())[1]):
         block = block.strip()
         if not block or block[0] in "#|-*>!<`[:" or block.startswith(("```", "**")) or re.match(r"\d+\.", block):
             continue
@@ -284,6 +280,12 @@ def rewrite_links(page: Path, base: Path, entry: dict) -> None:
     page.write_text("\n".join(out) + "\n")
 
 
+def insert_after_h1(text: str, block: str) -> str:
+    match = re.search(r"^# .+\n", text, flags=re.M)
+    at = match.end() if match else len(text) - len(split_meta(text)[1])
+    return text[:at] + block + text[at:]
+
+
 def normalize(base: Path, entry: dict, kind: str) -> None:
     if kind == "projects":
         readme = next((p for p in base.glob("*") if p.name.lower() == "readme.md"), None)
@@ -294,9 +296,8 @@ def normalize(base: Path, entry: dict, kind: str) -> None:
             (base / "index.md").write_text(f"# {title}\n\n{entry.get('description', '')}\n")
         index = base / "index.md"
         text = index.read_text()
-        match = re.match(r"(\s*# .+\n)", text)
         link = f"\n[Repository](https://github.com/{entry['repo']}) on `{entry['branch']}`\n"
-        index.write_text(match.group(1) + link + text[match.end():] if match else link + text)
+        index.write_text(insert_after_h1(text, link))
 
 
 def mask_fences(text: str) -> str:
@@ -377,9 +378,7 @@ def embed_slides(base: Path) -> None:
             '<p><button type="button" class="md-button" onclick="this.closest(\'div\').querySelector(\'iframe\').requestFullscreen()">Fullscreen</button> '
             f'<a href="{url}" target="_blank" rel="noopener">Open in new tab</a></p>\n</div>\n'
         )
-        text = page.read_text()
-        match = re.match(r"(\s*# .+\n)", text)
-        page.write_text(match.group(1) + "\n" + block + text[match.end():] if match else block + text)
+        page.write_text(insert_after_h1(page.read_text(), "\n" + block))
 
 
 def four_hats(base: Path) -> None:
@@ -417,13 +416,6 @@ def four_hats(base: Path) -> None:
     (base / "episodes.md").write_text("\n".join(lines))
 
 
-def split_meta(text: str) -> tuple[dict, str]:
-    if text.startswith("---\n") and "\n---\n" in text[4:]:
-        end = text.find("\n---\n", 4)
-        return yaml.safe_load(text[4:end]) or {}, text[end + 5:]
-    return {}, text
-
-
 def label_pages(root: Path, config: dict) -> None:
     """Give every page a tab title and description that name that page."""
     owners = {}
@@ -443,6 +435,8 @@ def label_pages(root: Path, config: dict) -> None:
             heading = owner["title"]
         elif owner:
             heading = f"{heading} - {owner['title']}"
+        if "updated" in meta:
+            meta["updated"] = str(meta["updated"])
         meta.setdefault("title", "Home" if heading == SITE_NAME else heading)
         if owner and "repo" in owner:
             meta.setdefault("repo_url", f"https://github.com/{owner['repo']}")
@@ -450,7 +444,7 @@ def label_pages(root: Path, config: dict) -> None:
             summary = owner["description"] if owner and rel.name == "index.md" else summary_of(page)
             if summary:
                 meta["description"] = summary
-        page.write_text("---\n" + yaml.safe_dump(meta, sort_keys=False, allow_unicode=True) + "---\n" + body)
+        page.write_text(join_meta(meta, body))
 
 
 def prepare(root: Path, config: dict) -> None:
@@ -560,6 +554,7 @@ def assemble() -> Path:
     if BUILD.parent.exists():
         shutil.rmtree(BUILD.parent)
     shutil.copytree(CONTENT, BUILD)
+    provenance.stamp(BUILD, provenance.commit_dates(ROOT, "content/en"), provenance.local_origin("content/en"))
     shutil.copytree(ASSETS, BUILD / "assets")
     definitions_index(BUILD)
     process_wiki(BUILD)
@@ -570,7 +565,10 @@ def assemble() -> Path:
     write_index(BUILD, config, "courses", "Courses", "Long-form courses built around one project or one skill path.")
     label_pages(BUILD, config)
     (ROOT / "mkdocs.en.yml").write_text(
-        BASE_THEME.format(site_name=SITE_NAME, tagline=TAGLINE, site_url=SITE_URL, docs_dir=BUILD.relative_to(ROOT).as_posix(), v=asset_version())
+        BASE_THEME.format(
+            site_name=SITE_NAME, tagline=TAGLINE, site_url=SITE_URL, docs_dir=BUILD.relative_to(ROOT).as_posix(),
+            v=asset_version(), self_repo=provenance.SELF_REPO,
+        )
         + "\nnav:\n"
         + yaml.safe_dump(nav_for(BUILD, config), sort_keys=False, allow_unicode=True)
     )

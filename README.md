@@ -40,6 +40,14 @@ The build copies every Markdown file and image under `path`. `README.md` becomes
 
 Same fields, under `courses:`. The URL is `/<slug>/`. `four-hats` keeps its docs in `docs-src/four-hats` (this repo is the source). It also gets its episode navigation and the verified steps from the act guides (`episode-tasks.yaml`).
 
+## Last updated and edit link
+
+Each page shows the date of the last commit to its source file. The build reads it from git history. Pages the build generates, such as listings and the episode index, show no date.
+
+Each dated page also links to its source file on GitHub. Generated pages have no edit link.
+
+CI checkouts need full history. Set `fetch-depth: 0` on `actions/checkout`. The build stops on a shallow clone.
+
 ## Definitions, Home, Contact
 
 These live in `content/en/`. Link a definition with `[[slug]]`. The build fails on an unresolved link.
