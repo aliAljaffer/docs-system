@@ -73,8 +73,10 @@ def fetch_all(root: Path, config: dict) -> None:
     entries = [(kind, e) for kind in ("projects", "courses") for e in config.get(kind, []) if not e.get("local")]
     # Bounded to 6 concurrent clones: network-bound, one per repo, GitHub tolerates it.
     with ThreadPoolExecutor(max_workers=6) as pool:
-        srcs = list(pool.map(lambda ke: clone(ke[1]), entries))
-        descriptions = list(pool.map(lambda ke: describe(ke[1]["repo"]), entries))
+        clones = [pool.submit(clone, e) for _, e in entries]
+        described = [pool.submit(describe, e["repo"]) for _, e in entries]
+        srcs = [f.result() for f in clones]
+        descriptions = [f.result() for f in described]
     for (kind, entry), src, description in zip(entries, srcs, descriptions):
         if description:
             entry.setdefault("description", description)
