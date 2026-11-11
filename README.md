@@ -54,7 +54,7 @@ These live in `content/en/`. Link a definition with `[[slug]]`. The build fails 
 
 ## Updates
 
-The site rebuilds on every push to `main`, on `repository_dispatch` (`docs-updated`), and daily at 03:00 UTC as a safety net. Overlapping runs queue; the newest pending run replaces older ones. Run the `Publish` workflow to rebuild now.
+The site rebuilds on every push to `main`, on `repository_dispatch` (`docs-updated`), and daily at 03:00 UTC. The daily run deploys only when this repo or a source repo has a new commit since the last deploy. Other triggers always deploy. Overlapping runs queue; the newest pending run replaces older ones. Run the `Publish` workflow to rebuild now.
 
 ### Rebuild on source repo push
 

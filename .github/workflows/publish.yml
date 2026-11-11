@@ -18,7 +18,33 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  changes:
+    runs-on: ubuntu-latest
+    outputs:
+      key: ${{ steps.fingerprint.outputs.key }}
+      deploy: ${{ github.event_name != 'schedule' || steps.lookup.outputs.cache-hit != 'true' }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - run: make setup
+
+      - id: fingerprint
+        run: echo "key=deployed-$(.venv/bin/python fingerprint.py)" >> "$GITHUB_OUTPUT"
+
+      - id: lookup
+        uses: actions/cache/restore@v4
+        with:
+          path: .deployed
+          key: ${{ steps.fingerprint.outputs.key }}
+          lookup-only: true
+
   publish:
+    needs: changes
+    if: needs.changes.outputs.deploy == 'true'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -80,3 +106,11 @@ jobs:
           git commit -am "Deploy docs ${tag}"
           git pull --rebase origin main
           git push origin HEAD:main
+
+      - run: touch .deployed
+
+      - uses: actions/cache/save@v4
+        continue-on-error: true
+        with:
+          path: .deployed
+          key: ${{ needs.changes.outputs.key }}
