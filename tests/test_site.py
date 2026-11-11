@@ -5,6 +5,7 @@ from __future__ import annotations
 import json
 import re
 import sys
+import tempfile
 import unittest
 from html.parser import HTMLParser
 from pathlib import Path
@@ -14,6 +15,7 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 SITE = ROOT / "site"
 
+import brand  # noqa: E402
 import fetch  # noqa: E402
 import provenance  # noqa: E402
 from build import convert_callouts  # noqa: E402
@@ -139,6 +141,81 @@ class SiteTests(unittest.TestCase):
         self.assertTrue(dates)
         for path, date in dates.items():
             self.assertRegex(date, r"^\d{4}-\d{2}-\d{2}$", path)
+
+    def test_brand_css(self) -> None:
+        css = (SITE / "assets" / "brand.css").read_text()
+        raw = json.loads((ROOT / "brand" / "brand.json").read_text())
+        light, night = css.split('[data-md-color-scheme="slate"]')
+        for mode, block in (("light", light), ("night", night)):
+            for key in brand.REQUIRED:
+                value = raw[mode][key].lower()
+                self.assertIn(f"--brand-{key.replace('_', '-')}: {value};", block, f"{mode}.{key}")
+        for name, family in raw["fonts"].items():
+            self.assertIn(f'--brand-font-{name}: "{family}"', light)
+
+    def test_theme_has_no_brand_literals(self) -> None:
+        theme = (ROOT / "assets" / "theme.css").read_text()
+        self.assertNotRegex(theme, r"#[0-9a-fA-F]{3,8}\b")
+        for family in json.loads((ROOT / "brand" / "brand.json").read_text())["fonts"].values():
+            self.assertNotIn(family, theme)
+
+    def test_page_uses_brand_head(self) -> None:
+        page = (SITE / "projects" / "homelab" / "index.html").read_text()
+        self.assertIn('rel="icon" href="../../assets/brand/icon.svg"', page)
+        for name in ("family=Inter", "JetBrains"):
+            self.assertNotIn(name, page)
+        self.assertNotIn('data-md-color-primary="indigo"', page)
+        self.assertIn("Roboto+Mono", page)
+
+    def test_case_study_link(self) -> None:
+        homelab = (SITE / "projects" / "homelab" / "index.html").read_text()
+        self.assertIn('href="https://alialjaffer.com/case-study/homelab/"', homelab)
+        ziti = (SITE / "projects" / "openziti-operator" / "index.html").read_text()
+        self.assertNotIn("/case-study/", ziti)
+
+    def test_portfolio_tab_and_footer(self) -> None:
+        page = (SITE / "index.html").read_text()
+        self.assertIn('<a href="https://alialjaffer.com" class="md-tabs__link">', page)
+        self.assertIn("Ali Aljaffer", page)
+        self.assertNotIn("Made with", page)
+
+    def test_giscus_themes(self) -> None:
+        reference = json.loads((ROOT / "tests" / "giscus_vars.json").read_text())
+        for mode, names in reference.items():
+            css = (SITE / "assets" / f"giscus-{mode}.css").read_text()
+            missing = [n for n in names if f"{n}:" not in css]
+            self.assertEqual(missing, [], mode)
+            self.assertNotIn("$", css)
+        comments = (SITE / "projects" / "homelab" / "index.html").read_text()
+        for mode in ("light", "dark"):
+            self.assertRegex(comments, rf"https://docs\.alialjaffer\.com/assets/giscus-{mode}\.css\?v=[0-9a-f]{{10}}")
+
+
+class BrandCompilerTests(unittest.TestCase):
+    def write(self, data: dict) -> Path:
+        folder = Path(tempfile.mkdtemp())
+        (folder / "icon.svg").write_text("<svg/>")
+        (folder / "brand.json").write_text(json.dumps({"fonts": {"text": "X"}, "icon": "icon.svg", **data}))
+        return folder / "brand.json"
+
+    def test_missing_required_key(self) -> None:
+        modes = {"light": {"ink": "#111", "accent": "#00f"}, "night": {"paper": "#000", "ink": "#fff", "accent": "#0ff"}}
+        with self.assertRaises(SystemExit):
+            brand.load(self.write(modes))
+
+    def test_bad_hex(self) -> None:
+        good = {"paper": "#fff", "ink": "#000", "accent": "#00f"}
+        with self.assertRaises(SystemExit):
+            brand.load(self.write({"light": {**good, "accent": "blue"}, "night": good}))
+
+    def test_minimal_brand_gets_defaults(self) -> None:
+        light = {"paper": "#ffffff", "ink": "#000000", "accent": "#0000ff"}
+        night = {"paper": "#000000", "ink": "#ffffff", "accent": "#00ffff"}
+        loaded = brand.load(self.write({"light": light, "night": night}))
+        self.assertEqual(loaded.modes["light"]["paper_2"], "#ffffff")
+        self.assertEqual(loaded.modes["night"]["accent_ink"], "#00ffff")
+        self.assertIn("color-mix", loaded.modes["light"]["ink_soft"])
+        self.assertIn("--brand-rule:", brand.css(loaded))
 
 
 if __name__ == "__main__":

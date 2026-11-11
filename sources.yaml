@@ -3,10 +3,12 @@ projects:
     repo: aliAljaffer/homelab
     branch: main
     path: docs
+    case_study: homelab
   - slug: grooszy
     repo: aliAljaffer/grooszy
     branch: main
     path: docs
+    case_study: grooszy
   - slug: openziti-operator
     title: OpenZiti Operator
     repo: aliAljaffer/openziti-operator
@@ -17,6 +19,7 @@ projects:
     repo: aliAljaffer/s2t
     branch: main
     path: .
+    case_study: s2t
 courses:
   - slug: four-hats
     title: Four Hats

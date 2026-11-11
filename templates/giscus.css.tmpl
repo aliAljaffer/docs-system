@@ -1,0 +1,107 @@
+$imports
+main {
+  --primary-default: $accent_rgb;
+  --bg-default: $paper_rgb;
+  --color-prettylights-syntax-comment: $ink_faint;
+  --color-prettylights-syntax-constant: $accent_ink;
+  --color-prettylights-syntax-entity: $accent_ink;
+  --color-prettylights-syntax-storage-modifier-import: $ink;
+  --color-prettylights-syntax-entity-tag: $accent_ink;
+  --color-prettylights-syntax-keyword: $code;
+  --color-prettylights-syntax-string: $ink_soft;
+  --color-prettylights-syntax-variable: $code;
+  --color-prettylights-syntax-brackethighlighter-unmatched: $code;
+  --color-prettylights-syntax-invalid-illegal-text: $paper;
+  --color-prettylights-syntax-invalid-illegal-bg: $code;
+  --color-prettylights-syntax-carriage-return-text: $paper;
+  --color-prettylights-syntax-carriage-return-bg: $code;
+  --color-prettylights-syntax-string-regexp: $accent_ink;
+  --color-prettylights-syntax-markup-list: $ink;
+  --color-prettylights-syntax-markup-heading: $accent_ink;
+  --color-prettylights-syntax-markup-italic: $ink;
+  --color-prettylights-syntax-markup-bold: $ink_strong;
+  --color-prettylights-syntax-markup-deleted-text: $code;
+  --color-prettylights-syntax-markup-deleted-bg: $paper_2;
+  --color-prettylights-syntax-markup-inserted-text: $accent_ink;
+  --color-prettylights-syntax-markup-inserted-bg: $paper_2;
+  --color-prettylights-syntax-markup-changed-text: $code;
+  --color-prettylights-syntax-markup-changed-bg: $paper_2;
+  --color-prettylights-syntax-markup-ignored-text: $paper;
+  --color-prettylights-syntax-markup-ignored-bg: $accent;
+  --color-prettylights-syntax-meta-diff-range: $accent_ink;
+  --color-prettylights-syntax-brackethighlighter-angle: $ink_soft;
+  --color-prettylights-syntax-sublimelinter-gutter-mark: $ink_faint;
+  --color-prettylights-syntax-constant-other-reference-link: $accent_ink;
+  --color-btn-text: $ink;
+  --color-btn-bg: $paper;
+  --color-btn-border: $rule;
+  --color-btn-shadow: 0 0 transparent;
+  --color-btn-inset-shadow: 0 0 transparent;
+  --color-btn-hover-bg: $paper_2;
+  --color-btn-hover-border: $ink_faint;
+  --color-btn-active-bg: $paper_2;
+  --color-btn-active-border: $ink;
+  --color-btn-selected-bg: $paper_2;
+  --color-btn-primary-text: $paper;
+  --color-btn-primary-bg: $ink;
+  --color-btn-primary-border: $ink;
+  --color-btn-primary-shadow: 0 0 transparent;
+  --color-btn-primary-inset-shadow: 0 0 transparent;
+  --color-btn-primary-hover-bg: $ink_soft;
+  --color-btn-primary-hover-border: $ink_soft;
+  --color-btn-primary-selected-bg: $ink;
+  --color-btn-primary-selected-shadow: 0 0 transparent;
+  --color-btn-primary-disabled-text: $paper;
+  --color-btn-primary-disabled-bg: $ink_faint;
+  --color-btn-primary-disabled-border: $ink_faint;
+  --color-action-list-item-default-hover-bg: $paper_2;
+  --color-segmented-control-bg: $paper_2;
+  --color-segmented-control-button-bg: $paper;
+  --color-segmented-control-button-selected-border: $rule;
+  --color-fg-default: $ink;
+  --color-fg-muted: $ink_soft;
+  --color-fg-subtle: $ink_faint;
+  --color-canvas-default: $paper;
+  --color-canvas-overlay: $paper;
+  --color-canvas-inset: $paper_2;
+  --color-canvas-subtle: $paper_2;
+  --color-border-default: $rule;
+  --color-border-muted: $rule;
+  --color-neutral-muted: $rule;
+  --color-accent-fg: $accent_ink;
+  --color-accent-emphasis: $accent;
+  --color-accent-muted: $accent;
+  --color-accent-subtle: $paper_2;
+  --color-success-fg: $ink_soft;
+  --color-attention-fg: $ink_soft;
+  --color-attention-muted: $rule;
+  --color-attention-subtle: $paper_2;
+  --color-danger-fg: $code;
+  --color-danger-muted: $code;
+  --color-danger-subtle: $paper_2;
+  --color-primer-shadow-inset: 0 0 transparent;
+  --color-scale-$gray_step: $paper_2;
+  --color-scale-$blue_step: $paper_2;
+  --color-social-reaction-bg-hover: var(--color-scale-$gray_step);
+  --color-social-reaction-bg-reacted-hover: var(--color-scale-$blue_step);
+}
+
+main,
+main button,
+main input,
+main textarea {
+  font-family: $font_text;
+  border-radius: 0;
+}
+
+main .pagination-loader-container {
+  background-image: url("$loader_line");
+}
+
+main .gsc-loading-image {
+  background-image: url("$loader_image");
+}
+
+.gsc-comment:not(.gsc-reply-box) .gsc-replies {
+  border-radius: unset;
+}

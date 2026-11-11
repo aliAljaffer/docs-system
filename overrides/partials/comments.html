@@ -1,7 +1,8 @@
 {% if page.url[:9] == 'projects/' and page.meta.comments is not sameas false %}
 <h2 id="__comments">Comments</h2>
 <script>
-  const theme = () => document.body.getAttribute("data-md-color-scheme") === "slate" ? "dark" : "light";
+  const themes = {{ config.extra.giscus | tojson }};
+  const theme = () => themes[document.body.getAttribute("data-md-color-scheme") === "slate" ? "dark" : "light"];
   const giscus = document.createElement("script");
   giscus.src = "https://giscus.app/client.js";
   giscus.async = true;

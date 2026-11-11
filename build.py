@@ -6,6 +6,7 @@ Contact, and Definitions live in content/en.
 """
 from __future__ import annotations
 
+import datetime
 import fcntl
 import hashlib
 import json
@@ -18,6 +19,7 @@ from pathlib import Path
 
 import yaml
 
+import brand
 import fetch
 import provenance
 from frontmatter import join_meta, split_meta
@@ -31,6 +33,9 @@ TASKS = yaml.safe_load((ROOT / "episode-tasks.yaml").read_text())["episodes"]
 ZENSICAL = os.environ.get("ZENSICAL") or shutil.which("zensical") or "zensical"
 
 SITE_URL = "https://docs.alialjaffer.com"
+PORTFOLIO_URL = "https://alialjaffer.com"
+PORTFOLIO_LABEL = "alialjaffer.com"
+OWNER = "Ali Aljaffer"
 SITE_NAME = "Ali's Docs"
 TAGLINE = "Documentation for the projects I build and the courses I teach."
 
@@ -54,11 +59,18 @@ theme:
   name: material
   custom_dir: overrides
   language: en
+  font: false
+  favicon: {favicon}
+  logo: {favicon}
   palette:
     - scheme: default
+      primary: custom
+      accent: custom
       media: "(prefers-color-scheme: light)"
       toggle: {{icon: material/weather-night, name: Night}}
     - scheme: slate
+      primary: custom
+      accent: custom
       media: "(prefers-color-scheme: dark)"
       toggle: {{icon: material/weather-sunny, name: Day}}
   features: [navigation.tabs, navigation.top, content.code.copy, content.code.annotate]
@@ -77,6 +89,8 @@ markdown_extensions:
   - toc:
       permalink: true
 extra_css:
+{brand_styles}  - assets/brand.css?v={v}
+  - assets/theme.css?v={v}
   - assets/hover.css?v={v}
   - assets/diagram-zoom.css?v={v}
   - assets/source-file.css?v={v}
@@ -93,8 +107,9 @@ extra_javascript:
 
 def asset_version() -> str:
     digest = hashlib.sha256()
-    for name in ("hover.css", "diagram-zoom.css", "source-file.css", "hover.js", "diagram-zoom.js", "analytics.js", "checklist.js", "mathjax.js"):
-        digest.update((ASSETS / name).read_bytes())
+    names = ("theme.css", "hover.css", "diagram-zoom.css", "source-file.css", "hover.js", "diagram-zoom.js", "analytics.js", "checklist.js", "mathjax.js")
+    for path in [*(ASSETS / name for name in names), *brand.asset_inputs(brand.load())]:
+        digest.update(path.read_bytes())
     return digest.hexdigest()[:10]
 
 
@@ -286,6 +301,12 @@ def insert_after_h1(text: str, block: str) -> str:
     return text[:at] + block + text[at:]
 
 
+def case_study_link(entry: dict) -> str:
+    if "case_study" not in entry:
+        return ""
+    return f" · [Case study]({PORTFOLIO_URL}/case-study/{entry['case_study']}/)"
+
+
 def normalize(base: Path, entry: dict, kind: str) -> None:
     if kind == "projects":
         readme = next((p for p in base.glob("*") if p.name.lower() == "readme.md"), None)
@@ -296,7 +317,7 @@ def normalize(base: Path, entry: dict, kind: str) -> None:
             (base / "index.md").write_text(f"# {title}\n\n{entry.get('description', '')}\n")
         index = base / "index.md"
         text = index.read_text()
-        link = f"\n[Repository](https://github.com/{entry['repo']}) on `{entry['branch']}`\n"
+        link = f"\n[Repository](https://github.com/{entry['repo']}) on `{entry['branch']}`{case_study_link(entry)}\n"
         index.write_text(insert_after_h1(text, link))
 
 
@@ -482,7 +503,7 @@ def write_index(root: Path, config: dict, kind: str, title: str, intro: str) -> 
         lines += [f"## {entry['title']}", "", entry["description"], ""]
         target = f"{entry['slug']}/" if kind == "projects" else f"../{entry['slug']}/"
         repo = f" · [Repository](https://github.com/{entry['repo']})" if "repo" in entry else ""
-        lines += [f"[Read the docs]({target}){repo}", ""]
+        lines += [f"[Read the docs]({target}){repo}{case_study_link(entry)}", ""]
     dest = root / kind if kind == "projects" else root / "courses"
     dest.mkdir(parents=True, exist_ok=True)
     (dest / "index.md").write_text("\n".join(lines))
@@ -546,6 +567,7 @@ def nav_for(root: Path, config: dict) -> list:
         children.append({category: [{title_of(p): p.relative_to(root).as_posix()} for p in pages]})
     nav.append({"Definitions": children})
     nav.append({"Contact": "contact.md"})
+    nav.append({PORTFOLIO_LABEL: PORTFOLIO_URL})
     return nav
 
 
@@ -556,6 +578,8 @@ def assemble() -> Path:
     shutil.copytree(CONTENT, BUILD)
     provenance.stamp(BUILD, provenance.commit_dates(ROOT, "content/en"), provenance.local_origin("content/en"))
     shutil.copytree(ASSETS, BUILD / "assets")
+    identity = brand.load()
+    brand.compile(identity, BUILD / "assets", SITE_URL)
     definitions_index(BUILD)
     process_wiki(BUILD)
     fetch.fetch_all(BUILD, config)
@@ -564,11 +588,21 @@ def assemble() -> Path:
     write_index(BUILD, config, "projects", "Projects", TAGLINE)
     write_index(BUILD, config, "courses", "Courses", "Long-form courses built around one project or one skill path.")
     label_pages(BUILD, config)
+    version = asset_version()
+    brand_styles = "".join(f"  - {s if s.startswith('http') else 'assets/brand/' + s}\n" for s in identity.stylesheets)
+    site = {
+        "copyright": f'&copy; {datetime.date.today().year} {OWNER} &middot; <a href="{PORTFOLIO_URL}">{PORTFOLIO_LABEL}</a>',
+        "extra": {
+            "generator": False,
+            "giscus": {mode: f"{SITE_URL}/assets/giscus-{mode}.css?v={version}" for mode in ("light", "dark")},
+        },
+    }
     (ROOT / "mkdocs.en.yml").write_text(
         BASE_THEME.format(
             site_name=SITE_NAME, tagline=TAGLINE, site_url=SITE_URL, docs_dir=BUILD.relative_to(ROOT).as_posix(),
-            v=asset_version(), self_repo=provenance.SELF_REPO,
+            v=version, self_repo=provenance.SELF_REPO, favicon=f"assets/brand/{identity.favicon}", brand_styles=brand_styles,
         )
+        + yaml.safe_dump(site, sort_keys=False)
         + "\nnav:\n"
         + yaml.safe_dump(nav_for(BUILD, config), sort_keys=False, allow_unicode=True)
     )
