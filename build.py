@@ -45,6 +45,7 @@ BASE_THEME = """\
 site_name: {site_name}
 site_description: {tagline}
 site_url: {site_url}/
+repo_url: https://github.com/aliAljaffer/docs-system
 docs_dir: {docs_dir}
 site_dir: site
 theme:
@@ -441,6 +442,8 @@ def label_pages(root: Path, config: dict) -> None:
         elif owner:
             heading = f"{heading} - {owner['title']}"
         meta.setdefault("title", "Home" if heading == SITE_NAME else heading)
+        if owner and "repo" in owner:
+            meta.setdefault("repo_url", f"https://github.com/{owner['repo']}")
         if "description" not in meta:
             summary = owner["description"] if owner and rel.name == "index.md" else summary_of(page)
             if summary:
