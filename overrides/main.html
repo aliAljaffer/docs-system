@@ -14,5 +14,7 @@
   <meta property="og:description" content="{{ summary | e }}">
   <meta name="twitter:description" content="{{ summary | e }}">
   {% endif %}
+  {% set repo = page.meta.repo_url if page.meta and page.meta.repo_url else config.repo_url %}
+  <script>(function(){var r="{{ repo }}";try{if(sessionStorage.getItem("__repo")!==r){Object.keys(sessionStorage).filter(function(k){return k.slice(-9)===".__source"}).forEach(function(k){sessionStorage.removeItem(k)});sessionStorage.setItem("__repo",r)}}catch(e){}})()</script>
   {{ super() }}
 {% endblock %}

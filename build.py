@@ -68,6 +68,7 @@ markdown_extensions:
       generic: true
   - pymdownx.tasklist:
       custom_checkbox: true
+      clickable_checkbox: true
   - attr_list
   - md_in_html
   - tables
@@ -83,12 +84,13 @@ extra_javascript:
   - assets/diagram-zoom.js?v={v}
   - assets/hover.js?v={v}
   - assets/analytics.js?v={v}
+  - assets/checklist.js?v={v}
 """
 
 
 def asset_version() -> str:
     digest = hashlib.sha256()
-    for name in ("hover.css", "diagram-zoom.css", "hover.js", "diagram-zoom.js", "analytics.js", "mathjax.js"):
+    for name in ("hover.css", "diagram-zoom.css", "hover.js", "diagram-zoom.js", "analytics.js", "checklist.js", "mathjax.js"):
         digest.update((ASSETS / name).read_bytes())
     return digest.hexdigest()[:10]
 
