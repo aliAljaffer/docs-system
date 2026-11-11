@@ -94,9 +94,7 @@
     if (!target) return;
     let data;
     try {
-      const response = await fetch(
-        `${location.pathname.startsWith("/ar/") ? "/ar" : ""}/assets/backlinks.json?v=${encodeURIComponent(document.lastModified)}`,
-      );
+      const response = await fetch(`/assets/backlinks.json?v=${encodeURIComponent(document.lastModified)}`);
       data = await response.json();
     } catch {
       return;

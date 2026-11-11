@@ -21,7 +21,7 @@
 
   const path = () => location.pathname;
   const lang = () => document.documentElement.lang || "en";
-  const pageTitle = () => document.title.replace(/\s+-\s+Docs$/, "");
+  const pageTitle = () => document.title.replace(/\s+-\s+Ali's Docs$/, "");
 
   function track(name, data) {
     if (window.umami && typeof window.umami.track === "function") {
@@ -33,9 +33,8 @@
     const heading = document.querySelector("h1")?.textContent?.trim() || "";
     const episode = heading.match(/^([A-Z]{3}-\d{2}):/);
     if (episode) return { type: "episode", code: episode[1] };
-    if (path().startsWith("/wiki/")) return { type: "wiki" };
+    if (path().startsWith("/four-hats/slides/")) return { type: "slide" };
     if (path().startsWith("/four-hats/")) return { type: "course" };
-    if (path().startsWith("/slides/")) return { type: "slide" };
     if (path().endsWith("/404.html")) return { type: "404" };
     return { type: "page" };
   }
@@ -59,16 +58,6 @@
     const link = event.target.closest("a[href]");
     if (!link) return;
 
-    if (link.classList.contains("lang-switch")) {
-      track("language-switch", {
-        from: lang(),
-        to: link.getAttribute("lang") || "",
-        target: link.getAttribute("href") || "",
-        path: path(),
-      });
-      return;
-    }
-
     let url;
     try {
       url = new URL(link.href, location.href);
@@ -76,7 +65,7 @@
       return;
     }
 
-    if (url.origin === location.origin && url.pathname.startsWith("/slides/")) {
+    if (url.origin === location.origin && url.pathname.startsWith("/four-hats/slides/")) {
       track("slide-open", { deck: url.pathname, path: path() });
       return;
     }
