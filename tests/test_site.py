@@ -11,6 +11,8 @@ from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import unquote, urlparse
 
+from PIL import Image
+
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 SITE = ROOT / "site"
@@ -95,8 +97,19 @@ class SiteTests(unittest.TestCase):
             self.assertIn(title, page, rel)
             self.assertIn('property="og:title"', page, rel)
             self.assertIn('property="og:url"', page, rel)
-            self.assertIn("assets/og.png", page, rel)
-        self.assertTrue((SITE / "assets" / "og.png").exists())
+
+    def test_every_page_has_its_own_preview_card(self) -> None:
+        pages = [p for p in SITE.rglob("index.html") if p.relative_to(SITE).parts[0] != "assets"]
+        self.assertGreater(len(pages), 100)
+        for page in pages:
+            match = re.search(r'property="og:image" content="https://docs\.alialjaffer\.com/([^"]*)og\.jpg"', page.read_text())
+            self.assertIsNotNone(match, page)
+            card = SITE / match.group(1) / "og.jpg"
+            self.assertEqual(card.parent, page.parent, page)
+            with Image.open(card) as im:
+                self.assertEqual(im.size, (1200, 630), card)
+        self.assertFalse((SITE / "assets" / "og.png").exists())
+        self.assertFalse((SITE / "assets" / "brand" / "og").exists())
 
     def test_wiki(self) -> None:
         self.assertTrue((SITE / "definitions" / "rest" / "index.html").exists())
