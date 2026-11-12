@@ -19,7 +19,7 @@ brand:
 	git -C .cache/brand config --add credential.helper '!gh auth git-credential'
 	git -C .cache/brand sparse-checkout set export
 	mkdir brand
-	tar -C .cache/brand/export -c --exclude README.md --exclude 'plate-*' --exclude portfolio.css . | tar -x -C brand
+	tar -C .cache/brand/export -c --exclude README.md --exclude 'plate-*' --exclude portfolio.css --exclude og . | tar -x -C brand
 
 serve:
 	python3 -m http.server -d site 8000
