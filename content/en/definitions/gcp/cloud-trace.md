@@ -136,7 +136,7 @@ with tracer.start_as_current_span("my-operation"):
 
 ### Architectural Patterns
 #### Microservices Tracing
-```
+```text
 API Gateway → Auth Service → User Service → Database
            → Product Service → Inventory Service
            → Notification Service → Email Provider

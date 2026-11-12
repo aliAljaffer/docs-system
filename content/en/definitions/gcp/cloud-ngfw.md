@@ -80,7 +80,7 @@ tags:
 ## Architecture
 
 ### Deployment Model
-```
+```text
 ┌─────────────────────────────────────────┐
 │          VPC Network                    │
 │                                         │
@@ -229,7 +229,7 @@ securityProfileGroup: "strict-inspection"
 ## Deployment Patterns
 
 ### Pattern 1: Hub-and-Spoke Security
-```
+```text
 ┌────────────────────────────────────────┐
 │       Hub VPC (Security)               │
 │   ┌──────────────────────┐             │
@@ -248,7 +248,7 @@ securityProfileGroup: "strict-inspection"
 **Use case**: Centralized security inspection for multiple VPCs
 
 ### Pattern 2: Inline Inspection
-```
+```text
 Internet
    ↓
 Cloud NAT / Cloud VPN
@@ -260,7 +260,7 @@ VPC Subnets (workloads)
 **Use case**: Inspect all north-south traffic (internet-bound)
 
 ### Pattern 3: East-West Inspection
-```
+```text
 VPC Subnet A  →  Cloud NGFW  →  VPC Subnet B
 (untrusted)         ↓            (trusted)
                   IDS/IPS
@@ -378,7 +378,7 @@ Cloud NGFW is **PCA-level** content, less common on ACE exam. ACE focuses on:
 **Question**: "Design defense-in-depth for multi-tier application"
 
 **Answer**: **Use all three together**
-```
+```text
 Internet
   ↓
 Cloud Armor (Layer 7 WAF, DDoS)

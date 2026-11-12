@@ -208,20 +208,20 @@ gcloud dataproc clusters update my-cluster \
 
 ### Architectural Patterns
 #### Data Lake Processing
-```
+```text
 Cloud Storage (data lake) → Dataproc (Spark ETL) → BigQuery (warehouse)
                                                   → Cloud Storage (curated)
 ```
 
 #### Migration from On-Prem Hadoop
-```
+```text
 On-prem HDFS → Cloud Storage (migrate data)
 On-prem Hive → Dataproc + Cloud SQL Metastore
 Existing Spark jobs → Dataproc (minimal changes)
 ```
 
 #### Hybrid Analytics
-```
+```text
 Dataproc (Spark processing) → BigQuery (SQL analytics)
                             → Bigtable (operational data)
                             → Cloud Storage (archival)
@@ -300,7 +300,7 @@ Dataproc (Spark processing) → BigQuery (SQL analytics)
 
 ### Advanced Features
 #### Workflow Templates
-```
+```text
 Job A (Spark) → Job B (Hive) → Job C (Spark)
 ```
 - Define dependencies as DAG

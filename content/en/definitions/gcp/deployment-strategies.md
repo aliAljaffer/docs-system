@@ -364,7 +364,7 @@ spec:
 
 ## Decision Tree
 
-```
+```text
 Do you need zero downtime?
 ├─ No → Recreate (simplest)
 └─ Yes

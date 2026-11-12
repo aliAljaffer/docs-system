@@ -277,19 +277,19 @@ gcloud functions deploy FUNCTION_NAME \
 
 ### Integration Patterns
 #### Fan-out Pattern
-```
+```text
 Cloud Storage → Function → Multiple Pub/Sub topics → Multiple Functions
 ```
 Process one event, trigger multiple downstream processes
 
 #### Aggregation Pattern
-```
+```text
 Multiple sources → Pub/Sub → Function → BigQuery/Cloud Storage
 ```
 Collect and aggregate data from multiple sources
 
 #### ETL Pipeline
-```
+```text
 Cloud Storage upload → Function → Transform data → Load to BigQuery
 ```
 

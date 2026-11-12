@@ -552,7 +552,7 @@ FROM mydataset.orders;
 
 ### Architectural Patterns
 #### Lambda Architecture (Batch + Streaming)
-```
+```text
 [Real-time Events] → [Pub/Sub] → [Dataflow] → [BigQuery Streaming]
                                                        ↓
                                               [Real-time View]
@@ -565,7 +565,7 @@ FROM mydataset.orders;
 ```
 
 #### Data Lake Pattern
-```
+```text
 [Raw Data Sources]
        ↓
 [Cloud Storage (Data Lake)]
@@ -580,7 +580,7 @@ FROM mydataset.orders;
 ```
 
 #### Hub and Spoke Pattern
-```
+```text
 [Source Systems]
   ↓  ↓  ↓
 [BigQuery (Central Hub)]
@@ -815,7 +815,7 @@ SELECT * FROM large_table TABLESAMPLE SYSTEM (1 PERCENT);
 ```
 
 #### Flat-Rate vs On-Demand Decision
-```
+```text
 Monthly On-Demand Cost Calculation:
 - Average 10 TB scanned per day
 - 10 TB × 30 days = 300 TB/month
@@ -994,7 +994,7 @@ SELECT * FROM ML.DETECT_ANOMALIES(MODEL mydataset.anomaly_model, ..., STRUCT(0.9
 
 ### Integration Patterns
 #### Streaming Analytics Pipeline
-```
+```text
 [Application] → [Pub/Sub] → [Dataflow] → [BigQuery Streaming]
                                                   ↓
                                           [BI Dashboard]
@@ -1002,7 +1002,7 @@ SELECT * FROM ML.DETECT_ANOMALIES(MODEL mydataset.anomaly_model, ..., STRUCT(0.9
 ```
 
 #### Data Lakehouse Pattern
-```
+```text
 [Raw Data] → [Cloud Storage (Parquet)]
                     ↓
           [BigQuery External Tables]

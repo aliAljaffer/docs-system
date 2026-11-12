@@ -203,7 +203,7 @@ pip install google-cloud-profiler  # Python
 5. **Verify**: Re-profile after changes
 
 ### Comparison Across Versions
-```
+```text
 Version 1.0 CPU profile vs Version 1.1 CPU profile
 - Identify performance regressions
 - Validate optimizations
@@ -226,7 +226,7 @@ Version 1.0 CPU profile vs Version 1.1 CPU profile
 7. **Continuous profiling**: Don't profile once and forget
 
 ### Integration with Observability
-```
+```text
 Performance Issue Workflow:
 1. Cloud Monitoring: Identify latency spike
 2. Cloud Trace: Find slow service

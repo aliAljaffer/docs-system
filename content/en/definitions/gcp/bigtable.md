@@ -55,7 +55,7 @@ tags:
 - **Cell**: Intersection of row and column, can have multiple timestamped versions
 
 #### Row Key Design (Critical!)
-```
+```text
 Row Key: user#timestamp#device
 Column Families: cf1
 Columns: cf1:temperature, cf1:humidity, cf1:pressure
@@ -446,19 +446,19 @@ for row in rows:
 
 ### Row Key Design Patterns
 #### Pattern 1: Salting/Hashing
-```
+```text
 Bad:  timestamp#user_id  (hotspot on recent time)
 Good: hash(user_id)#timestamp#user_id  (distributed)
 ```
 
 #### Pattern 2: Field Promotion
-```
+```text
 Bad:  user_id  (column: timestamp)
 Good: user_id#timestamp  (timestamp in row key for time-range queries)
 ```
 
 #### Pattern 3: Reverse Timestamp
-```
+```python
 # For time-series where recent data accessed most
 import sys
 reverse_timestamp = sys.maxsize - int(time.time() * 1000)
@@ -466,7 +466,7 @@ row_key = f"device#{device_id}#{reverse_timestamp}"
 ```
 
 #### Pattern 4: Bucketing
-```
+```python
 # Distribute time-series writes
 bucket = hash(device_id) % NUM_BUCKETS
 row_key = f"{bucket:03d}#{device_id}#{timestamp}"
@@ -474,7 +474,7 @@ row_key = f"{bucket:03d}#{device_id}#{timestamp}"
 
 ### Schema Design Best Practices
 #### Tall and Narrow (Preferred)
-```
+```text
 Row Key: user#12345#event#2024-01-01-12:00:00
 cf:type = "click"
 cf:page = "/products"
@@ -490,7 +490,7 @@ cf:price = "29.99"
 - Better for time-series
 
 #### Short and Wide (Use Sparingly)
-```
+```text
 Row Key: user#12345
 cf:event:2024-01-01-12:00:00:type = "click"
 cf:event:2024-01-01-12:00:00:page = "/products"
@@ -502,7 +502,7 @@ cf:event:2024-01-01-12:01:00:type = "purchase"
 
 ### Performance Optimization
 #### Monitoring and Tuning
-```
+```text
 Key Metrics:
 - CPU utilization: Target <70% (single-cluster), <90% (multi-cluster)
 - Storage per node: <70% of limit
@@ -524,7 +524,7 @@ Key Metrics:
 - **Request rate limiting**: Avoid overwhelming cluster
 
 ### High Availability Architecture
-```
+```text
 [Application - Global Load Balancer]
        |                    |
 [Bigtable Cluster     Bigtable Cluster
@@ -555,7 +555,7 @@ Key Metrics:
 
 ### Cost Optimization Strategies
 #### Right-Sizing Nodes
-```
+```text
 Current: 10 nodes, 30% CPU average
 Action: Reduce to 5 nodes (target 60% CPU)
 Savings: ~$2,350/month
@@ -583,14 +583,14 @@ gcloud bigtable clusters update CLUSTER_ID \
 
 ### Multi-Tenancy Patterns
 #### Row Key Prefix (Recommended)
-```
+```text
 Row Key: tenant_id#user_id#timestamp
 - Efficient range scans per tenant
 - Good distribution if tenants balanced
 ```
 
 #### Separate Tables
-```
+```text
 Tables: tenant1_data, tenant2_data
 - Full isolation
 - More operational overhead
@@ -598,7 +598,7 @@ Tables: tenant1_data, tenant2_data
 ```
 
 #### Separate Instances
-```
+```text
 Instances: tenant1_instance, tenant2_instance
 - Complete isolation
 - Highest cost
@@ -607,14 +607,14 @@ Instances: tenant1_instance, tenant2_instance
 
 ### Integration Patterns
 #### Real-Time Analytics Pipeline
-```
+```text
 [IoT Devices] → [Pub/Sub] → [Dataflow] → [Bigtable]
                                               ↓
                               [Scheduled Export to BigQuery]
 ```
 
 #### Serving Layer for ML
-```
+```text
 [ML Training - BigQuery/Vertex AI]
               ↓
 [Export Feature Store to Bigtable]
@@ -623,7 +623,7 @@ Instances: tenant1_instance, tenant2_instance
 ```
 
 #### Hybrid OLTP/OLAP
-```
+```text
 [Application Writes] → [Bigtable] ← [Real-time Reads]
                             ↓
                     [Export to BigQuery]
@@ -644,7 +644,7 @@ Instances: tenant1_instance, tenant2_instance
 
 ### Capacity Planning
 #### Storage Planning
-```
+```text
 Calculation:
 - Expected row count: 10 billion
 - Avg row size: 1 KB
@@ -657,7 +657,7 @@ HDD cost: 20,000 GB × $0.026/month = $520/month
 ```
 
 #### Node Planning
-```
+```text
 Calculation:
 - Expected QPS: 500,000
 - Per node capacity: 10,000 QPS
@@ -692,7 +692,7 @@ rows = table.read_rows(
 ```
 
 #### Graph Data
-```
+```text
 # User relationships
 Row Key: user#12345#follows
 cf:users = {user#67890: timestamp, user#11111: timestamp}

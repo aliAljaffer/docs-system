@@ -280,7 +280,7 @@ gcloud sql import sql INSTANCE_NAME gs://BUCKET/import.sql \
 
 ### Architectural Patterns
 #### High Availability Architecture
-```
+```text
 [App Tier - GKE/Compute Engine]
          |
     [Cloud SQL Proxy]

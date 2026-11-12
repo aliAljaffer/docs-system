@@ -189,7 +189,7 @@ eventFilters:
 ## Architecture Patterns
 
 ### Pattern 1: Event-Driven Data Processing
-```
+```text
 Cloud Storage upload
   ↓ (Eventarc)
 Cloud Run (process file)
@@ -199,7 +199,7 @@ BigQuery (load data)
 **Use case:** Automated ETL pipeline
 
 ### Pattern 2: Serverless Workflow Orchestration
-```
+```text
 Pub/Sub message
   ↓ (Eventarc)
 Workflows
@@ -209,7 +209,7 @@ Cloud Run → Cloud Functions → BigQuery
 **Use case:** Multi-step business process
 
 ### Pattern 3: Audit-Driven Automation
-```
+```text
 Cloud Audit Logs (IAM change)
   ↓ (Eventarc)
 Cloud Run (validate change)
@@ -219,7 +219,7 @@ Send alert or auto-remediate
 **Use case:** Security automation, compliance
 
 ### Pattern 4: Multi-Source Fan-Out
-```
+```text
 Storage + Firestore + Pub/Sub
   ↓ (Eventarc - 3 triggers)
 Cloud Run service
@@ -335,7 +335,7 @@ gcloud eventarc triggers delete TRIGGER_NAME --location=REGION
 ### Architectural Design Patterns
 
 #### Event-Driven Microservices
-```
+```text
 Multiple Services → Pub/Sub Topics
                     ↓ (Eventarc)
                 Cloud Run Services
@@ -349,7 +349,7 @@ Multiple Services → Pub/Sub Topics
 - Resilient to failures
 
 #### Serverless ETL Pipeline
-```
+```text
 Cloud Storage (raw data)
   ↓ (Eventarc)
 Cloud Run (transform)
@@ -367,7 +367,7 @@ BigQuery (analytics)
 - Event-driven orchestration
 
 #### Security Automation
-```
+```text
 Cloud Audit Logs (security events)
   ↓ (Eventarc)
 Cloud Run (analyze + respond)
@@ -382,7 +382,7 @@ Cloud Run (analyze + respond)
 - Centralized security monitoring
 
 #### Multi-Cloud Event Hub
-```
+```text
 GCP Services + AWS (via Pub/Sub) + On-Prem (via Pub/Sub)
   ↓ (Eventarc)
 Cloud Run / Workflows
@@ -403,7 +403,7 @@ Process events from any source
 - **Idempotency**: Design targets to handle duplicate events
 
 **HA Pattern:**
-```
+```text
 Cloud Storage (global)
   ↓
 Eventarc Trigger (us-central1) → Cloud Run (us-central1)
@@ -527,13 +527,13 @@ gcloud logging read "resource.labels.trigger_name=TRIGGER_NAME" \
 
 #### From Direct Pub/Sub Integration
 **Before (manual):**
-```
+```text
 Cloud Storage → Pub/Sub topic → Cloud Run
 (Configure notification) (Manual subscription)
 ```
 
 **After (Eventarc):**
-```
+```text
 Cloud Storage → Eventarc trigger → Cloud Run
 (Automatic routing, no manual Pub/Sub setup)
 ```

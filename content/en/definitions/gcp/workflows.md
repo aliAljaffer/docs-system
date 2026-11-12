@@ -92,7 +92,7 @@ gcloud workflows describe my-workflow
 ## PCA Level
 
 ### Orchestration Patterns
-```
+```text
 Workflows → Cloud Functions → Process data
          → Dataflow → Transform data
          → BigQuery → Load data

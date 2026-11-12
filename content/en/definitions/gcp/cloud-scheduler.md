@@ -28,7 +28,7 @@ tags:
 - **App Engine HTTP**: Invoke App Engine app
 
 ### Cron Syntax
-```
+```text
 * * * * *
 │ │ │ │ │
 │ │ │ │ └─ Day of week (0-6, Sun-Sat)
@@ -103,7 +103,7 @@ gcloud scheduler jobs delete my-job
 - Report generation
 
 ### Integration Patterns
-```
+```text
 Cloud Scheduler → Pub/Sub → Cloud Function → BigQuery (export)
                          → Dataflow (batch job)
 ```

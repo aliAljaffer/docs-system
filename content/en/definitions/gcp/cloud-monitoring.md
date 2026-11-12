@@ -162,7 +162,7 @@ gcloud monitoring dashboards create --config-from-file=dashboard.json
 
 ### Architectural Patterns
 #### Multi-Project Monitoring
-```
+```text
 Scoping Project (Workspace)
 ├── Monitored Project A (Production)
 ├── Monitored Project B (Staging)
@@ -185,7 +185,7 @@ Scoping Project (Workspace)
 - **Proactive vs reactive**: Alert before SLO breach
 
 #### Example SLI/SLO
-```
+```text
 SLI: Ratio of successful requests to total requests
 SLO: 99.9% of requests succeed
 Error Budget: 0.1% = ~43 minutes/month of downtime
@@ -201,7 +201,7 @@ Burn Rate Alert: 10x normal burn rate triggers page
 
 ### Integration Patterns
 #### Pub/Sub Integration
-```
+```text
 Alert → Pub/Sub → Cloud Function → Custom Action
 ```
 - Programmatic alert handling
@@ -210,7 +210,7 @@ Alert → Pub/Sub → Cloud Function → Custom Action
 - ChatOps integration
 
 #### Incident Management
-```
+```text
 Alert → PagerDuty/Splunk On-Call → On-call engineer
 ```
 - Escalation policies

@@ -118,7 +118,7 @@ Each rule can be configured with sensitivity:
 ## Custom Rules
 
 ### IP-Based Rules
-```
+```yaml
 # Allow specific IP
 action: allow
 match:
@@ -131,7 +131,7 @@ match:
 ```
 
 ### Geographic Rules
-```
+```yaml
 # Block traffic from specific countries
 action: deny(403)
 match:
@@ -140,7 +140,7 @@ match:
 ```
 
 ### Header-Based Rules
-```
+```yaml
 # Block if specific header present
 action: deny(403)
 match:
@@ -150,7 +150,7 @@ match:
 
 ### Advanced Expression Language (CEL)
 **Common Expression Language** for complex rules:
-```
+```yaml
 # Block non-HTTPS
 expression: "request.scheme != 'https'"
 
@@ -410,7 +410,7 @@ gcloud compute security-policies delete POLICY_NAME
 - **Application**: Input validation, authentication
 
 #### Defense in Depth
-```
+```text
 Internet
   ↓
 Cloud Armor (DDoS + WAF)

@@ -151,7 +151,7 @@ with DAG(
 
 ### Architectural Patterns
 #### Daily ETL Pipeline
-```
+```text
 Cloud Scheduler → Trigger DAG → Extract (Cloud Storage)
                               → Transform (Dataflow)
                               → Load (BigQuery)
@@ -160,7 +160,7 @@ Cloud Scheduler → Trigger DAG → Extract (Cloud Storage)
 ```
 
 #### ML Training Pipeline
-```
+```text
 DAG → Data Prep (Dataproc)
    → Feature Engineering (Dataflow)
    → Train Model (Vertex AI)
@@ -170,7 +170,7 @@ DAG → Data Prep (Dataproc)
 ```
 
 #### Multi-Cloud Data Pipeline
-```
+```text
 DAG → Extract from AWS S3 (boto3)
    → Process in GCP (Dataflow)
    → Load to Snowflake

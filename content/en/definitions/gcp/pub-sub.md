@@ -31,7 +31,7 @@ tags:
 - **Subscriber**: Receives messages from subscription
 
 ### Architecture Pattern
-```
+```text
 Publishers → Topic → Subscription A (pull) → Service A
                   → Subscription B (push) → Service B
                   → Subscription C (pull) → Service C
@@ -79,7 +79,7 @@ Publishers → Topic → Subscription A (pull) → Service A
 - Example: `"region": "us-west"`, `"priority": "high"`
 
 ### Subscription Filters
-```
+```text
 attribute.region = "us-west" AND attribute.priority = "high"
 ```
 - Filter messages at subscription level
@@ -179,7 +179,7 @@ gcloud pubsub topics delete my-topic
 
 ### Architectural Patterns
 #### Event-Driven Microservices
-```
+```text
 Order Service → order.created topic → Inventory Service (update stock)
                                    → Notification Service (email customer)
                                    → Analytics Service (track metrics)
@@ -189,7 +189,7 @@ Order Service → order.created topic → Inventory Service (update stock)
 - Independent scaling
 
 #### Stream Processing Pipeline
-```
+```text
 IoT Devices → Pub/Sub → Dataflow → BigQuery
                       → Dataflow → Bigtable
                       → Cloud Functions → Alerts
@@ -199,7 +199,7 @@ IoT Devices → Pub/Sub → Dataflow → BigQuery
 - Scalable ingestion
 
 #### Fan-Out Pattern
-```
+```text
 Single Publisher → Topic → Sub A (priority) → Fast processing
                         → Sub B (batch) → Hourly aggregation
                         → Sub C (archive) → Cloud Storage
@@ -279,7 +279,7 @@ publisher.publish(
 
 ### Integration Patterns
 #### With Cloud Functions
-```
+```text
 Pub/Sub → Cloud Function (event-driven)
 ```
 - Automatic triggering
@@ -287,7 +287,7 @@ Pub/Sub → Cloud Function (event-driven)
 - Scalable processing
 
 #### With Dataflow
-```
+```text
 Pub/Sub → Dataflow → BigQuery/Bigtable
 ```
 - Streaming data pipelines
@@ -295,7 +295,7 @@ Pub/Sub → Dataflow → BigQuery/Bigtable
 - Complex transformations
 
 #### With GKE
-```
+```text
 Pub/Sub → GKE workload (pull subscription)
 ```
 - Kubernetes-native integration

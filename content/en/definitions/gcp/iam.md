@@ -59,7 +59,7 @@ Three types of roles:
 - Individual resources (VMs, buckets, etc.)
 
 ### IAM Hierarchy
-```
+```text
 Organization (optional)
   └── Folders (optional, can be nested)
       └── Projects (required)

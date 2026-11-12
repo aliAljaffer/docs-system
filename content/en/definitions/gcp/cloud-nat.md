@@ -36,7 +36,7 @@ tags:
 - Cannot be used for **inbound connections** (ingress)
 
 ### How It Works
-```
+```text
 Private VM (no external IP) → Cloud Router → Cloud NAT → Internet
 ```
 

@@ -26,7 +26,7 @@ tags:
 - **Prevents deployment of unauthorized or vulnerable containers**
 
 ### How It Works
-```
+```text
 1. Build container image
 2. Scan for vulnerabilities (Container Analysis)
 3. Sign image if scan passes (create attestation)
@@ -113,7 +113,7 @@ admissionWhitelistPatterns:
 
 ### Integration with CI/CD
 **Typical Pipeline:**
-```
+```text
 1. Code commit
 2. Cloud Build: Build container image
 3. Cloud Build: Push to Artifact Registry
@@ -168,7 +168,7 @@ steps:
 - Policy based on severity threshold
 
 **Example Policy:**
-```
+```text
 Deny deployment if:
 - Critical vulnerabilities > 0
 - High vulnerabilities > 5
@@ -214,7 +214,7 @@ kubectl apply -f deployment.yaml
 ```
 
 **If deployment denied:**
-```
+```text
 Error from server: admission webhook "imagepolicywebhook.image-policy.k8s.io" denied the request:
 Image gcr.io/project/app:latest denied by Binary Authorization
 ```
@@ -435,7 +435,7 @@ gcloud container clusters describe CLUSTER_NAME \
 
 ### Architectural Patterns
 #### Secure Software Supply Chain
-```
+```text
 Architecture:
 1. Source Code (Cloud Source Repositories)
 2. Build (Cloud Build with provenance)
@@ -455,7 +455,7 @@ Security Gates:
 ```
 
 #### Multi-Environment Strategy
-```
+```text
 Dev Environment:
 - Policy: ALWAYS_ALLOW
 - Fast iteration, no attestation required
@@ -471,7 +471,7 @@ Production Environment:
 ```
 
 #### Separation of Duties
-```
+```text
 Attestors:
 1. build-attestor: Automated (Cloud Build)
 2. vulnerability-attestor: Automated (scan threshold)
@@ -680,7 +680,7 @@ def create_attestation(image_url, attestor_name, kms_key_version):
 
 ### Compliance & Audit
 #### SOC 2 Compliance
-```
+```text
 Controls:
 - CC6.6: Logical and physical access controls
 
@@ -699,7 +699,7 @@ Evidence:
 ```
 
 #### PCI-DSS Compliance
-```
+```text
 Requirement 6.3.2: Review of custom code prior to release
 
 Implementation:
@@ -737,7 +737,7 @@ gcloud alpha monitoring policies create \
 ```
 
 ### Integration with Security Command Center
-```
+```text
 Binary Authorization findings in SCC:
 - Images deployed without attestation (if dry run)
 - Policy violations
@@ -787,7 +787,7 @@ gcloud container binauthz policy import policy-backup.yaml
 
 ### Migration from AWS Signer
 **Comparison:**
-```
+```text
 AWS Signer Profile -> GCP Attestor
 AWS ECR Image Signing -> Container Analysis + Attestation
 AWS Lambda deployment config -> Binary Authorization policy
