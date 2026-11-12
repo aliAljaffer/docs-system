@@ -165,7 +165,8 @@ class SiteTests(unittest.TestCase):
         for name in ("family=Inter", "JetBrains"):
             self.assertNotIn(name, page)
         self.assertNotIn('data-md-color-primary="indigo"', page)
-        self.assertIn("Roboto+Mono", page)
+        for sheet in json.loads((ROOT / "brand" / "brand.json").read_text()).get("stylesheets", []):
+            self.assertIn(sheet if sheet.startswith("http") else f"assets/brand/{sheet}", page)
 
     def test_case_study_link(self) -> None:
         homelab = (SITE / "projects" / "homelab" / "index.html").read_text()
@@ -207,6 +208,21 @@ class BrandCompilerTests(unittest.TestCase):
         good = {"paper": "#fff", "ink": "#000", "accent": "#00f"}
         with self.assertRaises(SystemExit):
             brand.load(self.write({"light": {**good, "accent": "blue"}, "night": good}))
+
+    def test_shape_and_syntax(self) -> None:
+        good = {"paper": "#ffffff", "ink": "#000000", "accent": "#0000ff"}
+        loaded = brand.load(self.write({"light": good, "night": good}))
+        self.assertEqual(loaded.shape["radius"], "0")
+        self.assertEqual(loaded.syntax["light"]["keyword"], "#0000ff")
+        loaded = brand.load(self.write({"light": good, "night": good, "shape": {"radius": "12px", "shadow": True},
+                                        "syntax": {"light": {"keyword": "#123456"}}}))
+        self.assertIn("--brand-radius: 12px;", brand.css(loaded))
+        self.assertIn("--brand-syntax-keyword: #123456;", brand.css(loaded))
+        self.assertNotIn("--brand-shadow: none;", brand.css(loaded))
+        with self.assertRaises(SystemExit):
+            brand.load(self.write({"light": good, "night": good, "shape": {"radius": "1rem"}}))
+        with self.assertRaises(SystemExit):
+            brand.load(self.write({"light": good, "night": good, "syntax": {"light": {"tag": "#123456"}}}))
 
     def test_minimal_brand_gets_defaults(self) -> None:
         light = {"paper": "#ffffff", "ink": "#000000", "accent": "#0000ff"}
