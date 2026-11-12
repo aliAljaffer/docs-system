@@ -1,5 +1,5 @@
 ---
-title: Cidr
+title: cidr
 category: Networking
 description: 'Cloud definition: Cidr.'
 tags:
@@ -9,7 +9,7 @@ tags:
 ---
 
 
-# Cidr
+# cidr
 
 `cloud` `fundamentals` `networking`
 

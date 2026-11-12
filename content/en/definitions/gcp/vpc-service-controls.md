@@ -1,5 +1,5 @@
 ---
-title: Vpc-service-controls
+title: vpc-service-controls
 category: GCP
 description: ==IAM + VPC SC = Defense in Depth==
 tags:
@@ -8,7 +8,7 @@ tags:
 ---
 
 
-# Vpc-service-controls
+# vpc-service-controls
 
 `gcp` `security`
 

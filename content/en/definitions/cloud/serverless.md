@@ -1,5 +1,5 @@
 ---
-title: Serverless
+title: serverless
 category: Cloud
 description: Doesn't mean there are no servers, rather it refers to an absence of
   physical, dedicated servers. In other words, your programs and workloads aren't
@@ -11,7 +11,7 @@ tags:
 ---
 
 
-# Serverless
+# serverless
 
 `cloud` `fundamentals` `serverless`
 

@@ -1,12 +1,12 @@
 ---
-title: Performance optimizations
+title: performance-optimizations
 category: React
 description: 'React note: Performance optimizations.'
 tags:
 - react
 ---
 
-# Performance optimizations
+# performance-optimizations
 
 `react`
 

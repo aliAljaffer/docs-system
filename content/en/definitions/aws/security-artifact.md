@@ -1,5 +1,5 @@
 ---
-title: Artifact
+title: artifact
 category: AWS
 description: '"Access AWS and ISV security and compliance reports"'
 tags:
@@ -8,7 +8,7 @@ tags:
 ---
 
 
-# Artifact
+# artifact
 
 `aws` `services`
 

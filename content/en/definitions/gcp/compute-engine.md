@@ -1,5 +1,5 @@
 ---
-title: Compute-engine
+title: compute-engine
 category: GCP
 description: 'GCP note: Compute-engine.'
 tags:
@@ -8,7 +8,7 @@ tags:
 ---
 
 
-# Compute-engine
+# compute-engine
 
 `gcp` `compute`
 

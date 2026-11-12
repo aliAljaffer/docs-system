@@ -1,5 +1,5 @@
 ---
-title: Security-labs
+title: security-labs
 category: GCP
 description: 'GCP note: Security-labs.'
 tags:
@@ -8,7 +8,7 @@ tags:
 ---
 
 
-# Security-labs
+# security-labs
 
 `gcp` `security`
 

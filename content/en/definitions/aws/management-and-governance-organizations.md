@@ -1,5 +1,5 @@
 ---
-title: Organizations
+title: organizations
 category: AWS
 description: Automates account creation and assignment of permissions, as well as
   infrastructure deployment, when available.
@@ -9,7 +9,7 @@ tags:
 ---
 
 
-# Organizations
+# organizations
 
 `aws` `services`
 

@@ -1,5 +1,5 @@
 ---
-title: Prop-drilling
+title: prop-drilling
 category: React
 description: '...is the process of passing down data through props from a parent to
   a grandchild or greater. In this case, the child and several of its children do
@@ -10,7 +10,7 @@ tags:
 ---
 
 
-# Prop-drilling
+# prop-drilling
 
 `react` `patterns`
 

@@ -1,5 +1,5 @@
 ---
-title: Governance and compliance
+title: governance and compliance
 category: AWS
 description: AWS has services to automatically ensure your cloud resources are all
   compliant and any changes made are recorded and verified with the rules laid out.
@@ -8,7 +8,7 @@ tags:
 ---
 
 
-# Governance and compliance
+# governance and compliance
 
 `gcp`
 

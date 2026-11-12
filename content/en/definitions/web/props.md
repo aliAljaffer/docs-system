@@ -1,5 +1,5 @@
 ---
-title: Props
+title: props
 category: Web
 description: Props, short for Properties, are pieces of data that each component stores.
   Parent components can send their children data using props.
@@ -9,7 +9,7 @@ tags:
 ---
 
 
-# Props
+# props
 
 `web` `fundamentals`
 

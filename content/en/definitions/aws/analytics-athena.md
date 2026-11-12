@@ -1,5 +1,5 @@
 ---
-title: Athena
+title: athena
 category: AWS
 description: Amazon Athena is a serverless SQL like service that is primarily used
   to analyze data stored in S3. Queries can be performed in a variety of standards,
@@ -10,7 +10,7 @@ tags:
 ---
 
 
-# Athena
+# athena
 
 `aws` `services`
 

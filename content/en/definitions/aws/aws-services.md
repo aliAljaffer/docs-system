@@ -1,5 +1,5 @@
 ---
-title: Aws services
+title: aws services
 category: AWS
 description: 'AWS note: Aws services.'
 tags:
@@ -7,7 +7,7 @@ tags:
 ---
 
 
-# Aws services
+# aws services
 
 `gcp`
 

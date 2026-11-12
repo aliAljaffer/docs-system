@@ -1,5 +1,5 @@
 ---
-title: Comprehend
+title: comprehend
 category: AWS
 description: Natural language processing that analyzes unstructured text
 tags:
@@ -8,7 +8,7 @@ tags:
 ---
 
 
-# Comprehend
+# comprehend
 
 `aws` `services`
 

@@ -1,5 +1,5 @@
 ---
-title: Storage-labs
+title: storage-labs
 category: GCP
 description: 'GCP note: Storage-labs.'
 tags:
@@ -8,7 +8,7 @@ tags:
 ---
 
 
-# Storage-labs
+# storage-labs
 
 `gcp` `storage`
 

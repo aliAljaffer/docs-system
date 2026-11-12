@@ -1,5 +1,5 @@
 ---
-title: Cloud-scheduler
+title: cloud-scheduler
 category: GCP
 description: Fully managed cron job scheduler.
 tags:
@@ -8,7 +8,7 @@ tags:
 ---
 
 
-# Cloud-scheduler
+# cloud-scheduler
 
 `gcp` `management`
 

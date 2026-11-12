@@ -1,5 +1,5 @@
 ---
-title: Component
+title: component
 category: Web
 description: Component contains the logic (hook) and the view of an element. By convention,
   components start with a capital letter.
@@ -9,7 +9,7 @@ tags:
 ---
 
 
-# Component
+# component
 
 `web` `fundamentals`
 

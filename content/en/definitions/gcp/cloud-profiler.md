@@ -1,5 +1,5 @@
 ---
-title: Cloud-profiler
+title: cloud-profiler
 category: GCP
 description: 'GCP note: Cloud-profiler.'
 tags:
@@ -8,7 +8,7 @@ tags:
 ---
 
 
-# Cloud-profiler
+# cloud-profiler
 
 `gcp` `operations`
 

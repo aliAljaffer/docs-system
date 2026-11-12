@@ -1,5 +1,5 @@
 ---
-title: Memoization
+title: memoization
 category: Web
 description: The act of storing previous function call results into a data structure,
   for faster retrieval on second attempts of the function call with the same parameters.
@@ -9,7 +9,7 @@ tags:
 ---
 
 
-# Memoization
+# memoization
 
 `web` `fundamentals`
 

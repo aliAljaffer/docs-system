@@ -1,5 +1,5 @@
 ---
-title: Kendra
+title: kendra
 category: AWS
 description: Highly accurate machine learning enterprise search service for all unstructured
   data stored in Amazon S3 and Amazon RDS databases.
@@ -9,7 +9,7 @@ tags:
 ---
 
 
-# Kendra
+# kendra
 
 `aws` `services`
 

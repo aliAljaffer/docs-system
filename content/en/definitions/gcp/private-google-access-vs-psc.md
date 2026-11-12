@@ -1,5 +1,5 @@
 ---
-title: Private-google-access-vs-psc
+title: private-google-access-vs-psc
 category: GCP
 description: 1. Private Google Access = Simple, free, uses Google public IPs
 tags:
@@ -8,7 +8,7 @@ tags:
 ---
 
 
-# Private-google-access-vs-psc
+# private-google-access-vs-psc
 
 `gcp` `networking`
 

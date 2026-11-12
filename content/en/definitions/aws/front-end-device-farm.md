@@ -1,5 +1,5 @@
 ---
-title: Device farm
+title: device farm
 category: AWS
 description: Test android, ios, and web apps on REAL devices on the cloud.
 tags:
@@ -8,7 +8,7 @@ tags:
 ---
 
 
-# Device farm
+# device farm
 
 `aws` `services`
 

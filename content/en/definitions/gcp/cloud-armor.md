@@ -1,5 +1,5 @@
 ---
-title: Cloud-armor
+title: cloud-armor
 category: GCP
 description: 'GCP note: Cloud-armor.'
 tags:
@@ -8,7 +8,7 @@ tags:
 ---
 
 
-# Cloud-armor
+# cloud-armor
 
 `gcp` `networking`
 

@@ -1,5 +1,5 @@
 ---
-title: Ops-labs
+title: ops-labs
 category: GCP
 description: 'GCP note: Ops-labs.'
 tags:
@@ -8,7 +8,7 @@ tags:
 ---
 
 
-# Ops-labs
+# ops-labs
 
 `gcp` `operations`
 

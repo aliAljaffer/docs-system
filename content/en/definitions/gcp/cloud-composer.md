@@ -1,5 +1,5 @@
 ---
-title: Cloud-composer
+title: cloud-composer
 category: GCP
 description: 'GCP note: Cloud-composer.'
 tags:
@@ -8,7 +8,7 @@ tags:
 ---
 
 
-# Cloud-composer
+# cloud-composer
 
 `gcp` `data`
 

@@ -1,5 +1,5 @@
 ---
-title: Sagemaker
+title: sagemaker
 category: AWS
 description: '"Bringing together widely adopted AWS machine learning (ML) and analytics
   capabilities, Amazon SageMaker delivers an integrated experience for analytics and
@@ -10,7 +10,7 @@ tags:
 ---
 
 
-# Sagemaker
+# sagemaker
 
 `aws` `services`
 

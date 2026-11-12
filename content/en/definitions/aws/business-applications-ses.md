@@ -1,5 +1,5 @@
 ---
-title: Ses
+title: ses
 category: AWS
 description: 'AWS note: Ses.'
 tags:
@@ -8,7 +8,7 @@ tags:
 ---
 
 
-# Ses
+# ses
 
 `aws` `services`
 

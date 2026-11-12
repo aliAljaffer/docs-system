@@ -1,5 +1,5 @@
 ---
-title: Cloudwatch
+title: cloudwatch
 category: AWS
 description: '"Observe and monitor resources and applications on AWS, on premises,
   and on other clouds"'
@@ -9,7 +9,7 @@ tags:
 ---
 
 
-# Cloudwatch
+# cloudwatch
 
 `aws` `services`
 

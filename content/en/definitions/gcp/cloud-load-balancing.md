@@ -1,5 +1,5 @@
 ---
-title: Cloud-load-balancing
+title: cloud-load-balancing
 category: GCP
 description: 'GCP note: Cloud-load-balancing.'
 tags:
@@ -8,7 +8,7 @@ tags:
 ---
 
 
-# Cloud-load-balancing
+# cloud-load-balancing
 
 `gcp` `networking`
 

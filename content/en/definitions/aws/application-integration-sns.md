@@ -1,5 +1,5 @@
 ---
-title: Sns
+title: sns
 category: AWS
 description: 'AWS note: Sns.'
 tags:
@@ -8,7 +8,7 @@ tags:
 ---
 
 
-# Sns
+# sns
 
 `aws` `services`
 

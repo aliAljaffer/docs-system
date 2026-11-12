@@ -1,5 +1,5 @@
 ---
-title: Main-context-concepts
+title: main-context-concepts
 category: React
 description: The React Context API provides a way to pass data through the component
   tree without having to pass props down manually at every level. It is useful for
@@ -10,7 +10,7 @@ tags:
 ---
 
 
-# Main-context-concepts
+# main-context-concepts
 
 `react` `context`
 

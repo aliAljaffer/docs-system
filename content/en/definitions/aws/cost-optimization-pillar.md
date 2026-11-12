@@ -1,5 +1,5 @@
 ---
-title: Cost optimization pillar
+title: cost optimization pillar
 category: AWS
 description: 'Cloud note: Cost optimization pillar.'
 tags:
@@ -7,7 +7,7 @@ tags:
 ---
 
 
-# Cost optimization pillar
+# cost optimization pillar
 
 `gcp`
 

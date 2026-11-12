@@ -1,5 +1,5 @@
 ---
-title: Q
+title: q
 category: AWS
 description: '"Amazon Q is a generative AI assistant that transforms how work gets
   done in your organization. With specialized capabilities for software developers,
@@ -10,7 +10,7 @@ tags:
 ---
 
 
-# Q
+# q
 
 `aws` `services`
 

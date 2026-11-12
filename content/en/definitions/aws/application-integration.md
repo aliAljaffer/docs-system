@@ -1,5 +1,5 @@
 ---
-title: Application integration
+title: application integration
 category: AWS
 description: Refers to letting multiple independent applications work and communicate
   with each other, while being facilitated by an intermediate system.
@@ -8,7 +8,7 @@ tags:
 ---
 
 
-# Application integration
+# application integration
 
 `gcp`
 

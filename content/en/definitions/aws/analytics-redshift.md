@@ -1,5 +1,5 @@
 ---
-title: Redshift
+title: redshift
 category: AWS
 description: 'AWS note: Redshift.'
 tags:
@@ -8,7 +8,7 @@ tags:
 ---
 
 
-# Redshift
+# redshift
 
 `aws` `services`
 

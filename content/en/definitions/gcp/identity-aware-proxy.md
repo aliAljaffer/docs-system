@@ -1,5 +1,5 @@
 ---
-title: Identity-aware-proxy
+title: identity-aware-proxy
 category: GCP
 description: 'GCP note: Identity-aware-proxy.'
 tags:
@@ -8,7 +8,7 @@ tags:
 ---
 
 
-# Identity-aware-proxy
+# identity-aware-proxy
 
 `gcp` `security`
 

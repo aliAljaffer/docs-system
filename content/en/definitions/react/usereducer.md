@@ -1,5 +1,5 @@
 ---
-title: UseReducer
+title: useReducer
 category: React
 description: Used a lot by Redux Toolkit
 tags:
@@ -8,7 +8,7 @@ tags:
 ---
 
 
-# UseReducer
+# useReducer
 
 `react` `hooks`
 

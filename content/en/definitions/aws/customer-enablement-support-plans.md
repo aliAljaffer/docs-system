@@ -1,5 +1,5 @@
 ---
-title: Support plans
+title: support plans
 category: AWS
 description: 'AWS note: Support plans.'
 tags:
@@ -8,7 +8,7 @@ tags:
 ---
 
 
-# Support plans
+# support plans
 
 `aws` `services`
 

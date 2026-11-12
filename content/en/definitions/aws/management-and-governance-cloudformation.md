@@ -1,5 +1,5 @@
 ---
-title: Cloudformation
+title: cloudformation
 category: AWS
 description: A service that allows you to make templates to specify how you want architecture
   deployed.
@@ -9,7 +9,7 @@ tags:
 ---
 
 
-# Cloudformation
+# cloudformation
 
 `aws` `services`
 

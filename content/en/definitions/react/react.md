@@ -1,12 +1,12 @@
 ---
-title: React
+title: react
 category: React
 description: 'React note: React.'
 tags:
 - react
 ---
 
-# React
+# react
 
 `react`
 

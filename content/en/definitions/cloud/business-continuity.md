@@ -1,5 +1,5 @@
 ---
-title: Business continuity
+title: business continuity
 category: Cloud
 description: '...refers to an organization''s ability to continue operating despite
   an incident.'
@@ -10,7 +10,7 @@ tags:
 ---
 
 
-# Business continuity
+# business continuity
 
 `cloud` `fundamentals` `reliability`
 

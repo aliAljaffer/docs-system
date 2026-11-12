@@ -1,5 +1,5 @@
 ---
-title: Storage gateway
+title: storage gateway
 category: AWS
 description: Provide on-premise apps with access to virtually unlimited cloud storage.
 tags:
@@ -8,7 +8,7 @@ tags:
 ---
 
 
-# Storage gateway
+# storage gateway
 
 `aws` `services`
 

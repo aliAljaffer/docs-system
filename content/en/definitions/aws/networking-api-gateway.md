@@ -1,5 +1,5 @@
 ---
-title: Api gateway
+title: api gateway
 category: AWS
 description: '"Create, maintain, and secure APIs at any scale"'
 tags:
@@ -8,7 +8,7 @@ tags:
 ---
 
 
-# Api gateway
+# api gateway
 
 `aws` `services`
 

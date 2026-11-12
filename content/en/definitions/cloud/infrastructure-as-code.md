@@ -1,5 +1,5 @@
 ---
-title: Infrastructure as code
+title: infrastructure as code
 category: Cloud
 description: 'IaC: Writing the configurations for a specific cloud infrastructure
   as code, rather than manually creating the infrastructure using the AWS UI for example.'
@@ -10,7 +10,7 @@ tags:
 ---
 
 
-# Infrastructure as code
+# infrastructure as code
 
 `cloud` `fundamentals` `iac`
 

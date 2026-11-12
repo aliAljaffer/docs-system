@@ -1,5 +1,5 @@
 ---
-title: Principle of least privilege
+title: principle of least privilege
 category: Security
 description: '"The principle of least privilege (POLP) is a concept in computer security
   that limits users'' access rights to only what is strictly required to do their
@@ -11,7 +11,7 @@ tags:
 ---
 
 
-# Principle of least privilege
+# principle of least privilege
 
 `cloud` `fundamentals` `security`
 

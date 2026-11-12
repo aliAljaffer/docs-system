@@ -1,5 +1,5 @@
 ---
-title: Threat intelligence
+title: threat intelligence
 category: Security
 description: 'Collected and analyzed data about the motives and behavior of threat actors.'
 tags:
@@ -7,7 +7,7 @@ tags:
 - intelligence
 ---
 
-# Threat intelligence
+# threat intelligence
 
 Cyberthreat intelligence is data that an organization has collected and analyzed to understand the motives and behavior of threat actors. It focuses on **Tactics, Techniques, and Procedures** (TTPs) and **Indicators of Compromise** (IoCs).
 

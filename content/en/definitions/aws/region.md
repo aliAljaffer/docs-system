@@ -1,5 +1,5 @@
 ---
-title: Region
+title: region
 category: AWS
 description: A geographic area containing one or more availability zones, which hosts
   all AWS services. They are geographically spread out.
@@ -10,7 +10,7 @@ tags:
 ---
 
 
-# Region
+# region
 
 `cloud` `fundamentals` `geography`
 

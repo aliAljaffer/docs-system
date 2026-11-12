@@ -1,5 +1,5 @@
 ---
-title: Eventbridge
+title: eventbridge
 category: AWS
 description: 'AWS note: Eventbridge.'
 tags:
@@ -8,7 +8,7 @@ tags:
 ---
 
 
-# Eventbridge
+# eventbridge
 
 `aws` `services`
 

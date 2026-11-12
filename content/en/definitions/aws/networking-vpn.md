@@ -1,5 +1,5 @@
 ---
-title: Vpn
+title: vpn
 category: AWS
 description: An AWS VPN establishes the same tunnel but between your network/devices
   and the AWS global network.
@@ -9,7 +9,7 @@ tags:
 ---
 
 
-# Vpn
+# vpn
 
 `aws` `services`
 

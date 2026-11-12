@@ -1,5 +1,5 @@
 ---
-title: Step functions
+title: step functions
 category: AWS
 description: Step Functions is a visual workflow service that helps developers use
   AWS services to build distributed applications, automate processes, orchestrate
@@ -10,7 +10,7 @@ tags:
 ---
 
 
-# Step functions
+# step functions
 
 `aws` `services`
 

@@ -1,5 +1,5 @@
 ---
-title: Networking-labs
+title: networking-labs
 category: GCP
 description: 'GCP note: Networking-labs.'
 tags:
@@ -8,7 +8,7 @@ tags:
 ---
 
 
-# Networking-labs
+# networking-labs
 
 `gcp` `networking`
 

@@ -1,5 +1,5 @@
 ---
-title: Fault tolerance
+title: fault tolerance
 category: Cloud
 description: The ability to ensure there is no single point of failure and handle
   demand appropriately if there is a failure somewhere.
@@ -10,7 +10,7 @@ tags:
 ---
 
 
-# Fault tolerance
+# fault tolerance
 
 `cloud` `fundamentals` `reliability`
 

@@ -1,5 +1,5 @@
 ---
-title: Bedrock
+title: bedrock
 category: AWS
 description: Easiest way to build and scale generative AI apps with foundation models.
 tags:
@@ -8,7 +8,7 @@ tags:
 ---
 
 
-# Bedrock
+# bedrock
 
 `aws` `services`
 

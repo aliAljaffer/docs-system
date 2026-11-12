@@ -1,5 +1,5 @@
 ---
-title: UseState
+title: useState
 category: React
 description: 'React note: UseState.'
 tags:
@@ -8,7 +8,7 @@ tags:
 ---
 
 
-# UseState
+# useState
 
 `react` `hooks`
 

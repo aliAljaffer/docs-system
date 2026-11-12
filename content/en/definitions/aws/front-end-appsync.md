@@ -1,5 +1,5 @@
 ---
-title: Appsync
+title: appsync
 category: AWS
 description: real-time data sync using GraphQL for mobile and web apps, whether online
   or offline.
@@ -9,7 +9,7 @@ tags:
 ---
 
 
-# Appsync
+# appsync
 
 `aws` `services`
 

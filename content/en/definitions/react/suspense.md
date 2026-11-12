@@ -1,5 +1,5 @@
 ---
-title: Suspense
+title: suspense
 category: React
 description: Suspense API is a way for us to show a loading indicator or any type
   of fallback component while the child components are loading.
@@ -9,7 +9,7 @@ tags:
 ---
 
 
-# Suspense
+# suspense
 
 `react` `components`
 

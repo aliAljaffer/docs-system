@@ -1,5 +1,5 @@
 ---
-title: Cloud-build
+title: cloud-build
 category: GCP
 description: 'GCP note: Cloud-build.'
 tags:
@@ -8,7 +8,7 @@ tags:
 ---
 
 
-# Cloud-build
+# cloud-build
 
 `gcp` `devops`
 

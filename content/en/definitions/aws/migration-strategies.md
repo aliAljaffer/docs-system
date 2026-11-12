@@ -1,5 +1,5 @@
 ---
-title: Migration strategies
+title: migration strategies
 category: AWS
 description: 'Cloud note: Migration strategies.'
 tags:
@@ -7,7 +7,7 @@ tags:
 ---
 
 
-# Migration strategies
+# migration strategies
 
 `gcp`
 

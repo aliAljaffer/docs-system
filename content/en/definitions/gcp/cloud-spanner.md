@@ -1,5 +1,5 @@
 ---
-title: Cloud-spanner
+title: cloud-spanner
 category: GCP
 description: 'GCP note: Cloud-spanner.'
 tags:
@@ -8,7 +8,7 @@ tags:
 ---
 
 
-# Cloud-spanner
+# cloud-spanner
 
 `gcp` `databases`
 

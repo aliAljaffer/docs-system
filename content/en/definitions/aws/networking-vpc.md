@@ -1,5 +1,5 @@
 ---
-title: Vpc
+title: vpc
 category: AWS
 description: 'AWS note: Vpc.'
 tags:
@@ -8,7 +8,7 @@ tags:
 ---
 
 
-# Vpc
+# vpc
 
 `aws` `services`
 

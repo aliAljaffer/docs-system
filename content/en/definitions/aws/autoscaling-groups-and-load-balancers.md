@@ -1,5 +1,5 @@
 ---
-title: Autoscaling groups and load balancers
+title: autoscaling groups and load balancers
 category: AWS
 description: These two services together are what allows you to achieve high elasticity
   and scalability for compute workloads.
@@ -8,7 +8,7 @@ tags:
 ---
 
 
-# Autoscaling groups and load balancers
+# autoscaling groups and load balancers
 
 `gcp`
 

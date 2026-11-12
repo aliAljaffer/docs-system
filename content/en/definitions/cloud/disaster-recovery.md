@@ -1,5 +1,5 @@
 ---
-title: Disaster recovery
+title: disaster recovery
 category: Cloud
 description: '...refers to an organization''s ability to recover from a disaster.'
 tags:
@@ -9,7 +9,7 @@ tags:
 ---
 
 
-# Disaster recovery
+# disaster recovery
 
 `cloud` `fundamentals` `reliability`
 

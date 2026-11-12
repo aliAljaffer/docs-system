@@ -1,5 +1,5 @@
 ---
-title: Cloud-storage
+title: cloud-storage
 category: GCP
 description: 'GCP note: Cloud-storage.'
 tags:
@@ -8,7 +8,7 @@ tags:
 ---
 
 
-# Cloud-storage
+# cloud-storage
 
 `gcp` `storage`
 

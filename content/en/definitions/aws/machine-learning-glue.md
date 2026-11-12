@@ -1,5 +1,5 @@
 ---
-title: Glue
+title: glue
 category: AWS
 description: 'AWS note: Glue.'
 tags:
@@ -8,7 +8,7 @@ tags:
 ---
 
 
-# Glue
+# glue
 
 `aws` `services`
 

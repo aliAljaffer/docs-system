@@ -1,5 +1,5 @@
 ---
-title: Operational excellence pillars
+title: operational excellence pillars
 category: AWS
 description: 'Cloud note: Operational excellence pillars.'
 tags:
@@ -7,7 +7,7 @@ tags:
 ---
 
 
-# Operational excellence pillars
+# operational excellence pillars
 
 `gcp`
 

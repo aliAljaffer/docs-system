@@ -1,5 +1,5 @@
 ---
-title: Free services
+title: free services
 category: AWS
 description: Free tier for first 12 months of signup.
 tags:
@@ -7,7 +7,7 @@ tags:
 ---
 
 
-# Free services
+# free services
 
 `gcp`
 

@@ -1,5 +1,5 @@
 ---
-title: Tenets of aws
+title: tenets of aws
 category: AWS
 description: 'To deliver the best customer experience:'
 tags:
@@ -8,7 +8,7 @@ tags:
 ---
 
 
-# Tenets of aws
+# tenets of aws
 
 `cloud` `fundamentals`
 

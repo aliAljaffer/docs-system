@@ -1,5 +1,5 @@
 ---
-title: Security-command-center
+title: security-command-center
 category: GCP
 description: 'GCP note: Security-command-center.'
 tags:
@@ -8,7 +8,7 @@ tags:
 ---
 
 
-# Security-command-center
+# security-command-center
 
 `gcp` `security`
 

@@ -1,5 +1,5 @@
 ---
-title: Marketplace
+title: marketplace
 category: AWS
 description: Digital catalog where you can find, buy, and deploy software.
 tags:
@@ -8,7 +8,7 @@ tags:
 ---
 
 
-# Marketplace
+# marketplace
 
 `aws` `services`
 

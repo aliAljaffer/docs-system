@@ -1,5 +1,5 @@
 ---
-title: Artifact-registry
+title: artifact-registry
 category: GCP
 description: 'GCP note: Artifact-registry.'
 tags:
@@ -8,7 +8,7 @@ tags:
 ---
 
 
-# Artifact-registry
+# artifact-registry
 
 `gcp` `devops`
 

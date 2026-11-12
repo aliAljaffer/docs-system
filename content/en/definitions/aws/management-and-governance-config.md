@@ -1,5 +1,5 @@
 ---
-title: Config
+title: config
 category: AWS
 description: 'AWS note: Config.'
 tags:
@@ -8,7 +8,7 @@ tags:
 ---
 
 
-# Config
+# config
 
 `aws` `services`
 

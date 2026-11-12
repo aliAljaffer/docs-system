@@ -1,5 +1,5 @@
 ---
-title: Waf
+title: waf
 category: AWS
 description: 'AWS note: Waf.'
 tags:
@@ -8,7 +8,7 @@ tags:
 ---
 
 
-# Waf
+# waf
 
 `aws` `services`
 

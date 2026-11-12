@@ -1,5 +1,5 @@
 ---
-title: Ec2-ccp
+title: ec2-ccp
 category: AWS
 description: EC2 is the flagship AWS compute service that allows to launch virtual
   machines, called instances.
@@ -9,7 +9,7 @@ tags:
 ---
 
 
-# Ec2-ccp
+# ec2-ccp
 
 `aws` `services`
 

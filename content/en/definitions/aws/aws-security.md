@@ -1,5 +1,5 @@
 ---
-title: Aws security
+title: aws security
 category: AWS
 description: An effictively secured application has security at multiple layers. For
   appilications in the cloud, we can consider 7 layers of security.
@@ -8,7 +8,7 @@ tags:
 ---
 
 
-# Aws security
+# aws security
 
 `gcp`
 

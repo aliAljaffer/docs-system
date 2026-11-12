@@ -1,5 +1,5 @@
 ---
-title: Multi factor authentication
+title: multi factor authentication
 category: Security
 description: In AWS IAM, MFA is the best practice that requires a second authentication
   factor on top of a password. It helps verify that the logging-in user is who they
@@ -11,7 +11,7 @@ tags:
 ---
 
 
-# Multi factor authentication
+# multi factor authentication
 
 `cloud` `fundamentals` `security`
 

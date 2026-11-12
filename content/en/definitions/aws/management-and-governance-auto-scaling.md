@@ -1,5 +1,5 @@
 ---
-title: Auto scaling
+title: auto scaling
 category: AWS
 description: Monitors your applications and automatically adjusts capacity to maintain
   steady and predictable performance at the lowest possible cost.
@@ -9,7 +9,7 @@ tags:
 ---
 
 
-# Auto scaling
+# auto scaling
 
 `aws` `services`
 

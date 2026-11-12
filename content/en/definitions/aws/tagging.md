@@ -1,5 +1,5 @@
 ---
-title: Tagging
+title: tagging
 category: AWS
 description: Tagging involves identifying your resources with key:value pairs and
   is one of the best ways to manage costs.
@@ -8,7 +8,7 @@ tags:
 ---
 
 
-# Tagging
+# tagging
 
 `gcp`
 

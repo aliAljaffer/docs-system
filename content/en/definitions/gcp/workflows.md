@@ -1,5 +1,5 @@
 ---
-title: Workflows
+title: workflows
 category: GCP
 description: 'GCP note: Workflows.'
 tags:
@@ -8,7 +8,7 @@ tags:
 ---
 
 
-# Workflows
+# workflows
 
 `gcp` `management`
 

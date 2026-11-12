@@ -1,5 +1,5 @@
 ---
-title: UseEffect
+title: useEffect
 category: React
 description: Used for side-effects.
 tags:
@@ -8,7 +8,7 @@ tags:
 ---
 
 
-# UseEffect
+# useEffect
 
 `react` `hooks`
 

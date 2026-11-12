@@ -1,5 +1,5 @@
 ---
-title: Aws compute
+title: aws compute
 category: AWS
 description: 'AWS note: Aws compute.'
 tags:
@@ -7,7 +7,7 @@ tags:
 ---
 
 
-# Aws compute
+# aws compute
 
 `gcp`
 

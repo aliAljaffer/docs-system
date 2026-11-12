@@ -1,5 +1,5 @@
 ---
-title: User and identity management
+title: user and identity management
 category: AWS
 description: Should be extremely well-secured with multi factor authentication and
   extremely limited with access. THere are only a few certain scenarios where you
@@ -10,7 +10,7 @@ tags:
 ---
 
 
-# User and identity management
+# user and identity management
 
 `aws` `services`
 

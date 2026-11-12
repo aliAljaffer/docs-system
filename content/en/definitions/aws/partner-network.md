@@ -1,5 +1,5 @@
 ---
-title: Partner network
+title: partner network
 category: AWS
 description: APN is a global partner program for AWS.
 tags:
@@ -7,7 +7,7 @@ tags:
 ---
 
 
-# Partner network
+# partner network
 
 `gcp`
 

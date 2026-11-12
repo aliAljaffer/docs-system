@@ -1,5 +1,5 @@
 ---
-title: Beanstalk
+title: beanstalk
 category: AWS
 description: Elastic Beanstalk is ideal if you have a PHP, Java, Python, Ruby, Node.js,
   .NET, Go, or Docker web application.
@@ -9,7 +9,7 @@ tags:
 ---
 
 
-# Beanstalk
+# beanstalk
 
 `aws` `services`
 

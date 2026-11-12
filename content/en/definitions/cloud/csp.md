@@ -1,5 +1,5 @@
 ---
-title: Csp
+title: csp
 category: Cloud
 description: A cloud service provider is a company which provides multiple cloud services,
   that can be chained together, use unified API, utilizes metered billing, has monitoring,
@@ -10,7 +10,7 @@ tags:
 ---
 
 
-# Csp
+# csp
 
 `cloud` `fundamentals`
 

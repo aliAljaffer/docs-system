@@ -1,5 +1,5 @@
 ---
-title: UseRef
+title: useRef
 category: React
 description: 'React note: UseRef.'
 tags:
@@ -8,7 +8,7 @@ tags:
 ---
 
 
-# UseRef
+# useRef
 
 `react` `hooks`
 

@@ -1,5 +1,5 @@
 ---
-title: Augmented ai
+title: augmented ai
 category: AWS
 description: Implements human review of machine learning predictions
 tags:
@@ -8,7 +8,7 @@ tags:
 ---
 
 
-# Augmented ai
+# augmented ai
 
 `aws` `services`
 

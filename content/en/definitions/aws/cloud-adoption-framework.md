@@ -1,5 +1,5 @@
 ---
-title: Cloud adoption framework
+title: cloud adoption framework
 category: AWS
 description: https://abhi0751.medium.com/aws-cloud-adoption-framework-aws-caf-a512b89dbcba
 tags:
@@ -7,7 +7,7 @@ tags:
 ---
 
 
-# Cloud adoption framework
+# cloud adoption framework
 
 `gcp`
 

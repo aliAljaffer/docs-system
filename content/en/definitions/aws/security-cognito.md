@@ -1,5 +1,5 @@
 ---
-title: Cognito
+title: cognito
 category: AWS
 description: A sign-in service that allows users to use social media accounts (Google,
   Facebook, Apple, etc) to log-in. It manages the identities by having user groups
@@ -10,7 +10,7 @@ tags:
 ---
 
 
-# Cognito
+# cognito
 
 `aws` `services`
 

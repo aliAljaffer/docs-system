@@ -1,5 +1,5 @@
 ---
-title: Restful apis
+title: restful apis
 category: Cloud
 description: Build RESTful APIs optimized for serverless workloads and HTTP backends
   using HTTP APIs. HTTP APIs are the best choice for building APIs that only require
@@ -9,7 +9,7 @@ tags:
 ---
 
 
-# Restful apis
+# restful apis
 
 `gcp`
 

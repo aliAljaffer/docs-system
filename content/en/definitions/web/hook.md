@@ -1,5 +1,5 @@
 ---
-title: Hook
+title: hook
 category: Web
 description: Contains the business logic of how something is done. It is the logic
   side of a component.
@@ -9,7 +9,7 @@ tags:
 ---
 
 
-# Hook
+# hook
 
 `web` `fundamentals`
 

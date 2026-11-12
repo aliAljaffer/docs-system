@@ -1,5 +1,5 @@
 ---
-title: Bigquery
+title: bigquery
 category: GCP
 description: 'GCP note: Bigquery.'
 tags:
@@ -8,7 +8,7 @@ tags:
 ---
 
 
-# Bigquery
+# bigquery
 
 `gcp` `databases`
 

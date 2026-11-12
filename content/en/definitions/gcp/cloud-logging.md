@@ -1,5 +1,5 @@
 ---
-title: Cloud-logging
+title: cloud-logging
 category: GCP
 description: 'GCP note: Cloud-logging.'
 tags:
@@ -8,7 +8,7 @@ tags:
 ---
 
 
-# Cloud-logging
+# cloud-logging
 
 `gcp` `operations`
 

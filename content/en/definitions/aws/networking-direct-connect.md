@@ -1,5 +1,5 @@
 ---
-title: Direct connect
+title: direct connect
 category: AWS
 description: '"The AWS Direct Connect cloud service is the shortest path to your AWS
   resources. While in transit, your network traffic remains on the AWS global network
@@ -10,7 +10,7 @@ tags:
 ---
 
 
-# Direct connect
+# direct connect
 
 `aws` `services`
 

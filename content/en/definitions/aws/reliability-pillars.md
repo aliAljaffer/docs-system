@@ -1,5 +1,5 @@
 ---
-title: Reliability pillars
+title: reliability pillars
 category: AWS
 description: 'Cloud note: Reliability pillars.'
 tags:
@@ -7,7 +7,7 @@ tags:
 ---
 
 
-# Reliability pillars
+# reliability pillars
 
 `gcp`
 

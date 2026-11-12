@@ -1,5 +1,5 @@
 ---
-title: Traffic analysis
+title: traffic analysis
 category: Security
 description: 'Cloud definition: Traffic analysis.'
 tags:
@@ -9,7 +9,7 @@ tags:
 ---
 
 
-# Traffic analysis
+# traffic analysis
 
 `cloud` `fundamentals` `security`
 

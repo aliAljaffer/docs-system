@@ -1,5 +1,5 @@
 ---
-title: Connect
+title: connect
 category: AWS
 description: 'AWS note: Connect.'
 tags:
@@ -8,7 +8,7 @@ tags:
 ---
 
 
-# Connect
+# connect
 
 `aws` `services`
 
