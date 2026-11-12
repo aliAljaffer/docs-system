@@ -1,7 +1,7 @@
 ---
 title: Cloud-nat
 category: GCP
-description: 1. VM sends packet to internet destination
+description: Managed Network Address Translation service for outbound internet connectivity from private instances.
 tags:
 - gcp
 - networking
@@ -101,15 +101,10 @@ Private VM (no external IP) → Cloud Router → Cloud NAT → Internet
 - **Ports shared across all VMs** using that NAT IP
 
 #### Port Allocation Methods
-**Dynamic port allocation:**
-- Ports assigned as needed
-- Efficient for variable workloads
-- Default: Min 64, max 65,536 per VM
-
-**Static port allocation:**
-- Fixed ports per VM
-- Predictable, easier troubleshooting
-- Less efficient (ports reserved even if unused)
+| Method | Behavior | Trade-off |
+|--------|----------|-----------|
+| Dynamic port allocation | Ports assigned as needed. Default: Min 64, max 65,536 per VM | Efficient for variable workloads |
+| Static port allocation | Fixed ports per VM | Predictable, easier troubleshooting. Less efficient (ports reserved even if unused) |
 
 ### Connection Limits
 - NAT IP ports: **64,512 ports per IP**
@@ -121,10 +116,13 @@ Private VM (no external IP) → Cloud Router → Cloud NAT → Internet
 
 ## Timeout Configuration
 **Connection idle timeouts:**
-- **TCP Established**: 1200 seconds (20 min, default)
-- **TCP Transitory**: 30 seconds (default)
-- **UDP**: 30 seconds (default)
-- **ICMP**: 30 seconds (default)
+
+| Connection type | Default timeout |
+|-----------------|-----------------|
+| TCP Established | 1200 seconds (20 min) |
+| TCP Transitory | 30 seconds |
+| UDP | 30 seconds |
+| ICMP | 30 seconds |
 
 **Configurable:**
 - Adjust based on application requirements
@@ -142,11 +140,14 @@ Private VM (no external IP) → Cloud Router → Cloud NAT → Internet
   - Bytes transferred
   - Timestamp
 - Sent to [[gcp/cloud-logging|Cloud Logging]]
-- **Filter options**:
-  - **All**: Log all connections (high volume)
-  - **Errors only**: Failed translations
-  - **Translations only**: NAT events, not every packet
-  - **None**: No logging
+**Filter options:**
+
+| Filter | What is logged |
+|--------|----------------|
+| All | Log all connections (high volume) |
+| Errors only | Failed translations |
+| Translations only | NAT events, not every packet |
+| None | No logging |
 
 **Performance impact:**
 - Logging adds minimal latency
@@ -353,10 +354,12 @@ gcloud logging read "resource.type=nat_gateway" --limit=50
 - **Example**: 4 NAT IPs = 258,048 connections
 
 #### Sizing Guidelines
-- **Low traffic** (web servers): 1-2 NAT IPs
-- **Medium traffic** (app servers): 2-4 NAT IPs
-- **High traffic** (data processing): 4-8 NAT IPs
-- **Very high traffic** (large scale): 8+ NAT IPs (up to 64)
+| Traffic | Example | NAT IPs |
+|---------|---------|---------|
+| Low | Web servers | 1-2 |
+| Medium | App servers | 2-4 |
+| High | Data processing | 4-8 |
+| Very high | Large scale | 8+ (up to 64) |
 
 #### Monitoring Metrics
 - **Allocated ports**: Current port usage
@@ -404,11 +407,13 @@ gcloud compute routers nats create nat-manual \
 
 ### Observability
 #### Cloud Monitoring Metrics
-- `nat/allocated_ports`: Ports currently allocated
-- `nat/port_usage`: Port usage ratio
-- `nat/dropped_received_packets_count`: Packets dropped
-- `nat/sent_bytes_count`: Data egress volume
-- `nat/new_connections_count`: Connection rate
+| Metric | Meaning |
+|--------|---------|
+| `nat/allocated_ports` | Ports currently allocated |
+| `nat/port_usage` | Port usage ratio |
+| `nat/dropped_received_packets_count` | Packets dropped |
+| `nat/sent_bytes_count` | Data egress volume |
+| `nat/new_connections_count` | Connection rate |
 
 #### Cloud Logging
 ```bash
@@ -431,15 +436,19 @@ gcloud logging read "resource.type=nat_gateway AND \
 
 ### Troubleshooting
 #### Connection Failures
-- **Port exhaustion**: Increase NAT IPs or reduce timeouts
-- **Firewall rules**: Check egress firewall rules allow traffic
-- **Routing**: Verify default route to internet gateway exists
-- **Subnet configuration**: Confirm subnet is included in NAT config
+| Cause | Fix |
+|-------|-----|
+| Port exhaustion | Increase NAT IPs or reduce timeouts |
+| Firewall rules | Check egress firewall rules allow traffic |
+| Routing | Verify default route to internet gateway exists |
+| Subnet configuration | Confirm subnet is included in NAT config |
 
 #### Performance Issues
-- **High latency**: Check Cloud Monitoring for NAT metrics
-- **Packet drops**: Increase NAT IP count
-- **Timeouts**: Adjust idle timeout settings
+| Symptom | Fix |
+|---------|-----|
+| High latency | Check Cloud Monitoring for NAT metrics |
+| Packet drops | Increase NAT IP count |
+| Timeouts | Adjust idle timeout settings |
 
 #### Debugging Commands
 ```bash

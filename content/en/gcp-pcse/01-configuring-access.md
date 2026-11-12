@@ -7,7 +7,10 @@
 - **Google Cloud Directory Sync (GCDS):** Syncs users and groups from AD or LDAP into [[iam]] identities in Cloud Identity. It is one way, and you schedule it. It supports a dry run. It uses a dedicated Google identity with Super Admin rights.
 - **Passwords:** GCDS does not sync passwords by default. Google Password Sync does.
 - **SSO with a third-party IdP:** Configure a SAML profile in the Admin console. Apply it to org units or groups.
-- **Workforce Identity Federation (WIF):** An external IdP, such as Okta or Microsoft Entra ID, authenticates users. Google grants access without creating Cloud Identity accounts. WIF uses a workforce identity pool, an OIDC or SAML provider, attribute mapping, and attribute conditions. WIF does not support features tied to Cloud Identity accounts, such as 2SV policies, password policies, or the super admin role.
+- **Workforce Identity Federation (WIF):**
+  - Purpose: An external IdP, such as Okta or Microsoft Entra ID, authenticates users. Google grants access without creating Cloud Identity accounts.
+  - Components: a workforce identity pool, an OIDC or SAML provider, attribute mapping, and attribute conditions.
+  - Not supported: features tied to Cloud Identity accounts, such as 2SV policies, password policies, or the super admin role.
 
 | Need | Answer |
 |---|---|
@@ -33,8 +36,12 @@ Super Admin (Cloud Identity) and Organization Administrator (IAM) are separate r
 
 ## Authentication
 
-- Default password minimum length is 8.
-- Default web session length is 14 days. The admin console session is fixed at 1 hour.
+| Setting | Default |
+|---|---|
+| Password minimum length | 8 |
+| Web session length | 14 days |
+| Admin console session | 1 hour (fixed) |
+
 - 2SV methods, most secure first: security key, Google prompt, Authenticator codes, backup codes, text or voice.
 - 2SV enforcement options: Any, Any except verification codes, Only security key.
 - SAML needs the IdP Entity ID, the SSO URL, and a certificate. The response must include `saml:Subject` and `saml:NameID`.
@@ -77,17 +84,20 @@ gcloud config set auth/impersonate_service_account SA_EMAIL
 
 ### Workload Identity Federation setup
 
-- Create a workload identity pool at the global location.
-- Create an OIDC provider with `--issuer-uri` and `--attribute-mapping`.
-- Grant `roles/iam.workloadIdentityUser` to a `principalSet://` identity, such as one scoped by `attribute.repository`.
-- Attribute changes take up to 5 minutes.
+1. Create a workload identity pool at the global location.
+2. Create an OIDC provider with `--issuer-uri` and `--attribute-mapping`.
+3. Grant `roles/iam.workloadIdentityUser` to a `principalSet://` identity, such as one scoped by `attribute.repository`.
+
+Attribute changes take up to 5 minutes.
 
 ### Other service account rules
+
+!!! warning "Editor is a privilege escalation path"
+    Editor cannot change IAM policies. Editor can create or upload service account keys. That is a privilege escalation path.
 
 - Never store service account keys in [[secret-manager]]. An app that can call Secret Manager does not need a key.
 - Domain-wide delegation uses the `signJwt` API, not keys.
 - Disable a service account before you delete it. Disabling blocks token minting and API calls. Role bindings stay.
-- Editor cannot change IAM policies. Editor can create or upload service account keys. That is a privilege escalation path.
 - Limits: 100 service accounts per project. Names are immutable and have 6 to 30 characters. An account cannot move to another project.
 - Org policy `iam.disableCrossProjectServiceAccountUsage` is enforced by default.
 
@@ -109,7 +119,14 @@ gcloud config set auth/impersonate_service_account SA_EMAIL
 
 - Deny policies take precedence over allow bindings.
 - Attach them at the organization, folder, or project. Not at the resource level.
-- Principals use this form: `principal://goog/subject/EMAIL` for a user, `principalSet://goog/group/GROUP` for a group, and `principalSet://goog/cloudIdentityCustomerId/ID` for all users in a customer.
+- Principals use these forms:
+
+| Principal | Format |
+|---|---|
+| A user | `principal://goog/subject/EMAIL` |
+| A group | `principalSet://goog/group/GROUP` |
+| All users in a customer | `principalSet://goog/cloudIdentityCustomerId/ID` |
+
 - You can deny individual users.
 - Permissions use the v2 form, such as `storage.googleapis.com/buckets.create`.
 - Management roles: `roles/iam.denyAdmin` to manage, `roles/iam.denyReviewer` to view.
@@ -140,8 +157,9 @@ gcloud config set auth/impersonate_service_account SA_EMAIL
 | IAM Recommender | Which over-granted roles can I remove, based on use? |
 | Condition Simulator | What does this policy change do before I apply it? |
 | Essential Contacts | Who receives critical notifications? |
-
-Also know: Activity Analyzer (last use of a service account or key), service account insights (unused for 90 days), and lateral movement insights (cross-project impersonation).
+| Activity Analyzer | When was this service account or key last used? |
+| Service account insights | Which service accounts are unused for 90 days? |
+| Lateral movement insights | Where does cross-project impersonation happen? |
 
 ### Privileged Access Manager (PAM)
 
@@ -159,7 +177,14 @@ Also know: Activity Analyzer (last use of a service account or key), service acc
 ## Resource hierarchy and org policies
 
 - Use one organization. Keep the hierarchy shallow: organization, folders, projects.
-- Folders can represent environments (small organizations), products (agile at scale), or geographies (multi-region compliance). Do not copy the corporate org chart.
+- Folders can represent three models. Do not copy the corporate org chart.
+
+| Folder model | Use when |
+|---|---|
+| Environments | Small organizations |
+| Products | Agile at scale |
+| Geographies | Multi-region compliance |
+
 - Org policies control what resources may do. IAM controls who may act.
 - Constraints inherit down. A child can tighten a policy but not relax it. Exception: list constraints can reset values. `inheritFromParent` defaults to true.
 - Dry run mode tests a policy in audit mode before enforcement. Pre-built and custom constraints both support it.

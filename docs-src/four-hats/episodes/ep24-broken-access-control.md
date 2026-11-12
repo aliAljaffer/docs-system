@@ -52,7 +52,16 @@ Every task now belongs to a user, through an owner column. List, create, and sea
 
 ## Reproduce the IDOR, step by step
 
-The list is scoped correctly. The bug is somewhere else: the endpoints that take a task ID directly. Find it the same way a real attacker would, with two real accounts. Start the stack, register two users, log in as both, and save each token. One user creates a task and saves its ID from the response. Then confirm the second user's own list is empty. That empty list matters: it proves the list endpoint is correctly scoped, so the bug is not there. Then the second user deletes the first user's task by ID, using only their own valid token. The request succeeds, even though the second user never saw that task in their own list.
+The list is scoped correctly. The bug is somewhere else: the endpoints that take a task ID directly. Find it the same way a real attacker would, with two real accounts.
+
+1. Start the stack.
+2. Register two users.
+3. Log in as both and save each token.
+4. As the first user, create a task and save its ID from the response.
+5. Confirm the second user's own list is empty. That empty list matters: it proves the list endpoint is correctly scoped, so the bug is not there.
+6. As the second user, delete the first user's task by ID, using only their own valid token.
+
+The request succeeds, even though the second user never saw that task in their own list.
 
 Task IDs are sequential integers, starting at 1. The attacker did not need to guess the ID. They could enumerate every ID from 1 upward and delete or modify whatever existed. That is what makes this an IDOR, not a one-off mistake: the object reference itself is the attack surface. The same attack is available as one page in the security console at `/pentest`, served by the same frontend. It calls the same API over the same origin, nothing simulated. Open it through the Compose stack, never through a static file previewer, which has no API proxy and rejects the register and login requests.
 
@@ -60,7 +69,13 @@ Task IDs are sequential integers, starting at 1. The attacker did not need to gu
 
 The update and delete queries filter by the task ID and the owner at the same time. A task that exists but belongs to someone else, and a task that does not exist at all, now look identical to the caller: both return 404. Returning 403 instead would confirm "this task exists, you just cannot touch it," which hands an attacker a free existence check across every ID. Choosing 404 gives away nothing about which objects exist. That is the secure error design this fix depends on: the fix must not turn into an oracle.
 
-Rebuild the backend and run the exact same attack again. Create a new task as the first user. Delete it as the second user. Now the request returns 404 and the task survives. Then delete it as the owner: that still works. The fix removes one specific permission, not the feature. The same page in the security console gives the opposite verdict after the fix: safe, with the task untouched. That is the proof the fix works, not a new test written to match the fix.
+Rebuild the backend and run the exact same attack again:
+
+1. Create a new task as the first user.
+2. Delete it as the second user. Now the request returns 404 and the task survives.
+3. Delete it as the owner. That still works.
+
+The fix removes one specific permission, not the feature. The same page in the security console gives the opposite verdict after the fix: safe, with the task untouched. That is the proof the fix works, not a new test written to match the fix.
 
 ## Write the regression test
 

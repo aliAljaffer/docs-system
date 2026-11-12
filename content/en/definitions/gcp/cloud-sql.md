@@ -17,9 +17,11 @@ tags:
 **Fully managed relational database** service for MySQL, PostgreSQL, and SQL Server
 
 ### Supported Database Engines
-- **MySQL**: 5.6, 5.7, 8.0
-- **PostgreSQL**: 9.6 through 16
-- **SQL Server**: 2017, 2019, 2022 (Standard, Enterprise, Express, Web)
+| Engine | Versions |
+|--------|----------|
+| **MySQL** | 5.6, 5.7, 8.0 |
+| **PostgreSQL** | 9.6 through 16 |
+| **SQL Server** | 2017, 2019, 2022 (Standard, Enterprise, Express, Web) |
 
 ### Key Features
 - **Automatic backups and point-in-time recovery**
@@ -185,12 +187,14 @@ tags:
 - **Migrations from on-prem**: Lift-and-shift SQL databases
 
 ### When NOT to Use Cloud SQL
-- Need global distribution → Use [[cloud-spanner|Cloud Spanner]]
-- Need >64 TB storage → Use [[cloud-spanner|Cloud Spanner]] or [[gcp/bigtable|Bigtable]]
-- Need >96 vCPUs → Use [[cloud-spanner|Cloud Spanner]]
-- NoSQL requirements → Use [[gcp/firestore|Firestore]] or [[gcp/bigtable|Bigtable]]
-- Analytical workloads → Use [[bigquery|BigQuery]]
-- Extremely high performance PostgreSQL → Use [[alloydb|AlloyDB]]
+| Need | Use instead |
+|------|-------------|
+| Global distribution | [[cloud-spanner|Cloud Spanner]] |
+| >64 TB storage | [[cloud-spanner|Cloud Spanner]] or [[gcp/bigtable|Bigtable]] |
+| >96 vCPUs | [[cloud-spanner|Cloud Spanner]] |
+| NoSQL requirements | [[gcp/firestore|Firestore]] or [[gcp/bigtable|Bigtable]] |
+| Analytical workloads | [[bigquery|BigQuery]] |
+| Extremely high performance PostgreSQL | [[alloydb|AlloyDB]] |
 
 ---
 

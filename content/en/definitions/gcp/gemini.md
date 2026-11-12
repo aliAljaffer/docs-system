@@ -21,26 +21,12 @@ Google's **multimodal foundation model** for text, images, video, and code
 - **State-of-the-art**: Competitive with GPT-4, Claude 3
 - Available via [[vertex-ai|Vertex AI]], Gemini API, AI Studio
 ### Model Variants
-#### Gemini 1.5 Pro
-- **2M token context window** (largest in industry)
-- Multimodal (text, images, video, audio)
-- Best quality and reasoning
-- Use cases: Complex analysis, long documents, video understanding
-- **Pricing**: ~$7 per 1M input tokens, ~$21 per 1M output tokens
-- Context caching: 75% discount on cached tokens
 
-#### Gemini 1.5 Flash
-- **1M token context window**
-- Faster inference, lower cost
-- **50x cheaper** than Pro
-- Use cases: High-volume, low-latency, simple tasks
-- **Pricing**: ~$0.35 per 1M input tokens, ~$1.05 per 1M output tokens
-
-#### Gemini 1.0 Pro
-- Original model (still available)
-- 32K token context
-- Lower cost than 1.5 Pro
-- Use cases: Standard text generation
+| Model | Context | Input price (per 1M tokens) | Output price (per 1M tokens) | Best for | Notes |
+|---|---|---|---|---|---|
+| Gemini 1.5 Pro | **2M tokens** (largest in industry) | ~$7 | ~$21 | Complex analysis, long documents, video understanding | Multimodal (text, images, video, audio), best quality and reasoning, context caching gives 75% discount on cached tokens |
+| Gemini 1.5 Flash | **1M tokens** | ~$0.35 | ~$1.05 | High-volume, low-latency, simple tasks | Faster inference, lower cost, **50x cheaper** than Pro |
+| Gemini 1.0 Pro | 32K tokens | - | - | Standard text generation | Original model (still available), lower cost than 1.5 Pro |
 
 ### Capabilities
 #### Text Generation
@@ -93,12 +79,16 @@ Google's **multimodal foundation model** for text, images, video, and code
 - `HARM_CATEGORY_HATE_SPEECH`
 - `HARM_CATEGORY_DANGEROUS_CONTENT`
 - `HARM_CATEGORY_HARASSMENT`
-- `HARM_CATEGORY_SEXUALLY_EXPLICIT
+- `HARM_CATEGORY_SEXUALLY_EXPLICIT`
+
 #### Threshold Levels
-- `BLOCK_NONE`: No blocking
-- `BLOCK_LOW_AND_ABOVE`: Block low+ harmful content
-- `BLOCK_MEDIUM_AND_ABOVE`: Block medium+ (default)
-- `BLOCK_HIGH_AND_ABOVE`: Block only high harmful content
+
+| Threshold | Blocks |
+|---|---|
+| `BLOCK_NONE` | No blocking |
+| `BLOCK_LOW_AND_ABOVE` | Block low+ harmful content |
+| `BLOCK_MEDIUM_AND_ABOVE` | Block medium+ (default) |
+| `BLOCK_HIGH_AND_ABOVE` | Block only high harmful content |
 
 ### Generation Configuration
 ```python
@@ -205,6 +195,7 @@ response = model.generate_content(context + query2)  # $0.875 + new tokens
 - Cache persists 1 hour, auto-refresh on use
 
 #### Model Selection by Use Case
+
 | Use Case              | Model | Reasoning                 |
 | --------------------- | ----- | ------------------------- |
 | Simple classification | Flash | 50x cheaper, fast enough  |
@@ -212,6 +203,7 @@ response = model.generate_content(context + query2)  # $0.875 + new tokens
 | Long documents        | Pro   | 2M context needed         |
 | High-volume API       | Flash | Cost and speed            |
 | Video analysis        | Pro   | Multimodal quality        |
+
 ### Performance Optimization
 #### Prompt Engineering
 ```python

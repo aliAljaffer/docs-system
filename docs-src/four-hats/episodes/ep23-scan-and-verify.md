@@ -44,7 +44,13 @@ On the fixed code, the scan reports no findings. Temporarily put the f-string ba
 
 ## SCA, IaC, and secrets: Trivy
 
-Trivy checks three different things with one tool. It looks for known vulnerabilities in the packages inside your images (SCA). It looks for misconfigurations in Dockerfiles, Kubernetes YAML, and Terraform (IaC). And it looks for credentials accidentally committed to the repository (secrets). The scanner service mounts your Docker socket, so it can inspect a local image by name without pushing anything to a registry.
+Trivy checks three different things with one tool:
+
+- Known vulnerabilities in the packages inside your images (SCA).
+- Misconfigurations in Dockerfiles, Kubernetes YAML, and Terraform (IaC).
+- Credentials accidentally committed to the repository (secrets).
+
+The scanner service mounts your Docker socket, so it can inspect a local image by name without pushing anything to a registry.
 
 Run all three kinds of scan. The image scan reports the vulnerabilities in the backend base image. The config scan reports the state of the Kubernetes manifests. The secret scan is clean, since this course never commits credentials. Not every finding needs a fix today. Record every finding you do not fix, and say why. An unrecorded finding is invisible to the next person and to the next scan.
 
@@ -56,7 +62,12 @@ Target the frontend, not the backend. The backend has no page at the root path, 
 
 ![One scan per layer: source code, supply chain, running app](../assets/diagrams/ep23-scan-coverage.svg)
 
-A few details decide whether the scan succeeds. The `-I` flag keeps the Pod successful when the only result is warnings. Without it, the baseline script exits with code 2 and the wait command never sees `Succeeded`, even though the report is complete. Read the findings from the Pod log. Do not copy a report out of the exited container: its process is gone, so the copy command cannot run inside it. The working directory volume is required even without a report option, because the scanner script refuses to start with file-based options unless that directory is a mount. The starter rules file silences two informational findings only (cacheable content and modern web application). Every header finding still reports.
+A few details decide whether the scan succeeds:
+
+- The `-I` flag keeps the Pod successful when the only result is warnings. Without it, the baseline script exits with code 2 and the wait command never sees `Succeeded`, even though the report is complete.
+- Read the findings from the Pod log. Do not copy a report out of the exited container: its process is gone, so the copy command cannot run inside it.
+- The working directory volume is required even without a report option, because the scanner script refuses to start with file-based options unless that directory is a mount.
+- The starter rules file silences two informational findings only (cacheable content and modern web application). Every header finding still reports.
 
 Before the header fix, the log lists the missing anti-clickjacking header, the missing `X-Content-Type-Options` header, the missing Content Security Policy, the missing Permissions Policy, and the Nginx version leak. It reports no injection, because this scan sends no injection payloads.
 

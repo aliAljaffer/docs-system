@@ -50,9 +50,12 @@
 
 [[security-shield|Shield]] protects against DDoS attacks at Layers 3 and 4.
 
-- Shield Standard is free. It protects against SYN floods and similar Layer 3 and 4 attacks.
-- Shield Advanced provides DDoS mitigation for sophisticated attacks. It costs $3k per month. It protects against higher fees during an attack.
-- Shield Advanced deploys WAF rules to mitigate Layer 7 attacks.
+| Feature | Shield Standard | Shield Advanced |
+|---|---|---|
+| Cost | Free | $3k per month |
+| Protects against | SYN floods and similar Layer 3 and 4 attacks | Sophisticated attacks (DDoS mitigation) |
+| Layer 7 attacks | - | Deploys WAF rules to mitigate them |
+| Cost during an attack | - | Protects against higher fees |
 
 ### Firewall Manager
 
@@ -74,15 +77,22 @@ Network Firewall protects an entire [[networking-vpc|VPC]]. It filters Layer 3 t
 
 ### GuardDuty
 
-[[security-guardduty|GuardDuty]] detects threats with machine learning and anomaly detection. It reads CloudTrail logs, VPC Flow Logs, and DNS logs. It integrates with EventBridge. It detects cryptocurrency attacks.
+[[security-guardduty|GuardDuty]] detects threats with machine learning and anomaly detection.
+
+- Data sources: CloudTrail logs, VPC Flow Logs, and DNS logs.
+- It integrates with EventBridge.
+- It detects cryptocurrency attacks.
 
 ### Inspector
 
 [[security-inspector|Inspector]] runs automated security assessments.
 
-- EC2: uses the SSM agent. Checks network reachability and scans the OS for known vulnerabilities.
-- Container images in [[containers-ecr|ECR]]: assesses images when they are pushed.
-- Lambda functions: finds vulnerabilities in function code and dependencies.
+| Resource | What Inspector checks |
+|---|---|
+| EC2 | Uses the SSM agent. Checks network reachability and scans the OS for known vulnerabilities. |
+| Container images in [[containers-ecr|ECR]] | Assesses images when they are pushed. |
+| Lambda functions | Finds vulnerabilities in function code and dependencies. |
+
 - Reports to Security Hub. Sends findings to [[application-integration-eventbridge|EventBridge]].
 
 ### Macie

@@ -54,7 +54,13 @@ The pair has two halves:
 | `id_ed25519` | Your laptop, `~/.ssh` | Never |
 | `id_ed25519.pub` | Your laptop, then the server | Yes |
 
-The server stores the public key in the user's `authorized_keys`. At login, the server sends a challenge. The client signs it with the private key. The server verifies the signature with the public key. The private key never crosses the network.
+The server stores the public key in the user's `authorized_keys`. At login:
+
+1. The server sends a challenge.
+2. The client signs it with the private key.
+3. The server verifies the signature with the public key.
+
+The private key never crosses the network.
 
 For this lab, create the key with an empty passphrase. The Ansible container in Episode 9 cannot type a passphrase. State the reason before the command. On a real server, use a passphrase and an agent.
 
@@ -137,7 +143,8 @@ File commands work the same way:
 | `cp a.txt b.txt`, `mv old new` | Copy, move, rename |
 | `rm notes.txt`, `rm -r app` | Remove a file, remove a folder |
 
-`rm` does not ask. There is no trash can. Check `pwd` before a recursive remove.
+> [!WARNING]
+> `rm` does not ask. There is no trash can. Check `pwd` before a recursive remove.
 
 ## File permissions
 

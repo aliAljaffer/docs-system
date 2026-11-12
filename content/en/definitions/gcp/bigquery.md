@@ -49,10 +49,12 @@ tags:
 
 ### Architecture
 #### Separation of Storage and Compute
-- **Dremel**: Query execution engine
-- **Colossus**: Distributed storage
-- **Borg**: Orchestration (resource management)
-- **Jupiter**: Network fabric (1 Petabit/sec bisection bandwidth)
+| Component | Role |
+|---|---|
+| Dremel | Query execution engine |
+| Colossus | Distributed storage |
+| Borg | Orchestration (resource management) |
+| Jupiter | Network fabric (1 Petabit/sec bisection bandwidth) |
 
 **Can query data without moving it** (federated queries)
 
@@ -144,31 +146,19 @@ GROUP BY date, product_id;
 ```
 
 ### Query Types
-#### Interactive Queries (On-Demand)
-- Standard queries with automatic scaling
-- Charged per TB scanned
-- 100 concurrent queries per project
-- **Best for ad-hoc analysis**
-
-#### Batch Queries
-- Queued queries with lower priority
-- Same cost as interactive
-- Use when results not needed immediately
-- Can queue thousands of queries
-
-#### Scheduled Queries
-- Run queries on schedule (cron format)
-- Write results to table
-- Use for data pipelines, reports, dashboards
-- **Free** (only pay for query costs)
+| Query type | Behavior | Cost | Use when |
+|---|---|---|---|
+| Interactive (on-demand) | Standard queries with automatic scaling. 100 concurrent queries per project | Charged per TB scanned | Ad-hoc analysis |
+| Batch | Queued queries with lower priority. Can queue thousands of queries | Same as interactive | Results are not needed immediately |
+| Scheduled | Run queries on schedule (cron format). Write results to table | **Free** (only pay for query costs) | Data pipelines, reports, dashboards |
 
 ### Pricing
 #### Storage Pricing
-- **Active storage**: $0.02 per GB/month
-  - Tables modified in last 90 days
-- **Long-term storage**: $0.01 per GB/month
-  - Tables not modified for 90 days (automatic)
-- **Streaming inserts**: $0.01 per 200 MB
+| Item | Price | Condition |
+|---|---|---|
+| Active storage | $0.02 per GB/month | Tables modified in last 90 days |
+| Long-term storage | $0.01 per GB/month | Tables not modified for 90 days (automatic) |
+| Streaming inserts | $0.01 per 200 MB | - |
 
 #### Query Pricing (On-Demand)
 - **Analysis**: $6.25 per TB scanned (first 1 TB free per month)
@@ -408,11 +398,15 @@ LIMIT 10;
 ```
 
 ### Security
-- **IAM roles**:
-  - `roles/bigquery.dataViewer`: Read data
-  - `roles/bigquery.dataEditor`: Read, write, delete data
-  - `roles/bigquery.user`: Run queries
-  - `roles/bigquery.admin`: Full control
+**IAM roles:**
+
+| Role | Grants |
+|---|---|
+| `roles/bigquery.dataViewer` | Read data |
+| `roles/bigquery.dataEditor` | Read, write, delete data |
+| `roles/bigquery.user` | Run queries |
+| `roles/bigquery.admin` | Full control |
+
 - **VPC Service Controls**: Prevent data exfiltration
 - **CMEK**: Customer-managed encryption keys via [[gcp/cloud-kms|Cloud KMS]]
 - **Authorized views**: Share subset of data without full table access

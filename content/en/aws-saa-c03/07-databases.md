@@ -91,9 +91,13 @@ RDS Custom supports Oracle and Microsoft SQL Server with access to the underlyin
 
 ### Endpoints
 
-- The writer endpoint points to the primary instance.
-- The reader endpoint balances connections across replicas.
-- A custom endpoint points to instances you choose, such as larger instances for analytics. If a custom endpoint exists, the reader endpoint is not used.
+| Endpoint | Points to |
+|---|---|
+| Writer | The primary instance |
+| Reader | Replicas. It balances connections across them. |
+| Custom | Instances you choose, such as larger instances for analytics |
+
+If a custom endpoint exists, the reader endpoint is not used.
 
 ### Global Aurora
 
@@ -148,11 +152,13 @@ ElastiCache is an in-memory cache. It reduces load on RDS. It needs heavy applic
 | Provisioned (default) | You set read and write capacity per second. Autoscaling is optional. | Pay for RCUs and WCUs |
 | On-demand | Scales with the workload. No planning. | Pay per use. The note calls it expensive. |
 
-- DAX is a managed in-memory cache. It reduces read congestion. Cached reads take microseconds.
-- DynamoDB Streams capture item changes. Enable them before you create global tables.
-- Global tables give low-latency access in several Regions.
-- TTL expires items automatically. Use case: web session handling.
-- You can export to [[storage-s3|S3]] (enable point-in-time recovery first). You can import CSV, DynamoDB JSON, or Amazon Ion.
+| Feature | What it does |
+|---|---|
+| DAX | A managed in-memory cache. It reduces read congestion. Cached reads take microseconds. |
+| DynamoDB Streams | Capture item changes. Enable them before you create global tables. |
+| Global tables | Give low-latency access in several Regions. |
+| TTL | Expires items automatically. Use case: web session handling. |
+| Export and import | Export to [[storage-s3|S3]] (enable point-in-time recovery first). Import CSV, DynamoDB JSON, or Amazon Ion. |
 
 ## Other database services
 

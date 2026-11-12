@@ -12,12 +12,13 @@ tags:
 `gcp`
 
 ## Security Groups and NACLs
-**Security groups** work at the __instance__ level ([[compute-ec2-ccp|ec2-ccp]])
-- Implicitly **denies** all traffic (DENY ONLY)
-- **Work off of allow rules only** (stateful)
-Network Access Control List work at **subnet** level. ([[vpc|VPC]])
-- Virtual firewall at the **network** level
-- **Uses allow and deny rules** (stateless)
+
+| Attribute | Security group | Network ACL |
+|---|---|---|
+| Level | **Instance** ([[compute-ec2-ccp|ec2-ccp]]) | **Subnet** ([[vpc|VPC]]), virtual firewall at the **network** level |
+| Rules | Allow rules only. Implicitly **denies** all other traffic | Allow and deny rules |
+| State | Stateful | Stateless |
+
 **Deny rules have higher precedence than allow.**
 ## [[networking-vpn|VPN]] and [[networking-direct-connect|Direct Connect]]
 Virtual Private Network (VPN) is generally the equivalent to an on-premise version of VPC. Provides an isolated secure environment to access resources. Can also establish a VPN between your on-premise resources and the AWS cloud.

@@ -27,20 +27,14 @@ tags:
 | Cost | Per tunnel-hour | Per connection-hour |
 
 ### Cloud VPN Types
-#### HA VPN (High Availability VPN) - **Recommended**
-- **99.99% SLA** when configured with two tunnels
-- **Requires BGP** (dynamic routing)
-- Two external IP addresses on GCP side
-- Regional resource with automatic redundancy
-- **Supports multiple tunnels per gateway**
-- Introduced in 2019, replaces Classic VPN
-
-#### Classic VPN - **Legacy**
-- **99.9% SLA** with two tunnels
-- Single external IP address
-- Static or dynamic routing
-- **Not recommended for new deployments**
-- Will be deprecated eventually
+| Aspect | HA VPN (**Recommended**) | Classic VPN (**Legacy**) |
+|--------|--------------------------|--------------------------|
+| SLA | **99.99%** when configured with two tunnels | **99.9%** with two tunnels |
+| Routing | **Requires BGP** (dynamic routing) | Static or dynamic routing |
+| External IPs | Two external IP addresses on GCP side | Single external IP address |
+| Tunnels | **Supports multiple tunnels per gateway** | - |
+| Resource | Regional resource with automatic redundancy | - |
+| Status | Introduced in 2019, replaces Classic VPN | **Not recommended for new deployments**. Will be deprecated eventually |
 
 ---
 
@@ -55,18 +49,11 @@ tags:
 
 ### HA VPN Topologies
 #### To On-Premises (Recommended)
-- **Two on-prem VPN devices**: **99.99% SLA**
-  - 2 GCP interfaces → 2 on-prem devices
-  - 4 tunnels total (2 per device)
-  - Full redundancy
-- **Single on-prem VPN device with 2 interfaces**: 99.99% SLA
-  - 2 GCP interfaces → 2 interfaces on 1 device
-  - 4 tunnels total
-  - Device is single point of failure
-- **Single on-prem VPN device with 1 interface**: **99.9% SLA**
-  - 1 GCP interface → 1 on-prem interface
-  - 2 tunnels
-  - Minimal redundancy
+| On-prem setup | GCP interfaces | Tunnels | SLA | Notes |
+|---------------|----------------|---------|-----|-------|
+| **Two on-prem VPN devices** | 2 GCP interfaces → 2 on-prem devices | 4 total (2 per device) | **99.99%** | Full redundancy |
+| **Single on-prem VPN device with 2 interfaces** | 2 GCP interfaces → 2 interfaces on 1 device | 4 total | 99.99% | Device is single point of failure |
+| **Single on-prem VPN device with 1 interface** | 1 GCP interface → 1 on-prem interface | 2 | **99.9%** | Minimal redundancy |
 
 #### To Another GCP VPC (VPC-to-VPC)
 - HA VPN gateway in each [[vpc|VPC]]
@@ -96,12 +83,14 @@ tags:
 - **Graceful restart**: Maintains routes during BGP session reset
 
 ### Tunnel Configuration
-- **IKE version**: IKEv2 (recommended) or IKEv1
-- **Shared secret**: Pre-shared key for authentication
-- **Encryption**: AES-128, AES-256, 3DES
-- **Integrity**: SHA-1, SHA-256, SHA-384, SHA-512
-- **Perfect Forward Secrecy**: DH groups 2, 5, 14-24
-- **MTU**: 1460 bytes (default), max 1460
+| Setting | Value |
+|---------|-------|
+| **IKE version** | IKEv2 (recommended) or IKEv1 |
+| **Shared secret** | Pre-shared key for authentication |
+| **Encryption** | AES-128, AES-256, 3DES |
+| **Integrity** | SHA-1, SHA-256, SHA-384, SHA-512 |
+| **Perfect Forward Secrecy** | DH groups 2, 5, 14-24 |
+| **MTU** | 1460 bytes (default), max 1460 |
 
 ### VPN Throughput
 - **3 Gbps per tunnel**
@@ -119,17 +108,12 @@ tags:
 - Target VPN Gateway resource
 - **Not recommended for new deployments**
 
-### Static Routing (Classic VPN)
-- Manually configure routes on both sides
-- No Cloud Router required
-- Simple but not scalable
-- Cannot automatically learn new routes
-
-### Dynamic Routing (Classic VPN)
-- Requires Cloud Router
-- BGP-based route exchange
-- Automatically propagates route changes
-- **Preferred over static routing**
+### Routing Modes (Classic VPN)
+| Aspect | Static routing | Dynamic routing |
+|--------|----------------|-----------------|
+| Cloud Router | No Cloud Router required | Requires Cloud Router |
+| Route exchange | Manually configure routes on both sides. Cannot automatically learn new routes | BGP-based route exchange. Automatically propagates route changes |
+| Fit | Simple but not scalable | **Preferred over static routing** |
 
 ---
 
@@ -178,10 +162,12 @@ Configured at [[vpc|VPC]] level, affects Cloud Router behavior:
 ## Monitoring and Troubleshooting
 
 ### Tunnel Status
-- **Established**: Tunnel is up and running
-- **Waiting for full config**: Configuration incomplete
-- **Network error**: Connectivity issues
-- **Authorization error**: Shared secret mismatch
+| Status | Meaning |
+|--------|---------|
+| **Established** | Tunnel is up and running |
+| **Waiting for full config** | Configuration incomplete |
+| **Network error** | Connectivity issues |
+| **Authorization error** | Shared secret mismatch |
 
 ### Metrics (Cloud Monitoring)
 - **Tunnel established**: Boolean (up/down)
@@ -195,11 +181,13 @@ Configured at [[vpc|VPC]] level, affects Cloud Router behavior:
 - Tunnel state changes
 
 ### Common Issues
-- **Shared secret mismatch**: Check both sides
-- **MTU issues**: Set MTU to 1460 or lower
-- **Firewall blocking**: Allow UDP 500, 4500, ESP (IP protocol 50)
-- **Routing issues**: Verify Cloud Router BGP configuration
-- **ASN conflicts**: Ensure unique ASNs
+| Issue | Fix |
+|-------|-----|
+| **Shared secret mismatch** | Check both sides |
+| **MTU issues** | Set MTU to 1460 or lower |
+| **Firewall blocking** | Allow UDP 500, 4500, ESP (IP protocol 50) |
+| **Routing issues** | Verify Cloud Router BGP configuration |
+| **ASN conflicts** | Ensure unique ASNs |
 
 ---
 
@@ -393,10 +381,14 @@ gcloud compute vpn-tunnels delete TUNNEL_NAME --region=REGION
 
 ### Capacity Planning
 - **Tunnel count**: Based on throughput needs
-  - 1-3 Gbps: 2 tunnels (HA)
-  - 3-6 Gbps: 4 tunnels
-  - 6-15 Gbps: 8 tunnels (max per gateway)
-  - >15 Gbps: Multiple gateways or use Interconnect
+
+| Throughput | Tunnels |
+|------------|---------|
+| 1-3 Gbps | 2 tunnels (HA) |
+| 3-6 Gbps | 4 tunnels |
+| 6-15 Gbps | 8 tunnels (max per gateway) |
+| >15 Gbps | Multiple gateways or use Interconnect |
+
 - **Egress bandwidth**: Monitor and forecast
 - **BGP routes**: Max 100-200 routes per Cloud Router (soft limit)
 
@@ -433,9 +425,11 @@ gcloud compute vpn-tunnels delete TUNNEL_NAME --region=REGION
 - Enabled by default with BGP
 
 #### VPN Tunnel Redundancy Patterns
-- **Active/Active**: Equal cost routes, ECMP load balancing
-- **Active/Passive**: Different route priorities, failover only
-- **Active/Active with Unequal Cost**: Weighted load balancing via MED
+| Pattern | Routing |
+|---------|---------|
+| **Active/Active** | Equal cost routes, ECMP load balancing |
+| **Active/Passive** | Different route priorities, failover only |
+| **Active/Active with Unequal Cost** | Weighted load balancing via MED |
 
 ### VPN vs VPC Peering vs Cloud Interconnect
 | Feature | Cloud VPN | VPC Peering | Cloud Interconnect |

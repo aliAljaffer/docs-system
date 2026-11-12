@@ -31,20 +31,25 @@ tags:
 - Version-controlled
 
 #### Operators
-- **BashOperator**: Run bash commands
-- **PythonOperator**: Execute Python functions
-- **BigQueryOperator**: Run BigQuery queries
-- **DataflowOperator**: Launch Dataflow jobs
-- **GCSOperator**: Cloud Storage operations
+| Operator | Use for |
+|---|---|
+| BashOperator | Run bash commands |
+| PythonOperator | Execute Python functions |
+| BigQueryOperator | Run BigQuery queries |
+| DataflowOperator | Launch Dataflow jobs |
+| GCSOperator | Cloud Storage operations |
+
 - 100+ operators for GCP and external services
 
 ### Components
-- **Airflow Web Server**: UI for monitoring
-- **Airflow Scheduler**: Triggers task execution
-- **Workers**: Execute tasks
-- **Cloud SQL**: Metadata database
-- **Cloud Storage**: DAG storage, logs
-- **GKE**: Underlying infrastructure (managed by Google)
+| Component | Role |
+|---|---|
+| Airflow Web Server | UI for monitoring |
+| Airflow Scheduler | Triggers task execution |
+| Workers | Execute tasks |
+| Cloud SQL | Metadata database |
+| Cloud Storage | DAG storage, logs |
+| GKE | Underlying infrastructure (managed by Google) |
 
 ### Use Cases
 ✓ **ETL pipelines**: Extract, transform, load workflows
@@ -270,11 +275,11 @@ train_model = CreateCustomTrainingJobOperator(
 
 ### Migration Strategies
 #### From Self-Managed Airflow
-- Export existing DAGs
-- Modify for Cloud Composer operators
-- Upload to Cloud Storage
-- Test in Composer environment
-- Gradual migration DAG-by-DAG
+1. Export existing DAGs.
+2. Modify for Cloud Composer operators.
+3. Upload to Cloud Storage.
+4. Test in Composer environment.
+5. Migrate gradually, DAG by DAG.
 
 #### From AWS Step Functions / MWAA
 - Rewrite Step Functions as Airflow DAGs

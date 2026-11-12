@@ -13,10 +13,10 @@ tags:
 `aws` `services`
 
 **Physical** devices used to **move data in and out of the AWS cloud**
-- **AWS Snowcone**
-	- Supports **8TB of storage for HDD**, **14TB for SSD**
-- **AWS Snowball**
-	- Snowball Edge Storage optimized - **80TB HDD**
-	- Snowball Edge Compute optimized - **28TB SSD**
-- **AWS Snowmobile**
-	- **100PB or more.**
+
+| Device | Storage |
+|---|---|
+| **AWS Snowcone** | **8TB of storage for HDD**, **14TB for SSD** |
+| **AWS Snowball** Edge Storage optimized | **80TB HDD** |
+| **AWS Snowball** Edge Compute optimized | **28TB SSD** |
+| **AWS Snowmobile** | **100PB or more.** |

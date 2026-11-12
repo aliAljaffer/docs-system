@@ -17,21 +17,17 @@ tags:
 **Serverless, NoSQL document database** for mobile, web, and server applications
 
 ### Firestore Modes
-#### Native Mode (Recommended)
-- **Strongly consistent**
-- **Real-time updates** with listeners
-- **Offline support** for mobile/web
-- Rich querying capabilities
-- **Cannot switch to Datastore mode**
-- Use for: Mobile apps, web apps, real-time applications
 
-#### Datastore Mode
-- Firestore backend with Datastore API
-- Server-side applications only
-- No real-time updates
-- Eventual consistency option
-- **Cannot switch to Native mode**
-- Use for: Existing Datastore apps, server workloads without real-time needs
+| Attribute | Native mode (Recommended) | Datastore mode |
+|---|---|---|
+| Consistency | **Strongly consistent** | Eventual consistency option |
+| Real-time updates | **Real-time updates** with listeners | No real-time updates |
+| Offline support | **Offline support** for mobile/web | - |
+| Querying | Rich querying capabilities | - |
+| Backend and API | - | Firestore backend with Datastore API |
+| Clients | - | Server-side applications only |
+| Switching | **Cannot switch to Datastore mode** | **Cannot switch to Native mode** |
+| Use for | Mobile apps, web apps, real-time applications | Existing Datastore apps, server workloads without real-time needs |
 
 **This document focuses on Native Mode** as it's recommended for new applications.
 
@@ -47,6 +43,7 @@ tags:
 - **Pay per operation** (no minimum cost)
 
 ### Firestore vs DynamoDB
+
 | Feature | Firestore | DynamoDB |
 |---------|-----------|----------|
 | Data Model | Document (JSON-like) | Key-value, Document |
@@ -226,39 +223,25 @@ service cloud.firestore {
 ```
 
 ### Database Locations
-#### Multi-Region
-- `nam5`: us-central, us-east (**lowest latency in US**)
-- `eur3`: europe-west1, europe-west4
-- 99.99% SLA
-- **Data replicated across regions**
-- Higher cost than regional
 
-#### Regional
-- Single region (e.g., us-east1, europe-west2)
-- 99.9% SLA
-- Lower cost
-- Use when data residency required
+| Type | Examples | SLA | Cost | Notes |
+|---|---|---|---|---|
+| Multi-Region | `nam5`: us-central, us-east (**lowest latency in US**); `eur3`: europe-west1, europe-west4 | 99.99% | Higher than regional | **Data replicated across regions** |
+| Regional | Single region (e.g., us-east1, europe-west2) | 99.9% | Lower | Use when data residency required |
 
 **Location cannot be changed after creation**
 
 ### Pricing
-**Read Operations:**
-- Document read: $0.036 per 100,000 reads
-- Query (even if no results): Counted as 1 read
 
-**Write Operations:**
-- Document write, update, delete: $0.108 per 100,000 writes
-
-**Delete:**
-- Document delete: $0.012 per 100,000 deletes
-
-**Storage:**
-- $0.108 per GB/month (multi-region)
-- $0.018 per GB/month (regional)
-
-**Network:**
-- 10 GB/month free egress
-- Additional egress charged
+| Operation | Price |
+|---|---|
+| Document read | $0.036 per 100,000 reads |
+| Query (even if no results) | Counted as 1 read |
+| Document write, update, delete | $0.108 per 100,000 writes |
+| Document delete | $0.012 per 100,000 deletes |
+| Storage (multi-region) | $0.108 per GB/month |
+| Storage (regional) | $0.018 per GB/month |
+| Network egress | 10 GB/month free, additional egress charged |
 
 **Free Tier (Spark Plan):**
 - 50,000 reads/day
@@ -271,12 +254,15 @@ service cloud.firestore {
 - 1M reads/month + 500K writes/month + 1 GB storage ≈ $1.50/month
 
 ### Performance Characteristics
-- **<100ms latency** for most operations
-- **1 write per second per document** limit (can burst)
-- **10,000 writes/second** per collection (soft limit, can be higher)
-- Unlimited collections and documents
-- 1 MB document size limit
-- 500 operations per transaction/batch
+
+| Limit | Value |
+|---|---|
+| Latency | **<100ms** for most operations |
+| Writes per document | **1 write per second** limit (can burst) |
+| Writes per collection | **10,000 writes/second** (soft limit, can be higher) |
+| Collections and documents | Unlimited |
+| Document size | 1 MB |
+| Operations per transaction/batch | 500 |
 
 ### Use Cases
 - **Mobile applications**: Chat apps, social networks, real-time collaboration
@@ -296,13 +282,16 @@ service cloud.firestore {
 - Rapid development with managed security
 
 ### When NOT to Use Firestore
-- **Massive scale** (>100 TB) → Use [[gcp/bigtable|Bigtable]]
-- **Complex SQL queries** → Use [[gcp/cloud-sql|Cloud SQL]] or [[bigquery|BigQuery]]
-- **Analytics workloads** → Use [[bigquery|BigQuery]]
-- **Graph queries** → Use specialized graph database
-- **High write throughput per document** (>1/sec sustained) → Use [[gcp/bigtable|Bigtable]]
-- **Full-text search** → Use Algolia or Elasticsearch (or export to BigQuery)
-- **Global strong consistency across regions** → Use [[cloud-spanner|Cloud Spanner]]
+
+| Need | Use instead |
+|---|---|
+| **Massive scale** (>100 TB) | [[gcp/bigtable|Bigtable]] |
+| **Complex SQL queries** | [[gcp/cloud-sql|Cloud SQL]] or [[bigquery|BigQuery]] |
+| **Analytics workloads** | [[bigquery|BigQuery]] |
+| **Graph queries** | Specialized graph database |
+| **High write throughput per document** (>1/sec sustained) | [[gcp/bigtable|Bigtable]] |
+| **Full-text search** | Algolia or Elasticsearch (or export to BigQuery) |
+| **Global strong consistency across regions** | [[cloud-spanner|Cloud Spanner]] |
 
 ### Integration with Other Services
 #### Firebase
@@ -733,13 +722,14 @@ async function getUser(userId) {
 - Query performance
 
 #### Alerting Setup
-```javascript
-// Cloud Monitoring alert policies
-- Read operations >80% of quota
-- Write operations >80% of quota
-- Storage usage >90%
-- High security rule evaluation time
-```
+Cloud Monitoring alert policies:
+
+| Alert | Threshold |
+|---|---|
+| Read operations | >80% of quota |
+| Write operations | >80% of quota |
+| Storage usage | >90% |
+| Security rule evaluation time | High |
 
 ### Integration Patterns
 #### Firestore + Cloud Functions (Event-Driven)

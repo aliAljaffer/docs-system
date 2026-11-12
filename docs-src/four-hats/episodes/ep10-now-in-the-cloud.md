@@ -31,7 +31,10 @@ Cloud resources cost money while they run. Even an idle VM bills every hour. So 
 
 A budget alert sends an email when spending passes a limit. It does not stop the spending. You still destroy resources at the end.
 
-Create a Google Cloud project and note the project ID. Open Billing, then Budgets and alerts. Create a budget with a low amount, for example 5 USD. Add an email alert at 50 percent, 90 percent, and 100 percent.
+1. Create a Google Cloud project and note the project ID.
+2. Open Billing, then Budgets and alerts.
+3. Create a budget with a low amount, for example 5 USD.
+4. Add an email alert at 50 percent, 90 percent, and 100 percent.
 
 Do not create resources before the budget alert. The alert is the guardrail. `destroy` is the stop button.
 
@@ -61,8 +64,6 @@ You write the state you want in `.tf` files. `plan` shows what will change. `app
 | Apply and destroy | Make the change, then remove it. |
 | State file | The record of what the tool created. |
 | Budget alert | Mail when spend passes a limit. It does not stop spend. |
-| Load balancer | Spreads traffic across many servers. |
-| Reverse proxy and CDN | Proxy forwards requests. CDN serves nearby copies. |
 
 Reviewable infrastructure. `terraform plan` shows the change before it happens. A Cloud Engineer reviews that plan the way a Software Engineer reviews a pull request.
 
@@ -72,13 +73,16 @@ Reviewable infrastructure. `terraform plan` shows the change before it happens. 
 
 Three files describe the rest:
 
-- `variables.tf`: project ID, region, zone, machine type, SSH public key, and your IP in [[cloud/cidr|CIDR]] form.
-- `main.tf`: a network, a firewall rule for port 22 from your IP only, a firewall rule for port 8080, and a Compute Engine VM with Ubuntu 24.04, 20 GB disk, and a public IP.
-- `outputs.tf`: the VM IP and the app URL.
+| File | Contents |
+|---|---|
+| `variables.tf` | Project ID, region, zone, machine type, SSH public key, and your IP in [[cloud/cidr|CIDR]] form |
+| `main.tf` | A network, a firewall rule for port 22 from your IP only, a firewall rule for port 8080, and a Compute Engine VM with Ubuntu 24.04, 20 GB disk, and a public IP |
+| `outputs.tf` | The VM IP and the app URL |
 
 Tags connect the firewall rules to the VM. The ports are the same ones UFW opens on the VM. SSH opens from your IP only, as `/32`. The web port opens from `0.0.0.0/0`.
 
-The reference network uses auto mode. It does not create the Episode 7 subnet. Add a `google_compute_subnetwork` resource if you want the exact plan.
+> [!NOTE]
+> The reference network uses auto mode. It does not create the Episode 7 subnet. Add a `google_compute_subnetwork` resource if you want the exact plan.
 
 `terraform.tfvars` holds your project ID and your IP. It is in `.gitignore`. Never commit it.
 
@@ -99,7 +103,12 @@ The plan lists four resources to add. Apply asks for `yes`. The output shows the
 
 ## Reuse the playbook
 
-Only the IP address changes. Put the VM IP in `inventory.ini`. Set `ansible_user=student`. Run the playbook from Episode 9. Open the app URL.
+Only the IP address changes:
+
+1. Put the VM IP in `inventory.ini`.
+2. Set `ansible_user=student`.
+3. Run the playbook from Episode 9.
+4. Open the app URL.
 
 ```shell
 export DB_PASSWORD=choose-a-password
@@ -118,7 +127,11 @@ We are done. Remove everything:
 docker compose -f tools/compose.yaml run --rm terraform destroy
 ```
 
-Four resources destroyed. Open the Billing page and the Compute Engine page. Both must show nothing running. Open Billing Reports and check that no Compute Engine VM, disk, or network remains. Open Compute Engine VM instances and Disks. Both lists must be empty.
+Four resources destroyed. Then check:
+
+1. Open the Billing page and the Compute Engine page. Both must show nothing running.
+2. Open Billing Reports. Check that no Compute Engine VM, disk, or network remains.
+3. Open Compute Engine VM instances and Disks. Both lists must be empty.
 
 Destroy proves cleanup. An empty billing page closes the act. Unused resources are waste. Cost control is part of the job.
 

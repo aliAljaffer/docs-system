@@ -8,12 +8,15 @@
   - `10.0.0.0/8`: large networks
   - `172.16.0.0/12`
   - `192.168.0.0/16`: home networks
-- Limits:
-  - 5 VPCs per region (soft limit)
-  - 5 [[cidr|CIDR]] blocks per VPC
-  - Smallest CIDR: `/28` (16 addresses). Largest: `/16` (65,536 addresses).
 - A VPC CIDR must not overlap with your other networks.
 - Avoid Elastic IPs. Use a DNS name, or a load balancer, in front of a public IP.
+
+| Limit | Value |
+|---|---|
+| VPCs per region | 5 (soft limit) |
+| [[cidr|CIDR]] blocks per VPC | 5 |
+| Smallest CIDR | `/28` (16 addresses) |
+| Largest CIDR | `/16` (65,536 addresses) |
 
 ## Subnets
 
@@ -32,9 +35,17 @@ A subnet is a range inside the VPC CIDR. AWS reserves 5 IP addresses in each sub
 | Component | Direction | Notes |
 |---|---|---|
 | Internet gateway | Two-way for public resources | One per VPC. Scales and is highly available. Needs a route such as `0.0.0.0/0` to the gateway. |
-| NAT gateway | Private subnets to internet | AWS-managed. Resilient within one AZ. Create one per AZ for [[fault-tolerance|fault tolerance]]. Billed per hour. Needs an internet gateway. Bandwidth from 5 to 100 Gbps. Instances in the same subnet cannot use it. |
+| NAT gateway | Private subnets to internet | AWS-managed. See the list below the table. |
 | NAT instance (outdated) | Private subnets to internet | EC2 in a public subnet. Disable source/destination check. Not highly available. |
 | Egress-only internet gateway | Outbound IPv6 only | Update route tables. |
+
+NAT gateway facts:
+
+- It is resilient within one AZ. Create one per AZ for [[fault-tolerance|fault tolerance]].
+- It is billed per hour.
+- It needs an internet gateway.
+- Bandwidth runs from 5 to 100 Gbps.
+- Instances in the same subnet cannot use it.
 
 ### Bastion hosts
 

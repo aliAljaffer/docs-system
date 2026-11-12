@@ -24,11 +24,14 @@ tags:
 - Push and pull subscriptions
 
 ### Core Concepts
-- **Topic**: Named resource to which messages are sent
-- **Subscription**: Named resource representing stream from topic
-- **Message**: Data payload + attributes
-- **Publisher**: Sends messages to topic
-- **Subscriber**: Receives messages from subscription
+
+| Term | Meaning |
+|---|---|
+| **Topic** | Named resource to which messages are sent |
+| **Subscription** | Named resource representing stream from topic |
+| **Message** | Data payload + attributes |
+| **Publisher** | Sends messages to topic |
+| **Subscriber** | Receives messages from subscription |
 
 ### Architecture Pattern
 ```text
@@ -112,18 +115,24 @@ attribute.region = "us-west" AND attribute.priority = "high"
 - Use for critical workflows
 
 ### Throughput & Limits
-- **Unlimited throughput** (scales automatically)
-- **10 MB/second per partition** (configurable)
-- Max message size: 10 MB
-- Max retention: 31 days
-- Max attributes: 100 per message
+
+| Limit | Value |
+|---|---|
+| Throughput | **Unlimited** (scales automatically) |
+| Throughput per partition | **10 MB/second** (configurable) |
+| Max message size | 10 MB |
+| Max retention | 31 days |
+| Max attributes | 100 per message |
 
 ### Pricing
-- **Message ingestion**: $0.04 per GB
-- **Delivery**: $0.04 per GB
-- **Snapshots**: $0.27 per GB-month
-- **Seeks**: $0.01 per 1,000 seeks
-- **Free tier**: 10 GB/month
+
+| Item | Price |
+|---|---|
+| **Message ingestion** | $0.04 per GB |
+| **Delivery** | $0.04 per GB |
+| **Snapshots** | $0.27 per GB-month |
+| **Seeks** | $0.01 per 1,000 seeks |
+| **Free tier** | 10 GB/month |
 
 ---
 
@@ -215,14 +224,17 @@ Single Publisher → Topic → Sub A (priority) → Fast processing
 - 99.95% availability SLA
 
 ### Security Best Practices
-- **[[gcp/iam|IAM]] roles**:
-  - `pubsub.publisher`: Publish messages
-  - `pubsub.subscriber`: Receive messages
-  - `pubsub.viewer`: List topics/subscriptions
-  - `pubsub.admin`: Full access
+- **[[gcp/iam|IAM]] roles**: see the table below
 - **Service accounts**: Different account per publisher/subscriber
 - **VPC Service Controls**: Prevent data exfiltration
 - **CMEK**: Customer-managed encryption keys
+
+| Role | Allows |
+|---|---|
+| `pubsub.publisher` | Publish messages |
+| `pubsub.subscriber` | Receive messages |
+| `pubsub.viewer` | List topics/subscriptions |
+| `pubsub.admin` | Full access |
 
 ### Idempotency Handling
 **At-least-once delivery requires idempotent processing**
@@ -311,6 +323,7 @@ Pub/Sub → GKE workload (pull subscription)
 - **[[cloud-logging|Logs]]**: Publish/subscribe audit logs
 
 ### Comparison with AWS
+
 | Feature | Cloud Pub/Sub | SNS + SQS |
 |---------|---------------|-----------|
 | Fan-out | Native (subscriptions) | SNS → multiple SQS |
@@ -321,10 +334,13 @@ Pub/Sub → GKE workload (pull subscription)
 | Pricing | Per GB | Per request |
 
 ### Migration from SNS/SQS
-- **SNS topic** → Pub/Sub topic
-- **SQS queue** → Pub/Sub subscription
-- **SNS + SQS fan-out** → Single topic with multiple subscriptions
-- **SQS FIFO** → Pub/Sub with ordering keys
+
+| SNS / SQS | Pub/Sub |
+|---|---|
+| **SNS topic** | Pub/Sub topic |
+| **SQS queue** | Pub/Sub subscription |
+| **SNS + SQS fan-out** | Single topic with multiple subscriptions |
+| **SQS FIFO** | Pub/Sub with ordering keys |
 
 ### Use Cases
 ✓ **Good for:**

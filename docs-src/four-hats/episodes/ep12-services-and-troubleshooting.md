@@ -25,9 +25,14 @@ Pods get new IP addresses every time they restart. A Service gives them one stab
 
 ## Labels, selectors, and annotations
 
-Labels identify resources. Selectors use labels to pick resources. The act uses `app.kubernetes.io/name` and `app.kubernetes.io/part-of`. A Pod template carries these labels. A Service selector then finds matching Pods by those values.
+The act uses the labels `app.kubernetes.io/name` and `app.kubernetes.io/part-of`. A Pod template carries these labels. A Service selector then finds matching Pods by those values.
 
-Annotations store extra information. Selectors do not use them. Other tools read annotations. For example, `external-dns` reads an annotation on a Service and creates a DNS record for it.
+| | Labels | Annotations |
+|---|---|---|
+| Purpose | Identify resources | Store extra information |
+| Used by selectors | Yes, selectors use labels to pick resources | No |
+| Read by | Selectors | Other tools |
+| Example | `app.kubernetes.io/name` | `external-dns` reads an annotation on a Service and creates a DNS record for it |
 
 Labels and annotations look alike in YAML, but they serve different uses. A matching label is how a Service finds its Pods. A wrong selector means the Service has nobody to route to. When routing fails, matching labels is the first check.
 
@@ -48,13 +53,34 @@ Endpoints are the Pod addresses behind a Service. When endpoints list Pod IPs, r
 
 ![Labels pick Pods. Services front them with a stable name](../assets/diagrams/ep12-service-routing.svg)
 
-The command line can create the same objects without YAML. `kubectl run` makes one bare Pod with no self-healing. `kubectl create deployment` makes a Deployment whose Pods are replaced if they die. `kubectl expose` makes a Service with one stable address in front of the Pods. `kubectl get`, `describe`, and `logs` look, look closer, and read the output. Use these for a quick test. Keep the YAML for real work. Edit the file and apply it, instead of editing the live resource with `kubectl edit`.
+The command line can create the same objects without YAML:
+
+| Command | What it does |
+|---|---|
+| `kubectl run` | Makes one bare Pod with no self-healing |
+| `kubectl create deployment` | Makes a Deployment whose Pods are replaced if they die |
+| `kubectl expose` | Makes a Service with one stable address in front of the Pods |
+| `kubectl get`, `describe`, `logs` | Look, look closer, and read the output |
+
+Use these for a quick test. Keep the YAML for real work. Edit the file and apply it, instead of editing the live resource with `kubectl edit`.
 
 ## Break it, then fix it
 
-The debug loop uses four commands in order, `get`, `describe`, `logs`, and events. Start with `get` to see the state. Use `describe` to read the Events at the bottom. Use `logs` only after the Pod has started. Use events to see recent changes in order. Read the Events first. They name the cause in most cases.
+The debug loop uses four commands in order:
 
-A wrong image tag shows `ImagePullBackOff`. The Events show `Failed to pull image`. Fix the tag and apply. A wrong selector shows `<none>` in ENDPOINTS. Fix the selector and apply. Those two cases cover the common faults. The scratch Deployment and Service from the command line exercise are a quick way to practice both the create and delete forms, and they must be deleted when the test ends.
+1. `get`: see the state.
+2. `describe`: read the Events at the bottom.
+3. `logs`: use only after the Pod has started.
+4. Events: see recent changes in order.
+
+Read the Events first. They name the cause in most cases.
+
+| Symptom | Where it shows | Fix |
+|---|---|---|
+| Wrong image tag | `ImagePullBackOff`. The Events show `Failed to pull image`. | Fix the tag and apply. |
+| Wrong selector | `<none>` in ENDPOINTS | Fix the selector and apply. |
+
+Those two cases cover the common faults. The scratch Deployment and Service from the command line exercise are a quick way to practice both the create and delete forms, and they must be deleted when the test ends.
 
 A Service of type LoadBalancer needs a cloud. Minikube uses NodePort plus `minikube service` for local access. NodePort fits a laptop. Ingress plus [[gcp/cloud-load-balancing|cloud load balancing]] fit production. Editing the live resource drifts from Git, so the file stays the source of truth.
 

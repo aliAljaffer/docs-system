@@ -57,40 +57,24 @@ tags:
 - Compute Engine instances
 
 ### Supported Resources
-#### App Engine
-- **Easiest integration, built-in support**
-- Enable IAP with one click
-- No additional configuration needed
 
-#### Cloud Run
-- Requires ingress via HTTPS Load Balancer
-- Backend service configuration
-- IAP enabled on backend service
-
-#### GKE
-- External HTTPS Load Balancer + Ingress
-- BackendConfig CRD for IAP settings
-- Per-service or cluster-wide
-
-#### Compute Engine
-- Instance groups behind HTTPS Load Balancer
-- Backend service with IAP enabled
-- Applications must respect IAP headers
-
-#### On-Premises (via Connector)
-- IAP Connector for on-prem applications
-- **Bring BeyondCorp to hybrid environments**
-- No VPN tunnel needed
+| Resource | Setup required |
+|---|---|
+| App Engine | **Easiest integration, built-in support**. Enable IAP with one click. No additional configuration needed |
+| Cloud Run | Ingress via HTTPS Load Balancer. Backend service configuration. IAP enabled on backend service |
+| GKE | External HTTPS Load Balancer + Ingress. BackendConfig CRD for IAP settings. Per-service or cluster-wide |
+| Compute Engine | Instance groups behind HTTPS Load Balancer. Backend service with IAP enabled. Applications must respect IAP headers |
+| On-Premises (via Connector) | IAP Connector for on-prem applications. **Bring BeyondCorp to hybrid environments**. No VPN tunnel needed |
 
 ### IAM Roles for IAP
-**Access Roles:**
-- `roles/iap.httpsResourceAccessor`: Access HTTPS resources
-- `roles/iap.tunnelResourceAccessor`: TCP tunneling (SSH, RDP)
-- `roles/iap.webServiceUser`: Legacy, use httpsResourceAccessor instead
 
-**Admin Roles:**
-- `roles/iap.admin`: Full IAP admin (configure settings, IAM)
-- `roles/iap.settingsAdmin`: Configure IAP settings only
+| Role | Grants | Status |
+|---|---|---|
+| `roles/iap.httpsResourceAccessor` | Access HTTPS resources | Access role |
+| `roles/iap.tunnelResourceAccessor` | TCP tunneling (SSH, RDP) | Access role |
+| `roles/iap.webServiceUser` | - | Access role. Legacy, use httpsResourceAccessor instead |
+| `roles/iap.admin` | Full IAP admin (configure settings, IAM) | Admin role |
+| `roles/iap.settingsAdmin` | Configure IAP settings only | Admin role |
 
 **Best Practice:**
 - Grant `httpsResourceAccessor` to users/groups
@@ -207,9 +191,12 @@ spec:
 
 ### IAP Headers
 **IAP adds headers to forwarded requests:**
-- `X-Goog-IAP-JWT-Assertion`: Signed JWT token with user identity
-- `X-Goog-Authenticated-User-Email`: User email
-- `X-Goog-Authenticated-User-ID`: User ID
+
+| Header | Contains |
+|---|---|
+| `X-Goog-IAP-JWT-Assertion` | Signed JWT token with user identity |
+| `X-Goog-Authenticated-User-Email` | User email |
+| `X-Goog-Authenticated-User-ID` | User ID |
 
 **Application should verify JWT:**
 ```python
@@ -376,6 +363,7 @@ gcloud logging read "resource.type=gae_app \
 - Limited to Google identities (no SAML federation directly)
 
 ### IAP vs VPN
+
 | Aspect | IAP | VPN |
 |--------|-----|-----|
 | Network access | Application-level | Network-level |
@@ -388,6 +376,7 @@ gcloud logging read "resource.type=gae_app \
 | Cost | Free (IAP itself) | VPN gateway costs |
 
 ### IAP vs AWS ALB Authentication
+
 | Feature | IAP | ALB Auth + Cognito |
 |---------|-----|---------------------|
 | Identity providers | Google, Workspace, Cloud Identity | Cognito, SAML, OIDC, Social |

@@ -42,38 +42,28 @@ tags:
 - DynamoDB Global is eventually consistent + scale but NoSQL only
 
 ### Instance Configurations
-#### Regional Configuration
-- Data replicated across **3 zones within 1 region**
-- 99.99% SLA
-- Lower latency (single region)
-- Lower cost than multi-region
-- Use case: Regional applications, data residency requirements
+| Aspect | Regional | Multi-region |
+|--------|----------|--------------|
+| Replication | Data replicated across **3 zones within 1 region** | Data replicated across **multiple regions** |
+| SLA | 99.99% | **99.999%** (5 nines) |
+| Latency | Lower latency (single region) | Read from nearest replica (low latency reads) |
+| Cost | Lower cost than multi-region | - |
+| Writes | - | Commit after majority quorum |
+| Use case | Regional applications, data residency requirements | Global applications, disaster recovery |
 
-#### Multi-Region Configuration
-- Data replicated across **multiple regions**
-- **99.999% SLA** (5 nines)
-- Read from nearest replica (low latency reads)
-- Writes commit after majority quorum
-- Use case: Global applications, disaster recovery
-- Configurations:
-  - **nam3**: us-east1, us-central1, us-west1
-  - **nam6**: 6 US regions
-  - **eur3**: 3 Europe regions
-  - **nam-eur-asia1**: Global configuration
+Multi-region configurations:
+- **nam3**: us-east1, us-central1, us-west1
+- **nam6**: 6 US regions
+- **eur3**: 3 Europe regions
+- **nam-eur-asia1**: Global configuration
 
 ### Processing Units vs Nodes
-#### Processing Units (PUs)
-- Smallest unit of compute (100 PUs = 1 Node)
-- **Minimum 1000 PUs** for production (or 100 PUs for dev)
-- Each PU: ~0.01 node
-- Granular scaling
-- **Recommended for most use cases**
-
-#### Nodes
-- Legacy pricing model
-- 1 Node = 1000 PUs
-- Less granular scaling
-- Still supported but PUs preferred
+| Aspect | Processing units (PUs) | Nodes |
+|--------|------------------------|-------|
+| Role | Smallest unit of compute (100 PUs = 1 Node) | Legacy pricing model |
+| Size | Each PU: ~0.01 node. **Minimum 1000 PUs** for production (or 100 PUs for dev) | 1 Node = 1000 PUs |
+| Scaling | Granular scaling | Less granular scaling |
+| Status | **Recommended for most use cases** | Still supported but PUs preferred |
 
 **Capacity:**
 - 1 Node (1000 PUs): ~2 TB storage, ~10,000 QPS (reads), ~2,000 QPS (writes)
@@ -123,9 +113,11 @@ tags:
   - **Use stale reads for better performance and lower cost**
 
 #### Transaction Types
-- **Read-Write Transactions**: Full ACID, serializable isolation
-- **Read-Only Transactions**: Consistent snapshot, no locks
-- **Partitioned DML**: Large-scale updates, not transactional
+| Transaction type | Behavior |
+|------------------|----------|
+| **Read-Write Transactions** | Full ACID, serializable isolation |
+| **Read-Only Transactions** | Consistent snapshot, no locks |
+| **Partitioned DML** | Large-scale updates, not transactional |
 
 ### Backup and Recovery
 - **Automated backups**: Configurable retention (1 hour to 366 days)
@@ -143,10 +135,12 @@ tags:
 - Monitor with `INFORMATION_SCHEMA.DATABASE_OPTIONS`
 
 #### Data Export/Import
-- **Cloud Dataflow**: For large-scale exports to Cloud Storage, BigQuery
-- **Cloud Data Fusion**: For ETL pipelines
-- **Direct exports**: Native export to Cloud Storage (Avro format)
-- **Cloud Spanner emulator**: Local testing
+| Tool | Use for |
+|------|---------|
+| **Cloud Dataflow** | Large-scale exports to Cloud Storage, BigQuery |
+| **Cloud Data Fusion** | ETL pipelines |
+| **Direct exports** | Native export to Cloud Storage (Avro format) |
+| **Cloud Spanner emulator** | Local testing |
 
 ### Performance Optimization
 #### Query Optimization
@@ -169,17 +163,15 @@ tags:
 - Use read-only transactions for queries
 
 ### Pricing
-#### Processing Units Model (Recommended)
-- **Regional**: $0.90 per 100 PUs per hour
-- **Multi-region**: $3.00-9.00 per 100 PUs per hour (varies by config)
+| Model | Regional | Multi-region |
+|-------|----------|--------------|
+| Processing Units (recommended) | $0.90 per 100 PUs per hour | $3.00-9.00 per 100 PUs per hour (varies by config) |
+| Node (legacy) | $9.00 per node per hour | $30.00-90.00 per node per hour |
+
 - **Storage**: $0.30 per GB/month (regional), $0.50 (multi-region)
 - **Backup storage**: $0.036-0.054 per GB/month
 - **Network egress**: Standard GCP rates
-
-#### Node Model (Legacy)
-- **Regional**: $9.00 per node per hour
-- **Multi-region**: $30.00-90.00 per node per hour
-- Same storage and backup costs
+- **Node model**: Same storage and backup costs
 
 **Minimum costs:**
 - Regional: ~$650/month (1000 PUs)
@@ -202,12 +194,14 @@ tags:
 - Any workload requiring >2 TB and strong consistency
 
 ### When NOT to Use Cloud Spanner
-- Small databases (<100 GB) → Use [[gcp/cloud-sql|Cloud SQL]]
-- Don't need strong consistency → Use [[gcp/cloud-sql|Cloud SQL]] with replicas
-- NoSQL better fit → Use [[gcp/firestore|Firestore]] or [[gcp/bigtable|Bigtable]]
-- Analytical workloads → Use [[bigquery|BigQuery]]
-- Cost-sensitive with regional requirements → Use [[gcp/cloud-sql|Cloud SQL]] or [[alloydb|AlloyDB]]
-- Simple key-value access → Use [[gcp/firestore|Firestore]]
+| Situation | Use instead |
+|-----------|-------------|
+| Small databases (<100 GB) | [[gcp/cloud-sql|Cloud SQL]] |
+| Don't need strong consistency | [[gcp/cloud-sql|Cloud SQL]] with replicas |
+| NoSQL better fit | [[gcp/firestore|Firestore]] or [[gcp/bigtable|Bigtable]] |
+| Analytical workloads | [[bigquery|BigQuery]] |
+| Cost-sensitive with regional requirements | [[gcp/cloud-sql|Cloud SQL]] or [[alloydb|AlloyDB]] |
+| Simple key-value access | [[gcp/firestore|Firestore]] |
 
 ### Migration to Spanner
 #### HarbourBridge
@@ -392,7 +386,7 @@ CREATE TABLE LineItems (
 - Updates happen in same transaction
 
 #### Primary Key Design Patterns
-**Anti-pattern - Sequential Keys:**
+##### Anti-pattern - Sequential Keys
 ```sql
 -- BAD: All writes hit same split
 CREATE TABLE Events (
@@ -401,7 +395,7 @@ CREATE TABLE Events (
 ) PRIMARY KEY (Timestamp);
 ```
 
-**Pattern 1 - UUID:**
+##### Pattern 1 - UUID
 ```sql
 -- GOOD: Random distribution
 CREATE TABLE Events (
@@ -411,7 +405,7 @@ CREATE TABLE Events (
 ) PRIMARY KEY (EventId);
 ```
 
-**Pattern 2 - Hash + Sequential:**
+##### Pattern 2 - Hash + Sequential
 ```sql
 -- GOOD: Distributed but maintains some ordering
 CREATE TABLE Events (
@@ -421,7 +415,7 @@ CREATE TABLE Events (
 ) PRIMARY KEY (ShardId, Timestamp);
 ```
 
-**Pattern 3 - Bit-Reversed Timestamp:**
+##### Pattern 3 - Bit-Reversed Timestamp
 ```sql
 -- GOOD: Maintains ordering within shards
 CREATE TABLE Events (
@@ -465,9 +459,11 @@ with database.snapshot(exact_staleness=datetime.timedelta(seconds=15)) as snapsh
 
 ### High Availability and Disaster Recovery
 #### Multi-Region Failure Scenarios
-- **Single zone failure**: Automatic failover, no downtime
-- **Single region failure**: Continues operating (needs majority quorum)
-- **Multi-region failure**: Requires manual intervention if quorum lost
+| Failure | Outcome |
+|---------|---------|
+| **Single zone failure** | Automatic failover, no downtime |
+| **Single region failure** | Continues operating (needs majority quorum) |
+| **Multi-region failure** | Requires manual intervention if quorum lost |
 
 #### Backup Strategy
 - **Automated daily backups** with 7-365 day retention
@@ -520,10 +516,14 @@ SELECT * FROM Orders WHERE OrderDate > '2024-01-01';
 
 ### Security Best Practices
 - **IAM roles**:
-  - `roles/spanner.databaseReader`: Read-only access
-  - `roles/spanner.databaseUser`: Read-write access
-  - `roles/spanner.databaseAdmin`: Schema changes
-  - `roles/spanner.admin`: Full instance management
+
+| Role | Grants |
+|------|--------|
+| `roles/spanner.databaseReader` | Read-only access |
+| `roles/spanner.databaseUser` | Read-write access |
+| `roles/spanner.databaseAdmin` | Schema changes |
+| `roles/spanner.admin` | Full instance management |
+
 - **VPC Service Controls**: Prevent data exfiltration
 - **CMEK**: Customer-managed encryption keys via [[gcp/cloud-kms|Cloud KMS]]
 - **Audit logging**: Track all database operations

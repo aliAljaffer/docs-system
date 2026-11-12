@@ -24,10 +24,13 @@ An [[security-iam|IAM]] policy is a JSON document. It states what is allowed or 
 ## Passwords and MFA
 
 - A password policy enforces strong passwords.
-- [[multi-factor-authentication|Multi-factor authentication]] (MFA) adds a second layer of security. Device types:
-  - Virtual, such as Google Authenticator
-  - Universal 2nd Factor (U2F) hardware, such as YubiKey
-  - SurePassID key fob for AWS GovCloud
+- [[multi-factor-authentication|Multi-factor authentication]] (MFA) adds a second layer of security.
+
+| Device type | Example |
+|---|---|
+| Virtual | Google Authenticator |
+| Universal 2nd Factor (U2F) hardware | YubiKey |
+| Key fob for AWS GovCloud | SurePassID |
 
 ## Access methods
 
@@ -64,8 +67,12 @@ A permission boundary sets the maximum permissions for a user or role. Groups do
 
 - Organizations groups many AWS accounts.
 - Control Tower sets up governance guardrails:
-  - Preventive guardrails use SCPs. For example, they restrict regions across all accounts.
-  - Detective guardrails use [[management-and-governance-config|AWS Config]]. For example, they find untagged resources.
+
+| Guardrail | Built on | Example |
+|---|---|---|
+| Preventive | SCPs | Restrict regions across all accounts |
+| Detective | [[management-and-governance-config|AWS Config]] | Find untagged resources |
+
 - IAM Identity Center gives one login for:
   - AWS accounts in Organizations
   - Business cloud apps

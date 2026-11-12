@@ -2,9 +2,11 @@
 
 Run these steps when you finish the course. Run every command from the repository root. The steps remove the resources that the course created on your laptop and on Google Cloud.
 
-Warning: Step 1 deletes all data in the course database. Step 2 deletes the Minikube cluster and its data. Step 3 deletes the Multipass VM. Step 4 deletes the Google Cloud resources.
+> [!WARNING]
+> Step 1 deletes all data in the course database. Step 2 deletes the Minikube cluster and its data. Step 3 deletes the Multipass VM. Step 4 deletes the Google Cloud resources.
 
-Note: Some steps fail if you skipped an optional part. For example, `multipass delete` fails if Multipass is not installed. Continue with the next step.
+> [!NOTE]
+> Some steps fail if you skipped an optional part. For example, `multipass delete` fails if Multipass is not installed. Continue with the next step.
 
 1. Stop both Compose projects. Delete their containers, networks, volumes, and images:
 

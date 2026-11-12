@@ -17,6 +17,7 @@ tags:
 **Global resource** that spans all regions, providing **isolated network** for Google Cloud resources
 
 ### Key Differences from AWS VPC
+
 | Feature | GCP VPC | AWS VPC |
 |---------|---------|---------|
 | Scope | **Global** (spans all regions) | Regional |
@@ -26,9 +27,13 @@ tags:
 | DNS | Automatic internal DNS | Route 53 Private Hosted Zones |
 
 ### VPC Networks
-- **Default VPC**: Automatically created, one subnet per region
-- **Auto Mode VPC**: Automatically creates subnets in each region (10.128.0.0/9)
-- **Custom Mode VPC**: Manual subnet creation, **recommended for production**
+
+| Type | Subnets | Use |
+|---|---|---|
+| **Default VPC** | Automatically created, one subnet per region | - |
+| **Auto Mode VPC** | Automatically created in each region (10.128.0.0/9) | - |
+| **Custom Mode VPC** | Manual subnet creation | **Recommended for production** |
+
 - Can convert Auto Mode to Custom Mode (one-way, irreversible)
 
 ### Subnets
@@ -42,10 +47,13 @@ tags:
 - Minimum /29 (8 IPs), maximum /8
 
 #### Reserved IP Addresses (per subnet)
-- **First IP** (.0): Network address
-- **Second IP** (.1): Default gateway
-- **Second-to-last IP**: Reserved by GCP
-- **Last IP**: Broadcast address
+
+| Address | Role |
+|---|---|
+| **First IP** (.0) | Network address |
+| **Second IP** (.1) | Default gateway |
+| **Second-to-last IP** | Reserved by GCP |
+| **Last IP** | Broadcast address |
 
 ### Routing
 #### Routes
@@ -171,6 +179,7 @@ tags:
 - Use cases: Security monitoring, threat detection, troubleshooting
 
 ### VPC Network Peering vs Shared VPC
+
 | Feature       | VPC Peering | Shared VPC |
 | ------------- | ------------------- | --------------- |
 | Admin model   | Distributed         | Centralized     |
@@ -217,12 +226,15 @@ tags:
 - Savings: ~50% on egress costs
 
 ### Pricing
-- **VPC Network**: No charge
-- **Static IP**: Charged when not attached to running resource
-- **Egress traffic**: Charged (varies by destination)
-- **Ingress traffic**: Free
-- **Private Google Access**: Free
-- **VPC Peering**: No additional charge (standard egress applies)
+
+| Item | Charge |
+|---|---|
+| **VPC Network** | No charge |
+| **Static IP** | Charged when not attached to running resource |
+| **Egress traffic** | Charged (varies by destination) |
+| **Ingress traffic** | Free |
+| **Private Google Access** | Free |
+| **VPC Peering** | No additional charge (standard egress applies) |
 
 ---
 
@@ -368,14 +380,15 @@ gcloud compute routes create ROUTE_NAME \
 
 ### Migration Considerations
 #### From AWS
-- **VPC Scope**: GCP VPC is global, AWS VPC is regional
-  - Design: Single global VPC vs multiple regional VPCs
-- **Subnets**: GCP subnets are regional, AWS subnets are AZ-specific
-  - Simplifies multi-AZ deployments in GCP
-- **Security Groups**: Map to firewall rules with tags/[[gcp/iam|service accounts]]
-- **Network ACLs**: Map to firewall rules (stateful in GCP)
-- **VPC Endpoints**: Use Private Google Access and Private Service Connection
-- **Transit Gateway**: Use VPC peering or Network Connectivity Center
+
+| AWS concept | GCP equivalent | Notes |
+|---|---|---|
+| VPC (regional) | GCP VPC is global | Design: Single global VPC vs multiple regional VPCs |
+| Subnets (AZ-specific) | GCP subnets are regional | Simplifies multi-AZ deployments in GCP |
+| Security Groups | Firewall rules with tags/[[gcp/iam|service accounts]] | - |
+| Network ACLs | Firewall rules (stateful in GCP) | - |
+| VPC Endpoints | Private Google Access and Private Service Connection | - |
+| Transit Gateway | VPC peering or Network Connectivity Center | - |
 
 #### BYOIP Strategy
 - Validate IP ownership

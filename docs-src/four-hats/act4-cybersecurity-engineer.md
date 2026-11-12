@@ -9,7 +9,13 @@
 | Task | The backend ships a search endpoint that builds SQL from user input, nobody has tested it, and no part of the app checks who is allowed to change what. |
 | Goal | Think and act like an attacker to find the SQL injection, then switch hats and fix it, prove the fix with automated scans, find and fix a second real flaw, and put the app's secrets safely in Git. |
 | Done when | `sqlmap` finds nothing on the fixed endpoint, a Pod without an allow rule cannot reach the database, Semgrep, Trivy, and ZAP all run clean or with recorded findings, one user can no longer modify another's task, and every secret the app needs is a committed `SealedSecret`. |
-| Start here | Fork the starter repository. Copy the contents of `act-3-devops-engineer/` from the `solved` branch to the root of your fork, not the folder itself. Replace files that have the same name. Do not replace the starter `tools/` folder. Install Docker Desktop and Minikube. You need a second Minikube profile for the policy check in Episode 22. |
+| Start here | Follow the steps below this table. |
+
+1. Fork the starter repository.
+2. Copy the contents of `act-3-devops-engineer/` from the `solved` branch to the root of your fork, not the folder itself.
+3. Replace files that have the same name. Do not replace the starter `tools/` folder.
+4. Install Docker Desktop and Minikube.
+5. Plan a second Minikube profile. You need it for the policy check in Episode 22.
 
 Try each task first. Open **Show solution** for that task only when you are stuck. The last line in each solution links to the `solved` branch. Use that link as a last resort.
 
@@ -111,7 +117,17 @@ You find and fix a SQL injection in the backend you built in Act 1, harden the K
 | `kubernetes/sealed-secrets/controller.yaml` | The vendored Sealed Secrets controller manifest, for Episode 25 |
 | `kubernetes/app/07-networkpolicy.yaml` | The default-deny policy and the DNS egress allow rule, complete. No app-specific rules yet |
 
-You write everything else: the fixed search query, pentest notes, the app-specific NetworkPolicy allow rules (ingress and egress, port and label values; the default-deny and DNS rules are already there), a Semgrep rule, a security scan workflow, the Nginx security headers, real users with bcrypt and JWT, the ownership check, and the sealed `app-db` and `app-auth` secrets.
+You write everything else:
+
+- The fixed search query
+- Pentest notes
+- The app-specific NetworkPolicy allow rules (ingress and egress, port and label values; the default-deny and DNS rules are already there)
+- A Semgrep rule
+- A security scan workflow
+- The Nginx security headers
+- Real users with bcrypt and JWT
+- The ownership check
+- The sealed `app-db` and `app-auth` secrets
 
 Compare your work with `act-4-cybersecurity-engineer/` in the `solved` branch.
 
@@ -189,7 +205,14 @@ Last resort: [open the solved Act 4 folder](https://github.com/aliAljaffer/four-
 
 #### Task 5: Write the scope
 
-Write a one-page scope before you touch the app: the target (`http://localhost:8000`, your own Minikube cluster), what is in scope (the API, the frontend), what is out of scope (anyone else's systems), and when you will stop.
+Write a one-page scope before you touch the app. Include these fields:
+
+| Field | What to write |
+|---|---|
+| Target | `http://localhost:8000`, your own Minikube cluster |
+| In scope | The API, the frontend |
+| Out of scope | Anyone else's systems |
+| Stop | When you will stop |
 
 <details>
 <summary>Show solution</summary>
@@ -232,7 +255,13 @@ Install Burp Suite Community Edition on the host. Point your browser's proxy at 
 <details>
 <summary>Show solution</summary>
 
-Burp Suite Community Edition is a GUI intercepting proxy. It cannot run headless in a container for this interactive step, so install it on the host, the same way you installed VS Code and Docker Desktop in [Setup](00-setup.md#macos) ([Windows](00-setup.md#windows-1011)): download the installer and run it on your laptop, not in a container. Set Burp's proxy listener to `127.0.0.1:8080`. Point the browser at it. Open the frontend, create a task, search for it, mark it done, delete it. Open Burp's site map.
+Burp Suite Community Edition is a GUI intercepting proxy. It cannot run headless in a container for this interactive step.
+
+1. Install it on the host, the same way you installed VS Code and Docker Desktop in [Setup](00-setup.md#macos) ([Windows](00-setup.md#windows-1011)): download the installer and run it on your laptop, not in a container.
+2. Set Burp's proxy listener to `127.0.0.1:8080`.
+3. Point the browser at it.
+4. Open the frontend, create a task, search for it, mark it done, delete it.
+5. Open Burp's site map.
 
 The requests to find: `GET /`, `GET /api/tasks`, `POST /api/tasks`, `PATCH /api/tasks/<id>`, and `GET /api/tasks/search`.
 
@@ -418,12 +447,16 @@ Last resort: [open the solved backend/app.py](https://github.com/aliAljaffer/fou
 
 `kubernetes/app/07-networkpolicy.yaml` already has the default-deny policy for all ingress and egress in `app`. It also has the DNS egress allow rule for `kube-dns` on UDP and TCP port 53. Internal lookups keep working. It also has the `scanner` egress rule for the `sqlmap` and ZAP Pods. Add these allow rules to the same file:
 
-- The frontend accepts ingress on port 80 from anywhere.
-- The frontend sends egress to the backend on port 8000.
-- The backend accepts ingress on port 8000 from the frontend Pods and the scanner Pods.
-- The backend sends egress to the database on port 5432.
-- The database accepts ingress on port 5432 from the backend Pods only.
-- The `monitoring` namespace accepts ingress to the exporters: frontend port 9113, backend port 8000, and database port 9187.
+| Pod | Direction | Peer | Port |
+|---|---|---|---|
+| Frontend | Ingress | Anywhere | 80 |
+| Frontend | Egress | Backend | 8000 |
+| Backend | Ingress | Frontend Pods and scanner Pods | 8000 |
+| Backend | Egress | Database | 5432 |
+| Database | Ingress | Backend Pods only | 5432 |
+| Frontend exporter | Ingress | `monitoring` namespace | 9113 |
+| Backend exporter | Ingress | `monitoring` namespace | 8000 |
+| Database exporter | Ingress | `monitoring` namespace | 9187 |
 
 The default-deny policy blocks egress too. A rule on the destination alone is not enough. Add the egress rule on the source Pod as well.
 
@@ -699,7 +732,15 @@ The `wrk` volume is required even without `-r`. The image runs from `/zap/wrk`, 
 
 The Pod carries the label `app.kubernetes.io/name: scanner`. The `scanner` NetworkPolicy lets that label reach the frontend on port 80 and the backend on port 8000. Without the label, the default-deny egress policy blocks the scan and the Pod fails with `Connect timed out`.
 
-Expected before the header fix: the log lists `Missing Anti-clickjacking Header`, `X-Content-Type-Options Header Missing`, `Content Security Policy (CSP) Header Not Set`, `Permissions Policy Header Not Set`, and the Nginx version leak. The rules file silences two informational findings only: cacheable content and modern web application.
+Expected before the header fix: the log lists these findings:
+
+- `Missing Anti-clickjacking Header`
+- `X-Content-Type-Options Header Missing`
+- `Content Security Policy (CSP) Header Not Set`
+- `Permissions Policy Header Not Set`
+- The Nginx version leak
+
+The rules file silences two informational findings only: cacheable content and modern web application.
 
 Last resort: [open the solved zap-scan-pod.yaml](https://github.com/aliAljaffer/four-hats/blob/solved/act-4-cybersecurity-engineer/zap-scan-pod.yaml)
 
@@ -783,7 +824,13 @@ minikube kubectl -- rollout restart deployment/frontend -n app
 minikube kubectl -- rollout status deployment/frontend -n app
 ```
 
-Re-run the same ZAP Pod. Expected: the anti-clickjacking, `X-Content-Type-Options`, CSP, Permissions Policy, and version leak findings disappear. One Low finding remains, `Cross-Origin-*-Policy Header Missing or Invalid` (90004). Record it and leave it: those policies need every cross-origin resource to cooperate, and this app loads none. Keep the `base-uri`, `form-action`, and `object-src` CSP fallbacks. Without them ZAP raises `CSP: Failure to Define Directive with No Fallback` (10055).
+Re-run the same ZAP Pod. Expected:
+
+- The anti-clickjacking, `X-Content-Type-Options`, CSP, Permissions Policy, and version leak findings disappear.
+- One Low finding remains, `Cross-Origin-*-Policy Header Missing or Invalid` (90004). Record it and leave it: those policies need every cross-origin resource to cooperate, and this app loads none.
+
+> [!WARNING]
+> Keep the `base-uri`, `form-action`, and `object-src` CSP fallbacks. Without them ZAP raises `CSP: Failure to Define Directive with No Fallback` (10055).
 
 Last resort: [open the solved nginx.conf](https://github.com/aliAljaffer/four-hats/blob/solved/act-4-cybersecurity-engineer/frontend/nginx.conf)
 
@@ -839,7 +886,10 @@ Last resort: [open the solved .env.example](https://github.com/aliAljaffer/four-
 
 #### Task 26: Reset the database volume
 
-Reset the database volume. Warning: this deletes all data in your local database.
+Reset the database volume.
+
+> [!WARNING]
+> This deletes all data in your local database.
 
 <details>
 <summary>Show solution</summary>
@@ -881,7 +931,8 @@ Last resort: [open the solved frontend folder](https://github.com/aliAljaffer/fo
 
 Add a `users` table, a `tasks.owner_id` column, `POST /api/auth/register` (bcrypt-hashed passwords), and `POST /api/auth/login` (a signed JWT). Require `Authorization: Bearer <token>` on every `/api/tasks*` route. Scope `list`, `create`, and `search` to `owner_id`.
 
-The main task board has no login form. After this task, the page at `http://localhost:8080/` still loads, but its API calls return 401. Use `http://localhost:8080/pentest` for the authenticated flows. Do not change `frontend/app.js` for this act.
+> [!NOTE]
+> The main task board has no login form. After this task, the page at `http://localhost:8080/` still loads, but its API calls return 401. Use `http://localhost:8080/pentest` for the authenticated flows. Do not change `frontend/app.js` for this act.
 
 <details>
 <summary>Show solution</summary>
@@ -1141,7 +1192,10 @@ docker compose up --build -d backend
 
 The starter `frontend/nginx.conf` already maps `/pentest` to `pentest.html` with `try_files $uri $uri.html $uri/ =404;`. Keep that line. Do not remove it.
 
-A live, clickable version of the same attack and fix is at `http://localhost:8080/pentest`, served by the same frontend. It must be opened through `docker compose`, not a static-file previewer like VS Code's Live Server, which has no `/api/` proxy and returns `405` for the register and login requests.
+A live, clickable version of the same attack and fix is at `http://localhost:8080/pentest`, served by the same frontend.
+
+> [!WARNING]
+> Open it through `docker compose`, not a static-file previewer like VS Code's Live Server. A previewer has no `/api/` proxy and returns `405` for the register and login requests.
 
 Last resort: [open the solved backend/app.py](https://github.com/aliAljaffer/four-hats/blob/solved/act-4-cybersecurity-engineer/backend/app.py)
 
@@ -1225,7 +1279,10 @@ Last resort: [open the solved test_app.py](https://github.com/aliAljaffer/four-h
 
 #### Task 32: Delete the hand-made database Secret
 
-Delete the hand-made `app-db` Secret. If `app-auth` exists from an earlier run, delete it too. `--ignore-not-found` makes the command safe. Warning: the controller does not overwrite a Secret that it does not manage. The backend Pods fail until you apply the SealedSecrets.
+Delete the hand-made `app-db` Secret. If `app-auth` exists from an earlier run, delete it too. `--ignore-not-found` makes the command safe.
+
+> [!WARNING]
+> The controller does not overwrite a Secret that it does not manage. The backend Pods fail until you apply the SealedSecrets.
 
 <details>
 <summary>Show solution</summary>
@@ -1318,7 +1375,10 @@ Last resort: [open the solved 08-sealed-secrets.yaml](https://github.com/aliAlja
 
 #### Task 37: Reset the PostgreSQL volume
 
-The sealed `app-db` uses a new random password. The existing PostgreSQL volume still has the old password. Delete the volume so PostgreSQL initializes with the new password. Warning: this deletes the database data.
+The sealed `app-db` uses a new random password. The existing PostgreSQL volume still has the old password. Delete the volume so PostgreSQL initializes with the new password.
+
+> [!WARNING]
+> This deletes the database data.
 
 <details>
 <summary>Show solution</summary>
@@ -1387,7 +1447,10 @@ docker compose down -v
 minikube delete
 ```
 
-The first command removes the Compose stack from Episode 24 and its database volume. The second command removes the Minikube cluster.
+| Command | Removes |
+|---|---|
+| `docker compose down -v` | The Compose stack from Episode 24 and its database volume |
+| `minikube delete` | The Minikube cluster |
 
 Last resort: [open the solved Act 4 folder](https://github.com/aliAljaffer/four-hats/tree/solved/act-4-cybersecurity-engineer)
 

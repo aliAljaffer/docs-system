@@ -114,21 +114,20 @@ tags:
 - Model lineage
 - Deploy from registry
 ### Pricing
-**Generative AI (Gemini):**
-- Gemini 1.5 Pro: ~$7 per 1M input tokens, ~$21 per 1M output tokens
-- Gemini 1.5 Flash: ~$0.35 per 1M input tokens, ~$1.05 per 1M output tokens
-- Context caching: 75% discount on cached tokens
-**AutoML:**
-- Training: Per node-hour (~$20-40/hour depending on model type)
-- Prediction: Per prediction + infrastructure
-**Custom Training:**
-- Per vCPU/GPU/TPU hour
-- N1 standard: ~$0.05/vCPU-hour
-- NVIDIA T4 GPU: ~$0.35/GPU-hour
-- TPU v3: ~$8/TPU-hour
-**Prediction:**
-- Online: Per node-hour + request count
-- Batch: Per node-hour
+
+| Product | Item | Price |
+|---|---|---|
+| Generative AI (Gemini) | Gemini 1.5 Pro | ~$7 per 1M input tokens, ~$21 per 1M output tokens |
+| Generative AI (Gemini) | Gemini 1.5 Flash | ~$0.35 per 1M input tokens, ~$1.05 per 1M output tokens |
+| Generative AI (Gemini) | Context caching | 75% discount on cached tokens |
+| AutoML | Training | Per node-hour (~$20-40/hour depending on model type) |
+| AutoML | Prediction | Per prediction + infrastructure |
+| Custom Training | General | Per vCPU/GPU/TPU hour |
+| Custom Training | N1 standard | ~$0.05/vCPU-hour |
+| Custom Training | NVIDIA T4 GPU | ~$0.35/GPU-hour |
+| Custom Training | TPU v3 | ~$8/TPU-hour |
+| Prediction | Online | Per node-hour + request count |
+| Prediction | Batch | Per node-hour |
 
 ---
 
@@ -271,18 +270,19 @@ Cloud Storage (data) → Vertex AI Batch Prediction → Cloud Storage (results)
                                                    → BigQuery (analytics)
 ```
 ### Migration Strategies
-#### From SageMaker to Vertex AI
-- SageMaker Notebooks → Vertex AI Workbench
-- SageMaker Training → Vertex AI Custom Training
-- SageMaker Endpoints → Vertex AI Endpoints
-- SageMaker Feature Store → Vertex AI Feature Store
-- SageMaker Pipelines → Vertex AI Pipelines
 
-#### From Bedrock to Vertex AI
-- Bedrock Claude → Vertex Model Garden (Claude)
-- Bedrock Titan → Gemini
-- Bedrock RAG → Vertex AI Search + Gemini
-- Similar API patterns (REST, streaming)
+| AWS service | Vertex AI equivalent |
+|---|---|
+| SageMaker Notebooks | Vertex AI Workbench |
+| SageMaker Training | Vertex AI Custom Training |
+| SageMaker Endpoints | Vertex AI Endpoints |
+| SageMaker Feature Store | Vertex AI Feature Store |
+| SageMaker Pipelines | Vertex AI Pipelines |
+| Bedrock Claude | Vertex Model Garden (Claude) |
+| Bedrock Titan | Gemini |
+| Bedrock RAG | Vertex AI Search + Gemini |
+
+Bedrock and Vertex AI use similar API patterns (REST, streaming).
 
 ### Monitoring & Observability
 - **[[cloud-monitoring|Cloud Monitoring]]**: Prediction latency, error rate

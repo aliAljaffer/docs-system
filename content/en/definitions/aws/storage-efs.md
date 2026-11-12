@@ -16,7 +16,10 @@ tags:
 Elastic File System - a file system that grows or shrinks based on usage. Commonly mounted on [[compute-ec2-ccp|ec2-ccp]], but can also be mounted on containers or [[compute-lambda|Lambda]] functions.
 
 ## Storage classes
-- Standard - regularly accessed files, most expensive
-- Standard IA - Infrequently accessed files
-- One zone - Frequently accessed, but doesn't need [[high-durability|high durability]]
-- One zone IA - Infrequent access, less durable, cheapest
+
+| Class | Access pattern | Durability | Cost |
+|---|---|---|---|
+| Standard | Regularly accessed files | - | Most expensive |
+| Standard IA | Infrequently accessed files | - | - |
+| One zone | Frequently accessed | Doesn't need [[high-durability|high durability]] | - |
+| One zone IA | Infrequent access | Less durable | Cheapest |

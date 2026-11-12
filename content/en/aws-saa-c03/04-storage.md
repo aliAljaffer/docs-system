@@ -38,9 +38,11 @@ FSx provides fully managed file systems for high-performance workloads.
 
 ## AWS Snow Family
 
-- [[migration-aws-snow-family|Snowball]] is a secure, portable device. It moves petabytes of data into and out of AWS.
-- Snowball also supports edge computing. It runs EC2 instances or [[compute-lambda|Lambda]] where the data is created.
-- Snowcone has the DataSync agent preinstalled. Use it when the network cannot handle a DataSync transfer.
+| Device | Use it for |
+|---|---|
+| [[migration-aws-snow-family|Snowball]] | Moving petabytes of data into and out of AWS. It is a secure, portable device. |
+| Snowball (edge computing) | Running EC2 instances or [[compute-lambda|Lambda]] where the data is created |
+| Snowcone | Transfers when the network cannot handle DataSync. It has the DataSync agent preinstalled. |
 
 ## AWS Transfer Family
 

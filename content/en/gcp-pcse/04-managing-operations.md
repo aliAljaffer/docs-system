@@ -86,14 +86,29 @@ gcloud container clusters create ... --binauthz-evaluation-mode=PROJECT_SINGLETO
 - Create aggregated sinks at the organization or folder level with `--include-children`. Use them to route audit logs centrally.
 - Org-level Admin Activity logs cannot be sent with project-level sinks.
 - Sink destinations: log bucket, Pub/Sub, BigQuery, and [[cloud-storage|Cloud Storage]]. Cross-project destinations work.
-- Grant the sink writer identity the role for its destination: `objectCreator` (Cloud Storage), `dataEditor` (BigQuery), `publisher` ([[pub-sub|Pub/Sub]]), or `bucketWriter` (log bucket).
+- Grant the sink writer identity the role for its destination:
+
+| Destination | Writer role |
+|---|---|
+| Cloud Storage | `objectCreator` |
+| BigQuery | `dataEditor` |
+| [[pub-sub|Pub/Sub]] | `publisher` |
+| Log bucket | `bucketWriter` |
+
 - BigQuery sinks write dated tables by default. `--use-partitioned-table` writes partitioned tables.
 - For a SIEM, export with a Pub/Sub sink for streaming or a Cloud Storage sink for batch. Google SecOps ingests logs for native correlation.
 
 ## Security Command Center (SCC)
 
 - **Standard:** Baseline posture and misconfiguration visibility.
-- **Premium and Enterprise:** Event Threat Detection, full Security Health Analytics, Web Security Scanner, VM Manager and OS Management, Sensitive Data Protection discovery, Google SecOps integration (Enterprise), and posture management.
+- **Premium and Enterprise:**
+  - Event Threat Detection
+  - Full Security Health Analytics
+  - Web Security Scanner
+  - VM Manager and OS Management
+  - Sensitive Data Protection discovery
+  - Google SecOps integration (Enterprise)
+  - Posture management
 - Components: findings from sources, mute rules, continuous exports to Pub/Sub, BigQuery, or SecOps, queries, and response pipelines. [[cloud-functions|Cloud Functions]] can respond to Pub/Sub findings.
 - SCC needs an organization. Activate it at the project or organization level. Settings inherit.
 - Container Threat Detection also turns on per cluster.

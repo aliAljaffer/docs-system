@@ -76,7 +76,10 @@ Data Firehose delivers streaming data to destinations in near real time.
 
 ## Amazon MSK
 
-Amazon MSK is fully managed Apache Kafka. You can create, update, and delete clusters. It deploys in a VPC across multiple AZs and recovers from failures automatically. Data is stored on [[storage-ebs|EBS]] for as long as you want. MSK Serverless runs Kafka without capacity management.
+- Amazon MSK is fully managed Apache Kafka. You can create, update, and delete clusters.
+- It deploys in a VPC across multiple AZs and recovers from failures automatically.
+- Data is stored on [[storage-ebs|EBS]] for as long as you want.
+- MSK Serverless runs Kafka without capacity management.
 
 Consumers include Glue, Managed Service for Apache Flink, Lambda, and apps on EC2, ECS, or EKS.
 
@@ -110,12 +113,14 @@ Runs Apache Flink applications written in Java, Scala, or SQL. It reads from Dat
 
 [[application-integration-eventbridge|EventBridge]] routes events.
 
-- Schedules run cron jobs.
-- Event patterns react when a service changes state.
-- A rule sends the matching event, as JSON, to a target.
-- You can replay events to check that a bug is fixed.
-- The schema registry stores event schemas.
-- Cross-account event buses send events between accounts.
+| Feature | What it does |
+|---|---|
+| Schedules | Run cron jobs. |
+| Event patterns | React when a service changes state. |
+| Rules | Send the matching event, as JSON, to a target. |
+| Replay | Replays events to check that a bug is fixed. |
+| Schema registry | Stores event schemas. |
+| Cross-account event buses | Send events between accounts. |
 
 ## Exam tips
 

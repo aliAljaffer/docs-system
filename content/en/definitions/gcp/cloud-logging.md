@@ -25,10 +25,12 @@ tags:
 
 ### Log Types
 #### Platform Logs (Automatic)
-- **Admin Activity logs**: Who did what, when (400-day retention, **free**)
-- **Data Access logs**: Who accessed what data (30-day default, **not free**, **disabled by default**)
-- **System Event logs**: GCP system events (400-day retention, free)
-- **Policy Denied logs**: Security policy violations (30-day default)
+| Log type | Records | Retention | Cost | Notes |
+|----------|---------|-----------|------|-------|
+| Admin Activity | Who did what, when | 400 days | **Free** | - |
+| Data Access | Who accessed what data | 30 days default | **Not free** | **Disabled by default** |
+| System Event | GCP system events | 400 days | Free | - |
+| Policy Denied | Security policy violations | 30 days default | - | - |
 
 #### Component Logs
 - Application logs from [[app-engine|App Engine]], [[gcp/cloud-run|Cloud Run]], [[gcp/gke|GKE]]
@@ -213,10 +215,14 @@ Logs → Pub/Sub Sink → Dataflow → BigQuery/Bigtable
 - **Policy Denied**: Enable for security monitoring
 
 #### Log Access Control
-- **Roles**:
-  - `logging.viewer`: Read logs
-  - `logging.privateLogViewer`: Read all logs including Data Access
-  - `logging.admin`: Full access
+**Roles:**
+
+| Role | Grants |
+|------|--------|
+| `logging.viewer` | Read logs |
+| `logging.privateLogViewer` | Read all logs including Data Access |
+| `logging.admin` | Full access |
+
 - **Bucket-level permissions**: Restrict access to specific buckets
 - **VPC Service Controls**: Prevent log exfiltration
 
@@ -305,9 +311,11 @@ Error Logs → Log-based Alert → Pub/Sub → Cloud Function → PagerDuty
 - **Right to deletion**: Process for log deletion requests
 
 #### Industry-Specific
-- **HIPAA**: Enable Data Access logs, encrypt sinks
-- **PCI DSS**: Enable all audit logs, 1-year retention minimum
-- **SOC 2**: Admin Activity logs, change tracking
+| Framework | Logging requirement |
+|-----------|---------------------|
+| HIPAA | Enable Data Access logs, encrypt sinks |
+| PCI DSS | Enable all audit logs, 1-year retention minimum |
+| SOC 2 | Admin Activity logs, change tracking |
 
 ### Migration from CloudWatch Logs
 | CloudWatch Logs | Cloud Logging |

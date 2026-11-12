@@ -31,20 +31,12 @@ tags:
 - When you need Spark ecosystem (not Beam)
 
 ### Cluster Types
-#### Standard Cluster
-- 1 master, N workers
-- General-purpose
-- Most common
 
-#### High Availability Cluster
-- **3 masters** for HA
-- Recommended for production
-- Automatic failover
-
-#### Single Node Cluster
-- Development and testing
-- 1 node (master + worker)
-- Lowest cost
+| Cluster type | Layout | Use |
+|---|---|---|
+| Standard | 1 master, N workers | General-purpose, most common |
+| High Availability | **3 masters** for HA | Recommended for production, automatic failover |
+| Single Node | 1 node (master + worker) | Development and testing, lowest cost |
 
 ### Cluster Components
 - **Master nodes**: Manage cluster (YARN, HDFS NameNode)
@@ -79,21 +71,12 @@ tags:
 - HDFS data not stored on preemptible (unsafe)
 
 ### Storage Options
-#### HDFS
-- Ephemeral storage on cluster
-- Lost when cluster deleted
-- Fast, but not durable
 
-#### Cloud Storage
-- **Recommended for durability**
-- Persists after cluster deletion
-- **Cloud Storage Connector** (gs://)
-- Hive metastore on Cloud SQL
-
-#### Persistent Disk
-- Block storage attached to workers
-- Persists after cluster stop
-- More expensive than Cloud Storage
+| Option | Persistence | Notes |
+|---|---|---|
+| HDFS | Lost when cluster deleted | Ephemeral storage on cluster, fast, but not durable |
+| Cloud Storage | Persists after cluster deletion | **Recommended for durability**, **Cloud Storage Connector** (gs://), Hive metastore on Cloud SQL |
+| Persistent Disk | Persists after cluster stop | Block storage attached to workers, more expensive than Cloud Storage |
 
 ### Metastore Integration
 - **Cloud SQL**: Hive metastore persistence
@@ -249,6 +232,7 @@ Dataproc (Spark processing) → BigQuery (SQL analytics)
 - **Cloud Storage for final**: Durable output
 
 ### Spark on Dataproc vs Spark on Dataflow
+
 | Consideration | Dataproc | Dataflow |
 |---------------|----------|----------|
 | Existing Spark code | ✓ (minimal changes) | Rewrite to Beam |
@@ -259,6 +243,7 @@ Dataproc (Spark processing) → BigQuery (SQL analytics)
 | Best for | Spark workloads, migrations | New pipelines |
 
 ### Dataproc vs BigQuery
+
 | Use Case | Dataproc | BigQuery |
 |----------|----------|----------|
 | SQL analytics | No | ✓ Best |
@@ -293,10 +278,13 @@ Dataproc (Spark processing) → BigQuery (SQL analytics)
 
 #### From EMR to Dataproc
 - Very similar architectures
-- s3:// → gs://
-- EC2 instance types → GCE machine types
-- EMR steps → Dataproc jobs
-- S3 metastore → Cloud SQL metastore
+
+| EMR | Dataproc |
+|---|---|
+| s3:// | gs:// |
+| EC2 instance types | GCE machine types |
+| EMR steps | Dataproc jobs |
+| S3 metastore | Cloud SQL metastore |
 
 ### Advanced Features
 #### Workflow Templates

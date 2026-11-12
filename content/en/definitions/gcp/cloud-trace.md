@@ -161,11 +161,13 @@ API Gateway → Auth Service → User Service → Database
 5. **Database queries**: Optimize N+1 queries
 
 #### Common Issues
-- **Serial calls**: Convert to parallel
-- **Database queries**: Add indexes, optimize SQL
-- **External APIs**: Cache responses, use async
-- **Cold starts**: Minimize for serverless
-- **Network latency**: Co-locate services, use CDN
+| Issue | Fix |
+|-------|-----|
+| **Serial calls** | Convert to parallel |
+| **Database queries** | Add indexes, optimize SQL |
+| **External APIs** | Cache responses, use async |
+| **Cold starts** | Minimize for serverless |
+| **Network latency** | Co-locate services, use CDN |
 
 ### Sampling Strategies
 #### Fixed-Rate Sampling
@@ -234,8 +236,12 @@ spec:
 ### Compliance & Security
 - **PII in traces**: Avoid logging sensitive data in span attributes
 - **Access control**: [[gcp/iam|IAM]] roles
-  - `cloudtrace.user`: Read traces
-  - `cloudtrace.admin`: Full access
+
+| Role | Grants |
+|------|--------|
+| `cloudtrace.user` | Read traces |
+| `cloudtrace.admin` | Full access |
+
 - **Trace data retention**: 30 days, cannot extend
 - **VPC Service Controls**: Prevent trace data exfiltration
 

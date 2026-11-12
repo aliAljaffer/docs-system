@@ -38,7 +38,14 @@ GHCR is the GitHub registry. It is free for public repositories. The image name 
 ghcr.io/<owner>/<repo>/backend:<sha>
 ```
 
-`ghcr.io` is the registry host. `<owner>` and `<repo>` say whose fork holds it. `backend` names the app part. `<sha>` is the commit SHA, the unique ID of the code. Frontend and database have the same shape with their own suffix. A tag names an image version.
+| Part | Meaning |
+|---|---|
+| `ghcr.io` | The registry host |
+| `<owner>` and `<repo>` | Whose fork holds the image |
+| `backend` | The app part |
+| `<sha>` | The commit SHA, the unique ID of the code |
+
+Frontend and database have the same shape with their own suffix. A tag names an image version.
 
 Two tag styles matter. `latest` moves. It always points at the newest build. It is handy for a quick test. It hides what runs. You cannot tell which commit produced it. A commit SHA never changes. The same SHA always means the same code. Rollback becomes simple: point the manifest at an older SHA. The old bytes return. That is why this act tags by SHA and avoids `latest`.
 

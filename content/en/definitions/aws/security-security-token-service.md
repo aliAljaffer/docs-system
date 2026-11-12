@@ -25,13 +25,13 @@ These credentials are typically valid for 15 minutes to 12 hours, depending on t
 ## STS Operations
 ### AssumeRole
 Allows an IAM user or service to assume a role and receive temporary credentials.
-**AWS CLI Example:**
+#### AWS CLI example
 ```bash
 aws sts assume-role \
     --role-arn arn:aws:iam::123456789012:role/MyRole \
     --role-session-name MySession
 ```
-**Response:**
+#### Response
 ```json
 {
     "Credentials": {
@@ -46,21 +46,21 @@ aws sts assume-role \
     }
 }
 ```
-**Use Cases:**
+#### Use cases
 - Cross-account access
 - Service-to-service authentication
 - Temporary elevation of privileges
 - CI/CD pipeline authentication
 ### AssumeRoleWithWebIdentity
 Enables federated users from web identity providers (Google, Facebook, Amazon, or any OpenID Connect provider) to assume a role.
-**AWS CLI Example:**
+#### AWS CLI example
 ```bash
 aws sts assume-role-with-web-identity \
     --role-arn arn:aws:iam::123456789012:role/WebIdentityRole \
     --role-session-name WebIdentitySession \
     --web-identity-token eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9...
 ```
-**Use Cases:**
+#### Use cases
 - Mobile applications using social login
 - Web applications with federated identity
 - Single sign-on (SSO) implementations
@@ -68,39 +68,39 @@ aws sts assume-role-with-web-identity \
 ### AssumeRoleWithSAML
 Allows users authenticated via SAML 2.0 to assume a role and receive temporary credentials.
 
-**AWS CLI Example:**
+#### AWS CLI example
 ```bash
 aws sts assume-role-with-saml \
     --role-arn arn:aws:iam::123456789012:role/SAMLRole \
     --principal-arn arn:aws:iam::123456789012:saml-provider/MySAMLProvider \
     --saml-assertion base64-encoded-saml-assertion
 ```
-**Use Cases:**
+#### Use cases
 - Active Directory integration
 - Corporate SSO solutions
 - SAML-based identity federation
 - Enterprise authentication systems
 ### GetSessionToken
 Provides temporary credentials for existing IAM users, typically used for MFA scenarios.
-**AWS CLI Example:**
+#### AWS CLI example
 ```bash
 aws sts get-session-token \
     --duration-seconds 3600 \
     --serial-number arn:aws:iam::123456789012:mfa/user \
     --token-code 123456
 ```
-**Use Cases:**
+#### Use cases
 - Multi-factor authentication scenarios
 - Temporary credential refresh
 - Enhanced security for sensitive operations
 - Long-term credential protection
 ### GetCallerIdentity
 Returns information about the IAM user or role whose credentials are used to call the operation.
-**AWS CLI Example:**
+#### AWS CLI example
 ```bash
 aws sts get-caller-identity
 ```
-**Response:**
+#### Response
 ```json
 {
     "UserId": "AIDACKCEVSQ6C2EXAMPLE",
@@ -108,7 +108,7 @@ aws sts get-caller-identity
     "Arn": "arn:aws:iam::123456789012:user/DevUser"
 }
 ```
-**Use Cases:**
+#### Use cases
 - Identity verification
 - Debugging authentication issues
 - Account validation
@@ -116,14 +116,14 @@ aws sts get-caller-identity
 ### GetFederationToken
 Returns temporary credentials for federated users without requiring them to have IAM identities.
 
-**AWS CLI Example:**
+#### AWS CLI example
 ```bash
 aws sts get-federation-token \
     --name FederatedUser \
     --duration-seconds 3600 \
     --policy '{"Version":"2012-10-17","Statement":[{"Effect":"Allow","Action":"s3:GetObject","Resource":"arn:aws:s3:::mybucket/*"}]}'
 ```
-**Use Cases:**
+#### Use cases
 - Temporary access for external users
 - Limited-scope credential distribution
 - Application-specific permissions
@@ -131,21 +131,21 @@ aws sts get-federation-token \
 ## Common Usage Patterns
 ### Using Temporary Credentials
 After obtaining temporary credentials, you can use them in several ways:
-**Environment Variables:**
+#### Environment variables
 
 ```bash
 export AWS_ACCESS_KEY_ID=ASIACKCEVSQ6C2EXAMPLE
 export AWS_SECRET_ACCESS_KEY=9drTJvcXLB89EXAMPLELB8923FB892xMFI
 export AWS_SESSION_TOKEN=AQoEXAMPLEH4aoAH0gNCAPyJxz4BlCFFxWNE1OPTgk5TthT...
 ```
-**AWS CLI Profile:**
+#### AWS CLI profile
 ```bash
 aws configure set aws_access_key_id ASIACKCEVSQ6C2EXAMPLE --profile temp
 aws configure set aws_secret_access_key 9drTJvcXLB89EXAMPLELB8923FB892xMFI --profile temp
 aws configure set aws_session_token AQoEXAMPLEH4aoAH0gNCAPyJxz4BlCFFxWNE1OPTgk5TthT... --profile temp
 ```
 ### Cross-Account Access Scenario
-**Step 1: Create Trust Policy**
+#### Step 1: Create trust policy
 ```json
 {
     "Version": "2012-10-17",
@@ -160,13 +160,13 @@ aws configure set aws_session_token AQoEXAMPLEH4aoAH0gNCAPyJxz4BlCFFxWNE1OPTgk5T
     ]
 }
 ```
-**Step 2: Assume Role**
+#### Step 2: Assume role
 ```bash
 aws sts assume-role \
     --role-arn arn:aws:iam::444455556666:role/CrossAccountRole \
     --role-session-name CrossAccountSession
 ```
-**Step 3: Use Temporary Credentials**
+#### Step 3: Use temporary credentials
 ```bash
 aws s3 ls --profile temp-cross-account
 ```

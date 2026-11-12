@@ -36,9 +36,20 @@ Each container declares how much it needs and how much it may take:
 
 The scheduler uses requests to place Pods. It spreads them so each one gets its reserved share. That is why a request matters for autoscaling too. The HPA measures CPU as a percentage of the request. Without a request, there is nothing to divide by.
 
-CPU and memory fail in different ways. CPU over the limit is throttled. The container slows down but keeps running. Memory over the limit kills the container. Kubernetes reports `OOMKilled`. A low memory limit therefore looks like a crash. A low CPU limit looks like slowness.
+CPU and memory fail in different ways:
 
-The backend in this act requests `100m` CPU and `96Mi` memory. Its limits are `500m` CPU and `256Mi` memory. The frontend requests `50m` and `32Mi` and limits at `250m` and `128Mi`. PostgreSQL requests more because it holds data: `100m` and `256Mi` requested, `1000m` and `1Gi` as limits. The exporters get small shares. These numbers are examples from measured use. Keep them as a starting point. Episode 18 shows dashboards that refine them.
+| Resource | Over the limit | A low limit looks like |
+|---|---|---|
+| CPU | Throttled. The container slows down but keeps running. | Slowness |
+| Memory | The container is killed. Kubernetes reports `OOMKilled`. | A crash |
+
+| Container | CPU request | Memory request | CPU limit | Memory limit |
+|---|---|---|---|---|
+| Backend | `100m` | `96Mi` | `500m` | `256Mi` |
+| Frontend | `50m` | `32Mi` | `250m` | `128Mi` |
+| PostgreSQL | `100m` | `256Mi` | `1000m` | `1Gi` |
+
+PostgreSQL requests more because it holds data. The exporters get small shares. These numbers are examples from measured use. Keep them as a starting point. Episode 18 shows dashboards that refine them.
 
 ## Probes separate waiting from failing
 
@@ -66,7 +77,10 @@ minikube kubectl -- scale deployment/backend -n app --replicas=4
 
 Four backend Pods start. Set the count back to 2 and two stop. You are the thermostat in this step. You watch the load, you decide, you type. It works. It does not scale as a habit, because you must notice the load and type the command each time. A person cannot watch at 3 AM. The HPA does this for you.
 
-One warning: if an HPA owns the Deployment, it sets the count back to its own value. Manual writes fight the controller. You can scale by hand before the HPA exists. After the HPA exists, your manual number is a suggestion for a few seconds until the next check rewrites it. Apply the HPA next and let it own the Deployment.
+> [!WARNING]
+> If an HPA owns the Deployment, it sets the count back to its own value. Manual writes fight the controller.
+
+You can scale by hand before the HPA exists. After the HPA exists, your manual number is a suggestion for a few seconds until the next check rewrites it. Apply the HPA next and let it own the Deployment.
 
 ## An HPA holds the app to a CPU target
 

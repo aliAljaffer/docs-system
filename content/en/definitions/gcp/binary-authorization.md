@@ -64,16 +64,13 @@ tags:
 - Referenced by Binary Authorization
 
 ### Attestor Types
-#### PKIX (Public Key Infrastructure)
-- Uses X.509 certificates
-- **Recommended for production**
-- Easier key rotation
-- Better integration with enterprise PKI
-
-#### PGP (Pretty Good Privacy)
-- Uses PGP keys
-- Simpler setup
-- Legacy option
+| Attribute | PKIX (Public Key Infrastructure) | PGP (Pretty Good Privacy) |
+|---|---|---|
+| Key format | X.509 certificates | PGP keys |
+| Status | **Recommended for production** | Legacy option |
+| Key rotation | Easier | - |
+| Integration | Better with enterprise PKI | - |
+| Setup | - | Simpler |
 
 ### Policy Structure
 **Default Rule:**
@@ -168,14 +165,15 @@ steps:
 - Policy based on severity threshold
 
 **Example Policy:**
-```text
 Deny deployment if:
-- Critical vulnerabilities > 0
-- High vulnerabilities > 5
-- Medium vulnerabilities > 20
 
-Create attestation only if thresholds met
-```
+| Severity | Threshold |
+|---|---|
+| Critical | More than 0 vulnerabilities |
+| High | More than 5 vulnerabilities |
+| Medium | More than 20 vulnerabilities |
+
+Create attestation only if thresholds met.
 
 **Implementation:**
 ```python
@@ -232,31 +230,18 @@ gcloud run deploy SERVICE_NAME \
 ```
 
 ### Policy Evaluation Modes
-**ALWAYS_ALLOW**
-- Allow all images (no attestation required)
-- Use for dev/test environments
-
-**ALWAYS_DENY**
-- Deny all images (rarely used)
-- Use for temporarily blocking all deployments
-
-**REQUIRE_ATTESTATION**
-- Require attestations from specified attestors
-- **Production mode**
-
-**ALLOW_UNATTESTED_IMAGES** (deprecated)
-- Legacy mode, don't use
+| Mode | Effect | Use for |
+|---|---|---|
+| `ALWAYS_ALLOW` | Allow all images (no attestation required) | Dev/test environments |
+| `ALWAYS_DENY` | Deny all images (rarely used) | Temporarily blocking all deployments |
+| `REQUIRE_ATTESTATION` | Require attestations from specified attestors | **Production mode** |
+| `ALLOW_UNATTESTED_IMAGES` (deprecated) | Legacy mode | Do not use |
 
 ### Enforcement Modes
-**ENFORCED_BLOCK_AND_AUDIT_LOG**
-- **Block deployment if policy violated**
-- Log violation to Cloud Logging
-- Recommended for production
-
-**DRYRUN_AUDIT_LOG_ONLY**
-- Allow deployment even if policy violated
-- Log violation (for testing)
-- Use during policy development
+| Mode | Effect | Use for |
+|---|---|---|
+| `ENFORCED_BLOCK_AND_AUDIT_LOG` | **Block deployment if policy violated**. Log violation to Cloud Logging | Production (recommended) |
+| `DRYRUN_AUDIT_LOG_ONLY` | Allow deployment even if policy violated. Log violation | Testing, policy development |
 
 ### Exemptions and Allowlists
 **Image Allowlist Patterns:**
@@ -787,11 +772,11 @@ gcloud container binauthz policy import policy-backup.yaml
 
 ### Migration from AWS Signer
 **Comparison:**
-```text
-AWS Signer Profile -> GCP Attestor
-AWS ECR Image Signing -> Container Analysis + Attestation
-AWS Lambda deployment config -> Binary Authorization policy
-```
+| AWS | GCP |
+|---|---|
+| AWS Signer Profile | GCP Attestor |
+| AWS ECR Image Signing | Container Analysis + Attestation |
+| AWS Lambda deployment config | Binary Authorization policy |
 
 **Migration Steps:**
 1. Enable Binary Authorization in GCP

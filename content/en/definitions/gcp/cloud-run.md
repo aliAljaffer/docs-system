@@ -24,19 +24,12 @@ tags:
 - Supports any language, any library, any binary
 
 ### Cloud Run Services vs Jobs
-#### Cloud Run Services
-- **HTTP-triggered** applications
-- Responds to web requests
-- Auto-scales based on incoming traffic
-- Each instance can handle multiple concurrent requests
-- Use cases: APIs, web apps, webhooks
-
-#### Cloud Run Jobs
-- **Task-based** workloads
-- Run to completion then exit
-- Can run on schedule, manually, or via events
-- Parallel execution support
-- Use cases: Batch processing, data transformations, scheduled tasks
+| Attribute | Services | Jobs |
+|-----------|----------|------|
+| Workload | **HTTP-triggered** applications | **Task-based** workloads |
+| Behavior | Responds to web requests. Each instance can handle multiple concurrent requests | Run to completion then exit. Can run on schedule, manually, or via events |
+| Scaling | Auto-scales based on incoming traffic | Parallel execution support |
+| Use cases | APIs, web apps, webhooks | Batch processing, data transformations, scheduled tasks |
 
 ### Deployment Regions
 - **Multi-region**: `us`, `europe`, `asia` (higher availability)
@@ -77,9 +70,11 @@ tags:
   - **Always allocated**: CPU always available, **required for background tasks**
 
 ### Ingress Control
-- **All**: Accept traffic from anywhere (default)
-- **Internal**: Only from [[gcp/vpc|VPC]] or [[gcp/cloud-load-balancing|Cloud Load Balancing]]
-- **Internal and Cloud Load Balancing**: More restrictive internal
+| Setting | Accepts traffic from |
+|---------|----------------------|
+| **All** (default) | Anywhere |
+| **Internal** | Only from [[gcp/vpc|VPC]] or [[gcp/cloud-load-balancing|Cloud Load Balancing]] |
+| **Internal and Cloud Load Balancing** | More restrictive internal |
 
 ### Networking
 #### VPC Connector

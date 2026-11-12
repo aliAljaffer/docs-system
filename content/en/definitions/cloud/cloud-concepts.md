@@ -38,10 +38,12 @@ Shows which CSP is leading the way in cloud services.
 
 ## IaaS core services
 
-1. **Compute** - A virtual PC (or multiple)  (**[[compute-ec2-ccp|ec2-ccp]]**)
-2. **Networking** - Virtual network defining connections or services **(VPC)**
-3. **Storage** - Virtual hard drive (**[[storage-ebs|EBS]]**)
-4. **Database** - Virtual database for storing report data **([[database-aws-database|RDS]])**
+| Core service | What it is | AWS service |
+|---|---|---|
+| **Compute** | A virtual PC (or multiple) | **[[compute-ec2-ccp|ec2-ccp]]** |
+| **Networking** | Virtual network defining connections or services | **(VPC)** |
+| **Storage** | Virtual hard drive | **[[storage-ebs|EBS]]** |
+| **Database** | Virtual database for storing report data | **([[database-aws-database|RDS]])** |
 
 [stopped @ 35:05](https://youtu.be/SOTamWNgDKc&t=2105) 
 
@@ -50,7 +52,7 @@ Shows which CSP is leading the way in cloud services.
 ### AWS' responsibilities
 - Hardware/global infrastructure
 - Software for Compute, Storage, Database, Networking services
-## YOUR responsibilities
+### YOUR responsibilities
 - Securing data via client/server-side encryption
 - Configs of Virtual Infrastructure
 - Configs of managed services or 3rd party software
@@ -87,11 +89,13 @@ What makes the cloud possible. The network of computers, servers, etc, around th
 ## AWS Well-Architected Framework
 Your Architecture should be well thought out and designed.
 
-1. Operational excellence [[operational-excellence-pillars|operational excellence pillars]] - Run and monitor systems, provide most business value
-2. Security [[security-pillars|security pillars]] - Protect data and systems, mitigate risk
-3. Reliability [[reliability-pillars|reliability pillars]] - Mitigate and recover from disruptions
-4. Performance efficiency [[performance-efficiency-pillar|performance efficiency pillar]] - Use resources efficiently
-5. Cost optimization [[cost-optimization-pillar|cost optimization pillar]] - Pay the lowest cost possible
+| Pillar | Goal |
+|---|---|
+| Operational excellence [[operational-excellence-pillars|operational excellence pillars]] | Run and monitor systems, provide most business value |
+| Security [[security-pillars|security pillars]] | Protect data and systems, mitigate risk |
+| Reliability [[reliability-pillars|reliability pillars]] | Mitigate and recover from disruptions |
+| Performance efficiency [[performance-efficiency-pillar|performance efficiency pillar]] | Use resources efficiently |
+| Cost optimization [[cost-optimization-pillar|cost optimization pillar]] | Pay the lowest cost possible |
 
 [stopped at 41:22](https://www.youtube.com/watch?v=JsmhEgIV1mQ)
 

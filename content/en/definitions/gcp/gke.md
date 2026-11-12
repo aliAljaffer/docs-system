@@ -35,25 +35,12 @@ tags:
 - More configuration options but more operational overhead
 
 ### Cluster Types
-#### Zonal Cluster
-- Single control plane in one zone
-- Nodes in single zone (default) or multiple zones
-- Cheapest option
-- Control plane downtime during upgrades
 
-#### Regional Cluster
-**Recommended for production**
-- **Control plane replicated across 3 zones**
-- **99.95% SLA** (vs 99.5% for zonal)
-- Higher availability, no control plane downtime
-- Nodes distributed across multiple zones
-- ~3x cost of zonal for control plane
-
-#### Private Cluster
-- Nodes have only private IP addresses
-- Control plane can have private or public endpoint
-- Improved security, no direct internet access
-- Requires [[gcp/cloud-nat|Cloud NAT]] for outbound traffic
+| Type | Control plane | SLA | Nodes | Notes |
+|---|---|---|---|---|
+| Zonal | Single control plane in one zone | 99.5% | Single zone (default) or multiple zones | Cheapest option, control plane downtime during upgrades |
+| Regional (**recommended for production**) | **Replicated across 3 zones** | **99.95%** | Distributed across multiple zones | Higher availability, no control plane downtime, ~3x cost of zonal for control plane |
+| Private | Private or public endpoint | - | Only private IP addresses | Improved security, no direct internet access, requires [[gcp/cloud-nat|Cloud NAT]] for outbound traffic |
 
 ### Node Pools
 - Group of nodes within a cluster with same configuration
@@ -63,6 +50,7 @@ tags:
 - Use cases: Separate workload types (CPU vs GPU), cost optimization
 
 ### GKE Autopilot vs Standard Comparison
+
 | Feature | Autopilot | Standard |
 |---------|-----------|----------|
 | Node management | Google manages | You manage |
@@ -120,10 +108,13 @@ gcloud iam service-accounts add-iam-policy-binding GSA@PROJECT.iam.gserviceaccou
 - Not recommended for new clusters
 
 ### GKE Release Channels
-- **Rapid**: Cutting-edge features, frequent updates, less stable
-- **Regular**: Balanced, **default and recommended**
-- **Stable**: Production-ready, tested features, infrequent updates
-- **No channel**: Manual version management
+
+| Channel | Characteristics |
+|---|---|
+| **Rapid** | Cutting-edge features, frequent updates, less stable |
+| **Regular** | Balanced, **default and recommended** |
+| **Stable** | Production-ready, tested features, infrequent updates |
+| **No channel** | Manual version management |
 
 ### GKE Sandbox
 - Runs pods in isolated sandboxes using gVisor

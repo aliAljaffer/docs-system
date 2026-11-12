@@ -97,7 +97,11 @@ Expect the backend Pods to fail until you apply the SealedSecrets. That is norma
 
 ## Seal the secrets offline
 
-Sealing has three parts: build the plaintext manifest without sending it to the cluster, pipe it to `kubeseal`, and write only the sealed output to a file.
+Sealing has three parts:
+
+1. Build the plaintext manifest without sending it to the cluster.
+2. Pipe it to `kubeseal`.
+3. Write only the sealed output to a file.
 
 Build the plaintext manifest with a client-side dry run:
 
@@ -158,7 +162,10 @@ minikube kubectl -- rollout restart deployment/backend -n app
 minikube kubectl -- rollout status deployment/backend -n app
 ```
 
-Deleting the PVC deletes the database data. That warning matters. Postgres initializes only on an empty data directory, with the new password from the sealed Secret.
+> [!WARNING]
+> Deleting the PVC deletes the database data.
+
+Postgres initializes only on an empty data directory, with the new password from the sealed Secret.
 
 `kubernetes/argocd/applications/app.yaml` already points at the whole `kubernetes/app` folder. The sealed file is just another file in it now. ArgoCD syncs the `SealedSecret` like any other manifest:
 

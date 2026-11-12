@@ -1,7 +1,7 @@
 ---
 title: Cloud-scheduler
 category: GCP
-description: 'GCP note: Cloud-scheduler.'
+description: Fully managed cron job scheduler.
 tags:
 - gcp
 - management
@@ -23,9 +23,11 @@ tags:
 - Retry logic built-in
 
 ### Targets
-- **HTTP/HTTPS**: POST to any endpoint
-- **Pub/Sub**: Publish message to topic
-- **App Engine HTTP**: Invoke App Engine app
+| Target | Use for |
+|--------|---------|
+| **HTTP/HTTPS** | POST to any endpoint |
+| **Pub/Sub** | Publish message to topic |
+| **App Engine HTTP** | Invoke App Engine app |
 
 ### Cron Syntax
 ```text
@@ -39,9 +41,12 @@ tags:
 ```
 
 Examples:
-- `0 9 * * 1-5`: Every weekday at 9am
-- `*/10 * * * *`: Every 10 minutes
-- `0 0 1 * *`: First of every month
+
+| Expression | Meaning |
+|------------|---------|
+| `0 9 * * 1-5` | Every weekday at 9am |
+| `*/10 * * * *` | Every 10 minutes |
+| `0 0 1 * *` | First of every month |
 
 ### Time Zones
 - Specify timezone (e.g., `America/New_York`)

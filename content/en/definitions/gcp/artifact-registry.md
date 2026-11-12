@@ -24,20 +24,24 @@ tags:
 - Fine-grained IAM
 
 ### Supported Formats
-- **Docker**: Container images
-- **Maven**: Java packages
-- **npm**: Node.js packages
-- **Python**: PyPI packages
-- **Apt**: Debian packages
-- **Yum**: RPM packages
-- **Go**: Go modules
-- **KFP**: Kubeflow Pipelines components
+| Format | Stores |
+|---|---|
+| Docker | Container images |
+| Maven | Java packages |
+| npm | Node.js packages |
+| Python | PyPI packages |
+| Apt | Debian packages |
+| Yum | RPM packages |
+| Go | Go modules |
+| KFP | Kubeflow Pipelines components |
 
 ### Repository Types
-- **Standard**: Regional storage
-- **Multi-regional**: Replicated across regions
-- **Remote**: Proxy for external registries (Docker Hub, Maven Central)
-- **Virtual**: Aggregates multiple repositories
+| Type | Description |
+|---|---|
+| Standard | Regional storage |
+| Multi-regional | Replicated across regions |
+| Remote | Proxy for external registries (Docker Hub, Maven Central) |
+| Virtual | Aggregates multiple repositories |
 
 ### Image Management
 - Tag mutable/immutable
@@ -52,9 +56,11 @@ tags:
 - Integration with [[binary-authorization|Binary Authorization]]
 
 ### IAM Roles
-- `roles/artifactregistry.reader`: Pull images
-- `roles/artifactregistry.writer`: Push images
-- `roles/artifactregistry.admin`: Full access
+| Role | Grants |
+|---|---|
+| `roles/artifactregistry.reader` | Pull images |
+| `roles/artifactregistry.writer` | Push images |
+| `roles/artifactregistry.admin` | Full access |
 
 ### Pricing
 - **Storage**: $0.10 per GB/month

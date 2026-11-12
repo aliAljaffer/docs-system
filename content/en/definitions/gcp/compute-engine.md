@@ -45,22 +45,20 @@ tags:
 - **Costs more than predefined but better resource optimization**
 
 ### Machine Images vs. Images vs. Snapshots
-**AWS Comparison:**
-- Image = AMI
-- Snapshot = EBS Snapshot
-- Machine Image = AMI + complete instance config
-
-- **Image**: Boot disk only, OS and software
-- **Snapshot**: Point-in-time copy of [[gcp/persistent-disk|Persistent Disk]], incremental
-- **Machine Image**: Complete VM config (disks, metadata, permissions, instance properties)
-  - Best for instance cloning and backups
-  - Can include multiple disks
+| Resource | Contains | AWS equivalent |
+|----------|----------|----------------|
+| **Image** | Boot disk only, OS and software | AMI |
+| **Snapshot** | Point-in-time copy of [[gcp/persistent-disk|Persistent Disk]], incremental | EBS Snapshot |
+| **Machine Image** | Complete VM config (disks, metadata, permissions, instance properties). Best for instance cloning and backups. Can include multiple disks | AMI + complete instance config |
 
 ### Instance Lifecycle
 - **Provisioning** → **Staging** → **Running** → **Stopping** → **Terminated**
-- **Suspended**: Preserves VM state (RAM), fast resume, charged for storage
-- **Stopped**: Preserves disks only, no RAM state
-- **Preemptible/Spot**: Can be terminated any time
+
+| State | Behavior |
+|-------|----------|
+| **Suspended** | Preserves VM state (RAM), fast resume, charged for storage |
+| **Stopped** | Preserves disks only, no RAM state |
+| **Preemptible/Spot** | Can be terminated any time |
 
 ### Preemptible & Spot VMs
 **AWS Equivalent:** [[compute-ec2|EC2 Spot Instances]]
@@ -165,11 +163,13 @@ See [[gcp/persistent-disk|Persistent Disk]] for full details
 - Can be sold in secondary market if not needed
 
 ### Pricing
-- **On-Demand**: Per-second billing (min 1 min)
-- **Committed Use Discounts**: 1 or 3 year, **up to 57% discount**
-- **Sustained Use Discounts**: Automatic, up to 30% for running >25% of month
-- **Preemptible/Spot**: Up to 91% discount
-- **Free Tier**: 1 f1-micro instance per month (us-west1, us-central1, us-east1)
+| Option | Discount | Condition |
+|--------|----------|-----------|
+| **On-Demand** | - | Per-second billing (min 1 min) |
+| **Committed Use Discounts** | **Up to 57%** | 1 or 3 year |
+| **Sustained Use Discounts** | Up to 30% | Automatic, for running >25% of month |
+| **Preemptible/Spot** | Up to 91% | - |
+| **Free Tier** | - | 1 f1-micro instance per month (us-west1, us-central1, us-east1) |
 
 ---
 

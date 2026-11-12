@@ -32,34 +32,21 @@ tags:
 - On-premises via agent
 
 ### Supported Languages
-- **Go**: CPU, heap, contention, thread
-- **Java**: CPU, heap, contention, wall time
-- **Python**: CPU, wall time
-- **Node.js**: Heap, wall time
-- **.NET**: CPU, heap
+| Language | Profile types |
+|----------|---------------|
+| Go | CPU, heap, contention, thread |
+| Java | CPU, heap, contention, wall time |
+| Python | CPU, wall time |
+| Node.js | Heap, wall time |
+| .NET | CPU, heap |
 
 ### Profile Types
-#### CPU Profile
-- Where CPU time is spent
-- Hot functions
-- Optimization opportunities
-- **Most common profile type**
-
-#### Heap Profile
-- Memory allocation patterns
-- Memory leaks
-- Large object allocations
-- Garbage collection pressure
-
-#### Contention Profile
-- Lock contention in multi-threaded apps
-- Thread synchronization issues
-- Parallelism bottlenecks
-
-#### Wall Time Profile
-- Time including I/O waits
-- Blocking operations
-- Network/disk latency
+| Profile | Shows |
+|---------|-------|
+| CPU | Where CPU time is spent. Hot functions. Optimization opportunities. **Most common profile type** |
+| Heap | Memory allocation patterns. Memory leaks. Large object allocations. Garbage collection pressure |
+| Contention | Lock contention in multi-threaded apps. Thread synchronization issues. Parallelism bottlenecks |
+| Wall Time | Time including I/O waits. Blocking operations. Network/disk latency |
 
 ### How It Works
 1. Agent instruments application code
@@ -257,25 +244,20 @@ Performance Issue Workflow:
 - **Buffer usage**: Large object allocations
 
 ### Cost Reduction Case Studies
-#### Example: E-commerce API
-- **Before**: 100 vCPUs, high CPU usage
-- **Profiled**: Found JSON serialization bottleneck
-- **Optimized**: Used faster library
-- **After**: 60 vCPUs, same performance
-- **Savings**: 40% reduction in compute costs
-
-#### Example: Data Processing Pipeline
-- **Before**: 200 GB memory instances
-- **Profiled**: Memory leak in connection pool
-- **Fixed**: Properly closed connections
-- **After**: 100 GB memory instances
-- **Savings**: 50% reduction in memory costs
+| Case | Before | Profiled | Fix | After | Savings |
+|------|--------|----------|-----|-------|---------|
+| E-commerce API | 100 vCPUs, high CPU usage | Found JSON serialization bottleneck | Used faster library | 60 vCPUs, same performance | 40% reduction in compute costs |
+| Data Processing Pipeline | 200 GB memory instances | Memory leak in connection pool | Properly closed connections | 100 GB memory instances | 50% reduction in memory costs |
 
 ### Security Considerations
 - **No sensitive data in profiles**: Function names, not data
 - **Access control**: [[gcp/iam|IAM]] roles
-  - `cloudprofiler.user`: View profiles
-  - `cloudprofiler.admin`: Full access
+
+| Role | Grants |
+|------|--------|
+| `cloudprofiler.user` | View profiles |
+| `cloudprofiler.admin` | Full access |
+
 - **VPC Service Controls**: Prevent profile data exfiltration
 - **Production profiling**: Safe, low overhead
 

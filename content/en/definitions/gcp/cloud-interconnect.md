@@ -86,10 +86,15 @@ On-Premises ↔ Your Router ↔ Cross-Connect ↔ Google Edge Router ↔ Cloud R
 - 2 on-premises routers
 
 **Topology:**
-- Connection 1 → VLAN Attachment 1 → Cloud Router 1 → VPC
-- Connection 1 → VLAN Attachment 2 → Cloud Router 2 → VPC
-- Connection 2 → VLAN Attachment 3 → Cloud Router 1 → VPC
-- Connection 2 → VLAN Attachment 4 → Cloud Router 2 → VPC
+
+| Connection | VLAN attachment | Cloud Router |
+|------------|-----------------|--------------|
+| Connection 1 | VLAN Attachment 1 | Cloud Router 1 |
+| Connection 1 | VLAN Attachment 2 | Cloud Router 2 |
+| Connection 2 | VLAN Attachment 3 | Cloud Router 1 |
+| Connection 2 | VLAN Attachment 4 | Cloud Router 2 |
+
+All four paths lead to the VPC.
 
 ### Setup Process
 1. **Choose co-location facility** (Google PoP)
@@ -117,17 +122,11 @@ On-Premises ↔ Service Provider Network ↔ Google Edge ↔ Cloud Router ↔ VP
 - Faster setup than Dedicated Interconnect
 
 ### Layer 2 vs Layer 3
-#### Layer 2 Partner Interconnect
-- You configure BGP with Google Cloud Router
-- Direct VLAN attachment to [[vpc|VPC]]
-- More control over routing
-- Similar to Dedicated Interconnect experience
-
-#### Layer 3 Partner Interconnect
-- Service provider manages BGP to Google
-- You configure BGP with service provider
-- Abstracted from Google's network
-- Simpler for customers
+| Aspect | Layer 2 | Layer 3 |
+|--------|---------|---------|
+| BGP | You configure BGP with Google Cloud Router | Service provider manages BGP to Google. You configure BGP with the service provider |
+| VLAN attachment | Direct VLAN attachment to [[vpc|VPC]] | - |
+| Control | More control over routing. Similar to Dedicated Interconnect experience | Abstracted from Google's network. Simpler for customers |
 
 ### VLAN Attachments
 - Each Partner Interconnect connection = 1 VLAN attachment
@@ -212,19 +211,10 @@ Configured at [[vpc|VPC]] level:
 
 ## Pricing
 
-### Dedicated Interconnect
-- **Port fees**: Per 10 Gbps or 100 Gbps port per month
-  - ~$1,700/month for 10 Gbps
-  - ~$8,500/month for 100 Gbps
-- **Egress traffic**: Discounted rates (vs internet egress)
-- **Ingress traffic**: Free
-- **No charge**: For VLAN attachments
-
-### Partner Interconnect
-- **Connection fees**: Per connection capacity per month (via provider)
-- **Egress traffic**: Discounted rates
-- **Ingress traffic**: Free
-- **Provider fees**: Set by service provider
+| Connection type | Fees | Egress | Ingress |
+|-----------------|------|--------|---------|
+| Dedicated Interconnect | Port fees per 10 Gbps or 100 Gbps port per month (~$1,700 for 10 Gbps, ~$8,500 for 100 Gbps). No charge for VLAN attachments | Discounted rates (vs internet egress) | Free |
+| Partner Interconnect | Connection fees per connection capacity per month (via provider). Provider fees set by service provider | Discounted rates | Free |
 
 ### Egress Pricing (vs Internet)
 - Interconnect egress: ~60-70% cheaper than internet egress
@@ -465,18 +455,11 @@ gcloud compute routers add-bgp-peer ROUTER_NAME \
   - Packet drops
 
 ### Troubleshooting
-- **BGP Session Issues**:
-  - Verify ASN configuration on both sides
-  - Check IP addressing (link-local IPs)
-  - Validate MD5 authentication
-- **Throughput Issues**:
-  - Check link utilization
-  - Verify VLAN attachment capacity
-  - Monitor for packet drops
-- **Routing Issues**:
-  - Check route propagation (global vs regional)
-  - Verify route priorities
-  - Use `gcloud compute routers get-status` for BGP state
+| Symptom | Check or fix |
+|---------|--------------|
+| BGP session issues | Verify ASN configuration on both sides. Check IP addressing (link-local IPs). Validate MD5 authentication. |
+| Throughput issues | Check link utilization. Verify VLAN attachment capacity. Monitor for packet drops. |
+| Routing issues | Check route propagation (global vs regional). Verify route priorities. Use `gcloud compute routers get-status` for BGP state. |
 
 ### Network Connectivity Center
 - Centralized view of all Interconnect connections

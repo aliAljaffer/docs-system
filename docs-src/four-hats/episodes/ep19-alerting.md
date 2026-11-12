@@ -54,7 +54,8 @@ Two phases matter. Firing tells you something failed. Resolved tells you it reco
 
 Discord webhooks are a receiver interface. Create a webhook in Discord, copy its URL, and store it in a Secret in `monitoring`. Alertmanager reads the URL from a file and posts to it.
 
-The webhook URL is a secret. Never commit it. Never show it on a screen recording. A leaked webhook URL lets anyone post into the channel.
+> [!WARNING]
+> The webhook URL is a secret. Never commit it. Never show it on a screen recording. A leaked webhook URL lets anyone post into the channel.
 
 The Secret holds one key, `webhook_url`. Alertmanager mounts the Secret as a volume and reads the file at `/etc/alertmanager/secrets/discord/webhook_url`. A Secret in the wrong namespace blocks Alertmanager. Alertmanager stays in `ContainerCreating` until the Secret appears.
 
@@ -128,7 +129,12 @@ The same rule covered Prometheus in Episode 18. It covers Alertmanager here. A c
 
 Test the alert by breaking the backend. Pause ArgoCD automated sync first, or the alert never fires.
 
-ArgoCD self-heal restores the replica count within seconds. That is long before the alert `for: 1m` window elapses. If automated sync stays on, the Deployment returns to two replicas and `up` returns to `1` before Prometheus ever fires. Pause automated sync, scale the backend to zero, wait about one minute, and watch Discord show `BackendUnavailable`.
+ArgoCD self-heal restores the replica count within seconds. That is long before the alert `for: 1m` window elapses. If automated sync stays on, the Deployment returns to two replicas and `up` returns to `1` before Prometheus ever fires. To trigger the alert:
+
+1. Pause automated sync.
+2. Scale the backend to zero.
+3. Wait about one minute.
+4. Watch Discord show `BackendUnavailable`.
 
 Restore automated sync when you finish. The HPA cannot scale the backend up from zero replicas. Scale the Deployment back to two replicas by hand. Re-enabling sync alone leaves the backend at zero. Discord shows the resolved message once Prometheus scrapes the backend again.
 
@@ -140,7 +146,8 @@ Everything so far ran on Minikube, a single-node cluster on your laptop. Product
 
 This segment is a demo, presenter-only. There is nothing to submit. You can watch it without a Google Cloud account. The presenter needs `gcloud` and `kubectl` on the host machine.
 
-Warning: this needs a Google Cloud free trial and creates real billable resources. Set a budget alert before creating anything.
+> [!WARNING]
+> This needs a Google Cloud free trial and creates real billable resources. Set a budget alert before creating anything.
 
 ```shell
 gcloud container clusters create-auto gke-demo --region us-central1
@@ -154,7 +161,10 @@ Apply the same `kubernetes/app/` manifests: the Namespace, the Deployments, the 
 
 Same Deployments, StatefulSet, ConfigMaps, and Secrets, running on a different cluster. What changes: a managed control plane, automatic node upgrades, and a `LoadBalancer` Service that gets a real external IP, which Minikube cannot do without MetalLB. A `NodePort` Service never gets an external IP on GKE. What does not change: everything else this act taught you.
 
-Delete the cluster right after the demo, not at the end of the session. The cluster can leave [[gcp/persistent-disk|Persistent Disk]] volumes behind. List disks with `gcloud compute disks list --filter='name~pvc-'` and delete each disk the demo created. Check the Billing page. It must show no running resources.
+> [!WARNING]
+> Delete the cluster right after the demo, not at the end of the session. The cluster can leave [[gcp/persistent-disk|Persistent Disk]] volumes behind.
+
+List disks with `gcloud compute disks list --filter='name~pvc-'` and delete each disk the demo created. Check the Billing page. It must show no running resources.
 
 ## Limits and tradeoffs
 

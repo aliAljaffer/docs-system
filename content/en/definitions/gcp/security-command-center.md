@@ -73,11 +73,14 @@ tags:
 - Missing security controls
 
 **Categories:**
-- **PUBLIC_IP_ADDRESS**: Resources with public IPs
-- **OPEN_FIREWALL**: Overly permissive firewall rules
-- **WEAK_PASSWORD_POLICY**: Weak IAM policies
-- **AUDIT_LOGGING_DISABLED**: Missing audit logs
-- **SSL_NOT_ENFORCED**: Unencrypted connections
+
+| Category | Flags |
+|---|---|
+| **PUBLIC_IP_ADDRESS** | Resources with public IPs |
+| **OPEN_FIREWALL** | Overly permissive firewall rules |
+| **WEAK_PASSWORD_POLICY** | Weak IAM policies |
+| **AUDIT_LOGGING_DISABLED** | Missing audit logs |
+| **SSL_NOT_ENFORCED** | Unencrypted connections |
 
 #### Event Threat Detection (Premium)
 **Uses Google threat intelligence to detect:**
@@ -108,15 +111,20 @@ tags:
 - Coin mining
 - Outbound DDoS
 - Unauthorized network scanning
+
 **Requires:** OS Config agent installed
 ### Findings
 #### Finding Structure
-- **Category**: Type of security issue
-- **Severity**: Critical, High, Medium, Low
-- **State**: Active, Inactive, Muted
-- **Resource**: Affected GCP resource
-- **Source**: Detector that generated finding
-- **Event Time**: When issue was detected
+
+| Field | Meaning |
+|---|---|
+| **Category** | Type of security issue |
+| **Severity** | Critical, High, Medium, Low |
+| **State** | Active, Inactive, Muted |
+| **Resource** | Affected GCP resource |
+| **Source** | Detector that generated finding |
+| **Event Time** | When issue was detected |
+
 #### Finding Sources
 **Built-in Sources:**
 - Security Health Analytics
@@ -244,15 +252,19 @@ def remediate_public_bucket(event, context):
 - Custom dashboards per group
 
 ### Pricing (Premium Tier)
-- **Security Health Analytics**: Free
-- **Event Threat Detection**: $5 per project per month
-- **Container Threat Detection**: $5 per GKE node per month
-- **VM Threat Detection**: $0.015 per VM per hour
-- **Web Security Scanner**: $0.015 per scan
+
+| Feature | Price |
+|---|---|
+| **Security Health Analytics** | Free |
+| **Event Threat Detection** | $5 per project per month |
+| **Container Threat Detection** | $5 per GKE node per month |
+| **VM Threat Detection** | $0.015 per VM per hour |
+| **Web Security Scanner** | $0.015 per scan |
 
 **Free Trial:** 90 days for Premium tier
 
 ### SCC vs AWS Security Hub Comparison
+
 | Feature | SCC | AWS Security Hub |
 |---------|-----|------------------|
 | Asset inventory | Yes | Yes |
