@@ -19,6 +19,19 @@ jobs:
         with:
           python-version: "3.12"
 
+      - uses: actions/create-github-app-token@v1
+        id: brand-token
+        with:
+          app-id: 5511128
+          private-key: ${{ secrets.HOMELAB_APP_KEY }}
+          owner: aliAljaffer
+          repositories: branding
+
+      - name: Pull the theme from branding main
+        run: make brand
+        env:
+          GH_TOKEN: ${{ steps.brand-token.outputs.token }}
+
       - run: make setup check build
         env:
           GITHUB_TOKEN: ${{ github.token }}

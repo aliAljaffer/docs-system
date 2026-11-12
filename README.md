@@ -62,11 +62,9 @@ Only `paper`, `ink`, and `accent` are required per mode. The compiler derives th
 
 ### Change the brand
 
-1. Change the theme in the `branding` repo (`make export`) and push its `main`.
-2. Run `make brand`. It sparse-clones `export/` from branding `main` into `brand/`.
-3. Run `make build`.
-4. Check the pages in light and night mode.
-5. Deploy. The asset version changes, so caches refresh.
+Change the theme in the `branding` repo (`make export`) and push its `main`. That's all: CI runs `make brand` before every build, authenticated as the `update-manifests-homelab` GitHub App (secret `HOMELAB_APP_KEY`). The daily run also redeploys when branding `main` has moved, because its commit is part of the deploy key.
+
+To preview locally, run `make brand` (it sparse-clones `export/` from branding `main` into `brand/`), then `make build`, and check the pages in light and night mode.
 
 ## Definitions, Home, Contact
 
