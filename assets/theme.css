@@ -355,6 +355,11 @@ body::before {
   border-radius: var(--brand-radius);
   background-color: var(--brand-card-bg);
   box-shadow: var(--brand-shadow);
+  font-size: 0.85em;
+}
+
+.md-typeset table:not([class]) :is(th, td) {
+  padding: 9px 12px;
 }
 
 .md-typeset table:not([class]) th {
