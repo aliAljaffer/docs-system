@@ -45,7 +45,7 @@ Shows which CSP is leading the way in cloud services.
 | **Compute** | A virtual PC (or multiple) | **[[compute-ec2-ccp|ec2-ccp]]** |
 | **Networking** | Virtual network defining connections or services | **(VPC)** |
 | **Storage** | Virtual hard drive | **[[storage-ebs|EBS]]** |
-| **Database** | Virtual database for storing report data | **([[database-aws-database|RDS]])** |
+| **Database** | Virtual database for storing report data | **([[database-aws-database#DB Services|RDS]])** |
 
 [stopped @ 35:05](https://youtu.be/SOTamWNgDKc&t=2105) 
 

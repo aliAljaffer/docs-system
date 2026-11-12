@@ -82,7 +82,7 @@ tags:
 - **Cannot shrink disks**
 
 ### Disk Resizing
-**AWS Equivalent:** [[storage-ebs|EBS Volume Modification]]
+**AWS Equivalent:** [[compute-ec2#EBS Volume|EBS Volume Modification]]
 - Increase size without detaching
 - **Automatically replicates additional capacity**
 - Resize file system after disk resize:
@@ -92,7 +92,7 @@ tags:
 - **Cannot decrease size**
 
 ### Multi-Attach (Read-Only)
-**AWS Equivalent:** [[storage-ebs|EBS Multi-Attach]] (but different)
+**AWS Equivalent:** [[compute-ec2#EBS Multi-Attach - io1/io2 family|EBS Multi-Attach]] (but different)
 - Attach single disk to **multiple VMs in read-only mode**
 - Up to **10 VMs** can read simultaneously
 - All VMs must be in same zone (zonal) or replication zones (regional)
@@ -100,7 +100,7 @@ tags:
 - **Cannot write from multiple VMs** (unlike EBS Multi-Attach io2)
 
 ### Snapshots
-**AWS Equivalent:** [[storage-ebs|EBS Snapshots]]
+**AWS Equivalent:** [[compute-ec2#EBS Snapshots|EBS Snapshots]]
 - Point-in-time backup of persistent disk
 - **Incremental and automatic** (only changed blocks)
 - **Global resource** - can restore to any zone/region
@@ -154,7 +154,7 @@ tags:
 - Can attach to another VM after detachment
 
 ### Local SSD vs Persistent Disk
-**Comparison with [[compute-engine|Local SSDs]]:**
+**Comparison with [[compute-engine#local ssds|Local SSDs]]:**
 
 | Feature | Persistent Disk | Local SSD |
 |---------|-----------------|-----------|
@@ -188,7 +188,7 @@ tags:
 - Use [[gcp/cloud-monitoring|Cloud Monitoring]] to monitor disk utilization
 
 ### Disk Images
-**AWS Equivalent:** [[storage-ebs|AMI]]
+**AWS Equivalent:** [[compute-ec2#Amazon Machine Image (AMI)|AMI]]
 - Template for creating boot disks
 - Public images: Google, OS vendors, community
 - Custom images: Created from your disks/snapshots
@@ -197,7 +197,7 @@ tags:
 - Image families: Always get latest image in family
 
 ### Machine Images
-**AWS Equivalent:** [[compute-ec2|AMI + Launch Template combined]]
+**AWS Equivalent:** [[compute-ec2#Amazon Machine Image (AMI)|AMI + Launch Template combined]]
 - **Complete VM configuration** (disks, metadata, permissions)
 - Includes boot disk + data disks
 - Preserves machine type, labels, metadata

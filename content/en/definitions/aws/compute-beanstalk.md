@@ -14,7 +14,7 @@ tags:
 `aws` `services`
 
 ## SAA
-A fully managed service that was built to accommodate a repeating pattern in application development, where an ✅ 4. Solutions Architect - Associate SAA-C03 is used on an ✅ 4. Solutions Architect - Associate SAA-C03. It supports many languages, so you can run pretty much anything on it.
+A fully managed service that was built to accommodate a repeating pattern in application development, where an [[aws-saa-c03/03-compute#Elastic Load Balancing|Elastic Load Balancer]] is used on an [[aws-saa-c03/03-compute#Auto Scaling groups|Auto Scaling Group]]. It supports many languages, so you can run pretty much anything on it.
 ### Components of Elastic Beanstalk
 1. Application: Collection of envs, versions, configs
 2. Application Version: Iteration of the Application

@@ -309,7 +309,7 @@ gcloud compute routers add-bgp-peer ROUTER_NAME \
 
 #### Hub-and-Spoke with Interconnect
 - Central hub VPC with Interconnect to on-premises
-- Spoke VPCs connected via [[vpc|VPC Peering]] or Network Connectivity Center
+- Spoke VPCs connected via [[vpc#vpc peering|VPC Peering]] or Network Connectivity Center
 - Centralized egress to on-premises
 - Global routing for cross-region communication
 

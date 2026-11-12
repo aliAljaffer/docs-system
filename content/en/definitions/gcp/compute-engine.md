@@ -62,7 +62,7 @@ tags:
 | **Preemptible/Spot** | Can be terminated any time |
 
 ### Preemptible & Spot VMs
-**AWS Equivalent:** [[compute-ec2|EC2 Spot Instances]]
+**AWS Equivalent:** [[compute-ec2#ec2 spot instance requests|EC2 Spot Instances]]
 - **Up to 91% discount** compared to on-demand
 - **Preemptible**: Max 24 hours, legacy option
 - **Spot**: No max runtime, better than preemptible
@@ -82,7 +82,7 @@ See [[gcp/persistent-disk|Persistent Disk]] for full details
 - **Snapshots**: Incremental, global resource, can create across regions
 
 ### Local SSDs
-**AWS Equivalent:** [[compute-ec2|EC2 Instance Store]]
+**AWS Equivalent:** [[compute-ec2#ec2 instance store|EC2 Instance Store]]
 - Physically attached to the server
 - **375 GB per device, up to 24 devices (9 TB total)**
 - **Ephemeral - data lost on VM stop/terminate**
@@ -117,7 +117,7 @@ See [[gcp/persistent-disk|Persistent Disk]] for full details
 - Use cases: Sensitive data processing, regulatory compliance
 
 ### Sole-Tenant Nodes
-**AWS Equivalent:** [[compute-ec2|Dedicated Hosts]]
+**AWS Equivalent:** [[compute-ec2#ec2 instances purchasing options|Dedicated Hosts]]
 - Physical Compute Engine server dedicated to your project
 - Use cases: BYOL, compliance, performance isolation
 - Can specify node affinity (which node a VM runs on)
@@ -137,11 +137,11 @@ See [[gcp/persistent-disk|Persistent Disk]] for full details
 ### Metadata Server
 - `http://metadata.google.internal/computeMetadata/v1/`
 - Query instance metadata, project metadata
-- Get access tokens for [[gcp/iam|service accounts]]
+- Get access tokens for [[gcp/iam#service accounts|service accounts]]
 - Similar to AWS Instance Metadata Service
 
 ### Startup Scripts & Metadata
-**AWS Equivalent:** [[compute-ec2|EC2 User Data]]
+**AWS Equivalent:** [[compute-ec2#automating boot tasks|EC2 User Data]]
 - Run scripts on VM boot
 - Can be in metadata or [[gcp/cloud-storage|Cloud Storage]]
 - Keys: `startup-script`, `shutdown-script`
@@ -254,7 +254,7 @@ gcloud compute disks create DISK_NAME \
 - **Security**:
   - Shielded VMs for secure boot
   - Confidential VMs for data encryption in-use
-  - [[gcp/iam|Service accounts]] with minimal permissions
+  - [[gcp/iam#service accounts|Service accounts]] with minimal permissions
   - [[gcp/vpc-service-controls|VPC Service Controls]] for data exfiltration prevention
 
 ### Migration Strategies

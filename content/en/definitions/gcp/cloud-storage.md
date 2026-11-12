@@ -107,7 +107,7 @@ tags:
 | `roles/storage.admin` | Full control of buckets and objects |
 
 ### Access Control Lists (ACLs)
-**AWS Equivalent:** [[storage-s3|S3 ACLs]]
+**AWS Equivalent:** [[storage-s3#Bucket Security|S3 ACLs]]
 - Only with fine-grained access control
 - Predefined ACLs:
 
@@ -136,7 +136,7 @@ gsutil signurl -d 10m /path/to/key.json gs://bucket/object
 ```
 
 ### Signed Policy Documents
-**AWS Equivalent:** [[storage-s3|S3 POST Policy]]
+**AWS Equivalent:** [[storage-s3#Pre-Signed URLS|S3 POST Policy]]
 - Control uploads with specific conditions
 - File size limits, content type restrictions
 - Expiration time
@@ -207,7 +207,7 @@ gsutil compose gs://bucket/part1 gs://bucket/part2 gs://bucket/final
 - Less reliable, **deprecated - use Pub/Sub**
 
 ### CORS (Cross-Origin Resource Sharing)
-**AWS Equivalent:** [[storage-s3|S3 CORS]]
+**AWS Equivalent:** [[storage-s3#CORS - Cross-Origin Resource Sharing|S3 CORS]]
 - Allow browser-based apps to access bucket from different origin
 - Configure allowed origins, methods, headers
 - Set via JSON configuration file
@@ -435,7 +435,7 @@ gcloud storage buckets update gs://BUCKET_NAME --lock-retention-period
   - Default encryption at rest with Google-managed keys
   - CMEK for regulatory compliance
   - CSEK only when absolute key control required
-- **[[vpc|VPC Service Controls]]**:
+- **[[vpc#vpc service controls|VPC Service Controls]]**:
   - **Prevent data exfiltration**
   - Restrict bucket access to specific VPC
   - Control data movement between projects

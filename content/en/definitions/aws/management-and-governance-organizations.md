@@ -27,7 +27,7 @@ Automates account creation and assignment of permissions, as well as infrastruct
 
 SCPs set guardrails for all accounts in your organization (not users or roles.)
 
-**They only filter, and never ADD permissions**, so still need to use [[security-user-and-identity-management|IAM policies]] as well. 
+**They only filter, and never ADD permissions**, so still need to use [[security-user-and-identity-management#iam policies|IAM policies]] as well. 
 
 !!! warning
     **Avoid attaching SCPs to the root account of the organization!**

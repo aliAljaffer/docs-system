@@ -17,4 +17,4 @@ tags:
 
 Licenses can be used on virtual cores (vCPU), physical cores, sockets, or number of machines.
 
-It works with [[compute-ec2-ccp|EC2 dedicated instances, dedicated hosts, spot instances]], and Oracle databases in [[database-aws-database|RDS]]
+It works with [[compute-ec2-ccp#instance types|EC2 dedicated instances, dedicated hosts, spot instances]], and Oracle databases in [[database-aws-database#DB Services|RDS]]

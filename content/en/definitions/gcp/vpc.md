@@ -41,7 +41,7 @@ A Virtual Private Cloud (VPC) is a **global resource** that spans all regions an
 - **Regional resource** that spans all zones in a region
 - Each subnet has:
   - **Primary IP range**: Main CIDR block for resources
-  - **Secondary IP ranges**: Additional ranges for [[gcp/gke|GKE]] pods/services, alias IPs
+  - **Secondary IP ranges**: Additional ranges for [[gcp/gke#vpc-native (ip aliasing) - recommended|GKE]] pods/services, alias IPs
 - Can expand primary and secondary ranges **without downtime**
 - **Cannot overlap with other subnets** in same VPC
 - Cannot shrink subnet ranges
@@ -90,7 +90,7 @@ A Virtual Private Cloud (VPC) is a **global resource** that spans all regions an
 - **Source/Destination**:
   - IP ranges (CIDR)
   - Tags (for ingress)
-  - [[gcp/iam|Service accounts]]
+  - [[gcp/iam#service accounts|Service accounts]]
 - **Protocols and ports**: TCP, UDP, ICMP, etc.
 
 #### Implied Firewall Rules
@@ -160,7 +160,7 @@ A Virtual Private Cloud (VPC) is a **global resource** that spans all regions an
 - Control access to resources based on:
   - IP address
   - VPC network
-  - Identity context (user, [[gcp/iam|service account]], device)
+  - Identity context (user, [[gcp/iam#service accounts|service account]], device)
 - Supported services: [[gcp/cloud-storage|Cloud Storage]], [[gcp/cloud-sql|Cloud SQL]], [[gcp/bigquery|BigQuery]], etc.
 - See [[gcp/vpc-service-controls|VPC Service Controls]] for full details
 
@@ -191,7 +191,7 @@ A Virtual Private Cloud (VPC) is a **global resource** that spans all regions an
 
 ### Cloud Router
 - Managed BGP service
-- Required for [[cloud-vpn|Cloud VPN (HA mode)]] and [[cloud-interconnect|Cloud Interconnect]]
+- Required for [[cloud-vpn#ha vpn|Cloud VPN (HA mode)]] and [[cloud-interconnect|Cloud Interconnect]]
 - **Dynamically exchanges routes** between VPC and on-premises
 - Regional resource
 - Supports custom BGP advertisements
@@ -212,7 +212,7 @@ A Virtual Private Cloud (VPC) is a **global resource** that spans all regions an
 - **Ephemeral**: Temporary, released when resource stopped
 - **Static**: Reserved, persist beyond resource lifecycle
 - **Regional**: Used by regional resources ([[gcp/compute-engine|VMs]], [[cloud-load-balancing|internal LBs]])
-- **Global**: Used by global resources ([[cloud-load-balancing|Global Load Balancers]])
+- **Global**: Used by global resources ([[cloud-load-balancing#Global HTTP(S) Load Balancer|Global Load Balancers]])
 
 ### MTU (Maximum Transmission Unit)
 - Default: 1460 bytes
@@ -305,7 +305,7 @@ gcloud compute routes create ROUTE_NAME \
 ### Key Concepts for ACE
 - Creating custom VPC networks and subnets
 - Understanding regional subnets vs AWS AZ-specific subnets
-- Configuring firewall rules with tags and [[gcp/iam|service accounts]]
+- Configuring firewall rules with tags and [[gcp/iam#service accounts|service accounts]]
 - Enabling Private Google Access for private VMs
 - Managing static and ephemeral IP addresses
 - Expanding subnet ranges without downtime
@@ -335,7 +335,7 @@ gcloud compute routes create ROUTE_NAME \
 - Single global VPC with regional subnets
 - Global routing mode for cross-region communication
 - Regional resources in each region for low latency
-- [[cloud-load-balancing|Global Load Balancing]] for traffic distribution
+- [[cloud-load-balancing#Global HTTP(S) Load Balancer|Global Load Balancing]] for traffic distribution
 - Consider VPC flow logs for network visibility
 
 ### Network Segmentation Strategies
@@ -357,13 +357,13 @@ gcloud compute routes create ROUTE_NAME \
 ### High Availability Design
 - **Regional subnets** span all zones automatically
 - [[cloud-load-balancing|Cloud Load Balancing]] for traffic distribution
-- [[cloud-vpn|HA VPN]] for 99.99% SLA connectivity
+- [[cloud-vpn#ha vpn|HA VPN]] for 99.99% SLA connectivity
 - Multiple Cloud Routers in each region for BGP redundancy
-- [[gcp/persistent-disk|Regional Persistent Disks]] for data replication
+- [[gcp/persistent-disk#Regional vs Zonal|Regional Persistent Disks]] for data replication
 
 ### Security Best Practices
 - **Least Privilege Firewall Rules**: Deny by default, allow explicitly
-- **Use [[gcp/iam|Service Accounts]] for Rules**: More secure than tags
+- **Use [[gcp/iam#service accounts|Service Accounts]] for Rules**: More secure than tags
 - **Hierarchical Firewall Policies**: Enforce org-wide rules
 - **Private Google Access**: Avoid external IPs when possible
 - **VPC Service Controls**: Prevent data exfiltration
@@ -376,7 +376,7 @@ gcloud compute routes create ROUTE_NAME \
 - **Regional Egress**: Keep traffic within region when possible
 - **VPC Peering**: Use instead of external IPs for inter-VPC communication
 - **Private Google Access**: Avoid egress charges for Google API access
-- **[[gcp/compute-engine|Committed Use Discounts]]**: Apply to VM network egress
+- **[[gcp/compute-engine#committed use discounts (cud)|Committed Use Discounts]]**: Apply to VM network egress
 - **Release Static IPs**: When not in use to avoid charges
 
 ### Migration Considerations
@@ -386,7 +386,7 @@ gcloud compute routes create ROUTE_NAME \
 |---|---|---|
 | VPC (regional) | GCP VPC is global | Design: Single global VPC vs multiple regional VPCs |
 | Subnets (AZ-specific) | GCP subnets are regional | Simplifies multi-AZ deployments in GCP |
-| Security Groups | Firewall rules with tags/[[gcp/iam|service accounts]] | - |
+| Security Groups | Firewall rules with tags/[[gcp/iam#service accounts|service accounts]] | - |
 | Network ACLs | Firewall rules (stateful in GCP) | - |
 | VPC Endpoints | Private Google Access and Private Service Connection | - |
 | Transit Gateway | VPC peering or Network Connectivity Center | - |
@@ -399,7 +399,7 @@ gcloud compute routes create ROUTE_NAME \
 
 ### IP Address Planning
 - **Subnet sizing**: Plan for growth, can expand later
-- **Secondary ranges**: Reserve for [[gcp/gke|GKE pods/services]]
+- **Secondary ranges**: Reserve for [[gcp/gke#gke networking modes|GKE pods/services]]
 - **Avoid overlaps**: Critical for VPC peering and hybrid connectivity
 - **RFC 1918 ranges**: 10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16
 - **Organization-wide IPAM**: Centralized IP address management
@@ -436,7 +436,7 @@ gcloud compute routes create ROUTE_NAME \
 
 ### Well-Architected Considerations
 - **Operational Excellence**: Hierarchical firewall policies, centralized management with Shared VPC
-- **Reliability**: Regional subnets, multiple zones, [[cloud-vpn|HA VPN]], global routing
+- **Reliability**: Regional subnets, multiple zones, [[cloud-vpn#ha vpn|HA VPN]], global routing
 - **Security**: VPC Service Controls, Private Google Access, least privilege firewall rules, flow logs
 - **Performance**: Premium network tier, low latency routing, MTU optimization
 - **Cost**: Standard network tier, regional traffic, VPC peering, rightsized static IPs

@@ -49,7 +49,7 @@ tags:
 | **Management** | Simple allow/deny rules | Security policies | Advanced rulesets |
 
 **Decision Matrix:**
-- **[[vpc|VPC Firewall Rules]]**: Basic IP/port filtering (free, simple)
+- **[[vpc#firewall rules|VPC Firewall Rules]]**: Basic IP/port filtering (free, simple)
 - **[[cloud-armor|Cloud Armor]]**: Web application protection (WAF, DDoS)
 - **Cloud NGFW**: Advanced network security (IDS/IPS, SSL inspection, threat intel)
 
@@ -348,13 +348,13 @@ VPC Subnet A  →  Cloud NGFW  →  VPC Subnet B
 
 ### Essential Concepts
 Cloud NGFW is **PCA-level** content, less common on ACE exam. ACE focuses on:
-- [[vpc|VPC Firewall Rules]] (basic allow/deny)
+- [[vpc#firewall rules|VPC Firewall Rules]] (basic allow/deny)
 - [[cloud-armor|Cloud Armor]] (WAF for web apps)
 
 **ACE awareness**: Understand that Cloud NGFW exists for advanced network security, but detailed implementation is PCA-level.
 
 **Key differences to know for ACE**:
-- [[vpc|VPC Firewall Rules]] = Basic Layer 3-4
+- [[vpc#firewall rules|VPC Firewall Rules]] = Basic Layer 3-4
 - [[cloud-armor|Cloud Armor]] = Layer 7 WAF (web apps only)
 - Cloud NGFW = Advanced Layer 3-7 with IDS/IPS (enterprise)
 

@@ -103,9 +103,9 @@ def my_function(request):
 ### Security
 - **Authentication**:
   - HTTP: `roles/cloudfunctions.invoker` for authenticated
-  - Service-to-service: [[gcp/iam|Service account]] tokens
+  - Service-to-service: [[gcp/iam#service accounts|Service account]] tokens
 - **Secrets**: [[gcp/secret-manager|Secret Manager]] integration
-- **[[gcp/iam|Service Account]]**: Function runs with associated service account identity
+- **[[gcp/iam#service accounts|Service Account]]**: Function runs with associated service account identity
 - **[[gcp/vpc-service-controls|VPC Service Controls]]**: Prevent data exfiltration
 
 ### Cloud Functions vs Cloud Run vs App Engine
@@ -252,7 +252,7 @@ gcloud functions deploy FUNCTION_NAME \
 
 ### Security Best Practices
 - **Authentication**: Require for sensitive functions
-- **[[gcp/iam|Service Account]]**: Minimal permissions, unique per function
+- **[[gcp/iam#service accounts|Service Account]]**: Minimal permissions, unique per function
 - **Secrets**: Use [[gcp/secret-manager|Secret Manager]], not environment variables
 - **[[gcp/vpc-service-controls|VPC Service Controls]]**: Prevent data exfiltration
 - **Input validation**: Always validate and sanitize

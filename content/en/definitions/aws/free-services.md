@@ -14,7 +14,7 @@ tags:
 Free tier for first 12 months of signup.
 
 **But these services are free forever:**
-- [[security-user-and-identity-management|IAM]]
+- [[security-user-and-identity-management#identity access management (iam)|IAM]]
 - [[vpc|VPC]]
 - [[autoscaling-groups-and-load-balancers|autoscaling groups and load balancers]]
 - [[management-and-governance-cloudformation|cloudformation]]

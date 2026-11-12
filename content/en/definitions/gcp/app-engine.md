@@ -152,7 +152,7 @@ cron:
 - **[[gcp/iam|Cloud IAM]]** for access control
 - **App Engine firewall**: IP allowlist/denylist
 - **SSL/TLS**: Automatic for `.appspot.com` domains
-- **[[gcp/iam|Service accounts]]**: Each app runs with service account
+- **[[gcp/iam#service accounts|Service accounts]]**: Each app runs with service account
 - **Identity-Aware Proxy**: User authentication
 
 ### Regional Deployment
@@ -306,7 +306,7 @@ gcloud app services set-traffic default --splits=v2=1
 ### Security Best Practices
 - **App Engine Firewall**: Restrict source IPs
 - **Identity-Aware Proxy**: User authentication and authorization
-- **[[gcp/iam|Service account]]**: Minimal permissions
+- **[[gcp/iam#service accounts|Service account]]**: Minimal permissions
 - **Secrets**: [[gcp/secret-manager|Secret Manager]], not environment vars
 - **HTTPS only**: Enforce secure connections
 - **Security scanning**: Web Security Scanner

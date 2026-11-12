@@ -85,7 +85,7 @@ tags:
 - **Recommended for production**
 - Instance gets private IP from VPC
 - No internet exposure
-- Requires [[gcp/vpc|VPC peering]] setup
+- Requires [[gcp/vpc#vpc peering|VPC peering]] setup
 - Better security and performance
 - Lower latency from [[gcp/compute-engine|Compute Engine]] and [[gcp/gke|GKE]]
 
@@ -363,7 +363,7 @@ Primary (Zone A) → Standby (Zone B)
   - `roles/cloudsql.client` for applications
   - `roles/cloudsql.admin` for administrators
 - **Audit logging** with Cloud Audit Logs
-- **[[gcp/vpc|VPC Service Controls]]** for data exfiltration prevention
+- **[[gcp/vpc#vpc service controls|VPC Service Controls]]** for data exfiltration prevention
 
 ### Cost Optimization Strategies
 - **Committed Use Discounts**: 1 or 3 year, **up to 60% savings**

@@ -157,8 +157,8 @@ Private VM (no external IP) → Cloud Router → Cloud NAT → Internet
 - Use sampling or error-only for cost optimization
 ---
 ## Private Google Access
-**Important:** Cloud NAT is **NOT required** for [[vpc|Private Google Access]]
-- [[vpc|Private Google Access]]: VM → Google APIs (e.g., [[gcp/cloud-storage|Cloud Storage]])
+**Important:** Cloud NAT is **NOT required** for [[vpc#private google access|Private Google Access]]
+- [[vpc#private google access|Private Google Access]]: VM → Google APIs (e.g., [[gcp/cloud-storage|Cloud Storage]])
 - Cloud NAT: VM → Internet (e.g., software updates, external APIs)
 - Can use both simultaneously
 
@@ -257,7 +257,7 @@ gcloud logging read "resource.type=nat_gateway" --limit=50
 - Selecting which subnets use Cloud NAT
 - Understanding port allocation and connection limits
 - Enabling logging for monitoring and troubleshooting
-- Differentiating Cloud NAT from [[vpc|Private Google Access]]
+- Differentiating Cloud NAT from [[vpc#private google access|Private Google Access]]
 - Monitoring NAT usage and connection counts
 
 ---
@@ -271,7 +271,7 @@ gcloud logging read "resource.type=nat_gateway" --limit=50
   - Pulling images from Docker Hub, gcr.io
   - External API calls
   - Software updates
-- **[[vpc|Private Google Access]]** for GCP services
+- **[[vpc#private google access|Private Google Access]]** for GCP services
 - Secure, no direct internet exposure
 
 #### Multi-Tier Application
@@ -301,8 +301,8 @@ gcloud logging read "resource.type=nat_gateway" --limit=50
 
 ### Security Best Practices
 - **Least privilege**: Only NAT subnets that need internet access
-- **[[vpc|Firewall rules]]**: Control egress traffic from VMs
-- **[[vpc|Private Google Access]]**: Use instead of NAT for Google APIs
+- **[[vpc#firewall rules|Firewall rules]]**: Control egress traffic from VMs
+- **[[vpc#private google access|Private Google Access]]**: Use instead of NAT for Google APIs
 - **Logging**: Enable for security monitoring and forensics
 - **IP allowlisting**: Use manual NAT IPs for external allowlisting
 - **[[gcp/vpc-service-controls|VPC Service Controls]]**: Prevent data exfiltration
@@ -322,7 +322,7 @@ gcloud logging read "resource.type=nat_gateway" --limit=50
 
 ### Cost Optimization
 - **Minimize NAT usage**:
-  - Use [[vpc|Private Google Access]] for Google APIs (free)
+  - Use [[vpc#private google access|Private Google Access]] for Google APIs (free)
   - Internal communication via private IPs (no NAT needed)
 - **Logging**:
   - Use "Errors only" or "Translations only" to reduce log volume
@@ -477,9 +477,9 @@ curl ifconfig.me  # Returns NAT IP
 ### Integration with GCP Services
 - **[[gcp/gke|GKE]]**: Private clusters with Cloud NAT for outbound
 - **[[gcp/compute-engine|Compute Engine]]**: Private VMs with internet access
-- **[[gcp/cloud-run|Cloud Run]]**: Use [[gcp/cloud-run|VPC Connector]] + Cloud NAT for outbound
-- **[[gcp/cloud-functions|Cloud Functions]]**: [[gcp/cloud-functions|VPC Connector]] + Cloud NAT
-- **[[gcp/app-engine|App Engine]]**: Serverless VPC Access + Cloud NAT
+- **[[gcp/cloud-run|Cloud Run]]**: Use [[gcp/cloud-run#direct vpc egress|VPC Connector]] + Cloud NAT for outbound
+- **[[gcp/cloud-functions|Cloud Functions]]**: [[gcp/cloud-functions#networking|VPC Connector]] + Cloud NAT
+- **[[gcp/app-engine#vpc connector (flexible)|App Engine]]**: Serverless VPC Access + Cloud NAT
 
 ### Cloud NAT vs Private Google Access vs VPN
 | Feature | Cloud NAT | Private Google Access | VPN/Interconnect |

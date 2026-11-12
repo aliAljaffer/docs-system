@@ -115,6 +115,12 @@ class SiteTests(unittest.TestCase):
         self.assertTrue((SITE / "definitions" / "rest" / "index.html").exists())
         self.assertIn("/definitions/", (SITE / "assets" / "backlinks.json").read_text())
 
+    def test_wiki_heading_links(self) -> None:
+        page = (SITE / "definitions" / "aws" / "compute-beanstalk" / "index.html").read_text()
+        self.assertIn('href="/aws-saa-c03/03-compute/#elastic-load-balancing"', page)
+        target = (SITE / "aws-saa-c03" / "03-compute" / "index.html").read_text()
+        self.assertIn('id="elastic-load-balancing"', target)
+
     def test_diagrams_and_backlinks_rendered_at_build(self) -> None:
         page = (SITE / "four-hats" / "episodes" / "ep04-add-a-feature-with-a-test" / "index.html").read_text()
         self.assertIn('<div class="diagram-zoom">', page)

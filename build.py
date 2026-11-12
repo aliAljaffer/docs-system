@@ -9,6 +9,7 @@ from __future__ import annotations
 import datetime
 import fcntl
 import hashlib
+import html
 import json
 import os
 import posixpath
@@ -17,6 +18,7 @@ import shutil
 import subprocess
 from pathlib import Path
 
+import markdown
 import yaml
 
 import brand
@@ -196,7 +198,22 @@ def definitions_index(root: Path) -> None:
     (base / "index.md").write_text("\n".join(lines))
 
 
-WIKI = re.compile(r"\[\[([^\]|]+)(?:\|([^\]]+))?\]\]")
+WIKI = re.compile(r"\[\[([^\]|#]*)((?:#[^\]|]+)?)(?:\|([^\]]+))?\]\]")
+
+
+def heading_anchors(text: str) -> dict[str, str]:
+    """Map heading text to the id the toc extension gives it."""
+    md = markdown.Markdown(extensions=["fenced_code", "attr_list", "toc"])
+    md.convert(split_meta(text)[1])
+    found: dict[str, str] = {}
+
+    def walk(tokens: list[dict]) -> None:
+        for token in tokens:
+            found.setdefault(html.unescape(token["name"]).strip().lower(), token["id"])
+            walk(token["children"])
+
+    walk(md.toc_tokens)
+    return found
 
 
 def process_wiki(root: Path) -> None:
@@ -215,22 +232,36 @@ def process_wiki(root: Path) -> None:
             index[stem] = paths[0]
 
     titles = {path: title_of(path) for path in files}
+    anchors: dict[Path, dict[str, str]] = {}
     backlinks: dict[str, list[dict[str, str]]] = {}
     for path in files:
 
         def replace(match: re.Match[str]) -> str:
             target = match.group(1).strip()
-            label = (match.group(2) or target).strip()
-            if target not in index:
+            heading = match.group(2).rpartition("#")[2].strip()
+            if not target and not heading:
+                raise SystemExit(f"{path.name}: empty wikilink")
+            if target and target not in index:
                 raise SystemExit(f"{path.name}: missing wikilink target: {target}")
-            url = f"/{index[target].relative_to(root).with_suffix('').as_posix().removesuffix('index')}"
-            source = f"/{path.relative_to(root).with_suffix('').as_posix().removesuffix('index')}"
-            url, source = url.rstrip("/") + "/", source.rstrip("/") + "/"
-            entry = {"title": titles[path], "url": source}
-            bucket = backlinks.setdefault(url, [])
-            if entry not in bucket:
-                bucket.append(entry)
-            return f"[{label}]({url})"
+            page = index[target] if target else path
+            label = (match.group(3) or heading or target).strip()
+            url = f"/{page.relative_to(root).with_suffix('').as_posix().removesuffix('index')}"
+            url = url.rstrip("/") + "/"
+            fragment = ""
+            if heading:
+                if page not in anchors:
+                    anchors[page] = heading_anchors(page.read_text())
+                anchor = anchors[page].get(heading.lower())
+                if anchor is None:
+                    raise SystemExit(f"{path.name}: missing heading '{heading}' in {page.name}")
+                fragment = f"#{anchor}"
+            if page != path:
+                source = f"/{path.relative_to(root).with_suffix('').as_posix().removesuffix('index')}"
+                entry = {"title": titles[path], "url": source.rstrip("/") + "/"}
+                bucket = backlinks.setdefault(url, [])
+                if entry not in bucket:
+                    bucket.append(entry)
+            return f"[{label}]({url}{fragment})"
 
         path.write_text(WIKI.sub(replace, path.read_text()))
 

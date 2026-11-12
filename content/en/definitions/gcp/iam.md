@@ -62,7 +62,7 @@ Organization (optional)
 - Best practice: Grant least privilege at lowest level
 
 ### Service Accounts
-**AWS Equivalent:** IAM Roles
+**AWS Equivalent:** [[security-iam#IAM Roles|IAM Roles]]
 
 **Application/workload identity** - Not for end users
 
@@ -146,7 +146,7 @@ gcloud projects add-iam-policy-binding PROJECT_ID \
 - **Always use version 3 for new policies**
 
 ### Organization Policies
-**AWS Equivalent:** AWS SCPs
+**AWS Equivalent:** [[management-and-governance-organizations#Organizations vs. SCPs|AWS SCPs]]
 
 **Centralized constraints across organization**
 
@@ -178,7 +178,7 @@ gcloud projects add-iam-policy-binding PROJECT_ID \
 - **Essential tool for IAM debugging**
 
 ### Workload Identity Federation
-**AWS Equivalent:** OIDC/SAML Federation
+**AWS Equivalent:** [[security-iam#IAM Roles|OIDC/SAML Federation]]
 
 **Access GCP from external workloads without service account keys**
 

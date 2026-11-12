@@ -147,7 +147,7 @@ tags:
 ### Access Control
 #### Network-Based
 - **Private IP address only** (no public endpoint)
-- [[vpc|VPC firewall rules]] control network access
+- [[vpc#Firewall Rules|VPC firewall rules]] control network access
 - Default: Allow NFS (port 2049) within VPC
 - Can restrict by source IP ranges
 
@@ -492,9 +492,9 @@ nfsvers=3          # NFSv3 protocol
 ### Security Best Practices
 #### Network Isolation
 - Deploy in **private VPC subnet**
-- [[vpc|Firewall rules]]: Restrict to specific VMs/subnets
+- [[vpc#Firewall Rules|Firewall rules]]: Restrict to specific VMs/subnets
 - No public IP (inherent security)
-- [[vpc|VPC Service Controls]]: Prevent data exfiltration
+- [[vpc#vpc service controls|VPC Service Controls]]: Prevent data exfiltration
 
 #### Encryption
 - **At-rest**: Default Google-managed or CMEK
@@ -509,7 +509,7 @@ nfsvers=3          # NFSv3 protocol
 - **Network-level**: VPC firewall rules, Private Services Access
 - **File-level**: POSIX permissions (UID/GID)
   - Implement consistent UID/GID across clients
-  - Use [[iam|service accounts]] for VM identity
+  - Use [[iam#service accounts|service accounts]] for VM identity
 - **Audit**: [[gcp/cloud-logging|Cloud Audit Logs]] for admin operations
   - Track instance creation/deletion
   - Snapshot/backup operations
