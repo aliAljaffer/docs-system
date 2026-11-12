@@ -42,6 +42,7 @@ class Brand:
     shape: dict[str, object]
     fonts: dict[str, str]
     stylesheets: list[str]
+    logo: str
     favicon: str
     source: Path
 
@@ -120,8 +121,10 @@ def load(path: Path = BRAND_DIR / "brand.json") -> Brand:
         raise SystemExit("brand.json: fonts.text is required")
     fonts = {"text": fonts["text"], "code": fonts.get("code", fonts["text"]), "display": fonts.get("display", fonts["text"])}
     icon = raw.get("icon")
-    if not icon or not (path.parent / icon).is_file():
-        raise SystemExit(f"brand.json: icon file not found: {icon}")
+    favicon = raw.get("favicon", icon)
+    for key, name in (("icon", icon), ("favicon", favicon)):
+        if not name or not (path.parent / name).is_file():
+            raise SystemExit(f"brand.json: {key} file not found: {name}")
     modes = {mode: resolve(raw, mode) for mode in MODES}
     return Brand(
         modes=modes,
@@ -129,7 +132,8 @@ def load(path: Path = BRAND_DIR / "brand.json") -> Brand:
         shape=resolve_shape(raw),
         fonts=fonts,
         stylesheets=list(raw.get("stylesheets", [])),
-        favicon=icon,
+        logo=icon,
+        favicon=favicon,
         source=path.parent,
     )
 

@@ -61,7 +61,7 @@ theme:
   language: en
   font: false
   favicon: {favicon}
-  logo: {favicon}
+  logo: {logo}
   palette:
     - scheme: default
       primary: custom
@@ -600,7 +600,7 @@ def assemble() -> Path:
     (ROOT / "mkdocs.en.yml").write_text(
         BASE_THEME.format(
             site_name=SITE_NAME, tagline=TAGLINE, site_url=SITE_URL, docs_dir=BUILD.relative_to(ROOT).as_posix(),
-            v=version, self_repo=provenance.SELF_REPO, favicon=f"assets/brand/{identity.favicon}", brand_styles=brand_styles,
+            v=version, self_repo=provenance.SELF_REPO, favicon=f"assets/brand/{identity.favicon}?v={version}", logo=f"assets/brand/{identity.logo}?v={version}", brand_styles=brand_styles,
         )
         + yaml.safe_dump(site, sort_keys=False)
         + "\nnav:\n"
