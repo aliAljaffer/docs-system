@@ -1,5 +1,5 @@
 ---
-title: Cloud-monitoring
+title: cloud-monitoring
 category: GCP
 description: 'GCP note: Cloud-monitoring.'
 tags:
@@ -8,7 +8,7 @@ tags:
 ---
 
 
-# Cloud-monitoring
+# cloud-monitoring
 
 `gcp` `operations`
 

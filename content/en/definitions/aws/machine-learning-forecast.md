@@ -1,5 +1,5 @@
 ---
-title: Forecast
+title: forecast
 category: AWS
 description: Managed service for accurate TimeSeries forecasting.
 tags:
@@ -8,7 +8,7 @@ tags:
 ---
 
 
-# Forecast
+# forecast
 
 `aws` `services`
 

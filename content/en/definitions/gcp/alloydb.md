@@ -1,5 +1,5 @@
 ---
-title: Alloydb
+title: alloydb
 category: GCP
 description: 'GCP note: Alloydb.'
 tags:
@@ -8,7 +8,7 @@ tags:
 ---
 
 
-# Alloydb
+# alloydb
 
 `gcp` `databases`
 

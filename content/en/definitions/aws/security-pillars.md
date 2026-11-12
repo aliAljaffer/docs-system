@@ -1,5 +1,5 @@
 ---
-title: Security pillars
+title: security pillars
 category: AWS
 description: 1. Implement a strong identity foundation
 tags:
@@ -7,7 +7,7 @@ tags:
 ---
 
 
-# Security pillars
+# security pillars
 
 `gcp`
 

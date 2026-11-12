@@ -1,5 +1,5 @@
 ---
-title: Persistent-disk
+title: persistent-disk
 category: GCP
 description: 'GCP note: Persistent-disk.'
 tags:
@@ -8,7 +8,7 @@ tags:
 ---
 
 
-# Persistent-disk
+# persistent-disk
 
 `gcp` `storage`
 

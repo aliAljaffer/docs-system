@@ -1,5 +1,5 @@
 ---
-title: Eventarc
+title: eventarc
 category: GCP
 description: 'GCP note: Eventarc.'
 tags:
@@ -8,7 +8,7 @@ tags:
 ---
 
 
-# Eventarc
+# eventarc
 
 `gcp` `data`
 

@@ -1,5 +1,5 @@
 ---
-title: Gke
+title: gke
 category: GCP
 description: 'GCP note: Gke.'
 tags:
@@ -8,7 +8,7 @@ tags:
 ---
 
 
-# Gke
+# gke
 
 `gcp` `compute`
 

@@ -1,5 +1,5 @@
 ---
-title: Firestore
+title: firestore
 category: GCP
 description: 'GCP note: Firestore.'
 tags:
@@ -8,7 +8,7 @@ tags:
 ---
 
 
-# Firestore
+# firestore
 
 `gcp` `databases`
 

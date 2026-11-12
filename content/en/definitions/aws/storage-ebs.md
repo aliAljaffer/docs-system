@@ -1,5 +1,5 @@
 ---
-title: Ebs
+title: ebs
 category: AWS
 description: Elastic Block Storage - Most useful for ec2-ccp instances as it can be
   directly access by the OS of the instance. Can be attached to multiple ec2-ccp instances,
@@ -10,7 +10,7 @@ tags:
 ---
 
 
-# Ebs
+# ebs
 
 `aws` `services`
 

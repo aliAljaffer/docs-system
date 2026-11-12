@@ -1,5 +1,5 @@
 ---
-title: Fargate
+title: fargate
 category: AWS
 description: AWS Fargate is a serverless, pay-as-you-go compute engine that lets you
   focus on building applications without managing servers. Moving tasks such as server
@@ -10,7 +10,7 @@ tags:
 ---
 
 
-# Fargate
+# fargate
 
 `aws` `services`
 

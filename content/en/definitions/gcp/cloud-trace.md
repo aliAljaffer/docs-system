@@ -1,5 +1,5 @@
 ---
-title: Cloud-trace
+title: cloud-trace
 category: GCP
 description: 'GCP note: Cloud-trace.'
 tags:
@@ -8,7 +8,7 @@ tags:
 ---
 
 
-# Cloud-trace
+# cloud-trace
 
 `gcp` `operations`
 

@@ -1,5 +1,5 @@
 ---
-title: Inspector
+title: inspector
 category: AWS
 description: 'AWS note: Inspector.'
 tags:
@@ -8,7 +8,7 @@ tags:
 ---
 
 
-# Inspector
+# inspector
 
 `aws` `services`
 

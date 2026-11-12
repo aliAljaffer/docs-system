@@ -1,5 +1,5 @@
 ---
-title: Cloud-nat
+title: cloud-nat
 category: GCP
 description: Managed Network Address Translation service for outbound internet connectivity from private instances.
 tags:
@@ -8,7 +8,7 @@ tags:
 ---
 
 
-# Cloud-nat
+# cloud-nat
 
 `gcp` `networking`
 

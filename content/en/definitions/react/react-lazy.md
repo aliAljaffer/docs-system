@@ -1,5 +1,5 @@
 ---
-title: React-lazy
+title: react-lazy
 category: React
 description: In React, we use lazy-loading on components that might be too complex
   or big to save on loading time. React provides a lazy() function to do that. Traditionally,
@@ -10,7 +10,7 @@ tags:
 ---
 
 
-# React-lazy
+# react-lazy
 
 `react` `performance`
 

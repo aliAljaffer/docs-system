@@ -1,5 +1,5 @@
 ---
-title: Sqs
+title: sqs
 category: AWS
 description: 'AWS note: Sqs.'
 tags:
@@ -8,7 +8,7 @@ tags:
 ---
 
 
-# Sqs
+# sqs
 
 `aws` `services`
 

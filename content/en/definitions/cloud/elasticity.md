@@ -1,5 +1,5 @@
 ---
-title: Elasticity
+title: elasticity
 category: Cloud
 description: The ability to AUTOMATICALLY increase or decrease your resources based
   on metrics you are tracking.
@@ -9,7 +9,7 @@ tags:
 ---
 
 
-# Elasticity
+# elasticity
 
 `cloud` `fundamentals`
 

@@ -1,5 +1,5 @@
 ---
-title: Pricing calculator
+title: pricing calculator
 category: AWS
 description: A service that is cart-like where you add services, configure them, and
   see what they'd cost
@@ -9,7 +9,7 @@ tags:
 ---
 
 
-# Pricing calculator
+# pricing calculator
 
 `aws` `services`
 

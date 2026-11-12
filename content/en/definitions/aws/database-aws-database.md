@@ -1,5 +1,5 @@
 ---
-title: Aws database
+title: aws database
 category: AWS
 description: Databases store semi-structured and structured data. This is the primary
   difference between storage and database.
@@ -9,7 +9,7 @@ tags:
 ---
 
 
-# Aws database
+# aws database
 
 `aws` `services`
 

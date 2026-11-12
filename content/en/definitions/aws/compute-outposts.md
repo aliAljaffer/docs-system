@@ -1,5 +1,5 @@
 ---
-title: Outposts
+title: outposts
 category: AWS
 description: '"Run AWS infrastructure and services on premises for a truly consistent
   hybrid experience"'
@@ -9,7 +9,7 @@ tags:
 ---
 
 
-# Outposts
+# outposts
 
 `aws` `services`
 

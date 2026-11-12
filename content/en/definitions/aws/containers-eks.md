@@ -1,5 +1,5 @@
 ---
-title: Eks
+title: eks
 category: AWS
 description: Amazon Elastic Kubernetes Service (Amazon EKS) is a fully managed Kubernetes
   service that enables you to run Kubernetes seamlessly in both AWS Cloud and on-premises
@@ -10,7 +10,7 @@ tags:
 ---
 
 
-# Eks
+# eks
 
 `aws` `services`
 

@@ -1,5 +1,5 @@
 ---
-title: Rekognition
+title: rekognition
 category: AWS
 description: Search and analyze images and videos
 tags:
@@ -8,7 +8,7 @@ tags:
 ---
 
 
-# Rekognition
+# rekognition
 
 `aws` `services`
 

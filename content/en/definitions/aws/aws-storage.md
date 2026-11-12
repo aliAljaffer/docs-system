@@ -1,5 +1,5 @@
 ---
-title: Aws storage
+title: aws storage
 category: AWS
 description: 'AWS note: Aws storage.'
 tags:
@@ -7,7 +7,7 @@ tags:
 ---
 
 
-# Aws storage
+# aws storage
 
 `gcp`
 

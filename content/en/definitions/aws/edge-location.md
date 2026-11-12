@@ -1,5 +1,5 @@
 ---
-title: Edge location
+title: edge location
 category: AWS
 description: Individual sites spread out in a region for faster content delivery offering
   limited services.
@@ -10,7 +10,7 @@ tags:
 ---
 
 
-# Edge location
+# edge location
 
 `cloud` `fundamentals` `geography`
 

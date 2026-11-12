@@ -1,5 +1,5 @@
 ---
-title: Database migration service
+title: database migration service
 category: AWS
 description: Migrate databases with minimal downtime and high availability at low-costs
 tags:
@@ -8,7 +8,7 @@ tags:
 ---
 
 
-# Database migration service
+# database migration service
 
 `aws` `services`
 

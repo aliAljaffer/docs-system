@@ -1,5 +1,5 @@
 ---
-title: Ecr
+title: ecr
 category: AWS
 description: 'Elastic Container Registry: Share and deploy containers software, either
   publicly or privately'
@@ -9,7 +9,7 @@ tags:
 ---
 
 
-# Ecr
+# ecr
 
 `aws` `services`
 

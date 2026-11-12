@@ -1,5 +1,5 @@
 ---
-title: Cloud-kms
+title: cloud-kms
 category: GCP
 description: 'GCP note: Cloud-kms.'
 tags:
@@ -8,7 +8,7 @@ tags:
 ---
 
 
-# Cloud-kms
+# cloud-kms
 
 `gcp` `security`
 

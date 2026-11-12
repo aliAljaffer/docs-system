@@ -1,5 +1,5 @@
 ---
-title: Cloud concepts
+title: cloud concepts
 category: Cloud
 description: start @ certificate topics
 tags:
@@ -7,7 +7,7 @@ tags:
 ---
 
 
-# Cloud concepts
+# cloud concepts
 
 `gcp`
 

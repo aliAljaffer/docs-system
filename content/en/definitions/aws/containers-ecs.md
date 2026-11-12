@@ -1,5 +1,5 @@
 ---
-title: Ecs
+title: ecs
 category: AWS
 description: 'AWS note: Ecs.'
 tags:
@@ -8,7 +8,7 @@ tags:
 ---
 
 
-# Ecs
+# ecs
 
 `aws` `services`
 

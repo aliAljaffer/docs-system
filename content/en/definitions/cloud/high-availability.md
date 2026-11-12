@@ -1,5 +1,5 @@
 ---
-title: High availability
+title: high availability
 category: Cloud
 description: 'Cloud definition: High availability.'
 tags:
@@ -9,7 +9,7 @@ tags:
 ---
 
 
-# High availability
+# high availability
 
 `cloud` `fundamentals` `reliability`
 

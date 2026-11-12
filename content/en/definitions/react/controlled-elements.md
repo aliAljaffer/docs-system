@@ -1,5 +1,5 @@
 ---
-title: Controlled-elements
+title: controlled-elements
 category: React
 description: Controlled elements in React are elements that have a state that gets
   updated concurrently as user enters data. The state and user input are tied together.
@@ -9,7 +9,7 @@ tags:
 ---
 
 
-# Controlled-elements
+# controlled-elements
 
 `react` `forms`
 

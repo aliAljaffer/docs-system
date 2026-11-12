@@ -1,5 +1,5 @@
 ---
-title: Pure-functions
+title: pure-functions
 category: Web
 description: 'In computer programming, a pure function is a function that has the
   following properties:'
@@ -9,7 +9,7 @@ tags:
 ---
 
 
-# Pure-functions
+# pure-functions
 
 `web` `fundamentals`
 

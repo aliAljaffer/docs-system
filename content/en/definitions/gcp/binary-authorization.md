@@ -1,5 +1,5 @@
 ---
-title: Binary-authorization
+title: binary-authorization
 category: GCP
 description: 'GCP note: Binary-authorization.'
 tags:
@@ -8,7 +8,7 @@ tags:
 ---
 
 
-# Binary-authorization
+# binary-authorization
 
 `gcp` `security`
 

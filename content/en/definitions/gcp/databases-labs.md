@@ -1,5 +1,5 @@
 ---
-title: Databases-labs
+title: databases-labs
 category: GCP
 description: 'GCP note: Databases-labs.'
 tags:
@@ -8,7 +8,7 @@ tags:
 ---
 
 
-# Databases-labs
+# databases-labs
 
 `gcp` `databases`
 

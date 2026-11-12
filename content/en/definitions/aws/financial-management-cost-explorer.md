@@ -1,5 +1,5 @@
 ---
-title: Cost explorer
+title: cost explorer
 category: AWS
 description: Dashboard with visualizations for costs and usage data, viewable at monthly/daily
   intervals.
@@ -9,7 +9,7 @@ tags:
 ---
 
 
-# Cost explorer
+# cost explorer
 
 `aws` `services`
 

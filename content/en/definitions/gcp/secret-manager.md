@@ -1,5 +1,5 @@
 ---
-title: Secret-manager
+title: secret-manager
 category: GCP
 description: 'GCP note: Secret-manager.'
 tags:
@@ -8,7 +8,7 @@ tags:
 ---
 
 
-# Secret-manager
+# secret-manager
 
 `gcp` `security`
 

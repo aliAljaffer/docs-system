@@ -1,5 +1,5 @@
 ---
-title: Availability zones
+title: availability zones
 category: AWS
 description: PHYSICAL Data centers within a region that provide high availability
   within the region they reside in. They offer the same services offered in their
@@ -11,7 +11,7 @@ tags:
 ---
 
 
-# Availability zones
+# availability zones
 
 `cloud` `fundamentals` `geography`
 

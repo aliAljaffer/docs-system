@@ -1,5 +1,5 @@
 ---
-title: Vpc
+title: vpc
 category: GCP
 description: 'GCP note: Vpc.'
 tags:
@@ -8,7 +8,7 @@ tags:
 ---
 
 
-# Vpc
+# vpc
 
 `gcp` `networking`
 

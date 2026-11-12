@@ -1,5 +1,5 @@
 ---
-title: Transcribe
+title: transcribe
 category: AWS
 description: Speech to text (reverse of lex) that also analyzes the text for insights.
 tags:
@@ -8,7 +8,7 @@ tags:
 ---
 
 
-# Transcribe
+# transcribe
 
 `aws` `services`
 

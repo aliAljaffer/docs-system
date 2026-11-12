@@ -1,5 +1,5 @@
 ---
-title: Cloudtrail
+title: cloudtrail
 category: AWS
 description: '"Track user activity and API usage on AWS and in hybrid and multicloud
   environments"'
@@ -9,7 +9,7 @@ tags:
 ---
 
 
-# Cloudtrail
+# cloudtrail
 
 `aws` `services`
 

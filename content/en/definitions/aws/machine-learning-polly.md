@@ -1,5 +1,5 @@
 ---
-title: Polly
+title: polly
 category: AWS
 description: Text to Lifelike speech AI voice generation.
 tags:
@@ -8,7 +8,7 @@ tags:
 ---
 
 
-# Polly
+# polly
 
 `aws` `services`
 

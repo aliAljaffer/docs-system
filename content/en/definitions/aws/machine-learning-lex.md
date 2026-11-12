@@ -1,5 +1,5 @@
 ---
-title: Lex
+title: lex
 category: AWS
 description: Build text and voice chatbots.
 tags:
@@ -8,7 +8,7 @@ tags:
 ---
 
 
-# Lex
+# lex
 
 `aws` `services`
 

@@ -1,5 +1,5 @@
 ---
-title: Total cost of ownership
+title: total cost of ownership
 category: AWS
 description: TCO is one of the largest value additions for using the cloud.
 tags:
@@ -7,7 +7,7 @@ tags:
 ---
 
 
-# Total cost of ownership
+# total cost of ownership
 
 `gcp`
 

@@ -1,5 +1,5 @@
 ---
-title: Generative ai
+title: generative ai
 category: AI
 description: AI that generates somewhat NEW results
 tags:
@@ -9,7 +9,7 @@ tags:
 ---
 
 
-# Generative ai
+# generative ai
 
 `cloud` `fundamentals` `ai`
 

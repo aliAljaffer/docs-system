@@ -1,5 +1,5 @@
 ---
-title: Iot Overview
+title: overview
 category: AWS
 description: 'AWS note: Iot Overview.'
 tags:
@@ -8,7 +8,7 @@ tags:
 ---
 
 
-# Iot Overview
+# overview
 
 `aws` `services`
 

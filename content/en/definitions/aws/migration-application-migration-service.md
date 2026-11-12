@@ -1,5 +1,5 @@
 ---
-title: Application migration service
+title: application migration service
 category: AWS
 description: MGN - Move and improve your on-premises and cloud-based applications.
   Can migrate between AWS regions!!!!!!
@@ -9,7 +9,7 @@ tags:
 ---
 
 
-# Application migration service
+# application migration service
 
 `aws` `services`
 

@@ -1,5 +1,5 @@
 ---
-title: Aws snow family
+title: aws snow family
 category: AWS
 description: 'AWS note: Aws snow family.'
 tags:
@@ -8,7 +8,7 @@ tags:
 ---
 
 
-# Aws snow family
+# aws snow family
 
 `aws` `services`
 

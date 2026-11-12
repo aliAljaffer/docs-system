@@ -1,5 +1,5 @@
 ---
-title: Dataflow
+title: dataflow
 category: GCP
 description: 'GCP note: Dataflow.'
 tags:
@@ -8,7 +8,7 @@ tags:
 ---
 
 
-# Dataflow
+# dataflow
 
 `gcp` `data`
 

@@ -1,5 +1,5 @@
 ---
-title: Performance efficiency pillar
+title: performance efficiency pillar
 category: AWS
 description: 'Cloud note: Performance efficiency pillar.'
 tags:
@@ -7,7 +7,7 @@ tags:
 ---
 
 
-# Performance efficiency pillar
+# performance efficiency pillar
 
 `gcp`
 

@@ -1,5 +1,5 @@
 ---
-title: Ec2
+title: ec2
 category: AWS
 description: 'AWS note: Ec2.'
 tags:
@@ -8,7 +8,7 @@ tags:
 ---
 
 
-# Ec2
+# ec2
 
 `aws` `services`
 

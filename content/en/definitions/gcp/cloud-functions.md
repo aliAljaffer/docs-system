@@ -1,5 +1,5 @@
 ---
-title: Cloud-functions
+title: cloud-functions
 category: GCP
 description: Process one event, trigger multiple downstream processes
 tags:
@@ -8,7 +8,7 @@ tags:
 ---
 
 
-# Cloud-functions
+# cloud-functions
 
 `gcp` `compute`
 

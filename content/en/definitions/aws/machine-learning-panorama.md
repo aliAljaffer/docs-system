@@ -1,5 +1,5 @@
 ---
-title: Panorama
+title: panorama
 category: AWS
 description: Enabling computer vision apps at the edge.
 tags:
@@ -8,7 +8,7 @@ tags:
 ---
 
 
-# Panorama
+# panorama
 
 `aws` `services`
 

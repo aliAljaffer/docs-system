@@ -1,5 +1,5 @@
 ---
-title: Management-labs
+title: management-labs
 category: GCP
 description: 'GCP note: Management-labs.'
 tags:
@@ -8,7 +8,7 @@ tags:
 ---
 
 
-# Management-labs
+# management-labs
 
 `gcp` `management`
 

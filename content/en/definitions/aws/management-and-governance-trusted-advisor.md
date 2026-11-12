@@ -1,5 +1,5 @@
 ---
-title: Trusted advisor
+title: trusted advisor
 category: AWS
 description: 'A recommendation tool that automatically and actively monitors your
   AWS account to provide actionable recommendations across a series of categories:'
@@ -9,7 +9,7 @@ tags:
 ---
 
 
-# Trusted advisor
+# trusted advisor
 
 `aws` `services`
 

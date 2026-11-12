@@ -1,5 +1,5 @@
 ---
-title: Error-reporting
+title: error-reporting
 category: GCP
 description: 'GCP note: Error-reporting.'
 tags:
@@ -8,7 +8,7 @@ tags:
 ---
 
 
-# Error-reporting
+# error-reporting
 
 `gcp` `operations`
 

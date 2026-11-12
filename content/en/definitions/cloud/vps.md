@@ -1,5 +1,5 @@
 ---
-title: Vps
+title: vps
 category: Cloud
 description: One machine dedicated to a single business. The machine is split into
   sub-machines. Runs multiple web apps.
@@ -9,7 +9,7 @@ tags:
 ---
 
 
-# Vps
+# vps
 
 `cloud` `fundamentals`
 

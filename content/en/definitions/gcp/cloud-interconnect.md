@@ -1,5 +1,5 @@
 ---
-title: Cloud-interconnect
+title: cloud-interconnect
 category: GCP
 description: 'GCP note: Cloud-interconnect.'
 tags:
@@ -8,7 +8,7 @@ tags:
 ---
 
 
-# Cloud-interconnect
+# cloud-interconnect
 
 `gcp` `networking`
 

@@ -1,5 +1,5 @@
 ---
-title: Cloud hosting
+title: cloud hosting
 category: Cloud
 description: Multiple machines, multiple businesses.
 tags:
@@ -8,7 +8,7 @@ tags:
 ---
 
 
-# Cloud hosting
+# cloud hosting
 
 `cloud` `fundamentals`
 

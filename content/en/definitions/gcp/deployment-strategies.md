@@ -1,5 +1,5 @@
 ---
-title: Deployment-strategies
+title: deployment-strategies
 category: GCP
 description: 'GCP note: Deployment-strategies.'
 tags:
@@ -8,7 +8,7 @@ tags:
 ---
 
 
-# Deployment-strategies
+# deployment-strategies
 
 `gcp` `devops`
 

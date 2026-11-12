@@ -1,5 +1,5 @@
 ---
-title: Cloud-ngfw
+title: cloud-ngfw
 category: GCP
 description: 'GCP note: Cloud-ngfw.'
 tags:
@@ -8,7 +8,7 @@ tags:
 ---
 
 
-# Cloud-ngfw
+# cloud-ngfw
 
 `gcp` `networking`
 

@@ -1,5 +1,5 @@
 ---
-title: Compute-labs
+title: compute-labs
 category: GCP
 description: 'GCP note: Compute-labs.'
 tags:
@@ -8,7 +8,7 @@ tags:
 ---
 
 
-# Compute-labs
+# compute-labs
 
 `gcp` `compute`
 

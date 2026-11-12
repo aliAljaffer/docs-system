@@ -1,5 +1,5 @@
 ---
-title: Lightsail
+title: lightsail
 category: AWS
 description: 'AWS note: Lightsail.'
 tags:
@@ -8,7 +8,7 @@ tags:
 ---
 
 
-# Lightsail
+# lightsail
 
 `aws` `services`
 

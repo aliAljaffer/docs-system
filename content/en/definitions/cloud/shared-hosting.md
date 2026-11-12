@@ -1,5 +1,5 @@
 ---
-title: Shared hosting
+title: shared hosting
 category: Cloud
 description: One machine, hundred of businesses.
 tags:
@@ -8,7 +8,7 @@ tags:
 ---
 
 
-# Shared hosting
+# shared hosting
 
 `cloud` `fundamentals`
 

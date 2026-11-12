@@ -1,5 +1,5 @@
 ---
-title: Guardduty
+title: guardduty
 category: AWS
 description: 'AWS note: Guardduty.'
 tags:
@@ -8,7 +8,7 @@ tags:
 ---
 
 
-# Guardduty
+# guardduty
 
 `aws` `services`
 

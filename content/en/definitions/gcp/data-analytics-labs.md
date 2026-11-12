@@ -1,5 +1,5 @@
 ---
-title: Data-analytics-labs
+title: data-analytics-labs
 category: GCP
 description: 'GCP note: Data-analytics-labs.'
 tags:
@@ -8,7 +8,7 @@ tags:
 ---
 
 
-# Data-analytics-labs
+# data-analytics-labs
 
 `gcp` `data`
 

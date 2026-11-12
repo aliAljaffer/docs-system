@@ -1,5 +1,5 @@
 ---
-title: Cloud-sql
+title: cloud-sql
 category: GCP
 description: 'GCP note: Cloud-sql.'
 tags:
@@ -8,7 +8,7 @@ tags:
 ---
 
 
-# Cloud-sql
+# cloud-sql
 
 `gcp` `databases`
 

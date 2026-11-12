@@ -1,5 +1,5 @@
 ---
-title: Dedicated server
+title: dedicated server
 category: Cloud
 description: One machine dedicated to a single business.
 tags:
@@ -8,7 +8,7 @@ tags:
 ---
 
 
-# Dedicated server
+# dedicated server
 
 `cloud` `fundamentals`
 

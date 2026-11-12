@@ -1,5 +1,5 @@
 ---
-title: Cloud-run
+title: cloud-run
 category: GCP
 description: 'GCP note: Cloud-run.'
 tags:
@@ -8,7 +8,7 @@ tags:
 ---
 
 
-# Cloud-run
+# cloud-run
 
 `gcp` `compute`
 

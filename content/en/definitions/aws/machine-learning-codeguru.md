@@ -1,5 +1,5 @@
 ---
-title: Codeguru
+title: codeguru
 category: AWS
 description: Recommendation tool for building and running modern applications
 tags:
@@ -8,7 +8,7 @@ tags:
 ---
 
 
-# Codeguru
+# codeguru
 
 `aws` `services`
 

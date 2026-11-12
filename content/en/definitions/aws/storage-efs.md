@@ -1,5 +1,5 @@
 ---
-title: Efs
+title: efs
 category: AWS
 description: Elastic File System - a file system that grows or shrinks based on usage.
   Commonly mounted on ec2-ccp, but can also be mounted on containers or Lambda functions.
@@ -9,7 +9,7 @@ tags:
 ---
 
 
-# Efs
+# efs
 
 `aws` `services`
 

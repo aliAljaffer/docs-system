@@ -1,12 +1,12 @@
 ---
-title: Installation
+title: react-installation
 category: React
 description: 'React note: Installation.'
 tags:
 - react
 ---
 
-# Installation
+# react-installation
 
 `react`
 

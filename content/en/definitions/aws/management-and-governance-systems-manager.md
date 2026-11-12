@@ -1,5 +1,5 @@
 ---
-title: Systems manager
+title: systems manager
 category: AWS
 description: '"Manage nodes at scale on AWS and in multicloud and hybrid environments"'
 tags:
@@ -8,7 +8,7 @@ tags:
 ---
 
 
-# Systems manager
+# systems manager
 
 `aws` `services`
 

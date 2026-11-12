@@ -1,5 +1,5 @@
 ---
-title: Route53
+title: route53
 category: AWS
 description: Scalable DNS and domain name registration
 tags:
@@ -8,7 +8,7 @@ tags:
 ---
 
 
-# Route53
+# route53
 
 `aws` `services`
 

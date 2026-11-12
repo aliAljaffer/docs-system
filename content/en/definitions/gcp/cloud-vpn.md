@@ -1,5 +1,5 @@
 ---
-title: Cloud-vpn
+title: cloud-vpn
 category: GCP
 description: 'GCP note: Cloud-vpn.'
 tags:
@@ -8,7 +8,7 @@ tags:
 ---
 
 
-# Cloud-vpn
+# cloud-vpn
 
 `gcp` `networking`
 

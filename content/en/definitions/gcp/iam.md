@@ -1,5 +1,5 @@
 ---
-title: Iam
+title: iam
 category: GCP
 description: 'GCP note: Iam.'
 tags:
@@ -8,7 +8,7 @@ tags:
 ---
 
 
-# Iam
+# iam
 
 `gcp` `security`
 

@@ -1,5 +1,5 @@
 ---
-title: Gemini
+title: gemini
 category: GCP
 description: 'GCP note: Gemini.'
 tags:
@@ -8,7 +8,7 @@ tags:
 ---
 
 
-# Gemini
+# gemini
 
 `gcp` `ai`
 

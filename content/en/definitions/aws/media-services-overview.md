@@ -1,5 +1,5 @@
 ---
-title: Media Services Overview
+title: overview
 category: AWS
 description: 'AWS note: Media Services Overview.'
 tags:
@@ -8,7 +8,7 @@ tags:
 ---
 
 
-# Media Services Overview
+# overview
 
 `aws` `services`
 

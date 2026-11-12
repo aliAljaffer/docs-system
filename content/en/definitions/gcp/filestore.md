@@ -1,5 +1,5 @@
 ---
-title: Filestore
+title: filestore
 category: GCP
 description: 'GCP note: Filestore.'
 tags:
@@ -8,7 +8,7 @@ tags:
 ---
 
 
-# Filestore
+# filestore
 
 `gcp` `storage`
 

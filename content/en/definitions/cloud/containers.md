@@ -1,5 +1,5 @@
 ---
-title: Containers
+title: containers
 category: Cloud
 description: Containers allow you to run multiple applications on the same ec2-ccp
   instance that are =completely isolated from eachother=.
@@ -11,7 +11,7 @@ tags:
 ---
 
 
-# Containers
+# containers
 
 `cloud` `fundamentals` `containers` `kubernetes`
 

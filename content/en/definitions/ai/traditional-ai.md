@@ -1,5 +1,5 @@
 ---
-title: Traditional ai
+title: traditional ai
 category: AI
 description: AI that makes predictions based on a particular set of inputs and their
   expected outputs.
@@ -10,7 +10,7 @@ tags:
 ---
 
 
-# Traditional ai
+# traditional ai
 
 `cloud` `fundamentals` `ai`
 

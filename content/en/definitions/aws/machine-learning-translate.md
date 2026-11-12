@@ -1,5 +1,5 @@
 ---
-title: Translate
+title: translate
 category: AWS
 description: '"Amazon Translate lets you localize content for diverse global users
   and translate and analyze large volumes of text to activate cross-lingual communication
@@ -10,7 +10,7 @@ tags:
 ---
 
 
-# Translate
+# translate
 
 `aws` `services`
 

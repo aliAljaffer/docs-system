@@ -1,5 +1,5 @@
 ---
-title: Cryptography
+title: cryptography
 category: Security
 description: '...is the principles, means, and methods of transforming data to conceal
   its content, prevent its unauthorized use, or prevent its undetected modification.'
@@ -9,7 +9,7 @@ tags:
 ---
 
 
-# Cryptography
+# cryptography
 
 `security` `cryptography`
 

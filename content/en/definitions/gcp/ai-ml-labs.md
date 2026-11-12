@@ -1,5 +1,5 @@
 ---
-title: Ai-ml-labs
+title: ai-ml-labs
 category: GCP
 description: 'GCP note: Ai-ml-labs.'
 tags:
@@ -8,7 +8,7 @@ tags:
 ---
 
 
-# Ai-ml-labs
+# ai-ml-labs
 
 `gcp` `ai`
 

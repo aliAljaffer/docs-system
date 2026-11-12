@@ -1,5 +1,5 @@
 ---
-title: Devops-labs
+title: devops-labs
 category: GCP
 description: 'GCP note: Devops-labs.'
 tags:
@@ -8,7 +8,7 @@ tags:
 ---
 
 
-# Devops-labs
+# devops-labs
 
 `gcp` `devops`
 

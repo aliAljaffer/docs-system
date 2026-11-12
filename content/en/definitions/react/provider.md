@@ -1,5 +1,5 @@
 ---
-title: Provider
+title: provider
 category: React
 description: A Provider is a component that provides a global value to its children.
   Providers are used in Context API to share a piece of data across the entire app,
@@ -10,7 +10,7 @@ tags:
 ---
 
 
-# Provider
+# provider
 
 `react` `context`
 

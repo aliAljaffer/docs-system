@@ -1,5 +1,5 @@
 ---
-title: Cloud-dns
+title: cloud-dns
 category: GCP
 description: 'GCP note: Cloud-dns.'
 tags:
@@ -8,7 +8,7 @@ tags:
 ---
 
 
-# Cloud-dns
+# cloud-dns
 
 `gcp` `networking`
 

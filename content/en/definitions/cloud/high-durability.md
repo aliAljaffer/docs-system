@@ -1,5 +1,5 @@
 ---
-title: High durability
+title: high durability
 category: Cloud
 description: Ability to recover from disaster with minimal data lost
 tags:
@@ -9,7 +9,7 @@ tags:
 ---
 
 
-# High durability
+# high durability
 
 `cloud` `fundamentals` `reliability`
 

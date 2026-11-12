@@ -1,5 +1,5 @@
 ---
-title: Network devices
+title: main
 category: Networking
 description: Detection - Alarm or alert
 tags:
@@ -8,7 +8,7 @@ tags:
 ---
 
 
-# Network devices
+# main
 
 `networking` `devices`
 

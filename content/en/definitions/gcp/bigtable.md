@@ -1,5 +1,5 @@
 ---
-title: Bigtable
+title: bigtable
 category: GCP
 description: 'GCP note: Bigtable.'
 tags:
@@ -8,7 +8,7 @@ tags:
 ---
 
 
-# Bigtable
+# bigtable
 
 `gcp` `databases`
 

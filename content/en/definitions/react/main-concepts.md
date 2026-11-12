@@ -1,12 +1,12 @@
 ---
-title: Main concepts
+title: main-concepts
 category: React
 description: 'React note: Main concepts.'
 tags:
 - react
 ---
 
-# Main concepts
+# main-concepts
 
 `react`
 

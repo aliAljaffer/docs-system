@@ -1,5 +1,5 @@
 ---
-title: Memorystore
+title: memorystore
 category: GCP
 description: 'GCP note: Memorystore.'
 tags:
@@ -8,7 +8,7 @@ tags:
 ---
 
 
-# Memorystore
+# memorystore
 
 `gcp` `databases`
 

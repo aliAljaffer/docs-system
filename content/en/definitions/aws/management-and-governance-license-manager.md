@@ -1,5 +1,5 @@
 ---
-title: License manager
+title: license manager
 category: AWS
 description: Licenses can be used on virtual cores (vCPU), physical cores, sockets,
   or number of machines.
@@ -9,7 +9,7 @@ tags:
 ---
 
 
-# License manager
+# license manager
 
 `aws` `services`
 

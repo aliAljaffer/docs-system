@@ -1,5 +1,5 @@
 ---
-title: Billing and cost management
+title: billing and cost management
 category: AWS
 description: Get an overview and cost breakdowns, summaries, and allocation coverage.
   Adjust budgets, and view cost and usage analysis.
@@ -9,7 +9,7 @@ tags:
 ---
 
 
-# Billing and cost management
+# billing and cost management
 
 `aws` `services`
 

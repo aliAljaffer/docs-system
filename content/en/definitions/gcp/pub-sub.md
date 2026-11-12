@@ -1,5 +1,5 @@
 ---
-title: Pub-sub
+title: pub-sub
 category: GCP
 description: 'GCP note: Pub-sub.'
 tags:
@@ -8,7 +8,7 @@ tags:
 ---
 
 
-# Pub-sub
+# pub-sub
 
 `gcp` `data`
 

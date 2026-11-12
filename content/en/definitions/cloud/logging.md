@@ -1,5 +1,5 @@
 ---
-title: Logging
+title: logging
 category: Cloud
 description: 'Remember: Things WILL go wrong.'
 tags:
@@ -7,7 +7,7 @@ tags:
 ---
 
 
-# Logging
+# logging
 
 `gcp`
 

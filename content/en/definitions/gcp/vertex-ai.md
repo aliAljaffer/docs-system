@@ -1,5 +1,5 @@
 ---
-title: Vertex-ai
+title: vertex-ai
 category: GCP
 description: 'GCP note: Vertex-ai.'
 tags:
@@ -8,7 +8,7 @@ tags:
 ---
 
 
-# Vertex-ai
+# vertex-ai
 
 `gcp` `ai`
 

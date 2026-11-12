@@ -1,5 +1,5 @@
 ---
-title: Dataproc
+title: dataproc
 category: GCP
 description: 'GCP note: Dataproc.'
 tags:
@@ -8,7 +8,7 @@ tags:
 ---
 
 
-# Dataproc
+# dataproc
 
 `gcp` `data`
 

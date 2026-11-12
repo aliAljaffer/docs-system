@@ -1,5 +1,5 @@
 ---
-title: S3
+title: s3
 category: AWS
 description: 'AWS note: S3.'
 tags:
@@ -8,7 +8,7 @@ tags:
 ---
 
 
-# S3
+# s3
 
 `aws` `services`
 

@@ -1,5 +1,5 @@
 ---
-title: Kinesis
+title: kinesis
 category: AWS
 description: '"Collect, process, and analyze real-time video and data streams"'
 tags:
@@ -8,7 +8,7 @@ tags:
 ---
 
 
-# Kinesis
+# kinesis
 
 `aws` `services`
 

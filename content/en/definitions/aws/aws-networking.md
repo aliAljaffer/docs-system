@@ -1,5 +1,5 @@
 ---
-title: Aws networking
+title: aws networking
 category: AWS
 description: 'AWS note: Aws networking.'
 tags:
@@ -7,7 +7,7 @@ tags:
 ---
 
 
-# Aws networking
+# aws networking
 
 `gcp`
 
