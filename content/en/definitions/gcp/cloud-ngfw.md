@@ -66,14 +66,16 @@ tags:
 - Fully managed by Google (no appliance management)
 
 ### Key Capabilities
-1. **Layer 3-7 Filtering**: IP, port, protocol, application
-2. **Intrusion Detection & Prevention (IDS/IPS)**: Block known threats
-3. **SSL/TLS Decryption**: Inspect encrypted traffic
-4. **URL Filtering**: Allow/deny based on URL categories
-5. **Geo-based Filtering**: Block traffic from specific countries (network layer)
-6. **Application Awareness**: Identify and control applications (not just ports)
-7. **Threat Intelligence**: Google Cloud Threat Intelligence + Palo Alto feeds
-8. **Logging & Monitoring**: Detailed connection and threat logs
+| Capability | What it does |
+|------------|--------------|
+| **Layer 3-7 Filtering** | IP, port, protocol, application |
+| **Intrusion Detection & Prevention (IDS/IPS)** | Block known threats |
+| **SSL/TLS Decryption** | Inspect encrypted traffic |
+| **URL Filtering** | Allow/deny based on URL categories |
+| **Geo-based Filtering** | Block traffic from specific countries (network layer) |
+| **Application Awareness** | Identify and control applications (not just ports) |
+| **Threat Intelligence** | Google Cloud Threat Intelligence + Palo Alto feeds |
+| **Logging & Monitoring** | Detailed connection and threat logs |
 
 ---
 
@@ -99,14 +101,12 @@ tags:
 ```
 
 ### Components
-1. **Firewall Endpoint**: Logical deployment point in VPC
-2. **Security Profile Group**: Collection of security profiles
-   - Threat Prevention (IDS/IPS)
-   - URL Filtering
-   - SSL Decryption
-   - File Blocking
-3. **Firewall Policy**: Rules for traffic inspection and action
-4. **Threat Intelligence**: Cloud-based threat feeds
+| Component | Role |
+|-----------|------|
+| Firewall Endpoint | Logical deployment point in VPC |
+| Security Profile Group | Collection of security profiles: Threat Prevention (IDS/IPS), URL Filtering, SSL Decryption, File Blocking |
+| Firewall Policy | Rules for traffic inspection and action |
+| Threat Intelligence | Cloud-based threat feeds |
 
 ---
 
@@ -120,9 +120,12 @@ tags:
 - **Anomaly-based detection**: Unusual traffic patterns
 - **Protocol anomaly detection**: Malformed packets
 - **Actions**:
-  - **Alert**: Log only (IDS mode)
-  - **Drop**: Block and log (IPS mode)
-  - **Reset**: Terminate connection
+
+| Action | Effect |
+|--------|--------|
+| **Alert** | Log only (IDS mode) |
+| **Drop** | Block and log (IPS mode) |
+| **Reset** | Terminate connection |
 
 **Threat Categories:**
 - Spyware
@@ -432,10 +435,13 @@ Application Tier
 
 #### From AWS Network Firewall
 **Mapping**:
-- AWS Stateful rules → Cloud NGFW firewall policies
-- AWS Suricata rules → Cloud NGFW threat prevention profiles
-- AWS Domain filtering → Cloud NGFW URL filtering
-- AWS TLS inspection → Cloud NGFW SSL decryption
+
+| AWS Network Firewall | Cloud NGFW |
+|----------------------|------------|
+| Stateful rules | Firewall policies |
+| Suricata rules | Threat prevention profiles |
+| Domain filtering | URL filtering |
+| TLS inspection | SSL decryption |
 
 **Process**:
 1. Inventory existing AWS Network Firewall rules
@@ -455,25 +461,15 @@ Application Tier
 
 ### Compliance Considerations
 
-#### PCI DSS
-- **Requirement 11.4**: IDS/IPS for cardholder data environment
-  - **Solution**: Cloud NGFW threat prevention profiles
-- **Requirement 1.3**: Network segmentation
-  - **Solution**: Cloud NGFW + VPC Firewall Rules
-
-#### HIPAA
-- Audit logging of all network access
-  - **Solution**: Cloud NGFW comprehensive logging to Cloud Logging
-- Encryption in transit
-  - **Solution**: Enforce TLS (Cloud NGFW policy)
-- Intrusion detection
-  - **Solution**: Cloud NGFW IDS mode (alert on threats)
-
-#### GDPR
-- Data residency (EU)
-  - **Consideration**: Cloud NGFW endpoints in EU regions
-- Data exfiltration prevention
-  - **Solution**: Cloud NGFW SSL inspection + file blocking
+| Framework | Requirement | Cloud NGFW control |
+|-----------|-------------|--------------------|
+| PCI DSS | **Requirement 11.4**: IDS/IPS for cardholder data environment | Cloud NGFW threat prevention profiles |
+| PCI DSS | **Requirement 1.3**: Network segmentation | Cloud NGFW + VPC Firewall Rules |
+| HIPAA | Audit logging of all network access | Cloud NGFW comprehensive logging to Cloud Logging |
+| HIPAA | Encryption in transit | Enforce TLS (Cloud NGFW policy) |
+| HIPAA | Intrusion detection | Cloud NGFW IDS mode (alert on threats) |
+| GDPR | Data residency (EU) | Consideration: Cloud NGFW endpoints in EU regions |
+| GDPR | Data exfiltration prevention | Cloud NGFW SSL inspection + file blocking |
 
 ### Integration with GCP Services
 - **[[vpc|VPC]]**: Deployed as VPC firewall endpoints
@@ -487,12 +483,14 @@ Application Tier
 ### Monitoring and Observability
 
 #### Key Metrics (Cloud Monitoring)
-- **Connections inspected**: Total traffic processed
-- **Threats detected**: IDS/IPS hits
-- **Threats blocked**: IPS actions (drop/reset)
-- **SSL sessions decrypted**: TLS inspection volume
-- **URLs blocked**: URL filtering hits
-- **Endpoint health**: Availability of NGFW endpoints
+| Metric | Meaning |
+|--------|---------|
+| Connections inspected | Total traffic processed |
+| Threats detected | IDS/IPS hits |
+| Threats blocked | IPS actions (drop/reset) |
+| SSL sessions decrypted | TLS inspection volume |
+| URLs blocked | URL filtering hits |
+| Endpoint health | Availability of NGFW endpoints |
 
 #### Logging (Cloud Logging)
 ```bash
@@ -618,18 +616,24 @@ firewallPolicy:
 5. **Cost optimization**: When to use free VPC Firewall Rules vs paid Cloud NGFW
 
 **Common scenarios:**
-- "Requirement: IDS/IPS for PCI DSS compliance" → **Cloud NGFW Enterprise**
-- "Block SQL injection attacks on web application" → **[[cloud-armor|Cloud Armor]]** (WAF)
-- "Allow only TCP 443 from internet to web tier" → **VPC Firewall Rules** (simple, free)
-- "Inspect encrypted traffic for malware" → **Cloud NGFW** (SSL decryption)
-- "Detect and block command & control (C2) traffic" → **Cloud NGFW** (threat intelligence)
-- "DDoS protection for HTTP(S) application" → **[[cloud-armor|Cloud Armor]]** (built-in DDoS)
-- "Block traffic from specific countries to VPC" → **Cloud NGFW** (geo-filtering) or **VPC Firewall Rules** (if IP-based)
+
+| Scenario | Answer |
+|----------|--------|
+| "Requirement: IDS/IPS for PCI DSS compliance" | **Cloud NGFW Enterprise** |
+| "Block SQL injection attacks on web application" | **[[cloud-armor|Cloud Armor]]** (WAF) |
+| "Allow only TCP 443 from internet to web tier" | **VPC Firewall Rules** (simple, free) |
+| "Inspect encrypted traffic for malware" | **Cloud NGFW** (SSL decryption) |
+| "Detect and block command & control (C2) traffic" | **Cloud NGFW** (threat intelligence) |
+| "DDoS protection for HTTP(S) application" | **[[cloud-armor|Cloud Armor]]** (built-in DDoS) |
+| "Block traffic from specific countries to VPC" | **Cloud NGFW** (geo-filtering) or **VPC Firewall Rules** (if IP-based) |
 
 **Key exam distinction**:
-- **Cloud Armor** = **Layer 7** (HTTP/HTTPS only), attached to **load balancer**, WAF + DDoS
-- **Cloud NGFW** = **Layer 3-7**, attached to **VPC network**, IDS/IPS + threat intel
-- **VPC Firewall Rules** = **Layer 3-4**, attached to **VPC network**, basic allow/deny
+
+| Service | Layer | Attached to | Focus |
+|---------|-------|-------------|-------|
+| **Cloud Armor** | **Layer 7** (HTTP/HTTPS only) | **Load balancer** | WAF + DDoS |
+| **Cloud NGFW** | **Layer 3-7** | **VPC network** | IDS/IPS + threat intel |
+| **VPC Firewall Rules** | **Layer 3-4** | **VPC network** | Basic allow/deny |
 
 ---
 

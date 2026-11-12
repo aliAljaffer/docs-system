@@ -12,12 +12,14 @@ tags:
 
 `gcp` `networking`
 
-- **[GSP210](https://www.skills.google/catalog?keywords=GSP210)**: VPC Networking Fundamentals (1 hour, Introductory)
-- **[GSP211](https://www.skills.google/catalog?keywords=GSP211)**: Multiple VPC Networks (1 hour 10 min, Intermediate)
-- **[GSP007](https://www.skills.google/catalog?keywords=GSP007)**: Set Up Network and HTTP Load Balancers (1 hour)
-- **[GSP041](https://www.skills.google/catalog?keywords=GSP041)**: Internal Load Balancer
-- **[GSP016](https://www.skills.google/catalog?keywords=GSP016)**: Networking 101
-- **[GSP10258](https://www.skills.google/catalog?keywords=GSP10258)**: Implement Load Balancing on Compute Engine: Challenge Lab
-- **[GSP215](https://www.skills.google/catalog?keywords=GSP215)**: VPC Network Peering
-- **[GSP213](https://www.skills.google/catalog?keywords=GSP213)**: VPN Gateway (Cloud VPN basics)
-- **[GSP322](https://www.skills.google/catalog?keywords=GSP322)**: Build and Secure Networks in Google Cloud: Challenge Lab
+| Lab | Title | Time | Level |
+|---|---|---|---|
+| [GSP210](https://www.skills.google/catalog?keywords=GSP210) | VPC Networking Fundamentals | 1 hour | Introductory |
+| [GSP211](https://www.skills.google/catalog?keywords=GSP211) | Multiple VPC Networks | 1 hour 10 min | Intermediate |
+| [GSP007](https://www.skills.google/catalog?keywords=GSP007) | Set Up Network and HTTP Load Balancers | 1 hour | - |
+| [GSP041](https://www.skills.google/catalog?keywords=GSP041) | Internal Load Balancer | - | - |
+| [GSP016](https://www.skills.google/catalog?keywords=GSP016) | Networking 101 | - | - |
+| [GSP10258](https://www.skills.google/catalog?keywords=GSP10258) | Implement Load Balancing on Compute Engine: Challenge Lab | - | - |
+| [GSP215](https://www.skills.google/catalog?keywords=GSP215) | VPC Network Peering | - | - |
+| [GSP213](https://www.skills.google/catalog?keywords=GSP213) | VPN Gateway (Cloud VPN basics) | - | - |
+| [GSP322](https://www.skills.google/catalog?keywords=GSP322) | Build and Secure Networks in Google Cloud: Challenge Lab | - | - |

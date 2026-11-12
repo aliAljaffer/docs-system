@@ -39,11 +39,13 @@ tags:
 - Returns HTTP response
 
 #### Event Triggers
-- **[[gcp/cloud-storage|Cloud Storage]]**: Object finalize, delete, archive, metadata update
-- **[[gcp/pub-sub|Pub/Sub]]**: Message published to topic
-- **[[gcp/firestore|Firestore]]**: Document create, update, delete
-- **Firebase**: Real-time Database, Authentication, Analytics
-- **[[gcp/eventarc|Eventarc]]**: 100+ event sources (2nd gen only)
+| Source | Events |
+|---|---|
+| [[gcp/cloud-storage|Cloud Storage]] | Object finalize, delete, archive, metadata update |
+| [[gcp/pub-sub|Pub/Sub]] | Message published to topic |
+| [[gcp/firestore|Firestore]] | Document create, update, delete |
+| Firebase | Real-time Database, Authentication, Analytics |
+| [[gcp/eventarc|Eventarc]] | 100+ event sources (2nd gen only) |
 
 ### Runtime Environment
 - Temporary file system at `/tmp` (**ephemeral, not persisted across invocations**)
@@ -79,10 +81,12 @@ def my_function(request):
 - Requires thread-safe code
 
 ### Timeout & Limits
-- **1st gen max timeout**: 540 seconds
-- **2nd gen max timeout**: 3600 seconds (60 min)
-- **Max payload**: 10 MB
-- **Max concurrent invocations**: 1000 (can request increase)
+| Limit | Value |
+|---|---|
+| 1st gen max timeout | 540 seconds |
+| 2nd gen max timeout | 3600 seconds (60 min) |
+| Max payload | 10 MB |
+| Max concurrent invocations | 1000 (can request increase) |
 
 ### Memory & CPU
 - **Memory**: 128 MB to 32 GB (2nd gen), 128 MB to 8 GB (1st gen)

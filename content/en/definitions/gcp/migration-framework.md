@@ -151,17 +151,15 @@ Organization (root)
 - **Firewall Rules**: Default deny, explicit allows
 
 **Hybrid Connectivity:**
-- **[[cloud-vpn|Cloud VPN]]**:
-  - HA VPN for 99.99% SLA
-  - 1.5-3 Gbps per tunnel
-  - Encrypted
-  - Good for: Low-moderate bandwidth, encrypted requirement
-- **[[cloud-interconnect|Cloud Interconnect]]**:
-  - Dedicated: 10-100 Gbps
-  - Partner: 50 Mbps - 10 Gbps
-  - Good for: High bandwidth, low latency, predictable performance
+
+| Option | Bandwidth | Encryption | Best for |
+|---|---|---|---|
+| [[cloud-vpn|Cloud VPN]] (HA VPN for 99.99% SLA) | 1.5-3 Gbps per tunnel | Encrypted | Low-moderate bandwidth, encrypted requirement |
+| [[cloud-interconnect|Cloud Interconnect]] (Dedicated) | 10-100 Gbps | - | High bandwidth, low latency, predictable performance |
+| [[cloud-interconnect|Cloud Interconnect]] (Partner) | 50 Mbps - 10 Gbps | - | High bandwidth, low latency, predictable performance |
 
 **Decision Matrix:**
+
 | Bandwidth Need | Encryption Required | Recommendation |
 |----------------|---------------------|----------------|
 | < 3 Gbps | Yes | **HA VPN** |
@@ -184,12 +182,15 @@ Organization (root)
 
 #### 5. Migration Team
 **Roles needed:**
-- **Migration Lead**: Overall coordination
-- **Network Architect**: VPC, connectivity design
-- **Security Specialist**: IAM, compliance
-- **Application Owners**: Subject matter experts
-- **Cloud Engineers**: Hands-on migration work
-- **Project Manager**: Timeline, dependencies
+
+| Role | Responsibility |
+|---|---|
+| Migration Lead | Overall coordination |
+| Network Architect | VPC, connectivity design |
+| Security Specialist | IAM, compliance |
+| Application Owners | Subject matter experts |
+| Cloud Engineers | Hands-on migration work |
+| Project Manager | Timeline, dependencies |
 
 ---
 
@@ -210,9 +211,9 @@ Organization (root)
 - Use [[compute-engine|Migrate for Compute Engine]]
 
 **Best for:**
-✓ Quick migration needed
-✓ Limited resources for refactoring
-✓ Complex legacy applications
+- Quick migration needed
+- Limited resources for refactoring
+- Complex legacy applications
 
 **Process:**
 1. Create machine image of source VM
@@ -226,9 +227,9 @@ Organization (root)
 - Example: Database → [[cloud-sql|Cloud SQL]]
 
 **Best for:**
-✓ Want some cloud benefits
-✓ Minimal code changes acceptable
-✓ Reduce operational overhead
+- Want some cloud benefits
+- Minimal code changes acceptable
+- Reduce operational overhead
 
 **Process:**
 1. Identify opportunities for managed services
@@ -243,9 +244,9 @@ Organization (root)
 - Fully managed services
 
 **Best for:**
-✓ Maximum cloud benefits desired
-✓ Application needs modernization anyway
-✓ Team has cloud-native skills
+- Maximum cloud benefits desired
+- Application needs modernization anyway
+- Team has cloud-native skills
 
 **Process:**
 1. Redesign architecture
@@ -256,24 +257,13 @@ Organization (root)
 
 ### Data Migration
 
-#### Small Datasets (< 1 TB)
-- **gsutil**: Command-line upload to [[cloud-storage|Cloud Storage]]
-- **Console upload**: For very small files
-- **Storage Transfer Service**: Online transfer from other clouds
-
-#### Medium Datasets (1-20 TB)
-- **Storage Transfer Service**:
-  - Online from AWS S3, Azure Blob, HTTP/HTTPS
-  - Scheduled recurring transfers
-  - Bandwidth throttling
-
-#### Large Datasets (> 20 TB)
-- **Transfer Appliance**:
-  - Physical device shipped to you
-  - Load data locally (fast)
-  - Ship back to Google
-  - Google uploads to Cloud Storage
-  - Offline transfer (no bandwidth cost)
+| Size | Tool | Notes |
+|---|---|---|
+| < 1 TB | **gsutil** | Command-line upload to [[cloud-storage|Cloud Storage]] |
+| < 1 TB | **Console upload** | For very small files |
+| < 1 TB | **Storage Transfer Service** | Online transfer from other clouds |
+| 1-20 TB | **Storage Transfer Service** | Online from AWS S3, Azure Blob, HTTP/HTTPS. Scheduled recurring transfers. Bandwidth throttling |
+| > 20 TB | **Transfer Appliance** | Physical device shipped to you. Load data locally (fast). Ship back to Google. Google uploads to Cloud Storage. Offline transfer (no bandwidth cost) |
 
 #### Database Migration
 - **[[cloud-sql|Database Migration Service]]**:
@@ -334,11 +324,14 @@ Organization (root)
 
 #### 2. Managed Services
 **Replace self-managed with managed:**
-- VMs with databases → [[cloud-sql|Cloud SQL]], [[cloud-spanner|Cloud Spanner]]
-- Self-managed Kubernetes → [[gke|GKE Autopilot]]
-- Message queues → [[pub-sub|Cloud Pub/Sub]]
-- File servers → [[filestore|Filestore]]
-- Monitoring stack → Cloud Operations Suite
+
+| Self-managed | Managed option |
+|---|---|
+| VMs with databases | [[cloud-sql|Cloud SQL]], [[cloud-spanner|Cloud Spanner]] |
+| Self-managed Kubernetes | [[gke|GKE Autopilot]] |
+| Message queues | [[pub-sub|Cloud Pub/Sub]] |
+| File servers | [[filestore|Filestore]] |
+| Monitoring stack | Cloud Operations Suite |
 
 **Benefits:**
 - Reduced operational overhead
@@ -364,25 +357,14 @@ Organization (root)
 - Reliability (handle unexpected load)
 
 #### 4. Cost Optimization
-- **Right-sizing**:
-  - Use [[cloud-monitoring|Monitoring]] recommendations
-  - Downsize over-provisioned VMs
-  - Delete unused resources
-- **Committed Use Discounts**:
-  - 1-year or 3-year commitment
-  - Up to 57% savings
-  - For predictable workloads
-- **Preemptible/Spot VMs**:
-  - Up to 91% savings
-  - For fault-tolerant batch workloads
-- **Storage class optimization**:
-  - Nearline (< 30 days access)
-  - Coldline (< 90 days)
-  - Archive (< 365 days)
-  - Lifecycle policies
-- **Sustained Use Discounts**:
-  - Automatic
-  - Up to 30% for running > 25% of month
+
+| Option | Saving | Notes |
+|---|---|---|
+| **Right-sizing** | - | Use [[cloud-monitoring|Monitoring]] recommendations. Downsize over-provisioned VMs. Delete unused resources |
+| **Committed Use Discounts** | Up to 57% | 1-year or 3-year commitment. For predictable workloads |
+| **Preemptible/Spot VMs** | Up to 91% | For fault-tolerant batch workloads |
+| **Storage class optimization** | - | Nearline (< 30 days access), Coldline (< 90 days), Archive (< 365 days), lifecycle policies |
+| **Sustained Use Discounts** | Up to 30% for running > 25% of month | Automatic |
 
 #### 5. Adopt Cloud-Native Features
 - **Serverless**:
@@ -435,13 +417,16 @@ Organization (root)
 ## Migration Timeline Example
 
 **Typical enterprise migration:**
-- **Phase 1 (Assess)**: 1-2 months
-- **Phase 2 (Plan)**: 1-2 months
-- **Phase 3 (Deploy)**: 3-12 months (depends on # of workloads)
-- **Phase 4 (Optimize)**: Ongoing
 
-**Pilot project**: 1-2 months
-**Wave migration**: Migrate workloads in batches (10-20 apps per wave)
+| Phase | Duration |
+|---|---|
+| Phase 1 (Assess) | 1-2 months |
+| Phase 2 (Plan) | 1-2 months |
+| Phase 3 (Deploy) | 3-12 months (depends on # of workloads) |
+| Phase 4 (Optimize) | Ongoing |
+
+- **Pilot project**: 1-2 months
+- **Wave migration**: Migrate workloads in batches (10-20 apps per wave)
 
 ---
 
@@ -490,9 +475,12 @@ Organization (root)
 7. **Cost optimization**: Identify opportunities during migration
 
 **Common scenarios:**
-- "Large on-prem data center (100+ applications)" → **Phased migration, start with low complexity**
-- "20 TB database, minimal downtime" → **Database Migration Service with replication**
-- "100 TB data, slow internet" → **Transfer Appliance**
-- "Need hybrid for 6 months during migration" → **VPN or Interconnect**
-- "Legacy app, hard to modify" → **Lift-and-shift to Compute Engine**
-- "Modern app, containerized" → **Refactor to GKE or Cloud Run**
+
+| Scenario | Recommendation |
+|---|---|
+| Large on-prem data center (100+ applications) | **Phased migration, start with low complexity** |
+| 20 TB database, minimal downtime | **Database Migration Service with replication** |
+| 100 TB data, slow internet | **Transfer Appliance** |
+| Need hybrid for 6 months during migration | **VPN or Interconnect** |
+| Legacy app, hard to modify | **Lift-and-shift to Compute Engine** |
+| Modern app, containerized | **Refactor to GKE or Cloud Run** |

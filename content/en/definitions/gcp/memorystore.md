@@ -25,18 +25,11 @@ tags:
 
 ### Memorystore for Redis
 #### Tiers
-**Basic Tier**
-- Single Redis instance
-- No replication
-- **No SLA**
-- Lower cost
-- Use for: Dev/test, cache-only workloads
 
-**Standard Tier**
-- Automatic failover replica in separate zone
-- **99.9% SLA**
-- Cross-zone replication
-- Use for: Production, HA required
+| Tier | Replication | SLA | Cost | Use for |
+|---|---|---|---|---|
+| Basic | Single Redis instance, no replication | **No SLA** | Lower cost | Dev/test, cache-only workloads |
+| Standard | Automatic failover replica in separate zone, cross-zone replication | **99.9% SLA** | - | Production, HA required |
 
 #### Features
 - **Persistence**: RDB snapshots, AOF logs
@@ -46,12 +39,12 @@ tags:
 - **Versions**: Redis 4.0, 5.0, 6.x, 7.x
 
 #### Use Cases
-✓ Low-latency access WITH persistence
-✓ Gaming leaderboards
-✓ Session store with HA requirements
-✓ Real-time analytics
-✓ Pub/Sub messaging
-✓ Sorted sets, lists, hashes
+- Low-latency access WITH persistence
+- Gaming leaderboards
+- Session store with HA requirements
+- Real-time analytics
+- Pub/Sub messaging
+- Sorted sets, lists, hashes
 
 ### Memorystore for Memcached
 #### Features
@@ -62,13 +55,14 @@ tags:
 - Lower cost than Redis
 
 #### Use Cases
-✓ Pure caching (no persistence needed)
-✓ Session store (short-lived)
-✓ Database query caching
-✓ Reference data (states, countries, config)
-✓ Object caching
+- Pure caching (no persistence needed)
+- Session store (short-lived)
+- Database query caching
+- Reference data (states, countries, config)
+- Object caching
 
 ### Redis vs Memcached
+
 | Feature | Redis | Memcached |
 |---------|-------|-----------|
 | Persistence | ✓ (Standard tier) | ✗ |
@@ -99,14 +93,14 @@ tags:
 - **Encryption at rest**: Automatic
 
 ### Pricing
-**Redis:**
-- Basic: ~$0.05 per GB-hour
-- Standard: ~$0.08 per GB-hour (includes replica)
-- Network egress charges
 
-**Memcached:**
-- ~$0.025 per GB-hour (cheaper than Redis)
-- Per-node pricing
+| Engine | Tier | Price |
+|---|---|---|
+| Redis | Basic | ~$0.05 per GB-hour |
+| Redis | Standard | ~$0.08 per GB-hour (includes replica) |
+| Memcached | - | ~$0.025 per GB-hour (cheaper than Redis), per-node pricing |
+
+Redis also has network egress charges.
 
 ---
 
@@ -232,10 +226,13 @@ Application → Memorystore (check cache)
 - [[gcp/vpc|VPC Service Controls]] for data protection
 - Redis AUTH for authentication
 - TLS/SSL for transit encryption
-- IAM roles:
-  - `redis.admin`: Full access
-  - `redis.editor`: Manage instances
-  - `redis.viewer`: Read-only
+- IAM roles (see the table below)
+
+| Role | Access |
+|---|---|
+| `redis.admin` | Full access |
+| `redis.editor` | Manage instances |
+| `redis.viewer` | Read-only |
 
 ### Caching Strategies
 #### Cache-Aside (Lazy Loading)
@@ -315,6 +312,7 @@ data:
 - Minimal downtime with replication
 
 ### Use Case Selection
+
 | Requirement | Choose |
 |-------------|--------|
 | Simple key-value cache | Memcached |

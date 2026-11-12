@@ -29,9 +29,11 @@ kubectl set env --from=configmap/my_cm deploy/mydeploy --prefix="TF_VAR_"
 
 A Secret has one of three types:
 
-- `generic`: for values such as passwords.
-- `tls`: for TLS keys.
-- `docker-registry`: for container registry credentials.
+| Type | Use for |
+|---|---|
+| `generic` | Values such as passwords |
+| `tls` | TLS keys |
+| `docker-registry` | Container registry credentials |
 
 Create a TLS Secret:
 
@@ -41,9 +43,11 @@ kubectl create secret tls my-tls-keys --cert=tls/my.crt --key=tls/my.key
 
 Use a Secret in one of these ways:
 
-- For variables, run `kubectl set env`.
-- For files, mount the Secret as a volume.
-- For registry pulls, add the Secret under `pod.spec.imagePullSecrets`.
+| Use | How |
+|---|---|
+| Variables | Run `kubectl set env`. |
+| Files | Mount the Secret as a volume. |
+| Registry pulls | Add the Secret under `pod.spec.imagePullSecrets`. |
 
 To limit file access, set `defaultMode: 0400` under the Secret volume.
 

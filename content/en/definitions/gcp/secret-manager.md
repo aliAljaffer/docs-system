@@ -47,23 +47,19 @@ tags:
 
 ### Secret States
 **Version States:**
-- **ENABLED**: Active, can be accessed
-- **DISABLED**: Cannot be accessed, can be re-enabled
-- **DESTROYED**: Permanently deleted, **cannot be recovered**
+
+| State | Description |
+|---|---|
+| **ENABLED** | Active, can be accessed |
+| **DISABLED** | Cannot be accessed, can be re-enabled |
+| **DESTROYED** | Permanently deleted, **cannot be recovered** |
 
 ### Replication Policies
-#### Automatic Replication (Default)
-- Secret replicated to all GCP regions automatically
-- **High availability**
-- Global access with low latency
-- Best for most use cases
 
-#### User-Managed Replication
-- Choose specific regions for secret storage
-- **Data residency compliance** (GDPR, data sovereignty)
-- Lower storage costs (fewer replicas)
-- Must specify at least one region
-- Can add Customer-Managed Encryption Keys (CMEK) per region
+| Policy | Locations | Use when |
+|---|---|---|
+| **Automatic Replication** (Default) | Secret replicated to all GCP regions automatically | Best for most use cases. **High availability**. Global access with low latency |
+| **User-Managed Replication** | Choose specific regions for secret storage. Must specify at least one region | **Data residency compliance** (GDPR, data sovereignty). Lower storage costs (fewer replicas). Can add Customer-Managed Encryption Keys (CMEK) per region |
 
 ```bash
 # Create secret with specific regions
@@ -120,11 +116,14 @@ gcloud secrets update SECRET_ID \
 
 ### IAM Roles for Secret Manager
 **Predefined Roles:**
-- `roles/secretmanager.admin`: Full admin (create, delete, set IAM)
-- `roles/secretmanager.secretAccessor`: Read secret values (most common for apps)
-- `roles/secretmanager.secretVersionAdder`: Add new versions (rotation)
-- `roles/secretmanager.secretVersionManager`: Manage version lifecycle (enable/disable/destroy)
-- `roles/secretmanager.viewer`: View metadata only, **not secret values**
+
+| Role | Grants |
+|---|---|
+| `roles/secretmanager.admin` | Full admin (create, delete, set IAM) |
+| `roles/secretmanager.secretAccessor` | Read secret values (most common for apps) |
+| `roles/secretmanager.secretVersionAdder` | Add new versions (rotation) |
+| `roles/secretmanager.secretVersionManager` | Manage version lifecycle (enable/disable/destroy) |
+| `roles/secretmanager.viewer` | View metadata only, **not secret values** |
 
 **Best Practice:**
 - Grant `secretAccessor` to applications (read-only)
@@ -222,6 +221,7 @@ gcloud logging read "resource.type=secretmanager.googleapis.com/Secret \
 ```
 
 ### Secret Manager vs AWS Secrets Manager
+
 | Feature | Secret Manager | AWS Secrets Manager |
 |---------|----------------|---------------------|
 | Versioning | Numeric versions | Automatic labels (AWSCURRENT) |
@@ -248,14 +248,13 @@ gcloud logging read "resource.type=secretmanager.googleapis.com/Secret \
 - FIPS 140-2 Level 3 compliance (HSM)
 
 ### Pricing
-- **Secret versions**: $0.06 per month per active version
-- **Access operations**: $0.03 per 10,000 accesses
-- **Replication**: Included (no additional cost for regions)
-- **CMEK**: Additional Cloud KMS charges apply
 
-**Free Tier:**
-- First 6 secret versions free per month
-- First 10,000 access operations free per month
+| Item | Price | Free tier |
+|---|---|---|
+| **Secret versions** | $0.06 per month per active version | First 6 secret versions free per month |
+| **Access operations** | $0.03 per 10,000 accesses | First 10,000 access operations free per month |
+| **Replication** | Included (no additional cost for regions) | - |
+| **CMEK** | Additional Cloud KMS charges apply | - |
 
 **Cost Optimization:**
 - Destroy old secret versions (keep only necessary)

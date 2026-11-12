@@ -73,7 +73,12 @@ Set `PGDATA` to a subfolder. In this act the value is `/var/lib/postgresql/data/
 
 Use the image you built, `tutorial-database:local`. Do not use the stock `postgres:16-alpine` image. Only your built image has `init.sql` baked in. Only it creates the `tasks` table on first initialization. The stock image would start an empty database with no table. The app would start and find no tasks. This is not a version issue. It is a content issue inside the image.
 
-The StatefulSet in this act runs two containers in one Pod: `postgres` and `postgres-exporter`. That is why the ready count is 2/2, not 1/1. The exporter sidecar publishes Postgres metrics on port 9187. The Pod also carries probes. A startup probe waits with `pg_isready` for up to 150 seconds. Readiness and liveness probes keep checking the same command. Without the startup probe, a slow first boot could fail the readiness check before PostgreSQL is ready.
+The StatefulSet in this act runs two containers in one Pod: `postgres` and `postgres-exporter`.
+
+- That is why the ready count is 2/2, not 1/1.
+- The exporter sidecar publishes Postgres metrics on port 9187.
+- A startup probe waits with `pg_isready` for up to 150 seconds. Readiness and liveness probes keep checking the same command.
+- Without the startup probe, a slow first boot could fail the readiness check before PostgreSQL is ready.
 
 ## Limits of Minikube storage
 

@@ -347,18 +347,13 @@ spec:
 
 ## A/B Testing vs Canary
 
-### Canary Deployment
-- **Goal**: Test new version for stability, performance, errors
-- **Metrics**: Error rate, latency, resource usage
-- **Duration**: Short (hours to days)
-- **Decision**: Rollout or rollback based on technical metrics
-
-### A/B Testing
-- **Goal**: Test new feature for user engagement, conversion
-- **Metrics**: User behavior, business KPIs, click-through rate
-- **Duration**: Longer (days to weeks)
-- **Decision**: Keep feature or remove based on business metrics
-- **Implementation**: Same as canary (traffic splitting)
+| Aspect | Canary | A/B testing |
+|---|---|---|
+| Goal | Test new version for stability, performance, errors | Test new feature for user engagement, conversion |
+| Metrics | Error rate, latency, resource usage | User behavior, business KPIs, click-through rate |
+| Duration | Short (hours to days) | Longer (days to weeks) |
+| Decision | Rollout or rollback based on technical metrics | Keep feature or remove based on business metrics |
+| Implementation | - | Same as canary (traffic splitting) |
 
 ---
 
@@ -401,8 +396,11 @@ Do you need zero downtime?
 5. Cost implications
 
 **Common scenarios:**
-- "Minimize user impact during deployment" → **Canary**
-- "Instant rollback required" → **Blue/Green**
-- "Minimal cost, stateless app" → **Rolling**
-- "Test major refactoring without risk" → **Shadow**
-- "Breaking database changes" → **Blue/Green** (with dual-write period)
+
+| Scenario | Strategy |
+|---|---|
+| "Minimize user impact during deployment" | **Canary** |
+| "Instant rollback required" | **Blue/Green** |
+| "Minimal cost, stateless app" | **Rolling** |
+| "Test major refactoring without risk" | **Shadow** |
+| "Breaking database changes" | **Blue/Green** (with dual-write period) |

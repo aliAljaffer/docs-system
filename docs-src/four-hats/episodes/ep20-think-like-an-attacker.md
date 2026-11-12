@@ -26,9 +26,17 @@ Every app you have built so far assumed its users are honest. This episode stops
 
 ## Scope before tools
 
-Warning: never point a security tool at a system you do not own or do not have written permission to test. State this warning before any test. Every step in this act targets `127.0.0.1`, `localhost`, or your own Minikube cluster internal network. Nothing else.
+> [!WARNING]
+> Never point a security tool at a system you do not own or do not have written permission to test. State this warning before any test. Every step in this act targets `127.0.0.1`, `localhost`, or your own Minikube cluster internal network. Nothing else.
 
-Rules of engagement record four things before you touch the app. Target names the system you test. In scope names what you may test inside it. Out of scope names what you must not test. Stop condition names when you stop.
+Rules of engagement record four things before you touch the app:
+
+| Field | Meaning |
+|---|---|
+| Target | The system you test |
+| In scope | What you may test inside it |
+| Out of scope | What you must not test |
+| Stop condition | When you stop |
 
 | Term | Meaning |
 |---|---|
@@ -54,7 +62,14 @@ Before you attack anything, read it. Most of what an attacker needs is already p
 
 Keep a port-forward running in its own terminal for the rest of this act. The forward exposes the backend Service in the `app` namespace on your laptop at port 8000. With it up, you can call the API from your laptop while the app stays inside the cluster. If port 8000 is in use, forward to 18000 and use 18000 in the URLs. If a request hangs, check that the forward is still running first. A dead forward is the usual cause.
 
-Four endpoints respond in this episode. The two health endpoints are `healthz` and `readyz`. They prove the backend is alive and ready. The task list endpoint returns the saved tasks. The search endpoint takes a `q` parameter.
+Four endpoints respond in this episode:
+
+| Endpoint | Purpose | Parameter |
+|---|---|---|
+| `healthz` | Proves the backend is alive | - |
+| `readyz` | Proves the backend is ready | - |
+| Task list | Returns the saved tasks | - |
+| Search | Searches the tasks | `q` |
 
 The search endpoint is the first one that takes raw user input and uses it to filter data. Every other endpoint takes an ID or a fixed field. Search takes free text and shapes a database query. That difference draws the eye. An attacker will try search first for the same reason. You are only following the reading to its clear conclusion.
 

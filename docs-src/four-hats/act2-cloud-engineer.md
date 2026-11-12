@@ -9,7 +9,12 @@
 | Task | The app runs only on developer laptops. Nobody else can reach it. |
 | Goal | Run the app on a server that users can reach. Build the server from code. Keep cost known and open ports few. |
 | Done when | cloud-init and Ansible build a VM that runs the app. Terraform builds the same on Google Cloud. You destroy it afterwards. |
-| Start here | Fork the starter repository. Copy the contents of `act-1-software-engineer/` from the `solved` branch to the root of your fork, not the folder itself. Replace files that have the same name. Do not replace the starter `tools/` folder. Install Docker Desktop and Multipass. |
+| Start here | Follow the steps below this table. |
+
+1. Fork the starter repository.
+2. Copy the contents of `act-1-software-engineer/` from the `solved` branch to the root of your fork, not the folder itself.
+3. Replace files that have the same name. Do not replace the starter `tools/` folder.
+4. Install Docker Desktop and Multipass.
 
 Try each task first. Open **Show solution** for that task only when you are stuck. The last line in each solution links to the `solved` branch. Use that link as a last resort.
 
@@ -513,14 +518,14 @@ Last resort: [open the solved playbook](https://github.com/aliAljaffer/four-hats
 
 Write `infra/ansible/playbook.yml` with these tasks, in order:
 
-- Install `docker.io`, `docker-compose-v2`, `ufw`, and `rsync` with the `apt` module.
-- Start Docker and enable it at boot.
-- Add the login user to the `docker` group.
-- Allow ports 22 and 8080 in UFW. Turn UFW on with the default policy `deny`.
-- Create `/opt/taskboard`.
-- Copy the app to the VM with `synchronize`. Skip `.git`, `infra`, and `.env`. Set `become: false` on this task only. `synchronize` under `become: true` writes files as root, which then fights the directory ownership the previous task set, and the playbook never reaches `changed=0`.
-- Write `.env` on the VM from the `DB_PASSWORD` variable. Set `no_log: true` and mode `0600`.
-- Start the stack with `community.docker.docker_compose_v2`.
+1. Install `docker.io`, `docker-compose-v2`, `ufw`, and `rsync` with the `apt` module.
+2. Start Docker and enable it at boot.
+3. Add the login user to the `docker` group.
+4. Allow ports 22 and 8080 in UFW. Turn UFW on with the default policy `deny`.
+5. Create `/opt/taskboard`.
+6. Copy the app to the VM with `synchronize`. Skip `.git`, `infra`, and `.env`. Set `become: false` on this task only. `synchronize` under `become: true` writes files as root, which then fights the directory ownership the previous task set, and the playbook never reaches `changed=0`.
+7. Write `.env` on the VM from the `DB_PASSWORD` variable. Set `no_log: true` and mode `0600`.
+8. Start the stack with `community.docker.docker_compose_v2`.
 
 <details>
 <summary>Show solution</summary>
@@ -685,7 +690,8 @@ Check that port 8000 is closed. The command must time out.
 curl -m 3 http://VM_IP:8000/api/tasks
 ```
 
-This only times out because `compose.yaml` never publishes a backend port. Docker writes its own `iptables` rules for a published port, ahead of UFW's rules, so UFW's default-deny policy does not block a container port that is actually published to `0.0.0.0`. If you add one later for debugging, bind it to `127.0.0.1` only.
+> [!WARNING]
+> This only times out because `compose.yaml` never publishes a backend port. Docker writes its own `iptables` rules for a published port, ahead of UFW's rules, so UFW's default-deny policy does not block a container port that is actually published to `0.0.0.0`. If you add one later for debugging, bind it to `127.0.0.1` only.
 
 Last resort: [open the solved playbook](https://github.com/aliAljaffer/four-hats/blob/solved/act-2-cloud-engineer/infra/ansible/playbook.yml)
 
@@ -697,7 +703,8 @@ Concepts: configuration management, inventory, playbook, module, idempotence, fi
 
 Goal: you create the same VM on Google Cloud with Terraform, and you destroy it.
 
-Warning: this episode needs a Google Cloud free trial. Read [Costs and free options](costs-and-free-options.md) first. Create the budget alert in task 2 before you create any resource.
+> [!WARNING]
+> This episode needs a Google Cloud free trial. Read [Costs and free options](costs-and-free-options.md) first. Create the budget alert in task 2 before you create any resource.
 
 #### Task 1: Create a Google Cloud project
 
@@ -719,7 +726,10 @@ In the Billing page, create a budget with an alert at a low amount, for example 
 <details>
 <summary>Show solution</summary>
 
-Open **Billing > Budgets and alerts**. Select **Create budget**. Set the amount to 5 USD. Add an email alert at 50 percent, 90 percent, and 100 percent.
+1. Open **Billing > Budgets and alerts**.
+2. Select **Create budget**.
+3. Set the amount to 5 USD.
+4. Add an email alert at 50 percent, 90 percent, and 100 percent.
 
 Last resort: [open the solved Terraform folder](https://github.com/aliAljaffer/four-hats/tree/solved/act-2-cloud-engineer/infra/terraform/gcp)
 
@@ -983,9 +993,21 @@ Last resort: [open the solved Act 2 folder](https://github.com/aliAljaffer/four-
 
 </details>
 
-Limits of one VM: it has one point of failure, it scales by hand, and each update is a playbook run. Act 3 solves these problems with Kubernetes.
+Limits of one VM:
 
-Words to recognize (you do not build them): a load balancer spreads traffic across many servers. A reverse proxy forwards requests to another server, as the frontend Nginx does for `/api`. A CDN keeps copies of your files in cities around the world.
+- It has one point of failure.
+- It scales by hand.
+- Each update is a playbook run.
+
+Act 3 solves these problems with Kubernetes.
+
+Words to recognize (you do not build them):
+
+| Term | Meaning |
+|---|---|
+| Load balancer | Spreads traffic across many servers. |
+| Reverse proxy | Forwards requests to another server, as the frontend Nginx does for `/api`. |
+| CDN | Keeps copies of your files in cities around the world. |
 
 Concepts: infrastructure as code, provider, state file, plan and apply, firewall rule, budget alert, cost control, load balancer, reverse proxy, CDN.
 

@@ -39,18 +39,16 @@ Configurable components:
 
 What allows for cost savings between customers.
 
-1. Shared **(default)**- Multiple AWS accounts are using the same physical hardware
-2. Dedicated instance - Instance runs on a single-tenant hardware
-3. Dedicate host (Most expensive) - Instance runs on its own physical server that you can control and configure
+| Tenancy | Hardware | Note |
+|---|---|---|
+| Shared **(default)** | Multiple AWS accounts are using the same physical hardware | - |
+| Dedicated instance | Instance runs on a single-tenant hardware | - |
+| Dedicated host | Instance runs on its own physical server that you can control and configure | Most expensive |
 
 ## Pricing models
 
-1. **On-demand** **(default)** - Pay as you go, hourly rate
-2. **Reserved instances**
-	1. Best for apps with steady, predictable usage
-	2. Can commit to 1 or 3 years of usage
-	3. Can pay upfront, partial upfront, or no upfront.
-	4. Can be shared between accounts, and if not being used you can sell your reserves instance on AWS [[financial-management-marketplace|marketplace]].
-3. **Spot instances**
-	1. Unused compute capacity you can buy from AWS with up to 90% savings when compared to on demand
-	2. Designed for workloads that have flexible start and end times because **AWS can take back spot computing capacity at any time if its needed by other on-demand services**.
+| Model | Billing and commitment | Best for | Notes |
+|---|---|---|---|
+| **On-demand** **(default)** | Pay as you go, hourly rate | - | - |
+| **Reserved instances** | Commit to 1 or 3 years of usage. Pay upfront, partial upfront, or no upfront | Apps with steady, predictable usage | Can be shared between accounts. If not used, you can sell your reserved instance on AWS [[financial-management-marketplace|marketplace]] |
+| **Spot instances** | Unused compute capacity you can buy from AWS | Workloads that have flexible start and end times | Up to 90% savings when compared to on demand. **AWS can take back spot computing capacity at any time if its needed by other on-demand services** |

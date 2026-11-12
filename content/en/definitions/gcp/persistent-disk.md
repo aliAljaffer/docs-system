@@ -41,20 +41,11 @@ tags:
 - Multi-reader support built-in (read-only multi-attach)
 
 ### Disk Categories
-#### Zonal Persistent Disk
-- Replicated within **single zone**
-- Lower latency (same zone as VM)
-- Lower cost than regional
-- **Can only attach to VMs in same zone**
-- Use case: Most workloads, boot disks
 
-#### Regional Persistent Disk
-- Replicated across **2 zones in same region**
-- **Active-active replication**
-- Higher availability (zone failure protection)
-- **Can attach to VMs in either replication zone**
-- 2x storage cost of zonal
-- Use case: HA databases, critical workloads
+| Category | Replication | Attaches to | Cost | Use case |
+|---|---|---|---|---|
+| Zonal Persistent Disk | Replicated within **single zone**. Lower latency (same zone as VM) | **Only VMs in same zone** | Lower cost than regional | Most workloads, boot disks |
+| Regional Persistent Disk | Replicated across **2 zones in same region**. **Active-active replication**. Higher availability (zone failure protection) | **VMs in either replication zone** | 2x storage cost of zonal | HA databases, critical workloads |
 
 **AWS Comparison:** EBS is always zonal; Regional PD is like EBS Multi-Attach + synchronous cross-AZ replication
 
@@ -77,10 +68,14 @@ tags:
 - Standard PD: Higher latency (HDD)
 
 ### Disk Size Limits
-- **Standard PD**: 10 GB to 64 TB
-- **Balanced PD**: 10 GB to 64 TB
-- **SSD PD**: 10 GB to 64 TB
-- **Extreme PD**: 500 GB to 64 TB
+
+| Disk type | Min size | Max size |
+|---|---|---|
+| Standard PD | 10 GB | 64 TB |
+| Balanced PD | 10 GB | 64 TB |
+| SSD PD | 10 GB | 64 TB |
+| Extreme PD | 500 GB | 64 TB |
+
 - **Boot disk minimum: 10 GB**
 - **Can resize up without downtime**
 - **Cannot shrink disks**
@@ -129,13 +124,12 @@ tags:
 
 ### Encryption
 #### Encryption at Rest (Automatic)
-- **Google-managed keys**: **Default, automatic, no configuration**
-- **Customer-managed keys (CMEK)**: Keys in [[security-kms|Cloud KMS]]
-  - Regional key must match disk region
-  - Can't convert existing disks to CMEK
-- **Customer-supplied keys (CSEK)**: You manage and provide keys
-  - Provide key with every request
-  - **If you lose key, data is unrecoverable**
+
+| Option | Who manages keys | Notes |
+|---|---|---|
+| **Google-managed keys** | Google | **Default, automatic, no configuration** |
+| **Customer-managed keys (CMEK)** | You, in [[security-kms|Cloud KMS]] | Regional key must match disk region. Can't convert existing disks to CMEK |
+| **Customer-supplied keys (CSEK)** | You manage and provide keys | Provide key with every request. **If you lose key, data is unrecoverable** |
 
 #### Encryption in Transit
 - Automatically encrypted between VM and storage
@@ -224,23 +218,13 @@ tags:
 - **Free tier**: 30 GB zonal Standard PD per month
 
 ### Use Cases by Disk Type
-- **Standard PD**:
-  - Log files, backups, archives
-  - Big data sequential scans
-  - Cost-sensitive workloads
-- **Balanced PD**:
-  - **General purpose workloads**
-  - Web servers, app servers
-  - Development/test environments
-  - Boot disks
-- **SSD PD**:
-  - Transactional databases (MySQL, PostgreSQL)
-  - High-performance NoSQL
-  - Random I/O intensive apps
-- **Extreme PD**:
-  - SAP HANA, Oracle RAC
-  - SQL Server with very high IOPS needs
-  - Ultra-low latency requirements
+
+| Disk type | Use cases |
+|---|---|
+| Standard PD | Log files, backups, archives. Big data sequential scans. Cost-sensitive workloads |
+| Balanced PD | **General purpose workloads**. Web servers, app servers. Development/test environments. Boot disks |
+| SSD PD | Transactional databases (MySQL, PostgreSQL). High-performance NoSQL. Random I/O intensive apps |
+| Extreme PD | SAP HANA, Oracle RAC. SQL Server with very high IOPS needs. Ultra-low latency requirements |
 
 ---
 
@@ -416,24 +400,31 @@ sudo resize2fs /dev/sdb
 - Use RAID 0 for striping (performance), RAID 1 for mirroring (redundancy)
 
 #### Performance Monitoring
-- [[gcp/cloud-monitoring|Cloud Monitoring]] metrics:
-  - `disk.read_bytes_count`: Read throughput
-  - `disk.write_bytes_count`: Write throughput
-  - `disk.read_ops_count`: Read IOPS
-  - `disk.write_ops_count`: Write IOPS
-  - `disk.throttled_read_ops_count`: Throttled operations
+- [[gcp/cloud-monitoring|Cloud Monitoring]] metrics (see the table below)
 - Set alerts for throttling
 - Right-size based on actual usage
 
+| Metric | Measures |
+|---|---|
+| `disk.read_bytes_count` | Read throughput |
+| `disk.write_bytes_count` | Write throughput |
+| `disk.read_ops_count` | Read IOPS |
+| `disk.write_ops_count` | Write IOPS |
+| `disk.throttled_read_ops_count` | Throttled operations |
+
 ### Cost Optimization
 #### Disk Type Selection
-- **Decision matrix**:
-  - Sequential I/O, cost-sensitive → Standard PD
-  - General purpose → Balanced PD
-  - High IOPS database → SSD PD
-  - Ultra-high IOPS → Extreme PD
 - **Over-provisioning**: Size for performance, accept higher capacity cost
 - **Monitoring**: Downsize if consistently underutilized
+
+**Decision matrix:**
+
+| Workload | Disk type |
+|---|---|
+| Sequential I/O, cost-sensitive | Standard PD |
+| General purpose | Balanced PD |
+| High IOPS database | SSD PD |
+| Ultra-high IOPS | Extreme PD |
 
 #### Regional vs Zonal
 - Zonal: 50% cost of regional
@@ -487,10 +478,13 @@ sudo resize2fs /dev/sdb
 - **Method 2**: Migrate for Compute Engine
   - Automated migration tool
   - Minimal downtime
-- **Performance mapping**:
-  - gp2/gp3 → pd-balanced
-  - io1/io2 → pd-ssd or pd-extreme
-  - st1/sc1 → pd-standard
+- **Performance mapping**: see the table below
+
+| AWS type | GCP type |
+|---|---|
+| gp2/gp3 | pd-balanced |
+| io1/io2 | pd-ssd or pd-extreme |
+| st1/sc1 | pd-standard |
 
 #### From On-Premises
 - **Small (<1 TB)**: Upload disk image to Cloud Storage, import

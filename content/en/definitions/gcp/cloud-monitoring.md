@@ -61,11 +61,13 @@ tags:
 - **Auto-close duration**: When condition no longer met
 
 #### Alert Conditions
-- **Metric threshold**: CPU > 80%
-- **Metric absence**: No data for X minutes
-- **Forecast**: Predict breach in future
-- **Process health**: [[gcp/compute-engine|Compute Engine]] process monitoring
-- **Uptime check**: Endpoint availability
+| Condition | Detail |
+|-----------|--------|
+| Metric threshold | CPU > 80% |
+| Metric absence | No data for X minutes |
+| Forecast | Predict breach in future |
+| Process health | [[gcp/compute-engine|Compute Engine]] process monitoring |
+| Uptime check | Endpoint availability |
 
 ### Uptime Checks
 **AWS Equivalent:** CloudWatch Synthetics / Route 53 Health Checks
@@ -239,10 +241,13 @@ Alert → PagerDuty/Splunk On-Call → On-call engineer
 ### Compliance & Audit
 - **Audit logs**: Who created/modified alerts and dashboards
 - **Access control**: [[gcp/iam|IAM]] roles for monitoring
-  - `monitoring.viewer`: Read-only
-  - `monitoring.editor`: Create/edit dashboards and alerts
-  - `monitoring.admin`: Full access
-  - `monitoring.metricWriter`: Write custom metrics
+
+| Role | Grants |
+|------|--------|
+| `monitoring.viewer` | Read-only |
+| `monitoring.editor` | Create/edit dashboards and alerts |
+| `monitoring.admin` | Full access |
+| `monitoring.metricWriter` | Write custom metrics |
 
 ### Migration from CloudWatch
 | CloudWatch | Cloud Monitoring |
@@ -256,9 +261,12 @@ Alert → PagerDuty/Splunk On-Call → On-call engineer
 | Metric Streams | Pub/Sub Integration |
 
 ### Observability Triad
-- **Metrics**: Cloud Monitoring
-- **Logs**: [[cloud-logging|Cloud Logging]]
-- **Traces**: [[cloud-trace|Cloud Trace]]
+| Signal | Tool |
+|--------|------|
+| Metrics | Cloud Monitoring |
+| Logs | [[cloud-logging|Cloud Logging]] |
+| Traces | [[cloud-trace|Cloud Trace]] |
+
 - Use together for complete observability
 
 ### Well-Architected Considerations

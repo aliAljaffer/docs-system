@@ -14,9 +14,11 @@ Google Cloud has three firewall layers. Each layer attaches at a different level
 
 [[cloud-ngfw]] tiers:
 
-- **Essentials:** rules and logging.
-- **Enterprise:** adds Layer 7 filtering and TLS inspection with security profiles. Profiles include Palo Alto Networks and CrowdStrike threat lists.
-- **Plus:** adds advanced EDR-based features.
+| Tier | Includes |
+|---|---|
+| Essentials | Rules and logging |
+| Enterprise | Adds Layer 7 filtering and TLS inspection with security profiles. Profiles include Palo Alto Networks and CrowdStrike threat lists. |
+| Plus | Adds advanced EDR-based features |
 
 Firewall endpoints are required for Enterprise and Plus inspection. They are billed.
 
@@ -93,10 +95,14 @@ See [[private-google-access-vs-psc]] for the full comparison.
 
 ### HA VPN and Cloud Interconnect
 
-- HA VPN uses one gateway with two interfaces and two reserved public IPs. Use at least two tunnels from the same region. Use BGP. The SLA is 99.99%.
-- Each Cloud VPN tunnel is IPsec and caps at 3 Gbps. Use [[cloud-interconnect]] for more than 3 Gbps or lower latency.
-- Interconnect is not encrypted by default. Add IPsec or MACsec.
-- Dedicated Interconnect runs at 10 or 100 Gbps at a colocation facility. It requires LACP, eBGP-4, and 802.1Q.
+| Feature | HA VPN | Dedicated Interconnect |
+|---|---|---|
+| Encryption | IPsec | Not encrypted by default. Add IPsec or MACsec. |
+| Capacity | 3 Gbps per tunnel | 10 or 100 Gbps |
+| Requirements | One gateway with two interfaces and two reserved public IPs. At least two tunnels from the same region. BGP. | A colocation facility. LACP, eBGP-4, and 802.1Q. |
+| SLA | 99.99% | - |
+
+- Use [[cloud-interconnect]] for more than 3 Gbps or lower latency.
 - Each VLAN attachment pairs with a Cloud Router BGP session.
 
 ### Cloud DNS security

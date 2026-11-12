@@ -103,7 +103,10 @@ curl -m 3 http://<vm-ip>:8000/api/tasks
 
 The command times out. The firewall works. Only the ports from our plan are open.
 
-This only holds because `compose.yaml` never publishes a backend port. A published container port bypasses UFW entirely, because Docker writes its own rules ahead of it. The UFW default-deny policy cannot block a container port that is actually published. If you add a published port later for debugging, bind it to `127.0.0.1` only.
+This only holds because `compose.yaml` never publishes a backend port.
+
+> [!WARNING]
+> A published container port bypasses UFW entirely, because Docker writes its own rules ahead of it. The UFW default-deny policy cannot block a container port that is actually published. If you add a published port later for debugging, bind it to `127.0.0.1` only.
 
 ## Secrets stay out of Git
 

@@ -41,7 +41,21 @@ Fonts are copied locally in `slides/fonts/` from `~/branding/assets/fonts/` and 
 
 ### Coverage
 
-The deck follows `scripts/ep00-four-careers-one-project.md` segment by segment: Hook (00:00), Four Roles (00:40), Tour of the App (02:00), Act 1 (04:30), Act 2 (06:00), Act 3 (07:30), Act 4 (09:00), How the Course Works (10:00), What You Need (11:30), CV Skills Ledger (13:30), Outro.
+The deck follows `scripts/ep00-four-careers-one-project.md` segment by segment:
+
+| Time | Segment |
+|---|---|
+| 00:00 | Hook |
+| 00:40 | Four Roles |
+| 02:00 | Tour of the App |
+| 04:30 | Act 1 |
+| 06:00 | Act 2 |
+| 07:30 | Act 3 |
+| 09:00 | Act 4 |
+| 10:00 | How the Course Works |
+| 11:30 | What You Need |
+| 13:30 | CV Skills Ledger |
+| - | Outro |
 
 It is a visual aid, not the full script. Key points and visuals are on screen. Your talking points stay in the script.
 

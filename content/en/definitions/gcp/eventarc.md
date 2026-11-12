@@ -25,6 +25,7 @@ tags:
 - No infrastructure to manage
 
 ### Key Differences from AWS EventBridge
+
 | Feature | GCP Eventarc | AWS EventBridge |
 |---------|--------------|-----------------|
 | Event format | **CloudEvents standard** | AWS event schema |
@@ -40,14 +41,18 @@ tags:
 
 ### Google Cloud Service Events
 **Direct events** (no [[pub-sub|Pub/Sub]] topic needed):
-- **[[gcp/cloud-storage|Cloud Storage]]**: Object finalize, delete, archive, metadata update
-- **[[gcp/pub-sub|Pub/Sub]]**: Message published to topic
-- **[[gcp/firestore|Firestore]]**: Document create, update, delete
-- **[[gcp/artifact-registry|Artifact Registry]]**: Image push, delete
-- **[[gcp/compute-engine|Compute Engine]]**: Instance start, stop, delete
-- **[[gcp/cloud-sql|Cloud SQL]]**: Instance creation, backup complete
-- **[[gcp/cloud-build|Cloud Build]]**: Build status changes
-- **BigQuery**: Job complete, dataset changes
+
+| Service | Example events |
+|---|---|
+| **[[gcp/cloud-storage|Cloud Storage]]** | Object finalize, delete, archive, metadata update |
+| **[[gcp/pub-sub|Pub/Sub]]** | Message published to topic |
+| **[[gcp/firestore|Firestore]]** | Document create, update, delete |
+| **[[gcp/artifact-registry|Artifact Registry]]** | Image push, delete |
+| **[[gcp/compute-engine|Compute Engine]]** | Instance start, stop, delete |
+| **[[gcp/cloud-sql|Cloud SQL]]** | Instance creation, backup complete |
+| **[[gcp/cloud-build|Cloud Build]]** | Build status changes |
+| **BigQuery** | Job complete, dataset changes |
+
 - **50+ more Google Cloud services**
 
 ### Audit Log Events
@@ -77,6 +82,7 @@ tags:
 ## Event Targets
 
 ### Supported Targets
+
 | Target | Use Case | Invocation |
 |--------|----------|------------|
 | **[[gcp/cloud-run|Cloud Run]]** | HTTP services, APIs, web apps | **Recommended** |
@@ -139,12 +145,15 @@ tags:
 ```
 
 ### Event Attributes
-- **type**: Event type (e.g., `google.cloud.storage.object.v1.finalized`)
-- **source**: Event source (service/resource)
-- **subject**: Specific resource (e.g., object name)
-- **id**: Unique event identifier
-- **time**: Event timestamp
-- **data**: Event payload (service-specific)
+
+| Attribute | Meaning |
+|---|---|
+| **type** | Event type (e.g., `google.cloud.storage.object.v1.finalized`) |
+| **source** | Event source (service/resource) |
+| **subject** | Specific resource (e.g., object name) |
+| **id** | Unique event identifier |
+| **time** | Event timestamp |
+| **data** | Event payload (service-specific) |
 
 ---
 
@@ -478,22 +487,26 @@ gcloud logging read "resource.labels.trigger_name=TRIGGER_NAME" \
 ```
 
 #### Alerting Policies
-- **Failed deliveries**: `event_count_by_response_code{code>=400} > threshold`
-- **High latency**: `event_latencies > 5s`
-- **No events**: `event_count == 0` for expected sources
-- **DLQ accumulation**: Monitor [[pub-sub|Pub/Sub]] DLQ message count
+
+| Alert | Condition |
+|---|---|
+| **Failed deliveries** | `event_count_by_response_code{code>=400} > threshold` |
+| **High latency** | `event_latencies > 5s` |
+| **No events** | `event_count == 0` for expected sources |
+| **DLQ accumulation** | Monitor [[pub-sub|Pub/Sub]] DLQ message count |
 
 ### Error Handling & Retries
 #### Automatic Retries
 - Exponential backoff (1s, 2s, 4s, 8s, ...)
 - Max retry duration: 24 hours
-- Stops retrying after target returns:
-  - 2xx (success)
-  - 4xx (client error - don't retry)
-- Continues retrying for:
-  - 5xx (server error)
-  - Network errors
-  - Timeouts
+
+| Target response | Retried? |
+|---|---|
+| 2xx (success) | No, stops retrying |
+| 4xx (client error) | No, don't retry |
+| 5xx (server error) | Yes |
+| Network errors | Yes |
+| Timeouts | Yes |
 
 #### Dead Letter Queues
 - Configure [[pub-sub|Pub/Sub]] DLQ on underlying subscription

@@ -136,8 +136,10 @@ Scenarios name one layer. Pick the control for that layer.
 
 ### IaaS or PaaS training
 
-- **IaaS** ([[compute-engine]] or [[gke]] with GPUs or TPUs): You secure the whole stack. Use hardened images, VM Manager patching, CMEK, private networking, Confidential VMs or nodes for sensitive data, and secure CI/CD.
-- **PaaS** ([[vertex-ai]]): Google secures the infrastructure. You configure IAM per ML role, data access, CMEK, VPC Service Controls, PSC endpoints, and Model Armor.
+| Model | Who secures what | Controls to set |
+|---|---|---|
+| IaaS ([[compute-engine]] or [[gke]] with GPUs or TPUs) | You secure the whole stack. | Hardened images, VM Manager patching, CMEK, private networking, Confidential VMs or nodes for sensitive data, and secure CI/CD |
+| PaaS ([[vertex-ai]]) | Google secures the infrastructure. | IAM per ML role, data access, CMEK, VPC Service Controls, PSC endpoints, and Model Armor |
 
 ### Gemini Enterprise Agent Platform
 
@@ -154,9 +156,11 @@ Scenarios name one layer. Pick the control for that layer.
 
 Exam patterns:
 
-- "Prevent sensitive data leaking through prompts or responses." Answer: Model Armor.
-- "Discover unsanctioned AI usage." Answer: SCC AI inventory.
-- "Protect training data in use." Answer: Confidential Computing.
+| Scenario | Answer |
+|---|---|
+| Prevent sensitive data leaking through prompts or responses. | Model Armor |
+| Discover unsanctioned AI usage. | SCC AI inventory |
+| Protect training data in use. | Confidential Computing |
 
 !!! tip "Exam tips"
     - Match the key option to the requirement: default, CMEK, HSM, EKM, CSEK, or Confidential Computing.

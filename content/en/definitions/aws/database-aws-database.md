@@ -20,19 +20,14 @@ Databases store semi-structured and structured data. This is the primary differe
 - Non-Relational
 Databases are what makes querying and accessing data easier.
 
-## Relational DB Services
-1. **Relational Database Service (RDS)**
-	1. Support for most common SQL-based databases such as MySQL, MariaDB, Oracle, etc
-2. **Amazon Aurora**
-	1. Fully managed RDBS service for MySQL and PostgresSQL
-	2. Highly available, durable, scalable, and secure.
-	3. Can be [[serverless]] 
-## Non-Relational DB Services
-1. **DynamoDB**
-	1. Primarily NoSQL database from AWS, designed to be extremely fast, available, and scalable
-	2. Can scale to billions of records with guaranteed consistent data retrieval.
-2. **DocumentDB**
-	1. NoSQL document database for MongoDB.
+## DB Services
+
+| Service | Type | Notes |
+|---|---|---|
+| **Relational Database Service (RDS)** | Relational | Support for most common SQL-based databases such as MySQL, MariaDB, Oracle, etc |
+| **Amazon Aurora** | Relational | Fully managed RDBS service for MySQL and PostgresSQL. Highly available, durable, scalable, and secure. Can be [[serverless]] |
+| **DynamoDB** | Non-Relational | Primarily NoSQL database from AWS, designed to be extremely fast, available, and scalable. Can scale to billions of records with guaranteed consistent data retrieval |
+| **DocumentDB** | Non-Relational | NoSQL document database for MongoDB |
 ## Other services
 - [[analytics-redshift|redshift]]
 - **Elasticache**

@@ -22,35 +22,25 @@ tags:
 ==Member + Role + Resource = Policy Binding==
 
 #### Members (WHO)
-- **Google Account**: End user (consumer Gmail or Workspace)
-- **Service Account**: Application/workload identity
-- **Google Group**: Collection of Google accounts and service accounts
-- **Google Workspace domain**: All users in organization (example.com)
-- **Cloud Identity domain**: Like Workspace but without Google Workspace apps
-- **allAuthenticatedUsers**: Any authenticated Google account
-- **allUsers**: Anyone on the internet (public access)
+
+| Member | Meaning |
+|---|---|
+| **Google Account** | End user (consumer Gmail or Workspace) |
+| **Service Account** | Application/workload identity |
+| **Google Group** | Collection of Google accounts and service accounts |
+| **Google Workspace domain** | All users in organization (example.com) |
+| **Cloud Identity domain** | Like Workspace but without Google Workspace apps |
+| **allAuthenticatedUsers** | Any authenticated Google account |
+| **allUsers** | Anyone on the internet (public access) |
 
 #### Roles (WHAT)
 Three types of roles:
 
-**Primitive Roles (Legacy - Avoid)**
-- Owner: Full access + manage roles + billing
-- Editor: Modify access to resources
-- Viewer: Read-only access
-- **Too broad, not recommended for production**
-
-**Predefined Roles**
-- Created and maintained by Google
-- Granular permissions for specific services
-- Examples: `roles/compute.instanceAdmin.v1`, `roles/storage.objectViewer`
-- **Recommended for most use cases**
-
-**Custom Roles**
-- User-defined roles with specific permissions
-- Created at organization or project level
-- Not available at folder level
-- **Use when predefined roles are too permissive**
-- Custom roles have lifecycle stages: ALPHA, BETA, GA, DEPRECATED, DISABLED
+| Role type | Defined by | Details | Guidance |
+|---|---|---|---|
+| Primitive (Legacy - Avoid) | - | Owner: Full access + manage roles + billing. Editor: Modify access to resources. Viewer: Read-only access | **Too broad, not recommended for production** |
+| Predefined | Google (created and maintained) | Granular permissions for specific services. Examples: `roles/compute.instanceAdmin.v1`, `roles/storage.objectViewer` | **Recommended for most use cases** |
+| Custom | You (user-defined roles with specific permissions) | Created at organization or project level, not available at folder level. Lifecycle stages: ALPHA, BETA, GA, DEPRECATED, DISABLED | **Use when predefined roles are too permissive** |
 
 #### Resources (WHERE)
 - Organization
@@ -77,20 +67,12 @@ Organization (optional)
 **Application/workload identity** - Not for end users
 
 #### Types of Service Accounts
-**User-managed**
-- You create and manage
-- Format: `sa-name@project-id.iam.gserviceaccount.com`
-- Up to 100 per project (can request increase)
 
-**Default Service Accounts**
-- Compute Engine default: `PROJECT_NUMBER-compute@developer.gserviceaccount.com`
-- App Engine default: `PROJECT_ID@appspot.gserviceaccount.com`
-- **Highly privileged (Editor role), disable if not needed**
-
-**Google-managed**
-- Created and managed by Google
-- Used by Google services on your behalf
-- Format: `@PROJECT_ID.iam.gserviceaccount.com`
+| Type | Created by | Format | Notes |
+|---|---|---|---|
+| User-managed | You create and manage | `sa-name@project-id.iam.gserviceaccount.com` | Up to 100 per project (can request increase) |
+| Default | - | Compute Engine default: `PROJECT_NUMBER-compute@developer.gserviceaccount.com`. App Engine default: `PROJECT_ID@appspot.gserviceaccount.com` | **Highly privileged (Editor role), disable if not needed** |
+| Google-managed | Google | `@PROJECT_ID.iam.gserviceaccount.com` | Used by Google services on your behalf |
 
 #### Service Account Keys
 **Two types:**
@@ -115,10 +97,13 @@ Organization (optional)
 **Conditional access based on attributes**
 
 **Common Condition Attributes:**
-- **Time/Date**: `request.time < timestamp("2026-01-01T00:00:00Z")`
-- **IP Address**: `origin.ip in ["203.0.113.0/24"]`
-- **Resource attributes**: `resource.name.startsWith("projects/_/buckets/prod-")`
-- **Resource tags**: `resource.hasTagValue("tagKeys/123", "tagValues/456")`
+
+| Attribute | Example |
+|---|---|
+| **Time/Date** | `request.time < timestamp("2026-01-01T00:00:00Z")` |
+| **IP Address** | `origin.ip in ["203.0.113.0/24"]` |
+| **Resource attributes** | `resource.name.startsWith("projects/_/buckets/prod-")` |
+| **Resource tags** | `resource.hasTagValue("tagKeys/123", "tagValues/456")` |
 
 **Use Cases:**
 - Temporary access (intern accounts expire)
@@ -172,10 +157,13 @@ gcloud projects add-iam-policy-binding PROJECT_ID \
   - Example: Require OS Login on all VMs
 
 **Common Organization Policies:**
-- `constraints/compute.vmExternalIpAccess`: Restrict external IPs
-- `constraints/iam.disableServiceAccountKeyCreation`: Prevent service account keys
-- `constraints/compute.restrictSharedVpcSubnetworks`: Control Shared VPC usage
-- `constraints/sql.restrictPublicIp`: Prevent public Cloud SQL instances
+
+| Constraint | Effect |
+|---|---|
+| `constraints/compute.vmExternalIpAccess` | Restrict external IPs |
+| `constraints/iam.disableServiceAccountKeyCreation` | Prevent service account keys |
+| `constraints/compute.restrictSharedVpcSubnetworks` | Control Shared VPC usage |
+| `constraints/sql.restrictPublicIp` | Prevent public Cloud SQL instances |
 
 ### IAM Recommender
 - AI-powered recommendations to remove excessive permissions
@@ -207,12 +195,16 @@ gcloud projects add-iam-policy-binding PROJECT_ID \
 - Seamless multi-cloud integration
 
 ### Resource Hierarchy Best Practices
-- **Organization level**: Org-wide policies (security, compliance)
-- **Folder level**: Department/environment grouping (prod, dev, staging)
-- **Project level**: Application workloads
-- **Resource level**: Specific overrides (avoid when possible)
+
+| Level | Use for |
+|---|---|
+| **Organization level** | Org-wide policies (security, compliance) |
+| **Folder level** | Department/environment grouping (prod, dev, staging) |
+| **Project level** | Application workloads |
+| **Resource level** | Specific overrides (avoid when possible) |
 
 ### IAM vs AWS IAM Comparison
+
 | Feature | GCP IAM | AWS IAM |
 |---------|---------|---------|
 | Policy attachment | Resource-centric | Identity-centric |
@@ -225,13 +217,16 @@ gcloud projects add-iam-policy-binding PROJECT_ID \
 | Max policy size | No strict limit | 6,144 chars (managed), 10,240 (inline) |
 
 ### Audit Logging for IAM
-- **Admin Activity logs**: Who changed IAM policies (always on, free)
-- **Data Access logs**: Who accessed what data (disabled by default, costs)
-- **System Event logs**: Automated system changes
-- **Policy Denied logs**: Denied access attempts
+
+| Log | Records | Default |
+|---|---|---|
+| **Admin Activity logs** | Who changed IAM policies | Always on, free |
+| **Data Access logs** | Who accessed what data | Disabled by default, costs |
+| **System Event logs** | Automated system changes | - |
+| **Policy Denied logs** | Denied access attempts | - |
 
 ### Common IAM Patterns
-**Least Privilege**
+#### Least Privilege
 ```bash
 # Grant minimal role for specific task
 gcloud projects add-iam-policy-binding PROJECT_ID \
@@ -239,7 +234,7 @@ gcloud projects add-iam-policy-binding PROJECT_ID \
   --role='roles/compute.instanceAdmin.v1'
 ```
 
-**Service Account Impersonation**
+#### Service Account Impersonation
 ```bash
 # Allow user to act as service account
 gcloud iam service-accounts add-iam-policy-binding SA_EMAIL \
@@ -247,7 +242,7 @@ gcloud iam service-accounts add-iam-policy-binding SA_EMAIL \
   --role='roles/iam.serviceAccountTokenCreator'
 ```
 
-**Cross-Project Access**
+#### Cross-Project Access
 ```bash
 # Grant service account in Project A access to Project B
 gcloud projects add-iam-policy-binding PROJECT_B_ID \
@@ -327,20 +322,20 @@ gcloud projects get-iam-policy PROJECT_ID \
 ## PCA Level
 
 ### Architectural Considerations
-**Identity Management Strategy**
+#### Identity Management Strategy
 - Use Cloud Identity or Google Workspace for centralized user management
 - Sync with on-prem Active Directory using Google Cloud Directory Sync (GCDS)
 - Implement SSO with external IdP via SAML or OIDC
 - Plan for identity lifecycle (joiners, movers, leavers)
 
-**Resource Hierarchy Design**
+#### Resource Hierarchy Design
 - Organization for billing and centralized policies
 - Folders for environment separation (prod, staging, dev)
 - Folders for team/department isolation
 - Projects for workload boundaries
 - **Design hierarchy before implementation, hard to change later**
 
-**Service Account Management**
+#### Service Account Management
 - One service account per application/service
 - Dedicated projects for shared service accounts
 - Rotate service account keys (if using them) every 90 days
@@ -348,7 +343,7 @@ gcloud projects get-iam-policy PROJECT_ID \
 - Use Workload Identity Federation for external workloads (AWS, Azure, GitHub)
 - Implement service account impersonation over key downloads
 
-**Least Privilege Implementation**
+#### Least Privilege Implementation
 - Start with viewer, grant incrementally
 - Use predefined roles over primitive roles
 - Create custom roles for specific use cases
@@ -413,26 +408,26 @@ listPolicy:
 ```
 
 ### Security Controls & Compliance
-**Access Control Policies**
+#### Access Control Policies
 - Implement separation of duties (SoD)
 - Break glass procedures for emergency access
 - Privileged access management (PAM)
 - Regular access certification
 
-**Audit & Compliance**
+#### Audit & Compliance
 - Enable Admin Activity logs (always on)
 - Enable Data Access logs for sensitive resources
 - Export logs to BigQuery for long-term retention
 - Use Access Transparency for Google employee access visibility
 - Cloud Audit Logs for compliance (SOC 2, ISO, HIPAA, PCI-DSS)
 
-**VPC Service Controls Integration**
+#### VPC Service Controls Integration
 - Combine with IAM for defense-in-depth
 - Prevent data exfiltration even with compromised credentials
 - Create security perimeters around sensitive projects
 
 ### Advanced IAM Patterns
-**Service Account Chaining**
+#### Service Account Chaining
 ```bash
 # User -> SA1 -> SA2 -> Resource
 # User impersonates SA1
@@ -446,13 +441,13 @@ gcloud iam service-accounts add-iam-policy-binding SA2_EMAIL \
   --role='roles/iam.serviceAccountTokenCreator'
 ```
 
-**Just-in-Time Access**
+#### Just-in-Time Access
 - Use IAM Conditions with time constraints
 - Temporary elevated access for incidents
 - Automatic revocation after time window
 - Integrate with ticketing systems (JIRA, ServiceNow)
 
-**Federated Identity for B2B**
+#### Federated Identity for B2B
 - SAML 2.0 for partner organizations
 - Partner access to specific projects
 - Automated provisioning/deprovisioning
@@ -480,22 +475,28 @@ gcloud iam roles update customComputeRole \
 ```
 
 ### IAM Limits & Quotas
-- **Policy size**: 64 KB per resource
-- **Bindings per policy**: 1,500
-- **Members per binding**: 1,500
-- **Conditional role bindings**: 100 per policy
-- **Service accounts per project**: 100 (default)
-- **Service account keys**: 10 per service account
+
+| Limit | Value |
+|---|---|
+| **Policy size** | 64 KB per resource |
+| **Bindings per policy** | 1,500 |
+| **Members per binding** | 1,500 |
+| **Conditional role bindings** | 100 per policy |
+| **Service accounts per project** | 100 (default) |
+| **Service account keys** | 10 per service account |
 
 ### Migration from AWS IAM
 **Mapping AWS Concepts to GCP:**
-- AWS IAM User -> Google Account or Service Account
-- AWS IAM Role -> Service Account
-- AWS IAM Group -> Google Group
-- AWS IAM Policy -> IAM Role (predefined or custom)
-- AWS SCP -> Organization Policy
-- AWS STS -> Workload Identity Federation
-- AWS AssumeRole -> Service Account Impersonation
+
+| AWS concept | GCP equivalent |
+|---|---|
+| AWS IAM User | Google Account or Service Account |
+| AWS IAM Role | Service Account |
+| AWS IAM Group | Google Group |
+| AWS IAM Policy | IAM Role (predefined or custom) |
+| AWS SCP | Organization Policy |
+| AWS STS | Workload Identity Federation |
+| AWS AssumeRole | Service Account Impersonation |
 
 **Migration Strategy:**
 1. Map existing AWS policies to GCP predefined roles

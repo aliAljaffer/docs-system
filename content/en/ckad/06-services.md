@@ -6,11 +6,13 @@ A Service exposes a set of pods. It forwards traffic with round-robin load balan
 
 ## Service types
 
-- `ClusterIP`: the default type. It exposes the Service inside the cluster.
-- `NodePort`: opens a specific port on the node. The port forwards to the Service IP on the cluster network.
-- `LoadBalancer`: creates an external load balancer for applications in a public cloud.
-- `ExternalName`: redirects at the DNS level. Useful during a migration.
-- Headless Service: a `ClusterIP` Service with `clusterIP: None`. It lets you reach pods directly. Used with StatefulSets.
+| Type | What it does |
+|---|---|
+| `ClusterIP` | The default type. It exposes the Service inside the cluster. |
+| `NodePort` | Opens a specific port on the node. The port forwards to the Service IP on the cluster network. |
+| `LoadBalancer` | Creates an external load balancer for applications in a public cloud. |
+| `ExternalName` | Redirects at the DNS level. Useful during a migration. |
+| Headless Service | A `ClusterIP` Service with `clusterIP: None`. It lets you reach pods directly. Used with StatefulSets. |
 
 ## Create a Service
 

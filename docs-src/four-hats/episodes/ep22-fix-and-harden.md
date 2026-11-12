@@ -41,9 +41,15 @@ Remove the comment that says the endpoint is intentionally vulnerable. The comme
 
 ## Verify the fix
 
-Rebuild, reload, and restart before you verify. This warning matters. The running Pod uses the baked image. Changing the file on disk changes nothing until the image is rebuilt, loaded into Minikube, and the Deployment is restarted. Wait for the rollout to finish. Only then re-run the old payloads.
+> [!WARNING]
+> Rebuild, reload, and restart before you verify.
 
-Warning: do not run `sqlmap` from a laptop container against the port-forward. The port-forward listens on `127.0.0.1` only. A laptop container using `host.docker.internal` cannot reach it. Run the scan as a Pod. Use the same Pod command as Episode 21, with the same scanner label and the same Service URL.
+The running Pod uses the baked image. Changing the file on disk changes nothing until the image is rebuilt, loaded into Minikube, and the Deployment is restarted. Wait for the rollout to finish. Only then re-run the old payloads.
+
+> [!WARNING]
+> Do not run `sqlmap` from a laptop container against the port-forward.
+
+The port-forward listens on `127.0.0.1` only. A laptop container using `host.docker.internal` cannot reach it. Run the scan as a Pod. Use the same Pod command as Episode 21, with the same scanner label and the same Service URL.
 
 The boolean payload now returns an empty list. Nothing matches, because the whole payload is now just a search string. The UNION payload also returns an empty list. No extra row is added. The `sqlmap` scan reports the parameter as not injectable. Three checks now agree. The hand tests and the tool test all show the same result. The fix is real, and it is also measured.
 
@@ -65,7 +71,16 @@ Add egress rules on the source as well as ingress rules on the destination. Defa
 
 Prove the default-deny rule with a Pod that has no allow rule. Use a throwaway cluster. Do not disturb the cluster you record on.
 
-Warning: on an 8 GB laptop, stop the main profile first. Start the second profile. Run the check. Delete the second profile. Start the main profile again. All three commands come in order. Reversing them leaves two clusters fighting for memory.
+On an 8 GB laptop, follow this order:
+
+1. Stop the main profile.
+2. Start the second profile.
+3. Run the check.
+4. Delete the second profile.
+5. Start the main profile again.
+
+> [!WARNING]
+> Keep this order. Reversing it leaves two clusters fighting for memory.
 
 The second profile needs the same CPU and memory shape as the first. The earlier act guide version started the second profile with Calico networking. The probe Pod starts with a busybox image and tries to reach the database on port 5432. The probe times out. A Pod with no explicit allow rule cannot reach the database. The timeout is the proof. No timeout would mean the deny failed.
 

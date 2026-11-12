@@ -16,12 +16,13 @@ tags:
 - Setup a Zero-Spend budget on [[financial-management-budgets|AWS Budget]] to prevent racking up a tab
 - **IaaS**
 ### EC2 Instance Power States
-- **Stopped** - The data on [[storage-ebs|ebs]] disk remains intact in the next start
-- **Terminate** - any [[storage-ebs|ebs]] volumes also set-up to be destroyed is lost.
-- **Start**
-	- First start: The OS boosts, and the [[ec2-user-data|EC2 User Data]] script is run
-	- Subsequent starts: OS boots
-- **Hibernate** - 
+
+| Power state | What happens | Note |
+|---|---|---|
+| **Stopped** | The data on [[storage-ebs|ebs]] disk remains intact in the next start | - |
+| **Terminate** | Any [[storage-ebs|ebs]] volumes also set-up to be destroyed are lost | - |
+| **Start** | First start: the OS boots, and the [[ec2-user-data|EC2 User Data]] script is run. Subsequent starts: the OS boots | - |
+| **Hibernate** | In-memory state is preserved. The RAM state is written to a file in the root [[storage-ebs|ebs]] volume | See EC2 Hibernate below |
 ### Sizing and Configuration Options
 - OS: Linux, Windows, MacOS
 - CPU 
@@ -49,26 +50,13 @@ $$m5.2xlarge$$
 - 5: generation (improved overtime)
 - 2xlarge: size within the instance class **m**
 ### EC2 Instance Types
-##### General Purpose (GP)
-- Great for a diversity of workloads such as web servers or code repos, balanced
-- t2.micro
-##### Compute-Optimized
-- Great for compute-intensive tasks that require high performance processor:
-	- Batch processing
-	- Media Transcoding
-	- High Performance web servers
-	- Dedicated gaming servers
-- C name class
-##### Memory-Optimized
-- Fast performance for workloads that process data sets in memory
-	- High performance DBs
-	- Distributed web scale cache stores
-- **R**, **X,** **Z** name class 
-##### Storage-Optimized
-- Great for storage intensive tasks that require high, sequential read and write access to large data sets on local storage
-	- High frequency online transaction processing systems
-	- Relational & NoSQL DBs
--  **I, D, G, H** class names
+
+| Family | Use for | Name class |
+|---|---|---|
+| General Purpose (GP) | Great for a diversity of workloads such as web servers or code repos, balanced (example: t2.micro) | - |
+| Compute-Optimized | Compute-intensive tasks that require a high performance processor: batch processing, media transcoding, high performance web servers, dedicated gaming servers | **C** |
+| Memory-Optimized | Fast performance for workloads that process data sets in memory: high performance DBs, distributed web scale cache stores | **R**, **X**, **Z** |
+| Storage-Optimized | Storage intensive tasks that require high, sequential read and write access to large data sets on local storage: high frequency online transaction processing systems, relational and NoSQL DBs | **I**, **D**, **G**, **H** |
 ### Security Groups
 - **ALLOW** rules only
 - Rules can reference by **IP ADDRESS** or other **SECURITY GROUP**
@@ -90,10 +78,13 @@ $$m5.2xlarge$$
 **NO AWS API KEYS IN INSTANCES!**
 ### EC2 Instances Purchasing Options
 [[compute-ec2-ccp|Pricing models]]
-- Dedicated hosts - book an entire physical server (allows compliance)
-	- useful for licensed software
-- Dedicated Instances - no other customer will share your hardware
-- Capacity Reservations - Reserve capacity in a specific AZ for any duration (You're charged at On-Demand rate whether you launch instances or not) 
+
+| Option | What you get | Note |
+|---|---|---|
+| Dedicated hosts | Book an entire physical server (allows compliance) | Useful for licensed software |
+| Dedicated Instances | No other customer will share your hardware | - |
+| Capacity Reservations | Reserve capacity in a specific AZ for any duration | You're charged at On-Demand rate whether you launch instances or not |
+
 ![](/assets/vault/pasted-image-20250527163319.webp)
 ### Additional: IPv4 Address AWS Charges 
 - $0.005 per hour ($3.6 per month)
@@ -103,10 +94,14 @@ $$m5.2xlarge$$
 #### Spot Fleets
 $$Spot\ Fleet\ =\ set\ of\ Spot\ instances\ +\ (Optional)\ On-Demand\ Instances$$
 Strategies for Spot Fleets:
-- lowestPrice: From the pool with the lowest price (cost optimization, short workload)
-- diversified: distributed across all pools (great for avail., long workloads)
-- capacityOptimized
-- priceCapacityOptimized (recommended): pools with highest capacity available, then select the pool with the lowest price
+
+| Strategy | Best for |
+|---|---|
+| lowestPrice | From the pool with the lowest price (cost optimization, short workload) |
+| diversified | Distributed across all pools (great for avail., long workloads) |
+| capacityOptimized | - |
+| priceCapacityOptimized (recommended) | Pools with highest capacity available, then select the pool with the lowest price |
+
 **Spot Fleets allow us to automatically request Spot Instances with the lowest price.**
 ### Placement Groups
 Sometimes you want control over the EC2 Instance placement strategy
@@ -176,23 +171,17 @@ Deletes the EBS volume on termination of EC2 instance the volume is attached to.
 ##### Free Tier
 30 GB of free [[storage-ebs|ebs]] storage of type General Purpose GP (SSD) or magnetic per month
 ##### EBS Volume Types
-- gp2/gp3 (SSD) General Purpose SSD with price/perf balance
-	- Cost effective, low latency
-	- System boot volumes, virtual desktops, dev and test env
-	- 1GiB - 16TiB
-	- gp3: Baseline of 3k IOPS and throughput of 125 MiB/s, can increase IOPS to 16k and throughput 100 MiB/s **independently**
-	- gp2: Small volumes can burst IOPS to 3k, size of volume and IOPS are **LINKED**, 3 IOPS per GB, means at 5334 GB we are at the max IOPS.
-- Provisioned IOPS SSD: Critical business apps with sustained IOPS Performance, or apps that need more than 16,000 IOPS. **GREATE FOR DATABASES**
-	- io1 (4GiB - 16TiB)
-		- Max PIOPS: **64,000** for Nitro EC2 Instances
-	- io2 (4GiB - 64TiB)
-		- Sub-second latency
-		- Max PIOPS: **256,000** with an **IOPS:GiB** ration of 1000:1
-- HDD:
-	- Can't be boot volume
-	- 125GiB to 16TiB
-	- st1 (HDD) Low cost frequent access. Big Data, Data Warehouses, Log Processing. **Max throughput: 500MiB/s, max IOPS 500.**
-	- sc1 (HDD) Lowest cost, less frequent access. When lowest cost is important. **Max throughput: 250 MiB/s, max IOPS 250.**
+
+| Type | Kind | Size | Max performance | Use case |
+|---|---|---|---|---|
+| gp3 | General Purpose SSD | 1GiB - 16TiB | Baseline of 3k IOPS and 125 MiB/s throughput. Can increase IOPS to 16k and throughput 100 MiB/s **independently** | Cost effective, low latency. System boot volumes, virtual desktops, dev and test env |
+| gp2 | General Purpose SSD | 1GiB - 16TiB | Small volumes can burst IOPS to 3k. Size of volume and IOPS are **LINKED**: 3 IOPS per GB, so at 5334 GB we are at the max IOPS | Same as gp3 |
+| io1 | Provisioned IOPS SSD | 4GiB - 16TiB | Max PIOPS: **64,000** for Nitro EC2 Instances | Critical business apps with sustained IOPS performance, or apps that need more than 16,000 IOPS. **GREAT FOR DATABASES** |
+| io2 | Provisioned IOPS SSD | 4GiB - 64TiB | Max PIOPS: **256,000** with an **IOPS:GiB** ratio of 1000:1. Sub-second latency | Same as io1 |
+| st1 | HDD | 125GiB - 16TiB | **Max throughput: 500MiB/s, max IOPS 500.** | Low cost, frequent access. Big Data, Data Warehouses, Log Processing |
+| sc1 | HDD | 125GiB - 16TiB | **Max throughput: 250 MiB/s, max IOPS 250.** | Lowest cost, less frequent access. When lowest cost is important |
+
+HDD volumes can't be boot volumes.
 ##### EBS Snapshots
 Make a Backup (snapshot) of your EBS volume at a point in time.
 - **Not necessary to detach volume to do snapshot, but recommended**
@@ -240,23 +229,26 @@ Make a Backup (snapshot) of your EBS volume at a point in time.
 - EFS Scale
 	- 1000s of Concurrent NFS Clients, 10GB+ /s throughput
 	- Grow to Petabyte-scale NFS, automatically
-- Performance Mode
-	- **General Purpose (default)**: Latency-sensitive use-cases (CMS, web server, etc)
-	- **Max I/O**: High latency, throughput, and highly parallel (media processing, big data)
-- Throughput Mode
-	- **Bursting** - 1 TB = 50MiB/s + burst of 100MiB/s
-	- **Provisioned** - set your throughput regardless of storage size
-	- **Elastic** - Automatically scale with throughput up/down based on workload
+
+| Setting | Option | Use for |
+|---|---|---|
+| Performance Mode | **General Purpose (default)** | Latency-sensitive use-cases (CMS, web server, etc) |
+| Performance Mode | **Max I/O** | High latency, throughput, and highly parallel (media processing, big data) |
+| Throughput Mode | **Bursting** | 1 TB = 50MiB/s + burst of 100MiB/s |
+| Throughput Mode | **Provisioned** | Set your throughput regardless of storage size |
+| Throughput Mode | **Elastic** | Automatically scale with throughput up/down based on workload |
 ##### Storage Classes
-- Storage Tier (Move file after N days)
-	- **Standard**: frequently accessed files
-	- **Infrequent** access
-	- **Archive**: 50% cheaper
-	- Implement lifecycle policies to move files between storage tiers
-- Availability and durability
-	- **Standard**: Great for production, Multi-AZ
-	- **One Zone**: One AZ, great for development, backups, with IA
+- Implement lifecycle policies to move files between storage tiers (move file after N days)
 - Over 90% in cost savings by using the correct storage class!
+
+| Dimension | Class | Notes |
+|---|---|---|
+| Storage tier | **Standard** | Frequently accessed files |
+| Storage tier | **Infrequent** access | - |
+| Storage tier | **Archive** | 50% cheaper |
+| Availability and durability | **Standard** | Great for production, Multi-AZ |
+| Availability and durability | **One Zone** | One AZ, great for development, backups, with IA |
+
 ### EBS vs. EFS
 ![](/assets/vault/pasted-image-20250531212739.webp)
 ![](/assets/vault/pasted-image-20250531212843.webp)

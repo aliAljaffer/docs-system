@@ -67,11 +67,11 @@ bigquery.googleapis.com → 199.36.153.8/30
 ```
 
 ### Use Cases
-✓ **[[gcp/gke|GKE private clusters]]** accessing Google services
-✓ **[[gcp/compute-engine|Compute Engine]] VMs without external IPs** reading from [[gcp/cloud-storage|Cloud Storage]]
-✓ **Data processing** ([[gcp/dataflow|Dataflow]], Dataproc) accessing [[bigquery|BigQuery]]
-✓ **Cost savings** (no [[cloud-nat|NAT Gateway]] needed for Google API access)
-✓ **Security** (no internet exposure)
+- **[[gcp/gke|GKE private clusters]]** accessing Google services
+- **[[gcp/compute-engine|Compute Engine]] VMs without external IPs** reading from [[gcp/cloud-storage|Cloud Storage]]
+- **Data processing** ([[gcp/dataflow|Dataflow]], Dataproc) accessing [[bigquery|BigQuery]]
+- **Cost savings** (no [[cloud-nat|NAT Gateway]] needed for Google API access)
+- **Security** (no internet exposure)
 
 ### Limitations
 - ✗ Still uses Google's **public IP addresses** (might conflict with firewall rules expecting private IPs)
@@ -156,12 +156,12 @@ bigquery.googleapis.com → 10.0.1.5
 ```
 
 ### Use Cases
-✓ **Hybrid cloud** with strict firewall rules (only allow RFC 1918)
-✓ **Multi-region** private access to Google APIs
-✓ **Service mesh** architectures
-✓ **Consuming third-party SaaS** privately
-✓ **Publishing services** across VPCs without peering
-✓ **Replacing VPC Peering** for service sharing (more scalable)
+- **Hybrid cloud** with strict firewall rules (only allow RFC 1918)
+- **Multi-region** private access to Google APIs
+- **Service mesh** architectures
+- **Consuming third-party SaaS** privately
+- **Publishing services** across VPCs without peering
+- **Replacing VPC Peering** for service sharing (more scalable)
 
 ### Pricing
 - **PSC Endpoint**: ~$0.01 per hour per endpoint
@@ -173,24 +173,26 @@ bigquery.googleapis.com → 10.0.1.5
 ## When to Use Each
 
 ### Use Private Google Access When:
-✓ Simple use case: VMs accessing Google APIs
-✓ Cost is a concern (PGA is free)
-✓ You're okay with Google's public IP ranges
-✓ Single VPC, single region scenario
-✓ Quick setup needed
+
+- Simple use case: VMs accessing Google APIs
+- Cost is a concern (PGA is free)
+- You're okay with Google's public IP ranges
+- Single VPC, single region scenario
+- Quick setup needed
 
 **Example Scenario:**
 > "GKE private cluster needs to pull container images from Artifact Registry"
 > **Solution:** Enable Private Google Access on subnet ✓
 
 ### Use Private Service Connect When:
-✓ Need **private IPs (RFC 1918)** for Google APIs
-✓ Hybrid cloud with strict on-prem firewall rules
-✓ Consuming third-party services from Service Directory
-✓ Multi-region private access requirements
-✓ Publishing your own services for private consumption
-✓ Replacing VPC Peering (more scalable alternative)
-✓ Advanced routing control needed
+
+- Need **private IPs (RFC 1918)** for Google APIs
+- Hybrid cloud with strict on-prem firewall rules
+- Consuming third-party services from Service Directory
+- Multi-region private access requirements
+- Publishing your own services for private consumption
+- Replacing VPC Peering (more scalable alternative)
+- Advanced routing control needed
 
 **Example Scenario:**
 > "On-premises network has firewall rules that only allow RFC 1918 addresses. Need to access BigQuery from Interconnect."

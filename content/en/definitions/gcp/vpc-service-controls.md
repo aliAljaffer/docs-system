@@ -128,16 +128,16 @@ gcloud access-context-manager levels create LEVEL_NAME \
 ```
 
 ### Ingress and Egress Rules
+
+| Aspect | Ingress | Egress |
+|---|---|---|
+| Direction | Requests coming INTO the perimeter (from outside to inside) | Requests going OUT of the perimeter (from inside to outside) |
+| Default | Deny all ingress | Deny all egress |
+| **Source** | Identity and/or IP range | Identity inside perimeter |
+| **Target** | Service and method | External resource or service |
+| **Condition** | Access level requirements | Access level requirements |
+
 #### Ingress Policy
-- Control requests coming INTO the perimeter
-- From outside perimeter to inside
-- Default: Deny all ingress
-
-**Ingress Rule Components:**
-- **Source**: Identity and/or IP range
-- **Target**: Service and method
-- **Condition**: Access level requirements
-
 ```yaml
 # Example: Allow BigQuery access from specific IPs
 ingressPolicies:
@@ -154,15 +154,6 @@ ingressPolicies:
 ```
 
 #### Egress Policy
-- Control requests going OUT of the perimeter
-- From inside perimeter to outside
-- Default: Deny all egress
-
-**Egress Rule Components:**
-- **Source**: Identity inside perimeter
-- **Target**: External resource or service
-- **Condition**: Access level requirements
-
 ```yaml
 # Example: Allow Cloud Storage writes to backup bucket
 egressPolicies:
@@ -225,6 +216,7 @@ Solution:
 ```
 
 ### VPC SC vs IAM
+
 | Aspect | IAM | VPC SC |
 |--------|-----|--------|
 | Controls | Who has access | Where access happens |
@@ -239,6 +231,7 @@ Solution:
 - VPC SC: Where they can do it from
 
 ### VPC SC vs AWS VPC Endpoints
+
 | Feature | VPC SC | VPC Endpoints |
 |---------|--------|---------------|
 | Scope | Project/org-wide | VPC-specific |
@@ -505,7 +498,7 @@ ingressPolicies:
 ```
 
 ### Dry Run to Production Migration
-**Phase 1: Dry Run (Test)**
+#### Phase 1: Dry Run (Test)
 ```bash
 # Create perimeter in dry run mode
 gcloud access-context-manager perimeters create test-perimeter \
@@ -521,7 +514,7 @@ gcloud logging read "protoPayload.metadata.dryRun=true \
   --limit=100
 ```
 
-**Phase 2: Analyze Violations**
+#### Phase 2: Analyze Violations
 ```bash
 # Export to BigQuery for analysis
 gcloud logging sinks create vpc-sc-violations \
@@ -540,7 +533,7 @@ GROUP BY 1, 2, 3
 ORDER BY violation_count DESC
 ```
 
-**Phase 3: Add Ingress/Egress Rules**
+#### Phase 3: Add Ingress/Egress Rules
 ```bash
 # Create ingress/egress rules for legitimate traffic
 # Update perimeter with rules
@@ -550,7 +543,7 @@ gcloud access-context-manager perimeters update test-perimeter \
   --policy=POLICY_ID
 ```
 
-**Phase 4: Enforce**
+#### Phase 4: Enforce
 ```bash
 # Switch from dry run to enforced
 gcloud access-context-manager perimeters update test-perimeter \
@@ -633,7 +626,7 @@ PHI Protection:
 ### Troubleshooting VPC SC
 **Common Issues:**
 
-**Issue 1: Legitimate traffic blocked**
+#### Issue 1: Legitimate traffic blocked
 ```bash
 # Check audit logs
 gcloud logging read "protoPayload.metadata.violationReason!=\"\" \
@@ -643,7 +636,7 @@ gcloud logging read "protoPayload.metadata.violationReason!=\"\" \
 # Add ingress policy to allow
 ```
 
-**Issue 2: Service not working inside perimeter**
+#### Issue 2: Service not working inside perimeter
 ```bash
 # Check if service is supported
 gcloud access-context-manager supported-services list
@@ -653,7 +646,7 @@ gcloud access-context-manager perimeters describe PERIMETER_NAME \
   --policy=POLICY_ID
 ```
 
-**Issue 3: Cross-project access not working**
+#### Issue 3: Cross-project access not working
 ```bash
 # Create perimeter bridge
 gcloud access-context-manager perimeters create bridge \

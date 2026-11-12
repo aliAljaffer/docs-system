@@ -11,14 +11,19 @@ The PCSE exam tests how you design, deploy, and operate secure Google Cloud envi
 | Item | Detail |
 |---|---|
 | Length | 2 hours |
-| Questions | 50 to 60, multiple choice and multiple select. Select-all questions give no partial credit. Test takers report forms as short as 40 in 2025. |
+| Questions | 50 to 60, multiple choice and multiple select |
 | Cost | $200 USD |
-| Delivery | Online proctored or test center. Online proctoring needs a second camera, such as a phone behind you. No breaks, food, or drinks. |
+| Delivery | Online proctored or test center |
 | Languages | English, Japanese |
 | Validity | 2 years. Retake the full exam to renew. |
 | Retake policy | 14 days after fail 1, 60 days after fail 2, 365 days after fail 3 |
 | Recommended background | 3+ years in industry, 1+ year on Google Cloud |
 | Case studies | None |
+
+- Select-all questions give no partial credit.
+- Test takers report forms as short as 40 questions in 2025.
+- Online proctoring needs a second camera, such as a phone behind you.
+- You get no breaks, food, or drinks.
 
 Official page: https://cloud.google.com/learn/certification/cloud-security-engineer
 

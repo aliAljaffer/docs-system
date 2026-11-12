@@ -93,11 +93,11 @@ The ledger bullets are a starting point, not a copy-paste. Adjust them to match 
 
 A CV line like "Containerized a three-tier app" is a claim. Your GitHub repository is the proof. Three changes make the repository read well to someone who was not in this course.
 
-First, a clear `README.md` at the top. It should say what the app does, how to run it, and what you built in each act. A reviewer should land on the repo and understand the project without reading the course docs.
+1. A clear `README.md` at the top. It should say what the app does, how to run it, and what you built in each act. A reviewer should land on the repo and understand the project without reading the course docs.
 
-Second, pull request history that shows real review, not just solo commits. The merged pull requests from Episodes 2, 4, and 6 show branches, review, and merge. That history is evidence that you can work the way a team works. Merge your pull requests before you apply anywhere. A CV with no matching GitHub activity reads as empty, however true the bullets are.
+2. Pull request history that shows real review, not just solo commits. The merged pull requests from Episodes 2, 4, and 6 show branches, review, and merge. That history is evidence that you can work the way a team works. Merge your pull requests before you apply anywhere. A CV with no matching GitHub activity reads as empty, however true the bullets are.
 
-Third, pin the repository on your GitHub profile page. A reviewer can land on the profile and find the project in one click. Add your other projects beside it only if they are as polished. A pinned but unfinished repo works against you.
+3. Pin the repository on your GitHub profile page. A reviewer can land on the profile and find the project in one click. Add your other projects beside it only if they are as polished. A pinned but unfinished repo works against you.
 
 ## Prepare a talk track for each role
 
@@ -138,7 +138,14 @@ Practice each answer out loud. A bullet on a page and a spoken sentence are diff
 
 Four careers, one project, one CV. You built a task board, ran it on a VM, moved it to Kubernetes, then found and fixed a real vulnerability in it.
 
-The files for this work are `cv/template.tex` and `cv/skills-ledger.md` in the course repository. Open the ledger, keep only the acts you completed, copy each skill into its matching template section, and build with `docker compose -f tools/compose.yaml run --rm latex pdflatex template.tex`. Check that `cv/template.pdf` is one page and that every claim has proof behind it.
+The files for this work are `cv/template.tex` and `cv/skills-ledger.md` in the course repository. To finish:
+
+1. Open the ledger.
+2. Keep only the acts you completed.
+3. Copy each skill into its matching template section.
+4. Build with `docker compose -f tools/compose.yaml run --rm latex pdflatex template.tex`.
+
+Check that `cv/template.pdf` is one page and that every claim has proof behind it.
 
 An end-to-end run of this episode passed: `pdflatex` produced `cv/template.pdf` at one page.
 

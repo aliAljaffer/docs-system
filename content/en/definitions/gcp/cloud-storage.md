@@ -41,23 +41,11 @@ tags:
 - Can change storage class without moving data
 
 ### Location Types
-#### Regional
-- Data stored in single GCP region
-- **Lowest latency for in-region access**
-- Lower cost than dual/multi
-- Use case: Analytics, compute in same region
-
-#### Dual-Regional
-- Replicated across 2 specific regions within same geo
-- Automatically replicates data
-- Examples: `nam4` (us-central1 + us-east1)
-- Use case: High availability for specific geo
-
-#### Multi-Regional
-- Replicated across multiple regions in geo (US, EU, ASIA)
-- **Highest availability**
-- Geo-redundancy
-- Use case: Global content serving, websites
+| Type | Replication | Notes | Use case |
+|------|-------------|-------|----------|
+| Regional | Data stored in single GCP region | **Lowest latency for in-region access**. Lower cost than dual/multi | Analytics, compute in same region |
+| Dual-Regional | Replicated across 2 specific regions within same geo, automatically. Example: `nam4` (us-central1 + us-east1) | - | High availability for specific geo |
+| Multi-Regional | Replicated across multiple regions in geo (US, EU, ASIA) | **Highest availability**. Geo-redundancy | Global content serving, websites |
 
 ### Bucket Naming Rules
 - **Globally unique** across all GCP projects
@@ -79,47 +67,56 @@ tags:
 ### Object Lifecycle Management
 **AWS Equivalent:** [[storage-s3|S3 Lifecycle Policies]]
 - Automate storage class transitions and deletions
-- Conditions:
-  - **Age**: Days since upload
-  - **CreatedBefore**: Specific date
-  - **IsLive**: Current vs noncurrent versions
-  - **MatchesStorageClass**: Current storage class
-  - **NumberOfNewerVersions**: For versioned objects
-  - **DaysSinceNoncurrentTime**: For noncurrent versions
-- Actions:
-  - **Delete**: Remove object
-  - **SetStorageClass**: Transition to another class
+**Conditions:**
+
+| Condition | Meaning |
+|-----------|---------|
+| **Age** | Days since upload |
+| **CreatedBefore** | Specific date |
+| **IsLive** | Current vs noncurrent versions |
+| **MatchesStorageClass** | Current storage class |
+| **NumberOfNewerVersions** | For versioned objects |
+| **DaysSinceNoncurrentTime** | For noncurrent versions |
+
+**Actions:**
+
+| Action | Meaning |
+|--------|---------|
+| **Delete** | Remove object |
+| **SetStorageClass** | Transition to another class |
+
 - **Runs once per day**
 - No transition from Archive back to other classes
 
 ### Access Control
-#### Uniform (Bucket-level) - Recommended
-- **Uses only [[gcp/iam|Cloud IAM]]**
-- Applies to all objects in bucket
-- **Cannot be reverted to fine-grained for 90 days**
-- Simpler, recommended for new buckets
-- Required for some features (Bucket Lock, Pub/Sub notifications)
-
-#### Fine-grained (Object-level)
-- IAM + ACLs (Access Control Lists)
-- Per-object permissions possible
-- Legacy approach
-- More complex to manage
+| Aspect | Uniform (bucket-level), recommended | Fine-grained (object-level) |
+|--------|-------------------------------------|-----------------------------|
+| Permissions | **Uses only [[gcp/iam|Cloud IAM]]** | IAM + ACLs (Access Control Lists) |
+| Scope | Applies to all objects in bucket | Per-object permissions possible |
+| Reverting | **Cannot be reverted to fine-grained for 90 days** | - |
+| Notes | Simpler, recommended for new buckets. Required for some features (Bucket Lock, Pub/Sub notifications) | Legacy approach. More complex to manage |
 
 **Common IAM Roles:**
-- `roles/storage.objectViewer`: Read objects
-- `roles/storage.objectCreator`: Create objects
-- `roles/storage.objectAdmin`: Full control of objects
-- `roles/storage.admin`: Full control of buckets and objects
+
+| Role | Grants |
+|------|--------|
+| `roles/storage.objectViewer` | Read objects |
+| `roles/storage.objectCreator` | Create objects |
+| `roles/storage.objectAdmin` | Full control of objects |
+| `roles/storage.admin` | Full control of buckets and objects |
 
 ### Access Control Lists (ACLs)
 **AWS Equivalent:** [[storage-s3|S3 ACLs]]
 - Only with fine-grained access control
 - Predefined ACLs:
-  - `private`: Owner only
-  - `projectPrivate`: Project team based on roles
-  - `publicRead`: **All users can read**
-  - `publicReadWrite`: All users can read/write (not recommended)
+
+| Predefined ACL | Access |
+|----------------|--------|
+| `private` | Owner only |
+| `projectPrivate` | Project team based on roles |
+| `publicRead` | **All users can read** |
+| `publicReadWrite` | All users can read/write (not recommended) |
+
 - Apply to bucket or individual objects
 - `gsutil acl set public-read gs://bucket/object`
 
@@ -174,14 +171,11 @@ gsutil signurl -d 10m /path/to/key.json gs://bucket/object
 
 ### Encryption
 #### Encryption at Rest (Automatic)
-- **Google-managed keys**: Default, automatic, **no configuration needed**
-- **Customer-managed keys (CMEK)**: Keys in [[security-kms|Cloud KMS]]
-  - Rotate keys, audit usage
-  - Regional KMS key must match bucket location
-- **Customer-supplied keys (CSEK)**: You manage keys
-  - **You provide encryption key with each request**
-  - Google doesn't store your key
-  - ==Higher risk - lose key = lose data==
+| Option | Key owner | Notes |
+|--------|-----------|-------|
+| **Google-managed keys** | Google | Default, automatic, **no configuration needed** |
+| **Customer-managed keys (CMEK)** | You, in [[security-kms|Cloud KMS]] | Rotate keys, audit usage. Regional KMS key must match bucket location |
+| **Customer-supplied keys (CSEK)** | You | **You provide encryption key with each request**. Google doesn't store your key. ==Higher risk - lose key = lose data== |
 
 #### Encryption in Transit
 - **HTTPS/TLS by default**
@@ -491,9 +485,11 @@ gcloud storage buckets update gs://BUCKET_NAME --lock-retention-period
   - Filters for selective transfer
 
 #### On-Premises
-- **Small (<1 TB)**: gsutil rsync
-- **Medium (1-20 TB)**: Storage Transfer Service via HTTP/HTTPS
-- **Large (>20 TB)**: Transfer Appliance
+| Data size | Method |
+|-----------|--------|
+| **Small (<1 TB)** | gsutil rsync |
+| **Medium (1-20 TB)** | Storage Transfer Service via HTTP/HTTPS |
+| **Large (>20 TB)** | Transfer Appliance |
 
 #### Application Integration
 - **Cloud Storage libraries**: Java, Python, Node.js, Go, etc.

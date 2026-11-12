@@ -16,36 +16,38 @@ Create React App: `npx create-react-app@5 [directory]`
 
 Vite.js + React: `npm create vite@latest` then `npm i` to install packages. USE `.jsx` FOR VITE!
 
-- Install essentials: `npm i eslint@8 vite-plugin-eslint eslint-config-react-app --save`
+1. Install essentials: `npm i eslint@8 vite-plugin-eslint eslint-config-react-app --save`
 
-- if eslint < 9.0: create `.eslintrc.json` with content:
+2. Create the ESLint config file for your eslint version:
 
-  ```json
-  {
-    "extends": "react-app"
-  }
-  ```
+   - If eslint < 9.0: create `.eslintrc.json` with content:
 
-- else create `.eslint.config.cjs`:
+     ```json
+     {
+       "extends": "react-app"
+     }
+     ```
 
-  ```js
-  module.exports = {
-    extends: "react-app",
-  };
-  ```
+   - Else create `.eslint.config.cjs`:
 
-- in `vite.config.js` import `eslint`:
+     ```js
+     module.exports = {
+       extends: "react-app",
+     };
+     ```
 
-  ```js
-  import { defineConfig } from "vite";
-  import react from "@vitejs/plugin-react";
-  import eslint from "vite-plugin-eslint";
-  // https://vitejs.dev/config/
-  export default defineConfig({
-    plugins: [react(), eslint()],
-  });
-  ```
+3. In `vite.config.js` import `eslint`:
 
-- Start: `npm run dev`
+   ```js
+   import { defineConfig } from "vite";
+   import react from "@vitejs/plugin-react";
+   import eslint from "vite-plugin-eslint";
+   // https://vitejs.dev/config/
+   export default defineConfig({
+     plugins: [react(), eslint()],
+   });
+   ```
+
+4. Start: `npm run dev`
 
 JSON-Server start: `here`

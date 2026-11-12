@@ -24,11 +24,14 @@ tags:
 - Supports multiple languages and platforms
 
 ### Automatic Error Detection
-- [[app-engine|App Engine]]: Automatic
-- [[gcp/cloud-functions|Cloud Functions]]: Automatic
-- [[gcp/cloud-run|Cloud Run]]: Automatic
-- [[gcp/gke|GKE]]: Via logs
-- [[gcp/compute-engine|Compute Engine]]: Via client libraries or logs
+
+| Platform | Error detection |
+|---|---|
+| [[app-engine|App Engine]] | Automatic |
+| [[gcp/cloud-functions|Cloud Functions]] | Automatic |
+| [[gcp/cloud-run|Cloud Run]] | Automatic |
+| [[gcp/gke|GKE]] | Via logs |
+| [[gcp/compute-engine|Compute Engine]] | Via client libraries or logs |
 
 ### Error Grouping
 - **Groups similar errors automatically**
@@ -51,22 +54,28 @@ tags:
 - AWS/Azure
 
 ### Supported Languages
-- **Python**: Auto-detect exceptions
-- **Java**: Auto-detect exceptions
-- **Node.js**: Auto-detect errors
-- **Go**: Via error reporting library
-- **.NET**: Via error reporting library
-- **Ruby**: Via error reporting library
-- **PHP**: Via error reporting library
+
+| Language | How errors are reported |
+|---|---|
+| **Python** | Auto-detect exceptions |
+| **Java** | Auto-detect exceptions |
+| **Node.js** | Auto-detect errors |
+| **Go** | Via error reporting library |
+| **.NET** | Via error reporting library |
+| **Ruby** | Via error reporting library |
+| **PHP** | Via error reporting library |
 
 ### Error Details
-- **Stack trace**: Full call stack
-- **Error message**: Exception text
-- **Affected users**: Approximate count
-- **First seen**: When error first occurred
-- **Last seen**: Most recent occurrence
-- **Occurrences**: Total count
-- **Versions**: Which app versions affected
+
+| Field | Meaning |
+|---|---|
+| **Stack trace** | Full call stack |
+| **Error message** | Exception text |
+| **Affected users** | Approximate count |
+| **First seen** | When error first occurred |
+| **Last seen** | Most recent occurrence |
+| **Occurrences** | Total count |
+| **Versions** | Which app versions affected |
 
 ### Notifications
 - **Email**: Alert on new errors
@@ -215,6 +224,7 @@ Error Reporting → Pub/Sub → Cloud Function → PagerDuty
 - Use without concern for costs
 
 ### Comparison with AWS
+
 | AWS | GCP |
 |-----|-----|
 | Manual CloudWatch Logs analysis | Automatic error grouping |

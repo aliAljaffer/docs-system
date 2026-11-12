@@ -26,98 +26,43 @@ tags:
 - **Global availability** with regional key storage
 
 ### Key Concepts
-#### Key Ring
-- Logical grouping of keys in a specific location
-- **Cannot be deleted** (can delete keys inside)
-- Location is permanent (cannot change after creation)
-- Used for organizational grouping (prod-keys, dev-keys)
-
-#### Key (CryptoKey)
-- Named encryption key with one or more key versions
-- Defines purpose: encryption, signing, MAC
-- Rotation schedule
-- **Cannot be deleted, only disabled**
-
-#### Key Version
-- Actual cryptographic material
-- Each rotation creates a new version
-- Can have multiple versions (for decryption of old data)
-- Primary version used for new operations
-- Can be destroyed (after 24-hour grace period)
+| Term | Meaning | Rule |
+|------|---------|------|
+| Key Ring | Logical grouping of keys in a specific location, used for organization (prod-keys, dev-keys) | **Cannot be deleted** (can delete keys inside). Location is permanent (cannot change after creation) |
+| Key (CryptoKey) | Named encryption key with one or more key versions. Defines purpose (encryption, signing, MAC) and rotation schedule | **Cannot be deleted, only disabled** |
+| Key Version | Actual cryptographic material. Each rotation creates a new version. Primary version used for new operations | Can have multiple versions (for decryption of old data). Can be destroyed (after 24-hour grace period) |
 
 ### Key Purposes
-**Encryption/Decryption**
-- `ENCRYPT_DECRYPT`: Symmetric encryption (AES-256)
-- Most common use case
-- Encrypt data at application level
-
-**Digital Signatures**
-- `ASYMMETRIC_SIGN`: Sign and verify data
-- Algorithms: RSA, ECDSA
-- Use cases: Code signing, document signing
-
-**Message Authentication**
-- `MAC`: Generate and verify MACs (HMAC)
-- Data integrity verification
-
-**Asymmetric Encryption**
-- `ASYMMETRIC_DECRYPT`: Public/private key encryption
-- Encrypt with public key, decrypt with private key
+| Purpose | API value | Use for |
+|---------|-----------|---------|
+| Encryption/Decryption | `ENCRYPT_DECRYPT` | Symmetric encryption (AES-256). Most common use case. Encrypt data at application level |
+| Digital Signatures | `ASYMMETRIC_SIGN` | Sign and verify data (RSA, ECDSA). Code signing, document signing |
+| Message Authentication | `MAC` | Generate and verify MACs (HMAC). Data integrity verification |
+| Asymmetric Encryption | `ASYMMETRIC_DECRYPT` | Public/private key encryption. Encrypt with public key, decrypt with private key |
 
 ### Protection Levels
-#### Software
-- Keys protected by software
-- **Default and most common**
-- Lower cost
-- FIPS 140-2 Level 1 validated
-
-#### Hardware (HSM)
-- Keys stored in Cloud HSM (Hardware Security Module)
-- **FIPS 140-2 Level 3 validated**
-- Higher cost (10x more than software)
-- Private keys never leave HSM
-- Required for compliance (PCI-DSS, HIPAA strict requirements)
-
-#### External
-- Keys stored in external key management partner
-- Bring Your Own Key (BYOK)
-- Hybrid cloud scenarios
-- Partners: Thales, Fortanix, etc.
-
-#### External VPC
-- Keys managed externally but within your VPC
-- More control over key access paths
-- Data sovereignty requirements
+| Level | Key storage | Notes |
+|-------|-------------|-------|
+| Software | Keys protected by software | **Default and most common**. Lower cost. FIPS 140-2 Level 1 validated |
+| Hardware (HSM) | Keys stored in Cloud HSM (Hardware Security Module). Private keys never leave HSM | **FIPS 140-2 Level 3 validated**. Higher cost (10x more than software). Required for compliance (PCI-DSS, HIPAA strict requirements) |
+| External | Keys stored in external key management partner (Thales, Fortanix, etc.) | Bring Your Own Key (BYOK). Hybrid cloud scenarios |
+| External VPC | Keys managed externally but within your VPC | More control over key access paths. Data sovereignty requirements |
 
 ### Key Algorithms
-**Symmetric Encryption**
-- AES-256-GCM (default)
-- AES-128-GCM
-- AES-256-CBC
-- AES-128-CBC
-
-**Asymmetric Signing**
-- RSA (2048, 3072, 4096 bits)
-- ECDSA (P256, P384)
-
-**Asymmetric Encryption**
-- RSA (2048, 3072, 4096 bits)
-
-**MAC**
-- HMAC-SHA256
+| Type | Algorithms |
+|------|------------|
+| Symmetric encryption | AES-256-GCM (default), AES-128-GCM, AES-256-CBC, AES-128-CBC |
+| Asymmetric signing | RSA (2048, 3072, 4096 bits), ECDSA (P256, P384) |
+| Asymmetric encryption | RSA (2048, 3072, 4096 bits) |
+| MAC | HMAC-SHA256 |
 
 ### Key Rotation
-#### Automatic Rotation
-- Configurable schedule (30, 90, 365 days)
-- Creates new key version automatically
-- **Old versions retained for decryption**
-- New version becomes primary
-- Only for symmetric encryption keys
-
-#### Manual Rotation
-- Create new version on demand
-- Set as primary version manually
-- For asymmetric keys (no auto-rotation)
+| Aspect | Automatic | Manual |
+|--------|-----------|--------|
+| Schedule | Configurable (30, 90, 365 days) | On demand |
+| New version | Created automatically and becomes primary | Created by you, then set as primary manually |
+| Old versions | **Retained for decryption** | - |
+| Key type | Only symmetric encryption keys | Asymmetric keys (no auto-rotation) |
 
 **Best Practices:**
 - Enable automatic rotation for symmetric keys
@@ -197,13 +142,16 @@ gcloud compute instances create vm \
 
 ### IAM Roles for Cloud KMS
 **Predefined Roles:**
-- `roles/cloudkms.admin`: Full admin (create keys, set IAM)
-- `roles/cloudkms.cryptoKeyEncrypterDecrypter`: Encrypt and decrypt
-- `roles/cloudkms.cryptoKeyEncrypter`: Encrypt only
-- `roles/cloudkms.cryptoKeyDecrypter`: Decrypt only
-- `roles/cloudkms.signer`: Sign data
-- `roles/cloudkms.signerVerifier`: Sign and verify
-- `roles/cloudkms.viewer`: View keys (no crypto operations)
+
+| Role | Grants |
+|------|--------|
+| `roles/cloudkms.admin` | Full admin (create keys, set IAM) |
+| `roles/cloudkms.cryptoKeyEncrypterDecrypter` | Encrypt and decrypt |
+| `roles/cloudkms.cryptoKeyEncrypter` | Encrypt only |
+| `roles/cloudkms.cryptoKeyDecrypter` | Decrypt only |
+| `roles/cloudkms.signer` | Sign data |
+| `roles/cloudkms.signerVerifier` | Sign and verify |
+| `roles/cloudkms.viewer` | View keys (no crypto operations) |
 
 **Best Practices:**
 - Grant least privilege (encrypter vs encrypterDecrypter)
@@ -212,10 +160,12 @@ gcloud compute instances create vm \
 - Separate admin and usage permissions
 
 ### Key States
-- **ENABLED**: Active, can be used for crypto operations
-- **DISABLED**: Cannot be used, can be re-enabled
-- **DESTROY_SCHEDULED**: Scheduled for destruction (24-hour grace period)
-- **DESTROYED**: Permanently destroyed, **cannot be recovered**
+| State | Meaning |
+|-------|---------|
+| ENABLED | Active, can be used for crypto operations |
+| DISABLED | Cannot be used, can be re-enabled |
+| DESTROY_SCHEDULED | Scheduled for destruction (24-hour grace period) |
+| DESTROYED | Permanently destroyed, **cannot be recovered** |
 
 ### Import External Keys
 - Import existing keys into Cloud KMS
@@ -225,20 +175,13 @@ gcloud compute instances create vm \
 - Use case: Migrate from on-prem HSM
 
 ### Pricing
-**Software Keys:**
-- Active key versions: $0.06/month per key version
-- Key use operations: $0.03 per 10,000 operations
+| Key type | Key version | Operations |
+|----------|-------------|------------|
+| Software | $0.06/month per active key version | $0.03 per 10,000 operations |
+| HSM | $1/month per active key version | $0.03 per 10,000 operations |
+| External | $2.50/month per key version | $0.03 per 10,000 operations |
 
-**HSM Keys:**
-- Active key versions: $1/month per key version
-- Key use operations: $0.03 per 10,000 operations
-
-**External Keys:**
-- $2.50/month per key version
-- $0.03 per 10,000 operations
-
-**Free Tier:**
-- First 20,000 operations per month free (worldwide)
+Free tier: first 20,000 operations per month free (worldwide).
 
 ### Limitations
 - 15,000 key versions per key
@@ -646,11 +589,14 @@ encrypted_dek = kms_client.encrypt(
 
 ### Migration from AWS KMS
 **Mapping:**
-- AWS KMS CMK -> Cloud KMS CryptoKey
-- AWS KMS Alias -> Key names (no aliases in GCP)
-- AWS KMS Grant -> IAM roles on keys
-- AWS CloudHSM -> Cloud HSM protection level
-- AWS Secrets Manager -> [[gcp/secret-manager|Secret Manager]] (not KMS)
+
+| AWS KMS | Cloud KMS |
+|---------|-----------|
+| AWS KMS CMK | Cloud KMS CryptoKey |
+| AWS KMS Alias | Key names (no aliases in GCP) |
+| AWS KMS Grant | IAM roles on keys |
+| AWS CloudHSM | Cloud HSM protection level |
+| AWS Secrets Manager | [[gcp/secret-manager|Secret Manager]] (not KMS) |
 
 **Migration Steps:**
 1. Inventory AWS KMS keys and usage

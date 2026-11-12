@@ -55,12 +55,14 @@ Internal Load Balancers (private)
 - SSL/TLS termination at the edge
 
 #### Components
-- **Forwarding rules**: Map IP + port to target proxy
-- **Target proxy**: Routes requests to URL map
-- **URL map**: Routes based on host and path
-- **Backend services**: Manages backend instance groups
-- **Backend groups**: Actual compute resources ([[gcp/compute-engine|Compute Engine]], [[gcp/gke|GKE]], [[gcp/cloud-run|Cloud Run]], [[gcp/cloud-functions|Cloud Functions]])
-- **Health checks**: Monitor backend health
+| Component | Role |
+|-----------|------|
+| Forwarding rules | Map IP + port to target proxy |
+| Target proxy | Routes requests to URL map |
+| URL map | Routes based on host and path |
+| Backend services | Manages backend instance groups |
+| Backend groups | Actual compute resources ([[gcp/compute-engine|Compute Engine]], [[gcp/gke|GKE]], [[gcp/cloud-run|Cloud Run]], [[gcp/cloud-functions|Cloud Functions]]) |
+| Health checks | Monitor backend health |
 
 #### URL Maps and Content-Based Routing
 - Host-based routing: `example.com` vs `api.example.com`
@@ -70,14 +72,12 @@ Internal Load Balancers (private)
 - **More sophisticated than AWS ALB**: Supports redirects, rewrites, header manipulation
 
 #### Backend Service Configuration
-- **Balancing mode**: UTILIZATION, RATE, or CONNECTION
-- **Session affinity**:
-  - Client IP
-  - Generated cookie
-  - Client IP + protocol
-  - HTTP cookie
-- **Connection draining**: Timeout for in-flight requests (0-3600s)
-- **Timeout**: Backend response timeout (1-86400s)
+| Setting | Options | Range |
+|---------|---------|-------|
+| Balancing mode | UTILIZATION, RATE, or CONNECTION | - |
+| Session affinity | Client IP, Generated cookie, Client IP + protocol, HTTP cookie | - |
+| Connection draining | Timeout for in-flight requests | 0-3600s |
+| Timeout | Backend response timeout | 1-86400s |
 
 #### SSL/TLS Configuration
 - **SSL certificates**: Google-managed or self-managed
@@ -220,21 +220,12 @@ Internal Load Balancers (private)
 - Manual management
 
 ### Network Endpoint Groups (NEG)
-#### Zonal NEG
-- Specific IP:port endpoints
-- More flexible than instance groups
-- Use case: Containerized apps, custom backends
-
-#### Internet NEG
-- **External** endpoints (outside GCP)
-- Use case: Multi-cloud, hybrid architectures
-
-#### Serverless NEG
-- [[gcp/cloud-run|Cloud Run]], [[gcp/cloud-functions|Cloud Functions]], [[gcp/app-engine|App Engine]]
-- **Fully managed** backends
-
-#### Hybrid Connectivity NEG
-- On-premises endpoints via [[cloud-vpn|VPN]]/[[cloud-interconnect|Interconnect]]
+| NEG type | Endpoints | Use case |
+|----------|-----------|----------|
+| Zonal NEG | Specific IP:port endpoints. More flexible than instance groups | Containerized apps, custom backends |
+| Internet NEG | **External** endpoints (outside GCP) | Multi-cloud, hybrid architectures |
+| Serverless NEG | [[gcp/cloud-run|Cloud Run]], [[gcp/cloud-functions|Cloud Functions]], [[gcp/app-engine|App Engine]]. **Fully managed** backends | - |
+| Hybrid Connectivity NEG | On-premises endpoints via [[cloud-vpn|VPN]]/[[cloud-interconnect|Interconnect]] | - |
 
 ---
 
@@ -242,10 +233,13 @@ Internal Load Balancers (private)
 **AWS Equivalent:** Target Group Health Checks
 - Monitor backend availability
 - Types: HTTP, HTTPS, HTTP/2, TCP, SSL, gRPC
-- **Check interval**: 1-300 seconds (default 5s)
-- **Timeout**: 1-300 seconds (default 5s)
-- **Healthy threshold**: Consecutive successes (default 2)
-- **Unhealthy threshold**: Consecutive failures (default 2)
+
+| Setting | Meaning | Range | Default |
+|---------|---------|-------|---------|
+| Check interval | - | 1-300 seconds | 5s |
+| Timeout | - | 1-300 seconds | 5s |
+| Healthy threshold | Consecutive successes | - | 2 |
+| Unhealthy threshold | Consecutive failures | - | 2 |
 
 ### Health Check Firewall
 - Allow health check IP ranges:
@@ -291,7 +285,7 @@ Internal Load Balancers (private)
 ### SSL Policies
 - Control TLS versions (1.0, 1.1, 1.2, 1.3)
 - Cipher suite selection
-- ==Modern__, Compatible, Restricted, Custom profiles
+- **Modern**, **Compatible**, **Restricted**, **Custom** profiles
 - Apply to HTTPS, SSL Proxy, TCP Proxy load balancers
 
 ### Custom Headers
@@ -493,9 +487,12 @@ gcloud compute backend-services update BACKEND_SERVICE_NAME \
 
 ### Migration Strategies
 #### From AWS ALB/NLB
-- **ALB to HTTP(S) LB**: Similar features, simpler global setup
-- **NLB to Network LB**: Note IP preservation differences
-- **ELB Classic**: Migrate to HTTP(S) or Network LB
+| AWS | GCP | Note |
+|-----|-----|------|
+| ALB | HTTP(S) LB | Similar features, simpler global setup |
+| NLB | Network LB | Note IP preservation differences |
+| ELB Classic | HTTP(S) or Network LB | Migrate to one of these |
+
 - **Cross-region**: Single global IP vs multiple regional IPs
 
 #### Hybrid Migration
@@ -505,15 +502,11 @@ gcloud compute backend-services update BACKEND_SERVICE_NAME \
 - Monitor latency and errors during migration
 
 ### Observability
-- **[[gcp/cloud-monitoring|Cloud Monitoring]]**:
-  - Request count, latency, error rate
-  - Backend utilization, health
-  - Per-backend metrics
-- **[[gcp/cloud-logging|Cloud Logging]]**:
-  - HTTP request logs
-  - SSL certificate expiration
-  - Backend health changes
-- **[[gcp/cloud-trace|Cloud Trace]]**: Request latency breakdown
+| Tool | Signals |
+|------|---------|
+| [[gcp/cloud-monitoring|Cloud Monitoring]] | Request count, latency, error rate. Backend utilization, health. Per-backend metrics |
+| [[gcp/cloud-logging|Cloud Logging]] | HTTP request logs. SSL certificate expiration. Backend health changes |
+| [[gcp/cloud-trace|Cloud Trace]] | Request latency breakdown |
 
 ### Container-Native Load Balancing
 - [[gcp/gke|GKE]] pods as direct backends (not node proxying)
@@ -523,23 +516,22 @@ gcloud compute backend-services update BACKEND_SERVICE_NAME \
 - Uses NEG automatically
 
 ### Advanced URL Map Configurations
-- **Host rules**: Route by hostname
-- **Path matchers**: Route by URL path
-- **Route rules**: Header, query param routing
-- **URL redirects**: HTTP to HTTPS, domain redirects
-- **URL rewrites**: Modify request path before backend
-- **Header manipulation**: Add/remove headers
-- **Fault injection**: Testing resilience
+| Feature | Purpose |
+|---------|---------|
+| Host rules | Route by hostname |
+| Path matchers | Route by URL path |
+| Route rules | Header, query param routing |
+| URL redirects | HTTP to HTTPS, domain redirects |
+| URL rewrites | Modify request path before backend |
+| Header manipulation | Add/remove headers |
+| Fault injection | Testing resilience |
 
 ### SSL Certificate Management
-- **Google-managed**: **Automatic issuance and renewal**
-  - Requires domain ownership verification
-  - DNS or HTTP challenge
-  - Supports wildcard domains
-- **Self-managed**: Upload your own certs
-  - Full control over cert lifecycle
-  - Use for complex CA requirements
-- **Certificate Map**: Multiple certs per load balancer
+| Type | Lifecycle | Notes |
+|------|-----------|-------|
+| **Google-managed** | **Automatic issuance and renewal** | Requires domain ownership verification (DNS or HTTP challenge). Supports wildcard domains |
+| **Self-managed** | Upload your own certs. Full control over cert lifecycle | Use for complex CA requirements |
+| **Certificate Map** | Multiple certs per load balancer | - |
 
 ### Capacity Planning
 - **Backends**: Plan for 50% headroom for zone failures

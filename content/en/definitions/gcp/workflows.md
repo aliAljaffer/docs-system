@@ -59,9 +59,12 @@ main:
 - **Human approval workflows**: Wait for manual approval
 
 ### Pricing
-- **2,000 internal steps free/month**
-- $0.01 per 1,000 internal steps
-- External steps (API calls) free
+
+| Item | Price |
+|---|---|
+| Internal steps (free) | **2,000 per month** |
+| Internal steps | $0.01 per 1,000 |
+| External steps (API calls) | Free |
 
 ---
 
@@ -105,6 +108,7 @@ Workflows → Cloud Functions → Process data
 - Dead letter handling
 
 ### vs Cloud Composer
+
 | Feature | Workflows | Cloud Composer |
 |---------|-----------|----------------|
 | Complexity | Simple | Complex (Airflow DAGs) |

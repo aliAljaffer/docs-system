@@ -80,11 +80,14 @@ tags:
   - Request path/query
   - Expression language (CEL)
 - **Action**: What to do
-  - **Allow**: Permit traffic
-  - **Deny**: Block with HTTP 403/404/429/502
-  - **Rate-based ban**: Block after threshold
-  - **Redirect**: Send to different URL
-  - **Throttle**: Rate limit
+
+| Action | Effect |
+|---|---|
+| Allow | Permit traffic |
+| Deny | Block with HTTP 403/404/429/502 |
+| Rate-based ban | Block after threshold |
+| Redirect | Send to different URL |
+| Throttle | Rate limit |
 
 ---
 
@@ -93,25 +96,29 @@ tags:
 **Google-managed rule sets** for common vulnerabilities
 
 ### Available Rule Sets
-- **SQLi**: SQL injection protection
-- **XSS**: Cross-site scripting
-- **LFI**: Local file inclusion
-- **RFI**: Remote file inclusion
-- **RCE**: Remote code execution
-- **Scanner detection**: Block security scanners
-- **Protocol attack**: Malformed requests
-- **Session fixation**: Session hijacking
-- **Java attack**: Attacks on Java applications
-- **PHP attack**: PHP-specific vulnerabilities
-- **Node.js attack**: Node.js vulnerabilities
+| Rule set | Protects against |
+|---|---|
+| SQLi | SQL injection |
+| XSS | Cross-site scripting |
+| LFI | Local file inclusion |
+| RFI | Remote file inclusion |
+| RCE | Remote code execution |
+| Scanner detection | Security scanners (blocked) |
+| Protocol attack | Malformed requests |
+| Session fixation | Session hijacking |
+| Java attack | Attacks on Java applications |
+| PHP attack | PHP-specific vulnerabilities |
+| Node.js attack | Node.js vulnerabilities |
 
 ### Sensitivity Levels
 Each rule can be configured with sensitivity:
-- **0**: Off (disabled)
-- **1**: High threshold (low false positives, may miss attacks)
-- **2**: Medium threshold **recommended**
-- **3**: Low threshold (more false positives, better detection)
-- **4**: Very low threshold (highest sensitivity)
+| Level | Effect |
+|---|---|
+| 0 | Off (disabled) |
+| 1 | High threshold (low false positives, may miss attacks) |
+| 2 | Medium threshold, **recommended** |
+| 3 | Low threshold (more false positives, better detection) |
+| 4 | Very low threshold (highest sensitivity) |
 
 ---
 
@@ -231,10 +238,12 @@ Integrated with **reCAPTCHA Enterprise**
 - Invisible reCAPTCHA or checkbox
 
 ### Bot Detection Actions
-- **Allow**: Trusted bots (Googlebot, etc.)
-- **Challenge**: Suspicious traffic (reCAPTCHA)
-- **Deny**: Known malicious bots
-- **Redirect**: To CAPTCHA page
+| Action | Applies to |
+|---|---|
+| Allow | Trusted bots (Googlebot, etc.) |
+| Challenge | Suspicious traffic (reCAPTCHA) |
+| Deny | Known malicious bots |
+| Redirect | CAPTCHA page |
 
 ---
 
@@ -434,9 +443,12 @@ Application (Authentication, Authorization)
 #### Multi-Backend Policies
 - Different policies per backend service
 - Example:
-  - Public API: Strict rate limiting, WAF
-  - Admin panel: IP allowlist, MFA
-  - Static content: Minimal rules (CDN caching)
+
+| Backend | Policy |
+|---|---|
+| Public API | Strict rate limiting, WAF |
+| Admin panel | IP allowlist, MFA |
+| Static content | Minimal rules (CDN caching) |
 
 ### High Availability Design
 - Cloud Armor operates at **Google's edge**
@@ -472,12 +484,14 @@ Application (Authentication, Authorization)
 
 ### Migration Strategies
 #### From AWS WAF + Shield
-- **Map WAF rules**: AWS managed rules → Cloud Armor preconfigured rules
-- **IP sets**: AWS IP sets → Cloud Armor IP range rules
-- **Rate limiting**: AWS rate rules → Cloud Armor rate limiting
-- **Geographic**: AWS geo-match → Cloud Armor region_code
-- **Custom rules**: AWS conditions → Cloud Armor CEL expressions
-- **Logging**: AWS Kinesis → Cloud Logging
+| Area | AWS WAF or Shield | Cloud Armor |
+|---|---|---|
+| WAF rules | AWS managed rules | Preconfigured rules |
+| IP sets | AWS IP sets | IP range rules |
+| Rate limiting | AWS rate rules | Rate limiting |
+| Geographic | AWS geo-match | region_code |
+| Custom rules | AWS conditions | CEL expressions |
+| Logging | AWS Kinesis | Cloud Logging |
 
 #### Testing Approach
 1. **Inventory**: List all AWS WAF rules and Shield protections
@@ -569,27 +583,11 @@ gcloud logging read "jsonPayload.enforcedSecurityPolicy.preconfiguredExprIds:*" 
 - **New attack pattern**: Preconfigured rule hits spike
 
 ### Troubleshooting
-#### False Positives
-- **Symptom**: Legitimate traffic blocked
-- **Diagnosis**: Review logs for matched rule
-- **Fix**:
-  - Lower preconfigured rule sensitivity
-  - Add allow rule with higher priority
-  - Adjust rate limit thresholds
-  - Preview mode to test
-
-#### False Negatives
-- **Symptom**: Attacks not blocked
-- **Diagnosis**: Review attack traffic patterns
-- **Fix**:
-  - Increase preconfigured rule sensitivity
-  - Add custom rules for specific attacks
-  - Enable adaptive protection
-  - Tune rate limits
-
-#### Performance Issues
-- **High latency**: Complex CEL expressions
-- **Fix**: Simplify rules, use preconfigured rules
+| Issue | Symptom | Diagnosis | Fix |
+|---|---|---|---|
+| False positives | Legitimate traffic blocked | Review logs for matched rule | Lower preconfigured rule sensitivity. Add allow rule with higher priority. Adjust rate limit thresholds. Use preview mode to test |
+| False negatives | Attacks not blocked | Review attack traffic patterns | Increase preconfigured rule sensitivity. Add custom rules for specific attacks. Enable adaptive protection. Tune rate limits |
+| Performance issues | High latency from complex CEL expressions | - | Simplify rules, use preconfigured rules |
 
 ### Integration with GCP Services
 - **[[cloud-load-balancing|Cloud Load Balancing]]**: Required (backend service attachment)

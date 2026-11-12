@@ -1,7 +1,7 @@
 ---
 title: App-engine
 category: GCP
-description: '✗ Consider alternatives:'
+description: Fully managed PaaS for web applications and APIs.
 tags:
 - gcp
 - compute
@@ -78,23 +78,11 @@ handlers:
 ```
 
 ### Scaling Types
-#### Automatic Scaling
-- Based on request rate, latencies, or other metrics
-- **Default for Standard environment**
-- Scale to zero in Standard, min 1 in Flexible
-- Target CPU utilization, requests per second
-
-#### Manual Scaling
-- Fixed number of instances
-- No automatic scaling
-- You control instance count
-- Good for: Background workers, predictable load
-
-#### Basic Scaling
-- Dynamic based on requests
-- Instances created on-demand
-- Idle instances shut down
-- Max instance limit
+| Scaling type | Scales on | Notes |
+|---|---|---|
+| Automatic | Request rate, latencies, or other metrics (target CPU utilization, requests per second) | Default for Standard environment. Scale to zero in Standard, min 1 in Flexible |
+| Manual | Fixed number of instances, set by you | No automatic scaling. Good for background workers and predictable load |
+| Basic | Requests, instances created on demand | Idle instances shut down. Max instance limit |
 
 ### Versions & Traffic Splitting
 - Each deployment creates a **version**
@@ -121,16 +109,10 @@ handlers:
 - Custom domains via [[gcp/cloud-load-balancing|Cloud Load Balancing]]
 
 ### Runtimes
-**Standard Environment:**
-- Python 3.7-3.12
-- Java 11, 17, 21
-- Node.js 16, 18, 20
-- Go 1.16-1.21
-- PHP 7.4, 8.1-8.2
-- Ruby 3.0-3.2
-
-**Flexible Environment:**
-- Any language via custom Docker
+| Environment | Runtimes |
+|---|---|
+| Standard | Python 3.7-3.12, Java 11, 17, 21, Node.js 16, 18, 20, Go 1.16-1.21, PHP 7.4, 8.1-8.2, Ruby 3.0-3.2 |
+| Flexible | Any language via custom Docker |
 
 ### Static Files
 - Served directly from edge caches
@@ -245,10 +227,13 @@ gcloud app deploy dispatch.yaml
 - Multi-service (microservices) apps
 
 ✗ **Consider alternatives:**
-- Complex container orchestration → [[gke|GKE]]
-- Simple HTTP containers → [[cloud-run|Cloud Run]]
-- Event-driven → [[cloud-functions|Cloud Functions]]
-- Full VM control → [[compute-engine|Compute Engine]]
+
+| Need | Use instead |
+|---|---|
+| Complex container orchestration | [[gke|GKE]] |
+| Simple HTTP containers | [[cloud-run|Cloud Run]] |
+| Event-driven | [[cloud-functions|Cloud Functions]] |
+| Full VM control | [[compute-engine|Compute Engine]] |
 
 ### Multi-Service Architecture
 ```text

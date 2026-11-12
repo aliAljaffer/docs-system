@@ -592,7 +592,10 @@ Adds back interactivity and event handlers that were lost when html was server-s
 
 Common errors:
 
-incorrect HTML nesting, different data used for rendering, using browser-only APIs (window, document), side effects
+- incorrect HTML nesting
+- different data used for rendering
+- using browser-only APIs (window, document)
+- side effects
 
 ```js
 ReactDOM.hydrateRoot(document.getElementById("root"), <Menu />);
@@ -653,7 +656,7 @@ Client components are displayed to form a view. An interaction updating the stat
 
 ## Pros and Cons of RSC
 
-**Pros:**
+### Pros
 
 - We can compose entire full-stack apps with React components alone and server actions.
 
@@ -665,7 +668,7 @@ Client components are displayed to form a view. An interaction updating the stat
 
 - "Disappearing code" as server components ship no JS, so they can import huge libs for free.
 
-**Cons:**
+### Cons
 
 - Increase in complexity
 
@@ -703,9 +706,13 @@ export async function generateMetadata({ params }) {
 }
 ```
 
-**Favicon:** Just name the favicon to `icon.png` and store it in `@/app`
+### Favicon
 
-**Fonts:** Import from `next/font` such as `next/font/google` then call the function,
+Just name the favicon to `icon.png` and store it in `@/app`
+
+### Fonts
+
+Import from `next/font` such as `next/font/google` then call the function,
 
 ```js
 import { Josephine_Sans } from "next/font/google";
@@ -716,7 +723,9 @@ const JP = Josephine_Sans({
 JP.className; // Use this in Tailwind classes
 ```
 
-**Images:** Use Next's `<Image>` components. It serves `webp` images, lazy loads images, and prevents layout shifts because we define the height and width.
+### Images
+
+Use Next's `<Image>` components. It serves `webp` images, lazy loads images, and prevents layout shifts because we define the height and width.
 
 Can also change the `quality` prop `0-100` to control the quality of the image.
 
@@ -724,11 +733,17 @@ Use `placeholder` prop set to `blur` to blur the image while it loads. Only work
 
 When you want to use `<Image>` but don't want to set height/width, statically import the images (like import at top of file). If not possible, (i.e. waiting for the image from a URL) then put the image inside a container, make the parent `relative`, (OPTIONALLY) give it an aspect ration (i.e. `aspect-square`) and make the Image have the `fill` prop and class `object-cover`.
 
-**Nested Layouts:** Add a `layout.tsx` to the route folder you want to change the layout of.
+### Nested Layouts
 
-**Environment Variables:** Create a `.env.local`, access in-app with `process.env.VAR_NAME`.
+Add a `layout.tsx` to the route folder you want to change the layout of.
 
-**Next Image Unconfigured Host:** Provide hostname and path to make life easier.
+### Environment Variables
+
+Create a `.env.local`, access in-app with `process.env.VAR_NAME`.
+
+### Next Image Unconfigured Host
+
+Provide hostname and path to make life easier.
 
 ## [[suspense|Suspense]]
 
@@ -775,21 +790,15 @@ You can invoke an error to appear in-line by calling the `notFound()` from `next
 
 Two types of rendering in Next.js. The rendering is split by routes.
 
-### Static Rendering (Default for Next.js)
+### Static vs Dynamic Rendering
 
-HTML is generated at build time, or periodically in the background by re-fetching data.
-
-Useful when data doesn't change often and is not personalized to a certain user.
-
-When deployed to vercel: Each static route is hosted on a CDN.
+| Attribute | Static Rendering (Default for Next.js) | Dynamic Rendering |
+|---|---|---|
+| When HTML is generated | At build time, or periodically in the background by re-fetching data | At request time |
+| Best for | Data that doesn't change often and is not personalized to a certain user | Personalized user data (carts) |
+| Deployed to vercel | Each static route is hosted on a CDN | Each dynamic route becomes a [[serverless|serverless]] function |
 
 If all routes in an app are static, the entire app can be exported as a static site (Static Site Generation - SSG)
-
-### Dynamic Rendering
-
-HTML is generated at request time, and useful for personalized user data (carts).
-
-When deployed to vercel: each dynamic route becomes a [[serverless|serverless]] function.
 
 A route switches to dynamic rendering in these scenarios:
 
@@ -835,15 +844,15 @@ Add key:`output` with value `export` to `nextConfig` object in `next.config.mjs`
 
 2. Setup ENV with
 
-   a. `NEXTAUTH_URL` -> `http://localhost:3000`
+   - `NEXTAUTH_URL` -> `http://localhost:3000`
 
-   b. `NEXTAUTH_SECRET` -> `generate secret from vercel`
+   - `NEXTAUTH_SECRET` -> `generate secret from vercel`
 
 3. Configure (Google in this case) Google Developer Console, Create Project, APIs & Services, OAuth Consent Screen, External Type.
 
-   a. Now go to Credentials, add URLs same as NEXTAUTHURL,
+   - Now go to Credentials, add URLs same as NEXTAUTHURL,
 
-   b. redirect you get from "Auth.js Google" Doc page `BASE/api/...`
+   - redirect you get from "Auth.js Google" Doc page `BASE/api/...`
 
 4. After OAuth client creation, copy client ID and secret into `.env`, `AUTH_GOOGLE_ID` and `AUTH_GOOGLE_SECRET`
 

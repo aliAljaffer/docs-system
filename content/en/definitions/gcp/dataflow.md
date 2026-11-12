@@ -49,10 +49,13 @@ tags:
 - Use cases: Real-time analytics, monitoring, alerting
 
 ### Windowing
-- **Fixed windows**: Tumbling windows (e.g., 1 hour)
-- **Sliding windows**: Overlapping windows
-- **Session windows**: Activity-based (gap detection)
-- **Global window**: All data in one window (default for batch)
+
+| Window type | Behavior |
+|---|---|
+| Fixed | Tumbling windows (e.g., 1 hour) |
+| Sliding | Overlapping windows |
+| Session | Activity-based (gap detection) |
+| Global | All data in one window (default for batch) |
 
 ### Watermarks
 - Track event time progress
@@ -105,12 +108,16 @@ tags:
 - Faster pipeline startup
 
 ### Pricing
-- **vCPU**: Per second
-- **Memory**: Per GB-second
-- **Persistent Disk**: Per GB-hour
-- **Shuffle service**: Per GB shuffled
-- **Streaming Engine**: Additional fee
-- **No free tier**
+
+| Cost item | Billing unit |
+|---|---|
+| vCPU | Per second |
+| Memory | Per GB-second |
+| Persistent Disk | Per GB-hour |
+| Shuffle service | Per GB shuffled |
+| Streaming Engine | Additional fee |
+
+**No free tier**
 
 ---
 
@@ -245,6 +252,7 @@ Cloud Storage (daily files) → Dataflow → Transform → BigQuery (data wareho
 - Very low latency (<1 second) - consider Pub/Sub + Cloud Functions
 
 ### Comparison with AWS
+
 | Feature | Dataflow | Glue + Kinesis |
 |---------|----------|----------------|
 | Model | Apache Beam | Spark/Scala or SQL |

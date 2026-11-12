@@ -22,11 +22,15 @@ ELB runs health checks. It sends traffic only to healthy targets.
 
 ### Target groups
 
-- ALB and NLB send traffic to target groups:
-  - EC2 instances
-  - ECS tasks
-  - Lambda functions. The request becomes a JSON event.
-  - IP addresses. They must be private.
+ALB and NLB send traffic to target groups:
+
+| Target type | Notes |
+|---|---|
+| EC2 instances | - |
+| ECS tasks | - |
+| Lambda functions | The request becomes a JSON event. |
+| IP addresses | They must be private. |
+
 - Health checks for ALB run at the target group level.
 - NLB health checks support HTTP, HTTPS, and TCP.
 
@@ -55,13 +59,21 @@ The application servers behind an ALB do not see the client IP directly. ALB add
 | Application-based, application cookie | Load balancer | AWSALBAPP |
 | Duration-based | Load balancer | AWSALB (ALB) or AWSELB (CLB) |
 
-To enable stickiness, open the target group, then Actions, then Edit attributes, then Target selection configuration.
+To enable stickiness:
+
+1. Open the target group.
+2. Select Actions.
+3. Select Edit attributes.
+4. Go to Target selection configuration.
 
 ### Cross-zone load balancing
 
-- ALB: enabled by default. You can disable it per target group. No charge for inter-AZ data.
-- NLB and GLB: disabled by default. Inter-AZ data is charged if you enable it.
-- CLB: no charge for inter-AZ data.
+| Load balancer | Cross-zone default | Inter-AZ data charge |
+|---|---|---|
+| ALB | Enabled. You can disable it per target group. | No charge |
+| NLB | Disabled | Charged if you enable it |
+| GLB | Disabled | Charged if you enable it |
+| CLB | - | No charge |
 
 ### Server Name Indication (SNI)
 

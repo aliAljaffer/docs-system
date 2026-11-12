@@ -42,18 +42,23 @@ steps:
 - Share artifacts via `/workspace` directory
 
 ### Build Triggers
-- **GitHub**: Push, pull request, tag
-- **Bitbucket**: Push, pull request
-- **Cloud Source Repositories**: Push, tag
+| Source | Events |
+|---|---|
+| GitHub | Push, pull request, tag |
+| Bitbucket | Push, pull request |
+| Cloud Source Repositories | Push, tag |
+
 - **Automatic builds on code changes**
 - Branch/tag filters
 
 ### Substitution Variables
-- `$PROJECT_ID`: Project ID
-- `$BUILD_ID`: Build ID
-- `$COMMIT_SHA`: Git commit SHA
-- `$BRANCH_NAME`: Git branch
-- Custom variables: `$_VAR_NAME`
+| Variable | Value |
+|---|---|
+| `$PROJECT_ID` | Project ID |
+| `$BUILD_ID` | Build ID |
+| `$COMMIT_SHA` | Git commit SHA |
+| `$BRANCH_NAME` | Git branch |
+| `$_VAR_NAME` | Custom variable |
 
 ### Artifact Storage
 - Build artifacts to [[gcp/cloud-storage|Cloud Storage]]
@@ -67,10 +72,12 @@ steps:
 - Higher security
 
 ### Build Timeout & Pricing
-- **Default timeout**: 10 minutes
-- **Max timeout**: 24 hours
-- **Free tier**: 120 build-minutes/day
-- **Pricing**: $0.003 per build-minute (after free tier)
+| Setting | Value |
+|---|---|
+| Default timeout | 10 minutes |
+| Max timeout | 24 hours |
+| Free tier | 120 build-minutes/day |
+| Pricing | $0.003 per build-minute (after free tier) |
 
 ---
 

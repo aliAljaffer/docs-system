@@ -175,12 +175,16 @@ tags:
   - VPC Service Controls
 
 ### Filestore Pricing
-- **Provisioned capacity**: Per GiB-month
-  - Basic HDD: Lowest (~$0.20/GiB-month)
-  - Basic SSD: Mid (~$0.30/GiB-month)
-  - Enterprise: Premium (~$0.35/GiB-month)
-  - High Scale SSD: Highest (~$0.35/GiB-month)
-  - Zonal: Variable based on capacity
+**Provisioned capacity**: Per GiB-month
+
+| Tier | Price (per GiB-month) |
+|---|---|
+| Basic HDD | Lowest (~$0.20) |
+| Basic SSD | Mid (~$0.30) |
+| Enterprise | Premium (~$0.35) |
+| High Scale SSD | Highest (~$0.35) |
+| Zonal | Variable based on capacity |
+
 - **Snapshots**: Per GiB-month of snapshot storage
 - **Backups**: Cloud Storage pricing (cheaper than snapshots)
 - **Network egress**: Standard egress charges
@@ -188,35 +192,14 @@ tags:
 - **No free tier**
 
 ### Use Cases
-#### Development Environments
-- Shared source code repositories
-- Build artifacts
-- Log aggregation
-- Tier: Basic HDD or Zonal
 
-#### Content Management
-- Media files for web/mobile apps
-- WordPress shared storage
-- CMS file repositories
-- Tier: Basic HDD or Basic SSD
-
-#### High-Performance Computing
-- Genomics data processing
-- Rendering farms
-- Financial modeling
-- Tier: High Scale SSD
-
-#### Containerized Applications
-- [[gke|GKE]] persistent volumes (ReadWriteMany)
-- Shared configs across pods
-- Multi-pod data sharing
-- Tier: Enterprise (for HA) or Basic SSD
-
-#### Lift-and-Shift Migration
-- Applications requiring NFS
-- Legacy apps with file dependencies
-- **Direct replacement for on-prem NFS**
-- Tier: Based on performance needs
+| Use case | Examples | Tier |
+|---|---|---|
+| Development Environments | Shared source code repositories, build artifacts, log aggregation | Basic HDD or Zonal |
+| Content Management | Media files for web/mobile apps, WordPress shared storage, CMS file repositories | Basic HDD or Basic SSD |
+| High-Performance Computing | Genomics data processing, rendering farms, financial modeling | High Scale SSD |
+| Containerized Applications | [[gke|GKE]] persistent volumes (ReadWriteMany), shared configs across pods, multi-pod data sharing | Enterprise (for HA) or Basic SSD |
+| Lift-and-Shift Migration | Applications requiring NFS, legacy apps with file dependencies, **direct replacement for on-prem NFS** | Based on performance needs |
 
 ### Limitations
 - **No automatic tiering** to cheaper storage
@@ -436,12 +419,16 @@ spec:
 
 ### Performance Optimization
 #### Tier Selection
-- **Decision matrix**:
-  - <10 TiB, standard performance → Basic HDD
-  - <10 TiB, low latency → Basic SSD
-  - 10-100 TiB, high IOPS → High Scale SSD
-  - Needs regional HA → Enterprise
-  - Flexible capacity → Zonal
+**Decision matrix**:
+
+| Need | Tier |
+|---|---|
+| <10 TiB, standard performance | Basic HDD |
+| <10 TiB, low latency | Basic SSD |
+| 10-100 TiB, high IOPS | High Scale SSD |
+| Needs regional HA | Enterprise |
+| Flexible capacity | Zonal |
+
 - **Right-sizing**: Monitor IOPS and throughput utilization
 - **Over-provisioning**: Performance tied to capacity (except Enterprise)
 
@@ -457,12 +444,16 @@ nfsvers=3          # NFSv3 protocol
 ```
 
 #### Performance Monitoring
-- [[gcp/cloud-monitoring|Cloud Monitoring]] metrics:
-  - `nfs/server/read_bytes`: Read throughput
-  - `nfs/server/write_bytes`: Write throughput
-  - `nfs/server/read_ops`: Read IOPS
-  - `nfs/server/write_ops`: Write IOPS
-  - `nfs/server/used_bytes_percent`: Capacity utilization
+[[gcp/cloud-monitoring|Cloud Monitoring]] metrics:
+
+| Metric | Measures |
+|---|---|
+| `nfs/server/read_bytes` | Read throughput |
+| `nfs/server/write_bytes` | Write throughput |
+| `nfs/server/read_ops` | Read IOPS |
+| `nfs/server/write_ops` | Write IOPS |
+| `nfs/server/used_bytes_percent` | Capacity utilization |
+
 - Set alerts for high utilization
 - Scale capacity before hitting limits
 

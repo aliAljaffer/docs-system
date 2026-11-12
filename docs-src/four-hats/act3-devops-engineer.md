@@ -9,7 +9,12 @@
 | Task | Move the app from one VM to Kubernetes. Make delivery and monitoring automatic. |
 | Goal | Deploy to Minikube, scale on load, publish images from CI, deliver changes with Git, and alert on failures. |
 | Done when | The app scales from 2 to 6 replicas under load. ArgoCD syncs it from Git. Grafana shows a dashboard. Discord receives an alert. |
-| Start here | Fork the starter repository. Copy the contents of `act-2-cloud-engineer/` from the `solved` branch to the root of your fork, not the folder itself. Replace files that have the same name. Do not replace the starter `tools/` and `observability/` folders. Install Docker Desktop and Minikube. You do not need Multipass or GCP. |
+| Start here | Follow the steps below this table. |
+
+1. Fork the starter repository.
+2. Copy the contents of `act-2-cloud-engineer/` from the `solved` branch to the root of your fork, not the folder itself.
+3. Replace files that have the same name. Do not replace the starter `tools/` and `observability/` folders.
+4. Install Docker Desktop and Minikube. You do not need Multipass or GCP.
 
 Try each task first. Open **Show solution** for that task only when you are stuck. The last line in each solution links to the `solved` branch. Use that link as a last resort.
 
@@ -59,7 +64,8 @@ Compare your work with `act-3-devops-engineer/` in the `solved` branch.
 
 ## Start Minikube
 
-Docker Desktop must run in Linux-container mode. On Windows, use PowerShell, not WSL.
+> [!WARNING]
+> Docker Desktop must run in Linux-container mode. On Windows, use PowerShell, not WSL.
 
 #### Task 1: Start the cluster
 
@@ -160,15 +166,19 @@ Expected: `Login Succeeded`.
 
 ### Warnings
 
-- Never put the token in a manifest or in Git. ArgoCD syncs only Git, so create this Secret on the command line.
-- A classic token reaches every repository you can read. Keep the scope at `read:packages` and revoke the token after the course.
-- Making the repository and packages public removes the need for this token.
+> [!WARNING]
+> Never put the token in a manifest or in Git. ArgoCD syncs only Git, so create this Secret on the command line.
+>
+> A classic token reaches every repository you can read. Keep the scope at `read:packages` and revoke the token after the course.
+
+Making the repository and packages public removes the need for this token.
 
 ## Write the app manifests (episodes 11 to 15)
 
 Put the files in `kubernetes/app/`. Apply them in the `app` namespace.
 
-Warning: Do not apply `kubernetes/app/07-networkpolicy.yaml` in Act 3. That file adds a default-deny policy. Act 4 adds the allow rules that the app needs.
+> [!WARNING]
+> Do not apply `kubernetes/app/07-networkpolicy.yaml` in Act 3. That file adds a default-deny policy. Act 4 adds the allow rules that the app needs.
 
 #### Task 2: Write the Namespace
 
@@ -681,7 +691,11 @@ minikube kubectl -- scale deployment/backend -n app --replicas=4
 minikube kubectl -- scale deployment/backend -n app --replicas=2
 ```
 
-Service types: ClusterIP is internal, NodePort opens a port on the node, and LoadBalancer asks a cloud for a real load balancer. Minikube uses NodePort.
+| Service type | What it does |
+|---|---|
+| `ClusterIP` | Internal only. |
+| `NodePort` | Opens a port on the node. Minikube uses this type. |
+| `LoadBalancer` | Asks a cloud for a real load balancer. |
 
 The HPA in `05-hpa.yaml` has a `behavior` block. It sets how fast the HPA scales up and down. `stabilizationWindowSeconds` is the wait before the HPA acts on a lower number. The default scale-down wait is 5 minutes. The block here sets it to 0 so you can watch the change. Use a longer wait in production.
 
@@ -850,7 +864,8 @@ Apply them:
 minikube kubectl -- apply -f kubernetes/argocd/applications/
 ```
 
-Warning: ArgoCD needs read access to a private repository. Make the fork public, or add the repository credentials in ArgoCD.
+> [!WARNING]
+> ArgoCD needs read access to a private repository. Make the fork public, or add the repository credentials in ArgoCD.
 
 Last resort: [open the solved ArgoCD examples](https://github.com/aliAljaffer/four-hats/tree/solved/act-3-devops-engineer/kubernetes/argocd/applications)
 
@@ -942,7 +957,13 @@ Open Grafana. Log in with the `grafana-admin` Secret.
 minikube kubectl -- port-forward service/grafana -n monitoring 3000:3000
 ```
 
-Open `http://localhost:3000`. Log in as `admin` with the password from the `grafana-admin` Secret. The dashboard shows request rate, latency, frontend connections, database connections, and requests by endpoint.
+Open `http://localhost:3000`. Log in as `admin` with the password from the `grafana-admin` Secret. The dashboard shows:
+
+- Request rate
+- Latency
+- Frontend connections
+- Database connections
+- Requests by endpoint
 
 Last resort: [open the solved observability folder](https://github.com/aliAljaffer/four-hats/tree/solved/act-3-devops-engineer/observability)
 
@@ -1030,7 +1051,12 @@ Last resort: [open the solved prometheus.yaml](https://github.com/aliAljaffer/fo
 
 #### Task 25: Write the Discord receiver
 
-In `observability/alertmanager.yaml`, change `route.receiver` to `discord`, replace the `blackhole` receiver with a `discord_configs` receiver, add a `discord` volume from the Secret `alertmanager-discord`, and mount it at `/etc/alertmanager/secrets/discord`, read-only.
+In `observability/alertmanager.yaml`:
+
+1. Change `route.receiver` to `discord`.
+2. Replace the `blackhole` receiver with a `discord_configs` receiver.
+3. Add a `discord` volume from the Secret `alertmanager-discord`.
+4. Mount it at `/etc/alertmanager/secrets/discord`, read-only.
 
 <details>
 <summary>Show solution</summary>
@@ -1078,7 +1104,8 @@ Last resort: [open the solved alertmanager.yaml](https://github.com/aliAljaffer/
 
 Pause ArgoCD automated sync, scale the backend to zero, wait for the alert, then restore the sync and the replicas.
 
-Warning: ArgoCD's `selfHeal` restores `replicas: 2` within a few seconds, long before the alert's `for: 1m` can be satisfied. Pause automated sync first, or the alert never fires.
+> [!WARNING]
+> ArgoCD's `selfHeal` restores `replicas: 2` within a few seconds, long before the alert's `for: 1m` can be satisfied. Pause automated sync first, or the alert never fires.
 
 <details>
 <summary>Show solution</summary>
@@ -1121,7 +1148,8 @@ Delete the cluster.
 minikube delete
 ```
 
-Warning: this deletes the cluster and all PostgreSQL data. Minikube storage is for learning only.
+> [!WARNING]
+> This deletes the cluster and all PostgreSQL data. Minikube storage is for learning only.
 
 Last resort: [open the solved Act 3 folder](https://github.com/aliAljaffer/four-hats/tree/solved/act-3-devops-engineer)
 
@@ -1133,7 +1161,8 @@ This part is a demo, presenter-only. There is nothing for you to do here, and no
 
 Everything in this act ran on Minikube, a single-node cluster on your laptop. Production Kubernetes is usually managed: GKE, EKS, or AKS run the control plane for you. The manifests you wrote in episodes 11 to 15 do not change.
 
-Warning: this needs a Google Cloud free trial and creates real billable resources. Set a budget alert before creating anything; see [Costs and free options](costs-and-free-options.md).
+> [!WARNING]
+> This needs a Google Cloud free trial and creates real billable resources. Set a budget alert before creating anything; see [Costs and free options](costs-and-free-options.md).
 
 ```shell
 gcloud components install kubectl
@@ -1160,7 +1189,8 @@ gcloud container clusters delete gke-demo --region us-central1 --quiet
 
 The cluster can leave Persistent Disk volumes behind. List the disks:
 
-Warning: The filter can match disks from other clusters. Check the disk name and zone before you delete it.
+> [!WARNING]
+> The filter can match disks from other clusters. Check the disk name and zone before you delete it.
 
 ```shell
 gcloud compute disks list --filter='name~pvc-'

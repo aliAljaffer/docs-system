@@ -82,12 +82,14 @@ AlloyDB Cluster
 
 ### Machine Types
 #### Predefined Configurations
-- **2 vCPUs**: 16 GB RAM (dev/test)
-- **4 vCPUs**: 32 GB RAM (small production)
-- **8 vCPUs**: 64 GB RAM (medium production)
-- **16 vCPUs**: 128 GB RAM (large production)
-- **32 vCPUs**: 256 GB RAM (very large production)
-- **64 vCPUs**: 512 GB RAM (enterprise workloads)
+| vCPUs | RAM | Typical use |
+|---|---|---|
+| 2 | 16 GB | Dev/test |
+| 4 | 32 GB | Small production |
+| 8 | 64 GB | Medium production |
+| 16 | 128 GB | Large production |
+| 32 | 256 GB | Very large production |
+| 64 | 512 GB | Enterprise workloads |
 
 #### Custom Configurations
 - Choose vCPUs and memory independently
@@ -115,19 +117,10 @@ AlloyDB Cluster
 - Run reports without impacting OLTP performance
 
 ### High Availability
-#### Multi-Zone Configuration (Recommended)
-- Primary in one zone
-- Standby in another zone (same region)
-- **Automatic failover in ~60 seconds**
-- **99.99% SLA**
-- **Synchronous replication** to standby
-- No data loss on failover (RPO = 0)
-
-#### Single-Zone Configuration
-- Primary only
-- 99.9% SLA
-- Lower cost (no standby)
-- Use for dev/test only
+| Setup | Standby | Failover | SLA | Notes |
+|---|---|---|---|---|
+| Multi-zone (recommended) | Another zone, same region, synchronous replication | Automatic, ~60 seconds | 99.99% | No data loss on failover (RPO = 0) |
+| Single-zone | None (primary only) | - | 99.9% | Lower cost. Use for dev/test only |
 
 ### Backup and Recovery
 #### Automated Backups
@@ -265,13 +258,15 @@ LIMIT 10;
 - Can justify higher cost for performance
 
 ### When NOT to Use AlloyDB
-- **Budget constraints** → Use [[gcp/cloud-sql|Cloud SQL]] (2-3x cheaper)
-- **Simple workloads** → Use [[gcp/cloud-sql|Cloud SQL]]
-- **Global distribution** required → Use [[cloud-spanner|Cloud Spanner]]
-- **NoSQL better fit** → Use [[gcp/firestore|Firestore]] or [[gcp/bigtable|Bigtable]]
-- **Pure analytics** → Use [[bigquery|BigQuery]]
-- **MySQL or SQL Server** required → Use [[gcp/cloud-sql|Cloud SQL]]
-- Small datasets (<100 GB) with low traffic → Use [[gcp/cloud-sql|Cloud SQL]]
+| Need | Use instead |
+|---|---|
+| Budget constraints | [[gcp/cloud-sql|Cloud SQL]] (2-3x cheaper) |
+| Simple workloads | [[gcp/cloud-sql|Cloud SQL]] |
+| Global distribution | [[cloud-spanner|Cloud Spanner]] |
+| NoSQL better fit | [[gcp/firestore|Firestore]] or [[gcp/bigtable|Bigtable]] |
+| Pure analytics | [[bigquery|BigQuery]] |
+| MySQL or SQL Server | [[gcp/cloud-sql|Cloud SQL]] |
+| Small datasets (<100 GB) with low traffic | [[gcp/cloud-sql|Cloud SQL]] |
 
 ### Migration Strategies
 #### Database Migration Service (DMS)
@@ -600,14 +595,16 @@ ORDER BY mean_time DESC;
 ```
 
 #### Key Metrics to Monitor
-- **Connection count**: Monitor vs max_connections
-- **CPU utilization**: Target <75%
-- **Memory usage**: Monitor for OOM
-- **Disk I/O**: Read/write throughput
-- **Replication lag**: Should be 0 (read pools use shared storage)
-- **Query latency**: P50, P95, P99
-- **Transaction rate**: Commits/second
-- **Cache hit ratio**: Target >99%
+| Metric | Target or check |
+|---|---|
+| Connection count | Monitor vs max_connections |
+| CPU utilization | Target <75% |
+| Memory usage | Monitor for OOM |
+| Disk I/O | Read/write throughput |
+| Replication lag | Should be 0 (read pools use shared storage) |
+| Query latency | P50, P95, P99 |
+| Transaction rate | Commits/second |
+| Cache hit ratio | Target >99% |
 
 #### Alerting Setup
 ```text
@@ -645,15 +642,14 @@ gcloud alloydb instances update READ_POOL_ID \
 - Use partitioning to drop old partitions
 
 #### When to Use Cloud SQL Instead
-```text
-Decision Matrix:
-- Workload is not performance-critical → Cloud SQL
-- Budget <$500/month → Cloud SQL
-- Simple CRUD operations → Cloud SQL
-- Analytics on transactional data → AlloyDB
-- Need 99.99% SLA → AlloyDB
-- PostgreSQL performance bottleneck → AlloyDB
-```
+| Requirement | Choose |
+|---|---|
+| Workload is not performance-critical | Cloud SQL |
+| Budget <$500/month | Cloud SQL |
+| Simple CRUD operations | Cloud SQL |
+| Analytics on transactional data | AlloyDB |
+| Need 99.99% SLA | AlloyDB |
+| PostgreSQL performance bottleneck | AlloyDB |
 
 ### Security Best Practices
 #### IAM and Authentication
@@ -735,9 +731,11 @@ psql -h DR_ALLOYDB_IP -U postgres -d mydb < backup.sql
 ```
 
 #### RTO/RPO Considerations
-- **Multi-zone HA**: RPO = 0, RTO = ~60 seconds
-- **Automated backups + PITR**: RPO = <1 second, RTO = minutes
-- **Cross-region DR**: RPO = minutes to hours, RTO = hours
+| Strategy | RPO | RTO |
+|---|---|---|
+| Multi-zone HA | 0 | ~60 seconds |
+| Automated backups + PITR | <1 second | Minutes |
+| Cross-region DR | Minutes to hours | Hours |
 
 ### Advanced Features
 #### Logical Replication (External)

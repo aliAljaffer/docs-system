@@ -63,18 +63,21 @@ tags:
 
 ## DNS Records
 Supported record types:
-- **A**: IPv4 address
-- **AAAA**: IPv6 address
-- **CNAME**: Canonical name (alias)
-- **MX**: Mail exchange
-- **TXT**: Text records (SPF, DKIM, verification)
-- **NS**: Name server
-- **SOA**: Start of authority (auto-managed)
-- **SRV**: Service locator
-- **PTR**: Reverse DNS lookup
-- **CAA**: Certificate authority authorization
-- **NAPTR**: Naming authority pointer
-- **SPF**: Sender policy framework (deprecated, use TXT)
+
+| Record | Purpose |
+|---|---|
+| A | IPv4 address |
+| AAAA | IPv6 address |
+| CNAME | Canonical name (alias) |
+| MX | Mail exchange |
+| TXT | Text records (SPF, DKIM, verification) |
+| NS | Name server |
+| SOA | Start of authority (auto-managed) |
+| SRV | Service locator |
+| PTR | Reverse DNS lookup |
+| CAA | Certificate authority authorization |
+| NAPTR | Naming authority pointer |
+| SPF | Sender policy framework (deprecated, use TXT) |
 
 ---
 
@@ -153,29 +156,32 @@ Unlike AWS Route 53, Cloud DNS does **not support** advanced routing policies:
   - Public internet domains
 
 ### VPC Internal DNS Names
-- **Zonal DNS**: `INSTANCE_NAME.ZONE.c.PROJECT_ID.internal`
-  - Example: `my-vm.us-central1-a.c.my-project.internal`
-- **Global DNS**: `INSTANCE_NAME.c.PROJECT_ID.internal`
-  - Example: `my-vm.c.my-project.internal`
-- **Custom DNS**: Use private zones for custom names
+| Name type | Format | Example |
+|---|---|---|
+| Zonal DNS | `INSTANCE_NAME.ZONE.c.PROJECT_ID.internal` | `my-vm.us-central1-a.c.my-project.internal` |
+| Global DNS | `INSTANCE_NAME.c.PROJECT_ID.internal` | `my-vm.c.my-project.internal` |
+| Custom DNS | Use private zones for custom names | - |
 
 ---
 
 ## DNS Query Limits
-- **Queries per second**: Unlimited (100 billion/day)
-- **Zones per project**: 10,000 (can be increased)
-- **Record sets per zone**: 10,000 per zone (public), 100,000 (private)
-- **Records per record set**: 100 resource records
+| Limit | Value |
+|---|---|
+| Queries per second | Unlimited (100 billion/day) |
+| Zones per project | 10,000 (can be increased) |
+| Record sets per zone | 10,000 per zone (public), 100,000 (private) |
+| Records per record set | 100 resource records |
 
 ---
 
 ## Pricing
-- **Public zone**: $0.20 per zone per month (first 25 zones)
-- **Private zone**: $0.10 per zone per month
-- **Queries**:
-  - 0-1 billion queries/month: $0.40 per million
-  - 1+ billion queries/month: $0.20 per million
-- **Inbound forwarding**: $0.10 per million queries
+| Item | Price |
+|---|---|
+| Public zone | $0.20 per zone per month (first 25 zones) |
+| Private zone | $0.10 per zone per month |
+| Queries, 0-1 billion/month | $0.40 per million |
+| Queries, 1+ billion/month | $0.20 per million |
+| Inbound forwarding | $0.10 per million queries |
 
 ---
 
@@ -347,20 +353,20 @@ VPC Resources
 
 ### Migration Strategies
 #### From AWS Route 53
-- **Export Route 53 records**: Use AWS CLI
-- **Create Cloud DNS zones**: Map hosted zones
-- **Import records**: Use `gcloud` or Console import
-- **Update NS records**: At domain registrar
-- **Monitor TTL expiration**: Wait for old records to expire
-- **Validate resolution**: Test from multiple locations
+1. **Export Route 53 records**: Use AWS CLI
+2. **Create Cloud DNS zones**: Map hosted zones
+3. **Import records**: Use `gcloud` or Console import
+4. **Update NS records**: At domain registrar
+5. **Monitor TTL expiration**: Wait for old records to expire
+6. **Validate resolution**: Test from multiple locations
 
 #### From On-Premises DNS
-- **Inventory DNS zones and records**
-- **Create Cloud DNS zones** (public/private)
-- **Migrate records incrementally** per domain
-- **Hybrid period**: Use forwarding zones
-- **Update resolvers**: Point to Cloud DNS
-- **Decommission on-prem DNS** gradually
+1. **Inventory DNS zones and records**
+2. **Create Cloud DNS zones** (public/private)
+3. **Migrate records incrementally** per domain
+4. **Hybrid period**: Use forwarding zones
+5. **Update resolvers**: Point to Cloud DNS
+6. **Decommission on-prem DNS** gradually
 
 #### Hybrid Migration Pattern
 - **Phase 1**: Forwarding zone in Cloud DNS → on-prem

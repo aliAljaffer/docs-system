@@ -134,7 +134,11 @@ On GitHub, open a pull request into `main` of your fork. Merge it.
 <details>
 <summary>Show solution</summary>
 
-Open your fork on GitHub. Select **Compare and pull request** for the `add-readme-note` branch. Set the base branch to `main`. Select **Create pull request**. Select **Merge pull request**.
+1. Open your fork on GitHub.
+2. Select **Compare and pull request** for the `add-readme-note` branch.
+3. Set the base branch to `main`.
+4. Select **Create pull request**.
+5. Select **Merge pull request**.
 
 Last resort: [open the solved Act 1 folder](https://github.com/aliAljaffer/four-hats/tree/solved/act-1-software-engineer)
 
@@ -767,7 +771,10 @@ Break a test on purpose. Watch the check fail. Fix it.
 <details>
 <summary>Show solution</summary>
 
-Change one assertion in `backend/test_app.py`. For example, change `self.assertEqual(response.status_code, 200)` to `self.assertEqual(response.status_code, 201)`. Commit and push. The test job fails. Change the assertion back. Commit and push. The test job passes.
+1. Change one assertion in `backend/test_app.py`. For example, change `self.assertEqual(response.status_code, 200)` to `self.assertEqual(response.status_code, 201)`.
+2. Commit and push. The test job fails.
+3. Change the assertion back.
+4. Commit and push. The test job passes.
 
 Last resort: [open the solved backend/test_app.py](https://github.com/aliAljaffer/four-hats/blob/solved/act-1-software-engineer/backend/test_app.py)
 

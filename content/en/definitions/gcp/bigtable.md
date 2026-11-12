@@ -46,13 +46,15 @@ tags:
 
 ### Data Model
 #### Structure
-- **Instance**: Container for clusters
-- **Cluster**: Set of nodes in specific zone
-- **Table**: Contains column families
-- **Row**: Identified by unique row key (byte string)
-- **Column Family**: Group of columns
-- **Column Qualifier**: Individual column within family
-- **Cell**: Intersection of row and column, can have multiple timestamped versions
+| Term | Meaning |
+|---|---|
+| Instance | Container for clusters |
+| Cluster | Set of nodes in specific zone |
+| Table | Contains column families |
+| Row | Identified by unique row key (byte string) |
+| Column Family | Group of columns |
+| Column Qualifier | Individual column within family |
+| Cell | Intersection of row and column, can have multiple timestamped versions |
 
 #### Row Key Design (Critical!)
 ```text
@@ -80,34 +82,23 @@ Columns: cf1:temperature, cf1:humidity, cf1:pressure
 - `device_id#reverse_timestamp` - Device-specific queries
 
 ### Instance Types
-#### Production Instance
-- **Minimum 3 nodes** for SLA
-- **99.9% SLA** for single-cluster
-- **99.99% SLA** for multi-cluster (2+ clusters in different zones)
-- Suitable for production workloads
-- Supports replication
-
-#### Development Instance
-- **Single-node cluster**
-- **No SLA**
-- **No replication**
-- **Up to 75% cheaper** than production
-- Use for testing and development only
-- **Cannot upgrade to production** (must recreate)
+| Attribute | Production | Development |
+|---|---|---|
+| Nodes | Minimum 3 for SLA | Single-node cluster |
+| SLA | 99.9% for single-cluster, 99.99% for multi-cluster (2+ clusters in different zones) | None |
+| Replication | Supported | None |
+| Cost | - | Up to 75% cheaper than production |
+| Use for | Production workloads | Testing and development only |
+| Upgrade | - | Cannot upgrade to production (must recreate) |
 
 ### Storage Types
-#### SSD Storage (Default)
-- Low latency (<10ms)
-- High throughput
-- **Recommended for most workloads**
-- $0.17 per GB/month
-
-#### HDD Storage
-- Higher latency (200ms typical)
-- **Lower cost** ($0.026 per GB/month)
-- Good for batch workloads, cold data
-- **Minimum 10 TB storage** required
-- Use cases: Archival, infrequent access, batch analytics
+| Attribute | SSD (default) | HDD |
+|---|---|---|
+| Latency | Low (<10ms) | Higher (200ms typical) |
+| Throughput | High | - |
+| Price | $0.17 per GB/month | $0.026 per GB/month (lower cost) |
+| Minimum storage | - | 10 TB required |
+| Use for | Most workloads (recommended) | Batch workloads, cold data, archival, infrequent access, batch analytics |
 
 ### Replication
 #### Multi-Cluster Replication
@@ -218,11 +209,13 @@ row_filter = RowFilterChain([
 
 ### Monitoring and Observability
 #### Key Metrics
-- **CPU utilization**: Target **<70% for single-cluster**, <90% for multi-cluster
-- **Storage utilization**: <70% per node
-- **Latency**: P50, P99 read/write latency
-- **QPS**: Queries per second
-- **Error rate**: Failed requests
+| Metric | Target or check |
+|---|---|
+| CPU utilization | **<70% for single-cluster**, <90% for multi-cluster |
+| Storage utilization | <70% per node |
+| Latency | P50, P99 read/write latency |
+| QPS | Queries per second |
+| Error rate | Failed requests |
 
 #### Key Visualizer
 - **Visual tool to analyze row key distribution**
@@ -245,9 +238,11 @@ row_filter = RowFilterChain([
 - Replication across regions: Egress charges apply
 
 **Example costs:**
-- **Dev instance**: 1 SSD node + 100 GB = ~$487/month
-- **Prod instance**: 3 SSD nodes + 1 TB = ~$1,580/month
-- **Large instance**: 30 SSD nodes + 100 TB = ~$31,200/month
+| Scenario | Config | Monthly cost |
+|---|---|---|
+| Dev instance | 1 SSD node + 100 GB | ~$487 |
+| Prod instance | 3 SSD nodes + 1 TB | ~$1,580 |
+| Large instance | 30 SSD nodes + 100 TB | ~$31,200 |
 
 ### Use Cases
 - **Time-series data**: IoT, monitoring, financial ticks
@@ -267,12 +262,14 @@ row_filter = RowFilterChain([
 - Analytical workloads with Hadoop/Spark
 
 ### When NOT to Use Bigtable
-- Small datasets (<1 TB) → Use [[gcp/firestore|Firestore]] or [[gcp/cloud-sql|Cloud SQL]]
-- Transactional workloads → Use [[cloud-spanner|Cloud Spanner]] or [[gcp/cloud-sql|Cloud SQL]]
-- Complex SQL queries → Use [[gcp/cloud-sql|Cloud SQL]] or [[bigquery|BigQuery]]
-- Serverless/variable workload → Use [[gcp/firestore|Firestore]] (pay per request)
-- Document database → Use [[gcp/firestore|Firestore]]
-- Low throughput → DynamoDB on-demand more cost-effective
+| Need | Use instead |
+|---|---|
+| Small datasets (<1 TB) | [[gcp/firestore|Firestore]] or [[gcp/cloud-sql|Cloud SQL]] |
+| Transactional workloads | [[cloud-spanner|Cloud Spanner]] or [[gcp/cloud-sql|Cloud SQL]] |
+| Complex SQL queries | [[gcp/cloud-sql|Cloud SQL]] or [[bigquery|BigQuery]] |
+| Serverless/variable workload | [[gcp/firestore|Firestore]] (pay per request) |
+| Document database | [[gcp/firestore|Firestore]] |
+| Low throughput | DynamoDB on-demand (more cost-effective) |
 
 ### Migration Strategies
 #### From HBase
@@ -548,10 +545,12 @@ Key Metrics:
 - Consider cross-instance backups for DR
 
 #### Disaster Recovery Scenarios
-1. **Table corruption**: Restore from recent backup
-2. **Cluster failure**: Multi-cluster routing (automatic)
-3. **Region failure**: Manual failover to backup region
-4. **Accidental deletion**: Restore from backup (no PITR)
+| Scenario | Response |
+|---|---|
+| Table corruption | Restore from recent backup |
+| Cluster failure | Multi-cluster routing (automatic) |
+| Region failure | Manual failover to backup region |
+| Accidental deletion | Restore from backup (no PITR) |
 
 ### Cost Optimization Strategies
 #### Right-Sizing Nodes
@@ -632,10 +631,14 @@ Instances: tenant1_instance, tenant2_instance
 ```
 
 ### Security Best Practices
-- **IAM roles**:
-  - `roles/bigtable.user`: Read/write data
-  - `roles/bigtable.reader`: Read-only
-  - `roles/bigtable.admin`: Full control
+**IAM roles:**
+
+| Role | Grants |
+|---|---|
+| `roles/bigtable.user` | Read/write data |
+| `roles/bigtable.reader` | Read-only |
+| `roles/bigtable.admin` | Full control |
+
 - **VPC Service Controls**: Prevent data exfiltration
 - **CMEK**: Customer-managed encryption keys
 - **Audit logging**: Track all operations

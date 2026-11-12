@@ -12,10 +12,10 @@ tags:
 
 `react` `hooks`
 
-- State creation:
-  - **Simple**: `useState(20)`
-  - **Function-based:** `useState(() => calculateSum());`
-    - Function must be [[pure-functions|pure]] and has no arguments.
-- **State update**:
-  - **Simple**: `setState(30)`
-  - **Current-state-based**: `useState((curr) => curr + 1);`
+
+| Action | Simple | Function-based |
+|---|---|---|
+| State creation | `useState(20)` | `useState(() => calculateSum());` |
+| State update | `setState(30)` | **Current-state-based**: `useState((curr) => curr + 1);` |
+
+For function-based state creation, the function must be [[pure-functions|pure]] and has no arguments.

@@ -103,7 +103,10 @@ Compose refuses to start without `DB_PASSWORD`, even for a build. The workflow p
 
 `ci-only` is not a secret and is not used by a running service. It exists to satisfy the Compose variable check during the build.
 
-Do not put a real credential in the workflow file. A workflow file is code in Git. A secret in Git stays in history. Real secrets belong in GitHub Secrets or, later in this course, in Sealed Secrets.
+> [!WARNING]
+> Do not put a real credential in the workflow file. A workflow file is code in Git. A secret in Git stays in history.
+
+Real secrets belong in GitHub Secrets or, later in this course, in Sealed Secrets.
 
 ## Reading a failed check
 

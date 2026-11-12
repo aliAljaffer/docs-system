@@ -117,7 +117,12 @@ Config as code versions the view. The dashboard JSON lives in Git. If you change
 
 ## Watch the HPA load test
 
-The starter ships a load generator at zero replicas. Scale it up, watch the request rate rise on the dashboard, and watch the backend HPA scale from 2 to 6 replicas. Stop the load when you finish.
+The starter ships a load generator at zero replicas.
+
+1. Scale it up.
+2. Watch the request rate rise on the dashboard.
+3. Watch the backend HPA scale from 2 to 6 replicas.
+4. Stop the load when you finish.
 
 The load test proves the charts move. A dashboard that never moves during load is a wiring fault, not a quiet system.
 
@@ -128,13 +133,10 @@ Two rules close the loop:
 
 ## Limits and tradeoffs
 
-Prometheus reads config once. Restart after each scrape or rules edit.
-
-Exporter ports must be listed on the Service. The scrape target alone is not enough.
-
-Missing Secrets stop dashboards. Grafana needs `grafana-admin` to start. Without it, the Grafana Pod never becomes ready.
-
-Dashboard visibility trades against alert fatigue. Dashboards show what is wrong. Alerts, in Episode 19, decide what needs a person now.
+- Prometheus reads config once. Restart after each scrape or rules edit.
+- Exporter ports must be listed on the Service. The scrape target alone is not enough.
+- Missing Secrets stop dashboards. Grafana needs `grafana-admin` to start. Without it, the Grafana Pod never becomes ready.
+- Dashboard visibility trades against alert fatigue. Dashboards show what is wrong. Alerts, in Episode 19, decide what needs a person now.
 
 ## Common mistakes
 

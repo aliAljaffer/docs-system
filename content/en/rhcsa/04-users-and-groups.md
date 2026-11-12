@@ -21,13 +21,6 @@ Other commands: `userdel`, `groupdel`, `groupmod`, and `usermod`.
 
 ## Lock, unlock, and expire accounts
 
-```bash
-usermod -L anna
-usermod -U anna
-usermod -e 2030-01-01 anna
-usermod -s /sbin/nologin anna
-```
-
 | Command | Action |
 |---------|--------|
 | `usermod -L anna` | Lock the account |
