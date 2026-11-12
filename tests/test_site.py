@@ -120,6 +120,12 @@ class SiteTests(unittest.TestCase):
         self.assertIn('!!! tip "Hover a term"', result)
         self.assertIn("    Move the pointer", result)
 
+    def test_shell_fences_are_highlighted(self) -> None:
+        page = (SITE / "ckad" / "06-services" / "index.html").read_text()
+        self.assertIn('<span class="nf">kubectl</span>', page)
+        self.assertIn('<span class="k">expose</span>', page)
+        self.assertIn("&lt;service-name&gt;.&lt;namespace&gt;", page)
+
     def test_removed_sections_absent(self) -> None:
         for name in ("blogs", "notes", "graph", "tags", "ar", "feed.xml", "posts.json"):
             self.assertFalse((SITE / name).exists(), name)
@@ -265,6 +271,16 @@ class BrandCompilerTests(unittest.TestCase):
         for bad in ({"type": {"body_size": "big"}}, {"type": {"leading": "2"}}, {"shape": {"surfaces": "glossy"}}):
             with self.assertRaises(SystemExit):
                 brand.load(self.write({"light": good, "night": good, **bad}))
+
+    def test_night_shadow_is_soft_and_logo_swaps(self) -> None:
+        good = {"paper": "#ffffff", "ink": "#000000", "accent": "#0000ff"}
+        path = self.write({"light": good, "night": good, "shape": {"shadow": True}})
+        css = brand.css(brand.load(path))
+        self.assertEqual(css.count("rgba(0, 0, 0, 0.06)"), 2)
+        self.assertEqual(css.count("rgba(0, 0, 0, 0.08)"), 2)
+        self.assertIn("--brand-logo-reversed: none;", css)
+        (path.parent / "icon-reversed.svg").write_text("<svg/>")
+        self.assertIn('--brand-logo-reversed: url("brand/icon-reversed.svg");', brand.css(brand.load(path)))
 
 
 if __name__ == "__main__":

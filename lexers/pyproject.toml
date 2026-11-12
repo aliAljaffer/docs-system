@@ -1,0 +1,15 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "docs-lexers"
+version = "0.1.0"
+requires-python = ">=3.10"
+dependencies = ["pygments>=2.17"]
+
+[tool.setuptools]
+packages = ["docs_lexers"]
+
+[project.entry-points."pygments.lexers"]
+docs_shell = "docs_lexers.shell:DocsShellLexer"
