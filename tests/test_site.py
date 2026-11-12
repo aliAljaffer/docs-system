@@ -161,7 +161,9 @@ class SiteTests(unittest.TestCase):
 
     def test_page_uses_brand_head(self) -> None:
         page = (SITE / "projects" / "homelab" / "index.html").read_text()
-        self.assertIn('rel="icon" href="../../assets/brand/icon.svg"', page)
+        raw = json.loads((ROOT / "brand" / "brand.json").read_text())
+        self.assertIn(f'rel="icon" href="../../assets/brand/{raw.get("favicon", raw["icon"])}?v=', page)
+        self.assertIn(f'src="../../assets/brand/{raw["icon"]}?v=', page)
         for name in ("family=Inter", "JetBrains"):
             self.assertNotIn(name, page)
         self.assertNotIn('data-md-color-primary="indigo"', page)
