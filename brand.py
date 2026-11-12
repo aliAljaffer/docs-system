@@ -260,7 +260,7 @@ def giscus_css(brand: Brand, mode: str, site_url: str, version: str) -> str:
 
 def compile(brand: Brand, assets: Path, site_url: str, version: str) -> None:
     target = assets / "brand"
-    shutil.copytree(brand.source, target, ignore=shutil.ignore_patterns("brand.json"))
+    shutil.copytree(brand.source, target, ignore=shutil.ignore_patterns("brand.json", "og"))
     (assets / "brand.css").write_text(css(brand))
     for mode, name in MODES.items():
         (assets / f"giscus-{name}.css").write_text(giscus_css(brand, mode, site_url, version))

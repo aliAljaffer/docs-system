@@ -21,6 +21,7 @@ import yaml
 
 import brand
 import fetch
+import og
 import provenance
 from frontmatter import join_meta, split_meta
 
@@ -437,8 +438,9 @@ def four_hats(base: Path) -> None:
     (base / "episodes.md").write_text("\n".join(lines))
 
 
-def label_pages(root: Path, config: dict) -> None:
-    """Give every page a tab title and description that name that page."""
+def label_pages(root: Path, config: dict) -> list[og.Card]:
+    """Give every page a tab title and description that name that page, and return its preview card."""
+    cards = []
     owners = {}
     for kind in ("projects", "courses"):
         for entry in config.get(kind, []):
@@ -449,12 +451,15 @@ def label_pages(root: Path, config: dict) -> None:
             continue
         meta, body = split_meta(page.read_text())
         heading = title_of(page) if re.search(r"^# ", body, flags=re.M) else page.stem
+        section = ""
         owner = next((e for d, e in owners.items() if rel.as_posix().startswith(d + "/")), None)
         if rel.as_posix() == "index.md":
             heading = SITE_NAME
         elif owner and rel.name == "index.md" and len(rel.parts) == len(Path(fetch.dest_of("projects" if rel.parts[0] == "projects" else "courses", owner)).parts) + 1:
             heading = owner["title"]
         elif owner:
+            section = owner["title"]
+            card_title = heading
             heading = f"{heading} - {owner['title']}"
         if "updated" in meta:
             meta["updated"] = str(meta["updated"])
@@ -466,6 +471,14 @@ def label_pages(root: Path, config: dict) -> None:
             if summary:
                 meta["description"] = summary
         page.write_text(join_meta(meta, body))
+        url = rel.parent if rel.name == "index.md" else rel.with_suffix("")
+        cards.append(og.Card(
+            path="" if url == Path(".") else url.as_posix(),
+            title=card_title if section else heading,
+            section=section,
+            description=str(meta.get("description") or TAGLINE),
+        ))
+    return cards
 
 
 def prepare(root: Path, config: dict) -> None:
@@ -571,7 +584,7 @@ def nav_for(root: Path, config: dict) -> list:
     return nav
 
 
-def assemble() -> Path:
+def assemble() -> tuple[Path, list[og.Card]]:
     config = fetch.load()
     if BUILD.parent.exists():
         shutil.rmtree(BUILD.parent)
@@ -588,7 +601,7 @@ def assemble() -> Path:
     inject_home(BUILD, config)
     write_index(BUILD, config, "projects", "Projects", TAGLINE)
     write_index(BUILD, config, "courses", "Courses", "Long-form courses built around one project or one skill path.")
-    label_pages(BUILD, config)
+    cards = label_pages(BUILD, config)
     brand_styles = "".join(f"  - {s if s.startswith('http') else f'assets/brand/{s}?v={version}'}\n" for s in identity.stylesheets)
     site = {
         "copyright": f'&copy; {datetime.date.today().year} {OWNER} &middot; <a href="{PORTFOLIO_URL}">{PORTFOLIO_LABEL}</a>',
@@ -606,17 +619,20 @@ def assemble() -> Path:
         + "\nnav:\n"
         + yaml.safe_dump(nav_for(BUILD, config), sort_keys=False, allow_unicode=True)
     )
-    return ROOT / "mkdocs.en.yml"
+    return ROOT / "mkdocs.en.yml", cards
 
 
 def run() -> None:
     if SITE.exists():
         shutil.rmtree(SITE)
-    config = assemble()
+    config, cards = assemble()
     result = subprocess.run([ZENSICAL, "build", "-f", str(config)], capture_output=True, text=True)
     if result.returncode != 0:
         raise SystemExit(result.stdout + result.stderr)
     print(result.stdout.strip().splitlines()[-1])
+    eyebrow = SITE_URL.split("://", 1)[1].upper()
+    count = og.write_all(brand.BRAND_DIR / "og", brand.load().modes["light"], eyebrow, cards, SITE)
+    print(f"{count} preview cards")
     slugs = sorted(
         p.relative_to(BUILD / "definitions").with_suffix("").as_posix()
         for p in (BUILD / "definitions").rglob("*.md")
