@@ -22,6 +22,7 @@ import yaml
 import brand
 import fetch
 import og
+import postprocess
 import provenance
 from frontmatter import join_meta, split_meta
 
@@ -103,13 +104,13 @@ extra_javascript:
   - assets/hover.js?v={v}
   - assets/analytics.js?v={v}
   - assets/checklist.js?v={v}
-  - assets/nav-back.js?v={v}
+  - assets/course-nav.js?v={v}
 """
 
 
 def asset_version() -> str:
     digest = hashlib.sha256()
-    names = ("theme.css", "hover.css", "diagram-zoom.css", "source-file.css", "hover.js", "diagram-zoom.js", "analytics.js", "checklist.js", "nav-back.js", "mathjax.js")
+    names = ("theme.css", "hover.css", "diagram-zoom.css", "source-file.css", "hover.js", "diagram-zoom.js", "analytics.js", "checklist.js", "course-nav.js", "mathjax.js")
     for path in [*(ASSETS / name for name in names), *brand.asset_inputs(brand.load())]:
         digest.update(path.read_bytes())
     return digest.hexdigest()[:10]
@@ -222,8 +223,9 @@ def process_wiki(root: Path) -> None:
             label = (match.group(2) or target).strip()
             if target not in index:
                 raise SystemExit(f"{path.name}: missing wikilink target: {target}")
-            url = f"/{index[target].relative_to(root).with_suffix('').as_posix()}/"
-            source = f"/{path.relative_to(root).with_suffix('').as_posix()}/"
+            url = f"/{index[target].relative_to(root).with_suffix('').as_posix().removesuffix('index')}"
+            source = f"/{path.relative_to(root).with_suffix('').as_posix().removesuffix('index')}"
+            url, source = url.rstrip("/") + "/", source.rstrip("/") + "/"
             entry = {"title": titles[path], "url": source}
             bucket = backlinks.setdefault(url, [])
             if entry not in bucket:
@@ -650,6 +652,7 @@ def run() -> None:
     if result.returncode != 0:
         raise SystemExit(result.stdout + result.stderr)
     print(result.stdout.strip().splitlines()[-1])
+    print(f"{postprocess.run(SITE, SITE / 'assets' / 'backlinks.json')} pages enhanced")
     eyebrow = SITE_URL.split("://", 1)[1].upper()
     count = og.write_all(brand.BRAND_DIR / "og", brand.load().modes["light"], eyebrow, cards, SITE)
     print(f"{count} preview cards")

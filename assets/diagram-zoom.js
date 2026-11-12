@@ -3,7 +3,7 @@
   const PZ = window.Panzoom || window.panzoom;
   if (!PZ) return;
 
-  const diagrams = [...document.querySelectorAll('.md-typeset img[src$=".svg"]')];
+  const shells = [...document.querySelectorAll(".diagram-zoom")];
 
   function track(action) {
     if (window.umami && typeof window.umami.track === "function") {
@@ -11,34 +11,10 @@
     }
   }
 
-  for (const img of diagrams) {
-    if (img.closest(".diagram-zoom")) continue;
-
-    const shell = document.createElement("div");
-    shell.className = "diagram-zoom";
-
-    const viewport = document.createElement("div");
-    viewport.className = "diagram-viewport";
-
-    const canvas = document.createElement("div");
-    canvas.className = "diagram-canvas";
-
-    const tools = document.createElement("div");
-    tools.className = "diagram-tools";
-    tools.innerHTML =
-      '<button type="button" data-action="in" aria-label="Zoom in" title="Zoom in">+</button>' +
-      '<button type="button" data-action="out" aria-label="Zoom out" title="Zoom out">-</button>' +
-      '<button type="button" data-action="reset" aria-label="Reset zoom" title="Reset zoom">Reset</button>' +
-      '<button type="button" data-action="full" aria-label="Fullscreen" title="Fullscreen">Full</button>';
-
-    const hint = document.createElement("span");
-    hint.className = "diagram-hint";
-    hint.textContent = "Drag to pan. Scroll or pinch to zoom.";
-
-    img.parentNode.insertBefore(shell, img);
-    viewport.appendChild(canvas);
-    canvas.appendChild(img);
-    shell.append(viewport, tools, hint);
+  for (const shell of shells) {
+    const viewport = shell.querySelector(".diagram-viewport");
+    const canvas = shell.querySelector(".diagram-canvas");
+    const tools = shell.querySelector(".diagram-tools");
 
     const pz = PZ(canvas, {
       maxZoom: 10,

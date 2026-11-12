@@ -128,42 +128,6 @@
     hideTimer = setTimeout(hide, 180);
   });
 
-  async function backlinks() {
-    const target = document.querySelector(".md-content__inner");
-    if (!target) return;
-    let data;
-    try {
-      const response = await fetch(`/assets/backlinks.json?v=${encodeURIComponent(document.lastModified)}`);
-      data = await response.json();
-    } catch {
-      return;
-    }
-    const entries = data[current] || [];
-    if (!entries.length) return;
-    const heading = document.createElement("h2");
-    heading.id = "linked-from";
-    heading.textContent = "Linked from";
-    const list = document.createElement("ul");
-    for (const entry of entries) {
-      const item = document.createElement("li");
-      const link = document.createElement("a");
-      link.href = entry.url;
-      link.textContent = entry.title;
-      item.appendChild(link);
-      list.appendChild(item);
-    }
-    const box = document.createElement("div");
-    box.className = "backlinks";
-    box.append(heading, list);
-    target.appendChild(box);
-  }
-
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", backlinks);
-  } else {
-    backlinks();
-  }
-
   // Demo hook only: /four-hats/ep04/?preview=rest shows the card for a screenshot.
   const demo = new URLSearchParams(location.search).get("preview");
   if (demo) {
