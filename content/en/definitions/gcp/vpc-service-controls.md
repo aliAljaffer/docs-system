@@ -194,21 +194,21 @@ vpcAccessibleServices:
 
 ### Common Use Cases
 #### Prevent Cloud Storage Exfiltration
-```
+```text
 Problem: Malicious actor copies data to their bucket
 Solution: VPC SC prevents storage.objects.create outside perimeter
 Result: Data cannot leave protected buckets
 ```
 
 #### Protect Sensitive BigQuery Datasets
-```
+```text
 Problem: Analyst exports data to personal project
 Solution: Create perimeter around analytics project
 Result: Cannot query from outside perimeter, even with IAM
 ```
 
 #### Secure Multi-Project Architecture
-```
+```text
 Architecture:
 - Production perimeter: prod-project-1, prod-project-2
 - Staging perimeter: staging-project
@@ -216,7 +216,7 @@ Architecture:
 ```
 
 #### Secure CI/CD Pipeline
-```
+```text
 Problem: CI/CD needs to access production resources
 Solution:
 - Create access level for CI/CD IP ranges
@@ -352,7 +352,7 @@ gcloud access-context-manager perimeters delete PERIMETER_NAME --policy=POLICY_I
 
 ### Architectural Patterns
 #### Hub and Spoke Perimeter Design
-```
+```text
 Architecture:
 - Central "hub" perimeter: Shared services (logging, monitoring, secrets)
 - Spoke perimeters: prod, staging, dev
@@ -367,7 +367,7 @@ Benefits:
 ```
 
 #### Defense in Depth Strategy
-```
+```text
 Layer 1: Organization Policies (prevent external IPs, enforce regions)
 Layer 2: IAM (least privilege, service accounts)
 Layer 3: VPC Firewall Rules (network-level)
@@ -376,7 +376,7 @@ Layer 5: Encryption (CMEK, data at rest and in transit)
 ```
 
 #### Zero Trust Architecture
-```
+```text
 Components:
 1. VPC Service Controls: Perimeter around sensitive data
 2. Identity-Aware Proxy: Context-aware access to applications
@@ -605,7 +605,7 @@ constraints/gcp.resourceLocations:
 ```
 
 **PCI-DSS Compliance:**
-```
+```text
 Requirements:
 1. Isolate cardholder data environment (CDE)
 2. Restrict access to CDE
@@ -620,7 +620,7 @@ VPC SC Implementation:
 ```
 
 **HIPAA Compliance:**
-```
+```text
 PHI Protection:
 1. Perimeter around healthcare data projects
 2. Device policy: Screen lock + admin approval

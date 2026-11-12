@@ -48,7 +48,7 @@ tags:
 ## Dedicated Interconnect
 
 ### Architecture
-```
+```text
 On-Premises ↔ Your Router ↔ Cross-Connect ↔ Google Edge Router ↔ Cloud Router ↔ VPC
 ```
 
@@ -105,7 +105,7 @@ On-Premises ↔ Your Router ↔ Cross-Connect ↔ Google Edge Router ↔ Cloud R
 ## Partner Interconnect
 
 ### Architecture
-```
+```text
 On-Premises ↔ Service Provider Network ↔ Google Edge ↔ Cloud Router ↔ VPC
 ```
 

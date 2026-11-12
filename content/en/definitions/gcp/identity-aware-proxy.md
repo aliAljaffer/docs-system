@@ -25,7 +25,7 @@ tags:
 - **BeyondCorp implementation** for cloud applications
 
 ### How It Works
-```
+```text
 1. User accesses application URL (iap.example.com)
 2. IAP intercepts request
 3. Check if user is authenticated
@@ -490,7 +490,7 @@ gcloud iap web get-iam-policy \
 
 ### Architectural Patterns
 #### Zero Trust Enterprise Access
-```
+```text
 Architecture:
 1. All applications behind IAP (no VPN)
 2. Access Levels: Corporate network OR VPN OR managed device
@@ -507,7 +507,7 @@ Benefits:
 ```
 
 #### Hybrid Cloud Architecture
-```
+```text
 Components:
 - GCP: Applications with IAP
 - On-Premises: Applications with IAP Connector
@@ -522,7 +522,7 @@ Same authentication, same policies
 ```
 
 #### Multi-Tier Application Security
-```
+```text
 Tiers:
 1. Public tier: Cloud Armor (DDoS, WAF)
 2. Identity tier: IAP (authentication)
@@ -786,7 +786,7 @@ gcloud alpha monitoring policies create \
 
 ### Compliance & Audit
 **SOC 2 CC6.6 (Logical Access):**
-```
+```text
 Evidence:
 1. IAP configuration (all apps protected)
 2. IAM policies (who has access)
@@ -802,7 +802,7 @@ Audit queries:
 ```
 
 **HIPAA Access Controls:**
-```
+```text
 Requirements:
 - Unique user identification
 - Automatic logoff (session timeout)
@@ -851,7 +851,7 @@ gcloud compute backend-services update BACKEND_SERVICE \
 
 ### Multi-Organization Strategy
 **For holding companies:**
-```
+```text
 Challenge: Users need access to apps in multiple orgs
 
 Solution:

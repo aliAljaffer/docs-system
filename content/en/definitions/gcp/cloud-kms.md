@@ -138,7 +138,7 @@ tags:
 - Better performance for large datasets
 
 **Example Flow:**
-```
+```text
 1. Generate DEK locally (AES-256)
 2. Encrypt data with DEK
 3. Send DEK to KMS for encryption (wrap)
@@ -367,7 +367,7 @@ gcloud logging read "resource.type=cloudkms_cryptokey"
 
 ### Architectural Patterns
 #### Defense in Depth
-```
+```text
 Layer 1: IAM (Who can access)
 Layer 2: VPC Service Controls (Network perimeter)
 Layer 3: Cloud KMS (Data encryption)
@@ -381,7 +381,7 @@ Layer 4: Application-level encryption
 - Disaster recovery: Cross-region key backups (encrypted)
 
 #### Separation of Duties
-```
+```text
 Role separation:
 - Security team: Create and manage keys (cloudkms.admin)
 - Application team: Encrypt/decrypt (cloudkms.cryptoKeyEncrypterDecrypter)
@@ -532,7 +532,7 @@ gcloud alpha monitoring policies create \
 - Ionic Security
 
 **Architecture:**
-```
+```text
 Application -> Cloud KMS API -> EKM Endpoint -> External Key Manager
                                  (In your VPC)
 ```

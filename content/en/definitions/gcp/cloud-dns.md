@@ -278,7 +278,7 @@ gcloud dns managed-zones create ZONE_NAME \
 - Requires [[cloud-vpn|Cloud VPN]] or [[cloud-interconnect|Cloud Interconnect]]
 
 **Example:**
-```
+```text
 On-Premises DNS (corp.local)
      ↕ (forwarding)
 Cloud VPN/Interconnect

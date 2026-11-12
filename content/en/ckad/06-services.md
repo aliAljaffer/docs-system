@@ -31,7 +31,7 @@ Port fields:
 
 A Service has this DNS name:
 
-```
+```text
 <service-name>.<namespace>.svc.<cluster-name>
 ```
 

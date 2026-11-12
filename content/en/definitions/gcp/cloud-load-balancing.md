@@ -26,7 +26,7 @@ tags:
 | Health checks | Configured per backend | Per target group |
 
 ### Load Balancer Types Overview
-```
+```text
 External Load Balancers (internet-facing)
 ├── Global
 │   ├── HTTP(S) Load Balancer (Layer 7)

@@ -79,7 +79,7 @@ tags:
 - **Save queries**: Reuse common queries
 
 ### Query Language
-```
+```text
 # Find errors in a specific service
 resource.type="cloud_run_revision"
 resource.labels.service_name="my-service"
@@ -180,7 +180,7 @@ gcloud logging metrics list
 
 ### Architectural Patterns
 #### Centralized Logging
-```
+```text
 Production Project → Aggregator Sink → Central Logging Project
 Staging Project    → Aggregator Sink → Central Logging Project
 Dev Project        → Aggregator Sink → Central Logging Project
@@ -191,7 +191,7 @@ Dev Project        → Aggregator Sink → Central Logging Project
 - Cost attribution per source project
 
 #### Log Archival Strategy
-```
+```text
 All Logs → Exclusion Filter (drop debug) → _Default Bucket (30 days)
                                          → Cloud Storage Sink (long-term)
 Critical Logs → Custom Bucket (1 year)
@@ -199,7 +199,7 @@ Audit Logs → _Required Bucket (400 days, automatic)
 ```
 
 #### Real-Time Log Processing
-```
+```text
 Logs → Pub/Sub Sink → Dataflow → BigQuery/Bigtable
                     → Cloud Function → Alert/Action
 ```
@@ -270,7 +270,7 @@ ORDER BY request_count DESC
 
 ### Integration Patterns
 #### SIEM Integration
-```
+```text
 Cloud Logging → Pub/Sub → Splunk/Chronicle/Datadog
 ```
 - Export to security information systems
@@ -278,7 +278,7 @@ Cloud Logging → Pub/Sub → Splunk/Chronicle/Datadog
 - Advanced threat detection
 
 #### Incident Response
-```
+```text
 Error Logs → Log-based Alert → Pub/Sub → Cloud Function → PagerDuty
 ```
 - Automated incident creation

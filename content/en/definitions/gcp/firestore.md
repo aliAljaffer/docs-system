@@ -60,7 +60,7 @@ tags:
 
 ### Data Model
 #### Structure Hierarchy
-```
+```text
 Database (Project)
   └── Collection (users)
       └── Document (user123)

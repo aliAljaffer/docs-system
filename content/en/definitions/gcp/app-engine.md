@@ -49,7 +49,7 @@ tags:
 | Background threads | Limited | ✓ |
 
 ### Application Structure
-```
+```text
 my-app/
 ├── app.yaml          # Configuration file
 ├── main.py           # Application code
@@ -251,7 +251,7 @@ gcloud app deploy dispatch.yaml
 - Full VM control → [[compute-engine|Compute Engine]]
 
 ### Multi-Service Architecture
-```
+```text
 default service (frontend)
 api service (REST API)
 admin service (admin panel)

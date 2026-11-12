@@ -42,7 +42,7 @@ tags:
 - Uses Google's **public IP ranges** but routes through Google backbone
 
 ### How It Works
-```
+```text
 VM (private IP only) → VPC Subnet (PGA enabled)
                     → Google's public IP (199.36.153.8/30)
                     → Google API (storage.googleapis.com)
@@ -61,7 +61,7 @@ gsutil cp file.txt gs://bucket/  # Works even without external IP!
 ```
 
 ### DNS Resolution
-```
+```text
 storage.googleapis.com → 199.36.153.8/30 (Google's public IP range)
 bigquery.googleapis.com → 199.36.153.8/30
 ```
@@ -96,7 +96,7 @@ bigquery.googleapis.com → 199.36.153.8/30
 
 #### 1. PSC for Google APIs
 **Replaces/enhances Private Google Access**
-```
+```text
 VM (private IP) → PSC Endpoint (10.0.0.5 in your VPC)
                → Private connection to Google API
                → Cloud Storage, BigQuery, etc.
@@ -110,7 +110,7 @@ VM (private IP) → PSC Endpoint (10.0.0.5 in your VPC)
 
 #### 2. PSC for Published Services
 **Connect to third-party services privately**
-```
+```text
 Your VPC → PSC Endpoint → Partner's service in Service Directory
                        → (e.g., Confluent Kafka, MongoDB Atlas)
 ```
@@ -119,7 +119,7 @@ Your VPC → PSC Endpoint → Partner's service in Service Directory
 
 #### 3. PSC for Service Producers
 **Publish your own services**
-```
+```text
 Your service in VPC A → PSC Published
                      → Consumed from VPC B via endpoint
                      → No VPC Peering needed!
@@ -150,7 +150,7 @@ gcloud compute forwarding-rules create psc-endpoint \
 ```
 
 #### DNS Resolution (After PSC)
-```
+```text
 storage.googleapis.com → 10.0.1.5 (YOUR VPC private IP!)
 bigquery.googleapis.com → 10.0.1.5
 ```
@@ -201,7 +201,7 @@ bigquery.googleapis.com → 10.0.1.5
 ## Architecture Patterns
 
 ### Pattern 1: Private Google Access (Simple)
-```
+```text
 ┌─────────────────────────────────┐
 │         VPC (Subnet)            │
 │  ┌─────────────────────┐        │
@@ -223,7 +223,7 @@ bigquery.googleapis.com → 10.0.1.5
 ```
 
 ### Pattern 2: Private Service Connect (Advanced)
-```
+```text
 ┌─────────────────────────────────────┐
 │            Your VPC                 │
 │  ┌─────────────────────┐            │
@@ -244,7 +244,7 @@ bigquery.googleapis.com → 10.0.1.5
 ```
 
 ### Pattern 3: Hybrid Cloud with PSC
-```
+```text
 ┌──────────────────────┐       ┌────────────────────────┐
 │   On-Premises        │       │      GCP VPC           │
 │   10.1.0.0/16        │       │   10.0.0.0/16          │

@@ -161,21 +161,21 @@ gcloud dataflow flex-template build gs://BUCKET/template.json \
 
 ### Architectural Patterns
 #### Streaming ETL
-```
+```text
 Pub/Sub → Dataflow → Transform → BigQuery
                    → Enrich (Cloud SQL lookup)
                    → Aggregate (windowing)
 ```
 
 #### Real-Time Analytics
-```
+```text
 IoT Devices → Pub/Sub → Dataflow (windowing) → BigQuery (dashboard)
                                               → Bigtable (time-series)
                                               → Pub/Sub (alerts)
 ```
 
 #### Batch Data Processing
-```
+```text
 Cloud Storage (daily files) → Dataflow → Transform → BigQuery (data warehouse)
                                        → Validate → Cloud Storage (errors)
 ```

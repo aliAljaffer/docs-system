@@ -328,7 +328,7 @@ with database.snapshot() as snapshot:
 
 ### Architectural Patterns
 #### Global Active-Active Pattern
-```
+```text
 [Users: Americas]     [Users: Europe]      [Users: Asia]
        |                    |                    |
 [Cloud Load Balancer - Global]

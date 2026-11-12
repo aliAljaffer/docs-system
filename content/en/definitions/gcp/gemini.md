@@ -169,13 +169,13 @@ for response in responses:
 
 ### Architectural Patterns
 #### RAG with Gemini
-```
+```text
 User Query → Embedding → Vector Search (Matching Engine)
           → Retrieved Docs → Gemini (with context) → Answer
 ```
 
 #### Multimodal Analysis Pipeline
-```
+```text
 Video Upload → Cloud Storage → Gemini 1.5 Pro (analyze)
                              → Extract insights
                              → Store in BigQuery
@@ -183,7 +183,7 @@ Video Upload → Cloud Storage → Gemini 1.5 Pro (analyze)
 ```
 
 #### Chatbot with Context Caching
-```
+```text
 User Message → Check Cache → Gemini (cached context + new query)
             → System Instructions (cached)
             → Company Docs (cached)

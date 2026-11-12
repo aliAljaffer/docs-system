@@ -151,7 +151,7 @@ try {
 
 ### Architectural Integration
 #### Error Monitoring Pipeline
-```
+```text
 Application → Error Reporting (auto-group)
            → Notifications (email/mobile)
            → Ticket System (via webhook)
@@ -159,7 +159,7 @@ Application → Error Reporting (auto-group)
 ```
 
 #### Incident Response Workflow
-```
+```text
 1. Error Reporting: New error detected
 2. Notification: Alert on-call engineer
 3. Cloud Logging: Investigate context
@@ -185,7 +185,7 @@ Application → Error Reporting (auto-group)
 
 ### Integration Patterns
 #### With Incident Management
-```
+```text
 Error Reporting → Pub/Sub → Cloud Function → PagerDuty
                                            → Jira
                                            → Slack

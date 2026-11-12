@@ -55,7 +55,7 @@ tags:
 - **Intelligent caching**: ML-based prediction of data access patterns
 
 #### Cluster Components
-```
+```text
 AlloyDB Cluster
 ├── Primary Instance (read-write)
 ├── Read Pool Instances (read-only, auto-scale)
@@ -429,7 +429,7 @@ SELECT pg_size_pretty(pg_database_size('mydb'));
 
 ### Architectural Patterns
 #### High Availability Architecture
-```
+```text
 [Application Tier - GKE/Compute Engine]
          |
   [AlloyDB Auth Proxy]
@@ -450,7 +450,7 @@ Primary (Zone A) → Standby (Zone B)
 - ~60 second RTO
 
 #### Read Scaling Architecture
-```
+```text
 [Application - Write Path] → [Primary Instance]
                                      ↓
                             [Shared Storage]
@@ -466,7 +466,7 @@ Primary (Zone A) → Standby (Zone B)
 - Auto-scaling based on CPU
 
 #### Hybrid OLTP/OLAP Architecture
-```
+```text
 [Transactional Workload] → [Primary Instance - Row Storage]
                                      ↓
                             [Shared Storage]
@@ -610,7 +610,7 @@ ORDER BY mean_time DESC;
 - **Cache hit ratio**: Target >99%
 
 #### Alerting Setup
-```
+```text
 Alerts:
 - CPU >80% for 5 minutes
 - Memory >90%
@@ -645,7 +645,7 @@ gcloud alloydb instances update READ_POOL_ID \
 - Use partitioning to drop old partitions
 
 #### When to Use Cloud SQL Instead
-```
+```text
 Decision Matrix:
 - Workload is not performance-critical → Cloud SQL
 - Budget <$500/month → Cloud SQL

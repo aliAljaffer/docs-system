@@ -178,14 +178,14 @@ gcloud ai endpoints deploy-model ENDPOINT_ID \
 
 ### Architectural Patterns
 #### Generative AI Application
-```
+```text
 User Request → Cloud Run (API) → Vertex AI (Gemini) → Response
                                 → RAG (Vertex AI Search) → Context
                                 → Safety Filters → Validation
 ```
 
 #### MLOps Pipeline
-```
+```text
 Data Prep → Feature Store → Training (Vertex Pipelines) → Model Registry
                                                          → A/B Testing
                                                          → Production Endpoint
@@ -193,7 +193,7 @@ Data Prep → Feature Store → Training (Vertex Pipelines) → Model Registry
 ```
 
 #### Multimodal AI
-```
+```text
 Images → Gemini 1.5 Pro → Analysis
 Text   → (multimodal)   → Generation
 Video  →                → Summarization
@@ -255,18 +255,18 @@ Video  →                → Summarization
 - **Human review**: For sensitive applications
 ### Integration Patterns
 #### With GCP Services
-```
+```text
 BigQuery → Vertex AI (training data)
          → AutoML → Model
          → Batch Prediction → BigQuery (results)
 ```
 #### Real-Time Inference
-```
+```text
 Cloud Run → Vertex AI Endpoint → Gemini
          → Memorystore (caching) → Fast response
 ```
 #### Batch Processing
-```
+```text
 Cloud Storage (data) → Vertex AI Batch Prediction → Cloud Storage (results)
                                                    → BigQuery (analytics)
 ```

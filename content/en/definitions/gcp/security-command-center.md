@@ -145,7 +145,7 @@ tags:
 - **Cloud Functions**: Automated remediation
 
 **Example Workflow:**
-```
+```text
 Finding Created -> Pub/Sub -> Cloud Function -> Automated Fix
                              -> Email -> Security Team
 ```
@@ -337,7 +337,7 @@ gcloud scc sources describe SOURCE_ID \
 
 ### Architectural Patterns
 #### Centralized Security Monitoring
-```
+```text
 Architecture:
 - Organization-level SCC (Premium)
 - All projects report findings
@@ -353,7 +353,7 @@ Benefits:
 ```
 
 #### Multi-Tier Security Response
-```
+```text
 Severity-Based Response:
 - Critical/High: Immediate Pub/Sub -> PagerDuty -> On-call engineer
 - Medium: Email to security team + ticket (JIRA/ServiceNow)
@@ -366,7 +366,7 @@ Automated Response:
 ```
 
 #### Compliance-Driven Architecture
-```
+```text
 For PCI-DSS Compliance:
 1. Enable SCC Premium
 2. Enable PCI-DSS compliance monitoring
@@ -487,7 +487,7 @@ def remediate_open_ssh(data, context):
 ```
 
 ### SIEM Integration Architecture
-```
+```text
 SCC Findings -> Pub/Sub -> Dataflow -> BigQuery -> Data Studio Dashboard
                          -> Cloud Function -> JIRA ticket
                          -> Splunk HEC (HTTP Event Collector)
@@ -624,7 +624,7 @@ GROUP BY security_center_properties.resource_project, category;
 
 ### Multi-Organization Strategy
 **For holding companies with multiple GCP orgs:**
-```
+```text
 Challenge: Each org has separate SCC
 Solution:
 1. Enable SCC Premium on each org
@@ -649,7 +649,7 @@ Solution:
 
 ### Migration from AWS Security Hub
 **Comparison:**
-```
+```text
 AWS Security Hub Findings -> GCP SCC Findings
 AWS GuardDuty -> GCP Event Threat Detection
 AWS Inspector -> GCP Security Health Analytics
@@ -667,7 +667,7 @@ AWS Config -> GCP Asset Inventory
 
 ### Advanced Use Cases
 #### Insider Threat Detection
-```
+```text
 Monitoring:
 - Unusual IAM activity (Event Threat Detection)
 - Data exfiltration attempts (VPC Flow Logs + ETD)
@@ -682,7 +682,7 @@ Response:
 ```
 
 #### Supply Chain Security
-```
+```text
 For container workloads:
 1. Binary Authorization: Only signed images
 2. Container Threat Detection: Monitor running containers

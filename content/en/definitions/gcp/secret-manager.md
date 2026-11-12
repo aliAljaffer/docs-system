@@ -80,7 +80,7 @@ gcloud secrets create SECRET_ID \
 - Enable/disable specific versions
 
 **Version Lifecycle:**
-```
+```text
 Create (v1) -> Add (v2) -> Add (v3)
            -> latest = v3
            -> Can still access v1, v2
@@ -101,7 +101,7 @@ echo -n "new-secret-value" | gcloud secrets versions add SECRET_ID --data-file=-
 - **Secret Manager triggers rotation, doesn't generate new value**
 
 **Rotation Flow:**
-```
+```text
 1. Secret Manager: Time to rotate (based on schedule)
 2. Pub/Sub: Publishes rotation event
 3. Cloud Function: Generates new secret value
@@ -366,7 +366,7 @@ gcloud secrets create SECRET_ID \
 
 ### Architectural Patterns
 #### Centralized Secrets Management
-```
+```text
 Architecture:
 - Shared "secrets" project
 - Secrets created in central project
@@ -381,7 +381,7 @@ Benefits:
 ```
 
 #### Multi-Environment Strategy
-```
+```text
 Option 1: Separate projects per environment
 - dev-secrets project
 - staging-secrets project
@@ -396,7 +396,7 @@ Option 2: Same project, naming convention
 ```
 
 #### Secret Rotation Architecture
-```
+```text
 1. Cloud Scheduler triggers rotation (schedule)
 2. Pub/Sub topic receives rotation event
 3. Cloud Function generates new credential
@@ -407,7 +407,7 @@ Option 2: Same project, naming convention
 
 ### Database Credentials Management
 **Pattern 1: Dual-Write Rotation**
-```
+```text
 1. Generate new password
 2. Create new DB user or update password
 3. Add new secret version
@@ -452,7 +452,7 @@ class SecretRefresher:
 
 ### API Key Management
 **Pattern: Scoped API Keys**
-```
+```text
 1. Create separate secret per external service
    - stripe-api-key
    - sendgrid-api-key
@@ -480,7 +480,7 @@ gcloud secrets create tls-bundle --data-file=cert.p12
 ```
 
 **Auto-Renewal with Let's Encrypt:**
-```
+```text
 1. Cloud Scheduler: Trigger renewal (monthly)
 2. Cloud Function: Run certbot/acme.sh
 3. Cloud Function: Upload new cert to Secret Manager
@@ -616,7 +616,7 @@ secret = get_secret_cached("my-secret", ttl_hash=get_ttl_hash())
 
 ### Migration from AWS Secrets Manager
 **Comparison & Mapping:**
-```
+```text
 AWS Secrets Manager -> GCP Secret Manager
 Secret Name -> Secret ID
 Version Stages (AWSCURRENT) -> Version number (latest)

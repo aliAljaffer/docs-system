@@ -79,7 +79,7 @@ Google Cloud migration follows **4 sequential phases**:
 | **Availability/Reliability** | Current SLA? Downtime tolerance? | High SLA = more careful planning |
 
 **Migration Complexity Matrix:**
-```
+```text
 Low Complexity → High Complexity
 - Stateless apps → Stateful apps
 - Few dependencies → Many dependencies
@@ -113,7 +113,7 @@ Low Complexity → High Complexity
 
 #### 1. Resource Organization
 **Design hierarchy:**
-```
+```text
 Organization (root)
 └── Folders (by department, environment, or team)
     ├── Shared Services Folder

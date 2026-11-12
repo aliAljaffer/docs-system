@@ -178,7 +178,7 @@ value = client.get('key')
 
 ### Architectural Patterns
 #### Web Application Caching
-```
+```text
 User → Load Balancer → Compute Engine/GKE
                      → Check Memorystore (cache hit = fast)
                      → Cloud SQL (cache miss = slower)
@@ -186,14 +186,14 @@ User → Load Balancer → Compute Engine/GKE
 ```
 
 #### Session Store
-```
+```text
 User Login → App Engine → Memorystore (session data)
                        → Share sessions across instances
                        → Fast session lookup
 ```
 
 #### Database Query Caching
-```
+```text
 Application → Memorystore (check cache)
            → Cache hit: Return cached result
            → Cache miss: Query Cloud SQL → Cache result → Return
@@ -239,7 +239,7 @@ Application → Memorystore (check cache)
 
 ### Caching Strategies
 #### Cache-Aside (Lazy Loading)
-```
+```text
 1. Check cache
 2. If miss: Query database
 3. Write to cache
@@ -249,7 +249,7 @@ Application → Memorystore (check cache)
 - Cache populated on-demand
 
 #### Write-Through
-```
+```text
 1. Write to database
 2. Write to cache simultaneously
 3. Return success
@@ -258,7 +258,7 @@ Application → Memorystore (check cache)
 - Higher write latency
 
 #### Write-Behind (Write-Back)
-```
+```text
 1. Write to cache
 2. Asynchronously write to database
 3. Return success immediately

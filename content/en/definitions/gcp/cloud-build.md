@@ -114,7 +114,7 @@ gcloud builds triggers list
 ## PCA Level
 
 ### CI/CD Pipeline
-```
+```text
 Git Push → Cloud Build Trigger → Build & Test → Push to Artifact Registry
                                                → Deploy to Cloud Run
                                                → Notify via Pub/Sub
