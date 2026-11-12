@@ -1,5 +1,10 @@
 :root,
 [data-md-color-scheme] {
+  --brand-body-size: 0.85rem;
+  --brand-h1-size: 2rem;
+  --brand-h2-size: 1.28rem;
+  --brand-h3-size: 1rem;
+  --brand-label-size: 0.6rem;
   --md-text-font: var(--brand-font-text);
   --md-code-font: var(--brand-font-code);
 
@@ -111,7 +116,9 @@ body::before {
 
 .md-header__topic:first-child {
   font-family: var(--brand-font-display);
-  font-size: 1.35rem;
+  font-size: 1.08rem;
+  font-weight: var(--brand-heading-weight);
+  font-variation-settings: var(--brand-display-settings);
   letter-spacing: 0;
 }
 
@@ -186,20 +193,20 @@ body::before {
 
 .md-nav__link {
   border-radius: var(--brand-radius);
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   line-height: 1.35;
   color: var(--brand-ink-soft);
 }
 
-/* Desktop shows the current course or project only, as the active branch of its tab. */
+/* Desktop shows the current course or project only, with its full tree. */
 @media screen and (min-width: 76.25em) {
-  .md-nav--primary .md-nav__list:has(> .md-nav__item--nested.md-nav__item--active) > .md-nav__item--nested:not(.md-nav__item--active),
-  .md-nav--primary .md-nav__list:has(> .md-nav__item--nested.md-nav__item--active) > .md-nav__item:not(.md-nav__item--nested) {
+  .md-nav--primary .md-nav__item--section > .md-nav > .md-nav__list:has(> .md-nav__item--nested.md-nav__item--active) > .md-nav__item--nested:not(.md-nav__item--active),
+  .md-nav--primary .md-nav__item--section > .md-nav > .md-nav__list:has(> .md-nav__item--nested.md-nav__item--active) > .md-nav__item:not(.md-nav__item--nested) {
     display: none;
   }
 }
 
-.md-nav--primary .md-nav__item--section .md-nav__item--nested.md-nav__item--active > .md-nav__link {
+.md-nav--primary .md-nav__item--section > .md-nav > .md-nav__list > .md-nav__item--nested.md-nav__item--active > .md-nav__link {
   font-family: var(--brand-font-label);
   font-size: var(--brand-label-size);
   letter-spacing: 0.06em;
@@ -210,7 +217,7 @@ body::before {
   color: var(--brand-ink-soft);
 }
 
-.md-nav--primary .md-nav__item--section .md-nav__item--nested.md-nav__item--active > .md-nav__link .md-nav__icon {
+.md-nav--primary .md-nav__item--section > .md-nav > .md-nav__list > .md-nav__item--nested.md-nav__item--active > .md-nav__link .md-nav__icon {
   display: none;
 }
 
@@ -287,7 +294,7 @@ body::before {
 }
 
 .md-sidebar--secondary .md-nav__link {
-  font-size: 0.8rem;
+  font-size: 0.7rem;
 }
 
 .md-typeset h2 {
@@ -325,6 +332,11 @@ body::before {
   background-color: var(--brand-syntax-bg);
   border: 1px solid var(--brand-rule);
   border-radius: calc(var(--brand-radius) / 2);
+}
+
+.md-code__nav {
+  background-color: transparent;
+  backdrop-filter: none;
 }
 
 .md-code__button:after {
@@ -427,4 +439,56 @@ body::before {
   border: 1px solid var(--brand-rule);
   border-radius: var(--brand-radius);
   font-weight: 400;
+}
+
+.md-typeset [type="checkbox"]:checked + .task-list-indicator::before {
+  background-color: var(--brand-accent-ink);
+}
+
+.md-nav__back {
+  display: none;
+}
+
+@media screen and (min-width: 76.25em) {
+  .md-nav__item--nested:has(> .md-nav__back) {
+    position: relative;
+  }
+
+  .md-nav__back {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 1.5em;
+    height: 1.5em;
+    color: var(--brand-ink-soft);
+    background-color: currentcolor;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M15.41 16.58 10.83 12l4.58-4.59L14 6l-6 6 6 6z'/%3E%3C/svg%3E") center / contain no-repeat;
+  }
+
+  .md-nav__back:focus,
+  .md-nav__back:hover {
+    color: var(--brand-ink-strong);
+  }
+
+  .md-nav__item--nested:has(> .md-nav__back) > .md-nav__link {
+    padding-left: 1.5em;
+  }
+}
+
+.md-search__button {
+  font-size: 0.7rem;
+}
+
+.md-search__button::after {
+  font-size: 0.6rem;
+}
+
+.md-typeset pre code {
+  font-size: 0.7rem;
+  line-height: 1.6;
+}
+
+.md-typeset :not(pre) > code {
+  font-size: max(0.6rem, 0.86em);
 }
