@@ -13,8 +13,9 @@ tags:
 `gcp` `databases`
 
 ## Cloud Bigtable
-**AWS Equivalent:** DynamoDB (NoSQL), Keyspaces (Cassandra-compatible)
 **Fully managed, scalable NoSQL wide-column database** for massive workloads
+
+**AWS Equivalent:** DynamoDB (NoSQL), Keyspaces (Cassandra-compatible)
 
 ### Key Characteristics
 - **Petabyte-scale** with sub-10ms latency

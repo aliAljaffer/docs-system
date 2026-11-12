@@ -13,9 +13,9 @@ tags:
 `gcp` `security`
 
 ## Secret Manager
-**AWS Equivalent:** AWS Secrets Manager
+Secret Manager provides **secure storage and management of sensitive data**, such as API keys, passwords, certificates, and tokens.
 
-**Secure storage and management of sensitive data** - API keys, passwords, certificates, tokens
+**AWS Equivalent:** AWS Secrets Manager
 
 ### Overview
 - **Centralized secret storage** across GCP projects

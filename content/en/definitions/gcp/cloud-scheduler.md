@@ -13,8 +13,9 @@ tags:
 `gcp` `management`
 
 ## Cloud Scheduler
-**AWS Equivalent:** Amazon EventBridge Scheduler (formerly CloudWatch Events)
 **Fully managed cron job scheduler**
+
+**AWS Equivalent:** Amazon EventBridge Scheduler
 
 ### Overview
 - Schedule tasks on cron schedule

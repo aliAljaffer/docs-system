@@ -13,8 +13,9 @@ tags:
 `gcp` `operations`
 
 ## Cloud Trace
-**AWS Equivalent:** AWS X-Ray
 **Distributed tracing** for microservices and applications
+
+**AWS Equivalent:** AWS X-Ray
 
 ### Overview
 - **Analyze latency** in distributed systems

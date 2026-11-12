@@ -12,6 +12,8 @@ tags:
 
 `aws` `services`
 
+AWS Identity and Access Management (IAM) is the AWS service that controls who can access AWS resources and what they can do with them.
+
 
 ### IAM Policies Inheritance
 - Inline Policy: Sole policy dedicated to a group-less user

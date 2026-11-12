@@ -13,8 +13,9 @@ tags:
 `gcp` `storage`
 
 ## Filestore
+**Fully managed Network File System (NFS) storage** for [[gcp/compute-engine|Compute Engine]] and [[gcp/gke|GKE]]
+
 **AWS Equivalent:** [[storage-efs|EFS (Elastic File System)]]
-**Fully managed NFS file storage** for [[gcp/compute-engine|Compute Engine]] and [[gcp/gke|GKE]]
 
 ### Overview
 - Managed Network File System (NFS)

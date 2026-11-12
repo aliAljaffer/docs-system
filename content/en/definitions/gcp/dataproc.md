@@ -13,8 +13,9 @@ tags:
 `gcp` `data`
 
 ## Cloud Dataproc
-**AWS Equivalent:** Amazon EMR
 **Managed Apache Spark and Hadoop** clusters
+
+**AWS Equivalent:** Amazon EMR
 
 ### Overview
 - Fast cluster provisioning (**90 seconds**)

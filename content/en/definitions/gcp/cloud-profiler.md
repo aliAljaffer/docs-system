@@ -13,8 +13,9 @@ tags:
 `gcp` `operations`
 
 ## Cloud Profiler
-**AWS Equivalent:** No direct equivalent (closest: CodeGuru Profiler)
 **Continuous CPU and memory profiling** for production apps
+
+**AWS Equivalent:** No direct equivalent (closest: CodeGuru Profiler)
 
 ### Overview
 - **Low-overhead profiling** (< 0.5% CPU)

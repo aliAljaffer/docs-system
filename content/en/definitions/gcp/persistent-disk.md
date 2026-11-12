@@ -13,8 +13,9 @@ tags:
 `gcp` `storage`
 
 ## Persistent Disk
-**AWS Equivalent:** [[storage-ebs|EBS (Elastic Block Storage)]]
 **Block storage** for [[gcp/compute-engine|Compute Engine]] and [[gcp/gke|GKE]] - network-attached, durable
+
+**AWS Equivalent:** [[storage-ebs|EBS (Elastic Block Storage)]]
 
 ### Overview
 - Network-attached block storage for VMs

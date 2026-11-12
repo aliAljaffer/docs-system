@@ -13,8 +13,9 @@ tags:
 `gcp` `devops`
 
 ## Artifact Registry
-**AWS Equivalent:** Amazon ECR + CodeArtifact
 **Managed artifact repository** for containers and packages
+
+**AWS Equivalent:** Amazon ECR + CodeArtifact
 
 ### Overview
 - Store Docker images, language packages (Maven, npm, Python)

@@ -13,8 +13,9 @@ tags:
 `gcp` `databases`
 
 ## Memorystore
-**AWS Equivalent:** Amazon ElastiCache
 **Fully managed** in-memory data store for Redis and Memcached
+
+**AWS Equivalent:** Amazon ElastiCache
 
 ### Overview
 - High-performance caching and session store

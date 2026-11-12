@@ -13,8 +13,9 @@ tags:
 `gcp` `operations`
 
 ## Error Reporting
-**AWS Equivalent:** CloudWatch Logs Insights + manual error grouping
 **Automatic error aggregation** and alerting
+
+**AWS Equivalent:** CloudWatch Logs Insights + manual error grouping
 
 ### Overview
 - Automatically groups similar errors

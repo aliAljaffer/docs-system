@@ -13,8 +13,9 @@ tags:
 `gcp` `networking`
 
 ## Virtual Private Cloud (VPC)
+A Virtual Private Cloud (VPC) is a **global resource** that spans all regions and provides an **isolated network** for Google Cloud resources.
+
 **AWS Equivalent:** [[vpc|VPC]]
-**Global resource** that spans all regions, providing **isolated network** for Google Cloud resources
 
 ### Key Differences from AWS VPC
 

@@ -11,6 +11,8 @@ tags:
 
 `react` `routing`
 
+In React Router, the `<Form>` component submits form data to the `action` function of a route.
+
 Use `<Form method="POST">` from react router. Kinda like PHP. Hidden input enables us to submit the cart with the order, without needing an input field displayed.
 
 ```js

@@ -12,6 +12,8 @@ tags:
 
 `gcp` `ai`
 
+These hands-on labs cover Google Cloud artificial intelligence (AI) and machine learning (ML): Vertex AI, BigQuery ML, and the Cloud ML APIs.
+
 | Lab ID | Title |
 |---|---|
 | [GSP917](https://www.skills.google/catalog?keywords=GSP917) | Vertex AI: Qwik Start |

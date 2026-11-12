@@ -11,6 +11,8 @@ tags:
 
 `gcp`
 
+The performance efficiency pillar is the group of AWS Well-Architected Framework principles for using computing resources efficiently to meet requirements. This page lists them.
+
 - Democratizing advanced technology
 - Go global
 	- Deploying workloads to multiple AWS [[region|regions]] which lowers latency

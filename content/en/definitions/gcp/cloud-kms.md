@@ -13,9 +13,9 @@ tags:
 `gcp` `security`
 
 ## Cloud KMS (Key Management Service)
-**AWS Equivalent:** AWS KMS
-
 **Managed cryptographic key management** - Create, use, rotate, and destroy cryptographic keys
+
+**AWS Equivalent:** AWS KMS
 
 ### Overview
 - **Centralized key management** for cloud services and applications

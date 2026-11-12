@@ -11,6 +11,8 @@ tags:
 
 `react` `routing`
 
+In React Router, revalidation re-fetches the data of the current page after an action runs, so the page shows the latest data.
+
 ```js
 function UpdateOrder({ order }) {
   const fetcher = useFetcher();

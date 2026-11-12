@@ -13,8 +13,9 @@ tags:
 `gcp` `databases`
 
 ## Cloud Spanner
-**AWS Equivalent:** Aurora Global Database / DynamoDB Global Tables (hybrid)
 **Globally distributed, horizontally scalable, strongly consistent** relational database
+
+**AWS Equivalent:** Aurora Global Database / DynamoDB Global Tables (hybrid)
 
 ### Key Characteristics
 - **Unlimited horizontal scalability** (petabytes of data)

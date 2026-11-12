@@ -13,9 +13,9 @@ tags:
 `gcp` `security`
 
 ## Security Command Center (SCC)
-**AWS Equivalent:** AWS Security Hub + GuardDuty
+Security Command Center provides **centralized security and risk management**: vulnerability scanning, threat detection, and compliance monitoring.
 
-**Centralized security and risk management** - Vulnerability scanning, threat detection, and compliance monitoring
+**AWS Equivalent:** AWS Security Hub + GuardDuty
 
 ### Overview
 - **Unified security dashboard** for GCP resources

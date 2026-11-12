@@ -13,8 +13,9 @@ tags:
 `gcp` `data`
 
 ## Cloud Composer
-**AWS Equivalent:** Amazon Managed Workflows for Apache Airflow (MWAA)
 **Managed Apache Airflow** for orchestrating data pipelines
+
+**AWS Equivalent:** Amazon Managed Workflows for Apache Airflow (MWAA)
 
 ### Overview
 - Fully managed Apache Airflow service

@@ -13,8 +13,9 @@ tags:
 `gcp` `databases`
 
 ## Cloud SQL
-**AWS Equivalent:** RDS
 **Fully managed relational database** service for MySQL, PostgreSQL, and SQL Server
+
+**AWS Equivalent:** RDS
 
 ### Supported Database Engines
 | Engine | Versions |

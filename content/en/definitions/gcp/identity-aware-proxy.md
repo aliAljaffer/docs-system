@@ -13,9 +13,9 @@ tags:
 `gcp` `security`
 
 ## Identity-Aware Proxy (IAP)
-**AWS Equivalent:** AWS Cognito + ALB Authentication (partial equivalence)
-
 **Context-aware access control for applications** - Authenticate users without VPN, enforce access policies based on identity and context
+
+**AWS Equivalent:** AWS Cognito + ALB Authentication (partial equivalence)
 ### Overview
 - **Zero Trust access model** - No VPN required
 - **Identity-based access** - Google accounts, workforce identity

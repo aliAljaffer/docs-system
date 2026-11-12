@@ -13,8 +13,9 @@ tags:
 `gcp` `ai`
 
 ## Vertex AI
+Vertex AI is a **unified artificial intelligence (AI) and machine learning (ML) platform** for building, deploying, and scaling ML models.
+
 **AWS Equivalent:** Amazon SageMaker + Bedrock (combined)
-**Unified AI/ML platform** for building, deploying, and scaling ML models
 ### Overview
 - End-to-end ML platform
 - **Unified API** for all ML workflows

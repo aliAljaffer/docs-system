@@ -12,6 +12,8 @@ tags:
 
 `aws` `services`
 
+Elastic Compute Cloud (EC2) is the AWS service that provides virtual servers, called instances, in the cloud.
+
 ## Elastic Compute Cloud EC2
 - Setup a Zero-Spend budget on [[financial-management-budgets|AWS Budget]] to prevent racking up a tab
 - **IaaS**

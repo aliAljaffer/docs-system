@@ -13,8 +13,9 @@ tags:
 `gcp` `compute`
 
 ## Google Kubernetes Engine (GKE)
-**AWS Equivalent:** [[containers-eks|EKS]]
 **Managed Kubernetes** service for containerized applications
+
+**AWS Equivalent:** [[containers-eks|EKS]]
 
 ### GKE Cluster Modes
 #### Autopilot Mode (Recommended)

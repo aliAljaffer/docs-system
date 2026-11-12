@@ -13,8 +13,9 @@ tags:
 `gcp` `networking`
 
 ## Cloud VPN
+**IPsec virtual private network (VPN)** connection between Google Cloud [[vpc|VPC]] and on-premises or other cloud networks
+
 **AWS Equivalent:** AWS Site-to-Site VPN
-**IPsec VPN** connection between Google Cloud [[vpc|VPC]] and on-premises or other cloud networks
 
 ### Key Differences from AWS VPN
 | Feature | GCP Cloud VPN | AWS Site-to-Site VPN |

@@ -12,6 +12,8 @@ tags:
 
 `gcp` `databases`
 
+These hands-on labs cover Google Cloud databases and analytics: Cloud SQL for MySQL and PostgreSQL, and BigQuery.
+
 | Lab | Title | Modules |
 |---|---|---|
 | [GSP151](https://www.skills.google/catalog?keywords=GSP151) | Cloud SQL for MySQL: Qwik Start | - |

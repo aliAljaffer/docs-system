@@ -13,8 +13,9 @@ tags:
 `gcp` `compute`
 
 ## Cloud Functions
-**AWS Equivalent:** [[compute-lambda|AWS Lambda]]
 **Event-driven serverless** compute for lightweight functions
+
+**AWS Equivalent:** [[compute-lambda|AWS Lambda]]
 
 ### Generations
 #### 1st Gen

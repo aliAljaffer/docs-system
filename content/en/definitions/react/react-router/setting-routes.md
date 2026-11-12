@@ -11,6 +11,8 @@ tags:
 
 `react` `routing`
 
+In React Router, routes map URL paths to the elements that the app displays.
+
 ### To set routes
 
 ```js

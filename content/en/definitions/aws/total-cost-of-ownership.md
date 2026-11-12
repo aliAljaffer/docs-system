@@ -11,7 +11,7 @@ tags:
 
 `gcp`
 
-**TCO**
+Total cost of ownership (TCO) is the full cost of owning and running a system, including hardware, facilities, and staff.
 
 TCO is one of the largest value additions for using the cloud.
 

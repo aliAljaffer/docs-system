@@ -13,8 +13,9 @@ tags:
 `gcp` `devops`
 
 ## Cloud Build
-**AWS Equivalent:** AWS CodeBuild + CodePipeline
 **Fully managed CI/CD** platform
+
+**AWS Equivalent:** AWS CodeBuild + CodePipeline
 
 ### Overview
 - Build, test, and deploy on Google Cloud

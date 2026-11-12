@@ -12,6 +12,8 @@ tags:
 
 `networking` `devices`
 
+This page lists common network and security devices, and the Open Systems Interconnection (OSI) layer each one works at.
+
 [[osi-model|OSI Model]]
 ## Network devices by layer
 
