@@ -1,14 +1,14 @@
 ---
-title: overview
+title: Media services overview
 category: AWS
-description: 'AWS note: Media Services Overview.'
+description: AWS Media services overview.
 tags:
 - aws
 - services
 ---
 
 
-# overview
+# Media services overview
 
 `aws` `services`
 
