@@ -13,8 +13,9 @@ tags:
 `gcp` `databases`
 
 ## BigQuery
-**AWS Equivalent:** [[analytics-redshift|Redshift]]
 **Serverless, petabyte-scale data warehouse** for analytics and business intelligence
+
+**AWS Equivalent:** [[analytics-redshift|Redshift]]
 
 ### Key Characteristics
 - **Fully serverless** (no infrastructure management)

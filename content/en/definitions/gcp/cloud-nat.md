@@ -13,8 +13,10 @@ tags:
 `gcp` `networking`
 
 ## Cloud NAT
-**AWS Equivalent:** NAT Gateway
 **Managed Network Address Translation** service for outbound internet connectivity from **private instances**
+
+**AWS Equivalent:** NAT Gateway
+
 ### Key Differences from AWS NAT Gateway
 | Feature         | GCP Cloud NAT                    | AWS NAT Gateway             |
 | --------------- | -------------------------------- | --------------------------- |

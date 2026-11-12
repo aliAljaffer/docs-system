@@ -13,8 +13,9 @@ tags:
 `gcp` `networking`
 
 ## Cloud NGFW (Next-Generation Firewall) Enterprise
-**AWS Equivalent:** AWS Network Firewall
 **Advanced Layer 3-7 stateful firewall** with **intrusion detection/prevention (IDS/IPS)** for VPC networks
+
+**AWS Equivalent:** AWS Network Firewall
 
 ### Key Differences from AWS Network Firewall
 | Feature | GCP Cloud NGFW Enterprise | AWS Network Firewall |

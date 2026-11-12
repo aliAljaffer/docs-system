@@ -13,8 +13,9 @@ tags:
 `gcp` `data`
 
 ## Eventarc
+**Event routing service** that connects Google Cloud services, software as a service (SaaS), and custom applications using **events**
+
 **AWS Equivalent:** Amazon EventBridge
-**Event routing service** that connects Google Cloud services, SaaS, and custom applications using **events**
 
 ### Overview
 - Centralized event routing for event-driven architectures

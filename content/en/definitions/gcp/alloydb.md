@@ -13,8 +13,9 @@ tags:
 `gcp` `databases`
 
 ## AlloyDB
-**AWS Equivalent:** Aurora PostgreSQL
 **Fully managed PostgreSQL-compatible database** optimized for demanding enterprise workloads
+
+**AWS Equivalent:** Aurora PostgreSQL
 
 ### Key Characteristics
 - **100x faster analytics** than standard PostgreSQL

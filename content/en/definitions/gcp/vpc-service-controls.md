@@ -13,9 +13,9 @@ tags:
 `gcp` `security`
 
 ## VPC Service Controls
-**AWS Equivalent:** VPC Endpoints + SCPs (combined functionality)
+VPC Service Controls creates a **security perimeter to prevent data exfiltration**, with context-aware access control for Google Cloud services.
 
-**Security perimeter to prevent data exfiltration** - Context-aware access control for GCP services
+**AWS Equivalent:** VPC Endpoints + SCPs (combined functionality)
 ### Overview
 - **Prevents data exfiltration** even with compromised credentials
 - **Service perimeter** around GCP resources

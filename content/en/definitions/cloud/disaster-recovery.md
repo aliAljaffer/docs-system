@@ -13,4 +13,4 @@ tags:
 
 `cloud` `fundamentals` `reliability`
 
-...refers to an organization's ability to recover from a disaster.
+Disaster recovery is an organization's ability to recover from a disaster.

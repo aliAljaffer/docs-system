@@ -13,8 +13,9 @@ tags:
 `gcp` `management`
 
 ## Workflows
+Workflows **orchestrates** services with serverless workflows.
+
 **AWS Equivalent:** AWS Step Functions
-**Orchestrate** services with serverless workflows
 
 ### Overview
 - Define workflows as YAML/JSON

@@ -13,8 +13,9 @@ tags:
 `gcp` `ai`
 
 ## Gemini
-**AWS Equivalent:** Amazon Bedrock Claude 3 (closest comparison)
 Google's **multimodal foundation model** for text, images, video, and code
+
+**AWS Equivalent:** Amazon Bedrock Claude 3 (closest comparison)
 ### Overview
 - **Multimodal**: Native support for text, images, video, audio, code
 - **Long context**: Up to **2 million tokens** (Gemini 1.5 Pro)

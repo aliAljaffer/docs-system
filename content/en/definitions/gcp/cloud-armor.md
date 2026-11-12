@@ -13,8 +13,9 @@ tags:
 `gcp` `networking`
 
 ## Cloud Armor
-**AWS Equivalent:** AWS WAF + AWS Shield
 **DDoS protection** and **Web Application Firewall (WAF)** for applications behind [[cloud-load-balancing|Cloud Load Balancing]]
+
+**AWS Equivalent:** AWS WAF + AWS Shield
 
 ### Key Differences from AWS WAF & Shield
 | Feature         | GCP Cloud Armor                    | AWS WAF + Shield                  |

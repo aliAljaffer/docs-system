@@ -13,8 +13,9 @@ tags:
 `gcp` `networking`
 
 ## Cloud Interconnect
-**AWS Equivalent:** AWS Direct Connect
 **Dedicated private connection** between on-premises network and Google Cloud [[vpc|VPC]]
+
+**AWS Equivalent:** AWS Direct Connect
 
 ### Key Differences from AWS Direct Connect
 | Feature | GCP Cloud Interconnect | AWS Direct Connect |

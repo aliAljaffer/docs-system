@@ -12,6 +12,8 @@ tags:
 
 `networking` `osi`
 
+The OSI (Open Systems Interconnection) model splits network communication into seven layers, from physical cables up to applications.
+
 | Layer | Job | Notes and examples |
 |---|---|---|
 | **Physical Layer** | This is the hardware part of communication, like cables, switches, and electrical signals. It sends raw bits over the physical medium. | Cables, fiber, signal |

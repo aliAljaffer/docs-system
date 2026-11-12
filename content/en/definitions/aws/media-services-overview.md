@@ -12,4 +12,6 @@ tags:
 
 `aws` `services`
 
+The AWS Media Services are the AWS services that process, convert, store, and deliver video. The screenshot below lists them.
+
 ![](/assets/vault/media-screengrab.webp)

@@ -11,6 +11,8 @@ tags:
 
 `gcp`
 
+The operational excellence pillar is the group of AWS Well-Architected Framework principles for running systems and improving operations over time. The table below lists them.
+
 
 | Principle | What it means |
 |---|---|

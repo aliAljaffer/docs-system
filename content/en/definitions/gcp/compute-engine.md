@@ -13,8 +13,9 @@ tags:
 `gcp` `compute`
 
 ## Compute Engine
+**IaaS** (infrastructure as a service) - virtual machines running in Google's data centers
+
 **AWS Equivalent:** [[compute-ec2|EC2]]
-**IaaS** - Virtual machines running in Google's data centers
 
 ### Machine Types
 #### Predefined Machine Types

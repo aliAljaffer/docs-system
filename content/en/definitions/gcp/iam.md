@@ -13,9 +13,9 @@ tags:
 `gcp` `security`
 
 ## IAM (Identity and Access Management)
-**AWS Equivalent:** AWS IAM
-
 **Identity and Access Management** - Control who (identity) has what access (role) to which resources
+
+**AWS Equivalent:** AWS IAM
 
 ### Core IAM Concepts
 **Policy Binding Formula:**

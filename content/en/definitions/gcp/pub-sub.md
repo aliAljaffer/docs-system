@@ -13,8 +13,9 @@ tags:
 `gcp` `data`
 
 ## Cloud Pub/Sub
+Cloud Pub/Sub is a **fully managed** messaging and event streaming service.
+
 **AWS Equivalent:** [[application-integration-sns|SNS]] + [[application-integration-sqs|SQS]] combined
-**Fully managed** messaging and event streaming
 
 ### Overview
 - **Global, durable** message queuing service

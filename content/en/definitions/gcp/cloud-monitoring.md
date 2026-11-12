@@ -13,8 +13,9 @@ tags:
 `gcp` `operations`
 
 ## Cloud Monitoring
-**AWS Equivalent:** [[management-and-governance-cloudwatch|CloudWatch]]
 **Observability and monitoring** for Google Cloud and AWS
+
+**AWS Equivalent:** [[management-and-governance-cloudwatch|CloudWatch]]
 
 ### Overview
 - **Formerly Stackdriver Monitoring**

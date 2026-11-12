@@ -12,6 +12,8 @@ tags:
 
 `gcp` `operations`
 
+These hands-on labs cover Google Cloud operations: Cloud Monitoring, Cloud Logging, Prometheus, Cloud Trace, and Error Reporting.
+
 | Lab | Title |
 |---|---|
 | [GSP089](https://www.skills.google/catalog?keywords=GSP089) | Cloud Monitoring: Qwik Start |

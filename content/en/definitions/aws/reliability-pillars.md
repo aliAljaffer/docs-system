@@ -11,6 +11,8 @@ tags:
 
 `gcp`
 
+The reliability pillar is the group of AWS Well-Architected Framework principles for helping a workload recover from failure and meet demand. The table below lists them.
+
 
 | Principle | What it means |
 |---|---|

@@ -13,8 +13,9 @@ tags:
 `gcp` `storage`
 
 ## Cloud Storage
-**AWS Equivalent:** [[storage-s3|S3]]
 **Object storage** for unstructured data - fully managed, scalable, and durable
+
+**AWS Equivalent:** [[storage-s3|S3]]
 
 ### Overview
 - Store any amount of data, retrieve it any time

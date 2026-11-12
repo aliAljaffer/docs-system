@@ -12,6 +12,8 @@ tags:
 
 `gcp` `networking`
 
+These hands-on labs cover Google Cloud networking: Virtual Private Cloud (VPC) networks, load balancers, VPC peering, and Cloud VPN.
+
 | Lab | Title | Time | Level |
 |---|---|---|---|
 | [GSP210](https://www.skills.google/catalog?keywords=GSP210) | VPC Networking Fundamentals | 1 hour | Introductory |

@@ -11,6 +11,8 @@ tags:
 
 `gcp`
 
+AWS storage is the group of AWS services that store data as blocks, files, or objects.
+
 - Storage is different from database in that with storage, you have more flexibility on how data you store is formatted.
 - Best way to keep and analyze log files is in a storage solution like [[storage-s3|S3]].
 - Can **automate** uploads/removals of objects to your storage.

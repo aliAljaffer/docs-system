@@ -13,9 +13,9 @@ tags:
 `gcp` `security`
 
 ## Binary Authorization
-**AWS Equivalent:** AWS Signer + ECR Image Scanning (partial equivalence)
-
 **Deploy-time security control** - Ensures only trusted container images are deployed to GKE and Cloud Run
+
+**AWS Equivalent:** AWS Signer + ECR Image Scanning (partial equivalence)
 
 ### Overview
 - **Enforcement point** at deployment time

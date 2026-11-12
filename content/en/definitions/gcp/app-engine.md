@@ -13,8 +13,9 @@ tags:
 `gcp` `compute`
 
 ## App Engine
-**AWS Equivalent:** [[compute-beanstalk|Elastic Beanstalk]]
 **Fully managed PaaS** for web applications and APIs
+
+**AWS Equivalent:** [[compute-beanstalk|Elastic Beanstalk]]
 
 ### Environments
 #### Standard Environment

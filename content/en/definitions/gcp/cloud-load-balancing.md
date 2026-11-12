@@ -13,8 +13,9 @@ tags:
 `gcp` `networking`
 
 ## Cloud Load Balancing
-**AWS Equivalent:** ELB, ALB, NLB
 **Fully managed** load balancing service, **globally distributed**, **auto-scaling**
+
+**AWS Equivalent:** ELB, ALB, NLB
 
 ### Key Differences from AWS
 | Feature | GCP Load Balancing | AWS ELB/ALB/NLB |

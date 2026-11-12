@@ -11,6 +11,8 @@ tags:
 
 `gcp`
 
+The security pillar is the group of AWS Well-Architected Framework principles for protecting data, systems, and assets. This page lists them.
+
 1. Implement a strong identity foundation
 	1. [[principle-of-least-privilege|Principle of Least Privilege]]
 2. Enable traceability

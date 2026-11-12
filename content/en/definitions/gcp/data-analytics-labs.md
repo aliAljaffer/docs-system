@@ -12,6 +12,8 @@ tags:
 
 `gcp` `data`
 
+These hands-on labs cover Google Cloud data services: Pub/Sub, Dataflow, Dataproc, Cloud Scheduler, Cloud Composer, and Eventarc.
+
 - **[GSP095-096](https://www.skills.google/catalog?keywords=GSP095-096)**: Pub/Sub: Qwik Start (Command Line, Console)
 - **[GSP192](https://www.skills.google/catalog?keywords=GSP192)**: Dataflow: Qwik Start - Templates
 - **[GSP193](https://www.skills.google/catalog?keywords=GSP193)**: Dataflow: Qwik Start - Python

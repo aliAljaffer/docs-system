@@ -12,6 +12,8 @@ tags:
 
 `gcp` `devops`
 
+These hands-on labs cover Google Cloud DevOps tools: continuous integration and continuous delivery (CI/CD) pipelines, Cloud Source Repositories, Cloud Build, Docker deployments to Kubernetes, and Terraform.
+
 | Lab | Title | Modules |
 |---|---|---|
 | [GSP1076-1079](https://www.skills.google/catalog?keywords=GSP1076-1079) | CI/CD labs | Artifact Registry, Cloud Build, Cloud Deploy, Continuous Delivery Pipelines |

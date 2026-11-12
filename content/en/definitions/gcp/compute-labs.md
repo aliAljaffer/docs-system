@@ -12,6 +12,8 @@ tags:
 
 `gcp` `compute`
 
+These hands-on labs cover Google Cloud compute services: virtual machines, Kubernetes Engine, Docker, Cloud Run, Cloud Functions, and App Engine.
+
 - **[GSP001](https://www.skills.google/catalog?keywords=GSP001)**: Creating a Virtual Machine (40 min, Introductory)
 - **[GSP662](https://www.skills.google/catalog?keywords=GSP662)**: Hosting a Web App on Google Cloud Using Compute Engine (45 min)
 - **[GSP100](https://www.skills.google/catalog?keywords=GSP100)**: Google Kubernetes Engine: Qwik Start

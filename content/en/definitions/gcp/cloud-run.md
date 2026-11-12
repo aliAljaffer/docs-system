@@ -13,8 +13,9 @@ tags:
 `gcp` `compute`
 
 ## Cloud Run
-**AWS Equivalent:** AWS Fargate + AWS App Runner (combined)
 **Fully managed** serverless platform for **containerized applications**
+
+**AWS Equivalent:** AWS Fargate + AWS App Runner (combined)
 
 ### Overview
 - Deploy containers without managing infrastructure

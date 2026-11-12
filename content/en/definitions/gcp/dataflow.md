@@ -13,8 +13,9 @@ tags:
 `gcp` `data`
 
 ## Cloud Dataflow
-**AWS Equivalent:** AWS Glue + Amazon Kinesis Data Analytics
 **Fully managed** stream and batch data processing
+
+**AWS Equivalent:** AWS Glue + Amazon Kinesis Data Analytics
 
 ### Overview
 - **Based on Apache Beam**

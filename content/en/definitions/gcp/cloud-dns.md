@@ -13,8 +13,9 @@ tags:
 `gcp` `networking`
 
 ## Cloud DNS
-**AWS Equivalent:** [[networking-route53|Route 53]]
 **Managed authoritative DNS** service running on Google's global infrastructure
+
+**AWS Equivalent:** [[networking-route53|Route 53]]
 
 ### Key Differences from AWS Route 53
 | Feature | GCP Cloud DNS | AWS Route 53 |

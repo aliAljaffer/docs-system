@@ -13,8 +13,9 @@ tags:
 `gcp` `databases`
 
 ## Firestore
-**AWS Equivalent:** DynamoDB
 **Serverless, NoSQL document database** for mobile, web, and server applications
+
+**AWS Equivalent:** DynamoDB
 
 ### Firestore Modes
 
