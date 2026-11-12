@@ -15,6 +15,8 @@ build:
 brand:
 	rm -rf .cache/brand brand
 	gh repo clone aliAljaffer/branding .cache/brand -- --quiet --depth 1 --branch main --filter=blob:none --sparse
+	git -C .cache/brand config credential.helper ''
+	git -C .cache/brand config --add credential.helper '!gh auth git-credential'
 	git -C .cache/brand sparse-checkout set export
 	mkdir brand
 	tar -C .cache/brand/export -c --exclude README.md --exclude 'plate-*' --exclude portfolio.css . | tar -x -C brand
