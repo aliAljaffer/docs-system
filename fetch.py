@@ -15,7 +15,7 @@ import provenance
 
 ROOT = Path(__file__).resolve().parent
 CACHE = ROOT / ".cache"
-KEEP = {".md", ".png", ".jpg", ".jpeg", ".gif", ".svg", ".webp", ".html", ".css", ".ttf"}
+KEEP = {".md", ".png", ".jpg", ".jpeg", ".gif", ".svg", ".webp", ".html", ".css", ".ttf", ".woff2"}
 SKIP_NAMES = {"AGENTS.md", "CLAUDE.md"}
 
 
