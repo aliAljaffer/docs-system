@@ -8,3 +8,5 @@ mkdocs.en.yml
 .build.lock
 .venv/
 .deployed
+lexers/*.egg-info/
+lexers/build/

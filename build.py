@@ -363,6 +363,23 @@ def apply_content(acts: Path, ep: str) -> tuple[str, str]:
     return "\n\n".join(blocks), spec["file"]
 
 
+SHELL_FENCES = {"bash", "sh", "shell", "console", "zsh"}
+
+
+def use_shell_lexer(text: str) -> str:
+    """Point tagged shell fences at the docs-shell lexer, which colours commands and flags."""
+    out: list[str] = []
+    fenced = False
+    for line in text.splitlines(keepends=True):
+        stripped = line.lstrip()
+        if stripped.startswith("```"):
+            if not fenced and stripped[3:].strip() in SHELL_FENCES:
+                line = line[: len(line) - len(stripped)] + "```docs-shell\n"
+            fenced = not fenced
+        out.append(line)
+    return "".join(out)
+
+
 def rebase_links(body: str) -> str:
     """Act-guide links are relative to docs/; the body lands in docs/episodes/."""
 
@@ -598,6 +615,8 @@ def assemble() -> tuple[Path, list[og.Card]]:
     process_wiki(BUILD)
     fetch.fetch_all(BUILD, config)
     prepare(BUILD, config)
+    for page in BUILD.rglob("*.md"):
+        page.write_text(use_shell_lexer(page.read_text()))
     inject_home(BUILD, config)
     write_index(BUILD, config, "projects", "Projects", TAGLINE)
     write_index(BUILD, config, "courses", "Courses", "Long-form courses built around one project or one skill path.")

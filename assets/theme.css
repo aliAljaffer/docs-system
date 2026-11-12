@@ -193,7 +193,8 @@ body::before {
 
 /* Desktop shows the current course or project only, as the active branch of its tab. */
 @media screen and (min-width: 76.25em) {
-  .md-nav--primary .md-nav__list:has(> .md-nav__item--nested.md-nav__item--active) > .md-nav__item--nested:not(.md-nav__item--active) {
+  .md-nav--primary .md-nav__list:has(> .md-nav__item--nested.md-nav__item--active) > .md-nav__item--nested:not(.md-nav__item--active),
+  .md-nav--primary .md-nav__list:has(> .md-nav__item--nested.md-nav__item--active) > .md-nav__item:not(.md-nav__item--nested) {
     display: none;
   }
 }
@@ -201,9 +202,16 @@ body::before {
 .md-nav--primary .md-nav__item--section .md-nav__item--nested.md-nav__item--active > .md-nav__link {
   font-family: var(--brand-font-label);
   font-size: var(--brand-label-size);
-  letter-spacing: var(--brand-label-track);
+  letter-spacing: 0.06em;
+  line-height: 1.5;
+  padding-left: 0;
+  padding-right: 0;
   text-transform: uppercase;
   color: var(--brand-ink-soft);
+}
+
+.md-nav--primary .md-nav__item--section .md-nav__item--nested.md-nav__item--active > .md-nav__link .md-nav__icon {
+  display: none;
 }
 
 .md-nav--primary .md-nav__item .md-nav__link--active {

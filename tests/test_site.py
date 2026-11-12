@@ -120,6 +120,12 @@ class SiteTests(unittest.TestCase):
         self.assertIn('!!! tip "Hover a term"', result)
         self.assertIn("    Move the pointer", result)
 
+    def test_shell_fences_are_highlighted(self) -> None:
+        page = (SITE / "ckad" / "06-services" / "index.html").read_text()
+        self.assertIn('<span class="nf">kubectl</span>', page)
+        self.assertIn('<span class="k">expose</span>', page)
+        self.assertIn("&lt;service-name&gt;.&lt;namespace&gt;", page)
+
     def test_removed_sections_absent(self) -> None:
         for name in ("blogs", "notes", "graph", "tags", "ar", "feed.xml", "posts.json"):
             self.assertFalse((SITE / name).exists(), name)
