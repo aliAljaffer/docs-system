@@ -79,7 +79,7 @@ $$m5.2xlarge$$
 - Browser-based SSH client to connect to your EC2 instances
 **NO AWS API KEYS IN INSTANCES!**
 ### EC2 Instances Purchasing Options
-[[compute-ec2-ccp|Pricing models]]
+[[compute-ec2-ccp#pricing models|Pricing models]]
 
 | Option | What you get | Note |
 |---|---|---|

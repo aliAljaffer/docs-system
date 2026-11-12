@@ -98,8 +98,8 @@ gcloud iam service-accounts add-iam-policy-binding GSA@PROJECT.iam.gserviceaccou
 #### VPC-Native (IP Aliasing) - **Recommended**
 - Pods get IPs from [[gcp/vpc|VPC]] subnet ranges
 - **Better integration with Google Cloud services**
-- Required for [[gcp/private-google-access-vs-psc|Private Google Access]], [[gcp/vpc-service-controls|VPC Service Controls]]
-- Required for [[gcp/vpc|Shared VPC]]
+- Required for [[gcp/private-google-access-vs-psc#Private Google Access (PGA)|Private Google Access]], [[gcp/vpc-service-controls|VPC Service Controls]]
+- Required for [[gcp/vpc#shared vpc|Shared VPC]]
 - Pods are routable within VPC
 
 #### Routes-Based (Legacy)
@@ -156,10 +156,10 @@ gcloud iam service-accounts add-iam-policy-binding GSA@PROJECT.iam.gserviceaccou
 
 ### Cost Optimization
 - **Autopilot**: Pay only for requested pod resources
-- **[[compute-engine|Spot nodes]]**: Up to 91% discount, for fault-tolerant workloads
+- **[[compute-engine#preemptible & spot vms|Spot nodes]]**: Up to 91% discount, for fault-tolerant workloads
 - **Cluster autoscaler**: Scale down unused nodes
 - **Bin packing**: Efficient pod placement to minimize nodes
-- **[[compute-engine|Committed Use Discounts]]**: 1 or 3 year, applies to GKE nodes
+- **[[compute-engine#committed use discounts (cud)|Committed Use Discounts]]**: 1 or 3 year, applies to GKE nodes
 
 ---
 
@@ -254,9 +254,9 @@ gcloud container clusters update CLUSTER_NAME \
 - Backup strategies for stateful data
 #### Batch Processing
 - Use Jobs or CronJobs
-- [[compute-engine|Spot nodes]] for cost savings
+- [[compute-engine#preemptible & spot vms|Spot nodes]] for cost savings
 - Resource requests/limits to ensure scheduling
-- Consider [[cloud-run|Cloud Run Jobs]] for simpler use cases
+- Consider [[cloud-run#Cloud Run Services vs Jobs|Cloud Run Jobs]] for simpler use cases
 
 ### Multi-Tenancy Strategies
 - **Namespace isolation**: Soft multi-tenancy
@@ -276,17 +276,17 @@ gcloud container clusters update CLUSTER_NAME \
 - **GKE Sandbox** for untrusted workloads
 - **Private clusters** with authorized networks
 - **[[gcp/vpc-service-controls|VPC Service Controls]]** for data exfiltration prevention
-- **[[compute-engine|Shielded]] GKE nodes** (default)
+- **[[compute-engine#shielded vms|Shielded]] GKE nodes** (default)
 - **Pod Security Standards** (Restricted, Baseline, Privileged)
 
 ### Cost Optimization Strategies
 - **Autopilot** for optimal resource utilization
-- **[[compute-engine|Spot nodes]]** for fault-tolerant workloads (up to 91% savings)
+- **[[compute-engine#preemptible & spot vms|Spot nodes]]** for fault-tolerant workloads (up to 91% savings)
 - **Cluster autoscaler** to scale nodes based on demand
 - **VPA** for rightsizing pod requests
-- **[[compute-engine|Committed Use Discounts]]** for predictable workloads
+- **[[compute-engine#committed use discounts (cud)|Committed Use Discounts]]** for predictable workloads
 - **Bin packing**: Set appropriate resource requests/limits
-- **[[compute-engine|Preemptible nodes]]** in Standard mode
+- **[[compute-engine#preemptible & spot vms|Preemptible nodes]]** in Standard mode
 
 ### Observability
 - [[gcp/cloud-monitoring|Cloud Monitoring]] for metrics
@@ -305,7 +305,7 @@ gcloud container clusters update CLUSTER_NAME \
 ### Networking Considerations
 - **VPC-native clusters** for better integration
 - **Network policies** for pod-to-pod security
-- **Ingress controllers**: GKE Ingress ([[gcp/cloud-load-balancing|HTTP(S) Load Balancer]]), NGINX, Istio
+- **Ingress controllers**: GKE Ingress ([[gcp/cloud-load-balancing#http(s) load balancing|HTTP(S) Load Balancer]]), NGINX, Istio
 - **Service mesh**: Anthos Service Mesh for mTLS, traffic management
 - **Pod IP address ranges**: Plan carefully to avoid IP exhaustion
 
@@ -320,5 +320,5 @@ gcloud container clusters update CLUSTER_NAME \
 - **Reliability**: Regional clusters, PDBs, health checks, multi-zone node pools
 - **Security**: Workload Identity, [[gcp/binary-authorization|Binary Authorization]], private clusters, least privilege
 - **Performance**: Appropriate machine types, GPUs for ML, local SSDs for high I/O
-- **Cost**: Autopilot, [[compute-engine|Spot nodes]], autoscaling, rightsizing
+- **Cost**: Autopilot, [[compute-engine#preemptible & spot vms|Spot nodes]], autoscaling, rightsizing
 - **Sustainability**: Efficient resource utilization, carbon-aware scheduling

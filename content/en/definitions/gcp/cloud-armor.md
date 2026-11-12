@@ -33,8 +33,8 @@ tags:
 ## Cloud Armor Overview
 - **Layer 7** security (HTTP/HTTPS)
 - Protects applications behind:
-  - [[cloud-load-balancing|Global HTTP(S) Load Balancer]]
-  - [[cloud-load-balancing|Regional External Application Load Balancer]]
+  - [[cloud-load-balancing#global http(s) load balancer|Global HTTP(S) Load Balancer]]
+  - [[cloud-load-balancing#regional external application load balancer|Regional External Application Load Balancer]]
 - Defends against:
   - **DDoS attacks** (Layer 3, 4, 7)
   - **OWASP Top 10** vulnerabilities

@@ -60,7 +60,7 @@ tags:
 - HA VPN gateway in each [[vpc|VPC]]
 - 2 tunnels between gateways
 - Use cases: Multi-project, multi-organization connectivity
-- **Consider [[vpc|VPC Peering]] instead** (better performance, no cost)
+- **Consider [[vpc#vpc peering|VPC Peering]] instead** (better performance, no cost)
 
 #### To AWS (GCP-to-AWS)
 - HA VPN in GCP
@@ -204,7 +204,7 @@ Configured at [[vpc|VPC]] level, affects Cloud Router behavior:
 - **Rotate keys regularly** for security
 
 ### Firewall Rules
-- Create [[vpc|VPC firewall rules]] for VPN traffic
+- Create [[vpc#firewall rules|VPC firewall rules]] for VPN traffic
 - Allow traffic from on-premises IP ranges
 - Use tags for granular control
 
@@ -310,7 +310,7 @@ gcloud compute vpn-tunnels delete TUNNEL_NAME --region=REGION
 
 #### Multi-Region Hub-and-Spoke
 - Central hub VPC with HA VPN to on-premises
-- Spoke VPCs connected via [[vpc|VPC Peering]]
+- Spoke VPCs connected via [[vpc#vpc peering|VPC Peering]]
 - Global routing mode for cross-region communication
 - Centralized egress to on-premises
 

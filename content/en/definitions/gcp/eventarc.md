@@ -431,7 +431,7 @@ Eventarc Trigger (europe-west1) → Cloud Run (europe-west1)
   - Targets verify caller identity
   - No public endpoints required
 - **[[gcp/vpc|VPC]] integration**:
-  - Use [[gcp/cloud-run|Cloud Run internal ingress]]
+  - Use [[gcp/cloud-run#ingress control|Cloud Run internal ingress]]
   - Private event targets (no internet exposure)
 - **[[gcp/vpc-service-controls|VPC Service Controls]]**:
   - Protect event data from exfiltration
@@ -445,7 +445,7 @@ Eventarc Trigger (europe-west1) → Cloud Run (europe-west1)
   - [[gcp/cloud-run|Cloud Run]]: Up to 1000 concurrent requests
   - [[gcp/cloud-functions|Cloud Functions]]: Up to 1000 concurrent invocations
 - **Cold starts**:
-  - Use Cloud Run [[gcp/cloud-run|min instances]] for latency-sensitive
+  - Use Cloud Run [[gcp/cloud-run#scaling configuration|min instances]] for latency-sensitive
   - Optimize container startup time
 - **Event filtering**:
   - Filter at trigger (reduce invocations)

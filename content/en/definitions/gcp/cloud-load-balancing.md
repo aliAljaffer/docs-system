@@ -214,7 +214,7 @@ Internal Load Balancers (private)
 - Autoscaling based on CPU, load, custom metrics
 - Auto-healing with health checks
 - **Most common backend type**
-- See [[gcp/compute-engine|Compute Engine MIGs]]
+- See [[gcp/compute-engine#managed instance groups (mig)|Compute Engine MIGs]]
 
 **Unmanaged Instance Groups**
 - Heterogeneous instances
@@ -466,7 +466,7 @@ gcloud compute backend-services update BACKEND_SERVICE_NAME \
 - **Autoscaling backends**: Scale down during low traffic
 - **Cloud CDN**: Reduce backend load and egress costs
 - **Internal LB**: No egress charges for [[vpc|VPC]] traffic
-- **[[gcp/compute-engine|Committed Use Discounts]]**: For predictable backend resources
+- **[[gcp/compute-engine#committed use discounts (cud)|Committed Use Discounts]]**: For predictable backend resources
 
 ### Traffic Management Strategies
 #### Canary Deployments
@@ -513,7 +513,7 @@ gcloud compute backend-services update BACKEND_SERVICE_NAME \
 - [[gcp/gke|GKE]] pods as direct backends (not node proxying)
 - **Lower latency** (no extra hop)
 - Better load distribution
-- Requires [[gcp/gke|VPC-native cluster]]
+- Requires [[gcp/gke#vpc-native (ip aliasing) - recommended|VPC-native cluster]]
 - Uses NEG automatically
 
 ### Advanced URL Map Configurations

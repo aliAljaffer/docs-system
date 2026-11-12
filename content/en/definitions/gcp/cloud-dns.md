@@ -141,7 +141,7 @@ Unlike AWS Route 53, Cloud DNS does **not support** advanced routing policies:
 - ❌ No geoproximity routing
 
 **Workaround**: Use [[cloud-load-balancing|Cloud Load Balancing]] for traffic management:
-- [[cloud-load-balancing|Global Load Balancer]] handles geo-routing
+- [[cloud-load-balancing#global http(s) load balancer|Global Load Balancer]] handles geo-routing
 - Point DNS A record to Load Balancer IP
 - Load Balancer distributes to backends
 
@@ -297,7 +297,7 @@ VPC Resources
 ```
 
 #### Multi-Project DNS Architecture
-- **[[vpc|Shared VPC]]**: Host project manages DNS zones
+- **[[vpc#shared vpc|Shared VPC]]**: Host project manages DNS zones
 - **DNS Peering**: Service projects peer to host DNS zones
 - Centralized DNS management
 - Consistent naming across projects
@@ -310,7 +310,7 @@ VPC Resources
 
 #### Global Application with DNS
 - Cloud DNS public zone for domain
-- A record → [[cloud-load-balancing|Global Load Balancer]] IP
+- A record → [[cloud-load-balancing#global http(s) load balancer|Global Load Balancer]] IP
 - Load Balancer handles geo-routing
 - Multiple backend regions for low latency
 

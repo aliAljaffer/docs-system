@@ -16,7 +16,7 @@ Migration strategies, also called "the 6 R's", are six approaches for moving an 
 Can be automated with tools like [[customer-enablement-aws-vm-import-export|AWS VM Import Export]].
 "We’ve also found that applications are easier to optimize/re-architect once they’re already running in the cloud. Partly because your organization will have developed better skills to do so, and partly because the hard part  -  migrating the application, data, and traffic  -  has already been done."
 ### 2 - Replatforming ("Lift-tinker-and-shift")
-Optimizations for the cloud on your application to achieve some benefit, like performance or lower costs, but you aren't changing the core architecture of the application. You may be looking to reduce the amount of time you spend managing database instances by migrating to a database as a service platform like [[database-aws-database|RDS]] or migrating your application to a fully managed platform like [[compute-beanstalk|beanstalk]]
+Optimizations for the cloud on your application to achieve some benefit, like performance or lower costs, but you aren't changing the core architecture of the application. You may be looking to reduce the amount of time you spend managing database instances by migrating to a database as a service platform like [[database-aws-database#DB Services|RDS]] or migrating your application to a fully managed platform like [[compute-beanstalk|beanstalk]]
 ### 3 - Repurchasing - Moving to a different product
 A move to a SaaS platform.
 ### 4 - Refactoring / Re-architecting - Re-imagining how the application is architected and developed, typically using cloud-native features.

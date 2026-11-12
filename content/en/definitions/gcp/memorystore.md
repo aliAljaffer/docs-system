@@ -224,7 +224,7 @@ Application → Memorystore (check cache)
 ### Security Best Practices
 - **Private IP only** (no internet exposure)
 - VPC firewall rules
-- [[gcp/vpc|VPC Service Controls]] for data protection
+- [[gcp/vpc#vpc service controls|VPC Service Controls]] for data protection
 - Redis AUTH for authentication
 - TLS/SSL for transit encryption
 - IAM roles (see the table below)

@@ -329,6 +329,6 @@ bigquery.googleapis.com → 10.0.1.5
 
 - **[[vpc|VPC]]**: Both features operate within VPC
 - **[[cloud-vpn|Cloud VPN]]** / **[[cloud-interconnect|Cloud Interconnect]]**: PSC often used with hybrid connectivity
-- **[[vpc|VPC Service Controls]]**: Works with both PGA and PSC
+- **[[vpc#vpc service controls|VPC Service Controls]]**: Works with both PGA and PSC
 - **[[gcp/gke|GKE Private Clusters]]**: Commonly use PGA
 - **[[cloud-nat|Cloud NAT]]**: Alternative to PGA (but costs more, provides full internet access)

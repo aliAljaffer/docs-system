@@ -101,15 +101,15 @@ tags:
 - Callers must provide valid credentials
 - [[gcp/iam|IAM]] role: `roles/run.invoker`
 - Methods:
-  - Service-to-service: [[gcp/iam|Service account]] identity tokens
+  - Service-to-service: [[gcp/iam#service accounts|Service account]] identity tokens
   - User: Google Sign-In or [[gcp/iam|Cloud IAM]]
 
 ### Traffic Management
 - **Revisions**: Each deployment creates a new immutable revision
 - **Traffic splitting**: Route % of traffic to different revisions
-  - [[gcp/deployment-strategies|Blue/green deployments]]
-  - [[gcp/deployment-strategies|Canary testing]]
-  - [[gcp/deployment-strategies|Gradual rollouts]]
+  - [[gcp/deployment-strategies#5. blue/green deployment|Blue/green deployments]]
+  - [[gcp/deployment-strategies#4. canary deployment|Canary testing]]
+  - [[gcp/deployment-strategies#2. rolling update (rolling deployment)|Gradual rollouts]]
 - **Tags**: Assign names to revisions for testing
   - Each tag gets a unique URL
 
@@ -214,19 +214,19 @@ gcloud run jobs execute JOB_NAME --region=REGION
 
 #### Microservices
 - Each microservice as separate Cloud Run service
-- Service-to-service authentication with [[gcp/iam|service accounts]]
+- Service-to-service authentication with [[gcp/iam#service accounts|service accounts]]
 - [[gcp/cloud-trace|Cloud Trace]] for distributed tracing
 - Internal ingress for inter-service communication
 
 ### High Availability Design
 - **Multi-region deployment** for global availability
-- [[gcp/cloud-load-balancing|Global HTTP(S) Load Balancing]] for multi-region routing
+- [[cloud-load-balancing#Global HTTP(S) Load Balancer|Global HTTP(S) Load Balancing]] for multi-region routing
 - Health checks and automatic traffic failover
 - Regional redundancy
 
 ### Security Best Practices
 - **Authentication**: Always enable unless truly public
-- **Service Identity**: Unique [[gcp/iam|service account]] per service
+- **Service Identity**: Unique [[gcp/iam#service accounts|service account]] per service
 - **[[gcp/iam|IAM]]**: Principle of least privilege
 - **[[gcp/vpc-service-controls|VPC Service Controls]]**: Prevent data exfiltration
 - **[[gcp/binary-authorization|Binary Authorization]]**: Only deploy verified images
@@ -286,8 +286,8 @@ gcloud run jobs execute JOB_NAME --region=REGION
 - [[gcp/cloud-build|Cloud Build]] for container builds
 - [[gcp/artifact-registry|Artifact Registry]] for image storage
 - [Cloud Deploy](https://cloud.google.com/deploy) for deployment pipelines
-- [[gcp/deployment-strategies|Canary deployments]] with traffic splitting
-- [[gcp/deployment-strategies|Blue/green]] with revision management
+- [[gcp/deployment-strategies#4. canary deployment|Canary deployments]] with traffic splitting
+- [[gcp/deployment-strategies#5. blue/green deployment|Blue/green]] with revision management
 - Automated rollbacks on errors
 
 ### Migration to Cloud Run
