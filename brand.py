@@ -13,10 +13,22 @@ BRAND_DIR = ROOT / "brand"
 GISCUS_TEMPLATE = ROOT / "templates" / "giscus.css.tmpl"
 MODES = {"light": "light", "night": "dark"}
 REQUIRED = ("paper", "ink", "accent")
-OPTIONAL = ("paper_2", "paper_3", "ink_strong", "ink_soft", "ink_faint", "rule", "accent_ink", "code", "accent_fill", "on_accent")
+OPTIONAL = ("paper_2", "paper_3", "ink_strong", "ink_soft", "ink_faint", "rule", "accent_ink", "code", "accent_fill", "on_accent",
+            "complement", "wash_a", "wash_b", "wash_c")
 SYNTAX = ("bg", "text", "keyword", "function", "string", "number", "type", "comment", "punctuation")
-SHAPE_DEFAULTS = {"radius": "0", "radius_lg": "0", "label_size": "11px", "shadow": False, "headings": "text"}
+SHAPE_DEFAULTS = {
+    "radius": "0", "radius_lg": "0", "label_size": "11px", "shadow": False, "headings": "text",
+    "surfaces": "outline", "washes": False, "grain": False, "logo_size": "24px",
+}
+TYPE_DEFAULTS = {
+    "body_size": "0.8rem", "h1_size": "1.7em", "h2_size": "1.3em", "h3_size": "1.1em",
+    "heading_weight": 700, "heading_rule": True, "display_settings": "normal",
+    "label_font": "text", "label_track": "0.15em",
+}
 SIZE = re.compile(r"^(0|\d+(\.\d+)?px)$")
+LENGTH = re.compile(r"^\d+(\.\d+)?(px|rem|em)$")
+WASH_STRENGTH = {"light": (30, 24, 20), "night": (10, 8, 0)}
+GRAIN_OPACITY = {"light": 0.5, "night": 0.25}
 TRIPLETS = ("paper", "paper_2", "ink", "accent")
 HEX = re.compile(r"^#(?:[0-9a-fA-F]{3}|[0-9a-fA-F]{6})$")
 GISCUS_MODE = {
@@ -40,8 +52,10 @@ class Brand:
     modes: dict[str, dict[str, str]]
     syntax: dict[str, dict[str, str]]
     shape: dict[str, object]
+    type: dict[str, object]
     fonts: dict[str, str]
     stylesheets: list[str]
+    logo: str
     favicon: str
     source: Path
 
@@ -79,6 +93,9 @@ def resolve(raw: dict, mode: str) -> dict[str, str]:
     colours.setdefault("code", colours["accent_ink"])
     colours.setdefault("accent_fill", accent)
     colours.setdefault("on_accent", paper)
+    colours.setdefault("complement", accent)
+    for key in ("wash_a", "wash_b", "wash_c"):
+        colours.setdefault(key, paper)
     return colours
 
 
@@ -102,12 +119,29 @@ def resolve_shape(raw: dict) -> dict[str, object]:
     unknown = set(shape) - set(SHAPE_DEFAULTS)
     if unknown:
         raise SystemExit(f"brand.json: unknown shape keys: {', '.join(sorted(unknown))}")
-    for key in ("radius", "radius_lg", "label_size"):
+    for key in ("radius", "radius_lg", "label_size", "logo_size"):
         if not isinstance(shape[key], str) or not SIZE.match(shape[key]):
             raise SystemExit(f"brand.json: shape.{key} must be 0 or a px size like 12px, got {shape[key]!r}")
     if shape["headings"] not in ("text", "display"):
         raise SystemExit("brand.json: shape.headings must be 'text' or 'display'")
+    if shape["surfaces"] not in ("outline", "filled"):
+        raise SystemExit("brand.json: shape.surfaces must be 'outline' or 'filled'")
     return shape
+
+
+def resolve_type(raw: dict) -> dict[str, object]:
+    scale = {**TYPE_DEFAULTS, **(raw.get("type") or {})}
+    unknown = set(scale) - set(TYPE_DEFAULTS)
+    if unknown:
+        raise SystemExit(f"brand.json: unknown type keys: {', '.join(sorted(unknown))}")
+    for key in ("body_size", "h1_size", "h2_size", "h3_size", "label_track"):
+        if not isinstance(scale[key], str) or not LENGTH.match(scale[key]):
+            raise SystemExit(f"brand.json: type.{key} must be a px, rem or em length, got {scale[key]!r}")
+    if scale["heading_weight"] not in range(100, 1000, 100):
+        raise SystemExit("brand.json: type.heading_weight must be 100 to 900 in steps of 100")
+    if scale["label_font"] not in ("text", "code", "display"):
+        raise SystemExit("brand.json: type.label_font must be 'text', 'code' or 'display'")
+    return scale
 
 
 def load(path: Path = BRAND_DIR / "brand.json") -> Brand:
@@ -120,16 +154,20 @@ def load(path: Path = BRAND_DIR / "brand.json") -> Brand:
         raise SystemExit("brand.json: fonts.text is required")
     fonts = {"text": fonts["text"], "code": fonts.get("code", fonts["text"]), "display": fonts.get("display", fonts["text"])}
     icon = raw.get("icon")
-    if not icon or not (path.parent / icon).is_file():
-        raise SystemExit(f"brand.json: icon file not found: {icon}")
+    favicon = raw.get("favicon", icon)
+    for key, name in (("icon", icon), ("favicon", favicon)):
+        if not name or not (path.parent / name).is_file():
+            raise SystemExit(f"brand.json: {key} file not found: {name}")
     modes = {mode: resolve(raw, mode) for mode in MODES}
     return Brand(
         modes=modes,
         syntax={mode: resolve_syntax(raw, mode, modes[mode]) for mode in MODES},
         shape=resolve_shape(raw),
+        type=resolve_type(raw),
         fonts=fonts,
         stylesheets=list(raw.get("stylesheets", [])),
-        favicon=icon,
+        logo=icon,
+        favicon=favicon,
         source=path.parent,
     )
 
@@ -151,17 +189,49 @@ def shadow(colours: dict[str, str], mode: str, on: bool) -> str:
     return f"0 1px 2px rgba({r}, {g}, {b}, 0.04), 0 6px 18px rgba({r}, {g}, {b}, {0.05 if mode == 'light' else 0.3})"
 
 
+def surfaces(colours: dict[str, str], filled: bool) -> dict[str, str]:
+    """Outline is the hairline look (rules, bold active items); filled is the painted one (tinted fills, soft cards)."""
+    if not filled:
+        return {
+            "header-bg": colours["paper"], "header-blur": "none", "card-bg": "transparent",
+            "nav-active-bg": "transparent", "nav-active-weight": "700",
+            "code-inline-bg": colours["paper_2"], "code-inline-fg": colours["code"],
+            "panel-bg": colours["paper"], "panel-border": colours["rule"], "panel-edge": colours["ink"], "panel-edge-width": "2px",
+            "button-bg": "transparent", "button-fg": colours["ink"], "button-border": colours["ink"],
+            "button-hover-fg": colours["accent_ink"], "button-hover-border": colours["accent_ink"],
+        }
+    return {
+        "header-bg": mix(colours["paper"], 88, "transparent"), "header-blur": "blur(10px)", "card-bg": colours["paper_2"],
+        "nav-active-bg": mix(colours["accent"], 22, "transparent"), "nav-active-weight": "600",
+        "code-inline-bg": mix(colours["accent"], 18, colours["paper_2"]), "code-inline-fg": colours["ink"],
+        "panel-bg": mix(colours["complement"], 18, colours["paper_2"]), "panel-border": "transparent",
+        "panel-edge": colours["complement"], "panel-edge-width": "4px",
+        "button-bg": colours["accent_fill"], "button-fg": colours["on_accent"], "button-border": "transparent",
+        "button-hover-fg": colours["on_accent"], "button-hover-border": colours["ink"],
+    }
+
+
 def mode_properties(brand: Brand, mode: str) -> str:
-    lines = custom_properties(brand.modes[mode])
+    colours = brand.modes[mode]
+    lines = custom_properties(colours)
     lines += "".join(f"  --brand-syntax-{key}: {value};\n" for key, value in brand.syntax[mode].items())
-    lines += f"  --brand-shadow: {shadow(brand.modes[mode], mode, bool(brand.shape['shadow']))};\n"
+    lines += f"  --brand-shadow: {shadow(colours, mode, bool(brand.shape['shadow']))};\n"
+    lines += "".join(f"  --brand-{key}: {value};\n" for key, value in surfaces(colours, brand.shape["surfaces"] == "filled").items())
+    strengths = WASH_STRENGTH[mode] if brand.shape["washes"] else (0, 0, 0)
+    lines += "".join(f"  --brand-wash-{w}-strength: {p}%;\n" for w, p in zip("abc", strengths))
+    lines += f"  --brand-grain-opacity: {GRAIN_OPACITY[mode] if brand.shape['grain'] else 0};\n"
     return lines
 
 
 def css(brand: Brand) -> str:
     families = "".join(f"  --brand-font-{name}: {font_stack(name, family)};\n" for name, family in brand.fonts.items())
     families += f"  --brand-font-heading: var(--brand-font-{brand.shape['headings']});\n"
-    families += "".join(f"  --brand-{key.replace('_', '-')}: {brand.shape[key]};\n" for key in ("radius", "radius_lg", "label_size"))
+    families += "".join(f"  --brand-{key.replace('_', '-')}: {brand.shape[key]};\n" for key in ("radius", "radius_lg", "label_size", "logo_size"))
+    families += f"  --brand-font-label: var(--brand-font-{brand.type['label_font']});\n"
+    families += "".join(f"  --brand-{key.replace('_', '-')}: {brand.type[key]};\n"
+                        for key in ("body_size", "h1_size", "h2_size", "h3_size", "heading_weight", "display_settings", "label_track"))
+    rule = brand.type["heading_rule"]
+    families += f"  --brand-heading-rule: {'1px' if rule else '0'};\n  --brand-heading-rule-gap: {'0.4em' if rule else '0'};\n"
     light = mode_properties(brand, "light")
     night = mode_properties(brand, "night")
     return (

@@ -161,7 +161,9 @@ class SiteTests(unittest.TestCase):
 
     def test_page_uses_brand_head(self) -> None:
         page = (SITE / "projects" / "homelab" / "index.html").read_text()
-        self.assertIn('rel="icon" href="../../assets/brand/icon.svg"', page)
+        raw = json.loads((ROOT / "brand" / "brand.json").read_text())
+        self.assertIn(f'rel="icon" href="../../assets/brand/{raw.get("favicon", raw["icon"])}?v=', page)
+        self.assertIn(f'src="../../assets/brand/{raw["icon"]}?v=', page)
         for name in ("family=Inter", "JetBrains"):
             self.assertNotIn(name, page)
         self.assertNotIn('data-md-color-primary="indigo"', page)
@@ -232,6 +234,24 @@ class BrandCompilerTests(unittest.TestCase):
         self.assertEqual(loaded.modes["night"]["accent_ink"], "#00ffff")
         self.assertIn("color-mix", loaded.modes["light"]["ink_soft"])
         self.assertIn("--brand-rule:", brand.css(loaded))
+
+    def test_type_and_surfaces(self) -> None:
+        good = {"paper": "#ffffff", "ink": "#000000", "accent": "#0000ff"}
+        plain = brand.css(brand.load(self.write({"light": good, "night": good})))
+        for line in ("--brand-body-size: 0.8rem;", "--brand-heading-rule: 1px;", "--brand-wash-a-strength: 0%;",
+                     "--brand-grain-opacity: 0;", "--brand-nav-active-bg: transparent;"):
+            self.assertIn(line, plain)
+        painted = brand.css(brand.load(self.write({
+            "light": {**good, "wash_a": "#ff00ff"}, "night": good,
+            "shape": {"surfaces": "filled", "washes": True, "grain": True},
+            "type": {"body_size": "17px", "heading_rule": False, "label_font": "code"},
+        })))
+        for line in ("--brand-body-size: 17px;", "--brand-heading-rule: 0;", "--brand-wash-a: #ff00ff;",
+                     "--brand-wash-a-strength: 30%;", "--brand-grain-opacity: 0.5;", "--brand-font-label: var(--brand-font-code);"):
+            self.assertIn(line, painted)
+        for bad in ({"type": {"body_size": "big"}}, {"type": {"leading": "2"}}, {"shape": {"surfaces": "glossy"}}):
+            with self.assertRaises(SystemExit):
+                brand.load(self.write({"light": good, "night": good, **bad}))
 
 
 if __name__ == "__main__":
