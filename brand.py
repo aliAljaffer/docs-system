@@ -182,11 +182,17 @@ def custom_properties(colours: dict[str, str]) -> str:
     return "".join(lines)
 
 
-def shadow(colours: dict[str, str], mode: str, on: bool) -> str:
+def shadow(colours: dict[str, str], on: bool) -> str:
+    """Ink-tinted elevation in both modes. Night ink is pale, so a low alpha reads as a soft lift, not a glow."""
     if not on:
         return "none"
     r, g, b = rgb(colours["ink"]).split(", ")
-    return f"0 1px 2px rgba({r}, {g}, {b}, 0.04), 0 6px 18px rgba({r}, {g}, {b}, {0.05 if mode == 'light' else 0.3})"
+    return f"0 1px 2px rgba({r}, {g}, {b}, 0.06), 0 6px 18px rgba({r}, {g}, {b}, 0.08)"
+
+
+def logo_reversed(brand: Brand) -> str:
+    """Slate scheme swaps the header mark for icon-reversed.svg when the brand ships one."""
+    return 'url("brand/icon-reversed.svg")' if (brand.source / "icon-reversed.svg").is_file() else "none"
 
 
 def surfaces(colours: dict[str, str], filled: bool) -> dict[str, str]:
@@ -215,11 +221,13 @@ def mode_properties(brand: Brand, mode: str) -> str:
     colours = brand.modes[mode]
     lines = custom_properties(colours)
     lines += "".join(f"  --brand-syntax-{key}: {value};\n" for key, value in brand.syntax[mode].items())
-    lines += f"  --brand-shadow: {shadow(colours, mode, bool(brand.shape['shadow']))};\n"
+    lines += f"  --brand-shadow: {shadow(colours, bool(brand.shape['shadow']))};\n"
     lines += "".join(f"  --brand-{key}: {value};\n" for key, value in surfaces(colours, brand.shape["surfaces"] == "filled").items())
     strengths = WASH_STRENGTH[mode] if brand.shape["washes"] else (0, 0, 0)
     lines += "".join(f"  --brand-wash-{w}-strength: {p}%;\n" for w, p in zip("abc", strengths))
     lines += f"  --brand-grain-opacity: {GRAIN_OPACITY[mode] if brand.shape['grain'] else 0};\n"
+    if mode == "night":
+        lines += f"  --brand-logo-reversed: {logo_reversed(brand)};\n"
     return lines
 
 

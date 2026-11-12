@@ -266,6 +266,16 @@ class BrandCompilerTests(unittest.TestCase):
             with self.assertRaises(SystemExit):
                 brand.load(self.write({"light": good, "night": good, **bad}))
 
+    def test_night_shadow_is_soft_and_logo_swaps(self) -> None:
+        good = {"paper": "#ffffff", "ink": "#000000", "accent": "#0000ff"}
+        path = self.write({"light": good, "night": good, "shape": {"shadow": True}})
+        css = brand.css(brand.load(path))
+        self.assertEqual(css.count("rgba(0, 0, 0, 0.06)"), 2)
+        self.assertEqual(css.count("rgba(0, 0, 0, 0.08)"), 2)
+        self.assertIn("--brand-logo-reversed: none;", css)
+        (path.parent / "icon-reversed.svg").write_text("<svg/>")
+        self.assertIn('--brand-logo-reversed: url("brand/icon-reversed.svg");', brand.css(brand.load(path)))
+
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)
