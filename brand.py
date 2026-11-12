@@ -174,26 +174,26 @@ def rgb(colour: str) -> str:
     return ", ".join(str(int(colour[i:i + 2], 16)) for i in (1, 3, 5))
 
 
-def asset_url(entry: str, site_url: str) -> str:
-    return entry if re.match(r"https?://", entry) else f"{site_url}/assets/brand/{entry}"
+def asset_url(entry: str, site_url: str, version: str) -> str:
+    return entry if re.match(r"https?://", entry) else f"{site_url}/assets/brand/{entry}?v={version}"
 
 
-def giscus_css(brand: Brand, mode: str, site_url: str) -> str:
+def giscus_css(brand: Brand, mode: str, site_url: str, version: str) -> str:
     colours = brand.modes[mode]
     values = {key: value for key, value in colours.items()}
     values.update({f"syntax_{key}": value for key, value in brand.syntax[mode].items()})
     values.update(accent_rgb=rgb(colours["accent"]), paper_rgb=rgb(colours["paper"]))
     values.update(GISCUS_MODE[mode], font_text=font_stack("text", brand.fonts["text"]))
-    values["imports"] = "".join(f"@import url(\"{asset_url(e, site_url)}\");\n" for e in brand.stylesheets)
+    values["imports"] = "".join(f"@import url(\"{asset_url(e, site_url, version)}\");\n" for e in brand.stylesheets)
     return Template(GISCUS_TEMPLATE.read_text()).substitute(values)
 
 
-def compile(brand: Brand, assets: Path, site_url: str) -> None:
+def compile(brand: Brand, assets: Path, site_url: str, version: str) -> None:
     target = assets / "brand"
     shutil.copytree(brand.source, target, ignore=shutil.ignore_patterns("brand.json"))
     (assets / "brand.css").write_text(css(brand))
     for mode, name in MODES.items():
-        (assets / f"giscus-{name}.css").write_text(giscus_css(brand, mode, site_url))
+        (assets / f"giscus-{name}.css").write_text(giscus_css(brand, mode, site_url, version))
 
 
 def asset_inputs(brand: Brand) -> list[Path]:
