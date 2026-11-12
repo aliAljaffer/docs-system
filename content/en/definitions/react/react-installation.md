@@ -8,8 +8,6 @@ tags:
 
 # react-installation
 
-`react`
-
 This page shows how to create a React project with Create React App or Vite, and how to set up ESLint.
 
 Create React App: `npx create-react-app@5 [directory]`

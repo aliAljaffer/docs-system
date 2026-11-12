@@ -10,8 +10,6 @@ tags:
 
 # panorama
 
-`aws` `services`
-
 Enabling computer vision apps at the [[edge-location|edge]].
 ## Use cases
 1. Improve supply chain logistics

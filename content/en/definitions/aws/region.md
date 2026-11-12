@@ -12,8 +12,6 @@ tags:
 
 # region
 
-`cloud` `fundamentals` `geography`
-
 A geographic area containing one or more [[availability-zones|availability zones]], which hosts all AWS services. They are geographically spread out.
 ## Example
 

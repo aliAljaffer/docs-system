@@ -11,8 +11,6 @@ tags:
 
 # application migration service
 
-`aws` `services`
-
 MGN - Move and improve your on-premises and cloud-based applications. **Can migrate between AWS [[region|regions]]!!!!!!**
 
 | Benefit | Description |

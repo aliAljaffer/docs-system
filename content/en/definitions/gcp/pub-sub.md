@@ -10,8 +10,6 @@ tags:
 
 # pub-sub
 
-`gcp` `data`
-
 ## Cloud Pub/Sub
 Cloud Pub/Sub is a **fully managed** messaging and event streaming service.
 

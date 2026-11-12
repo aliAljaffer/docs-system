@@ -9,8 +9,6 @@ tags:
 
 # aws storage
 
-`gcp`
-
 AWS storage is the group of AWS services that store data as blocks, files, or objects.
 
 - Storage is different from database in that with storage, you have more flexibility on how data you store is formatted.

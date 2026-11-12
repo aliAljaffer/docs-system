@@ -10,8 +10,6 @@ tags:
 
 # tenets of aws
 
-`cloud` `fundamentals`
-
 To deliver the best customer experience:
 - [[high-availability|High availability]] - eliminate single-points of failure
 - [[scalability|Scalability]] - add or remove services as needed

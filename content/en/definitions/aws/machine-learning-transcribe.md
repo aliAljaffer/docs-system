@@ -10,6 +10,4 @@ tags:
 
 # transcribe
 
-`aws` `services`
-
 Speech to text (reverse of [[machine-learning-lex|lex]]) that also analyzes the text for insights.

@@ -10,8 +10,6 @@ tags:
 
 # storage-labs
 
-`gcp` `storage`
-
 These hands-on labs cover Google Cloud storage: Cloud Storage, persistent disks, and object lifecycle management.
 
 - **[GSP073](https://www.skills.google/catalog?keywords=GSP073)**: Cloud Storage: Qwik Start - Cloud Console (30 min)

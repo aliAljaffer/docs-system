@@ -10,8 +10,6 @@ tags:
 
 # cloud-trace
 
-`gcp` `operations`
-
 ## Cloud Trace
 **Distributed tracing** for microservices and applications
 

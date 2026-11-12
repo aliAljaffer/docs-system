@@ -10,8 +10,6 @@ tags:
 
 # cloud-profiler
 
-`gcp` `operations`
-
 ## Cloud Profiler
 **Continuous CPU and memory profiling** for production apps
 

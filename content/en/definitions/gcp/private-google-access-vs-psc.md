@@ -10,8 +10,6 @@ tags:
 
 # private-google-access-vs-psc
 
-`gcp` `networking`
-
 Private Google Access lets virtual machine (VM) instances with only private IP addresses reach Google APIs, and you enable it per subnet. Private Service Connect creates a private endpoint with an IP address from your own Virtual Private Cloud (VPC) to reach services.
 
 ## Private Google Access vs Private Service Connect

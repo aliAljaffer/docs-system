@@ -11,6 +11,4 @@ tags:
 
 # props
 
-`web` `fundamentals`
-
 Props, short for Properties, are pieces of data that each component stores. Parent [[component|components]] can send their children data using props.

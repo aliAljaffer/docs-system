@@ -9,8 +9,6 @@ tags:
 
 # useNavigation
 
-`react` `routing`
-
 Provides the current state of the entire app - loading, idle, submitting.
 
 ```js

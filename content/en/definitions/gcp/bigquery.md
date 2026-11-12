@@ -10,8 +10,6 @@ tags:
 
 # bigquery
 
-`gcp` `databases`
-
 ## BigQuery
 **Serverless, petabyte-scale data warehouse** for analytics and business intelligence
 

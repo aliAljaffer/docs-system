@@ -10,8 +10,6 @@ tags:
 
 # management-labs
 
-`gcp` `management`
-
 These hands-on labs cover Google Cloud management and orchestration services: Cloud Scheduler, Workflows, Cloud Composer, and Cloud Run.
 
 - **[GSP401](https://www.skills.google/catalog?keywords=GSP401)**: Cloud Scheduler: Qwik Start

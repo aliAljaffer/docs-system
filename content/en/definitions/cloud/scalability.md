@@ -11,8 +11,6 @@ tags:
 
 # scalability
 
-`cloud` `fundamentals`
-
 Your ability to scale up or down, depending on your budget, traffic, available memory, or other resources you want to track.
 
 Types of scaling:

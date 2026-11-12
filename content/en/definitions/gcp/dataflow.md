@@ -10,8 +10,6 @@ tags:
 
 # dataflow
 
-`gcp` `data`
-
 ## Cloud Dataflow
 **Fully managed** stream and batch data processing
 

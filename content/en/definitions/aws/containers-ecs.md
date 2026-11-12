@@ -10,8 +10,6 @@ tags:
 
 # ecs
 
-`aws` `services`
-
 **Amazon Elastic Container Service (Amazon ECS)** is a fully managed [[containers]] orchestration service that helps you to more efficiently deploy, manage, and scale containerized applications. It deeply integrates with the AWS environment to provide an easy-to-use solution for running container workloads in the cloud and on premises with advanced security features using Amazon ECS Anywhere. 
 - Scalable
 - Pay-as-you-go

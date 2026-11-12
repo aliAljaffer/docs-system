@@ -11,8 +11,6 @@ tags:
 
 # vpn
 
-`aws` `services`
-
 ## Virtual Private Networks (VPN)
 A VPN lets you establish a secure private tunnel between your on premise network and personal devices. 
 

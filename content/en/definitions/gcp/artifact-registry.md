@@ -10,8 +10,6 @@ tags:
 
 # artifact-registry
 
-`gcp` `devops`
-
 ## Artifact Registry
 **Managed artifact repository** for containers and packages
 

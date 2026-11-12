@@ -10,8 +10,6 @@ tags:
 
 # gke
 
-`gcp` `compute`
-
 ## Google Kubernetes Engine (GKE)
 **Managed Kubernetes** service for containerized applications
 

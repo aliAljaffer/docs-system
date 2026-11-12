@@ -10,6 +10,4 @@ tags:
 
 # connect
 
-`aws` `services`
-
 **AWS Connect** is a contact center that enables management at any scale.

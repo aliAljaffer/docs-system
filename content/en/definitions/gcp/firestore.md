@@ -10,8 +10,6 @@ tags:
 
 # firestore
 
-`gcp` `databases`
-
 ## Firestore
 **Serverless, NoSQL document database** for mobile, web, and server applications
 

@@ -12,8 +12,6 @@ tags:
 
 # provider
 
-`react` `context`
-
 A Provider is a component that provides a global value to its children. Providers are used in Context API to share a piece of data across the entire app, such as theme or maybe chosen language.
 
 ```js

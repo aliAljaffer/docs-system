@@ -10,8 +10,6 @@ tags:
 
 # autoscaling groups and load balancers
 
-`gcp`
-
 These two services together are what allows you to achieve high [[elasticity]] and [[scalability]] for [[aws-compute|compute]] workloads.
 
 - Autoscaling groups: Can automatically add/remove instances to meet performance requirements. Allows min/desired/max instances.

@@ -9,8 +9,6 @@ tags:
 
 # cloud adoption framework
 
-`gcp`
-
 The AWS Cloud Adoption Framework (AWS CAF) is an AWS guide that helps organizations plan and carry out a move to the cloud. It groups the needed organizational capabilities into perspectives.
 
 https://abhi0751.medium.com/aws-cloud-adoption-framework-aws-caf-a512b89dbcba

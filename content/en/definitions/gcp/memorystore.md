@@ -10,8 +10,6 @@ tags:
 
 # memorystore
 
-`gcp` `databases`
-
 ## Memorystore
 **Fully managed** in-memory data store for Redis and Memcached
 

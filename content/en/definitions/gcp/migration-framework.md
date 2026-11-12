@@ -10,8 +10,6 @@ tags:
 
 # migration-framework
 
-`gcp` `management`
-
 ## Cloud Migration Framework
 **Google's 4-Phase Methodology** for migrating to Google Cloud
 **Critical for PCA exam** - case studies heavily feature migration scenarios

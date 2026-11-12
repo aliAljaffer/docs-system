@@ -10,8 +10,6 @@ tags:
 
 # identity-aware-proxy
 
-`gcp` `security`
-
 ## Identity-Aware Proxy (IAP)
 **Context-aware access control for applications** - Authenticate users without VPN, enforce access policies based on identity and context
 

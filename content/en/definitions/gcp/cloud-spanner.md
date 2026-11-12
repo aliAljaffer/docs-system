@@ -10,8 +10,6 @@ tags:
 
 # cloud-spanner
 
-`gcp` `databases`
-
 ## Cloud Spanner
 **Globally distributed, horizontally scalable, strongly consistent** relational database
 

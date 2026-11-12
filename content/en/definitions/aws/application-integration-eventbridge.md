@@ -10,8 +10,6 @@ tags:
 
 # eventbridge
 
-`aws` `services`
-
 **Amazon EventBridge** is used with [[management-and-governance-cloudwatch|cloudwatch]], which is a service that monitors HOW your systems are performing and **W**h**AT** is happening with them.
 
 **EventBridge** processes events as they happen and can be used to trigger actions from other services.

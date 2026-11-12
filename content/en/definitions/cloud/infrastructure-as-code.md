@@ -12,8 +12,6 @@ tags:
 
 # infrastructure as code
 
-`cloud` `fundamentals` `iac`
-
 IaC: Writing the configurations for a specific cloud infrastructure as code, rather than manually creating the infrastructure using the AWS UI for example.
 
 Allow for less human-error, while also making the infrastructure share-able.

@@ -12,6 +12,4 @@ tags:
 
 # RTO
 
-`cloud` `fundamentals` `reliability`
-
 the maximum acceptable delay between the interruption of an application and the restoration of its service

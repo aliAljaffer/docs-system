@@ -10,8 +10,6 @@ tags:
 
 # error-reporting
 
-`gcp` `operations`
-
 ## Error Reporting
 **Automatic error aggregation** and alerting
 

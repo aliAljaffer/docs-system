@@ -11,8 +11,6 @@ tags:
 
 # traffic analysis
 
-`cloud` `fundamentals` `security`
-
 **traffic analysis**, can identify network activity, even encrypted activity. Traffic analysis involves tracking different metrics related to the network. Some examples of these metrics include:
 
 - source and destination of traffic

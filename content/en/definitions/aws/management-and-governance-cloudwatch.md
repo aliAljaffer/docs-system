@@ -11,8 +11,6 @@ tags:
 
 # cloudwatch
 
-`aws` `services`
-
 "Observe and monitor resources and applications on AWS, on premises, and on other clouds"
 
 **Amazon CloudWatch** is a service that **monitors** applications, responds to performance changes, optimizes resource use, and provides insights into operational health. By collecting data across AWS resources, ****CloudWatch gives visibility into system-wide performance and allows users to set alarms, automatically react to changes, and gain a unified view of operational health.****

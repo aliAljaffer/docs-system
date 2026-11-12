@@ -11,8 +11,6 @@ tags:
 
 # license manager
 
-`aws` `services`
-
 **AWS License Manager** is manager for software licenses, centralizing all the organization's license in one place.
 
 Licenses can be used on virtual cores (vCPU), physical cores, sockets, or number of machines.

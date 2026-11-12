@@ -10,8 +10,6 @@ tags:
 
 # useReducer
 
-`react` `hooks`
-
 Used a lot by Redux Toolkit
 
 - `const [state, dispatch] = useReducer(reducerFunction, initialState)`

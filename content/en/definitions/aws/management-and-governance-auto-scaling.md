@@ -11,7 +11,5 @@ tags:
 
 # auto scaling
 
-`aws` `services`
-
 Monitors your applications and automatically adjusts capacity to maintain steady and predictable performance at the **lowest possible cost.**
 Can be launched from Management Console, CLI, or SDK. **FREE.**

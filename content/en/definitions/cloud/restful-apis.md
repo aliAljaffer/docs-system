@@ -11,8 +11,6 @@ tags:
 
 # restful apis
 
-`gcp`
-
 A RESTful API is a web interface that follows the REST (Representational State Transfer) style. Clients send standard HTTP requests to access and change resources.
 
 ## [What is RESTful API?](https://aws.amazon.com/what-is/restful-api/)

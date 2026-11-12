@@ -9,8 +9,6 @@ tags:
 
 # aws compute
 
-`gcp`
-
 - Computing is the tier of services that is used to process workloads, handle app logic, evaluate rules, etc.
 - **Essentially needed for everything**
 - Main services:

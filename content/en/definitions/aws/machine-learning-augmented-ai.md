@@ -10,6 +10,4 @@ tags:
 
 # augmented ai
 
-`aws` `services`
-
 Implements human review of machine learning predictions

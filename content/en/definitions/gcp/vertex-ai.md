@@ -10,8 +10,6 @@ tags:
 
 # vertex-ai
 
-`gcp` `ai`
-
 ## Vertex AI
 Vertex AI is a **unified artificial intelligence (AI) and machine learning (ML) platform** for building, deploying, and scaling ML models.
 

@@ -8,8 +8,6 @@ tags:
 
 # main-concepts
 
-`react`
-
 This page covers core React concepts: components, hooks, controlled elements, one-way data flow, and re-renders.
 
 [[component]]

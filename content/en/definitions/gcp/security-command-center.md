@@ -10,8 +10,6 @@ tags:
 
 # security-command-center
 
-`gcp` `security`
-
 ## Security Command Center (SCC)
 Security Command Center provides **centralized security and risk management**: vulnerability scanning, threat detection, and compliance monitoring.
 

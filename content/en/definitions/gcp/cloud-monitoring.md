@@ -10,8 +10,6 @@ tags:
 
 # cloud-monitoring
 
-`gcp` `operations`
-
 ## Cloud Monitoring
 **Observability and monitoring** for Google Cloud and AWS
 

@@ -11,8 +11,6 @@ tags:
 
 # outposts
 
-`aws` `services`
-
 "Run AWS infrastructure and services on premises for a truly consistent hybrid experience"
 - Run AWS Services on premises
 - Fully managed infrastructure

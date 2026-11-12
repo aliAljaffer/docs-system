@@ -11,8 +11,6 @@ tags:
 
 # cloudtrail
 
-`aws` `services`
-
 "Track user activity and ****API**** usage on AWS and in hybrid and multicloud environments"
 **AWS CloudTrail** is a service that enables governance, compliance, operational **auditing**, and auditing of your AWS account.
 If asked how to track API calls or user access => CloudTrail

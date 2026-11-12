@@ -10,8 +10,6 @@ tags:
 
 # cloud-armor
 
-`gcp` `networking`
-
 ## Cloud Armor
 **DDoS protection** and **Web Application Firewall (WAF)** for applications behind [[cloud-load-balancing|Cloud Load Balancing]]
 

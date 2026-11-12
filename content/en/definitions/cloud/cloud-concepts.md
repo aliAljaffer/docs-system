@@ -9,8 +9,6 @@ tags:
 
 # cloud concepts
 
-`gcp`
-
 Cloud concepts are the core ideas behind cloud computing. This page covers what cloud providers do, the Infrastructure as a Service (IaaS) core services, the shared responsibility model, and the benefits of the cloud.
 
 start @ certificate topics

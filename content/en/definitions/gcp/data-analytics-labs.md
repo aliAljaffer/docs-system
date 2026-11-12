@@ -10,8 +10,6 @@ tags:
 
 # data-analytics-labs
 
-`gcp` `data`
-
 These hands-on labs cover Google Cloud data services: Pub/Sub, Dataflow, Dataproc, Cloud Scheduler, Cloud Composer, and Eventarc.
 
 - **[GSP095-096](https://www.skills.google/catalog?keywords=GSP095-096)**: Pub/Sub: Qwik Start (Command Line, Console)

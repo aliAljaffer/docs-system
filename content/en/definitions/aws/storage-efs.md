@@ -11,8 +11,6 @@ tags:
 
 # efs
 
-`aws` `services`
-
 Elastic File System - a file system that grows or shrinks based on usage. Commonly mounted on [[compute-ec2-ccp|ec2-ccp]], but can also be mounted on containers or [[compute-lambda|Lambda]] functions.
 
 ## Storage classes

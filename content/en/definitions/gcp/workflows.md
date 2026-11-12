@@ -10,8 +10,6 @@ tags:
 
 # workflows
 
-`gcp` `management`
-
 ## Workflows
 Workflows **orchestrates** services with serverless workflows.
 

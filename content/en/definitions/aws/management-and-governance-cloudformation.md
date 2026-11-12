@@ -11,8 +11,6 @@ tags:
 
 # cloudformation
 
-`aws` `services`
-
 A service that allows you to make templates to specify how you want architecture deployed.
 
 You can reuse templates to quickly deploy or edit your architecture configuration automatically.

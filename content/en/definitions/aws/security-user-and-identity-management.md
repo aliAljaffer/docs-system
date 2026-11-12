@@ -12,8 +12,6 @@ tags:
 
 # user and identity management
 
-`aws` `services`
-
 - When giving permissions to users, always follow [[principle-of-least-privilege|principle of least privilege]]!
 - Consider organizational compliance standards
 - Utilize multiple layers of authentication, such as [[multi-factor-authentication|MFA]] on top of passwords for access.

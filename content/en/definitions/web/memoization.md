@@ -11,8 +11,6 @@ tags:
 
 # memoization
 
-`web` `fundamentals`
-
 The act of storing previous function call results into a data structure, for faster retrieval on second attempts of the function call with the same parameters.
 
 ## React Memoization tools

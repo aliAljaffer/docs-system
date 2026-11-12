@@ -10,8 +10,6 @@ tags:
 
 # comprehend
 
-`aws` `services`
-
 Natural language processing that analyzes unstructured text
 
 "Derive and understand valuable insights from text within documents"

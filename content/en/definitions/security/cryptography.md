@@ -11,8 +11,6 @@ tags:
 
 # cryptography
 
-`security` `cryptography`
-
 ...is the principles, means, and methods of transforming data to conceal its content, prevent its unauthorized use, or prevent its undetected modification.
 
 ## Symmetric Encryption

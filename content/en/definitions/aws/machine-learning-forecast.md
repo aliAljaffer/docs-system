@@ -10,6 +10,4 @@ tags:
 
 # forecast
 
-`aws` `services`
-
 Managed service for accurate TimeSeries forecasting.

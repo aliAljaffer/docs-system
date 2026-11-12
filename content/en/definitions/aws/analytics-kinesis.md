@@ -10,8 +10,6 @@ tags:
 
 # kinesis
 
-`aws` `services`
-
 "Collect, process, and analyze real-time video and data streams"
 ## Use cases
 - ****Create real-time applications****

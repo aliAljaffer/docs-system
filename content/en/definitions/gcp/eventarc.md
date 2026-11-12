@@ -10,8 +10,6 @@ tags:
 
 # eventarc
 
-`gcp` `data`
-
 ## Eventarc
 **Event routing service** that connects Google Cloud services, software as a service (SaaS), and custom applications using **events**
 

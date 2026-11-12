@@ -13,8 +13,6 @@ tags:
 
 # multi factor authentication
 
-`cloud` `fundamentals` `security`
-
 In [[security-user-and-identity-management|AWS IAM]], MFA is the best practice that requires a second authentication factor on top of a password. It helps verify that the logging-in user is who they say they are. You can enable MFA for root and [[security-user-and-identity-management|IAM]] users you created in your account.
 
 ### Methods for MFA:

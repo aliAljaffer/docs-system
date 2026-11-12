@@ -10,8 +10,6 @@ tags:
 
 # iam
 
-`gcp` `security`
-
 ## IAM (Identity and Access Management)
 **Identity and Access Management** - Control who (identity) has what access (role) to which resources
 

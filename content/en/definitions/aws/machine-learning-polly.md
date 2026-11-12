@@ -10,6 +10,4 @@ tags:
 
 # polly
 
-`aws` `services`
-
 Text to Lifelike speech AI voice generation.

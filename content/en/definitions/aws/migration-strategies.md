@@ -9,8 +9,6 @@ tags:
 
 # migration strategies
 
-`gcp`
-
 Migration strategies, also called "the 6 R's", are six approaches for moving an application to the cloud: rehost, replatform, repurchase, refactor, retire, and retain.
 ### 1 - Rehosting ("Lift-and-shift")
 Can be automated with tools like [[customer-enablement-aws-vm-import-export|AWS VM Import Export]].

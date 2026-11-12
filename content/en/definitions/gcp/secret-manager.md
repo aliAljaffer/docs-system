@@ -10,8 +10,6 @@ tags:
 
 # secret-manager
 
-`gcp` `security`
-
 ## Secret Manager
 Secret Manager provides **secure storage and management of sensitive data**, such as API keys, passwords, certificates, and tokens.
 

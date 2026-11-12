@@ -10,8 +10,6 @@ tags:
 
 # useEffect
 
-`react` `hooks`
-
 Used for side-effects.
 
 ```javascript

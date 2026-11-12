@@ -10,8 +10,6 @@ tags:
 
 # security-labs
 
-`gcp` `security`
-
 These hands-on labs cover Google Cloud security: Identity and Access Management (IAM), service accounts, Cloud KMS, Identity-Aware Proxy, and VPC Service Controls.
 
 | Lab | Title |

@@ -10,8 +10,6 @@ tags:
 
 # tagging
 
-`gcp`
-
 Tagging involves identifying your resources with key:value pairs and is one of the best ways to manage costs.
 
 Can group tagged resources into resource groups, allowing you to better organize them and apply permissions to groups of resources.

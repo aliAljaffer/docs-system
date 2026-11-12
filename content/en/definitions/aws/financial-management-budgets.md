@@ -11,8 +11,6 @@ tags:
 
 # budgets
 
-`aws` `services`
-
 Setup budgets that can send you alerts if you are approaching or exceeding your defined budget.
 
 Can create budget reports

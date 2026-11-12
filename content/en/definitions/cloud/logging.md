@@ -9,8 +9,6 @@ tags:
 
 # logging
 
-`gcp`
-
 Remember: Things WILL go wrong.
 
 Logging helps the process of pinpointing where the failure occurred in the system, so that it can be fixed.

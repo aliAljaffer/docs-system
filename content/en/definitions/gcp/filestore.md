@@ -10,8 +10,6 @@ tags:
 
 # filestore
 
-`gcp` `storage`
-
 ## Filestore
 **Fully managed Network File System (NFS) storage** for [[gcp/compute-engine|Compute Engine]] and [[gcp/gke|GKE]]
 

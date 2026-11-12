@@ -10,8 +10,6 @@ tags:
 
 # cloud-composer
 
-`gcp` `data`
-
 ## Cloud Composer
 **Managed Apache Airflow** for orchestrating data pipelines
 

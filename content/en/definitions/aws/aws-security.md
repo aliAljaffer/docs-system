@@ -10,8 +10,6 @@ tags:
 
 # aws security
 
-`gcp`
-
 AWS security is the set of practices and services that protect applications and data in the AWS cloud.
 
 An effictively secured application has security at multiple layers. For appilications in the cloud, we can consider 7 layers of security.

@@ -10,6 +10,4 @@ tags:
 
 # amplify
 
-`aws` `services`
-
 Host full-stack web and mobile apps with Git version control.

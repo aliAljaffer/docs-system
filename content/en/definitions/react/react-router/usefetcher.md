@@ -9,8 +9,6 @@ tags:
 
 # useFetcher
 
-`react` `routing`
-
 Use data from another route but without navigating there. Uses the `loader()` function in the route
 
 ```js

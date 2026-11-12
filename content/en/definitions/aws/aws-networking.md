@@ -9,8 +9,6 @@ tags:
 
 # aws networking
 
-`gcp`
-
 AWS networking is the set of services and controls that connect, isolate, and secure AWS resources. This page covers security groups, network access control lists (network ACLs), Virtual Private Network (VPN), and Direct Connect.
 
 ## Security Groups and NACLs
