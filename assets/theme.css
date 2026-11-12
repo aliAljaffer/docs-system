@@ -22,18 +22,24 @@
   --md-accent-bg-color: var(--brand-paper);
   --md-accent-bg-color--light: var(--brand-paper);
 
-  --md-code-fg-color: var(--brand-ink);
-  --md-code-bg-color: var(--brand-paper-2);
+  --md-code-fg-color: var(--brand-syntax-text);
+  --md-code-bg-color: var(--brand-syntax-bg);
   --md-code-bg-color--light: var(--brand-paper-2);
   --md-code-bg-color--lighter: var(--brand-paper-3);
   --md-code-hl-color: var(--brand-accent);
   --md-code-hl-color--light: color-mix(in srgb, var(--brand-accent) 12%, transparent);
-  --md-code-hl-number-color: var(--brand-code);
-  --md-code-hl-special-color: var(--brand-code);
-  --md-code-hl-function-color: var(--brand-accent-ink);
-  --md-code-hl-constant-color: var(--brand-accent-ink);
-  --md-code-hl-keyword-color: var(--brand-code);
-  --md-code-hl-string-color: var(--brand-ink-soft);
+  --md-code-hl-number-color: var(--brand-syntax-number);
+  --md-code-hl-special-color: var(--brand-syntax-keyword);
+  --md-code-hl-function-color: var(--brand-syntax-function);
+  --md-code-hl-constant-color: var(--brand-syntax-type);
+  --md-code-hl-keyword-color: var(--brand-syntax-keyword);
+  --md-code-hl-string-color: var(--brand-syntax-string);
+  --md-code-hl-name-color: var(--brand-syntax-text);
+  --md-code-hl-operator-color: var(--brand-syntax-punctuation);
+  --md-code-hl-punctuation-color: var(--brand-syntax-punctuation);
+  --md-code-hl-comment-color: var(--brand-syntax-comment);
+  --md-code-hl-generic-color: var(--brand-syntax-comment);
+  --md-code-hl-variable-color: var(--brand-syntax-text);
 
   --md-typeset-color: var(--brand-ink);
   --md-typeset-a-color: var(--brand-ink-strong);
@@ -53,14 +59,19 @@
   --color-highlight: var(--brand-accent);
   --color-highlight-transparent: color-mix(in srgb, var(--brand-accent) 10%, transparent);
   --font-family: var(--brand-font-text);
-  --border-radius-2: 0;
-  --md-shadow-z1: none;
-  --md-shadow-z2: none;
-  --md-shadow-z3: none;
+  --border-radius-2: var(--brand-radius);
+  --md-shadow-z1: var(--brand-shadow);
+  --md-shadow-z2: var(--brand-shadow);
+  --md-shadow-z3: var(--brand-shadow);
 }
 
 [data-md-color-scheme] :is(h1, h2, h3, h4, h5, h6) {
   color: var(--brand-ink-strong);
+}
+
+.md-typeset :is(h1, h2, h3) {
+  font-family: var(--brand-font-heading);
+  text-wrap: balance;
 }
 
 :focus-visible {
@@ -89,7 +100,7 @@
 }
 
 .md-tabs__link {
-  font-size: 0.55rem;
+  font-size: var(--brand-label-size);
   letter-spacing: 0.15em;
   text-transform: uppercase;
   color: var(--brand-ink-soft);
@@ -107,11 +118,11 @@
 .md-sidebar--primary {
   background-color: var(--brand-paper);
   backdrop-filter: none;
-  border-radius: 0;
+  border-radius: var(--brand-radius);
 }
 
 .md-nav__link {
-  border-radius: 0;
+  border-radius: var(--brand-radius);
   font-size: 0.62rem;
   color: var(--brand-ink-soft);
 }
@@ -133,7 +144,7 @@
 
 .md-nav__item--section > .md-nav__link,
 .md-nav--secondary .md-nav__title {
-  font-size: 0.55rem;
+  font-size: var(--brand-label-size);
   letter-spacing: 0.15em;
   text-transform: uppercase;
 }
@@ -141,7 +152,7 @@
 .md-search__button {
   background: none;
   border: 1px solid var(--brand-rule);
-  border-radius: 0;
+  border-radius: var(--brand-radius);
 }
 
 .md-search__button:hover,
@@ -153,7 +164,7 @@
 .md-search__button::after {
   background: none;
   border: 1px solid var(--brand-rule);
-  border-radius: 0;
+  border-radius: var(--brand-radius);
 }
 
 .md-typeset {
@@ -187,16 +198,16 @@
 .md-typeset :not(pre) > code {
   color: var(--brand-code);
   background-color: var(--brand-paper-2);
-  border-radius: 0;
+  border-radius: var(--brand-radius);
 }
 
 .md-typeset pre > code {
   border: 1px solid var(--brand-rule);
-  border-radius: 0;
+  border-radius: var(--brand-radius);
 }
 
 .md-typeset table:not([class]) {
-  border-radius: 0;
+  border-radius: var(--brand-radius);
 }
 
 .md-typeset table:not([class]) th {
@@ -206,7 +217,7 @@
 .md-typeset :is(.admonition, details) {
   border: 1px solid var(--brand-rule);
   border-left: 2px solid var(--brand-ink);
-  border-radius: 0;
+  border-radius: var(--brand-radius);
 }
 
 .md-typeset :is(.admonition, details):is([class]) {
@@ -222,8 +233,9 @@
 .md-typeset .md-button {
   color: var(--brand-ink);
   background: none;
+  box-shadow: var(--brand-shadow);
   border: 1px solid var(--brand-ink);
-  border-radius: 0;
+  border-radius: var(--brand-radius);
 }
 
 .md-typeset .md-button:hover,
@@ -237,7 +249,7 @@
   background-color: var(--brand-paper);
   backdrop-filter: none;
   border: 1px solid var(--brand-rule);
-  border-radius: 0;
+  border-radius: var(--brand-radius);
 }
 
 .md-footer,
@@ -252,6 +264,6 @@
 .md-typeset .md-tag {
   background: none;
   border: 1px solid var(--brand-rule);
-  border-radius: 0;
+  border-radius: var(--brand-radius);
   font-weight: 400;
 }

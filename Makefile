@@ -1,6 +1,5 @@
 PYTHON ?= python3
 PY := .venv/bin/python
-BRAND_REF ?= terminal
 
 setup:
 	$(PYTHON) -m venv .venv
@@ -14,11 +13,13 @@ build:
 	$(PY) -m unittest discover -s tests
 
 brand:
-	rm -rf .cache/brand
-	gh repo clone aliAljaffer/branding .cache/brand -- --quiet --depth 1 --branch $(BRAND_REF)
-	rm -rf brand
+	rm -rf .cache/brand brand
+	gh repo clone aliAljaffer/branding .cache/brand -- --quiet --depth 1 --branch main --filter=blob:none --sparse
+	git -C .cache/brand config credential.helper ''
+	git -C .cache/brand config --add credential.helper '!gh auth git-credential'
+	git -C .cache/brand sparse-checkout set export
 	mkdir brand
-	git -C .cache/brand archive HEAD | tar -x -C brand --exclude README.md
+	tar -C .cache/brand/export -c --exclude README.md --exclude 'plate-*' --exclude portfolio.css . | tar -x -C brand
 
 serve:
 	python3 -m http.server -d site 8000

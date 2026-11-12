@@ -32,8 +32,20 @@ jobs:
 
       - run: make setup
 
+      - uses: actions/create-github-app-token@v1
+        id: brand-token
+        with:
+          app-id: 5511128
+          private-key: ${{ secrets.HOMELAB_APP_KEY }}
+          owner: aliAljaffer
+          repositories: branding
+
       - id: fingerprint
-        run: echo "key=deployed-$(.venv/bin/python fingerprint.py)" >> "$GITHUB_OUTPUT"
+        run: |
+          brand=$(gh api repos/aliAljaffer/branding/commits/main --jq .sha)
+          echo "key=deployed-$(.venv/bin/python fingerprint.py)-brand-${brand:0:12}" >> "$GITHUB_OUTPUT"
+        env:
+          GH_TOKEN: ${{ steps.brand-token.outputs.token }}
 
       - id: lookup
         uses: actions/cache/restore@v4
@@ -54,6 +66,19 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+
+      - uses: actions/create-github-app-token@v1
+        id: brand-token
+        with:
+          app-id: 5511128
+          private-key: ${{ secrets.HOMELAB_APP_KEY }}
+          owner: aliAljaffer
+          repositories: branding
+
+      - name: Pull the theme from branding main
+        run: make brand
+        env:
+          GH_TOKEN: ${{ steps.brand-token.outputs.token }}
 
       - run: make setup check build
         env:

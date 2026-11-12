@@ -51,10 +51,10 @@ CI checkouts need full history. Set `fetch-depth: 0` on `actions/checkout`. The 
 
 ## Brand
 
-The brand lives in `brand/`. It is a vendored copy of a branch of the private `branding` repo. Nothing else hard-codes a colour or font.
+The brand lives in `brand/`. It is a vendored copy of `export/` from the `main` branch of the private `branding` repo. Nothing else hard-codes a colour, font, radius or shadow.
 
 - `brand/brand.json` and `brand/icon.svg` hold the colours, fonts, font stylesheets, and icon.
-- `brand.py` compiles the brand into `brand.css` and the Giscus themes.
+- `brand.py` compiles the brand into `brand.css` and the Giscus themes. Optional `syntax` (code colours per mode) and `shape` (radius, label size, shadow, heading font) default to the old square, shadowless look when absent.
 - `assets/theme.css` maps `--brand-*` onto the theme variables. It holds no colours or font names.
 - `templates/giscus.css.tmpl` maps the brand onto the Giscus variables.
 
@@ -62,10 +62,9 @@ Only `paper`, `ink`, and `accent` are required per mode. The compiler derives th
 
 ### Change the brand
 
-1. Run `make brand BRAND_REF=<branch>`. It copies that branch of the `branding` repo into `brand/`. The default branch is `terminal`.
-2. Run `make build`.
-3. Check the pages in light and night mode.
-4. Deploy. The asset version changes, so caches refresh.
+Change the theme in the `branding` repo (`make export`) and push its `main`. That's all: CI runs `make brand` before every build, authenticated as the `update-manifests-homelab` GitHub App (secret `HOMELAB_APP_KEY`). The daily run also redeploys when branding `main` has moved, because its commit is part of the deploy key.
+
+To preview locally, run `make brand` (it sparse-clones `export/` from branding `main` into `brand/`), then `make build`, and check the pages in light and night mode.
 
 ## Definitions, Home, Contact
 
