@@ -115,6 +115,16 @@ class SiteTests(unittest.TestCase):
         self.assertTrue((SITE / "definitions" / "rest" / "index.html").exists())
         self.assertIn("/definitions/", (SITE / "assets" / "backlinks.json").read_text())
 
+    def test_diagrams_and_backlinks_rendered_at_build(self) -> None:
+        page = (SITE / "four-hats" / "episodes" / "ep04-add-a-feature-with-a-test" / "index.html").read_text()
+        self.assertIn('<div class="diagram-zoom">', page)
+        linked = (SITE / "definitions" / "ai" / "generative-ai" / "index.html").read_text()
+        self.assertIn('<h2 id="linked-from">', linked)
+
+    def test_course_pages_flagged_early(self) -> None:
+        self.assertIn('setAttribute("data-course"', (SITE / "ckad" / "06-services" / "index.html").read_text())
+        self.assertNotIn("data-course", (SITE / "definitions" / "rest" / "index.html").read_text())
+
     def test_callouts(self) -> None:
         result = convert_callouts("> [!tip] Hover a term\n> Move the pointer over a link.\n")
         self.assertIn('!!! tip "Hover a term"', result)

@@ -19,5 +19,8 @@
   {% endif %}
   {% set repo = page.meta.repo_url if page.meta and page.meta.repo_url else config.repo_url %}
   <script>(function(){var r="{{ repo }}";try{if(sessionStorage.getItem("__repo")!==r){Object.keys(sessionStorage).filter(function(k){return k.slice(-9)===".__source"}).forEach(function(k){sessionStorage.removeItem(k)});sessionStorage.setItem("__repo",r)}}catch(e){}})()</script>
+  {% set courses = namespace(on=false) %}
+  {% for item in nav.items if item.active and item.children and item.children[0].url == "courses/" %}{% set courses.on = true %}{% endfor %}
+  {% if courses.on %}<script>document.documentElement.setAttribute("data-course","")</script>{% endif %}
   {{ super() }}
 {% endblock %}
