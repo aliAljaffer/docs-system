@@ -28,6 +28,30 @@
     return clone.textContent.trim();
   }
 
+  const WORD_LIMIT = 40;
+  const SKIP = "table, pre, .highlight, .md-source-file, .backlinks, .admonition-title, details > summary";
+
+  function isTagLine(element) {
+    return [...element.childNodes].every((node) =>
+      node.nodeType === Node.ELEMENT_NODE ? node.tagName === "CODE" : !node.textContent.trim(),
+    );
+  }
+
+  function snippet(article) {
+    const parts = [];
+    let count = 0;
+    for (const element of article.querySelectorAll("p, li")) {
+      if (element.closest(SKIP) || (element.matches("p") && element.closest("li")) || isTagLine(element)) continue;
+      const words = cleanText(element).split(/\s+/).filter(Boolean);
+      if (!words.length) continue;
+      const room = WORD_LIMIT - count;
+      parts.push(words.length > room ? words.slice(0, room).join(" ") + "..." : words.join(" "));
+      count += Math.min(words.length, room);
+      if (count >= WORD_LIMIT) break;
+    }
+    return parts.join(" · ");
+  }
+
   async function load(url) {
     if (cache.has(url)) return cache.get(url);
     const response = await fetch(url, { headers: { Accept: "text/html" } });
@@ -35,8 +59,7 @@
     const doc = new DOMParser().parseFromString(text, "text/html");
     const article = doc.querySelector(".md-content__inner") || doc.querySelector("article");
     const title = cleanText(article?.querySelector("h1")) || url;
-    const first = article?.querySelector("p");
-    const body = cleanText(first);
+    const body = article ? snippet(article) : "";
     const result = { title, body };
     cache.set(url, result);
     return result;
@@ -69,7 +92,15 @@
     ensureCard();
     try {
       const { title, body } = await load(url.pathname);
-      card.innerHTML = `<h3>${title}</h3><p>${body}</p><span class="preview-more">Click to open</span>`;
+      const heading = document.createElement("h3");
+      heading.textContent = title;
+      const text = document.createElement("p");
+      text.textContent = body;
+      const more = document.createElement("a");
+      more.className = "preview-more";
+      more.href = url.pathname;
+      more.textContent = "Read more";
+      card.replaceChildren(heading, text, more);
       position(link);
       card.classList.add("visible");
       document.dispatchEvent(

@@ -5,8 +5,9 @@
   max-width: 420px;
   padding: 0.9rem 1rem;
   border: 1px solid var(--md-default-fg-color--lightest);
-  border-radius: 0;
+  border-radius: var(--brand-radius);
   background: var(--md-default-bg-color);
+  box-shadow: var(--brand-shadow);
   font-size: 0.72rem;
   line-height: 1.5;
   opacity: 0;
@@ -29,7 +30,10 @@
 }
 .preview-card .preview-more {
   font-size: 0.65rem;
+  font-weight: 600;
   color: var(--md-accent-fg-color);
+  text-decoration: underline;
+  text-underline-offset: 2px;
 }
 .backlinks {
   margin-top: 2.5rem;
