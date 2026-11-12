@@ -123,7 +123,7 @@
 
 .md-nav__link {
   border-radius: var(--brand-radius);
-  font-size: 0.62rem;
+  font-size: var(--brand-label-size);
   color: var(--brand-ink-soft);
 }
 
