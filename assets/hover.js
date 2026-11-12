@@ -55,6 +55,14 @@
     card.style.width = width + "px";
   }
 
+  function isDefinition(link) {
+    return (
+      link.closest(".md-content") !== null &&
+      link.pathname.startsWith("/definitions/") &&
+      link.pathname.replace(/\/$/, "") !== "/definitions"
+    );
+  }
+
   async function preview(link) {
     const url = new URL(link.href, location.href);
     if (url.origin !== location.origin) return;
@@ -74,7 +82,7 @@
 
   document.addEventListener("mouseover", (event) => {
     const link = event.target.closest("a[href]");
-    if (!link || link.closest(".preview-card")) return;
+    if (!link || link.closest(".preview-card") || !isDefinition(link)) return;
     if (link.origin !== location.origin || link.pathname === current) return;
     if (link.hash && link.pathname === current) return;
     clearTimeout(showTimer);
