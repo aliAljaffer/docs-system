@@ -9,8 +9,6 @@ tags:
 
 # free services
 
-`gcp`
-
 Free tier for first 12 months of signup.
 
 **But these services are free forever:**

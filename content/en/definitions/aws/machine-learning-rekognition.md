@@ -10,8 +10,6 @@ tags:
 
 # rekognition
 
-`aws` `services`
-
 Search and analyze images and videos
 
 "Automate and lower the cost of your image recognition and video analysis with ML"

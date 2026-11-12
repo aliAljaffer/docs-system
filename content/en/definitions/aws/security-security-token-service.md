@@ -12,8 +12,6 @@ tags:
 
 # Security Token Service
 
-`aws` `services`
-
 AWS Security Token Service (STS) is a web service that enables you to request temporary, limited-privilege credentials for AWS Identity and Access Management (IAM) users or federated users. These temporary credentials work almost identically to long-term access key credentials, but with the advantage of being temporary and automatically expiring.
 ## Core Concepts
 **Temporary Security Credentials** consist of:

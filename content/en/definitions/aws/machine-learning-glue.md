@@ -10,8 +10,6 @@ tags:
 
 # glue
 
-`aws` `services`
-
 **AWS Glue**: A fully managed extract, transform, and load (ETL) service that
 helps discover details and properties of data stored in Amazon S3 and Amazon
 Redshift for analytics, machine learning, and application development. AWS

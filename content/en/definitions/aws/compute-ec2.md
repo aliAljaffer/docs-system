@@ -10,8 +10,6 @@ tags:
 
 # ec2
 
-`aws` `services`
-
 Elastic Compute Cloud (EC2) is the AWS service that provides virtual servers, called instances, in the cloud.
 
 ## Elastic Compute Cloud EC2

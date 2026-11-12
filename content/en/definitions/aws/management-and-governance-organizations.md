@@ -11,8 +11,6 @@ tags:
 
 # organizations
 
-`aws` `services`
-
 **AWS Organizations** is a service that allows the creation of new AWS accounts tied to your business, and centrally manage billing, access, compliance, security, and share resources.
 
 | Term | Meaning |

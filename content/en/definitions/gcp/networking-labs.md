@@ -10,8 +10,6 @@ tags:
 
 # networking-labs
 
-`gcp` `networking`
-
 These hands-on labs cover Google Cloud networking: Virtual Private Cloud (VPC) networks, load balancers, VPC peering, and Cloud VPN.
 
 | Lab | Title | Time | Level |

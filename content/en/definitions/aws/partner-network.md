@@ -9,8 +9,6 @@ tags:
 
 # partner network
 
-`gcp`
-
 APN is a global partner program for AWS.
 
 Your organization can be one of two partners:

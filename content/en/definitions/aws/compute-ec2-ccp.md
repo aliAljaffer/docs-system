@@ -11,8 +11,6 @@ tags:
 
 # ec2-ccp
 
-`aws` `services`
-
 EC2 is the flagship [[aws-compute|AWS compute]] service that allows to launch virtual machines, called instances.
 
 - A VM is an emulation of a physical computer using software

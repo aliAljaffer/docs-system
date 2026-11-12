@@ -10,8 +10,6 @@ tags:
 
 # vpc-service-controls
 
-`gcp` `security`
-
 ## VPC Service Controls
 VPC Service Controls creates a **security perimeter to prevent data exfiltration**, with context-aware access control for Google Cloud services.
 

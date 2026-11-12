@@ -10,8 +10,6 @@ tags:
 
 # cloud-logging
 
-`gcp` `operations`
-
 ## Cloud Logging
 **Centralized logging** for Google Cloud
 

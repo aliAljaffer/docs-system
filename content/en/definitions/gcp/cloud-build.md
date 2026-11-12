@@ -10,8 +10,6 @@ tags:
 
 # cloud-build
 
-`gcp` `devops`
-
 ## Cloud Build
 **Fully managed CI/CD** platform
 

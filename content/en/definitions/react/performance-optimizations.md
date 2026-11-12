@@ -8,8 +8,6 @@ tags:
 
 # performance-optimizations
 
-`react`
-
 React performance optimization reduces wasted renders, improves responsiveness, and shrinks the bundle size.
 
 Do NOT prematurely optimize. Run and test for bottlenecks first. Some bottlenecks are not worth optimizing for (Not a lot of gains)

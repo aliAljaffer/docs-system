@@ -10,8 +10,6 @@ tags:
 
 # application integration
 
-`gcp`
-
 Refers to letting multiple independent applications work and communicate with each other, while being facilitated by an intermediate system.
 
 By separating out apps into individual components, you reduce the risk of one thing breaking causing everything else to break. (Separation of concerns)

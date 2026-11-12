@@ -11,8 +11,6 @@ tags:
 
 # appsync
 
-`aws` `services`
-
 real-time data sync using GraphQL for mobile and web apps, whether online or offline.
 
 A service designed for mobile applications that require user

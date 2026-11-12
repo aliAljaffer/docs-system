@@ -10,8 +10,6 @@ tags:
 
 # devops-labs
 
-`gcp` `devops`
-
 These hands-on labs cover Google Cloud DevOps tools: continuous integration and continuous delivery (CI/CD) pipelines, Cloud Source Repositories, Cloud Build, Docker deployments to Kubernetes, and Terraform.
 
 | Lab | Title | Modules |

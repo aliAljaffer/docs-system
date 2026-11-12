@@ -10,8 +10,6 @@ tags:
 
 # vpc
 
-`aws` `services`
-
 ### Virtual Private Cloud (VPC)
 A Virtual Private Cloud (VPC) is a logically isolated section of the AWS network where you launch your AWS resources. It uses Classless Inter-Domain Routing ([[cidr|CIDR]]) notation to specify a range of IP addresses.
 

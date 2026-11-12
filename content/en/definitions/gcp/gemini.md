@@ -10,8 +10,6 @@ tags:
 
 # gemini
 
-`gcp` `ai`
-
 ## Gemini
 Google's **multimodal foundation model** for text, images, video, and code
 

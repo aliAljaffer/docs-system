@@ -10,8 +10,6 @@ tags:
 
 # app-engine
 
-`gcp` `compute`
-
 ## App Engine
 **Fully managed PaaS** for web applications and APIs
 

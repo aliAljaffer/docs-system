@@ -10,8 +10,6 @@ tags:
 
 # cloud-scheduler
 
-`gcp` `management`
-
 ## Cloud Scheduler
 **Fully managed cron job scheduler**
 

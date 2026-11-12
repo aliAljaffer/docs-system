@@ -10,8 +10,6 @@ tags:
 
 # cloud-ngfw
 
-`gcp` `networking`
-
 ## Cloud NGFW (Next-Generation Firewall) Enterprise
 **Advanced Layer 3-7 stateful firewall** with **intrusion detection/prevention (IDS/IPS)** for VPC networks
 

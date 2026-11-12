@@ -8,8 +8,6 @@ tags:
 
 # react
 
-`react`
-
 React is a JavaScript library for building user interfaces from components. This page links to notes on setup, hooks, and routing with React Router.
 
 ## Installation

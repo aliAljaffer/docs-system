@@ -10,8 +10,6 @@ tags:
 
 # deployment-strategies
 
-`gcp` `devops`
-
 ## Deployment Strategies
 **Comprehensive guide** to **6 deployment strategies** for GCP services
 **Critical for PCA exam** - case studies often test deployment approach selection

@@ -10,8 +10,6 @@ tags:
 
 # cloud-run
 
-`gcp` `compute`
-
 ## Cloud Run
 **Fully managed** serverless platform for **containerized applications**
 

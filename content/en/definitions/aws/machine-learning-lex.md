@@ -10,8 +10,6 @@ tags:
 
 # lex
 
-`aws` `services`
-
 Build text and voice chatbots.
 
 "Add sophisticated, natural language, AI-powered chatbots to new and existing applications."

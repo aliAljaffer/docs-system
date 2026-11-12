@@ -10,8 +10,6 @@ tags:
 
 # storage gateway
 
-`aws` `services`
-
 Provide on-premise apps with access to virtually unlimited cloud storage.
 
 - **Tape Gateway** - Transfer data from physical tapes

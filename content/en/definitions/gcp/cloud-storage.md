@@ -10,8 +10,6 @@ tags:
 
 # cloud-storage
 
-`gcp` `storage`
-
 ## Cloud Storage
 **Object storage** for unstructured data - fully managed, scalable, and durable
 

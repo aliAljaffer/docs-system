@@ -10,8 +10,6 @@ tags:
 
 # allocation tags
 
-`gcp`
-
 Tags that you attach to resources in AWS to identify them in reports, so you know where costs are coming from.
 
 Two types:

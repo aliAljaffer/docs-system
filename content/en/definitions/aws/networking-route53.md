@@ -10,8 +10,6 @@ tags:
 
 # route53
 
-`aws` `services`
-
 Scalable DNS and domain name registration 
 
 A reliable and cost-effective way to route end users to Internet applications

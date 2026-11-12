@@ -12,8 +12,6 @@ tags:
 
 # main-context-concepts
 
-`react` `context`
-
 The **React Context API** provides a way to pass data through the component tree without having to pass [[props]] down manually at every level. It is useful for sharing data that can be considered “global” for a tree of React components.
 
 - [[usereducer|useReducer]] preferred for state management in Contexts

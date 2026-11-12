@@ -10,8 +10,6 @@ tags:
 
 # persistent-disk
 
-`gcp` `storage`
-
 ## Persistent Disk
 **Block storage** for [[gcp/compute-engine|Compute Engine]] and [[gcp/gke|GKE]] - network-attached, durable
 

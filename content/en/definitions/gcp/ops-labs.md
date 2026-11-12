@@ -10,8 +10,6 @@ tags:
 
 # ops-labs
 
-`gcp` `operations`
-
 These hands-on labs cover Google Cloud operations: Cloud Monitoring, Cloud Logging, Prometheus, Cloud Trace, and Error Reporting.
 
 | Lab | Title |

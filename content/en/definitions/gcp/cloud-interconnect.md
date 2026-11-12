@@ -10,8 +10,6 @@ tags:
 
 # cloud-interconnect
 
-`gcp` `networking`
-
 ## Cloud Interconnect
 **Dedicated private connection** between on-premises network and Google Cloud [[vpc|VPC]]
 

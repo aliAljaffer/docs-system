@@ -11,6 +11,4 @@ tags:
 
 # generative ai
 
-`cloud` `fundamentals` `ai`
-
 AI that generates somewhat **NEW** results

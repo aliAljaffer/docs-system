@@ -9,8 +9,6 @@ tags:
 
 # VMs and containers
 
-`gcp`
-
 A virtual machine (VM) uses software to act as a full server. A container packages an app with everything it needs to run on a server.
 
 ## Virtual Machines 

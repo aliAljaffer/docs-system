@@ -10,8 +10,6 @@ tags:
 
 # alloydb
 
-`gcp` `databases`
-
 ## AlloyDB
 **Fully managed PostgreSQL-compatible database** optimized for demanding enterprise workloads
 

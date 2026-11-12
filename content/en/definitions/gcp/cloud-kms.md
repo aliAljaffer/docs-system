@@ -10,8 +10,6 @@ tags:
 
 # cloud-kms
 
-`gcp` `security`
-
 ## Cloud KMS (Key Management Service)
 **Managed cryptographic key management** - Create, use, rotate, and destroy cryptographic keys
 

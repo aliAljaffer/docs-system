@@ -9,8 +9,6 @@ tags:
 
 # aws services
 
-`gcp`
-
 AWS services are the products AWS offers. This page groups them into four categories: compute, storage, networking, and database.
 
 1. [[aws-compute|aws compute]]

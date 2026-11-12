@@ -10,6 +10,4 @@ tags:
 
 # shared hosting
 
-`cloud` `fundamentals`
-
 One machine, hundred of businesses.

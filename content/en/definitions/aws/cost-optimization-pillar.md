@@ -9,8 +9,6 @@ tags:
 
 # cost optimization pillar
 
-`gcp`
-
 The cost optimization pillar is the group of AWS Well-Architected Framework practices for avoiding unnecessary spending. This page lists those practices.
 
 - Implement cloud financial management

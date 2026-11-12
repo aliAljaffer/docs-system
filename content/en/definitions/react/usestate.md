@@ -10,8 +10,6 @@ tags:
 
 # useState
 
-`react` `hooks`
-
 `useState` is a React hook that adds a state variable to a component. It returns the current value and a function to update it.
 
 

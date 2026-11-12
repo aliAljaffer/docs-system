@@ -9,8 +9,6 @@ tags:
 
 # useNavigate
 
-`react` `routing`
-
 Navigator hook that returns a function to change the URL.
 
 ```js

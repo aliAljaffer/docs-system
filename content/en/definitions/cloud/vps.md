@@ -11,6 +11,4 @@ tags:
 
 # vps
 
-`cloud` `fundamentals`
-
 One machine dedicated to a single business. The machine is split into sub-machines. Runs multiple web apps.

@@ -10,8 +10,6 @@ tags:
 
 # cloud-vpn
 
-`gcp` `networking`
-
 ## Cloud VPN
 **IPsec virtual private network (VPN)** connection between Google Cloud [[vpc|VPC]] and on-premises or other cloud networks
 

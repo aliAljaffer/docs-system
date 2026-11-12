@@ -10,8 +10,6 @@ tags:
 
 # database migration service
 
-`aws` `services`
-
 Migrate databases with minimal downtime and [[high-availability|high availability]] at low-costs
 
 | Benefit | Description |

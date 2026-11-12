@@ -11,8 +11,6 @@ tags:
 
 # high durability
 
-`cloud` `fundamentals` `reliability`
-
 Ability to recover from disaster with minimal data lost
 
 ## RTO **Recovery Time Objective**

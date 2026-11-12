@@ -9,8 +9,6 @@ tags:
 
 # loaders
 
-`react` `routing`
-
 React Router 
 - Loaders load data before component renders
 

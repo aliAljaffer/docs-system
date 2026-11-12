@@ -12,6 +12,4 @@ tags:
 
 # business continuity
 
-`cloud` `fundamentals` `reliability`
-
 Business continuity is an organization's ability to continue operating despite an incident.

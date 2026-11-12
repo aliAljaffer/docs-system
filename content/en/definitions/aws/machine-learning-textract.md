@@ -11,6 +11,4 @@ tags:
 
 # textract
 
-`aws` `services`
-
 Automatically extract printed text, handwriting, layout elements, and data from any document

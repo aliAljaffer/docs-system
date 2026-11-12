@@ -10,8 +10,6 @@ tags:
 
 # cloud-dns
 
-`gcp` `networking`
-
 ## Cloud DNS
 **Managed authoritative DNS** service running on Google's global infrastructure
 

@@ -11,6 +11,4 @@ tags:
 
 # ecr
 
-`aws` `services`
-
 Elastic Container Registry: Share and deploy [[containers]] software, either publicly or privately

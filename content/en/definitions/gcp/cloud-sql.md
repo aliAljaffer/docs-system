@@ -10,8 +10,6 @@ tags:
 
 # cloud-sql
 
-`gcp` `databases`
-
 ## Cloud SQL
 **Fully managed relational database** service for MySQL, PostgreSQL, and SQL Server
 

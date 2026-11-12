@@ -11,6 +11,4 @@ tags:
 
 # billing and cost management
 
-`aws` `services`
-
 Get an overview and cost breakdowns, summaries, and allocation coverage. Adjust [[financial-management-budgets|budgets]], and view cost and usage analysis.

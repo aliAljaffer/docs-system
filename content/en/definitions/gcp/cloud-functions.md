@@ -10,8 +10,6 @@ tags:
 
 # cloud-functions
 
-`gcp` `compute`
-
 ## Cloud Functions
 **Event-driven serverless** compute for lightweight functions
 

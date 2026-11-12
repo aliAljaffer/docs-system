@@ -10,8 +10,6 @@ tags:
 
 # dataproc
 
-`gcp` `data`
-
 ## Cloud Dataproc
 **Managed Apache Spark and Hadoop** clusters
 

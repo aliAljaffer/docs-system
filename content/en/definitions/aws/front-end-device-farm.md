@@ -10,6 +10,4 @@ tags:
 
 # device farm
 
-`aws` `services`
-
 Test android, ios, and web apps on REAL devices on the cloud.

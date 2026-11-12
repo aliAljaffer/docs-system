@@ -10,8 +10,6 @@ tags:
 
 # databases-labs
 
-`gcp` `databases`
-
 These hands-on labs cover Google Cloud databases and analytics: Cloud SQL for MySQL and PostgreSQL, and BigQuery.
 
 | Lab | Title | Modules |

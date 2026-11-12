@@ -107,12 +107,13 @@ extra_javascript:
   - assets/analytics.js?v={v}
   - assets/checklist.js?v={v}
   - assets/course-nav.js?v={v}
+  - assets/tag-search.js?v={v}
 """
 
 
 def asset_version() -> str:
     digest = hashlib.sha256()
-    names = ("theme.css", "hover.css", "diagram-zoom.css", "source-file.css", "hover.js", "diagram-zoom.js", "analytics.js", "checklist.js", "course-nav.js", "mathjax.js")
+    names = ("theme.css", "hover.css", "diagram-zoom.css", "source-file.css", "hover.js", "diagram-zoom.js", "analytics.js", "checklist.js", "course-nav.js", "tag-search.js", "mathjax.js")
     for path in [*(ASSETS / name for name in names), *brand.asset_inputs(brand.load())]:
         digest.update(path.read_bytes())
     return digest.hexdigest()[:10]

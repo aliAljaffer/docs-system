@@ -10,8 +10,6 @@ tags:
 
 # config
 
-`aws` `services`
-
 **AWS Config is a service used to manage changes in your AWS account and make sure they are compliant with processes set by the organization.**
 Config is [[region]] specific.
 Use cases:

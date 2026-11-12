@@ -10,6 +10,4 @@ tags:
 
 # dedicated server
 
-`cloud` `fundamentals`
-
 One machine dedicated to a single business.

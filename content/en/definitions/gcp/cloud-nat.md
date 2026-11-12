@@ -10,8 +10,6 @@ tags:
 
 # cloud-nat
 
-`gcp` `networking`
-
 ## Cloud NAT
 **Managed Network Address Translation** service for outbound internet connectivity from **private instances**
 

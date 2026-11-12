@@ -10,8 +10,6 @@ tags:
 
 # aws snow family
 
-`aws` `services`
-
 **Physical** devices used to **move data in and out of the AWS cloud**
 
 | Device | Storage |

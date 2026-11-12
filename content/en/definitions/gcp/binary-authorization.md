@@ -10,8 +10,6 @@ tags:
 
 # binary-authorization
 
-`gcp` `security`
-
 ## Binary Authorization
 **Deploy-time security control** - Ensures only trusted container images are deployed to GKE and Cloud Run
 

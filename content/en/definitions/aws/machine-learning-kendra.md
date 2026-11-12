@@ -11,6 +11,4 @@ tags:
 
 # kendra
 
-`aws` `services`
-
 Highly accurate machine learning enterprise search service for all unstructured data stored in Amazon [[storage-s3|S3]] and Amazon [[database-aws-database#DB Services|RDS]] databases.

@@ -10,6 +10,4 @@ tags:
 
 # bedrock
 
-`aws` `services`
-
 Easiest way to build and scale [[generative-ai|generative AI]] apps with foundation models.

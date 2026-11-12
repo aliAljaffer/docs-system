@@ -10,8 +10,6 @@ tags:
 
 # compute-engine
 
-`gcp` `compute`
-
 ## Compute Engine
 **IaaS** (infrastructure as a service) - virtual machines running in Google's data centers
 

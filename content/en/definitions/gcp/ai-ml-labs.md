@@ -10,8 +10,6 @@ tags:
 
 # ai-ml-labs
 
-`gcp` `ai`
-
 These hands-on labs cover Google Cloud artificial intelligence (AI) and machine learning (ML): Vertex AI, BigQuery ML, and the Cloud ML APIs.
 
 | Lab ID | Title |

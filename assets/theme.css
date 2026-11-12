@@ -439,6 +439,13 @@ body::before {
   border: 1px solid var(--brand-rule);
   border-radius: var(--brand-radius);
   font-weight: 400;
+  cursor: pointer;
+}
+
+.md-typeset .md-tag:hover,
+.md-typeset .md-tag:focus-visible {
+  border-color: var(--brand-accent-ink);
+  color: var(--brand-accent-ink);
 }
 
 .md-typeset [type="checkbox"]:checked + .task-list-indicator::before {

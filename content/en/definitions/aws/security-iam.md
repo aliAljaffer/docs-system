@@ -10,8 +10,6 @@ tags:
 
 # IAM
 
-`aws` `services`
-
 AWS Identity and Access Management (IAM) is the AWS service that controls who can access AWS resources and what they can do with them.
 
 

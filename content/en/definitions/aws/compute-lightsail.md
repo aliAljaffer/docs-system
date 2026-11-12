@@ -10,8 +10,6 @@ tags:
 
 # lightsail
 
-`aws` `services`
-
 **Amazon Lightsail** offers easy-to-use [[vps|virtual private server (VPS)]] instances, [[containers]], storage, databases, and more at a cost-effective monthly price.
 ## Use cases
 

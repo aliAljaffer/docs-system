@@ -10,8 +10,6 @@ tags:
 
 # useRef
 
-`react` `hooks`
-
 - the Ref is persisted across renders
 
 - Should not be read/written `.current` in render logic like state [[usestate|useState]]

@@ -11,8 +11,6 @@ tags:
 
 # aws database
 
-`aws` `services`
-
 Databases store semi-structured and structured data. This is the primary difference between [[aws-storage|storage]] and database.
 
 ## Types

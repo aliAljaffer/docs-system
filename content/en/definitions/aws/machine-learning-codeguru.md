@@ -10,6 +10,4 @@ tags:
 
 # codeguru
 
-`aws` `services`
-
 Recommendation tool for building and running modern applications

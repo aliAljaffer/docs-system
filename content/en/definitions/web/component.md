@@ -11,8 +11,6 @@ tags:
 
 # component
 
-`web` `fundamentals`
-
 ## React components
 
 ```js

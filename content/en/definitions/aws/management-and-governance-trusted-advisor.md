@@ -11,8 +11,6 @@ tags:
 
 # trusted advisor
 
-`aws` `services`
-
 A recommendation tool that automatically and actively monitors your AWS account to provide actionable recommendations across a series of categories:
 
 1. [[cost-optimization-pillar|cost optimization pillar]]

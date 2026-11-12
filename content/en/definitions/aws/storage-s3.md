@@ -10,8 +10,6 @@ tags:
 
 # s3
 
-`aws` `services`
-
 ## SAA
 Simple storage service. Buckets are used to contain Objects, which are files you upload. Objects have **keys**, these keys are the path to the object in the s3 bucket.
 - Buckets should be all lowercase.

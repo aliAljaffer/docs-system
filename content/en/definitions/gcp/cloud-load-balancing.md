@@ -10,8 +10,6 @@ tags:
 
 # cloud-load-balancing
 
-`gcp` `networking`
-
 ## Cloud Load Balancing
 **Fully managed** load balancing service, **globally distributed**, **auto-scaling**
 

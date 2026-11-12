@@ -10,8 +10,6 @@ tags:
 
 # bigtable
 
-`gcp` `databases`
-
 ## Cloud Bigtable
 **Fully managed, scalable NoSQL wide-column database** for massive workloads
 
