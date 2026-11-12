@@ -185,7 +185,7 @@ def custom_properties(colours: dict[str, str]) -> str:
 def shadow(colours: dict[str, str], mode: str, on: bool) -> str:
     if not on:
         return "none"
-    r, g, b = rgb(colours["ink"]).split(", ")
+    r, g, b = rgb(colours["ink"] if mode == "light" else "#000000").split(", ")
     return f"0 1px 2px rgba({r}, {g}, {b}, 0.04), 0 6px 18px rgba({r}, {g}, {b}, {0.05 if mode == 'light' else 0.3})"
 
 
