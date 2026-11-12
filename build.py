@@ -579,7 +579,8 @@ def assemble() -> Path:
     provenance.stamp(BUILD, provenance.commit_dates(ROOT, "content/en"), provenance.local_origin("content/en"))
     shutil.copytree(ASSETS, BUILD / "assets")
     identity = brand.load()
-    brand.compile(identity, BUILD / "assets", SITE_URL)
+    version = asset_version()
+    brand.compile(identity, BUILD / "assets", SITE_URL, version)
     definitions_index(BUILD)
     process_wiki(BUILD)
     fetch.fetch_all(BUILD, config)
@@ -588,8 +589,7 @@ def assemble() -> Path:
     write_index(BUILD, config, "projects", "Projects", TAGLINE)
     write_index(BUILD, config, "courses", "Courses", "Long-form courses built around one project or one skill path.")
     label_pages(BUILD, config)
-    version = asset_version()
-    brand_styles = "".join(f"  - {s if s.startswith('http') else 'assets/brand/' + s}\n" for s in identity.stylesheets)
+    brand_styles = "".join(f"  - {s if s.startswith('http') else f'assets/brand/{s}?v={version}'}\n" for s in identity.stylesheets)
     site = {
         "copyright": f'&copy; {datetime.date.today().year} {OWNER} &middot; <a href="{PORTFOLIO_URL}">{PORTFOLIO_LABEL}</a>',
         "extra": {
