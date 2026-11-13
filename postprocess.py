@@ -8,6 +8,11 @@ from pathlib import Path
 
 ARTICLE = re.compile(r'(<article class="md-content__inner md-typeset">)(.*?)(</article>)', re.S)
 SVG_IMG = re.compile(r'<img\b[^>]*\bsrc="[^"]*\.svg"[^>]*>')
+CODE_BLOCK = re.compile(
+    r'(<div class="(?:language-(?P<lang>[^\s"]+) )?highlight">)'
+    r'(?:<span class="filename">(?P<title>.*?)</span>)?<pre>'
+)
+LANGUAGE_LABELS = {"docs-shell": "shell", "docs-diff": "diff", "text": ""}
 
 DIAGRAM_TOOLS = (
     '<button type="button" data-action="in" aria-label="Zoom in" title="Zoom in">+</button>'
@@ -26,6 +31,18 @@ def diagram_shell(img: re.Match[str]) -> str:
     )
 
 
+def code_label(block: re.Match[str]) -> str:
+    title, lang = block.group("title"), block.group("lang") or ""
+    lang = LANGUAGE_LABELS.get(lang, lang)
+    if title:
+        label = f' data-title="{html.escape(html.unescape(title))}"'
+    elif lang:
+        label = f' data-lang="{html.escape(lang)}"'
+    else:
+        label = ""
+    return f"{block.group(1)}<pre{label}>"
+
+
 def backlinks_box(entries: list[dict[str, str]]) -> str:
     items = "".join(f'<li><a href="{html.escape(e["url"])}">{html.escape(e["title"])}</a></li>' for e in entries)
     return f'<div class="backlinks"><h2 id="linked-from">Linked from</h2><ul>{items}</ul></div>'
@@ -34,6 +51,7 @@ def backlinks_box(entries: list[dict[str, str]]) -> str:
 def enhance(page_html: str, url: str, backlinks: dict[str, list[dict[str, str]]]) -> str:
     def article(match: re.Match[str]) -> str:
         body = SVG_IMG.sub(diagram_shell, match.group(2))
+        body = CODE_BLOCK.sub(code_label, body)
         if backlinks.get(url):
             body += backlinks_box(backlinks[url])
         return match.group(1) + body + match.group(3)

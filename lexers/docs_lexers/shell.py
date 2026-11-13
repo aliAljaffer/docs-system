@@ -1,6 +1,6 @@
 """Shell lexer for the docs site. Colours a command, its first subcommand, flags, strings and placeholders.
 
-Fences use the alias `docs-shell`. The build rewrites bash, sh, shell, console and bare fences to it.
+Fences use the alias `docs-shell`. The build rewrites bash, sh, shell, console and zsh fences to it.
 """
 from pygments.lexer import RegexLexer, Whitespace, default, include
 from pygments.token import Comment, Keyword, Name, Number, Operator, String, Text

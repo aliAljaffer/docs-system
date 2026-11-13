@@ -13,3 +13,4 @@ packages = ["docs_lexers"]
 
 [project.entry-points."pygments.lexers"]
 docs_shell = "docs_lexers.shell:DocsShellLexer"
+docs_diff = "docs_lexers.diff:DocsDiffLexer"

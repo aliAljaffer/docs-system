@@ -82,6 +82,8 @@ markdown_extensions:
   - admonition
   - pymdownx.details
   - pymdownx.superfences
+  - pymdownx.highlight:
+      pygments_lang_class: true
   - pymdownx.arithmatex:
       generic: true
   - pymdownx.tasklist:
@@ -398,18 +400,22 @@ def apply_content(acts: Path, ep: str) -> tuple[str, str]:
     return "\n\n".join(blocks), spec["file"]
 
 
-SHELL_FENCES = {"bash", "sh", "shell", "console", "zsh"}
+FENCE_LEXERS = {
+    **dict.fromkeys(("bash", "sh", "shell", "console", "zsh"), "docs-shell"),
+    "diff": "docs-diff",
+}
 
 
-def use_shell_lexer(text: str) -> str:
-    """Point tagged shell fences at the docs-shell lexer, which colours commands and flags."""
+def use_docs_lexers(text: str) -> str:
+    """Point tagged shell and diff fences at the lexers in docs_lexers."""
     out: list[str] = []
     fenced = False
     for line in text.splitlines(keepends=True):
         stripped = line.lstrip()
         if stripped.startswith("```"):
-            if not fenced and stripped[3:].strip() in SHELL_FENCES:
-                line = line[: len(line) - len(stripped)] + "```docs-shell\n"
+            lexer = FENCE_LEXERS.get(stripped[3:].strip())
+            if not fenced and lexer:
+                line = line[: len(line) - len(stripped)] + f"```{lexer}\n"
             fenced = not fenced
         out.append(line)
     return "".join(out)
@@ -651,7 +657,7 @@ def assemble() -> tuple[Path, list[og.Card]]:
     fetch.fetch_all(BUILD, config)
     prepare(BUILD, config)
     for page in BUILD.rglob("*.md"):
-        page.write_text(use_shell_lexer(page.read_text()))
+        page.write_text(use_docs_lexers(page.read_text()))
     inject_home(BUILD, config)
     write_index(BUILD, config, "projects", "Projects", TAGLINE)
     write_index(BUILD, config, "courses", "Courses", "Long-form courses built around one project or one skill path.")
