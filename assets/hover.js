@@ -5,11 +5,14 @@
   let card = null;
   let showTimer = null;
   let hideTimer = null;
+  let anchorLink = null;
+  const ANCHORED = CSS.supports("anchor-name: --a");
 
   function ensureCard() {
     if (card) return card;
     card = document.createElement("div");
     card.className = "preview-card";
+    card.setAttribute("popover", "manual");
     document.body.appendChild(card);
     card.addEventListener("mouseenter", () => clearTimeout(hideTimer));
     card.addEventListener("mouseleave", hide);
@@ -17,8 +20,7 @@
   }
 
   function hide() {
-    if (!card) return;
-    card.classList.remove("visible");
+    if (card?.matches(":popover-open")) card.hidePopover();
   }
 
   function cleanText(element) {
@@ -66,6 +68,12 @@
   }
 
   function position(link) {
+    if (ANCHORED) {
+      if (anchorLink && anchorLink !== link) anchorLink.style.anchorName = "";
+      link.style.anchorName = "--preview-anchor";
+      anchorLink = link;
+      return;
+    }
     const rect = link.getBoundingClientRect();
     const width = Math.min(420, window.innerWidth - 32);
     let left = rect.left;
@@ -102,7 +110,7 @@
       more.textContent = "Read more";
       card.replaceChildren(heading, text, more);
       position(link);
-      card.classList.add("visible");
+      if (!card.matches(":popover-open")) card.showPopover();
       document.dispatchEvent(
         new CustomEvent("docs:preview", { detail: { title, url: url.pathname } }),
       );

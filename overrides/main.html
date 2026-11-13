@@ -22,5 +22,23 @@
   {% set courses = namespace(on=false) %}
   {% for item in nav.items if item.active and item.children and item.children[0].url == "courses/" %}{% set courses.on = true %}{% endfor %}
   {% if courses.on %}<script>document.documentElement.setAttribute("data-course","")</script>{% endif %}
+  <script type="speculationrules">
+  {
+    "prefetch": [{
+      "where": {
+        "and": [
+          {"href_matches": "/*"},
+          {"not": {"href_matches": ["/assets/*", "/*.pdf", "/*.zip", "/*.json", "/*.xml"]}},
+          {"not": {"selector_matches": "[rel~=nofollow], [download]"}}
+        ]
+      },
+      "eagerness": "moderate"
+    }]
+  }
+  </script>
   {{ super() }}
+{% endblock %}
+{% block scripts %}
+  {{ super() }}
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js" integrity="sha384-Wuix6BuhrWbjDBs24bXrjf4ZQ5aFeFWBuKkFekO2t8xFU0iNaLQfp2K6/1Nxveei" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 {% endblock %}

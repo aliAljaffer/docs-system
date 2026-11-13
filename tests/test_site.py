@@ -79,7 +79,8 @@ class SiteTests(unittest.TestCase):
     def test_slides_embedded(self) -> None:
         page = next((SITE / "four-hats" / "episodes").glob("ep04-*/index.html")).read_text()
         self.assertIn("<iframe", page)
-        self.assertIn("requestFullscreen", page)
+        self.assertIn("data-fullscreen", page)
+        self.assertIn("assets/fullscreen.js", page)
         self.assertIn("md-button", page)
         self.assertTrue(len(list((SITE / "four-hats" / "slides").glob("ep*.html"))) >= 27)
 
@@ -127,6 +128,16 @@ class SiteTests(unittest.TestCase):
         self.assertIn('<div class="diagram-zoom">', page)
         linked = (SITE / "definitions" / "ai" / "generative-ai" / "index.html").read_text()
         self.assertIn('<h2 id="linked-from">', linked)
+
+    def test_diagram_images_load_lazily_except_first(self) -> None:
+        shelled = postprocess.enhance(
+            '<article class="md-content__inner md-typeset">'
+            '<img alt="a" src="a.svg" /><img alt="b" src="b.svg" /></article>',
+            "/x/",
+            {},
+        )
+        self.assertIn('<img alt="a" src="a.svg" decoding="async" />', shelled)
+        self.assertIn('<img alt="b" src="b.svg" decoding="async" loading="lazy" />', shelled)
 
     def test_code_blocks_labelled_at_build(self) -> None:
         page = (SITE / "projects" / "s2t" / "index.html").read_text()

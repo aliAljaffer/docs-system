@@ -169,6 +169,7 @@ body.show-notes .hidden-notes{display:block}
 .animate-stagger>*:nth-child(2){animation-delay:.12s}
 .animate-stagger>*:nth-child(3){animation-delay:.19s}
 .animate-stagger>*:nth-child(4){animation-delay:.26s}
+@supports (animation-delay:calc(sibling-index() * 1s)){.animate-stagger>*{animation-delay:calc(.05s + (sibling-index() - 1) * .07s)}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
@@ -177,25 +178,25 @@ body.show-notes .hidden-notes{display:block}
 <div class="progress-track"><div class="progress-bar" id="progressBar"></div></div>
 <div class="slide-deck">
 <section class="slide active">
-<div class="dabs" aria-hidden="true"><i style="left:-4%;top:-8%;width:560px;height:360px;background:var(--wash-a)"></i><i style="right:-2%;top:4%;width:420px;height:340px;background:var(--wash-b)"></i><i style="left:36%;bottom:-12%;width:520px;height:320px;background:var(--wash-c)"></i></div>
-<div style="position:absolute;top:18px;left:20px;right:20px;display:flex;justify-content:space-between;align-items:center"><span class="time">00:00 · Ep 06</span><span class="badge" id="paletteBadge">Plein Air · Garden Hour</span></div>
+<div class="dabs" aria-hidden="true"><i class="dab-4"></i><i class="dab-2"></i><i class="dab-3"></i></div>
+<div class="topbar"><span class="time">00:00 · Ep 06</span><span class="badge" id="paletteBadge">Plein Air · Garden Hour</span></div>
 <div class="slide-content">
 <p class="eyebrow animate-fade-up">Minikube Project · Ep 06</p>
 <h1 class="slide-title">Continuous <em>Integration</em></h1>
 <p class="slide-subtitle">CI is the gate between a developer and main.</p>
 <div class="meta-row"><div class="item"><b>20 to 22</b><span>minutes</span></div><div class="item"><b>Theory</b><span>first</span></div><div class="item"><b>Apply</b><span>in docs</span></div></div>
 <p class="hidden-notes note"><strong>Speaker cue:</strong> Title only. Promise theory first. Hands-on steps live in the apply doc named at the end, not on screen.</p>
-<span class="complement-dot" style="right:12%;bottom:22%;width:14px;height:14px" aria-hidden="true"></span>
+<span class="complement-dot dot-sm" aria-hidden="true"></span>
 </div>
 </section>
-<section class="slide"><div style="position:absolute;top:18px;left:20px;right:20px;display:flex;justify-content:space-between;align-items:center"><span class="time">00:00 · Hook</span><span class="badge">Start here</span></div><div class="slide-content">
+<section class="slide"><div class="topbar"><span class="time">00:00 · Hook</span><span class="badge">Start here</span></div><div class="slide-content">
 <p class="eyebrow">Start here</p>
 <h2 class="slide-heading">CI is the gate between a developer and main.</h2>
 <ul class="bullets animate-stagger"><li><strong>Every push triggers checks.</strong> <span>Tests and builds run automatically.</span></li><li><strong>Every pull request shows pass or fail.</strong> <span>The review starts from facts, not trust.</span></li><li><strong>CI catches bugs before they ship.</strong> <span>The gate protects main.</span></li></ul>
 <p class="hidden-notes note"><strong>Speaker cue:</strong> Keep this short. Promise ideas, not steps. The doc at the end holds the steps.</p>
 </div>
 </section>
-<section class="slide"><div style="position:absolute;top:18px;left:20px;right:20px;display:flex;justify-content:space-between;align-items:center"><span class="time">01:00 · Goals</span><span class="badge">Learn</span></div><div class="slide-content">
+<section class="slide"><div class="topbar"><span class="time">01:00 · Goals</span><span class="badge">Learn</span></div><div class="slide-content">
 <p class="eyebrow">What you will learn</p>
 <h2 class="slide-heading">What you will learn</h2>
 <div class="grid-2"><div class="panel"><h3>Learning goals</h3><ul><li>Explain GitHub Actions workflows</li><li>Write CI to test and build images</li><li>Use least privilege permissions</li><li>Read PR status checks</li><li>Fix failing tests from logs</li></ul></div><div class="panel"><h3>Prerequisites</h3><ul><li>Episode 4 done, tests written</li><li>Episode 5 done, Compose done</li><li>Episode 2 done, PR workflow</li></ul></div></div>
@@ -203,28 +204,28 @@ body.show-notes .hidden-notes{display:block}
 </div>
 </section>
 
-<section class="slide"><div style="position:absolute;top:18px;left:20px;right:20px;display:flex;justify-content:space-between;align-items:center"><span class="time">01:00 · Concepts</span><span class="badge">Definitions</span></div><div class="slide-content">
+<section class="slide"><div class="topbar"><span class="time">01:00 · Concepts</span><span class="badge">Definitions</span></div><div class="slide-content">
 <p class="eyebrow">Theory</p>
 <h2 class="slide-heading">Workflows. Jobs. Least privilege.</h2>
-<table class="ep-table animate-fade-up"><tr><th>Term</th><th>Meaning</th></tr><tr><td>Workflow</td><td>A YAML file that GitHub Actions runs.</td></tr><tr><td>Job</td><td>A unit of work that runs on a runner.</td></tr><tr><td>Step</td><td>One action inside a job.</td></tr><tr><td>Runner</td><td>A GitHub-hosted machine that runs the job.</td></tr><tr><td>Trigger</td><td>When the workflow runs, such as pull_request or push.</td></tr><tr><td>Least privilege</td><td>Only contents read. The workflow can read, not modify.</td></tr><tr><td>Status check</td><td>The pass or fail shown on the pull request.</td></tr></table>
+<table class="ep-table animate-fade-up"><tr><th scope="col">Term</th><th scope="col">Meaning</th></tr><tr><td>Workflow</td><td>A YAML file that GitHub Actions runs.</td></tr><tr><td>Job</td><td>A unit of work that runs on a runner.</td></tr><tr><td>Step</td><td>One action inside a job.</td></tr><tr><td>Runner</td><td>A GitHub-hosted machine that runs the job.</td></tr><tr><td>Trigger</td><td>When the workflow runs, such as pull_request or push.</td></tr><tr><td>Least privilege</td><td>Only contents read. The workflow can read, not modify.</td></tr><tr><td>Status check</td><td>The pass or fail shown on the pull request.</td></tr></table>
 <p class="hidden-notes note"><strong>Speaker cue:</strong> Read across once. Definitions first. No commands on screen.</p>
 </div>
 </section>
-<section class="slide"><div style="position:absolute;top:18px;left:20px;right:20px;display:flex;justify-content:space-between;align-items:center"><span class="time">02:30 · Why It Matters</span><span class="badge">Decisions</span></div><div class="slide-content">
+<section class="slide"><div class="topbar"><span class="time">02:30 · Why It Matters</span><span class="badge">Decisions</span></div><div class="slide-content">
 <p class="eyebrow">Why it matters</p>
 <h2 class="slide-heading">Why CI gates main.</h2>
 <ul class="bullets animate-stagger"><li><strong>Automation scales review.</strong> <span>Every change gets the same checks.</span></li><li><strong>Failure is visible early.</strong> <span>Breaking a test proves the gate works.</span></li><li><strong>Least privilege limits damage.</strong> <span>A compromised action cannot push code.</span></li></ul>
 <p class="hidden-notes note"><strong>Speaker cue:</strong> Decisions plus reasons. This is the slide to quote in review.</p>
 </div>
 </section>
-<section class="slide"><div style="position:absolute;top:18px;left:20px;right:20px;display:flex;justify-content:space-between;align-items:center"><span class="time">04:00 · Diagram</span><span class="badge">How it fits</span></div><div class="slide-content">
+<section class="slide"><div class="topbar"><span class="time">04:00 · Diagram</span><span class="badge">How it fits</span></div><div class="slide-content">
 <p class="eyebrow">Diagram</p>
 <h2 class="slide-heading">Push, check, merge. In that order.</h2>
 <div class="arch animate-stagger"><div class="arch-box"><h4>Push branch</h4><p>GitHub detects the change.</p></div><div class="arrow">→</div><div class="arch-box"><h4>Runner checks</h4><p>Test job and build job run.</p></div><div class="arrow">→</div><div class="arch-box"><h4>Green allows merge</h4><p>Red blocks merge until fixed.</p></div></div>
 <p class="hidden-notes note"><strong>Speaker cue:</strong> Walk the arrows left to right. Each box is one layer. No commands needed.</p>
 </div>
 </section>
-<section class="slide"><div style="position:absolute;top:18px;left:20px;right:20px;display:flex;justify-content:space-between;align-items:center"><span class="time">06:00 · Limits</span><span class="badge">Watch out</span></div><div class="slide-content">
+<section class="slide"><div class="topbar"><span class="time">06:00 · Limits</span><span class="badge">Watch out</span></div><div class="slide-content">
 <p class="eyebrow">Limits and tradeoffs</p>
 <h2 class="slide-heading">False confidence. Flaky checks.</h2>
 <ul class="bullets animate-stagger"><li><strong>CI does not replace local discipline.</strong> <span>It verifies, not invents, the fix.</span></li><li><strong>Build needs a dummy password.</strong> <span>Compose requires DB_PASSWORD even for builds.</span></li><li><strong>Read-only restricts automation.</strong> <span>Safety limits what the workflow can do.</span></li><li><strong>Flaky tests block teams.</strong> <span>Unreliable checks cost trust.</span></li></ul>
@@ -232,22 +233,22 @@ body.show-notes .hidden-notes{display:block}
 <p class="hidden-notes note"><strong>Speaker cue:</strong> Name the failure mode before the fix. The doc holds the fix steps.</p>
 </div>
 </section>
-<section class="slide"><div style="position:absolute;top:18px;left:20px;right:20px;display:flex;justify-content:space-between;align-items:center"><span class="time">07:00 · Insight</span><span class="badge">Work</span></div><div class="slide-content">
+<section class="slide"><div class="topbar"><span class="time">07:00 · Insight</span><span class="badge">Work</span></div><div class="slide-content">
 <p class="eyebrow">Work insight</p>
 <h2 class="slide-heading">Work insight and what bites</h2>
-<div class="grid-2"><div class="panel"><h3>Role focus</h3><p style="font-size:15px;line-height:1.6;color:var(--ink-soft)">Focus: Full-Stack. Software Engineer view for this episode.</p></div><div class="panel"><h3>What bites</h3><ul><li>Set only the permissions you need</li><li>Never hardcode secrets in workflows</li><li>Read workflow logs when a job fails</li></ul></div></div>
+<div class="grid-2"><div class="panel"><h3>Role focus</h3><p class="text-15">Focus: Full-Stack. Software Engineer view for this episode.</p></div><div class="panel"><h3>What bites</h3><ul><li>Set only the permissions you need</li><li>Never hardcode secrets in workflows</li><li>Read workflow logs when a job fails</li></ul></div></div>
 <div class="note"><strong>Decision rule.</strong> Professional teams do not run tests manually.</div>
 <p class="hidden-notes note"><strong>Speaker cue:</strong> State the decision rule exactly. Name what bites before Apply.</p>
 </div>
 </section>
-<section class="slide"><div style="position:absolute;top:18px;left:20px;right:20px;display:flex;justify-content:space-between;align-items:center"><span class="time">07:30 · Apply</span><span class="badge">Four-hats docs</span></div><div class="slide-content">
+<section class="slide"><div class="topbar"><span class="time">07:30 · Apply</span><span class="badge">Four-hats docs</span></div><div class="slide-content">
 <p class="eyebrow">Apply in hands-on time</p>
 <h2 class="slide-heading">Apply in four-hats docs</h2>
-<div class="grid-2"><div class="panel"><h3>docs/act1-software-engineer.md, Episode 6</h3><ul><li><strong>Workflow file.</strong> .github/workflows/ci.yml with triggers and permissions.</li><li><strong>Test and build jobs.</strong> Python setup plus unittest, then docker compose build.</li><li><strong>Gate demo.</strong> Pull request checks, intentional failure, fix, green again.</li></ul></div><div class="panel"><h3>How to use it</h3><p style="font-size:15px;line-height:1.6;color:var(--ink-soft)">See act1 Episode 6, steps 1 to 7 for apply. Tool names: docker compose build, GitHub Actions checks.</p><p style="font-size:14px;line-height:1.6;color:var(--ink-soft);margin-top:8px">Theory stays on screen. Commands live in the doc. Work there, not here.</p></div></div>
+<div class="grid-2"><div class="panel"><h3>docs/act1-software-engineer.md, Episode 6</h3><ul><li><strong>Workflow file.</strong> .github/workflows/ci.yml with triggers and permissions.</li><li><strong>Test and build jobs.</strong> Python setup plus unittest, then docker compose build.</li><li><strong>Gate demo.</strong> Pull request checks, intentional failure, fix, green again.</li></ul></div><div class="panel"><h3>How to use it</h3><p class="text-15">See act1 Episode 6, steps 1 to 7 for apply. Tool names: docker compose build, GitHub Actions checks.</p><p class="text-14">Theory stays on screen. Commands live in the doc. Work there, not here.</p></div></div>
 <p class="hidden-notes note"><strong>Speaker cue:</strong> Point to the doc path. Say what it covers in one breath. Remind them tool names only appear here as captions.</p>
 </div>
 </section>
-<section class="slide"><div style="position:absolute;top:18px;left:20px;right:20px;display:flex;justify-content:space-between;align-items:center"><span class="time">08:30 · Ledger</span><span class="badge">CV</span></div><div class="slide-content">
+<section class="slide"><div class="topbar"><span class="time">08:30 · Ledger</span><span class="badge">CV</span></div><div class="slide-content">
 <p class="eyebrow">CV skills ledger hint</p>
 <h2 class="slide-heading">One ledger row earned.</h2>
 <ul class="bullets animate-stagger"><li><strong>Continuous integration. Built a GitHub Actions pipeline that tests and builds every pull request.</strong> <span>Section: CI/CD and Automation.</span></li></ul>
@@ -256,21 +257,21 @@ body.show-notes .hidden-notes{display:block}
 </div>
 </section>
 <section class="slide">
-<div class="dabs" aria-hidden="true"><i style="left:-4%;bottom:-10%;width:560px;height:360px;background:var(--wash-b)"></i><i style="right:-2%;top:6%;width:420px;height:320px;background:var(--wash-a)"></i></div>
-<div style="position:absolute;top:18px;left:20px;right:20px;display:flex;justify-content:space-between;align-items:center"><span class="time">Outro · Next</span><span class="badge">See you there</span></div>
+<div class="dabs" aria-hidden="true"><i class="dab-5"></i><i class="dab-1"></i></div>
+<div class="topbar"><span class="time">Outro · Next</span><span class="badge">See you there</span></div>
 <div class="slide-content">
 <p class="eyebrow animate-fade-up">Next episode</p>
 <h1 class="slide-title">You know <em>the idea.</em></h1>
 <p class="slide-subtitle">Theory first. Apply in the doc. Then next episode.</p>
-<div class="panel" style="max-width:760px"><h3>Next: Act 2 Cloud Engineer</h3><p style="color:var(--ink-soft);line-height:1.6;font-size:15px">Plan size, ports, network, DNS, cost, and diagram. Then build the same VM twice.</p></div>
+<div class="panel max-760"><h3>Next: Act 2 Cloud Engineer</h3><p class="text-15">Plan size, ports, network, DNS, cost, and diagram. Then build the same VM twice.</p></div>
 </div>
 </section>
 </div>
 <div class="switcher" id="switcher"></div>
 <div class="nav-controls">
-<button class="nav-btn" onclick="prevSlide()" aria-label="Previous">←</button>
+<button class="nav-btn" id="prevBtn" aria-label="Previous">←</button>
 <span class="slide-counter"><span id="current">1</span> / <span id="total">14</span></span>
-<button class="nav-btn" onclick="nextSlide()" aria-label="Next">→</button>
+<button class="nav-btn" id="nextBtn" aria-label="Next">→</button>
 </div>
 <script>
 const PALETTES=[
@@ -316,6 +317,8 @@ function showSlide(n){
 }
 window.nextSlide=function(){showSlide(current+1)};
 window.prevSlide=function(){showSlide(current-1)};
+document.getElementById("prevBtn").addEventListener("click",prevSlide);
+document.getElementById("nextBtn").addEventListener("click",nextSlide);
 document.addEventListener("keydown",function(e){
   if(e.key==="ArrowRight"||e.key===" "){e.preventDefault();nextSlide()}
   if(e.key==="ArrowLeft"){e.preventDefault();prevSlide()}

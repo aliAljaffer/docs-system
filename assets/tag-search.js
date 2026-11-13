@@ -27,15 +27,12 @@
 
   document.querySelectorAll(".md-tag").forEach((tag) => {
     const term = tag.textContent.trim();
-    tag.setAttribute("role", "button");
-    tag.setAttribute("tabindex", "0");
-    tag.setAttribute("title", `Search pages tagged ${term}`);
-    tag.addEventListener("click", () => search(term));
-    tag.addEventListener("keydown", (event) => {
-      if (event.key === "Enter" || event.key === " ") {
-        event.preventDefault();
-        search(term);
-      }
-    });
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = tag.className;
+    button.title = `Search pages tagged ${term}`;
+    button.append(...tag.childNodes);
+    button.addEventListener("click", () => search(term));
+    tag.replaceWith(button);
   });
 })();

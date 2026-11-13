@@ -169,6 +169,7 @@ body.show-notes .hidden-notes{display:block}
 .animate-stagger>*:nth-child(2){animation-delay:.12s}
 .animate-stagger>*:nth-child(3){animation-delay:.19s}
 .animate-stagger>*:nth-child(4){animation-delay:.26s}
+@supports (animation-delay:calc(sibling-index() * 1s)){.animate-stagger>*{animation-delay:calc(.05s + (sibling-index() - 1) * .07s)}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
@@ -177,25 +178,25 @@ body.show-notes .hidden-notes{display:block}
 <div class="progress-track"><div class="progress-bar" id="progressBar"></div></div>
 <div class="slide-deck">
 <section class="slide active">
-<div class="dabs" aria-hidden="true"><i style="left:-4%;top:-8%;width:560px;height:360px;background:var(--wash-a)"></i><i style="right:-2%;top:4%;width:420px;height:340px;background:var(--wash-b)"></i><i style="left:36%;bottom:-12%;width:520px;height:320px;background:var(--wash-c)"></i></div>
-<div style="position:absolute;top:18px;left:20px;right:20px;display:flex;justify-content:space-between;align-items:center"><span class="time">00:00 · Ep 09</span><span class="badge" id="paletteBadge">Plein Air · Garden Hour</span></div>
+<div class="dabs" aria-hidden="true"><i class="dab-4"></i><i class="dab-2"></i><i class="dab-3"></i></div>
+<div class="topbar"><span class="time">00:00 · Ep 09</span><span class="badge" id="paletteBadge">Plein Air · Garden Hour</span></div>
 <div class="slide-content">
 <p class="eyebrow animate-fade-up">Minikube Project · Ep 09</p>
 <h1 class="slide-title">Configuration <em>as Code</em></h1>
 <p class="slide-subtitle">Ansible does the same steps on every server, every time.</p>
 <div class="meta-row"><div class="item"><b>20 to 25</b><span>minutes</span></div><div class="item"><b>Theory</b><span>first</span></div><div class="item"><b>Apply</b><span>in docs</span></div></div>
 <p class="hidden-notes note"><strong>Speaker cue:</strong> Title only. Promise theory first. Hands-on steps live in the apply doc named at the end, not on screen.</p>
-<span class="complement-dot" style="right:12%;bottom:22%;width:14px;height:14px" aria-hidden="true"></span>
+<span class="complement-dot dot-sm" aria-hidden="true"></span>
 </div>
 </section>
-<section class="slide"><div style="position:absolute;top:18px;left:20px;right:20px;display:flex;justify-content:space-between;align-items:center"><span class="time">00:00 · Hook</span><span class="badge">Start here</span></div><div class="slide-content">
+<section class="slide"><div class="topbar"><span class="time">00:00 · Hook</span><span class="badge">Start here</span></div><div class="slide-content">
 <p class="eyebrow">Start here</p>
 <h2 class="slide-heading">Ten servers. Same steps. No drift.</h2>
 <ul class="bullets animate-stagger"><li><strong>Hand setup fails at scale.</strong> <span>Step seven is forgotten.</span></li><li><strong>Ansible repeats every step.</strong> <span>Every server converges to the same state.</span></li><li><strong>The playbook is runnable documentation.</strong> <span>Teammates read how the server is built.</span></li></ul>
 <p class="hidden-notes note"><strong>Speaker cue:</strong> Keep this short. Promise ideas, not steps. The doc at the end holds the steps.</p>
 </div>
 </section>
-<section class="slide"><div style="position:absolute;top:18px;left:20px;right:20px;display:flex;justify-content:space-between;align-items:center"><span class="time">01:00 · Goals</span><span class="badge">Learn</span></div><div class="slide-content">
+<section class="slide"><div class="topbar"><span class="time">01:00 · Goals</span><span class="badge">Learn</span></div><div class="slide-content">
 <p class="eyebrow">What you will learn</p>
 <h2 class="slide-heading">What you will learn</h2>
 <div class="grid-2"><div class="panel"><h3>Learning goals</h3><ul><li>Explain config management and idempotence</li><li>Write inventory and playbook</li><li>Run Ansible from a container</li><li>Set firewall with UFW</li><li>Pass secrets without Git</li></ul></div><div class="panel"><h3>Prerequisites</h3><ul><li>Episode 8 done, VM with SSH key</li><li>Docker Desktop running</li></ul></div></div>
@@ -203,28 +204,28 @@ body.show-notes .hidden-notes{display:block}
 </div>
 </section>
 
-<section class="slide"><div style="position:absolute;top:18px;left:20px;right:20px;display:flex;justify-content:space-between;align-items:center"><span class="time">01:00 · Concepts</span><span class="badge">Definitions</span></div><div class="slide-content">
+<section class="slide"><div class="topbar"><span class="time">01:00 · Concepts</span><span class="badge">Definitions</span></div><div class="slide-content">
 <p class="eyebrow">Theory</p>
 <h2 class="slide-heading">Inventories. Idempotence. Firewalls.</h2>
-<table class="ep-table animate-fade-up"><tr><th>Term</th><th>Meaning</th></tr><tr><td>Inventory</td><td>The list of servers.</td></tr><tr><td>Playbook</td><td>An ordered list of tasks.</td></tr><tr><td>Module</td><td>A plugin that performs one kind of change.</td></tr><tr><td>Idempotence</td><td>Running twice changes nothing the second time.</td></tr><tr><td>Host firewall</td><td>UFW default-deny with allow rules by port.</td></tr><tr><td>Secret handling</td><td>Password from env, hidden with no_log.</td></tr></table>
+<table class="ep-table animate-fade-up"><tr><th scope="col">Term</th><th scope="col">Meaning</th></tr><tr><td>Inventory</td><td>The list of servers.</td></tr><tr><td>Playbook</td><td>An ordered list of tasks.</td></tr><tr><td>Module</td><td>A plugin that performs one kind of change.</td></tr><tr><td>Idempotence</td><td>Running twice changes nothing the second time.</td></tr><tr><td>Host firewall</td><td>UFW default-deny with allow rules by port.</td></tr><tr><td>Secret handling</td><td>Password from env, hidden with no_log.</td></tr></table>
 <p class="hidden-notes note"><strong>Speaker cue:</strong> Read across once. Definitions first. No commands on screen.</p>
 </div>
 </section>
-<section class="slide"><div style="position:absolute;top:18px;left:20px;right:20px;display:flex;justify-content:space-between;align-items:center"><span class="time">02:30 · Why It Matters</span><span class="badge">Decisions</span></div><div class="slide-content">
+<section class="slide"><div class="topbar"><span class="time">02:30 · Why It Matters</span><span class="badge">Decisions</span></div><div class="slide-content">
 <p class="eyebrow">Why it matters</p>
 <h2 class="slide-heading">Why repeatable beats manual.</h2>
 <ul class="bullets animate-stagger"><li><strong>Repeatability beats memory.</strong> <span>The second run reporting changed equals zero proves it.</span></li><li><strong>Firewalls enforce the plan.</strong> <span>Only planned ports are open.</span></li><li><strong>Secrets stay out of Git.</strong> <span>Environment and inventory files are ignored by Git.</span></li></ul>
 <p class="hidden-notes note"><strong>Speaker cue:</strong> Decisions plus reasons. This is the slide to quote in review.</p>
 </div>
 </section>
-<section class="slide"><div style="position:absolute;top:18px;left:20px;right:20px;display:flex;justify-content:space-between;align-items:center"><span class="time">04:00 · Diagram</span><span class="badge">How it fits</span></div><div class="slide-content">
+<section class="slide"><div class="topbar"><span class="time">04:00 · Diagram</span><span class="badge">How it fits</span></div><div class="slide-content">
 <p class="eyebrow">Diagram</p>
 <h2 class="slide-heading">Ansible in a container, over SSH.</h2>
 <div class="arch animate-stagger"><div class="arch-box"><h4>Control</h4><p>Ansible container. Nothing installed on the laptop.</p></div><div class="arrow">→</div><div class="arch-box"><h4>Session</h4><p>SSH with the key. No agent on the VM.</p></div><div class="arrow">→</div><div class="arch-box"><h4>Target</h4><p>Docker, firewall, app, and env file converge.</p></div></div>
 <p class="hidden-notes note"><strong>Speaker cue:</strong> Walk the arrows left to right. Each box is one layer. No commands needed.</p>
 </div>
 </section>
-<section class="slide"><div style="position:absolute;top:18px;left:20px;right:20px;display:flex;justify-content:space-between;align-items:center"><span class="time">06:00 · Limits</span><span class="badge">Watch out</span></div><div class="slide-content">
+<section class="slide"><div class="topbar"><span class="time">06:00 · Limits</span><span class="badge">Watch out</span></div><div class="slide-content">
 <p class="eyebrow">Limits and tradeoffs</p>
 <h2 class="slide-heading">Lockout. Published port bypass.</h2>
 <ul class="bullets animate-stagger"><li><strong>Firewall order matters.</strong> <span>Enable UFW after allowing SSH or lock yourself out.</span></li><li><strong>Published ports bypass UFW.</strong> <span>Docker writes its own rules ahead of UFW.</span></li><li><strong>Paths and identities matter.</strong> <span>Inventory, env, and ownership must agree.</span></li><li><strong>YAML is strict.</strong> <span>Indentation errors fail the run.</span></li></ul>
@@ -232,22 +233,22 @@ body.show-notes .hidden-notes{display:block}
 <p class="hidden-notes note"><strong>Speaker cue:</strong> Name the failure mode before the fix. The doc holds the fix steps.</p>
 </div>
 </section>
-<section class="slide"><div style="position:absolute;top:18px;left:20px;right:20px;display:flex;justify-content:space-between;align-items:center"><span class="time">07:00 · Insight</span><span class="badge">Work</span></div><div class="slide-content">
+<section class="slide"><div class="topbar"><span class="time">07:00 · Insight</span><span class="badge">Work</span></div><div class="slide-content">
 <p class="eyebrow">Work insight</p>
 <h2 class="slide-heading">Work insight and what bites</h2>
-<div class="grid-2"><div class="panel"><h3>Role focus</h3><p style="font-size:15px;line-height:1.6;color:var(--ink-soft)">Focus: Platform Engineer. Platform Engineer view for this episode.</p></div><div class="panel"><h3>What bites</h3><ul><li>Open port 22 before enabling UFW</li><li>Check IPs with multipass list</li><li>Never commit inventory or env files</li></ul></div></div>
+<div class="grid-2"><div class="panel"><h3>Role focus</h3><p class="text-15">Focus: Platform Engineer. Platform Engineer view for this episode.</p></div><div class="panel"><h3>What bites</h3><ul><li>Open port 22 before enabling UFW</li><li>Check IPs with multipass list</li><li>Never commit inventory or env files</li></ul></div></div>
 <div class="note"><strong>Decision rule.</strong> The playbook is documentation that runs.</div>
 <p class="hidden-notes note"><strong>Speaker cue:</strong> State the decision rule exactly. Name what bites before Apply.</p>
 </div>
 </section>
-<section class="slide"><div style="position:absolute;top:18px;left:20px;right:20px;display:flex;justify-content:space-between;align-items:center"><span class="time">07:30 · Apply</span><span class="badge">Four-hats docs</span></div><div class="slide-content">
+<section class="slide"><div class="topbar"><span class="time">07:30 · Apply</span><span class="badge">Four-hats docs</span></div><div class="slide-content">
 <p class="eyebrow">Apply in hands-on time</p>
 <h2 class="slide-heading">Apply in four-hats docs</h2>
-<div class="grid-2"><div class="panel"><h3>docs/act2-cloud-engineer.md, Episode 9</h3><ul><li><strong>Playbook.</strong> Inventory, ping test, six task groups, syntax check.</li><li><strong>Run and verify.</strong> Playbook with DB_PASSWORD, app check, port 8000 closed.</li><li><strong>Proof.</strong> Second run with changed equals zero.</li></ul></div><div class="panel"><h3>How to use it</h3><p style="font-size:15px;line-height:1.6;color:var(--ink-soft)">See act2 Episode 9, steps 1 to 8 for apply. Tool names: ansible ping, ansible-playbook, curl checks.</p><p style="font-size:14px;line-height:1.6;color:var(--ink-soft);margin-top:8px">Theory stays on screen. Commands live in the doc. Work there, not here.</p></div></div>
+<div class="grid-2"><div class="panel"><h3>docs/act2-cloud-engineer.md, Episode 9</h3><ul><li><strong>Playbook.</strong> Inventory, ping test, six task groups, syntax check.</li><li><strong>Run and verify.</strong> Playbook with DB_PASSWORD, app check, port 8000 closed.</li><li><strong>Proof.</strong> Second run with changed equals zero.</li></ul></div><div class="panel"><h3>How to use it</h3><p class="text-15">See act2 Episode 9, steps 1 to 8 for apply. Tool names: ansible ping, ansible-playbook, curl checks.</p><p class="text-14">Theory stays on screen. Commands live in the doc. Work there, not here.</p></div></div>
 <p class="hidden-notes note"><strong>Speaker cue:</strong> Point to the doc path. Say what it covers in one breath. Remind them tool names only appear here as captions.</p>
 </div>
 </section>
-<section class="slide"><div style="position:absolute;top:18px;left:20px;right:20px;display:flex;justify-content:space-between;align-items:center"><span class="time">08:30 · Ledger</span><span class="badge">CV</span></div><div class="slide-content">
+<section class="slide"><div class="topbar"><span class="time">08:30 · Ledger</span><span class="badge">CV</span></div><div class="slide-content">
 <p class="eyebrow">CV skills ledger hint</p>
 <h2 class="slide-heading">Two ledger rows earned.</h2>
 <ul class="bullets animate-stagger"><li><strong>Ansible. Wrote an idempotent playbook that deploys a Compose stack.</strong> <span>Host firewall. Closed all but SSH and HTTP with UFW.</span></li></ul>
@@ -256,21 +257,21 @@ body.show-notes .hidden-notes{display:block}
 </div>
 </section>
 <section class="slide">
-<div class="dabs" aria-hidden="true"><i style="left:-4%;bottom:-10%;width:560px;height:360px;background:var(--wash-b)"></i><i style="right:-2%;top:6%;width:420px;height:320px;background:var(--wash-a)"></i></div>
-<div style="position:absolute;top:18px;left:20px;right:20px;display:flex;justify-content:space-between;align-items:center"><span class="time">Outro · Next</span><span class="badge">See you there</span></div>
+<div class="dabs" aria-hidden="true"><i class="dab-5"></i><i class="dab-1"></i></div>
+<div class="topbar"><span class="time">Outro · Next</span><span class="badge">See you there</span></div>
 <div class="slide-content">
 <p class="eyebrow animate-fade-up">Next episode</p>
 <h1 class="slide-title">You know <em>the idea.</em></h1>
 <p class="slide-subtitle">Theory first. Apply in the doc. Then next episode.</p>
-<div class="panel" style="max-width:760px"><h3>Next: Ep 10 Now in the Cloud</h3><p style="color:var(--ink-soft);line-height:1.6;font-size:15px">Terraform creates the VM. The same Ansible playbook configures it.</p></div>
+<div class="panel max-760"><h3>Next: Ep 10 Now in the Cloud</h3><p class="text-15">Terraform creates the VM. The same Ansible playbook configures it.</p></div>
 </div>
 </section>
 </div>
 <div class="switcher" id="switcher"></div>
 <div class="nav-controls">
-<button class="nav-btn" onclick="prevSlide()" aria-label="Previous">←</button>
+<button class="nav-btn" id="prevBtn" aria-label="Previous">←</button>
 <span class="slide-counter"><span id="current">1</span> / <span id="total">14</span></span>
-<button class="nav-btn" onclick="nextSlide()" aria-label="Next">→</button>
+<button class="nav-btn" id="nextBtn" aria-label="Next">→</button>
 </div>
 <script>
 const PALETTES=[
@@ -316,6 +317,8 @@ function showSlide(n){
 }
 window.nextSlide=function(){showSlide(current+1)};
 window.prevSlide=function(){showSlide(current-1)};
+document.getElementById("prevBtn").addEventListener("click",prevSlide);
+document.getElementById("nextBtn").addEventListener("click",nextSlide);
 document.addEventListener("keydown",function(e){
   if(e.key==="ArrowRight"||e.key===" "){e.preventDefault();nextSlide()}
   if(e.key==="ArrowLeft"){e.preventDefault();prevSlide()}

@@ -169,6 +169,7 @@ body.show-notes .hidden-notes{display:block}
 .animate-stagger>*:nth-child(2){animation-delay:.12s}
 .animate-stagger>*:nth-child(3){animation-delay:.19s}
 .animate-stagger>*:nth-child(4){animation-delay:.26s}
+@supports (animation-delay:calc(sibling-index() * 1s)){.animate-stagger>*{animation-delay:calc(.05s + (sibling-index() - 1) * .07s)}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
@@ -177,25 +178,25 @@ body.show-notes .hidden-notes{display:block}
 <div class="progress-track"><div class="progress-bar" id="progressBar"></div></div>
 <div class="slide-deck">
 <section class="slide active">
-<div class="dabs" aria-hidden="true"><i style="left:-4%;top:-8%;width:560px;height:360px;background:var(--wash-a)"></i><i style="right:-2%;top:4%;width:420px;height:340px;background:var(--wash-b)"></i><i style="left:36%;bottom:-12%;width:520px;height:320px;background:var(--wash-c)"></i></div>
-<div style="position:absolute;top:18px;left:20px;right:20px;display:flex;justify-content:space-between;align-items:center"><span class="time">00:00 · Ep 04</span><span class="badge" id="paletteBadge">Plein Air · Garden Hour</span></div>
+<div class="dabs" aria-hidden="true"><i class="dab-4"></i><i class="dab-2"></i><i class="dab-3"></i></div>
+<div class="topbar"><span class="time">00:00 · Ep 04</span><span class="badge" id="paletteBadge">Plein Air · Garden Hour</span></div>
 <div class="slide-content">
 <p class="eyebrow animate-fade-up">Minikube Project · Ep 04</p>
 <h1 class="slide-title">Add a Feature <em>with a Test</em></h1>
 <p class="slide-subtitle">Test first, then the endpoint, then the button. Prove it works before you merge.</p>
 <div class="meta-row"><div class="item"><b>15 to 17</b><span>minutes</span></div><div class="item"><b>Theory</b><span>first</span></div><div class="item"><b>Apply</b><span>in docs</span></div></div>
 <p class="hidden-notes note"><strong>Speaker cue:</strong> Title only. Promise theory first. Hands-on steps live in the apply doc named at the end, not on screen.</p>
-<span class="complement-dot" style="right:12%;bottom:22%;width:14px;height:14px" aria-hidden="true"></span>
+<span class="complement-dot dot-sm" aria-hidden="true"></span>
 </div>
 </section>
-<section class="slide"><div style="position:absolute;top:18px;left:20px;right:20px;display:flex;justify-content:space-between;align-items:center"><span class="time">00:00 · Hook</span><span class="badge">Start here</span></div><div class="slide-content">
+<section class="slide"><div class="topbar"><span class="time">00:00 · Hook</span><span class="badge">Start here</span></div><div class="slide-content">
 <p class="eyebrow">Start here</p>
 <h2 class="slide-heading">A feature is not done until it is tested.</h2>
 <ul class="bullets animate-stagger"><li><strong>Tests let you change code safely.</strong> <span>They catch broken old behavior.</span></li><li><strong>Tests document the API.</strong> <span>They state what the endpoint promises.</span></li><li><strong>Test-first thinking clarifies design.</strong> <span>You write the contract before the code.</span></li></ul>
 <p class="hidden-notes note"><strong>Speaker cue:</strong> Keep this short. Promise ideas, not steps. The doc at the end holds the steps.</p>
 </div>
 </section>
-<section class="slide"><div style="position:absolute;top:18px;left:20px;right:20px;display:flex;justify-content:space-between;align-items:center"><span class="time">01:00 · Goals</span><span class="badge">Learn</span></div><div class="slide-content">
+<section class="slide"><div class="topbar"><span class="time">01:00 · Goals</span><span class="badge">Learn</span></div><div class="slide-content">
 <p class="eyebrow">What you will learn</p>
 <h2 class="slide-heading">What you will learn</h2>
 <div class="grid-2"><div class="panel"><h3>Learning goals</h3><ul><li>Add a DELETE endpoint for tasks</li><li>Write tests that mock the database</li><li>Check HTTP status codes</li><li>Test by hand and in code</li><li>Open a pull request</li></ul></div><div class="panel"><h3>Prerequisites</h3><ul><li>Episode 2 done, Git workflow</li><li>Episode 3 done, app running locally</li><li>Python familiarity</li></ul></div></div>
@@ -203,28 +204,28 @@ body.show-notes .hidden-notes{display:block}
 </div>
 </section>
 
-<section class="slide"><div style="position:absolute;top:18px;left:20px;right:20px;display:flex;justify-content:space-between;align-items:center"><span class="time">01:00 · Concepts</span><span class="badge">Definitions</span></div><div class="slide-content">
+<section class="slide"><div class="topbar"><span class="time">01:00 · Concepts</span><span class="badge">Definitions</span></div><div class="slide-content">
 <p class="eyebrow">Theory</p>
 <h2 class="slide-heading">REST. Status. Test doubles.</h2>
-<table class="ep-table animate-fade-up"><tr><th>Term</th><th>Meaning</th></tr><tr><td>REST method</td><td>GET reads, POST creates, PATCH updates, DELETE removes.</td></tr><tr><td>Status 200</td><td>The request succeeded.</td></tr><tr><td>Status 404</td><td>The task was not found.</td></tr><tr><td>Unit test</td><td>A test of one behavior in isolation.</td></tr><tr><td>Mock</td><td>A fake that replaces the database in the test.</td></tr><tr><td>DELETE ... RETURNING</td><td>Delete and return the row in one query.</td></tr></table>
+<table class="ep-table animate-fade-up"><tr><th scope="col">Term</th><th scope="col">Meaning</th></tr><tr><td>REST method</td><td>GET reads, POST creates, PATCH updates, DELETE removes.</td></tr><tr><td>Status 200</td><td>The request succeeded.</td></tr><tr><td>Status 404</td><td>The task was not found.</td></tr><tr><td>Unit test</td><td>A test of one behavior in isolation.</td></tr><tr><td>Mock</td><td>A fake that replaces the database in the test.</td></tr><tr><td>DELETE ... RETURNING</td><td>Delete and return the row in one query.</td></tr></table>
 <p class="hidden-notes note"><strong>Speaker cue:</strong> Read across once. Definitions first. No commands on screen.</p>
 </div>
 </section>
-<section class="slide"><div style="position:absolute;top:18px;left:20px;right:20px;display:flex;justify-content:space-between;align-items:center"><span class="time">02:30 · Why It Matters</span><span class="badge">Decisions</span></div><div class="slide-content">
+<section class="slide"><div class="topbar"><span class="time">02:30 · Why It Matters</span><span class="badge">Decisions</span></div><div class="slide-content">
 <p class="eyebrow">Why it matters</p>
 <h2 class="slide-heading">Why the contract comes first.</h2>
 <ul class="bullets animate-stagger"><li><strong>A contract beats a guess.</strong> <span>A failing test defines the feature.</span></li><li><strong>Isolation keeps tests fast.</strong> <span>Mocks avoid a real database.</span></li><li><strong>Reviewers trust evidence.</strong> <span>A green test is part of the pull request.</span></li></ul>
 <p class="hidden-notes note"><strong>Speaker cue:</strong> Decisions plus reasons. This is the slide to quote in review.</p>
 </div>
 </section>
-<section class="slide"><div style="position:absolute;top:18px;left:20px;right:20px;display:flex;justify-content:space-between;align-items:center"><span class="time">04:00 · Diagram</span><span class="badge">How it fits</span></div><div class="slide-content">
+<section class="slide"><div class="topbar"><span class="time">04:00 · Diagram</span><span class="badge">How it fits</span></div><div class="slide-content">
 <p class="eyebrow">Diagram</p>
 <h2 class="slide-heading">Contract, then code, then proof.</h2>
 <div class="arch animate-stagger"><div class="arch-box"><h4>Test first</h4><p>Two cases: found returns 200, missing returns 404.</p></div><div class="arrow">→</div><div class="arch-box"><h4>Endpoint</h4><p>DELETE ... RETURNING. Maps the result to a status.</p></div><div class="arrow">→</div><div class="arch-box"><h4>Proof</h4><p>Tests pass. Frontend button calls the endpoint.</p></div></div>
 <p class="hidden-notes note"><strong>Speaker cue:</strong> Walk the arrows left to right. Each box is one layer. No commands needed.</p>
 </div>
 </section>
-<section class="slide"><div style="position:absolute;top:18px;left:20px;right:20px;display:flex;justify-content:space-between;align-items:center"><span class="time">06:00 · Limits</span><span class="badge">Watch out</span></div><div class="slide-content">
+<section class="slide"><div class="topbar"><span class="time">06:00 · Limits</span><span class="badge">Watch out</span></div><div class="slide-content">
 <p class="eyebrow">Limits and tradeoffs</p>
 <h2 class="slide-heading">Mock drift. Missing cases.</h2>
 <ul class="bullets animate-stagger"><li><strong>Mocks hide drift.</strong> <span>Unit tests pass while the real database diverges. A hand test covers the gap.</span></li><li><strong>Success-only tests mislead.</strong> <span>The 404 case is part of the contract.</span></li><li><strong>Mock paths are exact.</strong> <span>The fake must match the import.</span></li></ul>
@@ -232,22 +233,22 @@ body.show-notes .hidden-notes{display:block}
 <p class="hidden-notes note"><strong>Speaker cue:</strong> Name the failure mode before the fix. The doc holds the fix steps.</p>
 </div>
 </section>
-<section class="slide"><div style="position:absolute;top:18px;left:20px;right:20px;display:flex;justify-content:space-between;align-items:center"><span class="time">07:00 · Insight</span><span class="badge">Work</span></div><div class="slide-content">
+<section class="slide"><div class="topbar"><span class="time">07:00 · Insight</span><span class="badge">Work</span></div><div class="slide-content">
 <p class="eyebrow">Work insight</p>
 <h2 class="slide-heading">Work insight and what bites</h2>
-<div class="grid-2"><div class="panel"><h3>Role focus</h3><p style="font-size:15px;line-height:1.6;color:var(--ink-soft)">Focus: Backend, then Frontend. Software Engineer view for this episode.</p></div><div class="panel"><h3>What bites</h3><ul><li>Write the test before the endpoint</li><li>Check the status code in every test</li><li>Commit the test file with the code</li></ul></div></div>
+<div class="grid-2"><div class="panel"><h3>Role focus</h3><p class="text-15">Focus: Backend, then Frontend. Software Engineer view for this episode.</p></div><div class="panel"><h3>What bites</h3><ul><li>Write the test before the endpoint</li><li>Check the status code in every test</li><li>Commit the test file with the code</li></ul></div></div>
 <div class="note"><strong>Decision rule.</strong> Tests are not optional.</div>
 <p class="hidden-notes note"><strong>Speaker cue:</strong> State the decision rule exactly. Name what bites before Apply.</p>
 </div>
 </section>
-<section class="slide"><div style="position:absolute;top:18px;left:20px;right:20px;display:flex;justify-content:space-between;align-items:center"><span class="time">07:30 · Apply</span><span class="badge">Four-hats docs</span></div><div class="slide-content">
+<section class="slide"><div class="topbar"><span class="time">07:30 · Apply</span><span class="badge">Four-hats docs</span></div><div class="slide-content">
 <p class="eyebrow">Apply in hands-on time</p>
 <h2 class="slide-heading">Apply in four-hats docs</h2>
-<div class="grid-2"><div class="panel"><h3>docs/act1-software-engineer.md, Episode 4</h3><ul><li><strong>Branch and tests.</strong> Branch delete-task, two mocked tests in backend/test_app.py.</li><li><strong>Endpoint and button.</strong> DELETE in backend/app.py, Delete button in frontend/app.js.</li><li><strong>Checks.</strong> Test run, manual browser check, pull request and merge.</li></ul></div><div class="panel"><h3>How to use it</h3><p style="font-size:15px;line-height:1.6;color:var(--ink-soft)">See act1 Episode 4, steps 1 to 7 for apply. Tool names: python-test, git push, docker run checks.</p><p style="font-size:14px;line-height:1.6;color:var(--ink-soft);margin-top:8px">Theory stays on screen. Commands live in the doc. Work there, not here.</p></div></div>
+<div class="grid-2"><div class="panel"><h3>docs/act1-software-engineer.md, Episode 4</h3><ul><li><strong>Branch and tests.</strong> Branch delete-task, two mocked tests in backend/test_app.py.</li><li><strong>Endpoint and button.</strong> DELETE in backend/app.py, Delete button in frontend/app.js.</li><li><strong>Checks.</strong> Test run, manual browser check, pull request and merge.</li></ul></div><div class="panel"><h3>How to use it</h3><p class="text-15">See act1 Episode 4, steps 1 to 7 for apply. Tool names: python-test, git push, docker run checks.</p><p class="text-14">Theory stays on screen. Commands live in the doc. Work there, not here.</p></div></div>
 <p class="hidden-notes note"><strong>Speaker cue:</strong> Point to the doc path. Say what it covers in one breath. Remind them tool names only appear here as captions.</p>
 </div>
 </section>
-<section class="slide"><div style="position:absolute;top:18px;left:20px;right:20px;display:flex;justify-content:space-between;align-items:center"><span class="time">08:30 · Ledger</span><span class="badge">CV</span></div><div class="slide-content">
+<section class="slide"><div class="topbar"><span class="time">08:30 · Ledger</span><span class="badge">CV</span></div><div class="slide-content">
 <p class="eyebrow">CV skills ledger hint</p>
 <h2 class="slide-heading">Two ledger rows earned.</h2>
 <ul class="bullets animate-stagger"><li><strong>Python and Flask. Built a REST endpoint with validation and status codes.</strong> <span>Unit testing. Covered behavior with mocked database tests.</span></li></ul>
@@ -256,21 +257,21 @@ body.show-notes .hidden-notes{display:block}
 </div>
 </section>
 <section class="slide">
-<div class="dabs" aria-hidden="true"><i style="left:-4%;bottom:-10%;width:560px;height:360px;background:var(--wash-b)"></i><i style="right:-2%;top:6%;width:420px;height:320px;background:var(--wash-a)"></i></div>
-<div style="position:absolute;top:18px;left:20px;right:20px;display:flex;justify-content:space-between;align-items:center"><span class="time">Outro · Next</span><span class="badge">See you there</span></div>
+<div class="dabs" aria-hidden="true"><i class="dab-5"></i><i class="dab-1"></i></div>
+<div class="topbar"><span class="time">Outro · Next</span><span class="badge">See you there</span></div>
 <div class="slide-content">
 <p class="eyebrow animate-fade-up">Next episode</p>
 <h1 class="slide-title">You know <em>the idea.</em></h1>
 <p class="slide-subtitle">Theory first. Apply in the doc. Then next episode.</p>
-<div class="panel" style="max-width:760px"><h3>Next: Ep 05 Containers</h3><p style="color:var(--ink-soft);line-height:1.6;font-size:15px">One file. One command. Services start in order.</p></div>
+<div class="panel max-760"><h3>Next: Ep 05 Containers</h3><p class="text-15">One file. One command. Services start in order.</p></div>
 </div>
 </section>
 </div>
 <div class="switcher" id="switcher"></div>
 <div class="nav-controls">
-<button class="nav-btn" onclick="prevSlide()" aria-label="Previous">←</button>
+<button class="nav-btn" id="prevBtn" aria-label="Previous">←</button>
 <span class="slide-counter"><span id="current">1</span> / <span id="total">14</span></span>
-<button class="nav-btn" onclick="nextSlide()" aria-label="Next">→</button>
+<button class="nav-btn" id="nextBtn" aria-label="Next">→</button>
 </div>
 <script>
 const PALETTES=[
@@ -316,6 +317,8 @@ function showSlide(n){
 }
 window.nextSlide=function(){showSlide(current+1)};
 window.prevSlide=function(){showSlide(current-1)};
+document.getElementById("prevBtn").addEventListener("click",prevSlide);
+document.getElementById("nextBtn").addEventListener("click",nextSlide);
 document.addEventListener("keydown",function(e){
   if(e.key==="ArrowRight"||e.key===" "){e.preventDefault();nextSlide()}
   if(e.key==="ArrowLeft"){e.preventDefault();prevSlide()}

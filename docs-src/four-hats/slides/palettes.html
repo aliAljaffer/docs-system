@@ -46,10 +46,31 @@ const PALETTES=[
   {id:"riverbank",name:"Riverbank Mist",painting:"Monet, Rouen Cathedral, 1893",colors:["#cdebd7","#f5e8d5","#f2c4a8","#a8c8d8","#5e6b7a"]},
   {id:"gardenhour",name:"Garden Hour",painting:"Monet, The Artist's Garden, 1900",colors:["#b8d0a8","#f4e8b8","#e8b8d0","#c9d8e8","#6b6a8a"]}
 ];
-document.getElementById("grid").innerHTML=PALETTES.map(function(p){
-  const sw=p.colors.map(function(c){return '<span style="background:'+c+'"></span>'}).join("");
-  return '<article class="card" data-palette="'+p.id+'"><h3>'+p.name+'</h3><div class="paint">'+p.painting+'</div><div class="swatches">'+sw+'</div><div class="mini"><strong>Four Careers, One <em>Project</em></strong><br>Build a real app. Practice four real jobs. Finish with a project and a CV you own.</div><a class="link" href="ep00-four-careers-one-project.html?p='+p.id+'&mode=day">Open deck in this palette →</a></article>';
-}).join("");
+const grid=document.getElementById("grid");
+function el(tag,cls,text){
+  const n=document.createElement(tag);
+  if(cls)n.className=cls;
+  if(text)n.textContent=text;
+  return n;
+}
+PALETTES.forEach(function(p){
+  const card=el("article","card");
+  card.dataset.palette=p.id;
+  const swatches=el("div","swatches");
+  p.colors.forEach(function(c){
+    const sw=document.createElement("span");
+    sw.style.background=c;
+    swatches.append(sw);
+  });
+  const mini=el("div","mini");
+  const title=el("strong","","Four Careers, One ");
+  title.append(el("em","","Project"));
+  mini.append(title,document.createElement("br"),"Build a real app. Practice four real jobs. Finish with a project and a CV you own.");
+  const link=el("a","link","Open deck in this palette \u2192");
+  link.href="ep00-four-careers-one-project.html?p="+encodeURIComponent(p.id)+"&mode=day";
+  card.append(el("h3","",p.name),el("div","paint",p.painting),swatches,mini,link);
+  grid.append(card);
+});
 </script>
 </body>
 </html>

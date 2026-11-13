@@ -103,19 +103,19 @@ extra_css:
 extra_javascript:
   - assets/vendor/panzoom.min.js
   - assets/mathjax.js?v={v}
-  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
   - assets/diagram-zoom.js?v={v}
   - assets/hover.js?v={v}
   - assets/analytics.js?v={v}
   - assets/checklist.js?v={v}
   - assets/course-nav.js?v={v}
   - assets/tag-search.js?v={v}
+  - assets/fullscreen.js?v={v}
 """
 
 
 def asset_version() -> str:
     digest = hashlib.sha256()
-    names = ("theme.css", "hover.css", "diagram-zoom.css", "source-file.css", "hover.js", "diagram-zoom.js", "analytics.js", "checklist.js", "course-nav.js", "tag-search.js", "mathjax.js")
+    names = ("theme.css", "hover.css", "diagram-zoom.css", "source-file.css", "hover.js", "diagram-zoom.js", "analytics.js", "checklist.js", "course-nav.js", "tag-search.js", "mathjax.js", "fullscreen.js", "comments.js")
     for path in [*(ASSETS / name for name in names), *brand.asset_inputs(brand.load())]:
         digest.update(path.read_bytes())
     return digest.hexdigest()[:10]
@@ -442,7 +442,7 @@ def rebase_links(body: str) -> str:
 
 
 def embed_slides(base: Path) -> None:
-    script = f'<script src="/assets/analytics.js?v={asset_version()}"></script></body>'
+    script = f'<script src="/assets/analytics.js?v={asset_version()}" async fetchpriority="low"></script></body>'
     for deck in (base / "slides").glob("ep*.html"):
         html = deck.read_text()
         if "/assets/analytics.js" not in html:
@@ -455,7 +455,7 @@ def embed_slides(base: Path) -> None:
             '<div markdown="0">\n'
             f'<iframe src="{url}" title="Slides" loading="lazy" allowfullscreen '
             'style="width:100%;aspect-ratio:16/9;border:0"></iframe>\n'
-            '<p><button type="button" class="md-button" onclick="this.closest(\'div\').querySelector(\'iframe\').requestFullscreen()">Fullscreen</button> '
+            '<p><button type="button" class="md-button" data-fullscreen>Fullscreen</button> '
             f'<a href="{url}" target="_blank" rel="noopener">Open in new tab</a></p>\n</div>\n'
         )
         page.write_text(insert_after_h1(page.read_text(), "\n" + block))
@@ -667,6 +667,7 @@ def assemble() -> tuple[Path, list[og.Card]]:
         "copyright": f'&copy; {datetime.date.today().year} {OWNER} &middot; <a href="{PORTFOLIO_URL}">{PORTFOLIO_LABEL}</a>',
         "extra": {
             "generator": False,
+            "asset_version": version,
             "giscus": {mode: f"{SITE_URL}/assets/giscus-{mode}.css?v={version}" for mode in ("light", "dark")},
         },
     }

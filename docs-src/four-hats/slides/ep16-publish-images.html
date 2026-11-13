@@ -169,6 +169,7 @@ body.show-notes .hidden-notes{display:block}
 .animate-stagger>*:nth-child(2){animation-delay:.12s}
 .animate-stagger>*:nth-child(3){animation-delay:.19s}
 .animate-stagger>*:nth-child(4){animation-delay:.26s}
+@supports (animation-delay:calc(sibling-index() * 1s)){.animate-stagger>*{animation-delay:calc(.05s + (sibling-index() - 1) * .07s)}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
@@ -177,25 +178,25 @@ body.show-notes .hidden-notes{display:block}
 <div class="progress-track"><div class="progress-bar" id="progressBar"></div></div>
 <div class="slide-deck">
 <section class="slide active">
-<div class="dabs" aria-hidden="true"><i style="left:-4%;top:-8%;width:560px;height:360px;background:var(--wash-a)"></i><i style="right:-2%;top:4%;width:420px;height:340px;background:var(--wash-b)"></i><i style="left:36%;bottom:-12%;width:520px;height:320px;background:var(--wash-c)"></i></div>
-<div style="position:absolute;top:18px;left:20px;right:20px;display:flex;justify-content:space-between;align-items:center"><span class="time">00:00 · Ep 16</span><span class="badge" id="paletteBadge">Plein Air · Garden Hour</span></div>
+<div class="dabs" aria-hidden="true"><i class="dab-4"></i><i class="dab-2"></i><i class="dab-3"></i></div>
+<div class="topbar"><span class="time">00:00 · Ep 16</span><span class="badge" id="paletteBadge">Plein Air · Garden Hour</span></div>
 <div class="slide-content">
 <p class="eyebrow animate-fade-up">Minikube Project · Ep 16</p>
 <h1 class="slide-title">Publish <em>Images</em></h1>
 <p class="slide-subtitle">A push to main builds and publishes images. A real cluster pulls them.</p>
 <div class="meta-row"><div class="item"><b>18 to 22</b><span>minutes</span></div><div class="item"><b>Theory</b><span>first</span></div><div class="item"><b>Apply</b><span>in docs</span></div></div>
 <p class="hidden-notes note"><strong>Speaker cue:</strong> Title only. Promise theory first. Hands-on steps live in the apply doc named at the end, not on screen.</p>
-<span class="complement-dot" style="right:12%;bottom:22%;width:14px;height:14px" aria-hidden="true"></span>
+<span class="complement-dot dot-sm" aria-hidden="true"></span>
 </div>
 </section>
-<section class="slide"><div style="position:absolute;top:18px;left:20px;right:20px;display:flex;justify-content:space-between;align-items:center"><span class="time">00:00 · Hook</span><span class="badge">Start here</span></div><div class="slide-content">
+<section class="slide"><div class="topbar"><span class="time">00:00 · Hook</span><span class="badge">Start here</span></div><div class="slide-content">
 <p class="eyebrow">Start here</p>
 <h2 class="slide-heading">Clusters pull. Laptops load.</h2>
 <ul class="bullets animate-stagger"><li><strong>Until now, images were loaded by hand.</strong> <span>A real cluster pulls from a registry.</span></li><li><strong>Today a push to main publishes.</strong> <span>Build and tag happen in CI.</span></li><li><strong>Traceability is the point.</strong> <span>A SHA names the exact code.</span></li></ul>
 <p class="hidden-notes note"><strong>Speaker cue:</strong> Keep this short. Promise ideas, not steps. The doc at the end holds the steps.</p>
 </div>
 </section>
-<section class="slide"><div style="position:absolute;top:18px;left:20px;right:20px;display:flex;justify-content:space-between;align-items:center"><span class="time">01:00 · Goals</span><span class="badge">Learn</span></div><div class="slide-content">
+<section class="slide"><div class="topbar"><span class="time">01:00 · Goals</span><span class="badge">Learn</span></div><div class="slide-content">
 <p class="eyebrow">What you will learn</p>
 <h2 class="slide-heading">What you will learn</h2>
 <div class="grid-2"><div class="panel"><h3>Learning goals</h3><ul><li>Explain a container registry</li><li>Build multi-arch images in GitHub Actions</li><li>Tag images with the commit SHA</li><li>Update manifests without a workflow loop</li><li>Pull private images with a classic PAT</li></ul></div><div class="panel"><h3>Prerequisites</h3><ul><li>Episode 15 complete</li><li>Your fork is on GitHub</li></ul></div></div>
@@ -203,28 +204,28 @@ body.show-notes .hidden-notes{display:block}
 </div>
 </section>
 
-<section class="slide"><div style="position:absolute;top:18px;left:20px;right:20px;display:flex;justify-content:space-between;align-items:center"><span class="time">01:00 · Concepts</span><span class="badge">Definitions</span></div><div class="slide-content">
+<section class="slide"><div class="topbar"><span class="time">01:00 · Concepts</span><span class="badge">Definitions</span></div><div class="slide-content">
 <p class="eyebrow">Theory</p>
 <h2 class="slide-heading">Registries. Tags. Filters.</h2>
-<table class="ep-table animate-fade-up"><tr><th>Term</th><th>Meaning</th></tr><tr><td>Registry</td><td>Where images live. GHCR is the GitHub one.</td></tr><tr><td>Image name</td><td>ghcr.io owner repo image SHA.</td></tr><tr><td>Commit SHA</td><td>An immutable version tag.</td></tr><tr><td>Multi-arch</td><td>One tag holds amd64 and arm64 builds.</td></tr><tr><td>Paths filter</td><td>Runs only when listed paths change.</td></tr><tr><td>Bot commit</td><td>CI updates manifests without retriggering itself.</td></tr></table>
+<table class="ep-table animate-fade-up"><tr><th scope="col">Term</th><th scope="col">Meaning</th></tr><tr><td>Registry</td><td>Where images live. GHCR is the GitHub one.</td></tr><tr><td>Image name</td><td>ghcr.io owner repo image SHA.</td></tr><tr><td>Commit SHA</td><td>An immutable version tag.</td></tr><tr><td>Multi-arch</td><td>One tag holds amd64 and arm64 builds.</td></tr><tr><td>Paths filter</td><td>Runs only when listed paths change.</td></tr><tr><td>Bot commit</td><td>CI updates manifests without retriggering itself.</td></tr></table>
 <p class="hidden-notes note"><strong>Speaker cue:</strong> Read across once. Definitions first. No commands on screen.</p>
 </div>
 </section>
-<section class="slide"><div style="position:absolute;top:18px;left:20px;right:20px;display:flex;justify-content:space-between;align-items:center"><span class="time">02:30 · Why It Matters</span><span class="badge">Decisions</span></div><div class="slide-content">
+<section class="slide"><div class="topbar"><span class="time">02:30 · Why It Matters</span><span class="badge">Decisions</span></div><div class="slide-content">
 <p class="eyebrow">Why it matters</p>
 <h2 class="slide-heading">Why immutable tags win.</h2>
 <ul class="bullets animate-stagger"><li><strong>Pull beats loading.</strong> <span>Any cluster can fetch the same bytes.</span></li><li><strong>SHAs beat latest.</strong> <span>Rollback means pointing at an older SHA.</span></li><li><strong>Filters prevent loops.</strong> <span>Manifest-only bot commits stay silent.</span></li></ul>
 <p class="hidden-notes note"><strong>Speaker cue:</strong> Decisions plus reasons. This is the slide to quote in review.</p>
 </div>
 </section>
-<section class="slide"><div style="position:absolute;top:18px;left:20px;right:20px;display:flex;justify-content:space-between;align-items:center"><span class="time">04:00 · Diagram</span><span class="badge">How it fits</span></div><div class="slide-content">
+<section class="slide"><div class="topbar"><span class="time">04:00 · Diagram</span><span class="badge">How it fits</span></div><div class="slide-content">
 <p class="eyebrow">Diagram</p>
 <h2 class="slide-heading">Commit, build, publish, pull.</h2>
 <div class="arch animate-stagger"><div class="arch-box"><h4>Push to main</h4><p>Filtered by changed paths.</p></div><div class="arrow">→</div><div class="arch-box"><h4>Actions</h4><p>Tests, multi-arch builds, publish.</p></div><div class="arrow">→</div><div class="arch-box"><h4>GHCR to cluster</h4><p>Manifest tags update. Pods pull.</p></div></div>
 <p class="hidden-notes note"><strong>Speaker cue:</strong> Walk the arrows left to right. Each box is one layer. No commands needed.</p>
 </div>
 </section>
-<section class="slide"><div style="position:absolute;top:18px;left:20px;right:20px;display:flex;justify-content:space-between;align-items:center"><span class="time">06:00 · Limits</span><span class="badge">Watch out</span></div><div class="slide-content">
+<section class="slide"><div class="topbar"><span class="time">06:00 · Limits</span><span class="badge">Watch out</span></div><div class="slide-content">
 <p class="eyebrow">Limits and tradeoffs</p>
 <h2 class="slide-heading">Loop risk. Token scope.</h2>
 <ul class="bullets animate-stagger"><li><strong>Latest hides provenance.</strong> <span>It always moves.</span></li><li><strong>Permissions are exact.</strong> <span>Missing packages write denies push.</span></li><li><strong>Token scope is risk.</strong> <span>Read packages only. Never commit the token.</span></li><li><strong>Paths must match reality.</strong> <span>Renamed images break the update step.</span></li></ul>
@@ -232,22 +233,22 @@ body.show-notes .hidden-notes{display:block}
 <p class="hidden-notes note"><strong>Speaker cue:</strong> Name the failure mode before the fix. The doc holds the fix steps.</p>
 </div>
 </section>
-<section class="slide"><div style="position:absolute;top:18px;left:20px;right:20px;display:flex;justify-content:space-between;align-items:center"><span class="time">07:00 · Insight</span><span class="badge">Work</span></div><div class="slide-content">
+<section class="slide"><div class="topbar"><span class="time">07:00 · Insight</span><span class="badge">Work</span></div><div class="slide-content">
 <p class="eyebrow">Work insight</p>
 <h2 class="slide-heading">Work insight and what bites</h2>
-<div class="grid-2"><div class="panel"><h3>Role focus</h3><p style="font-size:15px;line-height:1.6;color:var(--ink-soft)">Focus: Release Engineer. Release Engineer view for this episode.</p></div><div class="panel"><h3>What bites</h3><ul><li>Never latest, tag by commit SHA</li><li>Paths filter stops workflow loops</li><li>Missing packages write fails the push</li></ul></div></div>
+<div class="grid-2"><div class="panel"><h3>Role focus</h3><p class="text-15">Focus: Release Engineer. Release Engineer view for this episode.</p></div><div class="panel"><h3>What bites</h3><ul><li>Never latest, tag by commit SHA</li><li>Paths filter stops workflow loops</li><li>Missing packages write fails the push</li></ul></div></div>
 <div class="note"><strong>Decision rule.</strong> Tag by commit SHA so you can trace a Pod to code.</div>
 <p class="hidden-notes note"><strong>Speaker cue:</strong> State the decision rule exactly. Name what bites before Apply.</p>
 </div>
 </section>
-<section class="slide"><div style="position:absolute;top:18px;left:20px;right:20px;display:flex;justify-content:space-between;align-items:center"><span class="time">07:30 · Apply</span><span class="badge">Four-hats docs</span></div><div class="slide-content">
+<section class="slide"><div class="topbar"><span class="time">07:30 · Apply</span><span class="badge">Four-hats docs</span></div><div class="slide-content">
 <p class="eyebrow">Apply in hands-on time</p>
 <h2 class="slide-heading">Apply in four-hats docs</h2>
-<div class="grid-2"><div class="panel"><h3>docs/act3-devops-engineer.md, Publish images and GHCR pull secret</h3><ul><li><strong>Workflow.</strong> publish.yml with unsaid paths fixed to your folders.</li><li><strong>Release flow.</strong> Tests, builds, publish, manifest tag update.</li><li><strong>Access.</strong> Classic PAT with read packages plus pull Secret if private.</li></ul></div><div class="panel"><h3>How to use it</h3><p style="font-size:15px;line-height:1.6;color:var(--ink-soft)">See act3 Episodes 16 for apply. Tool names: GitHub Actions publish, ghcr-pull secret, kubectl patch serviceaccount.</p><p style="font-size:14px;line-height:1.6;color:var(--ink-soft);margin-top:8px">Theory stays on screen. Commands live in the doc. Work there, not here.</p></div></div>
+<div class="grid-2"><div class="panel"><h3>docs/act3-devops-engineer.md, Publish images and GHCR pull secret</h3><ul><li><strong>Workflow.</strong> publish.yml with unsaid paths fixed to your folders.</li><li><strong>Release flow.</strong> Tests, builds, publish, manifest tag update.</li><li><strong>Access.</strong> Classic PAT with read packages plus pull Secret if private.</li></ul></div><div class="panel"><h3>How to use it</h3><p class="text-15">See act3 Episodes 16 for apply. Tool names: GitHub Actions publish, ghcr-pull secret, kubectl patch serviceaccount.</p><p class="text-14">Theory stays on screen. Commands live in the doc. Work there, not here.</p></div></div>
 <p class="hidden-notes note"><strong>Speaker cue:</strong> Point to the doc path. Say what it covers in one breath. Remind them tool names only appear here as captions.</p>
 </div>
 </section>
-<section class="slide"><div style="position:absolute;top:18px;left:20px;right:20px;display:flex;justify-content:space-between;align-items:center"><span class="time">08:30 · Ledger</span><span class="badge">CV</span></div><div class="slide-content">
+<section class="slide"><div class="topbar"><span class="time">08:30 · Ledger</span><span class="badge">CV</span></div><div class="slide-content">
 <p class="eyebrow">CV skills ledger hint</p>
 <h2 class="slide-heading">Two ledger rows earned.</h2>
 <ul class="bullets animate-stagger"><li><strong>Registries and multi-arch images. Tagged by commit SHA.</strong> <span>Release automation without workflow loops.</span></li></ul>
@@ -256,21 +257,21 @@ body.show-notes .hidden-notes{display:block}
 </div>
 </section>
 <section class="slide">
-<div class="dabs" aria-hidden="true"><i style="left:-4%;bottom:-10%;width:560px;height:360px;background:var(--wash-b)"></i><i style="right:-2%;top:6%;width:420px;height:320px;background:var(--wash-a)"></i></div>
-<div style="position:absolute;top:18px;left:20px;right:20px;display:flex;justify-content:space-between;align-items:center"><span class="time">Outro · Next</span><span class="badge">See you there</span></div>
+<div class="dabs" aria-hidden="true"><i class="dab-5"></i><i class="dab-1"></i></div>
+<div class="topbar"><span class="time">Outro · Next</span><span class="badge">See you there</span></div>
 <div class="slide-content">
 <p class="eyebrow animate-fade-up">Next episode</p>
 <h1 class="slide-title">You know <em>the idea.</em></h1>
 <p class="slide-subtitle">Theory first. Apply in the doc. Then next episode.</p>
-<div class="panel" style="max-width:760px"><h3>Next: Ep 17 GitOps</h3><p style="color:var(--ink-soft);line-height:1.6;font-size:15px">Stop running kubectl apply. Git holds desired state. A tool makes it real.</p></div>
+<div class="panel max-760"><h3>Next: Ep 17 GitOps</h3><p class="text-15">Stop running kubectl apply. Git holds desired state. A tool makes it real.</p></div>
 </div>
 </section>
 </div>
 <div class="switcher" id="switcher"></div>
 <div class="nav-controls">
-<button class="nav-btn" onclick="prevSlide()" aria-label="Previous">←</button>
+<button class="nav-btn" id="prevBtn" aria-label="Previous">←</button>
 <span class="slide-counter"><span id="current">1</span> / <span id="total">14</span></span>
-<button class="nav-btn" onclick="nextSlide()" aria-label="Next">→</button>
+<button class="nav-btn" id="nextBtn" aria-label="Next">→</button>
 </div>
 <script>
 const PALETTES=[
@@ -316,6 +317,8 @@ function showSlide(n){
 }
 window.nextSlide=function(){showSlide(current+1)};
 window.prevSlide=function(){showSlide(current-1)};
+document.getElementById("prevBtn").addEventListener("click",prevSlide);
+document.getElementById("nextBtn").addEventListener("click",nextSlide);
 document.addEventListener("keydown",function(e){
   if(e.key==="ArrowRight"||e.key===" "){e.preventDefault();nextSlide()}
   if(e.key==="ArrowLeft"){e.preventDefault();prevSlide()}
