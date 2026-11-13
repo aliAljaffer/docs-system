@@ -95,7 +95,7 @@ USER app
 
 `--chown=app:app` makes the files owned by the user that will read them. `USER app` changes the process user for every later instruction and for the container start.
 
-This is [[cloud/principle-of-least-privilege|least privilege]] at the process level. It does not replace a network policy or a read-only filesystem, which arrive in Act 4.
+This is [[security/principle-of-least-privilege|least privilege]] at the process level. It does not replace a network policy or a read-only filesystem, which arrive in Act 4.
 
 ## The Compose file
 
@@ -149,7 +149,7 @@ POSTGRES_PASSWORD: ${DB_PASSWORD:?Set DB_PASSWORD in .env}
 
 The `:?` makes the variable required. Compose stops with a message if it is missing. That is better than starting with an empty password.
 
-`.env` is in `.gitignore`. `.env.example` is the template in Git. A secret in a Git file is in history forever, even after you delete the line.
+`.env` is in `.gitignore`. [`.env.example`](https://github.com/aliAljaffer/four-hats/blob/main/.env.example) is the template in Git. A secret in a Git file is in history forever, even after you delete the line.
 
 ### Ports
 
@@ -174,7 +174,7 @@ Only the frontend publishes a port in this stack. The backend and the database t
 - **Using `latest`.** Pin the version. An unpinned tag changes without a commit.
 - **Forgetting `--build`.** The change is in the file, not in the running image.
 - **A plain `depends_on` list.** It waits for the container, not for readiness. Use the health condition.
-- **Committing `.env`.** It holds the password. Commit `.env.example` only.
+- **Committing `.env`.** It holds the password. Commit [`.env.example`](https://github.com/aliAljaffer/four-hats/blob/main/.env.example) only.
 - **`down` without `-v` when you wanted a clean database.** The old volume keeps the old data and the old schema.
 - **Windows: shell variable syntax.** Compose uses `${VAR}`. PowerShell uses `$env:VAR`. Do not mix them.
 
@@ -186,7 +186,7 @@ Only the frontend publishes a port in this stack. The backend and the database t
 - [ ] `compose.yaml` defines three services and one named volume.
 - [ ] The database has a health check.
 - [ ] The backend waits for `service_healthy`.
-- [ ] `.env` exists and `.env.example` is the only one in Git.
+- [ ] `.env` exists and [`.env.example`](https://github.com/aliAljaffer/four-hats/blob/main/.env.example) is the only one in Git.
 - [ ] `docker compose up --build` starts the stack.
 - [ ] The task board loads and add and delete work.
 - [ ] `docker compose down -v` removes the containers and the volume.
@@ -216,7 +216,7 @@ The verified steps for this episode are in [Act 1, Episode 5](../act1-software-e
 
 | After | You should see |
 |---|---|
-| You copy `.env.example` to `.env` | The file exists and is ignored by Git. |
+| You copy [`.env.example`](https://github.com/aliAljaffer/four-hats/blob/main/.env.example) to `.env` | The file exists and is ignored by Git. |
 | You run `docker compose up --build` | Three images build, then three services start. |
 | The database becomes healthy | The backend starts after it. |
 | You open port 8080 | The task board loads. |

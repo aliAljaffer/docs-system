@@ -22,7 +22,7 @@ Since Episode 13, every Secret in this app has been created by hand, on the comm
 
 - Episode 24 complete, with `app-auth` and the JWT flow from the authenticated endpoints.
 - A Minikube cluster with the `app` Application deployed from Act 3.
-- The `tools/compose.yaml` file with the `kubeseal` service, so sealing runs as a container.
+- The [`tools/compose.yaml`](https://github.com/aliAljaffer/four-hats/blob/main/tools/compose.yaml) file with the `kubeseal` service, so sealing runs as a container.
 
 ## Why plain Secrets cannot go in Git
 
@@ -167,7 +167,7 @@ minikube kubectl -- rollout status deployment/backend -n app
 
 Postgres initializes only on an empty data directory, with the new password from the sealed Secret.
 
-`kubernetes/argocd/applications/app.yaml` already points at the whole `kubernetes/app` folder. The sealed file is just another file in it now. ArgoCD syncs the `SealedSecret` like any other manifest:
+`kubernetes/argocd/applications/app.yaml` already points at the whole [`kubernetes/app`](https://github.com/aliAljaffer/four-hats/tree/main/kubernetes/app) folder. The sealed file is just another file in it now. ArgoCD syncs the `SealedSecret` like any other manifest:
 
 ```shell
 git add kubernetes/app/08-sealed-secrets.yaml kubernetes/app/04-deployments.yaml kubernetes/sealed-secrets
@@ -207,7 +207,7 @@ For the first time, a Secret's lifecycle lives in Git, not only on your command-
 
 ## Next
 
-Episode 26 is the finale. You combine every skills ledger row into one CV and build it as a PDF.
+Episode 26 is the finale. You combine every [skills ledger](../skills-ledger.md) row into one CV and build it as a PDF.
 
 ## Apply
 

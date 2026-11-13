@@ -50,15 +50,15 @@ You deploy the task board from Acts 1 and 2 to Kubernetes on Minikube. Then you 
 
 | Path | Content |
 |---|---|
-| `observability/namespace.yaml` | The `monitoring` Namespace |
-| `observability/prometheus.yaml` | Prometheus Deployment, Service, and a base ConfigMap with only a self-scrape target and empty rules |
-| `observability/grafana.yaml` | Grafana Deployment, Service, data source, and dashboard provider |
-| `observability/grafana-dashboard.json` | The task board dashboard |
-| `observability/alertmanager.yaml` | Alertmanager Deployment and Service with a placeholder receiver |
-| `observability/load-generator.yaml` | A load generator at zero replicas |
-| `observability/kustomization.yaml` | Builds the files above with Kustomize |
+| [`observability/namespace.yaml`](https://github.com/aliAljaffer/four-hats/blob/main/observability/namespace.yaml) | The `monitoring` Namespace |
+| [`observability/prometheus.yaml`](https://github.com/aliAljaffer/four-hats/blob/main/observability/prometheus.yaml) | Prometheus Deployment, Service, and a base ConfigMap with only a self-scrape target and empty rules |
+| [`observability/grafana.yaml`](https://github.com/aliAljaffer/four-hats/blob/main/observability/grafana.yaml) | Grafana Deployment, Service, data source, and dashboard provider |
+| [`observability/grafana-dashboard.json`](https://github.com/aliAljaffer/four-hats/blob/main/observability/grafana-dashboard.json) | The task board dashboard |
+| [`observability/alertmanager.yaml`](https://github.com/aliAljaffer/four-hats/blob/main/observability/alertmanager.yaml) | Alertmanager Deployment and Service with a placeholder receiver |
+| [`observability/load-generator.yaml`](https://github.com/aliAljaffer/four-hats/blob/main/observability/load-generator.yaml) | A load generator at zero replicas |
+| [`observability/kustomization.yaml`](https://github.com/aliAljaffer/four-hats/blob/main/observability/kustomization.yaml) | Builds the files above with Kustomize |
 
-You write everything else: the `kubernetes/app/` manifests, the scrape targets, the alert rule, the Discord receiver, the ArgoCD Applications, and the publish workflow.
+You write everything else: the [`kubernetes/app/`](https://github.com/aliAljaffer/four-hats/tree/main/kubernetes/app) manifests, the scrape targets, the alert rule, the Discord receiver, the ArgoCD Applications, and the publish workflow.
 
 Compare your work with `act-3-devops-engineer/` in the `solved` branch.
 
@@ -175,10 +175,10 @@ Making the repository and packages public removes the need for this token.
 
 ## Write the app manifests (episodes 11 to 15)
 
-Put the files in `kubernetes/app/`. Apply them in the `app` namespace.
+Put the files in [`kubernetes/app/`](https://github.com/aliAljaffer/four-hats/tree/main/kubernetes/app). Apply them in the `app` namespace.
 
 > [!WARNING]
-> Do not apply `kubernetes/app/07-networkpolicy.yaml` in Act 3. That file adds a default-deny policy. Act 4 adds the allow rules that the app needs.
+> Do not apply [`kubernetes/app/07-networkpolicy.yaml`](https://github.com/aliAljaffer/four-hats/blob/main/kubernetes/app/07-networkpolicy.yaml) in Act 3. That file adds a default-deny policy. Act 4 adds the allow rules that the app needs.
 
 #### Task 2: Write the Namespace
 
@@ -888,7 +888,7 @@ Last resort: [open the solved 04-deployments.yaml](https://github.com/aliAljaffe
 
 #### Task 18: Add Prometheus scrape targets
 
-Open `observability/prometheus.yaml`. Add scrape jobs to `scrape_configs`.
+Open [`observability/prometheus.yaml`](https://github.com/aliAljaffer/four-hats/blob/main/observability/prometheus.yaml). Add scrape jobs to `scrape_configs`.
 
 | Job | Target |
 |---|---|
@@ -901,7 +901,7 @@ The `frontend` and `postgres` targets need their exporter's port on the Service,
 <details>
 <summary>Show solution</summary>
 
-Add these jobs under `scrape_configs` in `observability/prometheus.yaml`:
+Add these jobs under `scrape_configs` in [`observability/prometheus.yaml`](https://github.com/aliAljaffer/four-hats/blob/main/observability/prometheus.yaml):
 
 ```yaml
       - job_name: backend
@@ -1026,7 +1026,7 @@ Last resort: [open the solved alertmanager.yaml](https://github.com/aliAljaffer/
 
 #### Task 24: Write the alert rule
 
-In `observability/prometheus.yaml`, replace `groups: []` in `rules.yml` with a `BackendUnavailable` group.
+In [`observability/prometheus.yaml`](https://github.com/aliAljaffer/four-hats/blob/main/observability/prometheus.yaml), replace `groups: []` in `rules.yml` with a `BackendUnavailable` group.
 
 <details>
 <summary>Show solution</summary>
@@ -1051,7 +1051,7 @@ Last resort: [open the solved prometheus.yaml](https://github.com/aliAljaffer/fo
 
 #### Task 25: Write the Discord receiver
 
-In `observability/alertmanager.yaml`:
+In [`observability/alertmanager.yaml`](https://github.com/aliAljaffer/four-hats/blob/main/observability/alertmanager.yaml):
 
 1. Change `route.receiver` to `discord`.
 2. Replace the `blackhole` receiver with a `discord_configs` receiver.
@@ -1173,7 +1173,7 @@ gcloud container clusters get-credentials gke-demo --region us-central1
 
 The demo needs the images that the [Task 13 publish workflow](#task-13-write-the-publish-workflow) pushed to GHCR. GKE pulls images from a registry; it cannot see images on your laptop. Local images from `minikube image load` do not exist on GKE. If you skipped Episode 16, publish the images first or use another registry.
 
-Apply the same `kubernetes/app/` manifests: the Namespace, the Deployments, the Services, the Postgres StatefulSet, the ConfigMaps, and the Secrets. Change the frontend Service from `type: NodePort` to `type: LoadBalancer` for this demo. Change each `image:` value to the published image. Then:
+Apply the same [`kubernetes/app/`](https://github.com/aliAljaffer/four-hats/tree/main/kubernetes/app) manifests: the Namespace, the Deployments, the Services, the Postgres StatefulSet, the ConfigMaps, and the Secrets. Change the frontend Service from `type: NodePort` to `type: LoadBalancer` for this demo. Change each `image:` value to the published image. Then:
 
 ```shell
 kubectl get nodes
@@ -1213,4 +1213,4 @@ Check the Billing page. It must show no running resources.
 | What you achieved | The app heals itself, scales under load, receives every commit through Git, and alerts Discord when the backend fails. |
 | What comes next | The Cybersecurity Engineer pentests the app and finds a SQL injection (Act 4). |
 
-**Resume after Act 3:** use the headline "Junior DevOps Engineer (Kubernetes, CI/CD, Observability)". Add the Act 3 rows of the [skills ledger](../cv/skills-ledger.md) to your CV.
+**Resume after Act 3:** use the headline "Junior DevOps Engineer (Kubernetes, CI/CD, Observability)". Add the Act 3 rows of the [skills ledger](skills-ledger.md#act-3-devops-engineer) to your CV.

@@ -7,7 +7,7 @@ Last episode you broke it. This episode fixes it, then makes sure a compromised 
 | | |
 |---|---|
 | You need | Episode 21 complete. A second, free Minikube profile for the policy check later in this episode. |
-| You build | A fixed search query, a rebuilt backend Deployment, and `kubernetes/app/07-networkpolicy.yaml` with default deny plus explicit allow rules |
+| You build | A fixed search query, a rebuilt backend Deployment, and [`kubernetes/app/07-networkpolicy.yaml`](https://github.com/aliAljaffer/four-hats/blob/main/kubernetes/app/07-networkpolicy.yaml) with default deny plus explicit allow rules |
 | Done when | Both exploit payloads return an empty list, `sqlmap` reports not injectable, and a Pod without an allow rule cannot reach the database |
 
 ## What you will be able to do
@@ -57,7 +57,7 @@ The boolean payload now returns an empty list. Nothing matches, because the whol
 
 Right now, every Pod in `app` can reach every other Pod. A compromised frontend could talk to the database directly. A compromised backend could talk to anything else in the namespace. Nothing in the cluster stops it.
 
-Default-deny first, then add only the paths the app needs. One policy blocks all ingress and all egress in `app`. Then three allow rules open the three paths the app needs. Frontend accepts ingress from anywhere on port 80. Backend accepts ingress from Pods labeled `app.kubernetes.io/name: frontend`. Database accepts ingress from Pods labeled `app.kubernetes.io/name: backend`. Each tier gets only the access it needs. That is [[cloud/principle-of-least-privilege|least privilege]] applied to the network.
+Default-deny first, then add only the paths the app needs. One policy blocks all ingress and all egress in `app`. Then three allow rules open the three paths the app needs. Frontend accepts ingress from anywhere on port 80. Backend accepts ingress from Pods labeled `app.kubernetes.io/name: frontend`. Database accepts ingress from Pods labeled `app.kubernetes.io/name: backend`. Each tier gets only the access it needs. That is [[security/principle-of-least-privilege|least privilege]] applied to the network.
 
 ![Frontend accepts from anywhere, backend only from frontend, Postgres only from backend](../assets/diagrams/ep22-networkpolicy.svg)
 

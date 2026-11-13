@@ -72,7 +72,7 @@ This episode mounts three things:
 
 | Mount | Why |
 |---|---|
-| `database/init.sql` read-only | PostgreSQL runs the file once, on first start, to create the table. |
+| [`database/init.sql`](https://github.com/aliAljaffer/four-hats/blob/main/database/init.sql) read-only | PostgreSQL runs the file once, on first start, to create the table. |
 | `backend/` into `/app` | Flask reads your code. A change on the laptop appears in the container. |
 | Frontend files and `nginx.conf` read-only | Nginx serves the static files and the proxy rules. |
 

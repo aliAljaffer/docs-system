@@ -304,7 +304,7 @@ Last resort: [open the solved Act 1 folder](https://github.com/aliAljaffer/four-
 
 #### Task 2: Add the DELETE endpoint
 
-Add the endpoint to `backend/app.py`. Use the `PATCH` endpoint as a model. Use `DELETE ... RETURNING`.
+Add the endpoint to [`backend/app.py`](https://github.com/aliAljaffer/four-hats/blob/main/backend/app.py). Use the `PATCH` endpoint as a model. Use `DELETE ... RETURNING`.
 
 <details>
 <summary>Show solution</summary>
@@ -329,7 +329,7 @@ Last resort: [open the solved backend/app.py](https://github.com/aliAljaffer/fou
 
 #### Task 3: Add two tests
 
-Add two tests to `backend/test_app.py`. Use `unittest.mock.patch` to replace `connect_to_database`. The tests then do not need a database. Add `MagicMock` and `patch` to the imports. Add the `fake_database` helper.
+Add two tests to [`backend/test_app.py`](https://github.com/aliAljaffer/four-hats/blob/main/backend/test_app.py). Use `unittest.mock.patch` to replace `connect_to_database`. The tests then do not need a database. Add `MagicMock` and `patch` to the imports. Add the `fake_database` helper.
 
 <details>
 <summary>Show solution</summary>
@@ -386,7 +386,7 @@ Last resort: [open the solved Act 1 folder](https://github.com/aliAljaffer/four-
 
 #### Task 5: Add the Delete button
 
-Add the button in `frontend/app.js`.
+Add the button in [`frontend/app.js`](https://github.com/aliAljaffer/four-hats/blob/main/frontend/app.js).
 
 <details>
 <summary>Show solution</summary>
@@ -771,7 +771,7 @@ Break a test on purpose. Watch the check fail. Fix it.
 <details>
 <summary>Show solution</summary>
 
-1. Change one assertion in `backend/test_app.py`. For example, change `self.assertEqual(response.status_code, 200)` to `self.assertEqual(response.status_code, 201)`.
+1. Change one assertion in [`backend/test_app.py`](https://github.com/aliAljaffer/four-hats/blob/main/backend/test_app.py). For example, change `self.assertEqual(response.status_code, 200)` to `self.assertEqual(response.status_code, 201)`.
 2. Commit and push. The test job fails.
 3. Change the assertion back.
 4. Commit and push. The test job passes.
@@ -795,4 +795,4 @@ The finished Act 1 is in the `solved` branch of this repository, folder `act-1-s
 | What you achieved | A tested, containerized app that starts with one command, with every pull request checked. |
 | What comes next | The Cloud Engineer finds a place to run it (Act 2). |
 
-**Resume after Act 1:** use the headline "Junior Software Engineer". Add the Act 1 rows of the [skills ledger](../cv/skills-ledger.md) to your CV.
+**Resume after Act 1:** use the headline "Junior Software Engineer". Add the Act 1 rows of the [skills ledger](skills-ledger.md#act-1-software-engineer) to your CV.

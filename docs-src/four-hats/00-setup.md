@@ -83,7 +83,7 @@ Some steps use host ports 8000 and 8080. If another program uses them, use 18000
 
 ## Run course tools
 
-Course tools run from `tools/compose.yaml`. The command is the same on macOS and Windows:
+Course tools run from [`tools/compose.yaml`](https://github.com/aliAljaffer/four-hats/blob/main/tools/compose.yaml). The command is the same on macOS and Windows:
 
 ```shell
 docker compose -f tools/compose.yaml run --rm python-test
