@@ -19,6 +19,7 @@ SITE = ROOT / "site"
 
 import brand  # noqa: E402
 import fetch  # noqa: E402
+import postprocess  # noqa: E402
 import provenance  # noqa: E402
 from build import convert_callouts  # noqa: E402
 
@@ -126,6 +127,22 @@ class SiteTests(unittest.TestCase):
         self.assertIn('<div class="diagram-zoom">', page)
         linked = (SITE / "definitions" / "ai" / "generative-ai" / "index.html").read_text()
         self.assertIn('<h2 id="linked-from">', linked)
+
+    def test_code_blocks_labelled_at_build(self) -> None:
+        page = (SITE / "projects" / "s2t" / "index.html").read_text()
+        self.assertIn('<div class="language-docs-shell highlight"><pre data-lang="shell">', page)
+        self.assertIn('<pre data-lang="diff">', page)
+        self.assertIn('<span class="g g-Changed">~ password</span>', page)
+        labelled = postprocess.CODE_BLOCK.sub(
+            postprocess.code_label,
+            '<div class="language-json highlight"><span class="filename">a &amp; "b".json</span><pre>'
+            '<div class="language-text highlight"><pre>',
+        )
+        self.assertEqual(
+            labelled,
+            '<div class="language-json highlight"><pre data-title="a &amp; &quot;b&quot;.json">'
+            '<div class="language-text highlight"><pre>',
+        )
 
     def test_course_pages_flagged_early(self) -> None:
         self.assertIn('setAttribute("data-course"', (SITE / "ckad" / "06-services" / "index.html").read_text())
