@@ -404,6 +404,16 @@ body::before {
   }
 }
 
+.md-typeset .slides-hint {
+  display: none;
+}
+
+@media screen and (max-width: 44.984375em) {
+  .md-typeset .slides-hint {
+    display: flow-root;
+  }
+}
+
 .md-code__button:after {
   display: none;
 }

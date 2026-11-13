@@ -82,6 +82,7 @@ class SiteTests(unittest.TestCase):
         self.assertIn("data-fullscreen", page)
         self.assertIn("assets/fullscreen.js", page)
         self.assertIn("md-button", page)
+        self.assertIn("slides-hint", page)
         self.assertTrue(len(list((SITE / "four-hats" / "slides").glob("ep*.html"))) >= 27)
 
     def test_definitions_manifest(self) -> None:
