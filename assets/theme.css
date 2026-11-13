@@ -418,11 +418,27 @@ body::before {
   border-color: var(--brand-ink);
 }
 
+.highlight .gi,
+.highlight .gd,
 .highlight .g-Changed {
   padding: 0 0.125em;
   margin: 0 -0.125em;
   border-radius: 0.1rem;
-  background-color: color-mix(in srgb, var(--brand-syntax-number) 18%, transparent);
+}
+
+.highlight .gi {
+  color: #1a7f37;
+  background-color: rgba(46, 160, 67, 0.18);
+}
+
+.highlight .gd {
+  color: #cf222e;
+  background-color: rgba(248, 81, 73, 0.18);
+}
+
+.highlight .g-Changed {
+  color: #9a6700;
+  background-color: rgba(212, 167, 44, 0.2);
 }
 
 .md-typeset pre > code {
