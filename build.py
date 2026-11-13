@@ -455,6 +455,8 @@ def embed_slides(base: Path) -> None:
         url = f"/four-hats/slides/{deck.name}"
         block = (
             '<div markdown="0">\n'
+            '<div class="admonition tip slides-hint"><p class="admonition-title">Tip</p>'
+            f'<p>On a phone, the slides are easier to read in a <a href="{url}" target="_blank" rel="noopener">new tab</a>.</p></div>\n'
             f'<iframe src="{url}" title="Slides" loading="lazy" allowfullscreen '
             'style="width:100%;aspect-ratio:16/9;border:0"></iframe>\n'
             '<p><button type="button" class="md-button" data-fullscreen>Fullscreen</button> '
