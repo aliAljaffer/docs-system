@@ -167,6 +167,18 @@ jobs:
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           command: deploy
 
+      # The zone stopped caching HTML (cache_level basic, browser TTL respecting
+      # origin). This purge clears anything cached under the old policy. Both
+      # hostnames are listed so the step keeps working after the cutover.
+      - name: Purge the edge cache
+        continue-on-error: true
+        run: |
+          curl -sS -X POST \
+            "https://api.cloudflare.com/client/v4/zones/${{ secrets.CLOUDFLARE_ZONE_ID }}/purge_cache" \
+            -H "Authorization: Bearer ${{ secrets.CLOUDFLARE_API_TOKEN }}" \
+            -H "Content-Type: application/json" \
+            --data '{"files":["https://docs-cf.alialjaffer.com/","https://docs.alialjaffer.com/"]}'
+
       - run: touch .deployed
 
       - uses: actions/cache/save@v4
