@@ -24,15 +24,15 @@ jobs:
       key: ${{ steps.fingerprint.outputs.key }}
       deploy: ${{ github.event_name != 'schedule' || steps.lookup.outputs.cache-hit != 'true' }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: "3.12"
 
       - run: make setup
 
-      - uses: actions/create-github-app-token@v1
+      - uses: actions/create-github-app-token@v3
         id: brand-token
         with:
           app-id: 5511128
@@ -48,7 +48,7 @@ jobs:
           GH_TOKEN: ${{ steps.brand-token.outputs.token }}
 
       - id: lookup
-        uses: actions/cache/restore@v4
+        uses: actions/cache/restore@v5
         with:
           path: .deployed
           key: ${{ steps.fingerprint.outputs.key }}
@@ -59,15 +59,15 @@ jobs:
     if: needs.changes.outputs.deploy == 'true'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           fetch-depth: 0
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: "3.12"
 
-      - uses: actions/create-github-app-token@v1
+      - uses: actions/create-github-app-token@v3
         id: brand-token
         with:
           app-id: 5511128
@@ -84,13 +84,13 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ github.token }}
 
-      - uses: docker/login-action@v3
+      - uses: docker/login-action@v4
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - uses: docker/metadata-action@v5
+      - uses: docker/metadata-action@v6
         id: meta
         with:
           images: ghcr.io/${{ github.repository }}
@@ -99,14 +99,14 @@ jobs:
             type=sha
             type=raw,value=run-${{ github.run_id }}
 
-      - uses: docker/build-push-action@v6
+      - uses: docker/build-push-action@v7
         with:
           context: .
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
 
-      - uses: actions/create-github-app-token@v1
+      - uses: actions/create-github-app-token@v3
         id: app
         with:
           app-id: 5511128
@@ -114,7 +114,7 @@ jobs:
           owner: aliAljaffer
           repositories: homelab
 
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           repository: aliAljaffer/homelab
           token: ${{ steps.app.outputs.token }}
@@ -181,7 +181,7 @@ jobs:
 
       - run: touch .deployed
 
-      - uses: actions/cache/save@v4
+      - uses: actions/cache/save@v5
         continue-on-error: true
         with:
           path: .deployed
