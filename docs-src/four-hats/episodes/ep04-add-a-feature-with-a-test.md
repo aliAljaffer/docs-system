@@ -173,7 +173,7 @@ An end-to-end run of this episode on the starter code passed: the test run repor
 
 ## What this unlocks on your CV
 
-Add these rows to your skills ledger:
+Add these rows to your [skills ledger](../skills-ledger.md):
 
 | Skill | Episode | CV section | Example bullet |
 |---|---|---|---|

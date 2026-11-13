@@ -34,7 +34,7 @@ Configuration management means describing the wanted state in code. Ansible comp
 
 ## Ansible runs in a container
 
-We do not install Ansible on the laptop. It runs as a Docker image. The image comes from `tools/ansible/Dockerfile`.
+We do not install Ansible on the laptop. It runs as a Docker image. The image comes from [`tools/ansible/Dockerfile`](https://github.com/aliAljaffer/four-hats/blob/main/tools/ansible/Dockerfile).
 
 ```shell
 docker compose -f tools/compose.yaml run --rm ansible ansible --version

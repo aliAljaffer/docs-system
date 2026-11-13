@@ -79,7 +79,7 @@ What you practice: Git, Python, Flask, SQL, unit testing, Docker, CI.
 
 ### Act 2: Cloud Engineer
 
-You plan the machine: CPU, memory, storage, firewall, [[cloud/cidr|CIDR]], DNS, and cost. Then you build the same machine twice. First on Multipass with cloud-init, then on Google Cloud with Terraform. Ansible configures it, and the playbook is idempotent, so a second run changes nothing.
+You plan the machine: CPU, memory, storage, firewall, [[networking/cidr|CIDR]], DNS, and cost. Then you build the same machine twice. First on Multipass with cloud-init, then on Google Cloud with Terraform. Ansible configures it, and the playbook is idempotent, so a second run changes nothing.
 
 What you practice: Multipass, cloud-init, Ansible, Terraform, GCP, Linux administration.
 
@@ -122,7 +122,7 @@ If you have no Google Cloud account, watch Episode 10 and skip its hands-on part
 
 ## The CV skills ledger
 
-After each episode, you add a row to the skills ledger in your repository. The row has four columns: skill, episode, CV section, and an example bullet.
+After each episode, you add a row to the skills ledger in your repository. The [reference copy](../skills-ledger.md) lists every row. The row has four columns: skill, episode, CV section, and an example bullet.
 
 The ledger is not a certificate. It is evidence. Each row points to work you did, and each act ends with a resume checkpoint you can use on its own.
 

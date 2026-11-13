@@ -16,7 +16,7 @@ Your app runs on your laptop. Users cannot reach your laptop. This episode decid
 - Name a region, a zone, an instance, and an image.
 - Size a VM from measured data, not a guess.
 - Decide which ports to open and to whom.
-- Read [[cloud/cidr|CIDR]] notation and plan one VPC with one subnet.
+- Read [[networking/cidr|CIDR]] notation and plan one VPC with one subnet.
 - Name the three private address ranges.
 - Resolve a name with `nslookup`.
 - Draw an architecture diagram for review.
@@ -73,7 +73,7 @@ Plan for 2 vCPUs and 2 GB of memory. That covers the app, a build, and room for 
 
 Sizing from a guess produces one of two failures. Too small, and the build or the database dies under load. Too large, and you pay for capacity nobody uses.
 
-## Ports and [[cloud/principle-of-least-privilege|least privilege]]
+## Ports and [[security/principle-of-least-privilege|least privilege]]
 
 Every open port is a way in. Open as few as you can.
 
@@ -196,7 +196,7 @@ Episode 8 creates the VM and logs in with a key. The plan becomes a machine.
 
 ## Apply
 
-The verified steps for this episode are in [Act 2, Episode 7](../act2-cloud-engineer.md#episode-7-plan-the-infrastructure) and in `docs/infrastructure-plan.md`. Follow the tasks in order.
+The verified steps for this episode are in [Act 2, Episode 7](../act2-cloud-engineer.md#episode-7-plan-the-infrastructure) and in [`docs/infrastructure-plan.md`](https://github.com/aliAljaffer/four-hats/blob/main/docs/infrastructure-plan.md). Follow the tasks in order.
 
 <!-- APPLY -->
 

@@ -69,13 +69,13 @@ Reviewable infrastructure. `terraform plan` shows the change before it happens. 
 
 ## Write the resources
 
-`infra/terraform/gcp/versions.tf` sets the Google provider. You do not change it. It sets the provider version and the `project`, `region`, and `zone` inputs.
+[`infra/terraform/gcp/versions.tf`](https://github.com/aliAljaffer/four-hats/blob/main/infra/terraform/gcp/versions.tf) sets the Google provider. You do not change it. It sets the provider version and the `project`, `region`, and `zone` inputs.
 
 Three files describe the rest:
 
 | File | Contents |
 |---|---|
-| `variables.tf` | Project ID, region, zone, machine type, SSH public key, and your IP in [[cloud/cidr|CIDR]] form |
+| `variables.tf` | Project ID, region, zone, machine type, SSH public key, and your IP in [[networking/cidr|CIDR]] form |
 | `main.tf` | A network, a firewall rule for port 22 from your IP only, a firewall rule for port 8080, and a Compute Engine VM with Ubuntu 24.04, 20 GB disk, and a public IP |
 | `outputs.tf` | The VM IP and the app URL |
 
@@ -153,7 +153,7 @@ Three ideas appear when an app grows past one VM. You do not build them in this 
 | Idea | What it does | On Google Cloud |
 |---|---|---|
 | Load balancer | Sits in front of many servers. It spreads traffic across them, so no server is overwhelmed. It also skips a server that is down. | [[gcp/cloud-load-balancing|Cloud Load Balancing]] |
-| Reverse proxy | Forwards requests to another server. Our frontend Nginx already does this. It forwards `/api` to the backend. | The Nginx `proxy_pass` line in `frontend/nginx.conf` |
+| Reverse proxy | Forwards requests to another server. Our frontend Nginx already does this. It forwards `/api` to the backend. | The Nginx `proxy_pass` line in [`frontend/nginx.conf`](https://github.com/aliAljaffer/four-hats/blob/main/frontend/nginx.conf) |
 | CDN | Keeps copies of your files in cities around the world. Users load them from a nearby city. | Cloud CDN |
 
 ## Common mistakes

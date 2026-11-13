@@ -51,6 +51,7 @@ ACTS = [
     (20, 25, "Act 4: Cybersecurity Engineer"),
     (26, 26, "Wrap up"),
 ]
+GROUP_PAGES = {"Wrap up": ("skills-ledger.md",)}
 
 BASE_THEME = """\
 site_name: {site_name}
@@ -81,6 +82,7 @@ theme:
 markdown_extensions:
   - admonition
   - pymdownx.details
+  - pymdownx.magiclink
   - pymdownx.superfences
   - pymdownx.highlight:
       pygments_lang_class: true
@@ -461,6 +463,17 @@ def embed_slides(base: Path) -> None:
         page.write_text(insert_after_h1(page.read_text(), "\n" + block))
 
 
+def act_groups(base: Path) -> list[tuple[str, list[Path]]]:
+    by_number = {int(p.name[2:4]): p for p in (base / "episodes").glob("ep*.md")}
+    groups = []
+    for start, end, label in ACTS:
+        group = [by_number[n] for n in range(start, end + 1) if n in by_number]
+        group += [base / name for name in GROUP_PAGES.get(label, ()) if (base / name).exists()]
+        if group:
+            groups.append((label, group))
+    return groups
+
+
 def four_hats(base: Path) -> None:
     """Course-specific steps: inject act-guide steps, then drop unlisted pages."""
     marker = "<!-- APPLY -->"
@@ -486,13 +499,10 @@ def four_hats(base: Path) -> None:
     if plan.exists():
         plan.unlink()
     lines = ["# Episodes", ""]
-    by_number = {int(p.name[2:4]): p for p in (base / "episodes").glob("ep*.md")}
-    for start, end, label in ACTS:
-        group = [by_number[n] for n in range(start, end + 1) if n in by_number]
-        if group:
-            lines += [f"## {label}", "", "| Episode |", "|---|"]
-            lines += [f"| [{title_of(p)}](episodes/{p.name}) |" for p in group]
-            lines.append("")
+    for label, group in act_groups(base):
+        lines += [f"## {label}", "", "| Episode |", "|---|"]
+        lines += [f"| [{title_of(p)}]({p.relative_to(base).as_posix()}) |" for p in group]
+        lines.append("")
     (base / "episodes.md").write_text("\n".join(lines))
 
 
@@ -612,11 +622,8 @@ def four_hats_nav(root: Path, base: Path, title: str) -> dict:
     for name, label in (("setup.md", "Setup"), ("episodes.md", "Episodes")):
         if (base / name).exists():
             children.append({label: rel(base / name)})
-    by_number = {int(p.name[2:4]): p for p in (base / "episodes").glob("ep*.md")}
-    for start, end, label in ACTS:
-        group = [by_number[n] for n in range(start, end + 1) if n in by_number]
-        if group:
-            children.append({label: [{title_of(p): rel(p)} for p in group]})
+    for label, group in act_groups(base):
+        children.append({label: [{title_of(p): rel(p)} for p in group]})
     for name, label in (("cleanup-guide.md", "Cleanup"), ("costs-and-free-options.md", "Costs and free options")):
         if (base / name).exists():
             children.append({label: rel(base / name)})
@@ -653,8 +660,8 @@ def assemble() -> tuple[Path, list[og.Card]]:
     version = asset_version()
     brand.compile(identity, BUILD / "assets", SITE_URL, version)
     definitions_index(BUILD)
-    process_wiki(BUILD)
     fetch.fetch_all(BUILD, config)
+    process_wiki(BUILD)
     prepare(BUILD, config)
     for page in BUILD.rglob("*.md"):
         page.write_text(use_docs_lexers(page.read_text()))

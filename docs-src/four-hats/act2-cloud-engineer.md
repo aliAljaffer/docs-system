@@ -220,12 +220,12 @@ Last resort: [open the solved Act 2 folder](https://github.com/aliAljaffer/four-
 
 #### Task 9: Save the plan
 
-Save your plan in `docs/infrastructure-plan.md`.
+Save your plan in [`docs/infrastructure-plan.md`](https://github.com/aliAljaffer/four-hats/blob/main/docs/infrastructure-plan.md).
 
 <details>
 <summary>Show solution</summary>
 
-Fill these sections in `docs/infrastructure-plan.md`:
+Fill these sections in [`docs/infrastructure-plan.md`](https://github.com/aliAljaffer/four-hats/blob/main/docs/infrastructure-plan.md):
 
 ```text
 # Infrastructure plan
@@ -753,7 +753,7 @@ Last resort: [open the solved Terraform folder](https://github.com/aliAljaffer/f
 
 #### Task 4: Read the provider file
 
-Look at `infra/terraform/gcp/versions.tf`. It sets the Google provider.
+Look at [`infra/terraform/gcp/versions.tf`](https://github.com/aliAljaffer/four-hats/blob/main/infra/terraform/gcp/versions.tf). It sets the Google provider.
 
 <details>
 <summary>Show solution</summary>
@@ -1032,4 +1032,4 @@ The finished Act 2 is in the `solved` branch of this repository, folder `act-2-c
 | What you achieved | A server you can rebuild from code. A second playbook run changes nothing. Only the needed ports are open. No resources are left running. |
 | What comes next | The DevOps Engineer fixes the limits of one VM (Act 3). |
 
-**Resume after Act 2:** use the headline "Junior Software Engineer with Cloud and Infrastructure as Code skills". Add the Act 2 rows of the [skills ledger](../cv/skills-ledger.md) to your CV.
+**Resume after Act 2:** use the headline "Junior Software Engineer with Cloud and Infrastructure as Code skills". Add the Act 2 rows of the [skills ledger](skills-ledger.md#act-2-cloud-engineer) to your CV.

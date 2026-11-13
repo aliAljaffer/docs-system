@@ -157,7 +157,7 @@ gcloud components install kubectl
 
 The end-to-end run also needed `gke-gcloud-auth-plugin`. Install it if `kubectl` reports the plugin missing. Delete the cluster and any `pvc-*` disks after the demo.
 
-Apply the same `kubernetes/app/` manifests: the Namespace, the Deployments, the Services, the Postgres StatefulSet, the ConfigMaps, and the Secrets. Change the frontend Service from `type: NodePort` to `type: LoadBalancer` for this demo. Change each `image:` value to the published image from Episode 16.
+Apply the same [`kubernetes/app/`](https://github.com/aliAljaffer/four-hats/tree/main/kubernetes/app) manifests: the Namespace, the Deployments, the Services, the Postgres StatefulSet, the ConfigMaps, and the Secrets. Change the frontend Service from `type: NodePort` to `type: LoadBalancer` for this demo. Change each `image:` value to the published image from Episode 16.
 
 Same Deployments, StatefulSet, ConfigMaps, and Secrets, running on a different cluster. What changes: a managed control plane, automatic node upgrades, and a `LoadBalancer` Service that gets a real external IP, which Minikube cannot do without MetalLB. A `NodePort` Service never gets an external IP on GKE. What does not change: everything else this act taught you.
 

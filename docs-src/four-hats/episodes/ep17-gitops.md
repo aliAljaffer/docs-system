@@ -92,7 +92,7 @@ spec:
       selfHeal: true
 ```
 
-Read it as one sentence: watch `main` at path `kubernetes/app` and keep namespace `app` equal to it, with automatic sync, prune, and self-heal.
+Read it as one sentence: watch `main` at path [`kubernetes/app`](https://github.com/aliAljaffer/four-hats/tree/main/kubernetes/app) and keep namespace `app` equal to it, with automatic sync, prune, and self-heal.
 
 The second Application points at `observability` and namespace `monitoring`. Together they cover the app and the monitoring stack, so the whole Act 3 system deploys from Git.
 

@@ -6,26 +6,26 @@ You started this course with a degree and no job yet. You finish it with four ro
 
 | | |
 |---|---|
-| You need | At least one act complete, with its skills ledger rows filled in |
+| You need | At least one act complete, with its [skills ledger](../skills-ledger.md) rows filled in |
 | You build | A built CV at `cv/template.pdf`, a polished GitHub profile, and one short talk track per role you practiced |
 | Done when | The PDF opens as one clean page, every skill matches ledger proof, no placeholders remain, the repo is pinned on your profile, and you can say each talk track in about thirty seconds |
 
 ## What you will be able to do
 
 - Turn skills ledger rows into CV bullets.
-- Build the CV from `cv/template.tex` with a Docker LaTeX image.
+- Build the CV from [`cv/template.tex`](https://github.com/aliAljaffer/four-hats/blob/main/cv/template.tex) with a Docker LaTeX image.
 - Polish a GitHub profile so it backs up the CV.
 - Prepare a short talk track for each role you practiced.
 
 ## Before you start
 
 - At least one act complete. The CV only lists what you practiced.
-- `cv/skills-ledger.md` filled in for the acts you completed. Each act stands on its own, so you can start at any act and use only those rows.
+- [`cv/skills-ledger.md`](https://github.com/aliAljaffer/four-hats/blob/main/cv/skills-ledger.md) filled in for the acts you completed. Each act stands on its own, so you can start at any act and use only those rows.
 - A GitHub profile and the project repository in a state you are willing to share.
 
 ## Ledger rows become bullets
 
-Open `cv/skills-ledger.md`. Do not start from a blank page. The ledger already lists every skill you can claim, with the episode where you practiced it, the CV section it belongs in, the proof you kept in your repository, and an example bullet for each row. Only use the acts you completed. A student who finished Act 1 can send a CV that night. A student who finished Act 4 uses rows from all four acts. The ledger makes that scope visible before you touch the template.
+Open [`cv/skills-ledger.md`](https://github.com/aliAljaffer/four-hats/blob/main/cv/skills-ledger.md) in your fork. The [reference copy](../skills-ledger.md) shows every row with its episode link. Do not start from a blank page. The ledger already lists every skill you can claim, with the episode where you practiced it, the CV section it belongs in, the proof you kept in your repository, and an example bullet for each row. Only use the acts you completed. A student who finished Act 1 can send a CV that night. A student who finished Act 4 uses rows from all four acts. The ledger makes that scope visible before you touch the template.
 
 Each row gives you the proof behind the claim:
 
@@ -33,14 +33,14 @@ Each row gives you the proof behind the claim:
 |---|---|
 | Episode | Where you practiced it, so you can point to proof in an interview |
 | Proof | The file or result you kept in your repository |
-| CV section | The heading in `cv/template.tex` where the skill belongs |
+| CV section | The heading in [`cv/template.tex`](https://github.com/aliAljaffer/four-hats/blob/main/cv/template.tex) where the skill belongs |
 | Example bullet | A starting point, not a copy-paste |
 
 The ledger is built for review. If an interviewer asks about a line on your CV, you can answer with the episode and the file, not with a vague memory. Keep the proof with the row while you fill the template.
 
 ## Fill in the template
 
-`cv/template.tex` already has the right section headings. They match the ledger's CV section column. The technical skills part lists seven headings:
+[`cv/template.tex`](https://github.com/aliAljaffer/four-hats/blob/main/cv/template.tex) already has the right section headings. They match the ledger's CV section column. The technical skills part lists seven headings:
 
 - Cloud Platforms
 - Containers & Orchestration
@@ -59,7 +59,7 @@ The CV also has Work Experience, Side Projects, Education, and Certifications se
 
 ## Build the PDF
 
-LaTeX needs a full install to render a PDF. Installing it on your laptop creates a heavy toolchain that only this step needs. This course runs it as a Docker image instead, the same way it ran Ansible and Terraform. The `latex` service in `tools/compose.yaml` carries the full TeX distribution. You build the CV with one command:
+LaTeX needs a full install to render a PDF. Installing it on your laptop creates a heavy toolchain that only this step needs. This course runs it as a Docker image instead, the same way it ran Ansible and Terraform. The `latex` service in [`tools/compose.yaml`](https://github.com/aliAljaffer/four-hats/blob/main/tools/compose.yaml) carries the full TeX distribution. You build the CV with one command:
 
 ```shell
 docker compose -f tools/compose.yaml run --rm latex pdflatex template.tex
@@ -115,14 +115,14 @@ Practice each answer out loud. A bullet on a page and a spoken sentence are diff
 ## Common mistakes
 
 - **Copying every ledger bullet word for word.** Adjust them to match what you actually built. Verbatim text from the course is visible to anyone who knows the course.
-- **Leaving placeholder names, emails, or example jobs in `cv/template.tex`.** No `YOUR NAME` and no example bullet may reach a reviewer. Check the built PDF, not only the `.tex` file.
+- **Leaving placeholder names, emails, or example jobs in [`cv/template.tex`](https://github.com/aliAljaffer/four-hats/blob/main/cv/template.tex).** No `YOUR NAME` and no example bullet may reach a reviewer. Check the built PDF, not only the `.tex` file.
 - **Listing a tool you read about but never used.** Only list what the ledger proof backs up. A skill without a file or a result is a risk in interview.
 - **Applying with no matching GitHub activity.** Merge your pull requests, write the README, and pin the repo first. An unmerged or empty profile breaks the proof behind the CV.
 - **Sending a two-page CV with seven thin sections.** Keep only the sections your proof supports. One page, strong bullets, real links.
 
 ## Check your work
 
-- [ ] Every skill on the CV matches a filled row in `cv/skills-ledger.md` from an act you completed.
+- [ ] Every skill on the CV matches a filled row in [`cv/skills-ledger.md`](https://github.com/aliAljaffer/four-hats/blob/main/cv/skills-ledger.md) from an act you completed.
 - [ ] `cv/template.pdf` builds with the Docker LaTeX image and opens as one page.
 - [ ] No placeholder text, no example bullets, and no wrong links remain in the PDF.
 - [ ] The repository has a clear `README.md`, merged pull requests, and is pinned on your profile.
@@ -138,7 +138,7 @@ Practice each answer out loud. A bullet on a page and a spoken sentence are diff
 
 Four careers, one project, one CV. You built a task board, ran it on a VM, moved it to Kubernetes, then found and fixed a real vulnerability in it.
 
-The files for this work are `cv/template.tex` and `cv/skills-ledger.md` in the course repository. To finish:
+The files for this work are [`cv/template.tex`](https://github.com/aliAljaffer/four-hats/blob/main/cv/template.tex) and [`cv/skills-ledger.md`](https://github.com/aliAljaffer/four-hats/blob/main/cv/skills-ledger.md) in the course repository. To finish:
 
 1. Open the ledger.
 2. Keep only the acts you completed.

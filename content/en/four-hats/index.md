@@ -4,6 +4,8 @@ Four careers, one project. Twenty-seven episodes.
 
 One small task-board app goes through four jobs. You do the same work a team does, and you finish with a project on GitHub and skills you can put on a CV.
 
+The course code lives in the [four-hats repository](https://github.com/aliAljaffer/four-hats). Fork it in Episode 1.
+
 | Act | Role | Code | Episodes |
 |---|---|---|---|
 | Introduction | Set up and overview | ALL | 0 to 1 |
@@ -33,3 +35,4 @@ The video is a visual aid. The page is complete without it.
 2. Read Episode 0 to see the four roles.
 3. Do Episode 1 to install the tools.
 4. Take the acts in order, or start at the act that matches the job you want.
+5. Use the [skills ledger](skills-ledger.md) to turn each episode into CV lines.

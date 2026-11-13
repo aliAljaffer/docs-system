@@ -23,7 +23,7 @@ Try each task first. Open **Show solution** for that task only when you are stuc
 
 Every task in this act runs against the task board inside a Minikube cluster, in the `app` namespace. Act 3 builds that cluster. Do these steps once, from the root of your fork, after you copy the contents of `act-3-devops-engineer/`. You do not need ArgoCD or the monitoring stack for this act.
 
-1. Copy two files from the starter repository into your fork: `kubernetes/sealed-secrets/controller.yaml` and `kubernetes/app/07-networkpolicy.yaml`. The act-3 snapshot does not include them.
+1. Copy two files from the starter repository into your fork: [`kubernetes/sealed-secrets/controller.yaml`](https://github.com/aliAljaffer/four-hats/blob/main/kubernetes/sealed-secrets/controller.yaml) and [`kubernetes/app/07-networkpolicy.yaml`](https://github.com/aliAljaffer/four-hats/blob/main/kubernetes/app/07-networkpolicy.yaml). The act-3 snapshot does not include them.
 
 2. Start Minikube with Calico. Calico enforces the NetworkPolicies that you write in Episode 22. The default network plugin ignores them without an error. Act 3 does this in [Task 1](act3-devops-engineer.md#task-1-start-the-cluster).
 
@@ -111,11 +111,11 @@ You find and fix a SQL injection in the backend you built in Act 1, harden the K
 
 | Path | Content |
 |---|---|
-| `tools/sqlmap/Dockerfile` | A small image built from the official `sqlmap` source, for Episode 21 |
-| `tools/zap/rules.tsv` | A ZAP baseline rule config that silences two informational findings, for Episode 23 |
-| `tools/compose.yaml` | Adds the `sqlmap`, `semgrep`, `trivy`, `latex`, and `kubeseal` services. ZAP runs as a Pod inside Minikube instead of through Compose; see Episode 23 |
-| `kubernetes/sealed-secrets/controller.yaml` | The vendored Sealed Secrets controller manifest, for Episode 25 |
-| `kubernetes/app/07-networkpolicy.yaml` | The default-deny policy and the DNS egress allow rule, complete. No app-specific rules yet |
+| [`tools/sqlmap/Dockerfile`](https://github.com/aliAljaffer/four-hats/blob/main/tools/sqlmap/Dockerfile) | A small image built from the official `sqlmap` source, for Episode 21 |
+| [`tools/zap/rules.tsv`](https://github.com/aliAljaffer/four-hats/blob/main/tools/zap/rules.tsv) | A ZAP baseline rule config that silences two informational findings, for Episode 23 |
+| [`tools/compose.yaml`](https://github.com/aliAljaffer/four-hats/blob/main/tools/compose.yaml) | Adds the `sqlmap`, `semgrep`, `trivy`, `latex`, and `kubeseal` services. ZAP runs as a Pod inside Minikube instead of through Compose; see Episode 23 |
+| [`kubernetes/sealed-secrets/controller.yaml`](https://github.com/aliAljaffer/four-hats/blob/main/kubernetes/sealed-secrets/controller.yaml) | The vendored Sealed Secrets controller manifest, for Episode 25 |
+| [`kubernetes/app/07-networkpolicy.yaml`](https://github.com/aliAljaffer/four-hats/blob/main/kubernetes/app/07-networkpolicy.yaml) | The default-deny policy and the DNS egress allow rule, complete. No app-specific rules yet |
 
 You write everything else:
 
@@ -417,7 +417,7 @@ tasks = connection.execute(
 ).fetchall()
 ```
 
-Remove the `# Intentionally vulnerable to SQL injection; Act 4 finds and fixes this.` comment from `backend/app.py`. The comment is no longer true.
+Remove the `# Intentionally vulnerable to SQL injection; Act 4 finds and fixes this.` comment from [`backend/app.py`](https://github.com/aliAljaffer/four-hats/blob/main/backend/app.py). The comment is no longer true.
 
 Last resort: [open the solved backend/app.py](https://github.com/aliAljaffer/four-hats/blob/solved/act-4-cybersecurity-engineer/backend/app.py)
 
@@ -445,7 +445,7 @@ Last resort: [open the solved backend/app.py](https://github.com/aliAljaffer/fou
 
 #### Task 16: Add the NetworkPolicies
 
-`kubernetes/app/07-networkpolicy.yaml` already has the default-deny policy for all ingress and egress in `app`. It also has the DNS egress allow rule for `kube-dns` on UDP and TCP port 53. Internal lookups keep working. It also has the `scanner` egress rule for the `sqlmap` and ZAP Pods. Add these allow rules to the same file:
+[`kubernetes/app/07-networkpolicy.yaml`](https://github.com/aliAljaffer/four-hats/blob/main/kubernetes/app/07-networkpolicy.yaml) already has the default-deny policy for all ingress and egress in `app`. It also has the DNS egress allow rule for `kube-dns` on UDP and TCP port 53. Internal lookups keep working. It also has the `scanner` egress rule for the `sqlmap` and ZAP Pods. Add these allow rules to the same file:
 
 | Pod | Direction | Peer | Port |
 |---|---|---|---|
@@ -465,7 +465,7 @@ Use the labels in the manifests: `app.kubernetes.io/name: frontend`, `app.kubern
 <details>
 <summary>Show solution</summary>
 
-Add these policies to `kubernetes/app/07-networkpolicy.yaml`:
+Add these policies to [`kubernetes/app/07-networkpolicy.yaml`](https://github.com/aliAljaffer/four-hats/blob/main/kubernetes/app/07-networkpolicy.yaml):
 
 ```yaml
 apiVersion: networking.k8s.io/v1
@@ -801,7 +801,7 @@ Last resort: [open the solved security workflow](https://github.com/aliAljaffer/
 
 #### Task 23: Add the Nginx headers
 
-Add the security headers to the `server` block in `frontend/nginx.conf`.
+Add the security headers to the `server` block in [`frontend/nginx.conf`](https://github.com/aliAljaffer/four-hats/blob/main/frontend/nginx.conf).
 
 <details>
 <summary>Show solution</summary>
@@ -840,7 +840,7 @@ Last resort: [open the solved nginx.conf](https://github.com/aliAljaffer/four-ha
 
 #### Task 24: Add the Python packages
 
-Add `bcrypt>=4.2,<5` and `PyJWT>=2.9,<3` to `backend/requirements.txt`.
+Add `bcrypt>=4.2,<5` and `PyJWT>=2.9,<3` to [`backend/requirements.txt`](https://github.com/aliAljaffer/four-hats/blob/main/backend/requirements.txt).
 
 <details>
 <summary>Show solution</summary>
@@ -856,12 +856,12 @@ Last resort: [open the solved requirements.txt](https://github.com/aliAljaffer/f
 
 #### Task 25: Add JWT_SECRET
 
-Add `JWT_SECRET` to `.env`, `.env.example`, and the backend service in `compose.yaml`.
+Add `JWT_SECRET` to `.env`, [`.env.example`](https://github.com/aliAljaffer/four-hats/blob/main/.env.example), and the backend service in `compose.yaml`.
 
 <details>
 <summary>Show solution</summary>
 
-`.env` and `.env.example`:
+`.env` and [`.env.example`](https://github.com/aliAljaffer/four-hats/blob/main/.env.example):
 
 ```text
 JWT_SECRET=change-me-locally-too
@@ -878,7 +878,7 @@ The backend service in `compose.yaml`:
       JWT_SECRET: ${JWT_SECRET:?Set JWT_SECRET in .env}
 ```
 
-Act 1 copied `.env` from `.env.example` in [Episode 5, Task 5](act1-software-engineer.md#task-5-copy-the-environment-file). If you skipped Act 1, run `cp .env.example .env` once. If you change only the example, your `.env` does not change. Compose reads the variable from `.env` only when the service lists it.
+Act 1 copied `.env` from [`.env.example`](https://github.com/aliAljaffer/four-hats/blob/main/.env.example) in [Episode 5, Task 5](act1-software-engineer.md#task-5-copy-the-environment-file). If you skipped Act 1, run `cp .env.example .env` once. If you change only the example, your `.env` does not change. Compose reads the variable from `.env` only when the service lists it.
 
 Last resort: [open the solved .env.example](https://github.com/aliAljaffer/four-hats/blob/solved/act-4-cybersecurity-engineer/.env.example)
 
@@ -932,12 +932,12 @@ Last resort: [open the solved frontend folder](https://github.com/aliAljaffer/fo
 Add a `users` table, a `tasks.owner_id` column, `POST /api/auth/register` (bcrypt-hashed passwords), and `POST /api/auth/login` (a signed JWT). Require `Authorization: Bearer <token>` on every `/api/tasks*` route. Scope `list`, `create`, and `search` to `owner_id`.
 
 > [!NOTE]
-> The main task board has no login form. After this task, the page at `http://localhost:8080/` still loads, but its API calls return 401. Use `http://localhost:8080/pentest` for the authenticated flows. Do not change `frontend/app.js` for this act.
+> The main task board has no login form. After this task, the page at `http://localhost:8080/` still loads, but its API calls return 401. Use `http://localhost:8080/pentest` for the authenticated flows. Do not change [`frontend/app.js`](https://github.com/aliAljaffer/four-hats/blob/main/frontend/app.js) for this act.
 
 <details>
 <summary>Show solution</summary>
 
-`database/init.sql`:
+[`database/init.sql`](https://github.com/aliAljaffer/four-hats/blob/main/database/init.sql):
 
 ```sql
 CREATE TABLE users (
@@ -956,7 +956,7 @@ CREATE TABLE tasks (
 );
 ```
 
-`backend/app.py`, the imports and constants:
+[`backend/app.py`](https://github.com/aliAljaffer/four-hats/blob/main/backend/app.py), the imports and constants:
 
 ```python
 import bcrypt
@@ -1190,7 +1190,7 @@ Rebuild the backend and repeat the attack. Create a new task as Alice. Delete it
 docker compose up --build -d backend
 ```
 
-The starter `frontend/nginx.conf` already maps `/pentest` to `pentest.html` with `try_files $uri $uri.html $uri/ =404;`. Keep that line. Do not remove it.
+The starter [`frontend/nginx.conf`](https://github.com/aliAljaffer/four-hats/blob/main/frontend/nginx.conf) already maps `/pentest` to `pentest.html` with `try_files $uri $uri.html $uri/ =404;`. Keep that line. Do not remove it.
 
 A live, clickable version of the same attack and fix is at `http://localhost:8080/pentest`, served by the same frontend.
 
@@ -1465,4 +1465,4 @@ Last resort: [open the solved Act 4 folder](https://github.com/aliAljaffer/four-
 | What you achieved | The app resists the injection, every workload has only the network access it needs, a Pod without an allow rule cannot reach the database, every future commit is checked by the same scans, one user can no longer touch another's data, and every secret this app needs is safe to commit. |
 | What comes next | Episode 26: combine every act's skills ledger entries into one CV. |
 
-**Resume after Act 4:** use the headline "Junior Cybersecurity Engineer (Penetration Testing and Application Security)". Add the Act 4 rows of the [skills ledger](../cv/skills-ledger.md) to your CV.
+**Resume after Act 4:** use the headline "Junior Cybersecurity Engineer (Penetration Testing and Application Security)". Add the Act 4 rows of the [skills ledger](skills-ledger.md#act-4-cybersecurity-engineer) to your CV.
