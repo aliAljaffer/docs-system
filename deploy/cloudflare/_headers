@@ -1,0 +1,29 @@
+# Port of deploy/nginx.conf and its snippets. Copied into site/ before deploy
+# because the build wipes that directory.
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  X-Frame-Options: SAMEORIGIN
+  Permissions-Policy: accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=()
+  Cross-Origin-Opener-Policy: same-origin-allow-popups
+  Content-Security-Policy-Report-Only: default-src 'self'; script-src 'self' 'inline-speculation-rules' https://cdn.jsdelivr.net https://giscus.app https://umami.alialjaffer.com; style-src 'self' 'unsafe-inline'; font-src 'self' https://cdn.jsdelivr.net; img-src 'self' data: https:; connect-src 'self' https://umami.alialjaffer.com; frame-src https://giscus.app; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'
+
+/assets/*
+  Cache-Control: public, max-age=604800
+
+/assets/backlinks.json
+  ! Cache-Control
+  Cache-Control: no-cache
+
+/assets/brand/fonts/*
+  Access-Control-Allow-Origin: https://giscus.app
+
+/assets/giscus-light.css
+  Access-Control-Allow-Origin: https://giscus.app
+
+/assets/giscus-dark.css
+  Access-Control-Allow-Origin: https://giscus.app
+
+/four-hats/slides/*
+  ! Content-Security-Policy-Report-Only
+  Content-Security-Policy-Report-Only: default-src 'self'; script-src 'self' 'unsafe-inline' https://umami.alialjaffer.com; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: https:; connect-src 'self' https://umami.alialjaffer.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'

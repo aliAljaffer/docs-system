@@ -1,0 +1,84 @@
+# Port of the location blocks in deploy/nginx.conf. _redirects has no regex,
+# so each /definitions/cloud/<slug> rule is written out.
+/courses/four-hats /four-hats/ 301
+/courses/four-hats/* /four-hats/:splat 301
+
+/wiki /definitions/ 301
+/wiki/* /definitions/:splat 301
+
+/setup /four-hats/setup/ 301
+/setup/* /four-hats/setup/:splat 301
+
+/cleanup-guide /four-hats/cleanup-guide/ 301
+/cleanup-guide/* /four-hats/cleanup-guide/:splat 301
+
+/costs-and-free-options /four-hats/costs-and-free-options/ 301
+/costs-and-free-options/* /four-hats/costs-and-free-options/:splat 301
+
+/tools /projects/ 301
+/tools/* /projects/ 301
+
+/ar / 301
+/ar/* / 301
+/blogs / 301
+/blogs/* / 301
+/notes / 301
+/notes/* / 301
+/graph / 301
+/graph/* / 301
+/tags / 301
+/tags/* / 301
+/slides / 301
+/slides/* / 301
+
+/definitions/cloud/multi-factor-authentication /definitions/security/multi-factor-authentication/ 301
+/definitions/cloud/multi-factor-authentication/ /definitions/security/multi-factor-authentication/ 301
+/definitions/cloud/totp /definitions/security/totp/ 301
+/definitions/cloud/totp/ /definitions/security/totp/ 301
+/definitions/cloud/principle-of-least-privilege /definitions/security/principle-of-least-privilege/ 301
+/definitions/cloud/principle-of-least-privilege/ /definitions/security/principle-of-least-privilege/ 301
+/definitions/cloud/traffic-analysis /definitions/security/traffic-analysis/ 301
+/definitions/cloud/traffic-analysis/ /definitions/security/traffic-analysis/ 301
+
+/definitions/cloud/cidr /definitions/networking/cidr/ 301
+/definitions/cloud/cidr/ /definitions/networking/cidr/ 301
+
+/definitions/cloud/generative-ai /definitions/ai/generative-ai/ 301
+/definitions/cloud/generative-ai/ /definitions/ai/generative-ai/ 301
+/definitions/cloud/traditional-ai /definitions/ai/traditional-ai/ 301
+/definitions/cloud/traditional-ai/ /definitions/ai/traditional-ai/ 301
+
+/definitions/cloud/application-integration /definitions/aws/application-integration/ 301
+/definitions/cloud/application-integration/ /definitions/aws/application-integration/ 301
+/definitions/cloud/cloud-adoption-framework /definitions/aws/cloud-adoption-framework/ 301
+/definitions/cloud/cloud-adoption-framework/ /definitions/aws/cloud-adoption-framework/ 301
+/definitions/cloud/consolidated-billing /definitions/aws/consolidated-billing/ 301
+/definitions/cloud/consolidated-billing/ /definitions/aws/consolidated-billing/ 301
+/definitions/cloud/partner-network /definitions/aws/partner-network/ 301
+/definitions/cloud/partner-network/ /definitions/aws/partner-network/ 301
+/definitions/cloud/tenets-of-aws /definitions/aws/tenets-of-aws/ 301
+/definitions/cloud/tenets-of-aws/ /definitions/aws/tenets-of-aws/ 301
+/definitions/cloud/tagging /definitions/aws/tagging/ 301
+/definitions/cloud/tagging/ /definitions/aws/tagging/ 301
+/definitions/cloud/migration-strategies /definitions/aws/migration-strategies/ 301
+/definitions/cloud/migration-strategies/ /definitions/aws/migration-strategies/ 301
+/definitions/cloud/governance-and-compliance /definitions/aws/governance-and-compliance/ 301
+/definitions/cloud/governance-and-compliance/ /definitions/aws/governance-and-compliance/ 301
+/definitions/cloud/operational-excellence-pillars /definitions/aws/operational-excellence-pillars/ 301
+/definitions/cloud/operational-excellence-pillars/ /definitions/aws/operational-excellence-pillars/ 301
+/definitions/cloud/security-pillars /definitions/aws/security-pillars/ 301
+/definitions/cloud/security-pillars/ /definitions/aws/security-pillars/ 301
+/definitions/cloud/reliability-pillars /definitions/aws/reliability-pillars/ 301
+/definitions/cloud/reliability-pillars/ /definitions/aws/reliability-pillars/ 301
+/definitions/cloud/performance-efficiency-pillar /definitions/aws/performance-efficiency-pillar/ 301
+/definitions/cloud/performance-efficiency-pillar/ /definitions/aws/performance-efficiency-pillar/ 301
+/definitions/cloud/cost-optimization-pillar /definitions/aws/cost-optimization-pillar/ 301
+/definitions/cloud/cost-optimization-pillar/ /definitions/aws/cost-optimization-pillar/ 301
+/definitions/cloud/total-cost-of-ownership /definitions/aws/total-cost-of-ownership/ 301
+/definitions/cloud/total-cost-of-ownership/ /definitions/aws/total-cost-of-ownership/ 301
+/definitions/cloud/availability-zones /definitions/aws/availability-zones/ 301
+/definitions/cloud/availability-zones/ /definitions/aws/availability-zones/ 301
+/definitions/cloud/region /definitions/aws/region/ 301
+/definitions/cloud/region/ /definitions/aws/region/ 301
+/definitions/cloud/edge-location /definitions/aws/edge-location/ 301
+/definitions/cloud/edge-location/ /definitions/aws/edge-location/ 301

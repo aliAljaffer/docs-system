@@ -10,3 +10,5 @@ mkdocs.en.yml
 .deployed
 lexers/*.egg-info/
 lexers/build/
+
+.wrangler/

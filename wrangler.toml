@@ -1,0 +1,10 @@
+name = "docs-cf"
+compatibility_date = "2026-11-13"
+
+routes = [
+  { pattern = "docs-cf.alialjaffer.com/*", zone_name = "alialjaffer.com" }
+]
+
+[assets]
+directory = "./site"
+not_found_handling = "404-page"

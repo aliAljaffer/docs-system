@@ -132,6 +132,16 @@ jobs:
           git pull --rebase origin main
           git push origin HEAD:main
 
+      - name: Add Cloudflare headers and redirects
+        run: cp deploy/cloudflare/_headers deploy/cloudflare/_redirects site/
+
+      - name: Deploy to Cloudflare
+        uses: cloudflare/wrangler-action@v4
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: deploy
+
       - run: touch .deployed
 
       - uses: actions/cache/save@v4
