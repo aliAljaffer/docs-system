@@ -1,5 +1,4 @@
 const IMAGE = /\.(?:jpe?g|png|webp)$/i;
-const PREFIX = "docs";
 
 export default {
   async fetch(request, env, ctx) {
@@ -17,7 +16,7 @@ export default {
       if (hit) return hit;
     }
 
-    const object = await env.BUCKET.get(PREFIX + url.pathname);
+    const object = await env.BUCKET.get(url.pathname.slice(1));
     if (!object) return env.ASSETS.fetch(request);
 
     const headers = new Headers();

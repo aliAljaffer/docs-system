@@ -147,7 +147,7 @@ jobs:
             echo "::warning::R2 credentials missing; leaving images in the Worker bundle."
             exit 0
           fi
-          rclone copy site r2:portfolio-assets/docs \
+          rclone copy site r2:docs-assets \
             --include "*.jpg" --include "*.jpeg" --include "*.png" --include "*.webp" \
             --checksum --transfers 16 --checkers 16 --s3-no-check-bucket
           find site -type f \( -name "*.jpg" -o -name "*.jpeg" -o -name "*.png" -o -name "*.webp" \) -delete

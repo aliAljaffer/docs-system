@@ -14,4 +14,4 @@ run_worker_first = ["/*.jpg", "/*.jpeg", "/*.png", "/*.webp"]
 
 [[r2_buckets]]
 binding = "BUCKET"
-bucket_name = "portfolio-assets"
+bucket_name = "docs-assets"
