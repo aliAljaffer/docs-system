@@ -18,6 +18,7 @@ tags:
 | Root master account | Sits at the top of the organization. |
 | Organizational Units (OU) | Groups of AWS accounts that can be nested. |
 | Service Control Policies (SCP) | Act as guardrails for your organization, setting boundaries on what your accounts are able to do. |
+
 ## Organizations vs. SCPs
 Organizations are useful if you have a lot of different users or departments that need access to services. It can enable [[consolidated-billing|consolidated billing]]. Can see details pertaining to account costs. 
 

@@ -88,6 +88,7 @@ markdown_extensions:
       pygments_lang_class: true
   - pymdownx.arithmatex:
       generic: true
+      inline_syntax: [round]
   - pymdownx.tasklist:
       custom_checkbox: true
       clickable_checkbox: true

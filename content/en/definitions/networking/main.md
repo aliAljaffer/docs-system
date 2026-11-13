@@ -23,6 +23,7 @@ This page lists common network and security devices, and the Open Systems Interc
 | 2 | Wireless access point (WAP) | Connects wireless to wired, a bridge. Most common: bridges 802.11 wireless to 802.3 ethernet |
 | 3 | Multilayer switch (MLS) | Can communicate and pass data to non-local network devices. Expensive |
 | 3 | Router | Most common network device. Uses software as opposed to ASIC chip. Can communicate with local and non-local devices. Most cases will have a **router** with less ports than a **switch**. Routes traffic between IP subnets |
+
 ## Security devices
 ### Firewall 
 Can be software based, or it's own device. 
@@ -39,6 +40,7 @@ It is the first line of defense in protecting the internal network from outside 
 | Action on attack | Detection: alarm or alert | Prevention: stops the attack |
 | Traffic path | Receives a copy of all traffic | All traffic must flow through the IPS, by being between the router (with a firewall) and the destination network segment |
 | Evaluation | Signature based, anomaly based, policy based | - |
+
 ### Virtual Private Network (VPN) concentrator
 Layers: 2,3,7.
 ...is used by remote hosts to access a private network through an encrypted tunnel through a public network. Once connected, remote hosts are seen as on-premise hosts.
@@ -50,6 +52,7 @@ Layers: 2,3,7.
 | Site-to-Site VPN | Allows a remote site's network to connect to the main site's network and be seen as a local network segment | - |
 | Host-to-site VPN | Remote access VPN allows select remote users to connect to the local network | Remote system uses VPN client software to make the connection |
 | Host-to-Host VPN | Allows a secure connection between two systems | Not needed |
+
 #### Protocols
 
 | Protocol | Layer | Use |
@@ -59,6 +62,7 @@ Layers: 2,3,7.
 | Point-to-Point Tunneling Protocol (PPTP) | - | Dial up VPN connections |
 | Transport Layer Security (TLS) | >= 5 | Cryptographic protocol used to create a secure encrypted connection between two end devices or applications. Commonly used to create a secure encrypted internet session |
 | Secure Socket Layer (SSL) | - | Older protocol similar to TLS, commonly used in internet transactions |
+
 ## Optimization and performance devices
 ### Load balancer
 content switch/filter.
@@ -83,6 +87,7 @@ A network appliance that is used to load balance between multiple hosts that con
 | Access level | File-level. File must be pulled to machine | Block level |
 | Efficiency | - | Very efficient reading and writing |
 | Bandwidth | - | Requires a lot of bandwidth |
+
 ## Network devices
 ## Access Points
 - Not a wireless router!
@@ -132,6 +137,7 @@ A network appliance that is used to load balance between multiple hosts that con
 | Internet gateway | Allows access over the internet to your application VPC |
 | VPC NAT Gateway | Allows outbound communication to the internet, but not necessarily inbound |
 | VPC Endpoint | Sets up a direct connection between cloud provider networks |
+
 ### Security lists / Access Control Lists
 - Adds inbound/outbound rules that apply to all VPCs
 ### Network security group / Security Group
@@ -158,6 +164,7 @@ Multiplexing, the ability to use many different apps at the same time
 | Delivery         | Reliable, recovery from errors, device confirms data delivery, but **SLOW** | Unreliable, no error recovery no reordering of data**FAST**! |
 | Connection       | Opens and closes connection                                                 | Connectionless, no formal open or close connections          |
 | Flow Control     | The receiver can manage how much data is sent                               | No flow control, sender determines the amount of data sent   |
+
 ### List of Ports
 #### IPv4 Sockets
 - Server IP address, protocol, server application port number
@@ -169,7 +176,7 @@ Multiplexing, the ability to use many different apps at the same time
 - 1024 - 65,535
 #### TCP and UDP
 - 0 - 65,535
-- The two are not the same! TCP 80 $\neq$ UDP 80
+- The two are not the same! TCP 80 ≠ UDP 80
 **Port numbers are for communication, not security!**
 ## Common Ports
 
@@ -200,6 +207,7 @@ Multiplexing, the ability to use many different apps at the same time
 | v1 | Plaintext | The original. Structured tables |
 | v2 | Plaintext | Data type enhancements, bulk transfers |
 | v3 | SECURE | Message integrity, authentication |
+
 ## Other Useful Protocols
 ### Internet Control Message Protocol
 Text messaging for network devices to communicate 

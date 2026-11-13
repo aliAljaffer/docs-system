@@ -11,6 +11,9 @@ tags:
 
 # ec2-ccp
 
+!!! note "About EC2 CCP"
+    EC2 CCP holds EC2 notes for the AWS Certified Cloud Practitioner exam (CLF-C02, also called CCP) only. For the full EC2 notes, see [[compute-ec2|EC2]].
+
 EC2 is the flagship [[aws-compute|AWS compute]] service that allows to launch virtual machines, called instances.
 
 - A VM is an emulation of a physical computer using software
