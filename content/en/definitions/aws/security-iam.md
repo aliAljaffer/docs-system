@@ -45,6 +45,7 @@ IAM-Policy
 | Universal 2nd Factor Security Key (U2F) | YubiKey | - |
 | Hardware Key Fob MFA Device | Gemalto | - |
 | Hardware Key Fob MFA Device **for AWS GovCloud** | SurePassID | - |
+
 ### Access to AWS
 - AWS Management Console (password + MFA)
 - AWS CLI (access keys)

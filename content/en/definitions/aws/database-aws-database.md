@@ -26,6 +26,7 @@ Databases are what makes querying and accessing data easier.
 | **Amazon Aurora** | Relational | Fully managed RDBS service for MySQL and PostgresSQL. Highly available, durable, scalable, and secure. Can be [[serverless]] |
 | **DynamoDB** | Non-Relational | Primarily NoSQL database from AWS, designed to be extremely fast, available, and scalable. Can scale to billions of records with guaranteed consistent data retrieval |
 | **DocumentDB** | Non-Relational | NoSQL document database for MongoDB |
+
 ## Other services
 - [[analytics-redshift|redshift]]
 - **Elasticache**

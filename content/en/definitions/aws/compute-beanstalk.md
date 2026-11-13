@@ -12,6 +12,10 @@ tags:
 # beanstalk
 
 ## SAA
+
+!!! note "About SAA"
+    SAA notes relate only to the AWS Certified Solutions Architect - Associate exam (SAA-C03, also called SAA).
+
 A fully managed service that was built to accommodate a repeating pattern in application development, where an [[aws-saa-c03/03-compute#Elastic Load Balancing|Elastic Load Balancer]] is used on an [[aws-saa-c03/03-compute#Auto Scaling groups|Auto Scaling Group]]. It supports many languages, so you can run pretty much anything on it.
 ### Components of Elastic Beanstalk
 1. Application: Collection of envs, versions, configs

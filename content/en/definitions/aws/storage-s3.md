@@ -11,6 +11,10 @@ tags:
 # s3
 
 ## SAA
+
+!!! note "About SAA"
+    SAA notes relate only to the AWS Certified Solutions Architect - Associate exam (SAA-C03, also called SAA).
+
 Simple storage service. Buckets are used to contain Objects, which are files you upload. Objects have **keys**, these keys are the path to the object in the s3 bucket.
 - Buckets should be all lowercase.
 - Although it might look like a global service, each bucket lives in a single region.
@@ -82,7 +86,9 @@ There are **Free** (28 metrics, 14-day query availability) and **Paid** metrics.
 To force secure transport on HTTPS (for SSE-C): Add a deny action to a role with the condition that `aws:SecureTransport = false`
 **Bucket policies will always be evaluated before "Default Encryption"**
 ### CORS - Cross-Origin Resource Sharing
+
 $$Origin\ =\ scheme\ (protocol)\ +\ host\ (domain)\ +\ port$$
+
 Used when getting resources from a different origin that the one you're on.
 ### MFA Delete
 ![](/assets/vault/pasted-image-20250704152225.webp)
@@ -101,6 +107,7 @@ Prevents an object version from deletion for a specified amount of mode.
 | Compliance Mode | Can't be deleted by ANYONE | No (also can't change mode) | - |
 | Governance | Most users can't delete | Some users have special perms to change the retention or delete | - |
 | Legal Hold | - | - | Indefinite protection of the object. `s3:PutObjectLegalHold` |
+
 ### S3 Access Points
 ![](/assets/vault/pasted-image-20250704160536.webp)
 VPC Origin needs a VPC Endpoint for access to the VPC.

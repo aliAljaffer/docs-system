@@ -23,6 +23,7 @@ Elastic Compute Cloud (EC2) is the AWS service that provides virtual servers, ca
 | **Terminate** | Any [[storage-ebs|ebs]] volumes also set-up to be destroyed are lost | - |
 | **Start** | First start: the OS boots, and the [[ec2-user-data|EC2 User Data]] script is run. Subsequent starts: the OS boots | - |
 | **Hibernate** | In-memory state is preserved. The RAM state is written to a file in the root [[storage-ebs|ebs]] volume | See EC2 Hibernate below |
+
 ### Sizing and Configuration Options
 - OS: Linux, Windows, MacOS
 - CPU 
@@ -38,14 +39,17 @@ Elastic Compute Cloud (EC2) is the AWS service that provides virtual servers, ca
 - Installing updates
 - Installing software
 - Downloading common files
-**EC2 User Data scripts run on ROOT account (**sudo** privileges)**
+
+**EC2 User Data scripts run on ROOT account (sudo privileges)**
 ### Some EC2 Instances
 ![](/assets/vault/pasted-image-20250526204626.webp)
 [ec2 instance types/](https://aws.amazon.com/ec2/instance-types/)
 ### Free Tier
 `t2.micro` up to 750hrs/month. 750 hours per month of public IPv4 address usage, 30 GiB of EBS storage, 2 million I/Os, 1 GB of snapshots, and 100 GB of bandwidth to the internet.
 ### Naming Convention
+
 $$m5.2xlarge$$
+
 - m: instance class
 - 5: generation (improved overtime)
 - 2xlarge: size within the instance class **m**
@@ -57,6 +61,7 @@ $$m5.2xlarge$$
 | Compute-Optimized | Compute-intensive tasks that require a high performance processor: batch processing, media transcoding, high performance web servers, dedicated gaming servers | **C** |
 | Memory-Optimized | Fast performance for workloads that process data sets in memory: high performance DBs, distributed web scale cache stores | **R**, **X**, **Z** |
 | Storage-Optimized | Storage intensive tasks that require high, sequential read and write access to large data sets on local storage: high frequency online transaction processing systems, relational and NoSQL DBs | **I**, **D**, **G**, **H** |
+
 ### Security Groups
 - **ALLOW** rules only
 - Rules can reference by **IP ADDRESS** or other **SECURITY GROUP**
@@ -75,6 +80,7 @@ $$m5.2xlarge$$
 - **Connection refused = application error / not launched**
 ### EC2 Instance Connect
 - Browser-based SSH client to connect to your EC2 instances
+
 **NO AWS API KEYS IN INSTANCES!**
 ### EC2 Instances Purchasing Options
 [[compute-ec2-ccp#pricing models|Pricing models]]
@@ -92,7 +98,9 @@ $$m5.2xlarge$$
 ### EC2 Spot Instance Requests
 - Define a **max spot price** and get the instance while current spot price < max defined
 #### Spot Fleets
+
 $$Spot\ Fleet\ =\ set\ of\ Spot\ instances\ +\ (Optional)\ On-Demand\ Instances$$
+
 Strategies for Spot Fleets:
 
 | Strategy | Best for |
@@ -237,6 +245,7 @@ Make a Backup (snapshot) of your EBS volume at a point in time.
 | Throughput Mode | **Bursting** | 1 TB = 50MiB/s + burst of 100MiB/s |
 | Throughput Mode | **Provisioned** | Set your throughput regardless of storage size |
 | Throughput Mode | **Elastic** | Automatically scale with throughput up/down based on workload |
+
 ##### Storage Classes
 - Implement lifecycle policies to move files between storage tiers (move file after N days)
 - Over 90% in cost savings by using the correct storage class!
@@ -273,5 +282,6 @@ Right click on instance -> Images -> Create Image
 - Risk of data loss if hardware fails
 - Backups and replications are your responsibility
 ### EC2 Instance Profiles
->Think of it as of a single identity that a group of instances can have (e.g. your scalegroup instances share single instance profile, hence a single entity name assuming a role)
+> Think of it as of a single identity that a group of instances can have (e.g. your scalegroup instances share single instance profile, hence a single entity name assuming a role)
+
 ---
