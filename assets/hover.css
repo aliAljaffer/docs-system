@@ -1,24 +1,40 @@
 /* Hover preview and backlinks for the docs system. */
 .preview-card {
   position: fixed;
+  inset: auto;
+  margin: 0;
   z-index: 200;
-  max-width: 420px;
+  width: min(420px, calc(100vw - 2rem));
+  overflow: visible;
   padding: 0.9rem 1rem;
   border: 1px solid var(--md-default-fg-color--lightest);
   border-radius: var(--brand-radius);
   background: var(--md-default-bg-color);
+  color: inherit;
   box-shadow: var(--brand-shadow);
   font-size: 0.72rem;
   line-height: 1.5;
   opacity: 0;
   transform: translateY(4px);
-  transition: opacity 120ms ease, transform 120ms ease;
-  pointer-events: none;
+  transition: opacity 120ms ease, transform 120ms ease, display 120ms allow-discrete, overlay 120ms allow-discrete;
 }
-.preview-card.visible {
+.preview-card:popover-open {
   opacity: 1;
   transform: translateY(0);
-  pointer-events: auto;
+}
+@starting-style {
+  .preview-card:popover-open {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+}
+@supports (anchor-name: --a) {
+  .preview-card {
+    position-anchor: --preview-anchor;
+    position-area: block-end span-inline-end;
+    position-try-fallbacks: flip-block, flip-inline, flip-block flip-inline;
+    margin-block: 0.5rem;
+  }
 }
 .preview-card h3 {
   margin: 0 0 0.35rem;

@@ -1,22 +1,4 @@
 {% if page.url[:9] == 'projects/' and page.meta.comments is not sameas false %}
 <h2 id="__comments">Comments</h2>
-<script>
-  const themes = {{ config.extra.giscus | tojson }};
-  const theme = () => themes[document.body.getAttribute("data-md-color-scheme") === "slate" ? "dark" : "light"];
-  const giscus = document.createElement("script");
-  giscus.src = "https://giscus.app/client.js";
-  giscus.async = true;
-  giscus.crossOrigin = "anonymous";
-  Object.entries({
-    repo: "aliAljaffer/aliAljaffer.github.io", repoId: "R_kgDOIZBWHA",
-    category: "Announcements", categoryId: "DIC_kwDOIZBWHM4DBcZ5",
-    mapping: "pathname", strict: "0", reactionsEnabled: "1",
-    inputPosition: "top", loading: "lazy",
-    lang: "{{ config.theme.language }}", theme: theme(),
-  }).forEach(([k, v]) => giscus.dataset[k] = v);
-  document.currentScript.after(giscus);
-  new MutationObserver(() => document.querySelector("iframe.giscus-frame")?.contentWindow
-    ?.postMessage({ giscus: { setConfig: { theme: theme() } } }, "https://giscus.app"))
-    .observe(document.body, { attributeFilter: ["data-md-color-scheme"] });
-</script>
+<script src="{{ base_url }}/assets/comments.js?v={{ config.extra.asset_version }}" data-themes='{{ config.extra.giscus | tojson }}' data-lang="{{ config.theme.language }}"></script>
 {% endif %}

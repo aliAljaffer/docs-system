@@ -169,6 +169,7 @@ body.show-notes .hidden-notes{display:block}
 .animate-stagger>*:nth-child(2){animation-delay:.12s}
 .animate-stagger>*:nth-child(3){animation-delay:.19s}
 .animate-stagger>*:nth-child(4){animation-delay:.26s}
+@supports (animation-delay:calc(sibling-index() * 1s)){.animate-stagger>*{animation-delay:calc(.05s + (sibling-index() - 1) * .07s)}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
@@ -177,25 +178,25 @@ body.show-notes .hidden-notes{display:block}
 <div class="progress-track"><div class="progress-bar" id="progressBar"></div></div>
 <div class="slide-deck">
 <section class="slide active">
-<div class="dabs" aria-hidden="true"><i style="left:-4%;top:-8%;width:560px;height:360px;background:var(--wash-a)"></i><i style="right:-2%;top:4%;width:420px;height:340px;background:var(--wash-b)"></i><i style="left:36%;bottom:-12%;width:520px;height:320px;background:var(--wash-c)"></i></div>
-<div style="position:absolute;top:18px;left:20px;right:20px;display:flex;justify-content:space-between;align-items:center"><span class="time">00:00 · Ep 10</span><span class="badge" id="paletteBadge">Plein Air · Garden Hour</span></div>
+<div class="dabs" aria-hidden="true"><i class="dab-4"></i><i class="dab-2"></i><i class="dab-3"></i></div>
+<div class="topbar"><span class="time">00:00 · Ep 10</span><span class="badge" id="paletteBadge">Plein Air · Garden Hour</span></div>
 <div class="slide-content">
 <p class="eyebrow animate-fade-up">Minikube Project · Ep 10</p>
 <h1 class="slide-title">Now in <em>the Cloud</em></h1>
 <p class="slide-subtitle">A cloud VM is the same as your Multipass VM. Someone else owns the hardware.</p>
 <div class="meta-row"><div class="item"><b>26 to 31</b><span>minutes</span></div><div class="item"><b>Theory</b><span>first</span></div><div class="item"><b>Apply</b><span>in docs</span></div></div>
 <p class="hidden-notes note"><strong>Speaker cue:</strong> Title only. Promise theory first. Hands-on steps live in the apply doc named at the end, not on screen.</p>
-<span class="complement-dot" style="right:12%;bottom:22%;width:14px;height:14px" aria-hidden="true"></span>
+<span class="complement-dot dot-sm" aria-hidden="true"></span>
 </div>
 </section>
-<section class="slide"><div style="position:absolute;top:18px;left:20px;right:20px;display:flex;justify-content:space-between;align-items:center"><span class="time">00:00 · Hook</span><span class="badge">Start here</span></div><div class="slide-content">
+<section class="slide"><div class="topbar"><span class="time">00:00 · Hook</span><span class="badge">Start here</span></div><div class="slide-content">
 <p class="eyebrow">Start here</p>
 <h2 class="slide-heading">Same VM. Different owner.</h2>
 <ul class="bullets animate-stagger"><li><strong>The VM is the same model.</strong> <span>Someone else owns the hardware.</span></li><li><strong>Code creates it.</strong> <span>Plan, apply, and destroy describe the change.</span></li><li><strong>Cost comes first.</strong> <span>A budget alert precedes any resource.</span></li></ul>
 <p class="hidden-notes note"><strong>Speaker cue:</strong> Keep this short. Promise ideas, not steps. The doc at the end holds the steps.</p>
 </div>
 </section>
-<section class="slide"><div style="position:absolute;top:18px;left:20px;right:20px;display:flex;justify-content:space-between;align-items:center"><span class="time">01:00 · Goals</span><span class="badge">Learn</span></div><div class="slide-content">
+<section class="slide"><div class="topbar"><span class="time">01:00 · Goals</span><span class="badge">Learn</span></div><div class="slide-content">
 <p class="eyebrow">What you will learn</p>
 <h2 class="slide-heading">What you will learn</h2>
 <div class="grid-2"><div class="panel"><h3>Learning goals</h3><ul><li>Budget alert before any resource</li><li>Describe VM and firewall in Terraform</li><li>Run plan, apply, destroy</li><li>Reuse Ansible on cloud VM</li><li>Know limits, LB, proxy and CDN</li></ul></div><div class="panel"><h3>Prerequisites</h3><ul><li>Episode 9 done</li><li>Google Cloud free trial</li><li>Read costs and free options doc</li></ul></div></div>
@@ -203,28 +204,28 @@ body.show-notes .hidden-notes{display:block}
 </div>
 </section>
 
-<section class="slide"><div style="position:absolute;top:18px;left:20px;right:20px;display:flex;justify-content:space-between;align-items:center"><span class="time">01:00 · Concepts</span><span class="badge">Definitions</span></div><div class="slide-content">
+<section class="slide"><div class="topbar"><span class="time">01:00 · Concepts</span><span class="badge">Definitions</span></div><div class="slide-content">
 <p class="eyebrow">Theory</p>
 <h2 class="slide-heading">Plan. Apply. Destroy.</h2>
-<table class="ep-table animate-fade-up"><tr><th>Term</th><th>Meaning</th></tr><tr><td>Infrastructure as code</td><td>Desired state in files. Tools reconcile reality.</td></tr><tr><td>Plan</td><td>Shows what would change before it changes.</td></tr><tr><td>Apply and destroy</td><td>Make the change, then remove it.</td></tr><tr><td>State file</td><td>The record of what the tool created.</td></tr><tr><td>Budget alert</td><td>Mail when spend passes a limit. It does not stop spend.</td></tr><tr><td>Load balancer</td><td>Spreads traffic across many servers.</td></tr><tr><td>Reverse proxy and CDN</td><td>Proxy forwards requests. CDN serves nearby copies.</td></tr></table>
+<table class="ep-table animate-fade-up"><tr><th scope="col">Term</th><th scope="col">Meaning</th></tr><tr><td>Infrastructure as code</td><td>Desired state in files. Tools reconcile reality.</td></tr><tr><td>Plan</td><td>Shows what would change before it changes.</td></tr><tr><td>Apply and destroy</td><td>Make the change, then remove it.</td></tr><tr><td>State file</td><td>The record of what the tool created.</td></tr><tr><td>Budget alert</td><td>Mail when spend passes a limit. It does not stop spend.</td></tr><tr><td>Load balancer</td><td>Spreads traffic across many servers.</td></tr><tr><td>Reverse proxy and CDN</td><td>Proxy forwards requests. CDN serves nearby copies.</td></tr></table>
 <p class="hidden-notes note"><strong>Speaker cue:</strong> Read across once. Definitions first. No commands on screen.</p>
 </div>
 </section>
-<section class="slide"><div style="position:absolute;top:18px;left:20px;right:20px;display:flex;justify-content:space-between;align-items:center"><span class="time">02:30 · Why It Matters</span><span class="badge">Decisions</span></div><div class="slide-content">
+<section class="slide"><div class="topbar"><span class="time">02:30 · Why It Matters</span><span class="badge">Decisions</span></div><div class="slide-content">
 <p class="eyebrow">Why it matters</p>
 <h2 class="slide-heading">Why code reviews infrastructure.</h2>
 <ul class="bullets animate-stagger"><li><strong>Reviewable infrastructure.</strong> <span>Plan review resembles code review.</span></li><li><strong>Cost control is part of the job.</strong> <span>Unused resources are waste.</span></li><li><strong>Destroy proves cleanup.</strong> <span>An empty billing page closes the act.</span></li></ul>
 <p class="hidden-notes note"><strong>Speaker cue:</strong> Decisions plus reasons. This is the slide to quote in review.</p>
 </div>
 </section>
-<section class="slide"><div style="position:absolute;top:18px;left:20px;right:20px;display:flex;justify-content:space-between;align-items:center"><span class="time">04:00 · Diagram</span><span class="badge">How it fits</span></div><div class="slide-content">
+<section class="slide"><div class="topbar"><span class="time">04:00 · Diagram</span><span class="badge">How it fits</span></div><div class="slide-content">
 <p class="eyebrow">Diagram</p>
 <h2 class="slide-heading">One VM exposes its limits.</h2>
 <div class="arch animate-stagger"><div class="arch-box"><h4>Users</h4><p>Traffic arrives at one address.</p></div><div class="arrow">→</div><div class="arch-box"><h4>One VM</h4><p>Single point of failure. Manual scale.</p></div><div class="arrow">→</div><div class="arch-box"><h4>Beyond one VM</h4><p>Load balancer, proxy, and CDN share load.</p></div></div>
 <p class="hidden-notes note"><strong>Speaker cue:</strong> Walk the arrows left to right. Each box is one layer. No commands needed.</p>
 </div>
 </section>
-<section class="slide"><div style="position:absolute;top:18px;left:20px;right:20px;display:flex;justify-content:space-between;align-items:center"><span class="time">06:00 · Limits</span><span class="badge">Watch out</span></div><div class="slide-content">
+<section class="slide"><div class="topbar"><span class="time">06:00 · Limits</span><span class="badge">Watch out</span></div><div class="slide-content">
 <p class="eyebrow">Limits and tradeoffs</p>
 <h2 class="slide-heading">One VM. Alert warning limits.</h2>
 <ul class="bullets animate-stagger"><li><strong>One point of failure.</strong> <span>If the VM fails, the app is down.</span></li><li><strong>Manual scale and updates.</strong> <span>Resize and each update need a playbook run.</span></li><li><strong>Manual rollbacks.</strong> <span>Recovery is a procedure, not a promise.</span></li><li><strong>Alerts do not cap spend.</strong> <span>Destroy is still the stop button.</span></li></ul>
@@ -232,22 +233,22 @@ body.show-notes .hidden-notes{display:block}
 <p class="hidden-notes note"><strong>Speaker cue:</strong> Name the failure mode before the fix. The doc holds the fix steps.</p>
 </div>
 </section>
-<section class="slide"><div style="position:absolute;top:18px;left:20px;right:20px;display:flex;justify-content:space-between;align-items:center"><span class="time">07:00 · Insight</span><span class="badge">Work</span></div><div class="slide-content">
+<section class="slide"><div class="topbar"><span class="time">07:00 · Insight</span><span class="badge">Work</span></div><div class="slide-content">
 <p class="eyebrow">Work insight</p>
 <h2 class="slide-heading">Work insight and what bites</h2>
-<div class="grid-2"><div class="panel"><h3>Role focus</h3><p style="font-size:15px;line-height:1.6;color:var(--ink-soft)">Focus: Cloud Engineer. Cloud Engineer view for this episode.</p></div><div class="panel"><h3>What bites</h3><ul><li>Budget alert first, destroy last</li><li>Never commit tfvars or state files</li><li>Open SSH to your IP only</li></ul></div></div>
+<div class="grid-2"><div class="panel"><h3>Role focus</h3><p class="text-15">Focus: Cloud Engineer. Cloud Engineer view for this episode.</p></div><div class="panel"><h3>What bites</h3><ul><li>Budget alert first, destroy last</li><li>Never commit tfvars or state files</li><li>Open SSH to your IP only</li></ul></div></div>
 <div class="note"><strong>Decision rule.</strong> Cost control is part of the job.</div>
 <p class="hidden-notes note"><strong>Speaker cue:</strong> State the decision rule exactly. Name what bites before Apply.</p>
 </div>
 </section>
-<section class="slide"><div style="position:absolute;top:18px;left:20px;right:20px;display:flex;justify-content:space-between;align-items:center"><span class="time">07:30 · Apply</span><span class="badge">Four-hats docs</span></div><div class="slide-content">
+<section class="slide"><div class="topbar"><span class="time">07:30 · Apply</span><span class="badge">Four-hats docs</span></div><div class="slide-content">
 <p class="eyebrow">Apply in hands-on time</p>
 <h2 class="slide-heading">Apply in four-hats docs</h2>
-<div class="grid-2"><div class="panel"><h3>docs/act2-cloud-engineer.md, Episode 10 and docs/costs-and-free-options.md</h3><ul><li><strong>Spend guardrails.</strong> Budget alert before project resources.</li><li><strong>Terraform flow.</strong> Init, validate, plan, apply, then reuse the Ansible playbook.</li><li><strong>Cleanup.</strong> Destroy, billing check, no running resources.</li></ul></div><div class="panel"><h3>How to use it</h3><p style="font-size:15px;line-height:1.6;color:var(--ink-soft)">See act2 Episode 10, steps 1 to 12 for apply. Tool names: gcloud auth, terraform init, validate, plan, apply, destroy.</p><p style="font-size:14px;line-height:1.6;color:var(--ink-soft);margin-top:8px">Theory stays on screen. Commands live in the doc. Work there, not here.</p></div></div>
+<div class="grid-2"><div class="panel"><h3>docs/act2-cloud-engineer.md, Episode 10 and docs/costs-and-free-options.md</h3><ul><li><strong>Spend guardrails.</strong> Budget alert before project resources.</li><li><strong>Terraform flow.</strong> Init, validate, plan, apply, then reuse the Ansible playbook.</li><li><strong>Cleanup.</strong> Destroy, billing check, no running resources.</li></ul></div><div class="panel"><h3>How to use it</h3><p class="text-15">See act2 Episode 10, steps 1 to 12 for apply. Tool names: gcloud auth, terraform init, validate, plan, apply, destroy.</p><p class="text-14">Theory stays on screen. Commands live in the doc. Work there, not here.</p></div></div>
 <p class="hidden-notes note"><strong>Speaker cue:</strong> Point to the doc path. Say what it covers in one breath. Remind them tool names only appear here as captions.</p>
 </div>
 </section>
-<section class="slide"><div style="position:absolute;top:18px;left:20px;right:20px;display:flex;justify-content:space-between;align-items:center"><span class="time">08:30 · Ledger</span><span class="badge">CV</span></div><div class="slide-content">
+<section class="slide"><div class="topbar"><span class="time">08:30 · Ledger</span><span class="badge">CV</span></div><div class="slide-content">
 <p class="eyebrow">CV skills ledger hint</p>
 <h2 class="slide-heading">Four ledger rows earned.</h2>
 <ul class="bullets animate-stagger"><li><strong>Terraform, Google Cloud, cost control, load balancer and proxy and CDN concepts.</strong> <span>VM plus firewall plus destroy are the proofs.</span></li></ul>
@@ -256,21 +257,21 @@ body.show-notes .hidden-notes{display:block}
 </div>
 </section>
 <section class="slide">
-<div class="dabs" aria-hidden="true"><i style="left:-4%;bottom:-10%;width:560px;height:360px;background:var(--wash-b)"></i><i style="right:-2%;top:6%;width:420px;height:320px;background:var(--wash-a)"></i></div>
-<div style="position:absolute;top:18px;left:20px;right:20px;display:flex;justify-content:space-between;align-items:center"><span class="time">Outro · Next</span><span class="badge">See you there</span></div>
+<div class="dabs" aria-hidden="true"><i class="dab-5"></i><i class="dab-1"></i></div>
+<div class="topbar"><span class="time">Outro · Next</span><span class="badge">See you there</span></div>
 <div class="slide-content">
 <p class="eyebrow animate-fade-up">Next episode</p>
 <h1 class="slide-title">You know <em>the idea.</em></h1>
 <p class="slide-subtitle">Theory first. Apply in the doc. Then next episode.</p>
-<div class="panel" style="max-width:760px"><h3>Next: Ep 11 Hello, Kubernetes</h3><p style="color:var(--ink-soft);line-height:1.6;font-size:15px">Delete the Multipass VM. Minikube needs the memory. Start Pods and Deployments.</p></div>
+<div class="panel max-760"><h3>Next: Ep 11 Hello, Kubernetes</h3><p class="text-15">Delete the Multipass VM. Minikube needs the memory. Start Pods and Deployments.</p></div>
 </div>
 </section>
 </div>
 <div class="switcher" id="switcher"></div>
 <div class="nav-controls">
-<button class="nav-btn" onclick="prevSlide()" aria-label="Previous">←</button>
+<button class="nav-btn" id="prevBtn" aria-label="Previous">←</button>
 <span class="slide-counter"><span id="current">1</span> / <span id="total">14</span></span>
-<button class="nav-btn" onclick="nextSlide()" aria-label="Next">→</button>
+<button class="nav-btn" id="nextBtn" aria-label="Next">→</button>
 </div>
 <script>
 const PALETTES=[
@@ -316,6 +317,8 @@ function showSlide(n){
 }
 window.nextSlide=function(){showSlide(current+1)};
 window.prevSlide=function(){showSlide(current-1)};
+document.getElementById("prevBtn").addEventListener("click",prevSlide);
+document.getElementById("nextBtn").addEventListener("click",nextSlide);
 document.addEventListener("keydown",function(e){
   if(e.key==="ArrowRight"||e.key===" "){e.preventDefault();nextSlide()}
   if(e.key==="ArrowLeft"){e.preventDefault();prevSlide()}

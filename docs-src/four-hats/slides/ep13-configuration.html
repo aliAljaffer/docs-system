@@ -169,6 +169,7 @@ body.show-notes .hidden-notes{display:block}
 .animate-stagger>*:nth-child(2){animation-delay:.12s}
 .animate-stagger>*:nth-child(3){animation-delay:.19s}
 .animate-stagger>*:nth-child(4){animation-delay:.26s}
+@supports (animation-delay:calc(sibling-index() * 1s)){.animate-stagger>*{animation-delay:calc(.05s + (sibling-index() - 1) * .07s)}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
@@ -177,25 +178,25 @@ body.show-notes .hidden-notes{display:block}
 <div class="progress-track"><div class="progress-bar" id="progressBar"></div></div>
 <div class="slide-deck">
 <section class="slide active">
-<div class="dabs" aria-hidden="true"><i style="left:-4%;top:-8%;width:560px;height:360px;background:var(--wash-a)"></i><i style="right:-2%;top:4%;width:420px;height:340px;background:var(--wash-b)"></i><i style="left:36%;bottom:-12%;width:520px;height:320px;background:var(--wash-c)"></i></div>
-<div style="position:absolute;top:18px;left:20px;right:20px;display:flex;justify-content:space-between;align-items:center"><span class="time">00:00 · Ep 13</span><span class="badge" id="paletteBadge">Plein Air · Garden Hour</span></div>
+<div class="dabs" aria-hidden="true"><i class="dab-4"></i><i class="dab-2"></i><i class="dab-3"></i></div>
+<div class="topbar"><span class="time">00:00 · Ep 13</span><span class="badge" id="paletteBadge">Plein Air · Garden Hour</span></div>
 <div class="slide-content">
 <p class="eyebrow animate-fade-up">Minikube Project · Ep 13</p>
 <h1 class="slide-title">Config<em>uration</em></h1>
 <p class="slide-subtitle">The same image must run everywhere. Only the configuration changes.</p>
 <div class="meta-row"><div class="item"><b>15 to 20</b><span>minutes</span></div><div class="item"><b>Theory</b><span>first</span></div><div class="item"><b>Apply</b><span>in docs</span></div></div>
 <p class="hidden-notes note"><strong>Speaker cue:</strong> Title only. Promise theory first. Hands-on steps live in the apply doc named at the end, not on screen.</p>
-<span class="complement-dot" style="right:12%;bottom:22%;width:14px;height:14px" aria-hidden="true"></span>
+<span class="complement-dot dot-sm" aria-hidden="true"></span>
 </div>
 </section>
-<section class="slide"><div style="position:absolute;top:18px;left:20px;right:20px;display:flex;justify-content:space-between;align-items:center"><span class="time">00:00 · Hook</span><span class="badge">Start here</span></div><div class="slide-content">
+<section class="slide"><div class="topbar"><span class="time">00:00 · Hook</span><span class="badge">Start here</span></div><div class="slide-content">
 <p class="eyebrow">Start here</p>
 <h2 class="slide-heading">One image. Many environments.</h2>
 <ul class="bullets animate-stagger"><li><strong>The same image runs everywhere.</strong> <span>Only configuration changes.</span></li><li><strong>Plain settings and secrets differ.</strong> <span>One holds values. One holds credentials.</span></li><li><strong>Separation is the lesson.</strong> <span>Theory of config comes before wiring.</span></li></ul>
 <p class="hidden-notes note"><strong>Speaker cue:</strong> Keep this short. Promise ideas, not steps. The doc at the end holds the steps.</p>
 </div>
 </section>
-<section class="slide"><div style="position:absolute;top:18px;left:20px;right:20px;display:flex;justify-content:space-between;align-items:center"><span class="time">01:00 · Goals</span><span class="badge">Learn</span></div><div class="slide-content">
+<section class="slide"><div class="topbar"><span class="time">01:00 · Goals</span><span class="badge">Learn</span></div><div class="slide-content">
 <p class="eyebrow">What you will learn</p>
 <h2 class="slide-heading">What you will learn</h2>
 <div class="grid-2"><div class="panel"><h3>Learning goals</h3><ul><li>Move settings to a ConfigMap</li><li>Create Secrets from command line</li><li>Show base64 is not encryption</li><li>Keep Secrets out of Git</li></ul></div><div class="panel"><h3>Prerequisites</h3><ul><li>Episode 12 done</li></ul></div></div>
@@ -203,28 +204,28 @@ body.show-notes .hidden-notes{display:block}
 </div>
 </section>
 
-<section class="slide"><div style="position:absolute;top:18px;left:20px;right:20px;display:flex;justify-content:space-between;align-items:center"><span class="time">01:00 · Concepts</span><span class="badge">Definitions</span></div><div class="slide-content">
+<section class="slide"><div class="topbar"><span class="time">01:00 · Concepts</span><span class="badge">Definitions</span></div><div class="slide-content">
 <p class="eyebrow">Theory</p>
 <h2 class="slide-heading">ConfigMaps. Secrets. Encoding.</h2>
-<table class="ep-table animate-fade-up"><tr><th>Term</th><th>Meaning</th></tr><tr><td>ConfigMap</td><td>Plain settings such as host and port.</td></tr><tr><td>Secret</td><td>Credentials such as a database password.</td></tr><tr><td>envFrom</td><td>Loads every key from a ConfigMap.</td></tr><tr><td>configMapKeyRef</td><td>Loads one key from a ConfigMap.</td></tr><tr><td>secretKeyRef</td><td>Loads one key from a Secret.</td></tr><tr><td>Base64</td><td>An encoding. It is not encryption.</td></tr></table>
+<table class="ep-table animate-fade-up"><tr><th scope="col">Term</th><th scope="col">Meaning</th></tr><tr><td>ConfigMap</td><td>Plain settings such as host and port.</td></tr><tr><td>Secret</td><td>Credentials such as a database password.</td></tr><tr><td>envFrom</td><td>Loads every key from a ConfigMap.</td></tr><tr><td>configMapKeyRef</td><td>Loads one key from a ConfigMap.</td></tr><tr><td>secretKeyRef</td><td>Loads one key from a Secret.</td></tr><tr><td>Base64</td><td>An encoding. It is not encryption.</td></tr></table>
 <p class="hidden-notes note"><strong>Speaker cue:</strong> Read across once. Definitions first. No commands on screen.</p>
 </div>
 </section>
-<section class="slide"><div style="position:absolute;top:18px;left:20px;right:20px;display:flex;justify-content:space-between;align-items:center"><span class="time">02:30 · Why It Matters</span><span class="badge">Decisions</span></div><div class="slide-content">
+<section class="slide"><div class="topbar"><span class="time">02:30 · Why It Matters</span><span class="badge">Decisions</span></div><div class="slide-content">
 <p class="eyebrow">Why it matters</p>
 <h2 class="slide-heading">Why images stay portable.</h2>
 <ul class="bullets animate-stagger"><li><strong>Images stay portable.</strong> <span>Environments differ by config, not rebuilds.</span></li><li><strong>Secrets stay out of Git history.</strong> <span>A pushed password persists after deletion.</span></li><li><strong>Scope limits damage.</strong> <span>Read access to a Secret reads the password.</span></li></ul>
 <p class="hidden-notes note"><strong>Speaker cue:</strong> Decisions plus reasons. This is the slide to quote in review.</p>
 </div>
 </section>
-<section class="slide"><div style="position:absolute;top:18px;left:20px;right:20px;display:flex;justify-content:space-between;align-items:center"><span class="time">04:00 · Diagram</span><span class="badge">How it fits</span></div><div class="slide-content">
+<section class="slide"><div class="topbar"><span class="time">04:00 · Diagram</span><span class="badge">How it fits</span></div><div class="slide-content">
 <p class="eyebrow">Diagram</p>
 <h2 class="slide-heading">Settings and secrets enter by reference.</h2>
 <div class="arch animate-stagger"><div class="arch-box"><h4>ConfigMap</h4><p>DB_HOST, DB_PORT, DB_NAME.</p></div><div class="arrow">→</div><div class="arch-box"><h4>Secret</h4><p>DB_USER and DB_PASSWORD.</p></div><div class="arrow">→</div><div class="arch-box"><h4>Backend</h4><p>Environment values wire both in.</p></div></div>
 <p class="hidden-notes note"><strong>Speaker cue:</strong> Walk the arrows left to right. Each box is one layer. No commands needed.</p>
 </div>
 </section>
-<section class="slide"><div style="position:absolute;top:18px;left:20px;right:20px;display:flex;justify-content:space-between;align-items:center"><span class="time">06:00 · Limits</span><span class="badge">Watch out</span></div><div class="slide-content">
+<section class="slide"><div class="topbar"><span class="time">06:00 · Limits</span><span class="badge">Watch out</span></div><div class="slide-content">
 <p class="eyebrow">Limits and tradeoffs</p>
 <h2 class="slide-heading">Decodable secrets. Restart gap.</h2>
 <ul class="bullets animate-stagger"><li><strong>Base64 decodes openly.</strong> <span>Anyone with the file reads the value.</span></li><li><strong>Unencrypted by default.</strong> <span>Real clusters add encryption at rest and access rules.</span></li><li><strong>Config changes need restarts.</strong> <span>Running Pods do not re-read automatically.</span></li><li><strong>Wrong namespace breaks pods.</strong> <span>The Secret must live with the workload.</span></li></ul>
@@ -232,22 +233,22 @@ body.show-notes .hidden-notes{display:block}
 <p class="hidden-notes note"><strong>Speaker cue:</strong> Name the failure mode before the fix. The doc holds the fix steps.</p>
 </div>
 </section>
-<section class="slide"><div style="position:absolute;top:18px;left:20px;right:20px;display:flex;justify-content:space-between;align-items:center"><span class="time">07:00 · Insight</span><span class="badge">Work</span></div><div class="slide-content">
+<section class="slide"><div class="topbar"><span class="time">07:00 · Insight</span><span class="badge">Work</span></div><div class="slide-content">
 <p class="eyebrow">Work insight</p>
 <h2 class="slide-heading">Work insight and what bites</h2>
-<div class="grid-2"><div class="panel"><h3>Role focus</h3><p style="font-size:15px;line-height:1.6;color:var(--ink-soft)">Focus: Platform Engineer. Platform Engineer view for this episode.</p></div><div class="panel"><h3>What bites</h3><ul><li>Never commit Secrets with real values</li><li>Match Secret namespace to the Pod</li><li>Restart Deployments to reload ConfigMaps</li></ul></div></div>
+<div class="grid-2"><div class="panel"><h3>Role focus</h3><p class="text-15">Focus: Platform Engineer. Platform Engineer view for this episode.</p></div><div class="panel"><h3>What bites</h3><ul><li>Never commit Secrets with real values</li><li>Match Secret namespace to the Pod</li><li>Restart Deployments to reload ConfigMaps</li></ul></div></div>
 <div class="note"><strong>Decision rule.</strong> Rotating a leaked secret is expensive.</div>
 <p class="hidden-notes note"><strong>Speaker cue:</strong> State the decision rule exactly. Name what bites before Apply.</p>
 </div>
 </section>
-<section class="slide"><div style="position:absolute;top:18px;left:20px;right:20px;display:flex;justify-content:space-between;align-items:center"><span class="time">07:30 · Apply</span><span class="badge">Four-hats docs</span></div><div class="slide-content">
+<section class="slide"><div class="topbar"><span class="time">07:30 · Apply</span><span class="badge">Four-hats docs</span></div><div class="slide-content">
 <p class="eyebrow">Apply in hands-on time</p>
 <h2 class="slide-heading">Apply in four-hats docs</h2>
-<div class="grid-2"><div class="panel"><h3>docs/act3-devops-engineer.md, Episodes 11 to 15, manifests table</h3><ul><li><strong>ConfigMap.</strong> 01-configmap.yaml with database settings.</li><li><strong>Secret.</strong> app-db created outside Git from literals.</li><li><strong>Wiring.</strong> envFrom plus secretKeyRef, then a restart check.</li></ul></div><div class="panel"><h3>How to use it</h3><p style="font-size:15px;line-height:1.6;color:var(--ink-soft)">See act3 Episodes 13 for apply. Tool names: kubectl create secret, kubectl apply.</p><p style="font-size:14px;line-height:1.6;color:var(--ink-soft);margin-top:8px">Theory stays on screen. Commands live in the doc. Work there, not here.</p></div></div>
+<div class="grid-2"><div class="panel"><h3>docs/act3-devops-engineer.md, Episodes 11 to 15, manifests table</h3><ul><li><strong>ConfigMap.</strong> 01-configmap.yaml with database settings.</li><li><strong>Secret.</strong> app-db created outside Git from literals.</li><li><strong>Wiring.</strong> envFrom plus secretKeyRef, then a restart check.</li></ul></div><div class="panel"><h3>How to use it</h3><p class="text-15">See act3 Episodes 13 for apply. Tool names: kubectl create secret, kubectl apply.</p><p class="text-14">Theory stays on screen. Commands live in the doc. Work there, not here.</p></div></div>
 <p class="hidden-notes note"><strong>Speaker cue:</strong> Point to the doc path. Say what it covers in one breath. Remind them tool names only appear here as captions.</p>
 </div>
 </section>
-<section class="slide"><div style="position:absolute;top:18px;left:20px;right:20px;display:flex;justify-content:space-between;align-items:center"><span class="time">08:30 · Ledger</span><span class="badge">CV</span></div><div class="slide-content">
+<section class="slide"><div class="topbar"><span class="time">08:30 · Ledger</span><span class="badge">CV</span></div><div class="slide-content">
 <p class="eyebrow">CV skills ledger hint</p>
 <h2 class="slide-heading">One ledger row earned.</h2>
 <ul class="bullets animate-stagger"><li><strong>ConfigMaps and Secrets. Separated settings and credentials from images.</strong> <span>Secret created outside Git is the proof.</span></li></ul>
@@ -256,21 +257,21 @@ body.show-notes .hidden-notes{display:block}
 </div>
 </section>
 <section class="slide">
-<div class="dabs" aria-hidden="true"><i style="left:-4%;bottom:-10%;width:560px;height:360px;background:var(--wash-b)"></i><i style="right:-2%;top:6%;width:420px;height:320px;background:var(--wash-a)"></i></div>
-<div style="position:absolute;top:18px;left:20px;right:20px;display:flex;justify-content:space-between;align-items:center"><span class="time">Outro · Next</span><span class="badge">See you there</span></div>
+<div class="dabs" aria-hidden="true"><i class="dab-5"></i><i class="dab-1"></i></div>
+<div class="topbar"><span class="time">Outro · Next</span><span class="badge">See you there</span></div>
 <div class="slide-content">
 <p class="eyebrow animate-fade-up">Next episode</p>
 <h1 class="slide-title">You know <em>the idea.</em></h1>
 <p class="slide-subtitle">Theory first. Apply in the doc. Then next episode.</p>
-<div class="panel" style="max-width:760px"><h3>Next: Ep 14 State</h3><p style="color:var(--ink-soft);line-height:1.6;font-size:15px">A database must keep its files. Today you give PostgreSQL a disk.</p></div>
+<div class="panel max-760"><h3>Next: Ep 14 State</h3><p class="text-15">A database must keep its files. Today you give PostgreSQL a disk.</p></div>
 </div>
 </section>
 </div>
 <div class="switcher" id="switcher"></div>
 <div class="nav-controls">
-<button class="nav-btn" onclick="prevSlide()" aria-label="Previous">←</button>
+<button class="nav-btn" id="prevBtn" aria-label="Previous">←</button>
 <span class="slide-counter"><span id="current">1</span> / <span id="total">14</span></span>
-<button class="nav-btn" onclick="nextSlide()" aria-label="Next">→</button>
+<button class="nav-btn" id="nextBtn" aria-label="Next">→</button>
 </div>
 <script>
 const PALETTES=[
@@ -316,6 +317,8 @@ function showSlide(n){
 }
 window.nextSlide=function(){showSlide(current+1)};
 window.prevSlide=function(){showSlide(current-1)};
+document.getElementById("prevBtn").addEventListener("click",prevSlide);
+document.getElementById("nextBtn").addEventListener("click",nextSlide);
 document.addEventListener("keydown",function(e){
   if(e.key==="ArrowRight"||e.key===" "){e.preventDefault();nextSlide()}
   if(e.key==="ArrowLeft"){e.preventDefault();prevSlide()}

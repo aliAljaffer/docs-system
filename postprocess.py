@@ -22,10 +22,12 @@ DIAGRAM_TOOLS = (
 )
 
 
-def diagram_shell(img: re.Match[str]) -> str:
+def diagram_shell(img: re.Match[str], first: bool = False) -> str:
+    attrs = ' decoding="async"' if first else ' decoding="async" loading="lazy"'
+    tag = re.sub(r"\s*/?>$", lambda end: attrs + end.group(0), img.group(0))
     return (
         '<div class="diagram-zoom"><div class="diagram-viewport"><div class="diagram-canvas">'
-        f"{img.group(0)}"
+        f"{tag}"
         f'</div></div><div class="diagram-tools">{DIAGRAM_TOOLS}</div>'
         '<span class="diagram-hint">Drag to pan. Scroll or pinch to zoom.</span></div>'
     )
@@ -50,7 +52,9 @@ def backlinks_box(entries: list[dict[str, str]]) -> str:
 
 def enhance(page_html: str, url: str, backlinks: dict[str, list[dict[str, str]]]) -> str:
     def article(match: re.Match[str]) -> str:
-        body = SVG_IMG.sub(diagram_shell, match.group(2))
+        # The first diagram can be the LCP image, so it stays eager.
+        diagrams = []
+        body = SVG_IMG.sub(lambda img: diagram_shell(img, first=not diagrams.append(1) and len(diagrams) == 1), match.group(2))
         body = CODE_BLOCK.sub(code_label, body)
         if backlinks.get(url):
             body += backlinks_box(backlinks[url])
