@@ -1,5 +1,6 @@
 name = "docs-cf"
 compatibility_date = "2026-11-13"
+main = "worker/index.js"
 
 routes = [
   { pattern = "docs-cf.alialjaffer.com/*", zone_name = "alialjaffer.com" }
@@ -7,4 +8,10 @@ routes = [
 
 [assets]
 directory = "./site"
+binding = "ASSETS"
 not_found_handling = "404-page"
+run_worker_first = ["/*.jpg", "/*.jpeg", "/*.png", "/*.webp"]
+
+[[r2_buckets]]
+binding = "BUCKET"
+bucket_name = "portfolio-assets"

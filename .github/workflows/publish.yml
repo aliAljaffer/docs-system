@@ -132,6 +132,26 @@ jobs:
           git pull --rebase origin main
           git push origin HEAD:main
 
+      - name: Install rclone
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq rclone
+
+      - name: Sync images to R2 and trim the Worker bundle
+        env:
+          RCLONE_CONFIG_R2_TYPE: s3
+          RCLONE_CONFIG_R2_PROVIDER: Cloudflare
+          RCLONE_CONFIG_R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          RCLONE_CONFIG_R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          RCLONE_CONFIG_R2_ENDPOINT: https://${{ secrets.CLOUDFLARE_ACCOUNT_ID }}.r2.cloudflarestorage.com
+        run: |
+          if [ -z "${RCLONE_CONFIG_R2_ACCESS_KEY_ID:-}" ]; then
+            echo "::warning::R2 credentials missing; leaving images in the Worker bundle."
+            exit 0
+          fi
+          rclone copy site r2:portfolio-assets/docs \
+            --include "*.jpg" --include "*.jpeg" --include "*.png" --include "*.webp" \
+            --checksum --transfers 16 --checkers 16 --s3-no-check-bucket
+          find site -type f \( -name "*.jpg" -o -name "*.jpeg" -o -name "*.png" -o -name "*.webp" \) -delete
+
       - name: Add Cloudflare headers and redirects
         run: cp deploy/cloudflare/_headers deploy/cloudflare/_redirects site/
 
