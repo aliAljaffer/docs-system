@@ -10,26 +10,37 @@
 
   // Umami and the track() calls must not run while a speculation-rules prerender is hidden.
   function start() {
+    const pending = [];
+    function flush() {
+      if (!window.umami || typeof window.umami.track !== "function") return;
+      while (pending.length) {
+        const [name, data] = pending.shift();
+        window.umami.track(name, data);
+      }
+    }
+
+    // page-type fires at DOMContentLoaded, often before the async tracker has
+    // defined window.umami. Queue until it exists instead of dropping the event.
+    function track(name, data) {
+      pending.push([name, data]);
+      flush();
+    }
+
     const script = document.createElement("script");
     script.fetchPriority = "low";
     script.src = `${UMAMI_HOST}/script.js`;
     script.setAttribute("data-website-id", WEBSITE_ID);
     script.setAttribute("data-host-url", UMAMI_HOST);
-    script.setAttribute("data-domains", SITE_HOST);
+    script.setAttribute("data-domains", FORCE ? `${SITE_HOST},${location.hostname}` : SITE_HOST);
     script.setAttribute("data-tag", "docs");
     script.setAttribute("data-performance", "true");
     script.setAttribute("data-do-not-track", "true");
+    script.addEventListener("load", flush);
     document.head.appendChild(script);
 
     const path = () => location.pathname;
     const lang = () => document.documentElement.lang || "en";
     const pageTitle = () => document.title.replace(/\s+-\s+Ali's Docs$/, "");
-
-    function track(name, data) {
-      if (window.umami && typeof window.umami.track === "function") {
-        window.umami.track(name, data);
-      }
-    }
 
     function pageType() {
       const heading = document.querySelector("h1")?.textContent?.trim() || "";
