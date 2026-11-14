@@ -46,15 +46,21 @@
       const heading = document.querySelector("h1")?.textContent?.trim() || "";
       const episode = heading.match(/^([A-Z]{3}-\d{2}):/);
       if (episode) return { type: "episode", code: episode[1] };
+      // Cloudflare serves the custom 404 at the requested URL, so the path is no guide.
+      if (heading.startsWith("404")) return { type: "404" };
       if (path().startsWith("/four-hats/slides/")) return { type: "slide" };
       if (path().startsWith("/four-hats/")) return { type: "course" };
-      if (path().endsWith("/404.html")) return { type: "404" };
       return { type: "page" };
     }
 
     function ready() {
       const info = pageType();
-      track("page-type", { ...info, lang: lang(), title: pageTitle() });
+      track("page-type", {
+        ...info,
+        section: path().split("/")[1] || "home",
+        lang: lang(),
+        title: pageTitle(),
+      });
 
       if (info.type === "404") {
         track("page-404", { path: path(), referrer: document.referrer || "direct" });
@@ -94,7 +100,32 @@
           target: url.pathname,
           path: path(),
         });
+        return;
       }
+
+      if (url.hash && url.pathname === location.pathname) {
+        track("toc-jump", { target: url.hash.slice(1), path: path() });
+      }
+    });
+
+    document.addEventListener("click", (event) => {
+      const tag = event.target.closest("button.md-tag");
+      if (tag) track("tag-filter", { term: tag.textContent.trim(), path: path() });
+    });
+
+    document.addEventListener("click", (event) => {
+      if (!event.target.closest("[data-md-component=search] button")) return;
+      track("search-open", { lang: lang(), path: path() });
+    });
+
+    document.addEventListener("click", (event) => {
+      const button = event.target.closest("[data-fullscreen]");
+      if (!button) return;
+      const frame = button.closest("div")?.querySelector("iframe");
+      track("slide-fullscreen", {
+        deck: frame?.getAttribute("src") || "",
+        path: path(),
+      });
     });
 
     document.addEventListener("click", (event) => {
@@ -105,13 +136,21 @@
       track("code-copy", { language: match ? match[1] : "unknown", path: path() });
     });
 
-    document.querySelectorAll("input.md-search__input").forEach((input) => {
-      input.addEventListener("keydown", (event) => {
+    // zensical renders the search input inside a shadow root that is not a
+    // descendant of the search component, so find it by role on the event path.
+    document.addEventListener(
+      "keydown",
+      (event) => {
         if (event.key !== "Enter") return;
-        const length = input.value.trim().length;
-        if (length) track("search", { length, lang: lang(), path: path() });
-      });
-    });
+        const input = event
+          .composedPath()
+          .find((node) => node instanceof HTMLInputElement && node.getAttribute("role") === "combobox");
+        const term = (input?.value || "").trim();
+        if (!term) return;
+        track("search", { term: term.slice(0, 80), length: term.length, lang: lang(), path: path() });
+      },
+      true,
+    );
 
     document.addEventListener("docs:preview", (event) => {
       const detail = event.detail || {};
@@ -122,15 +161,24 @@
       });
     });
 
-    document.querySelectorAll(".task-list-item input[type=checkbox]").forEach((box, index) => {
+    const boxes = [...document.querySelectorAll(".task-list-item input[type=checkbox]")];
+    let complete = false;
+    boxes.forEach((box, index) => {
       box.addEventListener("change", () => {
         track("task-toggle", { checked: box.checked, index, path: path() });
+        if (!complete && boxes.every((b) => b.checked)) {
+          complete = true;
+          track("checklist-complete", { total: boxes.length, path: path() });
+        }
       });
     });
 
     document.querySelectorAll('input[name="__palette"]').forEach((input) => {
       input.addEventListener("change", () => {
-        track("theme-change", { scheme: input.id, path: path() });
+        track("theme-change", {
+          scheme: input.dataset.mdColorScheme === "slate" ? "dark" : "light",
+          path: path(),
+        });
       });
     });
 
