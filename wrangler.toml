@@ -3,7 +3,8 @@ compatibility_date = "2026-11-13"
 main = "worker/index.js"
 
 routes = [
-  { pattern = "docs-cf.alialjaffer.com/*", zone_name = "alialjaffer.com" }
+  { pattern = "docs.alialjaffer.com/*", zone_name = "alialjaffer.com" },
+  { pattern = "docs-cf.alialjaffer.com/*", zone_name = "alialjaffer.com" },
 ]
 
 [assets]
