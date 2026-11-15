@@ -37,6 +37,7 @@ TASKS = yaml.safe_load((ROOT / "episode-tasks.yaml").read_text())["episodes"]
 ZENSICAL = os.environ.get("ZENSICAL") or shutil.which("zensical") or "zensical"
 
 SITE_URL = "https://docs.alialjaffer.com"
+HOME_TITLE = "Kubernetes, cloud, and Linux notes"
 PORTFOLIO_URL = "https://alialjaffer.com"
 PORTFOLIO_LABEL = "alialjaffer.com"
 OWNER = "Ali Aljaffer"
@@ -534,13 +535,18 @@ def label_pages(root: Path, config: dict) -> list[og.Card]:
             heading = f"{heading} - {owner['title']}"
         if "updated" in meta:
             meta["updated"] = str(meta["updated"])
-        meta.setdefault("title", "Home" if heading == SITE_NAME else heading)
+        meta.setdefault("title", HOME_TITLE if heading == SITE_NAME else heading)
         if owner and "repo" in owner:
             meta.setdefault("repo_url", f"https://github.com/{owner['repo']}")
         if "description" not in meta:
             summary = owner["description"] if owner and rel.name == "index.md" else summary_of(page)
             if summary:
                 meta["description"] = summary
+        if meta.get("description"):
+            text = " ".join(str(meta["description"]).split())
+            if len(text) > 160:
+                text = text[:155].rsplit(" ", 1)[0].rstrip(",.;:")
+            meta["description"] = text
         page.write_text(join_meta(meta, body))
         url = rel.parent if rel.name == "index.md" else rel.with_suffix("")
         cards.append(og.Card(
@@ -669,7 +675,7 @@ def assemble() -> tuple[Path, list[og.Card]]:
     for page in BUILD.rglob("*.md"):
         page.write_text(use_docs_lexers(page.read_text()))
     inject_home(BUILD, config)
-    write_index(BUILD, config, "projects", "Projects", TAGLINE)
+    write_index(BUILD, config, "projects", "Projects", "Docs for the projects in this homelab: the cluster, a spending tracker, an OpenZiti operator, and s2t.")
     write_index(BUILD, config, "courses", "Courses", "Long-form courses built around one project or one skill path.")
     cards = label_pages(BUILD, config)
     brand_styles = "".join(f"  - {s if s.startswith('http') else f'assets/brand/{s}?v={version}'}\n" for s in identity.stylesheets)

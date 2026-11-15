@@ -3,7 +3,7 @@
   {% set heading = config.site_name if page.canonical_url == config.site_url else (page.meta.title if page.meta and page.meta.title else page.title) %}
   {% set summary = page.meta.description if page.meta and page.meta.description else config.site_description %}
   <meta property="og:site_name" content="{{ config.site_name }}">
-  <meta property="og:type" content="{{ 'website' if page.is_homepage else 'article' }}">
+  <meta property="og:type" content="{{ 'website' if page.canonical_url == config.site_url else 'article' }}">
   <meta property="og:title" content="{{ heading | e }}">
   <meta property="og:url" content="{{ page.canonical_url }}">
   <meta property="og:image" content="{{ page.canonical_url }}og.jpg">
@@ -36,9 +36,56 @@
     }]
   }
   </script>
+  {% set summary_text = page.meta.description if page.meta and page.meta.description else config.site_description %}
+  {% set parents = page.ancestors | reverse | rejectattr("is_homepage") | list %}
+  {% set is_home = page.canonical_url == config.site_url %}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "{{ config.site_url }}#website",
+        "url": {{ config.site_url | tojson }},
+        "name": {{ config.site_name | tojson }},
+        "description": {{ config.site_description | tojson }},
+        "inLanguage": "en"
+      },
+      {
+        "@type": "Person",
+        "@id": "https://alialjaffer.com/#person",
+        "name": "Ali Aljaffer",
+        "url": "https://alialjaffer.com"
+      }{% if not is_home %},
+      {
+        "@type": "TechArticle",
+        "headline": {{ heading | tojson }},
+        "description": {{ summary_text | tojson }},
+        "url": {{ page.canonical_url | tojson }},
+        "mainEntityOfPage": {{ page.canonical_url | tojson }},
+        {% if page.meta and page.meta.updated %}"dateModified": {{ page.meta.updated | tojson }},{% endif %}
+        "author": {"@id": "https://alialjaffer.com/#person"},
+        "publisher": {"@id": "https://alialjaffer.com/#person"},
+        "image": {{ (page.canonical_url ~ "og.jpg") | tojson }},
+        "inLanguage": "en",
+        "isPartOf": {"@id": "{{ config.site_url }}#website"}
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {"@type": "ListItem", "position": 1, "name": "Home", "item": {{ config.site_url | tojson }}},
+          {% for ancestor in parents %}{"@type": "ListItem", "position": {{ loop.index + 1 }}, "name": {{ ancestor.title | tojson }}, "item": {{ ancestor.canonical_url | tojson }}},
+          {% endfor %}{"@type": "ListItem", "position": {{ parents | length + 2 }}, "name": {{ heading | tojson }}, "item": {{ page.canonical_url | tojson }}}
+        ]
+      }{% endif %}
+    ]
+  }
+  </script>
   {{ super() }}
 {% endblock %}
 {% block scripts %}
   {{ super() }}
+  {% if page.content and "arithmatex" in page.content %}
   <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js" integrity="sha384-Wuix6BuhrWbjDBs24bXrjf4ZQ5aFeFWBuKkFekO2t8xFU0iNaLQfp2K6/1Nxveei" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  {% endif %}
 {% endblock %}
