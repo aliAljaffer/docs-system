@@ -84,54 +84,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ github.token }}
 
-      - uses: docker/login-action@v4
-        with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-
-      - uses: docker/metadata-action@v6
-        id: meta
-        with:
-          images: ghcr.io/${{ github.repository }}
-          tags: |
-            type=raw,value=latest
-            type=sha
-            type=raw,value=run-${{ github.run_id }}
-
-      - uses: docker/build-push-action@v7
-        with:
-          context: .
-          push: true
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
-
-      - uses: actions/create-github-app-token@v3
-        id: app
-        with:
-          app-id: 5511128
-          private-key: ${{ secrets.HOMELAB_APP_KEY }}
-          owner: aliAljaffer
-          repositories: homelab
-
-      - uses: actions/checkout@v5
-        with:
-          repository: aliAljaffer/homelab
-          token: ${{ steps.app.outputs.token }}
-          path: homelab
-
-      - name: Bump image tag in homelab
-        working-directory: homelab
-        run: |
-          tag="run-${GITHUB_RUN_ID}"
-          sed -i "s|newTag: .*|newTag: ${tag}|" kubernetes/apps/docs/kustomization.yaml
-          git diff --quiet && exit 0
-          git config user.name "update-manifests-homelab[bot]"
-          git config user.email "349350479+update-manifests-homelab[bot]@users.noreply.github.com"
-          git commit -am "Deploy docs ${tag}"
-          git pull --rebase origin main
-          git push origin HEAD:main
-
       - name: Report the build size
         run: |
           echo "files: $(find site -type f | wc -l)  size: $(du -sh site | cut -f1)"
