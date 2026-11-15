@@ -717,6 +717,8 @@ def run() -> None:
         if p.name != "index.md"
     )
     (SITE / "definitions.json").write_text(json.dumps(slugs) + "\n")
+    # Deployed by both the Worker and any direct build of site/.
+    shutil.copyfile(ROOT / "deploy" / "cloudflare" / "robots.txt", SITE / "robots.txt")
 
 
 if __name__ == "__main__":
