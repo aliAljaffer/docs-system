@@ -177,7 +177,7 @@ jobs:
             "https://api.cloudflare.com/client/v4/zones/${{ secrets.CLOUDFLARE_ZONE_ID }}/purge_cache" \
             -H "Authorization: Bearer ${{ secrets.CLOUDFLARE_API_TOKEN }}" \
             -H "Content-Type: application/json" \
-            --data '{"files":["https://docs-cf.alialjaffer.com/","https://docs.alialjaffer.com/"]}'
+            --data '{"files":["https://docs-cf.alialjaffer.com/","https://docs.alialjaffer.com/","https://docs.alialjaffer.com/robots.txt","https://docs.alialjaffer.com/sitemap.xml"]}'
 
       - run: touch .deployed
 
